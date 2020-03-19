@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - "3.6"
+
+install:
+  - pip install mkdocs
+  - echo -e "machine github.com\n  login ${GITHUB_TOKEN}" > ~/.netrc
+
+script:
+  - mkdocs gh-deploy --force --clean
+
+branches:
+  only:
+    - master
