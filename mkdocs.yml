@@ -4,6 +4,9 @@ site_name: Chictf-Writeups
 # Repository
 repo_name: 'YanhuiJessica/Chictf-Writeups'
 
+pages:
+    - '首页': index.md
+
 # Theme
 theme:
     name: 'material'
