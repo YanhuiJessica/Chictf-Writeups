@@ -1,1 +1,27 @@
-site_name: My Docs
+# Project Information
+site_name: Chictf-Writeups
+
+# Repository
+repo_name: 'YanhuiJessica/Chictf-Writeups'
+
+# Theme
+theme:
+    name: 'material'
+    language: 'zh'
+    palette:
+      primary: 'white'
+      accent: 'red'
+    logo:
+      icon: 'school'
+    feature:
+      tabs: true
+    font:
+      text: 'Fira Sans'
+      code: 'Fira Mono'
+
+plugins:
+    - search
+
+markdown_extensions:
+    - admonition
+    - codehilite
