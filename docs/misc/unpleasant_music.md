@@ -7,11 +7,11 @@ description: 网鼎杯-第3场-2018
 ## 解题思路
 
 - 初始拿到一个 WAV 文件，使用音频编辑软件打开，发现是一个单声道音频，波形布满了整个框咕<br>
-![原音频波形](/misc/img/unpleasant_music01.jpg)
+![原音频波形](img/unpleasant_music01.jpg)
 - 既然这么满，就看看频谱吧咕。但是并没有发现，SAD<br>
-![频谱](/misc/img/unpleasant_music02.jpg)
+![频谱](img/unpleasant_music02.jpg)
 - 放大波形，发现其有一定的规律~像是 01 序列<br>
-![规律波形](/misc/img/unpleasant_music03.jpg)
+![规律波形](img/unpleasant_music03.jpg)
 - 手动解码是不可能的咕，写个程序跑一下
     ```py
     import wave, codecs
@@ -75,10 +75,10 @@ description: 网鼎杯-第3场-2018
     0x7b|terminator
 
 - 用 010 Editor 打开`result.rar`发现有一块的 HEAD_TYPE 是`0x7a`<br>
-![错误的 HEAD_TYPE](/misc/img/unpleasant_music04.jpg)
+![错误的 HEAD_TYPE](img/unpleasant_music04.jpg)
 - 想来这应该不是常见的块类型，前面已经出现了标志块和归档头部块，就改成`0x74`试试咕。诶嘿嘿~ RAR 文件里面出现了一个`STM`文件
 - 用`file`看看咕~发现是 PNG 文件，修改一下文件后缀，得到一个被截掉一半的二维码<br>
-![半个二维码](/misc/img/unpleasant_music05.jpg)
+![半个二维码](img/unpleasant_music05.jpg)
 - 然后常规操作改一下 PNG 图片的高就可以了咕~⭐扫描二维码得到 flag！
 
 ## 参考资料
