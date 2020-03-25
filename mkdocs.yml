@@ -5,7 +5,9 @@ site_name: Chictf-Writeups
 repo_name: 'YanhuiJessica/Chictf-Writeups'
 
 pages:
-    - '首页': index.md
+    - 首页: index.md
+    - Misc:
+      - Unpleasant_music: misc/unpleasant_music.md
 
 # Theme
 theme:
@@ -28,6 +30,11 @@ plugins:
 extra_javascript:
     - 'javascripts/extra.js'
     - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/YanhuiJessica'
 
 # Extensions
 markdown_extensions:
