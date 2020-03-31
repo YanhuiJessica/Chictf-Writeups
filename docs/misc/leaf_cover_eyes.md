@@ -30,3 +30,4 @@ description: BJDCTF-2020-Misc
     #  CRC error in chunk IHDR (computed 55900eef, expected c20f1fc6)
     # ERRORS DETECTED in 1.png
     ```
+ - 如果是这样的话，应该就可以联想到要修改图像的高了吧咕！
