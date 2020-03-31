@@ -8,7 +8,7 @@ pages:
     - 首页: index.md
     - Misc:
       - Unpleasant_music: misc/unpleasant_music.md
-      - 一叶障目：misc/leaf_cover_eyes.md
+      - 一叶障目: misc/leaf_cover_eyes.md
 
 # Theme
 theme:
