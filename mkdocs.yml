@@ -7,7 +7,7 @@ repo_name: 'YanhuiJessica/Chictf-Writeups'
 nav:
     - 首页: index.md
     - Misc:
-      - Unpleasant_music: misc/unpleasant_music.md
+      - Unpleasant music: misc/unpleasant_music.md
       - 一叶障目: misc/leaf_cover_eyes.md
       - Difficult Programming Language: misc/difficult_programming_language.md
 
