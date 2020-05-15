@@ -11,7 +11,8 @@ install:
 
 script:
   - mkdocs gh-deploy --force --clean
-  - apt list --installed
+  - pwd
+  - ls -l
 
 branches:
   only:
