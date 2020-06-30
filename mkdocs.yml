@@ -10,6 +10,8 @@ nav:
       - Unpleasant music: misc/unpleasant_music.md
       - 一叶障目: misc/leaf_cover_eyes.md
       - Difficult Programming Language: misc/difficult_programming_language.md
+    - Web:
+      - 文件上传 JS 绕过: web/t-star-upload-bypass.md
 
 # Theme
 theme:
