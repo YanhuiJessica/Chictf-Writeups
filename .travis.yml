@@ -11,6 +11,10 @@ install:
 
 script:
   - mkdocs gh-deploy --force --clean
+  - mkdocs build
+
+after_success:
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ];then mkdocs gh-deploy --force --clean; fi'
 
 branches:
   only:
