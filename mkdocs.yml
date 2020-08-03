@@ -13,8 +13,8 @@ nav:
       - 一叶障目: misc/leaf_cover_eyes.md
       - Difficult Programming Language: misc/difficult_programming_language.md
     - Web:
-      - 文件上传 JS 绕过: web/t-star-upload-bypass.md
-      - 小猫咪踩灯泡: web/t-star-tomcat.md
+      - 文件上传 JS 绕过: web/t_star_upload_bypass.md
+      - 小猫咪踩灯泡: web/t_star_tomcat.md
     - 彩蛋:
       - CTFHub - 首页: eggs/ctfhub_index.md
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
