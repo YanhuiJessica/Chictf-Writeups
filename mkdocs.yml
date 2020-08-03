@@ -5,7 +5,9 @@ site_name: Chictf-Writeups
 repo_name: 'YanhuiJessica/Chictf-Writeups'
 
 nav:
-    - 首页: index.md
+    - 简介:
+      - 首页: index.md
+      - 如何参与: how_to_participate.md
     - Misc:
       - Unpleasant music: misc/unpleasant_music.md
       - 一叶障目: misc/leaf_cover_eyes.md
