@@ -15,6 +15,7 @@ nav:
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
+      - CTFHub - 反射型 XSS: web/ctfhub_reflected_xss.md
     - 彩蛋:
       - CTFHub - 首页: eggs/ctfhub_index.md
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
