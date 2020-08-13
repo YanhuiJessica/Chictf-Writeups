@@ -20,8 +20,8 @@ description: BJDCTF-2020-Reverse
 ![选择调试器](img/easyre03.jpg)
 - 单步调了一圈没发现啥，超级失落【捂脸】
 - `Ctrl + F12`调出函数调用关系图，发现可疑函数！
-  - 不仅没被调用，还调用了`_putchar`函数
+    - 不仅没被调用，还调用了`_putchar`函数
 
-  ![可疑函数 _ques](img/easyre04.jpg)
+  ![可疑函数 _ques](img/easyre04.jpg)<br>
 - 动态调试时将 EIP 修改至`_ques`的开始地址`0x00401520`，继续运行即可看到 flag<br>
 ![HACKIT4FUN](img/easyre05.jpg)
