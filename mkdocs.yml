@@ -1,8 +1,10 @@
 # Project Information
 site_name: Chictf-Writeups
+site_author: YanhuiJessica
 
 # Repository
 repo_name: 'YanhuiJessica/Chictf-Writeups'
+repo_url: https://github.com/YanhuiJessica/Chictf-Writeups
 
 nav:
     - 简介:
