@@ -32,6 +32,7 @@ nav:
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
       - CTFHub - 工具: eggs/ctfhub_tools.md
       - CTFHub - 赛事: eggs/ctfhub_match.md
+      - CTFHub - 真题: eggs/ctfhub_exams.md
 
 # Theme
 theme:
