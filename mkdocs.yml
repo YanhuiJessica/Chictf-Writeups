@@ -27,6 +27,8 @@ nav:
     - Crypto:
       - bank: crypto/bank.md
       - shanghai: crypto/shanghai.md
+    - Wargames:
+      - Natas: wargames/natas.md
     - 彩蛋:
       - CTFHub - 首页: eggs/ctfhub_index.md
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
