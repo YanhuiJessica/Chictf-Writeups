@@ -261,3 +261,105 @@ title: OverTheWire：Natas
 ![FOEIUWGHFEEUHOFUOIU](img/natas12.jpg)
 - 回到 http://natas6.natas.labs.overthewire.org ，输入密码，获得 *natas7* 的口令<br>
 ![Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9](img/natas13.jpg)
+
+## Level 7
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas7</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>7z3hEENjQtflzgnT29q7wAvMNfZdh0i9</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas7.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 首页给出了 *Home* 和 *About* 页面的链接，并提示 *natas8* 的口令存储在`/etc/natas_webpass/natas8`<br>
+![页面链接和提示](img/natas14.jpg)
+- 通过 GET 方式传递参数给 *index.php*，那么除了`home`和`about`，随便传一个值试试叭(—ˋωˊ—)<br>
+![http://natas7.natas.labs.overthewire.org/index.php?page=notexist](img/natas15.jpg)
+- `include()`首先查看传入的文件路径（由上图可知，传入`include()`函数的参数即为 *page* 变量的值），其次查看定义的`include_path`，最后检查调用脚本所在的目录和当前工作目录。那么可通过`page=/etc/natas_webpass/natas8`或`page=../../../../etc/natas_webpass/natas8`来获得下一关的口令
+
+### 参考资料
+
+[PHP: include - Manual](https://www.php.net/manual/en/function.include.php)
+
+## Level 8
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas8</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas8.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 再次出现输入框，先查看源代码
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas8</h1>
+  <div id="content">
+
+  <?
+
+  $encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+  function encodeSecret($secret) {
+      return bin2hex(strrev(base64_encode($secret)));
+  }
+  # 输入经过 Base64 编码、字符串反转，最后转化为十六进制字符串
+  # 结果要与 $encodedSecret 相等
+  if(array_key_exists("submit", $_POST)) {
+      if(encodeSecret($_POST['secret']) == $encodedSecret) {
+      print "Access granted. The password for natas9 is <censored>";
+      } else {
+      print "Wrong secret";
+      }
+  }
+  ?>
+
+  <form method=post>
+  Input secret: <input name=secret><br>
+  <input type=submit name=submit>
+  </form>
+
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 对`$encodedSecret`进行逆操作，以得到要提交的`secret`的值
+  ```bash
+  $ echo 0x3d3d516343746d4d6d6c315669563362 | xxd -r | rev | base64 -d
+  oubWYf2kBq
+  ```
+- 提交即可获取口令<br>
+![W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl](img/natas16.jpg)
