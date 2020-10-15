@@ -15,6 +15,7 @@ nav:
       - 一叶障目: misc/leaf_cover_eyes.md
       - Difficult Programming Language: misc/difficult_programming_language.md
       - 机密信息: misc/secret_information.md
+      - 藏藏藏: misc/hide_and_seek.md
       - TARGZ-y1ng: misc/targz_y1ng.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
