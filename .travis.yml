@@ -7,7 +7,8 @@ install:
   - pip install mkdocs
   - pip install mkdocs-material==4.6.3
   - pip install pymdown-extensions==6.3
-  - pip install mkdocs-git-committers-plugin
+  - pip install mkdocs-git-authors-plugin
+  - pip install mkdocs-git-revision-date-localized-plugin
   - echo -e "machine github.com\n  login ${GITHUB_TOKEN}" > ~/.netrc
 
 script:
