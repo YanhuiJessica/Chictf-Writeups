@@ -59,15 +59,10 @@ plugins:
     - git-committers:
         repository: YanhuiJessica/Chictf-Writeups
         branch: master
-        token:
-          !!python/object/apply:os.getenv ["Chictf"]
+        token: !!python/object/apply:os.getenv ["GITHUB_TOKEN"]
 
 extra_javascript:
-    - 'static/js/extra.js'
     - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
-
-extra_css:
-    - 'static/css/extra.css'
 
 extra:
   social:
