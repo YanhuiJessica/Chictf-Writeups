@@ -30,6 +30,8 @@ nav:
     - Crypto:
       - bank: crypto/bank.md
       - shanghai: crypto/shanghai.md
+      - easy_RSA: crypto/easy_rsa.md
+      - Normal_RSA: crypto/normal_rsa.md
     - Wargames:
       - Natas: wargames/natas.md
     - 彩蛋:
