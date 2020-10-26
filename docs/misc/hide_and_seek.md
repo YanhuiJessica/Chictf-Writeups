@@ -1,6 +1,6 @@
 ---
 title: Misc - 藏藏藏
-description: BJDCTF-2020-Misc
+description: 2020 | BJDCTF | Misc
 ---
 
 ## 解题思路

@@ -1,6 +1,6 @@
 ---
 title: Misc - TARGZ-y1ng
-description: BJDCTF-2nd
+description: 2020 | BJDCTF | 2nd | Misc
 ---
 
 ## 题目

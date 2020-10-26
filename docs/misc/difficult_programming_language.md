@@ -1,6 +1,6 @@
 ---
 title: Misc - Difficult Programming Language
-description: HCTF-2018-Misc
+description: 2018 | HCTF | Misc
 ---
 <!--more-->
 

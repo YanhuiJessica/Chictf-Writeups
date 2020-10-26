@@ -1,6 +1,6 @@
 ---
 title: Web - Funhash
-description: 强网杯-2020-强网先锋
+description: 2020 | 强网杯 | 强网先锋
 ---
 
 ## 解题思路

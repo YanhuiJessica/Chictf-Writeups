@@ -1,6 +1,6 @@
 ---
 title: Misc - 机密信息
-description: 赛客夏令营-2017-Misc
+description: 2017 | 赛客夏令营 | Misc
 ---
 
 ## 解题思路

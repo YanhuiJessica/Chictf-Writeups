@@ -1,6 +1,6 @@
 ---
 title: Eggs - 公众号
-description: CTFHub - 公众号彩蛋
+description: CTFHub | 技能树 | 彩蛋
 ---
 
 ## 题目

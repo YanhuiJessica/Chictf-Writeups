@@ -1,6 +1,6 @@
 ---
 title: Eggs - 工具
-description: CTFHub - 工具彩蛋
+description: CTFHub | 技能树 | 彩蛋
 ---
 
 ## 题目

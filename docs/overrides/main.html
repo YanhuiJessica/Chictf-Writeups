@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+  {% if page and page.meta and page.meta.description %}
+  <div style="color: gray;">
+    <small>
+      {{ page.meta.description }}
+    </small>
+  </div>
+  {% endif %}
+
   {{ super() }}
 
   {% if git_page_authors %}

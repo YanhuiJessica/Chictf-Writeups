@@ -1,6 +1,6 @@
 ---
 title: Web - 小猫咪踩灯泡
-description: 2020-腾讯犀牛鸟网络安全-T-Star-高校挑战赛
+description: 2020 | 腾讯犀牛鸟网络安全 | T-Star-高校挑战赛 | Web
 ---
 
 ## 解题思路

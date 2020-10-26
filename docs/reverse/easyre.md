@@ -1,6 +1,6 @@
 ---
 title: Reverse - EasyRe
-description: BJDCTF-2020-Reverse
+description: 2020 | BJDCTF | Reverse
 ---
 
 ## 解题思路

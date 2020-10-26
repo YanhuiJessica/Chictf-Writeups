@@ -1,6 +1,6 @@
 ---
 title: Crypto - shanghai
-description: 网鼎杯-第4场-2018
+description: 2018 | 网鼎杯 | 第4场 | Crypto
 ---
 
 ## 题目

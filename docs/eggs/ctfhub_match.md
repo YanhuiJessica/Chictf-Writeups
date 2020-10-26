@@ -1,6 +1,6 @@
 ---
 title: Eggs - 赛事
-description: CTFHub - 赛事彩蛋
+description: CTFHub | 技能树 | 彩蛋
 ---
 
 ## 题目

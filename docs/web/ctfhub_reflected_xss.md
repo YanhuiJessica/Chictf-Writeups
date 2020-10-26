@@ -1,6 +1,6 @@
 ---
 title: Web - 反射型 XSS
-description: CTFHub - 反射型 XSS
+description: CTFHub | 技能树 | Web
 ---
 
 ## 反射型 XSS

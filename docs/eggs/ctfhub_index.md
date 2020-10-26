@@ -1,6 +1,6 @@
 ---
 title: Eggs - 首页
-description: CTFHub - 首页彩蛋
+description: CTFHub | 技能树 | 彩蛋
 ---
 
 ## 题目

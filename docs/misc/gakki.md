@@ -1,6 +1,6 @@
 ---
 title: Misc - gakki
-description: GXYCTF-2019
+description: 2019 | GXYCTF | Misc
 ---
 
 ## 解题思路

@@ -1,6 +1,6 @@
 ---
 title: Misc - 一叶障目
-description: BJDCTF-2020-Misc
+description: 2020 | BJDCTF | Misc
 ---
 
 ## 解题思路
