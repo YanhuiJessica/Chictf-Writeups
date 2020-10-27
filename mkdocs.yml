@@ -33,6 +33,7 @@ nav:
       - easy_RSA: crypto/easy_rsa.md
       - Normal_RSA: crypto/normal_rsa.md
       - fanfie: crypto/fanfie.md
+      - easy_ECC: crypto/easy_ecc.md
     - Wargames:
       - Natas: wargames/natas.md
     - 彩蛋:
