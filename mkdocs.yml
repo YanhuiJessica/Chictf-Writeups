@@ -24,6 +24,7 @@ nav:
       - CTFHub - 反射型 XSS: web/ctfhub_reflected_xss.md
       - 主动: web/initiative.md
       - Funhash: web/funhash.md
+      - XSS Game: web/xss_game.md
     - Reverse:
       - EasyRe: reverse/easyre.md
       - z3: reverse/z3.md
