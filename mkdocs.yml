@@ -18,6 +18,9 @@ nav:
       - 藏藏藏: misc/hide_and_seek.md
       - TARGZ-y1ng: misc/targz_y1ng.md
       - gakki: misc/gakki.md
+      - 从零开始的记账工具人: misc/account_bot.md
+      - 自复读的复读机: misc/self_repeating_repeater.md
+      - 来自一教的图片: misc/4f_system_middle.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
