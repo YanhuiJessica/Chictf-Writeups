@@ -93,7 +93,7 @@ title: Web - XSS game
 - 通过指向 JS 文件的 URL 触发，使用咕果的 JSAPI<br>
 ![https://xss-game.appspot.com/level6/frame#HTTPS://google.com/jsapi?callback=alert](img/xss_game10.jpg)
 - 通过 Data URLs 触发， MIME type 的值不影响<br>
-![data:text/,alert(1)](img/xss_game11.jpg)
+![data:,alert(1)](img/xss_game11.jpg)
 
 ### 参考资料
 
