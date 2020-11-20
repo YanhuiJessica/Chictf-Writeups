@@ -23,6 +23,7 @@ nav:
         - 自复读的复读机: misc/self_repeating_repeater.md
         - 233 同学的 Docker: misc/233_docker.md
         - 来自一教的图片: misc/4f_system_middle.md
+      - Stegano50: misc/stegano50.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
@@ -30,6 +31,7 @@ nav:
       - 主动: web/initiative.md
       - Funhash: web/funhash.md
       - XSS Game: web/xss_game.md
+      - Web php include: web/web_php_include.md
     - Reverse:
       - EasyRe: reverse/easyre.md
       - z3: reverse/z3.md
@@ -40,6 +42,7 @@ nav:
       - Normal_RSA: crypto/normal_rsa.md
       - easy_ECC: crypto/easy_ecc.md
       - fanfie: crypto/fanfie.md
+      - 转轮机加密: crypto/jefferson_disk.md
     - Wargames:
       - Natas: wargames/natas.md
     - 彩蛋:
