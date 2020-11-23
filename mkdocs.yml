@@ -45,6 +45,7 @@ nav:
       - 转轮机加密: crypto/jefferson_disk.md
     - Wargames:
       - Natas: wargames/natas.md
+      - Leviathan: wargames/leviathan.md
     - 彩蛋:
       - CTFHub - 首页: eggs/ctfhub_index.md
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
