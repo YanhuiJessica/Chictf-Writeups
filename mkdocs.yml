@@ -35,6 +35,8 @@ nav:
     - Reverse:
       - EasyRe: reverse/easyre.md
       - z3: reverse/z3.md
+    - Pwn:
+      - when did you born: pwn/when_did_you_born.md
     - Crypto:
       - bank: crypto/bank.md
       - shanghai: crypto/shanghai.md
