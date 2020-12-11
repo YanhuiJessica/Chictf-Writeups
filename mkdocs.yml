@@ -22,6 +22,7 @@ nav:
         - 从零开始的记账工具人: misc/account_bot.md
         - 从零开始的火星文生活: misc/gibberish_message.md
         - 自复读的复读机: misc/self_repeating_repeater.md
+        - 233 同学的字符串工具: misc/233_string_tool.md
         - 233 同学的 Docker: misc/233_docker.md
         - 来自一教的图片: misc/4f_system_middle.md
       - Stegano50: misc/stegano50.md
