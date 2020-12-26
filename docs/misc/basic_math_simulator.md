@@ -11,7 +11,7 @@ description: 2020 | 中国科学技术大学第七届信息安全大赛 | Genera
 
 - 自己算的话一道题都算不出来(Φ皿Φ)
 - 直接使用开发者工具查看网页，符号看上去都不易爬取（当时没有禁掉 JS）
-- 使用`curl`获取网页，发现使用的是 LaTex<br>
+- 使用`curl`获取网页，发现使用的是 *LaTex*<br>
 ![LaTex](img/basic_math_simulator02.jpg)
 - 使用`sympy`计算定积分，`LaTex`文本可以使用`parse_latex`转换
     ```py
