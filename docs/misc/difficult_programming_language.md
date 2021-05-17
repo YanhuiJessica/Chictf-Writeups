@@ -36,5 +36,5 @@ description: 2018 | HCTF | Misc
 
 ## 参考资料
 
-- [USB - CTF Wiki](https://ctf-wiki.github.io/ctf-wiki/misc/traffic/protocols/USB/)
+- [USB - CTF Wiki](https://ctf-wiki.org/misc/traffic/protocols/usb/)
 - [Malbolge – lutter.cc](https://lutter.cc/malbolge/)

@@ -48,6 +48,7 @@ nav:
       - easy_ECC: crypto/easy_ecc.md
       - fanfie: crypto/fanfie.md
       - 转轮机加密: crypto/jefferson_disk.md
+      - 编码与调制: crypto/code_modulate.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
