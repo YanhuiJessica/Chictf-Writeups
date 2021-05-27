@@ -9,8 +9,6 @@ description: CTFHub | 技能树 | Web
 
 ## Log
 
-### 解题思路
-
 - 使用工具 [WangYihang/GitHacker](https://github.com/WangYihang/GitHacker) 检出 Git 仓库
     ```bash
     $ githacker --url http://challenge-6c68a91f29757be4.sandbox.ctfhub.com:10080/.git/ --folder result
@@ -50,8 +48,6 @@ description: CTFHub | 技能树 | Web
 
 ## Stash
 
-### 解题思路
-
 - 同样地，检出仓库并进入仓库目录
     ```bash
     $ githacker --url http://challenge-942122132ef0c89f.sandbox.ctfhub.com:10080/.git --folder result
@@ -71,8 +67,6 @@ description: CTFHub | 技能树 | Web
     ```
 
 ## Index
-
-### 解题思路
 
 - `GitHacker`检出目录后就看到 Flag 文件了（咦 :0）
     ```bash
