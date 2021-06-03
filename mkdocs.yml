@@ -36,6 +36,7 @@ nav:
       - XSS Game: web/xss_game.md
       - Web php include: web/web_php_include.md
       - CTFHub - Git 泄露: web/ctfhub_git_leakage.md
+      - NEWSCTF - easy_web: web/newsctf_easy_web.md
     - Reverse:
       - EasyRe: reverse/easyre.md
       - z3: reverse/z3.md
