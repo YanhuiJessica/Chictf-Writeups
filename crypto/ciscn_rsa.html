@@ -1,0 +1,1594 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="2021 | 第十四届全国大学生信息安全竞赛 | 线上初赛 | Crypto">
+      
+      
+      
+        <meta name="author" content="YanhuiJessica">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>Crypto - rsa</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700%7CFira+Mono&display=fallback">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="white" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="0" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Chictf-Writeups" aria-label="Chictf-Writeups" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Chictf-Writeups
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Crypto - rsa
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/YanhuiJessica/Chictf-Writeups/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../index.html" class="md-tabs__link">
+          简介
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../misc/unpleasant_music.html" class="md-tabs__link">
+          Misc
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../web/t_star_upload_bypass.html" class="md-tabs__link">
+          Web
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../reverse/easyre.html" class="md-tabs__link">
+          Reverse
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../pwn/when_did_you_born.html" class="md-tabs__link">
+          Pwn
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="bank.html" class="md-tabs__link md-tabs__link--active">
+          Crypto
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../wargames/natas.html" class="md-tabs__link">
+          Wargames
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../eggs/ctfhub_index.html" class="md-tabs__link">
+          彩蛋
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="Chictf-Writeups" class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </a>
+    Chictf-Writeups
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/YanhuiJessica/Chictf-Writeups/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      简介
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        简介
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../how_to_participate.html" title="如何参与" class="md-nav__link">
+      如何参与
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Misc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Misc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/unpleasant_music.html" title="Unpleasant music" class="md-nav__link">
+      Unpleasant music
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/leaf_cover_eyes.html" title="一叶障目" class="md-nav__link">
+      一叶障目
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/difficult_programming_language.html" title="Difficult Programming Language" class="md-nav__link">
+      Difficult Programming Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/secret_information.html" title="机密信息" class="md-nav__link">
+      机密信息
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/hide_and_seek.html" title="藏藏藏" class="md-nav__link">
+      藏藏藏
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/targz_y1ng.html" title="TARGZ-y1ng" class="md-nav__link">
+      TARGZ-y1ng
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/gakki.html" title="gakki" class="md-nav__link">
+      gakki
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      HackerGame 2020
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        HackerGame 2020
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/account_bot.html" title="从零开始的记账工具人" class="md-nav__link">
+      从零开始的记账工具人
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/gibberish_message.html" title="从零开始的火星文生活" class="md-nav__link">
+      从零开始的火星文生活
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/self_repeating_repeater.html" title="自复读的复读机" class="md-nav__link">
+      自复读的复读机
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/233_string_tool.html" title="233 同学的字符串工具" class="md-nav__link">
+      233 同学的字符串工具
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/233_docker.html" title="233 同学的 Docker" class="md-nav__link">
+      233 同学的 Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/4f_system_middle.html" title="来自一教的图片" class="md-nav__link">
+      来自一教的图片
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/basic_math_simulator.html" title="超基础的数理模拟器" class="md-nav__link">
+      超基础的数理模拟器
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/stegano50.html" title="Stegano50" class="md-nav__link">
+      Stegano50
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../misc/newsctf_all_reverse.html" title="NEWSCTF - ！了反都，了反" class="md-nav__link">
+      NEWSCTF - ！了反都，了反
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/t_star_upload_bypass.html" title="文件上传 JS 绕过" class="md-nav__link">
+      文件上传 JS 绕过
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/t_star_tomcat.html" title="小猫咪踩灯泡" class="md-nav__link">
+      小猫咪踩灯泡
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/ctfhub_reflected_xss.html" title="CTFHub - 反射型 XSS" class="md-nav__link">
+      CTFHub - 反射型 XSS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/initiative.html" title="主动" class="md-nav__link">
+      主动
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/funhash.html" title="Funhash" class="md-nav__link">
+      Funhash
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/xss_game.html" title="XSS Game" class="md-nav__link">
+      XSS Game
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/web_php_include.html" title="Web php include" class="md-nav__link">
+      Web php include
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/ctfhub_git_leakage.html" title="CTFHub - Git 泄露" class="md-nav__link">
+      CTFHub - Git 泄露
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/newsctf_easy_web.html" title="NEWSCTF - easy_web" class="md-nav__link">
+      NEWSCTF - easy_web
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Reverse
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Reverse
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reverse/easyre.html" title="EasyRe" class="md-nav__link">
+      EasyRe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reverse/z3.html" title="z3" class="md-nav__link">
+      z3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Pwn
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Pwn
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pwn/when_did_you_born.html" title="when did you born" class="md-nav__link">
+      when did you born
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      Crypto
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Crypto
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="bank.html" title="bank" class="md-nav__link">
+      bank
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="shanghai.html" title="shanghai" class="md-nav__link">
+      shanghai
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="easy_rsa.html" title="easy_RSA" class="md-nav__link">
+      easy_RSA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="normal_rsa.html" title="Normal_RSA" class="md-nav__link">
+      Normal_RSA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="easy_ecc.html" title="easy_ECC" class="md-nav__link">
+      easy_ECC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="fanfie.html" title="fanfie" class="md-nav__link">
+      fanfie
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="jefferson_disk.html" title="转轮机加密" class="md-nav__link">
+      转轮机加密
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="code_modulate.html" title="编码与调制" class="md-nav__link">
+      编码与调制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        CISCN - rsa
+      </label>
+    
+    <a href="ciscn_rsa.html" title="CISCN - rsa" class="md-nav__link md-nav__link--active">
+      CISCN - rsa
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    解题思路
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    低加密指数攻击
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    共模攻击
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p-coppersmith" class="md-nav__link">
+    已知 P 的高位攻击（Coppersmith 攻击）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Wargames
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Wargames
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wargames/natas.html" title="Natas" class="md-nav__link">
+      Natas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wargames/leviathan.html" title="Leviathan" class="md-nav__link">
+      Leviathan
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      彩蛋
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        彩蛋
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_index.html" title="CTFHub - 首页" class="md-nav__link">
+      CTFHub - 首页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_wechat.html" title="CTFHub - 公众号" class="md-nav__link">
+      CTFHub - 公众号
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_tools.html" title="CTFHub - 工具" class="md-nav__link">
+      CTFHub - 工具
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_match.html" title="CTFHub - 赛事" class="md-nav__link">
+      CTFHub - 赛事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eggs/ctfhub_exams.html" title="CTFHub - 真题" class="md-nav__link">
+      CTFHub - 真题
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    解题思路
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    低加密指数攻击
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    共模攻击
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p-coppersmith" class="md-nav__link">
+    已知 P 的高位攻击（Coppersmith 攻击）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+  
+  <div style="color: gray;">
+    <small>
+      2021 | 第十四届全国大学生信息安全竞赛 | 线上初赛 | Crypto
+    </small>
+  </div>
+  
+
+  
+                
+                  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/crypto/ciscn_rsa.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>CISCN - rsa</h1>
+                
+                <h2 id="_1">解题思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>题目提供了 RSA 加密部分代码以及输出，明文被拆成了三部分进行加密
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flag</span> <span class="kn">import</span> <span class="n">text</span><span class="p">,</span><span class="n">flag</span>
+<span class="kn">import</span> <span class="nn">md5</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">long_to_bytes</span><span class="p">,</span><span class="n">bytes_to_long</span><span class="p">,</span><span class="n">getPrime</span>
+
+<span class="k">assert</span> <span class="n">md5</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span> <span class="o">==</span> <span class="n">flag</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">msg1</span> <span class="o">=</span> <span class="n">text</span><span class="p">[:</span><span class="n">xx</span><span class="p">]</span>
+<span class="n">msg2</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">xx</span><span class="p">:</span><span class="n">yy</span><span class="p">]</span>
+<span class="n">msg3</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">yy</span><span class="p">:]</span>
+
+<span class="n">msg1</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">msg1</span><span class="p">)</span>
+<span class="n">msg2</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">msg2</span><span class="p">)</span>
+<span class="n">msg3</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">msg3</span><span class="p">)</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">N1</span> <span class="o">=</span> <span class="n">p1</span><span class="o">*</span><span class="n">q1</span>
+<span class="n">e1</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span> <span class="nb">pow</span><span class="p">(</span><span class="n">msg1</span><span class="p">,</span><span class="n">e1</span><span class="p">,</span><span class="n">N1</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span><span class="n">N1</span><span class="p">)</span>
+
+<span class="n">p2</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">N2</span> <span class="o">=</span> <span class="n">p2</span><span class="o">*</span><span class="n">q2</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">e3</span> <span class="o">=</span> <span class="mi">65537</span>
+<span class="nb">print</span> <span class="nb">pow</span><span class="p">(</span><span class="n">msg2</span><span class="p">,</span><span class="n">e2</span><span class="p">,</span><span class="n">N2</span><span class="p">)</span>
+<span class="nb">print</span> <span class="nb">pow</span><span class="p">(</span><span class="n">msg2</span><span class="p">,</span><span class="n">e3</span><span class="p">,</span><span class="n">N2</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">e2</span><span class="p">,</span><span class="n">N2</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">e3</span><span class="p">,</span><span class="n">N2</span><span class="p">)</span>
+
+<span class="n">p3</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">q3</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">N3</span> <span class="o">=</span> <span class="n">p3</span><span class="o">*</span><span class="n">q3</span>
+<span class="nb">print</span> <span class="nb">pow</span><span class="p">(</span><span class="n">msg3</span><span class="p">,</span><span class="n">e3</span><span class="p">,</span><span class="n">N3</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">e3</span><span class="p">,</span><span class="n">N3</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">p3</span><span class="o">&gt;&gt;</span><span class="mi">200</span>
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="_2">低加密指数攻击<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>第一部分加密，<span><span class="MathJax_Preview">e1</span><script type="math/tex">e1</script></span> 只有 <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span>，属于低加密指数攻击</li>
+<li>直接使用工具 <a href="https://github.com/Ganapati/RsaCtfTool">Ganapati/RsaCtfTool</a> Cube-Root 攻击
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>$ ./RsaCtfTool.py -e <span class="m">3</span> -n <span class="m">123814470394550598363280518848914546938137731026777975885846733672494493975703069760053867471836249473290828799962586855892685902902050630018312939010564945676699712246249820341712155938398068732866646422826619477180434858148938235662092482058999079105450136181685141895955574548671667320167741641072330259009</span> --uncipher <span class="m">19105765285510667553313898813498220212421177527647187802549913914263968945493144633390670605116251064550364704789358830072133349108808799075021540479815182657667763617178044110939458834654922540704196330451979349353031578518479199454480458137984734402248011464467312753683234543319955893</span> --attack cube_root
+private argument is not set, the private key will not be displayed, even <span class="k">if</span> recovered.
+
+<span class="o">[</span>*<span class="o">]</span> Testing key /tmp/tmp_l5kh68w.
+<span class="o">[</span>*<span class="o">]</span> Performing cube_root attack on /tmp/tmp_l5kh68w.
+
+Results <span class="k">for</span> /tmp/tmp_l5kh68w:
+
+Unciphered data :
+HEX : 0x200a4f2077696c6420576573742057696e642c2074686f7520627265617468206f6620417574756d
+INT <span class="o">(</span>big endian<span class="o">)</span> : <span class="m">267334379257781603687613466720913534310764480084016847281446486946801530200295563483353634338157</span>
+INT <span class="o">(</span>little endian<span class="o">)</span> : <span class="m">913291388310064586979227686933669644206016064403638123402129058189456441650304517698024417200672</span>
+STR : b<span class="s1">&#39; \nO wild West Wind, thou breath of Autum&#39;</span>
+</code></pre></div>
+</td></tr></table></li>
+</ul>
+<h3 id="_3">共模攻击<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>第二部分使用了相同的模数 <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>，不同的 <span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span> 对同一段文本进行加密</li>
+<li>使用工具 <a href="https://github.com/Ganapati/RsaCtfTool">Ganapati/RsaCtfTool</a> 的共模攻击（same_n_huge_e），<code>e</code>与密文在顺序上需要对应
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>$ ./RsaCtfTool.py -e <span class="m">17</span>,65537 -n <span class="m">111381961169589927896512557754289420474877632607334685306667977794938824018345795836303161492076539375959731633270626091498843936401996648820451019811592594528673182109109991384472979198906744569181673282663323892346854520052840694924830064546269187849702880332522636682366270177489467478933966884097824069977</span> --uncipher <span class="m">54995751387258798791895413216172284653407054079765769704170763023830130981480272943338445245689293729308200574217959018462512790523622252479258419498858307898118907076773470253533344877959508766285730509067829684427375759345623701605997067135659404296663877453758701010726561824951602615501078818914410959610</span>,91290935267458356541959327381220067466104890455391103989639822855753797805354139741959957951983943146108552762756444475545250343766798220348240377590112854890482375744876016191773471853704014735936608436210153669829454288199838827646402742554134017280213707222338496271289894681312606239512924842845268366950 --attack same_n_huge_e
+private argument is not set, the private key will not be displayed, even <span class="k">if</span> recovered.
+<span class="o">[</span>*<span class="o">]</span> Multikey mode using keys: /tmp/tmpdgzqh3f2, /tmp/tmp9fa7r378
+<span class="o">[</span>*<span class="o">]</span> Performing same_n_huge_e attack.
+
+Results <span class="k">for</span> /tmp/tmpdgzqh3f2,/tmp/tmp9fa7r378:
+
+Unciphered data :
+HEX : 0x6e2773206265696e672c0a54686f752c2066726f6d2077686f736520756e7365656e2070726573656e636520746865206c656176657320646561640a4172652064726976656e2c206c696b652067686f7374732066726f6d20616e20656e6368616e74657220666c6565696e672c0a59656c6c6f772c2061
+INT <span class="o">(</span>big endian<span class="o">)</span> : <span class="m">4193305853284549103821195807609492624095031428085219879448342104337322945001387680236011960472296815293233144303730273979905837762067652913308898433728800864776794638198055607422503065410595894676740531680367227696622352026247676452540064020322619036125381146346603655445487695574824919137</span>
+INT <span class="o">(</span>little endian<span class="o">)</span> : <span class="m">3697344670341776042819034986158075076536873171472590072336800110388597776652983023588023111158079096754137966151154403318011693149935108642418525130993932032045777394368194102308289062036168961367389701205240426686201519457468290650177310915303466740807866707603445131602629565993519884142</span>
+STR : b<span class="s2">&quot;n&#39;s being,\nThou, from whose unseen presence the leaves dead\nAre driven, like ghosts from an enchanter fleeing,\nYellow, a&quot;</span>
+
+<span class="o">[</span>*<span class="o">]</span> Testing key /tmp/tmpdgzqh3f2.
+
+<span class="o">[</span>*<span class="o">]</span> Testing key /tmp/tmp9fa7r378.
+</code></pre></div>
+</td></tr></table></li>
+</ul>
+<h3 id="p-coppersmith">已知 P 的高位攻击（Coppersmith 攻击）<a class="headerlink" href="#p-coppersmith" title="Permanent link">&para;</a></h3>
+<ul>
+<li>第三部分已知 P 的高位，为私钥的一部分，而工具 <a href="https://github.com/Ganapati/RsaCtfTool">Ganapati/RsaCtfTool</a> 主要专注于公钥攻击，尚未实现攻击<code>partial_q</code></li>
+<li>使用 SageMath
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c1"># sage</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">113432930155033263769270712825121761080813952100666693606866355917116416984149165507231925180593860836255402950358327422447359200689537217528547623691586008952619063846801829802637448874451228957635707553980210685985215887107300416969549087293746310593988908287181025770739538992559714587375763131132963783147</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">59213696442373765895948702611659756779813897653022080905635545636905434038306468935283962686059037461940227618715695875589055593696352594630107082714757036815875497138523738695066811985036315624927897081153190329636864005133757096991035607918106529151451834369442313673849563635248465014289409374291381429646</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">7117286695925472918001071846973900342640107770214858928188419765628151478620236042882657992902</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mi">65537</span>
+
+<span class="n">pbits</span> <span class="o">=</span> <span class="mi">512</span> <span class="c1"># p 的原始长度</span>
+<span class="n">kbits</span> <span class="o">=</span> <span class="n">pbits</span><span class="o">-</span><span class="n">p</span><span class="o">.</span><span class="n">nbits</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">kbits</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;upper </span><span class="si">%d</span><span class="s2"> bits (of </span><span class="si">%d</span><span class="s2"> bits) is given&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pbits</span><span class="o">-</span><span class="n">kbits</span><span class="p">,</span> <span class="n">pbits</span><span class="p">))</span>
+<span class="n">PR</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">Zmod</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">p</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">small_roots</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="n">kbits</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 多项式小值根求解及因子分解</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">inverse_mod</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">fn</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">hex_str</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hex_str</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">hex_str</span><span class="p">[</span><span class="mi">2</span><span class="p">:]))</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>获得输出
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>upper <span class="m">312</span> bits <span class="o">(</span>of <span class="m">512</span> bits<span class="o">)</span> is given
+0x6e6420626c61636b2c20616e642070616c652c20616e6420686563746963207265642c0a50657374696c656e63652d73747269636b656e206d756c746974756465733a204f2074686f752c0a57686f2063686172696f7465737420746f207468656972206461726b2077696e747279206265640a
+b<span class="s1">&#39;nd black, and pale, and hectic red,\nPestilence-stricken multitudes: O thou,\nWho chariotest to their dark wintry bed\n&#39;</span>
+</code></pre></div>
+</td></tr></table></li>
+<li>拼接各部分结果再 MD5 即可获得 Flag</li>
+</ul>
+<h2 id="_4">参考资料<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://doc.sagemath.org/html/en/reference/polynomial_rings/sage/rings/polynomial/polynomial_modn_dense_ntl.html#dense-univariate-polynomials-over-zz-n-zz-implemented-using-ntl">Dense univariate polynomials over Z/nZ
+, implemented using NTL</a></li>
+</ul>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">June 7, 2021 16:20:56</span>
+                      
+                    </small>
+                  </div>
+                
+              
+
+  
+    <div class="md-source-date">
+      <small>
+          Contributors: <span class='git-page-authors git-authors'><a href='mailto:137126578@qq.com'>YanhuiJessica</a></span>
+      </small>
+    </div>
+  
+
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="code_modulate.html" title="编码与调制" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                编码与调制
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../wargames/natas.html" title="Natas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                Natas
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/YanhuiJessica" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.2.1",url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

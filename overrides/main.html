@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if page and page.meta and page.meta.description %}
+  <div style="color: gray;">
+    <small>
+      {{ page.meta.description }}
+    </small>
+  </div>
+  {% endif %}
+
+  {{ super() }}
+
+  {% if git_page_authors %}
+    <div class="md-source-date">
+      <small>
+          Contributors: {{ git_page_authors | default('enable mkdocs-git-authors-plugin') }}
+      </small>
+    </div>
+  {% endif %}
+{% endblock %}
