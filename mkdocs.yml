@@ -83,7 +83,6 @@ plugins:
     - search
     - git-revision-date-localized:
         type: datetime
-        time_zone: Asia/Shanghai
         locale: en
     - git-authors
 
