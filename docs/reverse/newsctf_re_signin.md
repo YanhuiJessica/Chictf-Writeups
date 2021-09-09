@@ -18,7 +18,7 @@ count is times
     ```bash
     uncompyle6 flag.pyc > flag.py
     ```
-- 分析代码，发现冒泡排序，结合提示 `count is times` 可以推测 `c` 数组每一位的值是对应数组冒泡排序的总交换次数
+- 分析代码，发现冒泡排序，结合题目 `count is times` 可以推测 `c` 数组每一位的值是对应数组冒泡排序的总交换次数（本来没有 Hint）
     ```py
     flag = 'xxxx{xxxxxxxxxxxxxxxxxx}'
     import random
