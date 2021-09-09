@@ -18,7 +18,7 @@ count is times
     ```bash
     uncompyle6 flag.pyc > flag.py
     ```
-- 分析代码，发现冒泡排序，结合题目 `count is times` 可以推测 `c` 数组每一位的值是对应数组冒泡排序的总交换次数（本来没有 Hint）
+- 分析代码，发现冒泡排序，结合题目 `count is times` 可以推测 `c` 数组每一位的值是对应数组冒泡排序的总交换次数（本来没有 Hint 的 XD）
     ```py
     flag = 'xxxx{xxxxxxxxxxxxxxxxxx}'
     import random
@@ -40,9 +40,9 @@ count is times
                     nums[j], nums[j + 1] = nums[(j + 1)], nums[j]
 
             if count == c[t]:
-                print(numss)
+                print(numss) # 交换前的 nums 数组
                 t += 1
-                if t == 24: # 共输出 24 次
+                if t == 24:
                     break
     ```
 - 计算得 `synt{jrypbzr_gb_arjfpgs}`
