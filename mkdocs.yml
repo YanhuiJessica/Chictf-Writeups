@@ -28,6 +28,7 @@ nav:
         - 超基础的数理模拟器: misc/basic_math_simulator.md
       - Stegano50: misc/stegano50.md
       - NEWSCTF - ！了反都，了反: misc/newsctf_all_reverse.md
+      - audio-frequency-stego: misc/audio_frequency_stego.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
