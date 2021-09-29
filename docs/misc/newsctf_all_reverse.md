@@ -193,6 +193,7 @@ description: 2021 | NEWSCTF | Misc
 	</tr>
 	</tbody>
 	</table>
+
 - Base64 解码则首先丢弃填充的等号，而后将编码字符对应的二进制数每 8 个一组转化为 ASCII 码，直到剩余的二进制数不足 8 位。上表标<font style="color:red">红</font>的二进制位不会影响解码，可用于隐写
 - `extract.py`
 	```py
