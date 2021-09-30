@@ -21,6 +21,7 @@ description: 2020 | BJDCTF | Misc
 ## 咕咕咕
 
 - 翻了翻别人的 WP，发现会因为 CRC 错误打不开图片的咕？！（啊，被 Windows 害惨了）
+    - 【除了暴力枚举宽高来匹配原来的 CRC，直接修改宽高后再更改 CRC 的值更快 (ΦˋωˊΦ)】
 - Windows 下使用`pngcheck`来弥补 QWQ
     ```bash
     pngcheck -v 1.png
