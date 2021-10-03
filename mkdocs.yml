@@ -29,6 +29,9 @@ nav:
       - Stegano50: misc/stegano50.md
       - NEWSCTF - ！了反都，了反: misc/newsctf_all_reverse.md
       - audio-frequency-stego: misc/audio_frequency_stego.md
+      - DeconstruCT.F 2021:
+        - Pirates: misc/pirates.md
+        - Teg Rads: misc/teg_rads.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
@@ -39,6 +42,7 @@ nav:
       - Web php include: web/web_php_include.md
       - CTFHub - Git 泄露: web/ctfhub_git_leakage.md
       - NEWSCTF - easy_web: web/newsctf_easy_web.md
+      - Here's a Flag: web/heres_a_flag.md
     - Reverse:
       - EasyRe: reverse/easyre.md
       - z3: reverse/z3.md
