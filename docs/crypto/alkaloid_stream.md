@@ -73,10 +73,12 @@ I found a weird stream cipher scheme. Can you break this?
 - 其中，`fake` 数组的产生过程为突破点。当且仅当 $i = ln - 1$ 时，$fake[ln - 1]$ 不与 `key` 数组中的值异或，且 `fake` 数组初始值为全 $0$，因此 $fake[ln - 1] = 0$。在 `output.txt` 中搜索，只有一个 $0$ \\(ΦωΦ)/
 - 由此结合 `public` 数组可以依次推出 `key` 数组和 `keystream`
 
-    $$fake[ln - 1] => key[ln - 1] \\
+    $$
+    fake[ln - 1] => key[ln - 1] \\
     key[ln - 1] = fake[ln - 2] => key[ln - 2] \\
     key[ln - 2] \oplus key[ln - 1] = fake[ln - 3] => key[ln - 3] \\
-    ... ...$$
+    ... ...
+    $$
 
 - 使用 `recover_keystream` 函数或直接用 `keystream` 异或 `enc` 就可以得到 Flag 啦！(ΦˋωˊΦ)
     ```py
