@@ -74,7 +74,7 @@ I found a weird stream cipher scheme. Can you break this?
 - 由此结合 `public` 数组可以依次推出 `key` 数组和 `keystream`
 
     $$
-    \displaylines{fake[ln - 1] => key[ln - 1] \\ key[ln - 1] = fake[ln - 2] => key[ln - 2] \\ key[ln - 2] \oplus key[ln - 1] = fake[ln - 3] => key[ln - 3] \\ ... ...
+    \displaylines{fake[ln - 1] => key[ln - 1] \\\ key[ln - 1] = fake[ln - 2] => key[ln - 2] \\\ key[ln - 2] \oplus key[ln - 1] = fake[ln - 3] => key[ln - 3] \\\ ... ...
     $$
 
 - 使用 `recover_keystream` 函数或直接用 `keystream` 异或 `enc` 就可以得到 Flag 啦！(ΦˋωˊΦ)
