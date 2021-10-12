@@ -90,6 +90,7 @@ main()
     ﬄ |	0xFB04 |	FFL
     ﬅ |	0xFB05 |	ST
     ﬆ |	0xFB06 |	ST
+
 - Lowercase Transformation Collisions
 
     Char |	Code Point |    Output Char
