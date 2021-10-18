@@ -32,6 +32,7 @@ nav:
       - DeconstruCT.F 2021:
         - Pirates: misc/pirates.md
         - Teg Rads: misc/teg_rads.md
+      - HearingNotBelieving: misc/hearing_not_believing.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
