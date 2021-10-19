@@ -19,25 +19,25 @@ Hearing is not believing
 - 最后是 SSTV，慢扫描电视（Slow-scan television）
 - Linux 下用 `qsstv` 就可以，能得到 $16$ 张图片，拼起来是一个二维码
 
-    <img src="img/hearing_not_believing04.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing08.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing12.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing16.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing04.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing08.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing12.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing16.png" width=100px style="margin:-4px">
     <br>
-    <img src="img/hearing_not_believing05.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing09.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing13.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing17.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing05.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing09.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing13.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing17.png" width=100px style="margin:-4px">
     <br>
-    <img src="img/hearing_not_believing06.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing10.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing14.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing18.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing06.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing10.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing14.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing18.png" width=100px style="margin:-4px">
     <br>
-    <img src="img/hearing_not_believing07.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing11.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing15.png" width=100px style="margin:-4px">
-    <img src="img/hearing_not_believing19.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing07.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing11.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing15.png" width=100px style="margin:-4px">
+    <img src="../img/hearing_not_believing19.png" width=100px style="margin:-4px">
 
 - 由于没法直接扫出来，还要再手工描一下图 (╥ω╥) 获得另一部分 Flag：`U_kn0W_S57V}`<br>
 ![流下眼泪](img/hearing_not_believing20.jpg)
