@@ -72,13 +72,13 @@ Block cipher is used frequently.
 - 涉及到两种分组密码工作模式：`CBC` 和 `OFB`
 - 无论 `CBC` 还是 `OFB` 都可以从第二组密文开始解密（由第一组密文推出第二组 IV），期间可爆破出 `keys`
 
-    ![CBC 解密](img/easyxor01.jpg)
-  
-  - `CBC` -> 使用第一组密文作为从第二组开始解密的 IV，由于 `Block Cipher Decryption`，需要编写 `convert` 函数的逆过程
+        ![CBC 解密](img/easyxor01.jpg)
+    
+    - `CBC` -> 使用第一组密文作为从第二组开始解密的 IV，由于 `Block Cipher Decryption`，需要编写 `convert` 函数的逆过程
 
-    ![OFB 解密](img/easyxor02.jpg)
-  
-  - `OFB` -> 根据 Flag 格式可知第一组明文为 `ByteCTF{`，与第一组密文异或得从第二组开始解密的 IV
+        ![OFB 解密](img/easyxor02.jpg)
+    
+    - `OFB` -> 根据 Flag 格式可知第一组明文为 `ByteCTF{`，与第一组密文异或得从第二组开始解密的 IV
 - 由于解密必须使用 (╥ω╥)，逆一下 `convert()` 函数，重点在逆 `shift()` 函数上
 
     ```py
@@ -90,26 +90,26 @@ Block cipher is used frequently.
     ```
 
 - `shift()` 函数中移位导致部分位泄漏（当 $k == 0$ 时无法逆推）
-  - 当 $k > 0$ 时，结果二进制各个位依次为 $m_0 \oplus m_k \& c，m_1 \oplus m_{k+1} \& c，...，m_{63-k} \oplus m_{63} \& c，m_{64-k}，m_{65-k}，...，m_{63}$<br>
+    - 当 $k > 0$ 时，结果二进制各个位依次为 $m_0 \oplus m_k \& c，m_1 \oplus m_{k+1} \& c，...，m_{63-k} \oplus m_{63} \& c，m_{64-k}，m_{65-k}，...，m_{63}$<br>
 ![推理图解](img/easyxor03.jpg)
   
-  - 当 $k < 0$ 时，结果二进制各个位依次为 $m_0，m_1，...，m_{-k} \oplus m_0 \& c，m_{-k+1} \oplus m_1 \& c，...，m_{63} \oplus m_{63+k} \& c$
+    - 当 $k < 0$ 时，结果二进制各个位依次为 $m_0，m_1，...，m_{-k} \oplus m_0 \& c，m_{-k+1} \oplus m_1 \& c，...，m_{63} \oplus m_{63+k} \& c$
 ![推理图解](img/easyxor04.jpg)
   
-  - `unshift()` 函数
-    ```py
-    def unshift(m, k, c):
-        if k == 0: return 0    # 返回任意值即可
-        res = m
-        if k < 0:
-            for _ in range(64 // (-k)): # 每一轮可以计算 k 位
-                res = m ^ res >> (-k) & c
-        else:
-            for _ in range(64 // k):
-                res = m ^ res << k & c
-        assert m == shift(res, k, c)
-        return res
-    ```
+    - `unshift()` 函数
+      ```py
+      def unshift(m, k, c):
+          if k == 0: return 0    # 返回任意值即可
+          res = m
+          if k < 0:
+              for _ in range(64 // (-k)): # 每一轮可以计算 k 位
+                  res = m ^ res >> (-k) & c
+          else:
+              for _ in range(64 // k):
+                  res = m ^ res << k & c
+          assert m == shift(res, k, c)
+          return res
+      ```
 
 - 解密函数 `decrypt()` 改写自 `encrypt()`
     ```py
