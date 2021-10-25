@@ -90,10 +90,10 @@ Block cipher is used frequently.
     ```
 
 - `shift()` 函数中移位导致部分位泄漏（当 $k == 0$ 时无法逆推）
-    - 当 $k > 0$ 时，结果二进制各个位依次为 $m_0 \oplus m_k \& c，m_1 \oplus m_{k+1} \& c，...，m_{63-k} \oplus m_{63} \& c，m_{64-k}，m_{65-k}，...，m_{63}$<br>
+    - 当 $k > 0$ 时，结果二进制各个位依次为 $m_0 \oplus m_k \& c_{0}，m_1 \oplus m_{k+1} \& c_{1}，...，m_{63-k} \oplus m_{63} \& c_{63-k}，m_{64-k}，m_{65-k}，...，m_{63}$<br>
 ![推理图解](img/easyxor03.jpg)
   
-    - 当 $k < 0$ 时，结果二进制各个位依次为 $m_0，m_1，...，m_{-k} \oplus m_0 \& c，m_{-k+1} \oplus m_1 \& c，...，m_{63} \oplus m_{63+k} \& c$
+    - 当 $k < 0$ 时，结果二进制各个位依次为 $m_0，m_1，...，m_{-k} \oplus m_0 \& c_{-k}，m_{-k+1} \oplus m_1 \& c_{-k+1}，...，m_{63} \oplus m_{63+k} \& c_{63}$
 ![推理图解](img/easyxor04.jpg)
   
     - `unshift()` 函数
