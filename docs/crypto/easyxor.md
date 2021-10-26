@@ -72,7 +72,7 @@ Block cipher is used frequently.
 - 涉及到两种分组密码工作模式：`CBC` 和 `OFB`
 - 无论 `CBC` 还是 `OFB` 都可以从第二组密文开始解密（由第一组密文推出第二组 IV），期间可爆破出 `keys`
 
-        ![CBC 解密](img/easyxor01.jpg)
+    ![CBC 解密](img/easyxor01.jpg)
     
     - `CBC` -> 使用第一组密文作为从第二组开始解密的 IV，由于 `Block Cipher Decryption`，需要编写 `convert` 函数的逆过程
 
