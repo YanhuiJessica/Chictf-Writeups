@@ -33,6 +33,8 @@ nav:
         - Pirates: misc/pirates.md
         - Teg Rads: misc/teg_rads.md
       - HearingNotBelieving: misc/hearing_not_believing.md
+      - HackerGame 2021:
+        - 透明的文件: misc/transparent_file.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
@@ -44,6 +46,9 @@ nav:
       - CTFHub - Git 泄露: web/ctfhub_git_leakage.md
       - NEWSCTF - easy_web: web/newsctf_easy_web.md
       - Here's a Flag: web/heres_a_flag.md
+      - HackerGame 2021:
+        - FLAG 助力大红包: web/flag_red_packet.md
+        - 图之上的信息: web/info_above_graph.md
     - Reverse:
       - EasyRe: reverse/easyre.md
       - z3: reverse/z3.md
