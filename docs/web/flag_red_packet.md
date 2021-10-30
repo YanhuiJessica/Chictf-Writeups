@@ -31,7 +31,7 @@ description: 2021 | 中国科学技术大学第八届信息安全大赛 | Web
 - 不能直接修改 POST 请求中的 IP 地址<br>
 ![失败！检测到前后端检测 IPv4 地址不匹配](img/flag_red_packet03.jpg)
 
-- 服务端通过 HTTP 请求头中的 `X-Forwarded-For` 识别客户端的原始 IP，接下来就是伪造 IP 地址~~疯狂~~助力 🤪
+- 服务端通过 HTTP 请求头中的 `X-Forwarded-For` 识别客户端的原始 IP，接下来就是伪造 IP 地址 ~~疯狂~~ 助力 🤪
 
     ```py
     import requests
