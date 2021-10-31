@@ -47,6 +47,7 @@ nav:
       - NEWSCTF - easy_web: web/newsctf_easy_web.md
       - Here's a Flag: web/heres_a_flag.md
       - HackerGame 2021:
+        - 卖瓜: web/sale_melon.md
         - FLAG 助力大红包: web/flag_red_packet.md
         - 图之上的信息: web/info_above_graph.md
     - Reverse:
