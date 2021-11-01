@@ -21,10 +21,37 @@ description: 2021 | 中国科学技术大学第八届信息安全大赛 | Genera
     ```
 
 - 根据 `用于在终端中展示一个五颜六色的 flag`，再结合 [RsaCtfTool/test.sh](https://github.com/Ganapati/RsaCtfTool/blob/master/test.sh)（十分感谢！😽） 推测是终端设置颜色和格式化的控制序列，只不过语法结构有缺失
+    - [ANSI escape code - Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code)
 - 在所有 `[` 之前添加 `\e` 或 `\033` 或 `\x1B`
 - 清空终端并执行 `` echo -e `cat transparent.txt` ``，然后全部选中（由于打印的字符为空格，选中才可见设置的字体颜色）就可以看到 Flag 了 🥳<br>
 ![flag{abxnniohkalmcowsayfiglet}](img/transparent_file01.jpg)
 
+    - 或者替换空格为可见字符 `` echo -e `cat transparent.txt | sed 's/ /O/g'` ``<br>
+![不用全选也能看](img/transparent_file02.jpg)
+
+## 咕咕咕
+
+- 终端显示依赖于控制序列
+- ed（文本编辑器） - [ed(1) - Linux man page](https://linux.die.net/man/1/ed)
+    - 适用于不解析控制字符的 dumb terminal
+      ```bash
+      # 插入模式与结束
+      a<Enter>{{text_to_insert}}<Enter>.
+
+      # 保存
+      w {{filename}}
+
+      # 退出
+      q
+      ```
+
+### `reset` vs `clear`
+
+- `clear` 清空终端屏幕
+- `reset` 将重新初始化终端，比 `clear` 更彻底，但保留 `bash` 的状态
+
 ## 参考资料
 
 - [bash:tip_colors_and_formatting - FLOZz' MISC](https://misc.flogisoft.com/bash/tip_colors_and_formatting)
+- [clear(1) - Linux man page](https://linux.die.net/man/1/clear)
+- [reset(1) - Linux man page](https://linux.die.net/man/1/reset)
