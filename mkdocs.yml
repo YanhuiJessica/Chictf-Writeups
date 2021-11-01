@@ -69,6 +69,7 @@ nav:
       - opisthocomus-hoazin: crypto/opisthocomus_hoazin.md
       - Alkaloid Stream: crypto/alkaloid_stream.md
       - easyxor: crypto/easyxor.md
+      - HackerGame - Easy RSA: crypto/ustc_easy_rsa.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
