@@ -7,6 +7,8 @@ description: 2021 | PBCTF | Crypto
 
 I found a weird stream cipher scheme. Can you break this?
 
+[CTFtime.org / pbctf 2021 / Alkaloid Stream](https://ctftime.org/task/17577)
+
 ## 解题思路
 
 - 加密程序 `gen.py` 和输出文件 `output.txt`
