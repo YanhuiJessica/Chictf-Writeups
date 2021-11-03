@@ -101,14 +101,16 @@ I found a weird stream cipher scheme. Can you break this?
                 break
             fake ^= key[i + j + 1]
         for p in range(ln):
-            # output.txt 中有两个值一样，其中一对是 ln - 1
-            if fake == public[p][0] and public[p][1] != 0:
+            if fake == public[p][0]:
                 key[i] = public[p][1]
                 keystream[p] = 1
+                public[p] = [-1, -1]
             elif fake == public[p][1]:
                 key[i] = public[p][0]
                 keystream[p] = 0
+                public[p] = [-1, -1]
 
     print(bits_to_bytes(xor(enc, keystream)))
+
+    # b'pbctf{super_duper_easy_brute_forcing_actually_this_one_was_made_by_mistake}'
     ```
-- Flag：`pbctf{super_duper_easy_brute_forcing_actually_this_one_was_made_by_mistake}`
