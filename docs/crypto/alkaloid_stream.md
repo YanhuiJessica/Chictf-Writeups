@@ -92,30 +92,20 @@ I found a weird stream cipher scheme. Can you break this?
     ln = len(enc)
     key = [0] * ln
     keystream = [0] * ln
-    fake = [0] * ln
-    # 先根据 fake[ln - 1] 找到 key[ln - 1]
-    for p in range(len(public)):
-        if public[p][0] == 0:
-            key[ln - 1] = public[p][1]
-            keystream[p] = 1
-            break
-        elif public[p][1] == 0:
-            key[ln - 1] = public[p][0]
-            keystream[p] = 0
-            break
 
     # 依次求解
-    for i in range(ln - 2, -1, -1):
+    for i in range(ln - 1, -1, -1):
+        fake = 0
         for j in range(ln // 3):
             if i + j + 1 >= ln:
                 break
-            fake[i] ^= key[i + j + 1]
-        for p in range(len(public)):
+            fake ^= key[i + j + 1]
+        for p in range(ln):
             # output.txt 中有两个值一样，其中一对是 ln - 1
-            if fake[i] == public[p][0] and public[p][1] != 0:
+            if fake == public[p][0] and public[p][1] != 0:
                 key[i] = public[p][1]
                 keystream[p] = 1
-            elif fake[i] == public[p][1]:
+            elif fake == public[p][1]:
                 key[i] = public[p][0]
                 keystream[p] = 0
 
