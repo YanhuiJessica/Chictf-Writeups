@@ -67,7 +67,9 @@ nav:
       - 编码与调制: crypto/code_modulate.md
       - CISCN - rsa: crypto/ciscn_rsa.md
       - opisthocomus-hoazin: crypto/opisthocomus_hoazin.md
-      - Alkaloid Stream: crypto/alkaloid_stream.md
+      - PBCTF 2021:
+        - Alkaloid Stream: crypto/alkaloid_stream.md
+        - Steroid Stream: crypto/steroid_stream.md
       - easyxor: crypto/easyxor.md
       - HackerGame - Easy RSA: crypto/ustc_easy_rsa.md
     - Wargames:
