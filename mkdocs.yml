@@ -35,6 +35,7 @@ nav:
       - HearingNotBelieving: misc/hearing_not_believing.md
       - HackerGame 2021:
         - 透明的文件: misc/transparent_file.md
+        - p😭q: misc/p_q.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
