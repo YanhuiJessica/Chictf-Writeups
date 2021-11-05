@@ -54,7 +54,8 @@ description: 2021 | 中国科学技术大学第八届信息安全大赛 | Genera
     img = Image.open('flag.gif')
     np_frames = numpy.array([numpy.array(frame.copy().convert('RGB').getdata(),dtype=numpy.uint8).reshape(frame.size[1],frame.size[0],3) for frame in ImageSequence.Iterator(img)])
     ```
-- `power_to_db` 和 `melspectrogram` 分别有逆函数 `db_to_power` 和 `mel_to_audio`，只要获得 `spectrogram`（频域） 就可以了
+- `power_to_db` 和 `melspectrogram` 分别有逆函数 `db_to_power` 和 `mel_to_audio`，只要获得 `spectrogram`（时频谱） 就可以了
+    - 时频谱图（语谱图），横轴为时间，纵轴为频率，颜色表示幅值
 - 分析 `gif_data` 的生成过程（直接使用其他音频对比 `spectrogram` 和 `gif_data` 更直观）
 
     ```py
@@ -70,7 +71,7 @@ description: 2021 | 中国科学技术大学第八届信息安全大赛 | Genera
                     ] for freq in range(num_freqs * 2 + 1)
                 ]
             ), numpy.ones([quantize, quantize, 1])
-        ) for frame in spectrogram.transpose()  # 矩阵转置，频域->时域
+        ) for frame in spectrogram.transpose()  # 矩阵转置，时域 -> 频域
     ]
     ```
 
