@@ -76,6 +76,7 @@ nav:
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
+      - Krypton: wargames/krypton.md
     - 彩蛋:
       - CTFHub - 首页: eggs/ctfhub_index.md
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
