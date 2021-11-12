@@ -303,30 +303,30 @@ $ vi count.py
 
 ??? note "count.py"
 
-  ```py
-  #!/usr/bin/env python3
+    ```py
+    #!/usr/bin/env python3
 
-  for i in range(1, 3):
-    s = ''
-    with open('found' + str(i), 'r') as f:
-      s += f.read()
-    s = s.replace(' ', '')
-    d = list(dict() for _ in range(6))
-    cnt = list(0 for _ in range(6))
-    for i in range(len(s)):
-      cnt[i % 6] += 1
-      try:
-        d[i % 6][s[i]] += 1
-      except:
-        d[i % 6][s[i]] = 1
-  key = ''
-  for i in range(6):
-    for j in d[i]:
-      d[i][j] /= cnt[i]
-    d[i] = sorted(d[i].items(), key=lambda kv:(kv[1],kv[0]), reverse=True)
-    key += chr((26 + ord(next(iter(d[i]))[0]) - ord('E')) % 26 + ord('A'))
-  print(key)
-  ```
+    for i in range(1, 3):
+      s = ''
+      with open('found' + str(i), 'r') as f:
+        s += f.read()
+      s = s.replace(' ', '')
+      d = list(dict() for _ in range(6))
+      cnt = list(0 for _ in range(6))
+      for i in range(len(s)):
+        cnt[i % 6] += 1
+        try:
+          d[i % 6][s[i]] += 1
+        except:
+          d[i % 6][s[i]] = 1
+    key = ''
+    for i in range(6):
+      for j in d[i]:
+        d[i][j] /= cnt[i]
+      d[i] = sorted(d[i].items(), key=lambda kv:(kv[1],kv[0]), reverse=True)
+      key += chr((26 + ord(next(iter(d[i]))[0]) - ord('E')) % 26 + ord('A'))
+    print(key)
+    ```
 
 ```bash
 $ python3 count.py 
