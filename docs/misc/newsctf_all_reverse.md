@@ -13,10 +13,12 @@ description: 2021 | NEWSCTF | Misc
 - 使用 010 Editor 查看类型不明的文件，发现是按字节逆序的 RAR 文件<br>
 ![!raR](img/newsctf_all_reverse03.jpg)
 - 按字节逆序后获得一个加密的 RAR 文件，其中包含一个`flag.txt`文件
-- 再回到流量包，大量的 POST 请求非常可疑，查看任意一个 POST 请求，其中包含用户名和密码的表单数据<br>
+- 再回到流量包，大量的 POST 请求非常可疑，查看任意一个 POST 请求，其中包含用户名和密码的表单数据，推测与压缩包密码有关<br>
 ![name, password, _submit, nonce](img/newsctf_all_reverse04.jpg)
+- 注意到有一个 `/logout` 请求，说明在此之前一定有一次成功的登入，缩小检索范围<br>
+![/logout](img/newsctf_all_reverse05.jpg)
 - 如果用户名或密码错误，将返回`403 FORBIDDEN`，以此为依据查找正确的用户名和密码。最终获得正确用户名`test123`和密码`passwd123`<br>
-![passwd123](img/newsctf_all_reverse05.jpg)
+![passwd123](img/newsctf_all_reverse06.jpg)
 - 使用`passwd123`可解压加密的 RAR 文件并获得`flag.txt`，内容显然是经过 Base64 编码后倒序的文本
 	```bash
 	# 内容节选
