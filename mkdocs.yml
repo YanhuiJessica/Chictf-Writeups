@@ -75,6 +75,7 @@ nav:
         - Steroid Stream: crypto/steroid_stream.md
       - easyxor: crypto/easyxor.md
       - HackerGame - Easy RSA: crypto/ustc_easy_rsa.md
+      - Baby MAC: crypto/baby_mac.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
