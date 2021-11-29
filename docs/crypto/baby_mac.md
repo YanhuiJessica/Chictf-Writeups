@@ -99,7 +99,8 @@ nc babymac.hackable.software 1337
         mac = aes.encrypt(mac)
         return mac
     ```
-- 当明文长度刚好为 16 字节时，将填充 `b'\x10' * 16`，用 $pad$ 表示，$iv$ 表示 `b'\x00' * 16`
+- 当明文长度刚好为 16 字节时，将填充 `b'\x10' * 16`，用 $pad$ 表示，$iv$ 表示 `b'\x00' * 16`<br>
+![加密说明](img/baby_mac01.jpg)
 - 可以利用异或取得目标字符串的 MAC（加密过程简单表示为顺序块的形式，如 $pad, iv$ 等价于 $MAC_k(MAC_k(pad) \oplus iv)$）
 
     <div style="text-align: center">
