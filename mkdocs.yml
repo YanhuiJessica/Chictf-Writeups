@@ -40,6 +40,7 @@ nav:
       - 西湖论剑 2021:
         - YUSA的小秘密: misc/yusa_little_secret.md
         - Yusa的秘密: misc/yusa_secret.md
+      - Compress The Flag: misc/compress_the_flag.md
       - s/&lt;script&gt;//gi: misc/s_script_gi.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
