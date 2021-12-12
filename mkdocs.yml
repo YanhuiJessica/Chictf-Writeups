@@ -37,7 +37,10 @@ nav:
         - 透明的文件: misc/transparent_file.md
         - 加密的 U 盘: misc/encrypted_u_disk.md
         - p😭q: misc/p_q.md
-      - Yusa的秘密: misc/yusa_secret.md
+      - 西湖论剑 2021:
+        - YUSA的小秘密: misc/yusa_little_secret.md
+        - Yusa的秘密: misc/yusa_secret.md
+      - s/<script>//gi: misc/s_script_gi.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
