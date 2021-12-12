@@ -1,5 +1,5 @@
 ---
-title: Misc - s/<script>//gi
+title: Misc - s/&lt;script&gt;//gi
 description: 2021 | SECCON | Misc
 ---
 
