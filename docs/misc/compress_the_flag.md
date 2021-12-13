@@ -133,17 +133,17 @@ nc compresstheflag.hackable.software 1337
         1:EEEE
             none   29
             zlib   35
-        bzip2   69
+           bzip2   69
             lzma   88
         1:AAAA
             none   29
             zlib   37
-        bzip2   70
+           bzip2   70
             lzma   88
         1:SSSS
             none   29
             zlib   37
-        bzip2   70
+           bzip2   70
             lzma   88
         ```
 
