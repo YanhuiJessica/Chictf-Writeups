@@ -68,7 +68,7 @@ description: 2021 | NEWSCTF | Web
 - `e10adc3949ba59abbe56e057f20f883e` 在线 MD5 解码后得到 `123456`
 - 关于 `md5($a) === md5($b) && $a !== $b` 可以参考 [Web - Funhash](funhash.md)，传入两个不同的数组即可
 - 当数组赋值未指定键值（如`$array[]=1`）时，将取当前（上次数组重新索引后存在过的）最大整数索引值加 1，若还没有整数索引，则键值为 0
-  - 64 位系统下的整数溢出
+    - 64 位系统下的整数溢出
     ```php
     <?php
     $large_number = 9223372036854775807;
@@ -82,7 +82,7 @@ description: 2021 | NEWSCTF | Web
     var_dump($large_number);                     // float(5.0E+19)
     ?>
     ```
-  - `$array[++$c]=1`需要能够成功赋值，而`$array[]=1`（相当于`$array[$c+2]=1`）赋值失败才能获得`$flag`，那么`$c`的值应为 $9223372036854775806$
+    - `$array[++$c]=1`需要能够成功赋值，而`$array[]=1`（相当于`$array[$c+2]=1`）赋值失败才能获得`$flag`，那么`$c`的值应为 $9223372036854775806$
 - 由于`$_POST`默认只能接受到`Content-Type: application/x-www-form-urlencoded`的数据，因此以 GET 请求为基础修改并发送 POST 请求时，除了修改请求方法、添加请求主体外，要记得在请求头添加`Content-Type`字段
 - 获得`$flag`的内容
     ```bash

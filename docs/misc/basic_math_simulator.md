@@ -47,11 +47,11 @@ description: 2020 | 中国科学技术大学第七届信息安全大赛 | Genera
     r = s.get(base_url)
     print(r.content)
     ```
-  - `parse_latex`会将常数 ${\displaystyle e}$ 识别为符号，需要进行替换
-  - `parse_latex`对于部分 *LaTex* 表达式会出现解析错误的情况，因此不能直接对原始表达式使用，如 $\int_{2}^{\frac{9}{2}} \frac{1}{4} \, x + 2 \, \sqrt{x} + \frac{2}{x} - \ln(x)\,{d x}$，可以看到↓需要计算定积分的区域划分错了
-    ```cmd
-    >>> parse_latex(r'\int_{2}^{\frac{9}{2}} \frac{1}{4} \, x + 2 \, \sqrt{x} + \frac{2}{x} - \ln(x)\,{d x}')
-    -dx*log(x, E) + 2*sqrt(x) + x*Integral(1/4, (x, 2, 9/2)) + 2/x
-    ```
+    - `parse_latex`会将常数 ${\displaystyle e}$ 识别为符号，需要进行替换
+    - `parse_latex`对于部分 *LaTex* 表达式会出现解析错误的情况，因此不能直接对原始表达式使用，如 $\int_{2}^{\frac{9}{2}} \frac{1}{4} \, x + 2 \, \sqrt{x} + \frac{2}{x} - \ln(x)\,{d x}$，可以看到↓需要计算定积分的区域划分错了
+      ```cmd
+      >>> parse_latex(r'\int_{2}^{\frac{9}{2}} \frac{1}{4} \, x + 2 \, \sqrt{x} + \frac{2}{x} - \ln(x)\,{d x}')
+      -dx*log(x, E) + 2*sqrt(x) + x*Integral(1/4, (x, 2, 9/2)) + 2/x
+      ```
 - 做完 $400$ 道题就能拿到 Flag 了(ΦˋωˊΦ)<br>
 ![Sympy 一点也不慢！](img/basic_math_simulator03.jpg)

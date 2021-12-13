@@ -20,7 +20,7 @@ I found a weird stream cipher scheme. Can you break this?
         for j in arr[:ln // 3]: # 在 [i + 1, ln) 中随机选取 ln // 3 个 key 异或
             fake[i] ^= key[j]
     ```
-  - 对于 `fake` 数组中下标为 $[ln - ln // 3, ln)$ 的元素值均为 $0$
+    - 对于 `fake` 数组中下标为 $[ln - ln // 3, ln)$ 的元素值均为 $0$
 - 异或等同于 $GF(2)$ 中的加法，可以把 `fake` 数组中的值看作是已知 `keys` 的线性组合，而 `keys` 数组中的值相互间线性无关，从而可以区分 `fake` 和 `keys`
 - 使用已知 `keys` 构建一个以 `keys` 为行的 $GF(2)$ 矩阵，假设 `keys` 的数量为 $k$，那么有 $k$ 行相互独立，矩阵的秩（rank）为 $k$。添加值 $v$ 到 $k + 1$ 行，如果 $v$ 是 `keys` 的线性组合，那么矩阵的秩仍为 $k$，否则是 $k + 1$
     ```py
