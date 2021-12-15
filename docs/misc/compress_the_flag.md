@@ -127,7 +127,7 @@ nc compresstheflag.hackable.software 1337
 - 指定随机数种子，也就是说可以知道 Flag 打乱之后每一个字符原先的位置
 - 先在本地用 `DrgnS{ABCDEFGHIJKLMNOPQR}` 观察一下
     - 当种子为 1 时，字母 `E` 开头
-    - 观察发现，当输入字符串为 4 个相同字符时，`EEEE` 和打乱的 Flag 字符串使用 zlib 和 bzip2 （均含 Huffman 编码）压缩的长度会小于其他字符
+    - 观察发现，当输入字符串为 4 个相同字符时，`EEEE` 和打乱的 Flag 字符串使用 zlib 和 bzip2 （均含 RLE 和 Huffman 编码）压缩的长度会小于其他字符
 
         ```bash
         1:EEEE
