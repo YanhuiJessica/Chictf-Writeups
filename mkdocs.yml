@@ -76,6 +76,7 @@ nav:
       - CISCN - rsa: crypto/ciscn_rsa.md
       - opisthocomus-hoazin: crypto/opisthocomus_hoazin.md
       - Stars and Shapes: crypto/stars_and_shapes.md
+      - He Thrusts His Fists Against the Post: crypto/he_thrusts_his_fists_against_the_post.md
       - PBCTF 2021:
         - Alkaloid Stream: crypto/alkaloid_stream.md
         - Steroid Stream: crypto/steroid_stream.md
