@@ -324,7 +324,7 @@ $ vi count.py
       for j in d[i]:
         d[i][j] /= cnt[i]
       d[i] = sorted(d[i].items(), key=lambda kv:(kv[1],kv[0]), reverse=True)
-      key += chr((26 + ord(next(iter(d[i]))[0]) - ord('E')) % 26 + ord('A'))
+      key += chr((26 + ord(d[i][0][0]) - ord('E')) % 26 + ord('A'))
     print(key)
     ```
 
@@ -433,3 +433,179 @@ $ python3 count.py
 ```
 
 - 解 `BELOS Z` 得 `RANDO M`
+
+## Level 6
+
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>krypton6</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>RANDOM</td>
+  </tr>
+</tbody>
+</table>
+
+```bash
+$ ssh krypton6@krypton.labs.overthewire.org -p 2231
+
+$ cd /krypton/krypton6
+$ ls
+encrypt6  HINT1  HINT2  keyfile.dat  krypton7  onetime  README
+$ cat README 
+Hopefully by now its obvious that encryption using repeating keys
+is a bad idea.  Frequency analysis can destroy repeating/fixed key
+substitution crypto.
+
+A feature of good crypto is random ciphertext.  A good cipher must
+not reveal any clues about the plaintext.  Since natural language 
+plaintext (in this case, English) contains patterns, it is left up
+to the encryption key or the encryption algorithm to add the 
+'randomness'.
+
+Modern ciphers are similar to older plain substitution 
+ciphers, but improve the 'random' nature of the key.
+
+An example of an older cipher using a complex, random, large key
+is a vigniere using a key of the same size of the plaintext.  For
+example, imagine you and your confident have agreed on a key using
+the book 'A Tale of Two Cities' as your key, in 256 byte blocks.
+
+The cipher works as such:
+
+Each plaintext message is broken into 256 byte blocks.  For each 
+block of plaintext, a corresponding 256 byte block from the book
+is used as the key, starting from the first chapter, and progressing.
+No part of the book is ever re-used as key.  The use of a key of the 
+same length as the plaintext, and only using it once is called a "One Time Pad".
+
+Look in the krypton6/onetime  directory.  You will find a file called 'plain1', a 256 
+byte block.  You will also see a file 'key1', the first 256 bytes of
+'A Tale of Two Cities'.  The file 'cipher1' is the cipher text of 
+plain1.  As you can see (and try) it is very difficult to break
+the cipher without the key knowledge.
+
+(NOTE - it is possible though.  Using plain language as a one time pad
+key has a weakness.  As a secondary challenge, open README in that directory)
+
+If the encryption is truly random letters, and only used once, then it
+is impossible to break.  A truly random "One Time Pad" key cannot be
+broken.  Consider intercepting a ciphertext message of 1000 bytes.  One
+could brute force for the key, but due to the random key nature, you would
+produce every single valid 1000 letter plaintext as well.  Who is to know
+which is the real plaintext?!?
+
+Choosing keys that are the same size as the plaintext is impractical.
+Therefore, other methods must be used to obscure ciphertext against 
+frequency analysis in a simple substitution cipher.  The
+impracticality of an 'infinite' key means that the randomness, or
+entropy, of the encryption is introduced via the method.
+
+We have seen the method of 'substitution'.  Even in modern crypto,
+substitution is a valid technique.  Another technique is 'transposition',
+or swapping of bytes.
+
+Modern ciphers break into two types; symmetric and asymmetric.
+
+Symmetric ciphers come in two flavours: block and stream.
+
+Until now, we have been playing with classical ciphers, approximating
+'block' ciphers.  A block cipher is done in fixed size blocks (suprise!).
+For example, in the previous paragraphs we discussed breaking text and keys
+into 256 byte blocks, and working on those blocks.  Block ciphers use a
+fixed key to perform substituion and transposition ciphers on each
+block discretely.
+
+Its time to employ a stream cipher.  A stream cipher attempts to create
+an on-the-fly 'random' keystream to encrypt the incoming plaintext one
+byte at a time.  Typically, the 'random' key byte is xor'd with the 
+plaintext to produce the ciphertext.  If the random keystream can be
+replicated at the recieving end, then a further xor will produce the
+plaintext once again.
+
+From this example forward, we will be working with bytes, not ASCII 
+text, so a hex editor/dumper like hexdump is a necessity.  Now is the
+right time to start to learn to use tools like cryptool.
+
+In this example, the keyfile is in your directory, however it is 
+not readable by you.  The binary 'encrypt6' is also available.
+It will read the keyfile and encrypt any message you desire, using
+the key AND a 'random' number.  You get to perform a 'known ciphertext'
+attack by introducing plaintext of your choice.  The challenge here is 
+not simple, but the 'random' number generator is weak.
+
+As stated, it is now that we suggest you begin to use public tools, like cryptool,
+to help in your analysis.  You will most likely need a hint to get going.
+See 'HINT1' if you need a kickstart.
+
+If you have further difficulty, there is a hint in 'HINT2'.
+
+The password for level 7 (krypton7) is encrypted with 'encrypt6'.
+
+Good Luck!
+```
+
+流密码，可以采用选择明文攻击，弱随机数生成器，建议使用开源工具（如 `cryptool`）辅助分析。
+
+```bash
+$ mktemp -d
+/tmp/tmp.dUnxjQOLqJ
+$ cd /tmp/tmp.dUnxjQOLqJ
+$ ln -s /krypton/krypton6/encrypt6
+$ ln -s /krypton/krypton6/keyfile.dat
+$ chmod 777 .
+$ ./encrypt6 
+usage: encrypt6 foo bar 
+Where: foo is the file containing the plaintext and bar is the destination ciphertext file.
+$ cat /krypton/krypton6/krypton7 
+PNUKLYLWRQKGKBE
+```
+
+`encrypt6` 不处理英文字母以外的字符
+
+```bash
+$ echo -n '!#$%^&*()Aa' > plain
+$ ./encrypt6 plain cipher
+$ cat cipher 
+EI
+```
+
+首先获取伪随机序列的周期
+
+```bash
+$ for i in $(seq 1 64); do echo -n A; done > plain
+$ ./encrypt6 plain cipher
+$ cat cipher 
+EICTDGYIYZKTHNSIRFXYCPFUEOCKRNEICTDGYIYZKTHNSIRFXYCPFUEOCKRNEICT
+```
+
+由此可知，伪随机序列的周期为 30 字节
+
+```bash
+$ for i in $(seq 1 30); do echo -n B; done > plain
+$ ./encrypt6 plain cipher
+$ cat cipher 
+FJDUEHZJZALUIOTJSGYZDQGVFPDLSO
+```
+
+对比 A 和 B 一个周期的加密结果，注意到 B 的加密结果只是在 A 的基础上字母表位置后移了一位（注意不是**异或**，不要被惯性思维带偏了），即 30 个 A 加密的结果就是一个周期的密钥！
+
+```bash
+A: EICTDGYIYZKTHNSIRFXYCPFUEOCKRN
+B: FJDUEHZJZALUIOTJSGYZDQGVFPDLSO
+```
+
+那么直接密文减去密钥就好了！
+
+```py
+m, c, k = '', 'PNUKLYLWRQKGKBE', 'EICTDGYIYZKTHNSIRFXYCPFUEOCKRN'
+for i in range(len(c)):
+    m += chr((26 + ord(c[i]) - ord(k[i])) % 26 + ord('A'))
+print(m)
+# LFSRISNOTRANDOM
+```
