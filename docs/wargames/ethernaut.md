@@ -571,7 +571,7 @@ contract Vault {
 
 ```js
 // 首先确定变量定义的顺序，第一个变量存储在 slot 0，第二个变量存储在 slot 1，以此类推
->> await web3.eth.getStorageAt(contract.address, 1)
+>> await web3.eth.getStorageAt(instance, 1)
 "0x412076657279207374726f6e67207365637265742070617373776f7264203a29"
 >> web3.utils.toAscii("0x412076657279207374726f6e67207365637265742070617373776f7264203a29")
 "A very strong secret password :)"
@@ -692,7 +692,7 @@ contract Reentrance {
 - 先看看合约的初始资金
 
     ```js
-    >> await web3.eth.getBalance(contract.address)
+    >> await web3.eth.getBalance(instance)
     "1000000000000000"
     ```
 
@@ -882,17 +882,17 @@ contract Privacy {
 - 常量不存储
 
 ```js
->> await web3.eth.getStorageAt(contract.address, 0)
+>> await web3.eth.getStorageAt(instancedress, 0)
 "0x0000000000000000000000000000000000000000000000000000000000000001"
->> await web3.eth.getStorageAt(contract.address, 1)
+>> await web3.eth.getStorageAt(instancedress, 1)
 "0x000000000000000000000000000000000000000000000000000000006210d5b1"
->> await web3.eth.getStorageAt(contract.address, 2)
+>> await web3.eth.getStorageAt(instancedress, 2)
 "0x00000000000000000000000000000000000000000000000000000000d5b1ff0a" // 0a for flattening, ff for denomination
->> await web3.eth.getStorageAt(contract.address, 3)
+>> await web3.eth.getStorageAt(instancedress, 3)
 "0xc3003c2bcb65196b8352fb925d945f9229929bcc727f70ea451255859a6a4f56"
->> await web3.eth.getStorageAt(contract.address, 4)
+>> await web3.eth.getStorageAt(instancedress, 4)
 "0x6d6f76ea288ee9c55ab1ad76264518237a23af3495ee5702f57a164f8aeb99b0"
->> await web3.eth.getStorageAt(contract.address, 5)
+>> await web3.eth.getStorageAt(instancedress, 5)
 "0x06e3eb3b9e34467cbf1a226fc2bd13e5948a7a15ef2205caf186fa3df3076f53"  // data[2]
 ```
 
@@ -1096,3 +1096,73 @@ contract Hack {
 ### 参考资料
 
 [Inline Assembly](https://docs.soliditylang.org/en/v0.6.0/assembly.html#inline-assembly)
+
+## 15. Naught Coin
+
+取出被锁住的硬币，清空自己的余额
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
+
+contract NaughtCoin is ERC20 { // 基于 ERC20
+
+  // string public constant name = 'NaughtCoin';
+  // string public constant symbol = '0x0';
+  // uint public constant decimals = 18;
+  uint public timeLock = now + 10 * 365 days;
+  uint256 public INITIAL_SUPPLY;
+  address public player;
+
+  constructor(address _player) 
+  ERC20('NaughtCoin', '0x0')
+  public {
+    player = _player;
+    INITIAL_SUPPLY = 1000000 * (10**uint256(decimals()));
+    // _totalSupply = INITIAL_SUPPLY;
+    // _balances[player] = INITIAL_SUPPLY;
+    _mint(player, INITIAL_SUPPLY); // Creates INITIAL_SUPPLY tokens and assigns them to player
+    emit Transfer(address(0), player, INITIAL_SUPPLY);
+  }
+  
+  function transfer(address _to, uint256 _value) override public lockTokens returns(bool) {
+    // super 继承直接父合约的 transfer 函数
+    super.transfer(_to, _value);  // 将调用者 _value 数量的金额转移给 _to
+  }
+
+  // Prevent the initial owner from transferring tokens until the timelock has passed
+  modifier lockTokens() {
+    if (msg.sender == player) {
+      require(now > timeLock);
+      _;
+    } else {
+     _;
+    }
+  } 
+} 
+```
+
+- `lockTokens` 限制了 `player`，而被覆写的 `transfer` 只能由持有货币的账户发起转账
+- `NaughtCoin` 合约是 `ERC20` 的子合约，在合约 `ERC20` 中除了定义 `transfer` 还有 `transferFrom` 函数，由此可以绕过 `lockTokens` 的限制
+
+    ```
+    transferFrom(address sender, address recipient, uint256 amount) → bool
+    ```
+
+- 在调用 `transferFrom` 之前需要取得 `msg.sender` 的授权
+
+    ```js
+    >> await contract.approve(player, await contract.INITIAL_SUPPLY())
+    ```
+
+- 发起转账
+
+    ```js
+    >> await contract.transferFrom(player, instance, await contract.INITIAL_SUPPLY())
+    ```
+
+### 参考资料
+
+[ERC 20 - OpenZeppelin Docs](https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#ERC20-_mint-address-uint256-)
