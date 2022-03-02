@@ -33,7 +33,7 @@ rzua]o^]tahf]ie]kiho^z]niru]ha^ogn]doak]i[]g[uff]iop^atpe[paz[[tapzetd
 - 排除常见的单表代换密码（都是线性的），最后想到了椭圆曲线
 - 尽管点分布的形状似乎和实数域的椭圆曲线不搭边，但若考虑是在有限域，则图中点集完全符合有限域中椭圆曲线的特性
     - 同时，椭圆曲线上点的逆元可以符合加解密的映射需求
-- 根据点数及其坐标大小可知有限域大小为 $31$
+- 根据各点坐标大小可推出有限域大小为 $31$
 - 通过 [在线椭圆曲线可视化工具](https://www.desmos.com/calculator/ialhd71we3) 寻找椭圆曲线系数的大致范围
     - 关键特征：三个点位于 $x$ 轴，一个点位于 $(0, 0)$
 - 再结合有限域和已知点的坐标确定椭圆曲线系数 $a=-5,b=0$
@@ -45,8 +45,9 @@ rzua]o^]tahf]ie]kiho^z]niru]ha^ogn]doak]i[]g[uff]iop^atpe[paz[[tapzetd
 
     for a in range(-5, 0):
         for b in range(-4, 5):
-            try: E = EllipticCurve(Zmod(31), [a, b])
-            except: continue
+            if 4 * a**3 + 27 * b**2:
+                E = EllipticCurve(Zmod(31), [a, b])
+            else: continue
             f = 1
             for p in ps:
                 try: E(p[0], p[1])
