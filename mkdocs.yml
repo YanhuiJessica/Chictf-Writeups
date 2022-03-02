@@ -84,6 +84,7 @@ nav:
       - easyxor: crypto/easyxor.md
       - HackerGame - Easy RSA: crypto/ustc_easy_rsa.md
       - Baby MAC: crypto/baby_mac.md
+      - noteasy03: crypto/noteasy03.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
