@@ -17,7 +17,7 @@ description: 2022 | UGRACTF | CRYPTO
 rzua]o^]tahf]ie]kiho^z]niru]ha^ogn]doak]i[]g[uff]iop^atpe[paz[[tapzetd
 ```
 
-## 解题思路
+## 解题思路 [English ver.](https://sekai.team/blog/ugra-ctf-quals-2022/noteasy03/)
 
 - 根据题目 `curved`/`closed in on himself` 和图片，推测应该是某种曲线，且所有点在曲线上都能找到对应点
 - 分析密文，结合 `flag` 的格式，得到以下映射关系。再结合 `Caesar` 推测是单表代换
