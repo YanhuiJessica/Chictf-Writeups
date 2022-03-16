@@ -65,6 +65,7 @@ nav:
       - NEWSCTF - re_signin: reverse/newsctf_re_signin.md
     - Pwn:
       - when did you born: pwn/when_did_you_born.md
+      - Amnesia: pwn/amnesia.md
     - Crypto:
       - bank: crypto/bank.md
       - shanghai: crypto/shanghai.md
