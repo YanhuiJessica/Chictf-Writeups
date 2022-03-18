@@ -5,6 +5,7 @@ site_author: YanhuiJessica
 # Repository
 repo_name: 'YanhuiJessica/Chictf-Writeups'
 repo_url: https://github.com/YanhuiJessica/Chictf-Writeups
+site_url: https://yanhuijessica.github.io/Chictf-Writeups/
 
 nav:
     - 简介:
@@ -120,6 +121,20 @@ plugins:
         type: datetime
         locale: en
     - git-authors
+    - blogging:
+        theme:
+          name: card
+        size: 3
+        paging: false
+        show_total: false
+        dirs:
+          - crypto
+          - misc
+          - pwn
+          - reverse
+          - web
+          - wargames
+          - eggs
 
 extra_javascript:
     - https://polyfill.io/v3/polyfill.min.js?features=es6
