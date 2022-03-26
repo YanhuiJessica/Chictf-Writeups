@@ -87,6 +87,7 @@ nav:
       - HackerGame - Easy RSA: crypto/ustc_easy_rsa.md
       - Baby MAC: crypto/baby_mac.md
       - noteasy03: crypto/noteasy03.md
+      - Dealymaffs: crypto/dealymaffs.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
