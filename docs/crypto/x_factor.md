@@ -9,6 +9,7 @@ Decrypt it!
 
 ??? note "x_factor.md"
 
+    ```md
     I have generated a RSA-1024 key pair:
     * public key exponent: 0x10001
     * public key modulus: 0xa9e7da28ebecf1f88efe012b8502122d70b167bdcfa11fd24429c23f27f55ee2cc3dcd7f337d0e630985152e114830423bfaf83f4f15d2d05826bf511c343c1b13bef744ff2232fb91416484be4e130a007a9b432225c5ead5a1faf02fa1b1b53d1adc6e62236c798f76695bb59f737d2701fe42f1fbf57385c29de12e79c5b3
@@ -26,6 +27,7 @@ Decrypt it!
 
     Take the least significant 16 bytes of the signature, encode them in lowercase hexadecimal and format it as `LINECTF{sig_lowest_16_bytes_hex}` to obtain the flag.
     E.g. the last signature from the list above would become `LINECTF{174c96f2c629afe74949d97918cbee4a}`.
+    ```
 
 ## 解题思路
 
