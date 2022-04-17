@@ -1,0 +1,83 @@
+---
+title: Crypto - X Factor
+description: 2022 | LINE CTF | crypto
+---
+
+## 题目
+
+Decrypt it!
+
+??? note "x_factor.md"
+
+    I have generated a RSA-1024 key pair:
+    * public key exponent: 0x10001
+    * public key modulus: 0xa9e7da28ebecf1f88efe012b8502122d70b167bdcfa11fd24429c23f27f55ee2cc3dcd7f337d0e630985152e114830423bfaf83f4f15d2d05826bf511c343c1b13bef744ff2232fb91416484be4e130a007a9b432225c5ead5a1faf02fa1b1b53d1adc6e62236c798f76695bb59f737d2701fe42f1fbf57385c29de12e79c5b3
+
+    Here are some known plain -> signature pairs I generated using my private key:
+    * 0x945d86b04b2e7c7 -> 0x17bb21949d5a0f590c6126e26dc830b51d52b8d0eb4f2b69494a9f9a637edb1061bec153f0c1d9dd55b1ad0fd4d58c46e2df51d293cdaaf1f74d5eb2f230568304eebb327e30879163790f3f860ca2da53ee0c60c5e1b2c3964dbcf194c27697a830a88d53b6e0ae29c616e4f9826ec91f7d390fb42409593e1815dbe48f7ed4
+    * 0x5de2 -> 0x3ea73715787028b52796061fb887a7d36fb1ba1f9734e9fd6cb6188e087da5bfc26c4bfe1b4f0cbfa0d693d4ac0494efa58888e8415964c124f7ef293a8ee2bc403cad6e9a201cdd442c102b30009a3b63fa61cdd7b31ce9da03507901b49a654e4bb2b03979aea0fab3731d4e564c3c30c75aa1d079594723b60248d9bdde50
+    * 0xa16b201cdd42ad70da249 -> 0x9444e3fc71056d25489e5ce78c6c986c029f12b61f4f4b5cbd4a0ce6b999919d12c8872b8f2a8a7e91bd0f263a4ead8f2aa4f7e9fdb9096c2ea11f693f6aa73d6b9d5e351617d6f95849f9c73edabd6a6fde6cc2e4559e67b0e4a2ea8d6897b32675be6fc72a6172fd42a8a8e96adfc2b899015b73ff80d09c35909be0a6e13a
+    * 0x6d993121ed46b -> 0x2b7a1c4a1a9e9f9179ab7b05dd9e0089695f895864b52c73bfbc37af3008e5c187518b56b9e819cc2f9dfdffdfb86b7cc44222b66d3ea49db72c72eb50377c8e6eb6f6cbf62efab760e4a697cbfdcdc47d1adc183cc790d2e86490da0705717e5908ad1af85c58c9429e15ea7c83ccf7d86048571d50bd721e5b3a0912bed7c
+    * 0x726fa7a7 -> 0xa7d5548d5e4339176a54ae1b3832d328e7c512be5252dabd05afa28cd92c7932b7d1c582dc26a0ce4f06b1e96814ee362ed475ddaf30dd37af0022441b36f08ec8c7c4135d6174167a43fa34f587abf806a4820e4f74708624518044f272e3e1215404e65b0219d42a706e5c295b9bf0ee8b7b7f9b6a75d76be64cf7c27dfaeb
+    * 0x31e828d97a0874cff -> 0x67832c41a913bcc79631780088784e46402a0a0820826e648d84f9cc14ac99f7d8c10cf48a6774388daabcc0546d4e1e8e345ee7fc60b249d95d953ad4d923ca3ac96492ba71c9085d40753cab256948d61aeee96e0fe6c9a0134b807734a32f26430b325df7b6c9f8ba445e7152c2bf86b4dfd4293a53a8d6f003bf8cf5dffd
+    * 0x904a515 -> 0x927a6ecd74bb7c7829741d290bc4a1fd844fa384ae3503b487ed51dbf9f79308bb11238f2ac389f8290e5bcebb0a4b9e09eda084f27add7b1995eeda57eb043deee72bfef97c3f90171b7b91785c2629ac9c31cbdcb25d081b8a1abc4d98c4a1fd9f074b583b5298b2b6cc38ca0832c2174c96f2c629afe74949d97918cbee4a
+
+    **What is the signature of 0x686178656c696f6e?**
+
+    Take the least significant 16 bytes of the signature, encode them in lowercase hexadecimal and format it as `LINECTF{sig_lowest_16_bytes_hex}` to obtain the flag.
+    E.g. the last signature from the list above would become `LINECTF{174c96f2c629afe74949d97918cbee4a}`.
+
+## 解题思路
+
+- 根据已知明密文对获取指定消息 `0x686178656c696f6e` 的签名，只要指定消息的因数包含于所有给定消息的因数，则可由 RSA 的乘法同态性推出
+  
+    <div style="text-align: center">
+
+    $E(ab) = E(a) \cdot E(b)(mod\, n)$
+
+    $E(a/b) = E(a) \cdot E(b)^{-1}(mod\, n)$
+
+    </div>
+
+- 获取所有明文的因数，可见，指定消息所有因数完全包含于给定消息的因数
+
+    ```py
+    from factordb.factordb import FactorDB
+
+    pt = [0x686178656c696f6e, 0x945d86b04b2e7c7, 0x5de2, 0xa16b201cdd42ad70da249, 0x6d993121ed46b, 0x726fa7a7, 0x31e828d97a0874cff, 0x904a515]
+
+    for i in pt:
+        f = FactorDB(i)
+        f.connect()
+        print(chr(pt.index(i) + ord('a')), hex(i), f.get_factor_list())
+
+    # a 0x686178656c696f6e [2, 197, 947, 2098711, 9605087]
+    # b 0x945d86b04b2e7c7 [811, 947, 947, 947, 970111]
+    # c 0x5de2 [2, 61, 197]
+    # d 0xa16b201cdd42ad70da249 [970111, 2098711, 2098711, 2854343]
+    # e 0x6d993121ed46b [947, 970111, 2098711]
+    # f 0x726fa7a7 [61, 197, 197, 811]
+    # g 0x31e828d97a0874cff [2098711, 2854343, 9605087]
+    # h 0x904a515 [197, 811, 947]
+    ```
+
+- 经过手工计算，指定消息 $a=\frac{c\times e^2\times g\times h^2}{b\times d\times f}$，那么接下来利用 RSA 的乘法同态性求解就好啦 > <
+
+    ```py
+    from Crypto.Util.number import inverse
+
+    n = 0xa9e7da28ebecf1f88efe012b8502122d70b167bdcfa11fd24429c23f27f55ee2cc3dcd7f337d0e630985152e114830423bfaf83f4f15d2d05826bf511c343c1b13bef744ff2232fb91416484be4e130a007a9b432225c5ead5a1faf02fa1b1b53d1adc6e62236c798f76695bb59f737d2701fe42f1fbf57385c29de12e79c5b3
+    ct = [0x17bb21949d5a0f590c6126e26dc830b51d52b8d0eb4f2b69494a9f9a637edb1061bec153f0c1d9dd55b1ad0fd4d58c46e2df51d293cdaaf1f74d5eb2f230568304eebb327e30879163790f3f860ca2da53ee0c60c5e1b2c3964dbcf194c27697a830a88d53b6e0ae29c616e4f9826ec91f7d390fb42409593e1815dbe48f7ed4,0x3ea73715787028b52796061fb887a7d36fb1ba1f9734e9fd6cb6188e087da5bfc26c4bfe1b4f0cbfa0d693d4ac0494efa58888e8415964c124f7ef293a8ee2bc403cad6e9a201cdd442c102b30009a3b63fa61cdd7b31ce9da03507901b49a654e4bb2b03979aea0fab3731d4e564c3c30c75aa1d079594723b60248d9bdde50,0x9444e3fc71056d25489e5ce78c6c986c029f12b61f4f4b5cbd4a0ce6b999919d12c8872b8f2a8a7e91bd0f263a4ead8f2aa4f7e9fdb9096c2ea11f693f6aa73d6b9d5e351617d6f95849f9c73edabd6a6fde6cc2e4559e67b0e4a2ea8d6897b32675be6fc72a6172fd42a8a8e96adfc2b899015b73ff80d09c35909be0a6e13a,0x2b7a1c4a1a9e9f9179ab7b05dd9e0089695f895864b52c73bfbc37af3008e5c187518b56b9e819cc2f9dfdffdfb86b7cc44222b66d3ea49db72c72eb50377c8e6eb6f6cbf62efab760e4a697cbfdcdc47d1adc183cc790d2e86490da0705717e5908ad1af85c58c9429e15ea7c83ccf7d86048571d50bd721e5b3a0912bed7c,0xa7d5548d5e4339176a54ae1b3832d328e7c512be5252dabd05afa28cd92c7932b7d1c582dc26a0ce4f06b1e96814ee362ed475ddaf30dd37af0022441b36f08ec8c7c4135d6174167a43fa34f587abf806a4820e4f74708624518044f272e3e1215404e65b0219d42a706e5c295b9bf0ee8b7b7f9b6a75d76be64cf7c27dfaeb,0x67832c41a913bcc79631780088784e46402a0a0820826e648d84f9cc14ac99f7d8c10cf48a6774388daabcc0546d4e1e8e345ee7fc60b249d95d953ad4d923ca3ac96492ba71c9085d40753cab256948d61aeee96e0fe6c9a0134b807734a32f26430b325df7b6c9f8ba445e7152c2bf86b4dfd4293a53a8d6f003bf8cf5dffd,0x927a6ecd74bb7c7829741d290bc4a1fd844fa384ae3503b487ed51dbf9f79308bb11238f2ac389f8290e5bcebb0a4b9e09eda084f27add7b1995eeda57eb043deee72bfef97c3f90171b7b91785c2629ac9c31cbdcb25d081b8a1abc4d98c4a1fd9f074b583b5298b2b6cc38ca0832c2174c96f2c629afe74949d97918cbee4a]
+
+    S = inverse(ct[0], n) * ct[1] * inverse(ct[2], n) * pow(ct[3], 2, n) * inverse(ct[4], n) * ct[5] * pow(ct[6], 2, n) % n
+    print(hex(S)[-32:])
+    # a049347a7db8226d496eb55c15b1d840
+    ```
+
+### Flag
+
+> LINECTF{a049347a7db8226d496eb55c15b1d840}
+
+## 参考资料
+
+[Homomorphic Encryption For Division With RSA | by Prof Bill Buchanan OBE | Medium](https://medium.com/asecuritysite-when-bob-met-alice/homomorphic-encryption-for-division-with-rsa-2f1e97058f91)
