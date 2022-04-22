@@ -74,6 +74,8 @@ rzua]o^]tahf]ie]kiho^z]niru]ha^ogn]doak]i[]g[uff]iop^atpe[paz[[tapzetd
 
     for c in cipher:
         print(res[c], end='')
-    
-    # ugra_in_case_of_losing_your_sanity_dial_oh_three_oijnacjfhjaghhcajgfcd
     ```
+
+### Flag
+
+> ugra_in_case_of_losing_your_sanity_dial_oh_three_oijnacjfhjaghhcajgfcd

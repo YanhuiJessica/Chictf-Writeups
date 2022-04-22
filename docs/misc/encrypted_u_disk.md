@@ -78,7 +78,11 @@ description: 2021 | 中国科学技术大学第八届信息安全大赛 | Genera
     sudo losetup -P /dev/loop24 day2.img
     sudo cryptsetup luksOpen /dev/loop24p1 day2 --master-key-file masterkey
     ```
-- 进入磁盘，`flag.txt` 就在眼前：`flag{changing_Pa55w0rD_d0esNot_ChangE_Luk5_ma5ter_key}`
+- 进入磁盘，就能看到 `flag.txt` 了
+
+### Flag
+
+> flag{changing_Pa55w0rD_d0esNot_ChangE_Luk5_ma5ter_key}
 
 ## 参考资料
 
