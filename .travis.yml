@@ -7,7 +7,7 @@ python:
 install:
   - pip install mkdocs==1.2.3 mkdocs-material==4.6.3
   - pip install pymdown-extensions==9.2
-  - pip install jinja2==3.0.3
+  - pip install jinja2==2.11.3
   - pip install mkdocs-git-authors-plugin mkdocs-blogging-plugin
   - pip install mkdocs-git-revision-date-localized-plugin
   - echo -e "machine github.com\n  login ${GITHUB_TOKEN}" > ~/.netrc
