@@ -148,6 +148,7 @@ extra:
   social:
     - type: 'github'
       link: 'https://github.com/YanhuiJessica'
+  disqus: chictf-writeups
 
 # Extensions
 markdown_extensions:
