@@ -114,14 +114,6 @@ nc cha.hackpack.club 10997 # or 20997
 ## 解题思路
 
 - `server` 同时提供了加密和解密的功能，但是解密结果显然是不对的 (╥ω╥)
-
-    ```bash
-    |  MENU:
-    |   [E]ncrypt
-    |   [D]ecrypt
-    |   [Q]uit
-    ```
-
     - 如果我们加密 `test` 并将得到的密文交给服务器解密，那么会收到一串乱码（以下结果经过 `long_to_bytes` 处理）
 
         ```bash
@@ -160,11 +152,13 @@ nc cha.hackpack.club 10997 # or 20997
     $\therefore L(c_p^{\lambda}\, mod\, n^2)=mk_p,L(c_q^{\lambda}\, mod\, n^2)=mk_q$
 
     $\because$
-    $\begin{align}
-        (g_p\times g_q)^\lambda\ mod\ n^2 & =(nk_p+1)(nk_q+1) \\
-        & = n^2k_pk_q+nk_p+nk_q+1 \\
-        & \equiv nk_p+nk_q+1(mod\ n^2)
-    \end{align}$
+    $\begin{equation}
+        \begin{split}
+            (g_p\times g_q)^\lambda\ mod\ n^2 & =(nk_p+1)(nk_q+1) \\
+            & = n^2k_pk_q+nk_p+nk_q+1 \\
+            & \equiv nk_p+nk_q+1(mod\ n^2)
+        \end{split}
+    \end{equation}$
 
     $\therefore L((g_p\times g_q)^\lambda\ mod\ n^2)=k_p+k_q$
 
@@ -266,7 +260,13 @@ print(long_to_bytes(m))
 
 #### 加法同态性
 
-- $D(E(m_1,r_1)\cdot E(m_2,r_2)\, mod\, n^2)=D(g^{m_1}\cdot r_1^n\cdot g^{m_2}\cdot r_2^n\, mod\, n^2)$ $=D(g^{m_1+m_2}\cdot(r_1\cdot r_2)^n\, mod\, n^2)=m_1+m_2\, (mod\, n)$
+- $\begin{equation}
+    \begin{split}
+        D(E(m_1,r_1)\cdot E(m_2,r_2)\, mod\, n^2)&=D(g^{m_1}\cdot r_1^n\cdot g^{m_2}\cdot r_2^n\, mod\, n^2)\\
+        &=D(g^{m_1+m_2}\cdot(r_1\cdot r_2)^n\, mod\, n^2)\\
+        &=m_1+m_2\, (mod\, n)
+    \end{split}
+\end{equation}$
 - $D(E(m_1,r_1)\cdot g^{m_2}\, mod\, n^2)=m_1+m_2\, (mod\, n)$
 
 #### 乘法同态性
