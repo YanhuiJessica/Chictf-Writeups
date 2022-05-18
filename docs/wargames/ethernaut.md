@@ -1342,8 +1342,33 @@ contract SimpleToken {
 ```
 
 - 已知合约 `Recovery` 的地址，需要恢复其中创建的合约 `SimpleToken` 里的以太，但合约 `SimpleToken` 创建后没有赋值给变量
-- 不过信息都是公开的嘛！使用合约 `Recovery` 的地址在 [Etherscan](https://rinkeby.etherscan.io/address/0x16E277D062Decea0879110009CFB4C020491B1a7#internaltx) 找到交易信息，其中就包括合约创建，合约 `SimpleToken` 实例的地址 GET ✔️ <br>
+- 不过信息都是公开的嘛！使用合约 `Recovery` 的地址在 [Etherscan](https://rinkeby.etherscan.io/address/0x16E277D062Decea0879110009CFB4C020491B1a7#internaltx) 找到交易信息，其中就包括合约创建 ΦωΦ 合约 `SimpleToken` 实例的地址 GET ✔️ <br>
 ![Contract Creation](img/ethernaut05.jpg)
 - 在 Remix 添加合约 `SimpleToken` 的源码，通过 `At Address` 引用合约<br>
 ![At Address](img/ethernaut06.jpg)
 - 接下来调用 `destroy` 函数就可以取回以太啦 XD
+- 实际上，合约地址都是确定性的，通过合约创建者（`sender`）的地址 `address` 以及由创建者发起的交易的数量 `nonce` 计算获得
+    - 根据 [EIP 161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md#specification)，初始 `nonce` 为 $1$
+
+    ```py
+    import rlp
+    from eth_utils import keccak, to_checksum_address, to_bytes
+
+    def mk_contract_address(sender: str, nonce: int) -> str:
+      """
+      Create a contract address using eth-utils.
+      """
+      sender_bytes = to_bytes(hexstr=sender)
+      address_bytes = keccak(rlp.encode([sender_bytes, nonce]))[12:]
+      return to_checksum_address(address_bytes)
+
+    mk_contract_address(to_checksum_address("0x16E277D062Decea0879110009CFB4C020491B1a7"), 1)
+    # 0x935eC7Ae1497f5361d69AD99EB5b6577Deeb0D4F
+    ```
+
+- 因此，可以将以太币发送到预确定的地址，随后在指定地址创建合约来恢复以太币，实现无私钥保存以太币
+
+### 参考资料
+
+- [How is the address of an Ethereum contract computed?](https://ethereum.stackexchange.com/questions/760/how-is-the-address-of-an-ethereum-contract-computed)
+- [Normal transactions VS. Internal transactions in etherscan - Ethereum Stack Exchange](https://ethereum.stackexchange.com/questions/6429/normal-transactions-vs-internal-transactions-in-etherscan)
