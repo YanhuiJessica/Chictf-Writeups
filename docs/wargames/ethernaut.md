@@ -1372,3 +1372,79 @@ contract SimpleToken {
 
 - [How is the address of an Ethereum contract computed?](https://ethereum.stackexchange.com/questions/760/how-is-the-address-of-an-ethereum-contract-computed)
 - [Normal transactions VS. Internal transactions in etherscan - Ethereum Stack Exchange](https://ethereum.stackexchange.com/questions/6429/normal-transactions-vs-internal-transactions-in-etherscan)
+
+## 18. MagicNumber
+
+- 部署合约 `Solver`，包含函数 `whatIsTheMeaningOfLife()`，需要返回正确的数，即 `42`
+- 代码最多只能包含 10 个操作码，可能需要人工编写 EVM 字节码 😱
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+contract MagicNum {
+
+  address public solver;
+
+  constructor() public {}
+
+  function setSolver(address _solver) public {
+    solver = _solver;
+  }
+
+  /*
+    ____________/\\\_______/\\\\\\\\\_____        
+     __________/\\\\\_____/\\\///////\\\___       
+      ________/\\\/\\\____\///______\//\\\__      
+       ______/\\\/\/\\\______________/\\\/___     
+        ____/\\\/__\/\\\___________/\\\//_____    
+         __/\\\\\\\\\\\\\\\\_____/\\\//________   
+          _\///////////\\\//____/\\\/___________  
+           ___________\/\\\_____/\\\\\\\\\\\\\\\_ 
+            ___________\///_____\///////////////__
+  */
+}
+```
+
+- EVM 执行字节码，并不知道函数名、参数名等信息
+- 通过 ABI，其它合约能够调用指定合约的函数
+- 无论被调用的函数名是什么都将返回 $42$ 的合约 👇🏻
+
+    ```
+    60 0a
+    60 0c
+    60 00
+    39  // copy code into memory
+    60 0a
+    60 00
+    f3  // return code
+
+    60 2a
+    60 00
+    52  // push 42 into memory
+    60 20
+    60 00
+    f3  // return
+    ```
+
+- 由外部账户发起没有 `to` 地址的转账交易，并将合约的 bytecode 放在 `data` 域即可创建合约
+
+    ```js
+    >> let bytecode = "600a600c600039600a6000f3602a60005260206000f3";
+    >> web3.eth.sendTransaction({"data": bytecode, "from": player})
+    ```
+
+- [Rinkeby Transaction Hash (Txhash) Details](https://rinkeby.etherscan.io/tx/0x95938e4aabc67cd95dd9d4049b57a25baa79db0381dad25cee561e875a33286b) 查询创建合约的地址
+- 接下来调用实例的 `setSolver` 就好啦 =v=
+
+    ```js
+    >> await contract.setSolver("0x55f81c329b419adb95a16a014473e86c487ea56d");
+    >> await contract.solver();
+    "0x55F81C329b419Adb95a16A014473e86C487eA56d"
+    ```
+
+### 参考资料
+
+- [Ethereum Virtual Machine Opcodes](https://www.ethervm.io/)
+- [EVM bytecode programming - HackMD](https://hackmd.io/@e18r/r1yM3rCCd)
+- [evm - What is an ABI and why is it needed to interact with contracts? - Ethereum Stack Exchange](https://ethereum.stackexchange.com/questions/234/what-is-an-abi-and-why-is-it-needed-to-interact-with-contracts)
