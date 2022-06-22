@@ -882,17 +882,17 @@ contract Privacy {
 - 常量不存储
 
 ```js
->> await web3.eth.getStorageAt(instancedress, 0)
+>> await web3.eth.getStorageAt(instance, 0)
 "0x0000000000000000000000000000000000000000000000000000000000000001"
->> await web3.eth.getStorageAt(instancedress, 1)
+>> await web3.eth.getStorageAt(instance, 1)
 "0x000000000000000000000000000000000000000000000000000000006210d5b1"
->> await web3.eth.getStorageAt(instancedress, 2)
+>> await web3.eth.getStorageAt(instance, 2)
 "0x00000000000000000000000000000000000000000000000000000000d5b1ff0a" // 0a for flattening, ff for denomination
->> await web3.eth.getStorageAt(instancedress, 3)
+>> await web3.eth.getStorageAt(instance, 3)
 "0xc3003c2bcb65196b8352fb925d945f9229929bcc727f70ea451255859a6a4f56"
->> await web3.eth.getStorageAt(instancedress, 4)
+>> await web3.eth.getStorageAt(instance, 4)
 "0x6d6f76ea288ee9c55ab1ad76264518237a23af3495ee5702f57a164f8aeb99b0"
->> await web3.eth.getStorageAt(instancedress, 5)
+>> await web3.eth.getStorageAt(instance, 5)
 "0x06e3eb3b9e34467cbf1a226fc2bd13e5948a7a15ef2205caf186fa3df3076f53"  // data[2]
 ```
 
