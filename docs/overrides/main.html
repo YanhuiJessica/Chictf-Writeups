@@ -14,13 +14,17 @@
   {% if git_page_authors %}
     <div class="md-source-date">
       <small>
-          <i class="md-icon">people</i>
+          <span class="twemoji">
+            {% include ".icons/octicons/people-16.svg" %} 
+          </span>
           Contributors: {{ git_page_authors | default('enable mkdocs-git-authors-plugin') }}
       </small>
       <br>
       <small>
           <span id="busuanzi_container_page_pv">
-            <i class="md-icon">visibility</i>
+            <span class="twemoji">
+              {% include ".icons/material/eye.svg" %}
+            </span>
             Pageviews: <span id="busuanzi_value_page_pv"></span>
           </span>
       </small>

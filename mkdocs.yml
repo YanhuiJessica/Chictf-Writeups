@@ -115,10 +115,12 @@ theme:
     palette:
       primary: 'white'
       accent: 'red'
-    logo:
-      icon: 'school'
-    feature:
-      tabs: true
+    icon:
+      logo: material/school
+    features:
+      - navigation.tabs
+      - navigation.top
+      - navigation.tracking
     font:
       text: 'Fira Sans'
       code: 'Fira Mono'
@@ -152,7 +154,7 @@ extra_javascript:
 
 extra:
   social:
-    - type: 'github'
+    - icon: fontawesome/brands/github-alt
       link: 'https://github.com/YanhuiJessica'
   disqus: chictf-writeups
 
@@ -172,8 +174,10 @@ markdown_extensions:
     - pymdownx.caret
     - pymdownx.critic
     - pymdownx.details
+    - attr_list
     - pymdownx.emoji:
-        emoji_generator: !!python/name:pymdownx.emoji.to_svg
+        emoji_index: !!python/name:materialx.emoji.twemoji
+        emoji_generator: !!python/name:materialx.emoji.to_svg
     - pymdownx.inlinehilite
     - pymdownx.keys
     - pymdownx.magiclink
