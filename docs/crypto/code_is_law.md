@@ -7,6 +7,9 @@ description: 2022 | BSidesTLV CTF | Blockchain
 
 Download the **zip** file and follow the instructions in the **README.md** file to solve the solidity challenge.
 
+[:material-download: `code-is-law-1.zip`](static/code-is-law-1.zip)
+[:material-download: `code-is-law-2.zip`](static/code-is-law-2.zip)
+
 ??? note "OnlyICanHazToken.sol"
 
     ```js
@@ -201,9 +204,12 @@ Download the **zip** file and follow the instructions in the **README.md** file 
 
 ### Flag
 
-```bash
-BSidesTLV2022{c0nstUct!v3_m@g!3_ind3ed} # Code is Law 1
-BSidesTLV2022{W!L3_M@g!3_in_the_w3rld} # Code is Law 2
-```
+#### Code is Law 1
+
+> BSidesTLV2022{c0nstUct!v3_m@g!3_ind3ed}
+
+#### Code is Law 2
+
+> BSidesTLV2022{W!L3_M@g!3_in_the_w3rld}
 
 [^1]: [Local ERC20 Balance Manipulation (with HardHat)](https://kndrck.co/posts/local_erc20_bal_mani_w_hh/)
