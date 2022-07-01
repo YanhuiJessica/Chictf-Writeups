@@ -156,7 +156,6 @@ extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: 'https://github.com/YanhuiJessica'
-  disqus: chictf-writeups
 
 # Extensions
 markdown_extensions:
