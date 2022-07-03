@@ -175,7 +175,7 @@ Download the **zip** file and follow the instructions in the **README.md** file 
     }
     ```
 
-## 解题思路
+## 解题思路 [English ver.](https://sekai.team/blog/bsidestlv-2022/code_is_law/)
 
 - 当 `ChallengeToken.did_i_win()` 的 `msg.sender` 所在地址持有 `token` 时就能获得 flag
 - 首先分析 `Code is Law 1` 的 `ChallengeToken` 合约
