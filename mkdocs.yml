@@ -135,7 +135,9 @@ plugins:
     - blogging:
         theme:
           name: card
-        size: 3
+        features:
+          tags: {}
+        size: 5
         paging: false
         show_total: false
         dirs:
