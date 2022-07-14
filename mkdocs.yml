@@ -95,6 +95,8 @@ nav:
       - Casino: crypto/casino.md
       - Black Hole: crypto/black_hole.md
       - Code is Law: crypto/code_is_law.md
+      - Google CTF 2022:
+        - Maybe Someday: crypto/maybe_someday.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
