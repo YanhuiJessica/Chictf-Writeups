@@ -61,6 +61,7 @@ nav:
         - FLAG 助力大红包: web/flag_red_packet.md
         - 图之上的信息: web/info_above_graph.md
       - Most Secure Crypto Algo: web/most_secure_crypto_algo.md
+      - Totally Secure Dapp: web/totally_secure_dapp.md
     - Reverse:
       - EasyRe: reverse/easyre.md
       - z3: reverse/z3.md
