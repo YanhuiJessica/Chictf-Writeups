@@ -108,7 +108,7 @@ https://totally-secure-dapp.vercel.app/
     from web3 import Web3
     import json, time
 
-    # 在 https://infura.io/ 注册一个账号并创建一个项目
+    # 在 https://infura.io/ 注册一个账号并创建一个项目可获得 API key
     w3 = Web3(Web3.HTTPProvider("https://ropsten.infura.io/v3/<api-key>"))
 
     account = w3.eth.account.from_key("<your-private-key>")
