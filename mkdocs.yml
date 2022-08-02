@@ -99,6 +99,7 @@ nav:
       - Diophantine: crypto/diophantine.md
       - Google CTF 2022:
         - Maybe Someday: crypto/maybe_someday.md
+      - Dynamic RSA: crypto/dynamic_rsa.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
