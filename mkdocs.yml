@@ -98,6 +98,7 @@ nav:
       - Code is Law: crypto/code_is_law.md
       - Diophantine: crypto/diophantine.md
       - Google CTF 2022:
+        - Cycling: crypto/cycling.md
         - Maybe Someday: crypto/maybe_someday.md
       - Dynamic RSA: crypto/dynamic_rsa.md
     - Wargames:
