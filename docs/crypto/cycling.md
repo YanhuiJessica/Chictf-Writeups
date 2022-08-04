@@ -1,6 +1,10 @@
 ---
 title: Crypto - Cycling
 description: 2022 | Google CTF | crypto
+tags:
+    - rsa
+    - carmichael function
+    - pollard's p−1 algorithm
 ---
 
 ## 题目
@@ -62,7 +66,7 @@ Pack out your quantum computer and perform 2^1025-3 encryptions to solve this ch
 
 - 已知目标密文必须再经过 $2^{1025}-3$ 次加密后才能获得明文。令 $R=2^{1025}-2$（梅森数的 $2$ 倍），那么有 $x^{e^{R}}\equiv x\ (mod\ n)$
 - 欧拉函数 $\varphi(n)$ 能够求出满足 $a^m\equiv 1\ (mod\ n)$（$a$ 小于 $n$ 且与 $n$ 互质） 的正整数，但不一定是最小的，卡迈克尔函数 $\lambda(n)$ 的结果才是。那么有 $x^{\lambda(n)}\equiv 1\ (mod\ n),\ x^{e^R}\equiv x\equiv (x^{\lambda(n)})^k x\ (mod\ n)$，能够推出 $e^R\equiv 1\ mod\ \lambda(n)$，由此可知 $\lambda(\lambda(n))|R$
-- 设 $\lambda(n)=\prod_{i=1}^k s_i^{r_i}$，那么 $\lambda(\lambda(n))=lcm(\lambda(s_1^{r_1}),\lambda(s_2^{r_2}),\dotsb,\lambda(s_k^{r_k}))=lcm(s_1^{r_1-1}(s_1-1),s_2^{r_2-1}(s_2-1),\dotsb,s_k^{r_k-1}(s_k-1))$，根据 $R$ 的质因数分解结果推测所有质因数指数不大于 $1$，则 $\lambda(\lambda(n))=lcm(s_1-1,s_2-1,\dotsb,s_k-1)$
+- 设 $\lambda(n)=\prod_{i=1}^k s_i^{r_i}$，那么 $\lambda(\lambda(n))=lcm(\lambda(s_1^{r_1}),\lambda(s_2^{r_2}),\dotsb,\lambda(s_k^{r_k}))=$$lcm(s_1^{r_1-1}(s_1-1),s_2^{r_2-1}(s_2-1),\dotsb,s_k^{r_k-1}(s_k-1))$，根据 $R$ 的质因数分解结果推测所有质因数指数不大于 $1$，则 $\lambda(\lambda(n))=lcm(s_1-1,s_2-1,\dotsb,s_k-1)$
 - 根据 Pollard 的 $p-1$ 质因数分解算法，可以选择与 $n$ 互质的任意整数 $a$，计算 $g=gcd((a^{M}-1\ mod\ n), n)$ 来分解 $n$
     - $p$ 是 $n$ 的一个质因数，若 $p-1$ 的每一个因数 $s$ 都满足 $s\le B$（$B$ 人为选定），显然有 $(p-1)|B!$，$M$ 定义为 $\prod_{primes\ s\le B}s^{\lfloor log_s B\rfloor}$，若 $g=1$ 或 $g=n$ 则重新选择 $B$ 进行计算
     - 根据费马小定理有 $a^{k(p-1)}\equiv 1\ (mod\ p)$
