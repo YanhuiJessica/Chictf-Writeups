@@ -176,10 +176,10 @@ https://totally-secure-dapp.vercel.app/
 - 在控制台输入 `localStorage.getItem('user-id')` 即可获得对应账户的 `userId`
 - 调用 API 接口
 
-```bash
-$ curl -d '{"userAddress":"0xe09f6d20E2522F6B971b4516744946CF17BE8432", "contractAddress":"0x014A2a17AA06C26C660FB4A269aC87849d38Fd0A", "userId": "RIHIaESfxzilmF10mmBpH"}' -H "Content-Type: application/json" -X POST https://totally-secure-dapp.vercel.app/api/secret
-{"flag":"UACTF{23411y_m394_5u5_f149}"}
-```
+    ```bash
+    $ curl -d '{"userAddress":"0xe09f6d20E2522F6B971b4516744946CF17BE8432", "contractAddress":"0x014A2a17AA06C26C660FB4A269aC87849d38Fd0A", "userId": "RIHIaESfxzilmF10mmBpH"}' -H "Content-Type: application/json" -X POST https://totally-secure-dapp.vercel.app/api/secret
+    {"flag":"UACTF{23411y_m394_5u5_f149}"}
+    ```
 
 ### Flag
 
