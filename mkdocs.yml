@@ -45,6 +45,7 @@ nav:
       - s/&lt;script&gt;//gi: misc/s_script_gi.md
       - Log 4 sanity check: misc/log4_sanity_check.md
       - Bishop Duel: misc/bishop_duel.md
+      - Lighthouse: misc/lighthouse.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
