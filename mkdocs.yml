@@ -128,6 +128,9 @@ theme:
       - navigation.tabs
       - navigation.top
       - navigation.tracking
+      - search.suggest
+      - search.highlight
+      - search.share
     font:
       text: 'Fira Sans'
       code: 'Fira Mono'
