@@ -1,5 +1,5 @@
 ---
-title: Exploit Education：Protostar
+title: Exploit Education：Protostar - Stack
 ---
 
 > The levels to be exploited can be found in the /opt/protostar/bin directory.
