@@ -569,7 +569,7 @@ int main(int argc, char **argv)
 
 - `ret` 指令弹出栈顶存储的地址并跳转，那么可以先跳转到 `ret` 本身绕过检查，接下来再跳转到栈就可以了 :3
 
-    ??? note "Dump of assembler code for function main"
+    ??? note "Dump of assembler code for function getpath"
 
         ```bash
         (gdb) disassemble getpath 
