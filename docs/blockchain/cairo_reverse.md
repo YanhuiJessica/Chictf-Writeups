@@ -1,8 +1,8 @@
 ---
-title: Reverse - Cairo Reverse
+title: Blockchain - Cairo Reverse
 description: 2022 | BalsnCTF | smart contract
 tags:
-    - smart contract
+    - reverse
 ---
 
 ## 题目

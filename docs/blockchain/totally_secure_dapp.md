@@ -1,8 +1,8 @@
 ---
-title: Web - Totally Secure Dapp
+title: Blockchain - Totally Secure Dapp
 description: 2022 | UACTF | Web
 tags:
-    - blockchain
+    - smart contract
 ---
 
 ## 题目

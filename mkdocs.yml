@@ -62,12 +62,10 @@ nav:
         - FLAG 助力大红包: web/flag_red_packet.md
         - 图之上的信息: web/info_above_graph.md
       - Most Secure Crypto Algo: web/most_secure_crypto_algo.md
-      - Totally Secure Dapp: web/totally_secure_dapp.md
     - Reverse:
       - EasyRe: reverse/easyre.md
       - z3: reverse/z3.md
       - NEWSCTF - re_signin: reverse/newsctf_re_signin.md
-      - Cairo Reverse: reverse/cairo_reverse.md
     - Pwn:
       - when did you born: pwn/when_did_you_born.md
       - Amnesia: pwn/amnesia.md
@@ -97,12 +95,15 @@ nav:
       - P(ai)^3: crypto/paiaiai.md
       - Casino: crypto/casino.md
       - Black Hole: crypto/black_hole.md
-      - Code is Law: crypto/code_is_law.md
       - Diophantine: crypto/diophantine.md
       - Google CTF 2022:
         - Cycling: crypto/cycling.md
         - Maybe Someday: crypto/maybe_someday.md
       - Dynamic RSA: crypto/dynamic_rsa.md
+    - Blockchain:
+      - Code is Law: blockchain/code_is_law.md
+      - Totally Secure Dapp: blockchain/totally_secure_dapp.md
+      - Cairo Reverse: blockchain/cairo_reverse.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
@@ -156,6 +157,7 @@ plugins:
         paging: false
         show_total: false
         dirs:
+          - blockchain
           - crypto
           - misc
           - pwn

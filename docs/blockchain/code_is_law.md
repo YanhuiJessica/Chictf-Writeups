@@ -1,8 +1,8 @@
 ---
-title: Crypto - Code is Law
+title: Blockchain - Code is Law
 description: 2022 | BSidesTLV CTF | Blockchain
 tags:
-    - blockchain
+    - smart contract
     - hardhat
 ---
 
