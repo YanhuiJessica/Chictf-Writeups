@@ -223,3 +223,187 @@ Please send '2035797908' as a little endian 32bit int
 2035797908  # Enter + Ctrl_D, which will closes cat and echo
 Thank you sir/madam
 ```
+
+## Net 1
+
+> convert binary integers into ascii representation
+
+```c
+#include "../common/common.c"
+
+#define NAME "net1"
+#define UID 998
+#define GID 998
+#define PORT 2998
+
+void run()
+{
+  char buf[12];
+  char fub[12];
+  char *q;
+
+  unsigned int wanted;
+
+  wanted = random();
+
+  sprintf(fub, "%d", wanted);
+
+  // the binary string is sent
+  if(write(0, &wanted, sizeof(wanted)) != sizeof(wanted)) {
+      errx(1, ":(\n");
+  }
+
+  if(fgets(buf, sizeof(buf)-1, stdin) == NULL) {
+      errx(1, ":(\n");
+  }
+
+  // strchr - locate character in string
+  q = strchr(buf, '\r'); if(q) *q = 0;
+  q = strchr(buf, '\n'); if(q) *q = 0;
+
+  if(strcmp(fub, buf) == 0) {
+      printf("you correctly sent the data\n");
+  } else {
+      printf("you didn't send the data properly\n");
+  }
+}
+
+int main(int argc, char **argv, char **envp)
+{
+  int fd;
+  char *username;
+
+  /* Run the process as a daemon */
+  background_process(NAME, UID, GID); 
+  
+  /* Wait for socket activity and return */
+  fd = serve_forever(PORT);
+
+  /* Set the client socket to STDIN, STDOUT, and STDERR */
+  set_io(fd);
+
+  /* Don't do this :> */
+  srandom(time(NULL));
+  // If we send fast enough, the seconds will be the same
+  // thus produce the same pseudo random number
+
+  run();
+}
+```
+
+### Exploit
+
+```py
+import socket, struct
+
+# 可以与 strace nc -l <port> 对比
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('localhost', 2998))
+wanted = s.recv(4)    # 4 bytes
+num_wanted = str(struct.unpack('I', wanted)[0])
+s.sendall(num_wanted)
+print 'Receive: ' + wanted
+print 'Send: ' + num_wanted
+print s.recv(1024)
+```
+
+```bash
+$ python /tmp/net.py 
+Receive: ��W
+Send: 1473381877
+you correctly sent the data
+```
+
+### References
+
+- [socket - Example](https://docs.python.org/3/library/socket.html#example)
+
+## Net 2
+
+> add up 4 unsigned 32-bit integers
+
+```c
+#include "../common/common.c"
+
+#define NAME "net2"
+#define UID 997
+#define GID 997
+#define PORT 2997
+
+void run()
+{
+  unsigned int quad[4];
+  int i;
+  unsigned int result, wanted;
+
+  result = 0;
+  for(i = 0; i < 4; i++) {
+      quad[i] = random();
+      result += quad[i];    // 可能有溢出
+
+      if(write(0, &(quad[i]), sizeof(result)) != sizeof(result)) {
+          errx(1, ":(\n");
+      }
+  }
+
+  if(read(0, &wanted, sizeof(result)) != sizeof(result)) {
+      errx(1, ":<\n");
+  }
+
+
+  if(result == wanted) {
+      printf("you added them correctly\n");
+  } else {
+      printf("sorry, try again. invalid\n");
+  }
+}
+
+int main(int argc, char **argv, char **envp)
+{
+  int fd;
+  char *username;
+
+  /* Run the process as a daemon */
+  background_process(NAME, UID, GID); 
+  
+  /* Wait for socket activity and return */
+  fd = serve_forever(PORT);
+
+  /* Set the client socket to STDIN, STDOUT, and STDERR */
+  set_io(fd);
+
+  /* Don't do this :> */
+  srandom(time(NULL));
+
+  run();
+}
+```
+
+### Exploit
+
+```py
+import socket, struct
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('localhost', 2997))
+result = ''
+for i in range(4):
+    result += s.recv(4)
+nums = struct.unpack('IIII', result)
+sm = 0
+for num in nums:
+    sm += num
+ans = struct.pack('I', sm & 0xffffffff)
+s.sendall(ans)
+print 'Receive: ' + result
+print 'Send: ' + ans
+print s.recv(1024)
+```
+
+```bash
+$ python /tmp/net.py 
+Receive: ��iv�c��>
+z�P
+Send: ���
+you added them correctly
+```
