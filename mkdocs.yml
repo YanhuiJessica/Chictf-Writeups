@@ -100,6 +100,8 @@ nav:
         - Cycling: crypto/cycling.md
         - Maybe Someday: crypto/maybe_someday.md
       - Dynamic RSA: crypto/dynamic_rsa.md
+      - corCTF 2022:
+        - exchanged: crypto/exchanged.md
     - Blockchain:
       - Code is Law: blockchain/code_is_law.md
       - Totally Secure Dapp: blockchain/totally_secure_dapp.md
