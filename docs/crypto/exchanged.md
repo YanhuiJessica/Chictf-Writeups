@@ -1,6 +1,8 @@
 ---
 title: Crypto - exchanged
 description: 2022 | corCTF | crypto
+tags:
+    - algebra
 ---
 
 ## 题目
