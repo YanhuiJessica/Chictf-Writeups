@@ -2,6 +2,7 @@
 title: OpenZeppelin：Ethernaut
 tags:
     - blockchain
+    - smart contract
 ---
 
 ## 0. Hello Ethernaut
