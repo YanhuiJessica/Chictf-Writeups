@@ -156,7 +156,8 @@ plugins:
         theme:
           name: card
         features:
-          tags: {}
+          tags:
+            insert: top
         size: 5
         paging: false
         show_total: false
