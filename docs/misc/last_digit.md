@@ -1,7 +1,7 @@
 ---
 title: Misc - last digit
 description: 2022 | DownUnderCTF | misc
-tag:
+tags:
     - binary search
 ---
 
