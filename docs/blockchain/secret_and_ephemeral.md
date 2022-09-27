@@ -84,6 +84,7 @@ for i in range(w3.eth.get_block_number(), -1, -1):
 		if tx['to'] == None:
 			owner = tx['from']
 			not_yours, secret_num = decode_abi(['string', 'uint256'], bytes.fromhex(tx['input'][-320:]))
+            # -320 根据观察获得
 			break
 	else:
 		continue
