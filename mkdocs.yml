@@ -121,6 +121,7 @@ nav:
         - Format: wargames/protostar/format.md
         - Heap: wargames/protostar/heap.md
         - Net: wargames/protostar/net.md
+        - Final: wargames/protostar/final.md
     - 彩蛋:
       - CTFHub - 首页: eggs/ctfhub_index.md
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
