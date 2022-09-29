@@ -1,6 +1,8 @@
 ---
 title: Blockchain - Private Log
 description: 2022 | DownUnderCTF | blockchain
+tags:
+    - proxy contract
 ---
 
 ## 题目
