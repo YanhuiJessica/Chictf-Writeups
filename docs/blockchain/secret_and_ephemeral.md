@@ -1,6 +1,8 @@
 ---
 title: Blockchain - Secret and Ephemeral
 description: 2022 | DownUnderCTF | blockchain
+tags:
+    - smart contract
 ---
 
 ## 题目
