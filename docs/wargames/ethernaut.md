@@ -7,7 +7,7 @@ tags:
 
 ## 0. Hello Ethernaut
 
-- 登录 MetaMask，将 MetaMask 切换到 Rinkeby 测试网络
+- 登录 MetaMask，将 MetaMask 切换到 Goerli 测试网络
     - 若没有则需要在 `设置->高级` 中开启「Show test networks」
 - 在浏览器的控制台可以收到一些消息，其中一条为玩家地址
     - 可以使用 `player` 命令随时查看玩家地址，MetaMask 也可以直接复制
@@ -22,7 +22,7 @@ tags:
 - 在控制台输入 `ethernaut` 查看游戏的主要合约
     - 合约的 ABI（Application Binary Interfaces）提供了所有 Ethernaut.sol 的公开方法，如所有者，可通过 `ethernaut.owner()` 查看
     - 并不需要直接与 Ethernaut.sol 合约交互，而是通过关卡实例
-- 获取测试用以太币用于支付汽油费：[1](https://faucet.rinkeby.io/) / [2](https://faucets.chain.link/rinkeby) / [3](https://faucet.paradigm.xyz/)
+- 获取测试用以太币用于支付汽油费：[1](https://goerlifaucet.com/) / [2](https://goerli-faucet.pk910.de/) / [3](https://www.allthatnode.com/faucet/ethereum.dsrv) / [4](https://goerlifaucet.org/)
 - 点击「Get new instance」并在 MetaMask 授权交易
 - 查看合约信息并根据提示交互
 
@@ -53,6 +53,8 @@ tags:
     "ethernaut0"
     >> await contract.authenticate("ethernaut0")
     // MetaMask 授权交易，等待确认
+    >> await contract.getCleared()
+    true
     ```
 
 - 查看合约所有 ABI：`contract.abi`
