@@ -162,7 +162,7 @@ plugins:
         locale: en
     - git-authors
     - blogging:
-        locale: zh-CN
+        locale: zh
         theme:
           name: card
         features:
