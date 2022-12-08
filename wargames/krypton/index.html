@@ -1,0 +1,3419 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="YanhuiJessica">
+      
+      
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/wargames/krypton/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.3.3">
+    
+    
+      
+        <title>OverTheWire：Krypton - Chictf-Writeups</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+      
+    
+<style>
+  .md-typeset h1 {
+    color:var(--md-default-fg-color--light);
+    font-size:2em;
+    line-height:1.3;
+    margin:0 0 1em;
+  }
+</style>
+
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="red">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#level-0" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Chictf-Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OverTheWire：Krypton
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/YanhuiJessica/Chictf-Writeups" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        简介
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../misc/unpleasant_music/" class="md-tabs__link">
+        Misc
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../web/t_star_upload_bypass/" class="md-tabs__link">
+        Web
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../reverse/easyre/" class="md-tabs__link">
+        Reverse
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../pwn/when_did_you_born/" class="md-tabs__link">
+        Pwn
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../crypto/bank/" class="md-tabs__link">
+        Crypto
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../blockchain/code_is_law/" class="md-tabs__link">
+        Blockchain
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../natas/" class="md-tabs__link md-tabs__link--active">
+        Wargames
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../eggs/ctfhub_index/" class="md-tabs__link">
+        彩蛋
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    Chictf-Writeups
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/YanhuiJessica/Chictf-Writeups" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          简介
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="简介" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          简介
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_participate/" class="md-nav__link">
+        如何参与
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/unpleasant_music/" class="md-nav__link">
+        Unpleasant music
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/leaf_cover_eyes/" class="md-nav__link">
+        一叶障目
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/difficult_programming_language/" class="md-nav__link">
+        Difficult Programming Language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/secret_information/" class="md-nav__link">
+        机密信息
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/hide_and_seek/" class="md-nav__link">
+        藏藏藏
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/targz_y1ng/" class="md-nav__link">
+        TARGZ-y1ng
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/gakki/" class="md-nav__link">
+        gakki
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" type="checkbox" id="__nav_2_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8">
+          HackerGame 2020
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2020" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/account_bot/" class="md-nav__link">
+        从零开始的记账工具人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/gibberish_message/" class="md-nav__link">
+        从零开始的火星文生活
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/self_repeating_repeater/" class="md-nav__link">
+        自复读的复读机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/233_string_tool/" class="md-nav__link">
+        233 同学的字符串工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/233_docker/" class="md-nav__link">
+        233 同学的 Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/4f_system_middle/" class="md-nav__link">
+        来自一教的图片
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/basic_math_simulator/" class="md-nav__link">
+        超基础的数理模拟器
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/stegano50/" class="md-nav__link">
+        Stegano50
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/newsctf_all_reverse/" class="md-nav__link">
+        NEWSCTF - ！了反都，了反
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/audio_frequency_stego/" class="md-nav__link">
+        audio-frequency-stego
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_12" type="checkbox" id="__nav_2_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_12">
+          DeconstruCT.F 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DeconstruCT.F 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_12">
+          <span class="md-nav__icon md-icon"></span>
+          DeconstruCT.F 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/pirates/" class="md-nav__link">
+        Pirates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/teg_rads/" class="md-nav__link">
+        Teg Rads
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/hearing_not_believing/" class="md-nav__link">
+        HearingNotBelieving
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_14" type="checkbox" id="__nav_2_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_14">
+          HackerGame 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_14">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/transparent_file/" class="md-nav__link">
+        透明的文件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/encrypted_u_disk/" class="md-nav__link">
+        加密的 U 盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/p_q/" class="md-nav__link">
+        p😭q
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_15" type="checkbox" id="__nav_2_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_15">
+          西湖论剑 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="西湖论剑 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_15">
+          <span class="md-nav__icon md-icon"></span>
+          西湖论剑 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/yusa_little_secret/" class="md-nav__link">
+        YUSA的小秘密
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/yusa_secret/" class="md-nav__link">
+        Yusa的秘密
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/compress_the_flag/" class="md-nav__link">
+        Compress The Flag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/s_script_gi/" class="md-nav__link">
+        s/&lt;script&gt;//gi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/log4_sanity_check/" class="md-nav__link">
+        Log 4 sanity check
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/bishop_duel/" class="md-nav__link">
+        Bishop Duel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/lighthouse/" class="md-nav__link">
+        Lighthouse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/last_digit/" class="md-nav__link">
+        last digit
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Web" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/t_star_upload_bypass/" class="md-nav__link">
+        文件上传 JS 绕过
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/t_star_tomcat/" class="md-nav__link">
+        小猫咪踩灯泡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ctfhub_reflected_xss/" class="md-nav__link">
+        CTFHub - 反射型 XSS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/initiative/" class="md-nav__link">
+        主动
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/funhash/" class="md-nav__link">
+        Funhash
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/xss_game/" class="md-nav__link">
+        XSS Game
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/web_php_include/" class="md-nav__link">
+        Web php include
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ctfhub_git_leakage/" class="md-nav__link">
+        CTFHub - Git 泄露
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/newsctf_easy_web/" class="md-nav__link">
+        NEWSCTF - easy_web
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/heres_a_flag/" class="md-nav__link">
+        Here's a Flag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_11" type="checkbox" id="__nav_3_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_11">
+          HackerGame 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_11">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/sale_melon/" class="md-nav__link">
+        卖瓜
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/flag_red_packet/" class="md-nav__link">
+        FLAG 助力大红包
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/info_above_graph/" class="md-nav__link">
+        图之上的信息
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/most_secure_crypto_algo/" class="md-nav__link">
+        Most Secure Crypto Algo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/calculus_calc_exercise/" class="md-nav__link">
+        微积分计算小练习
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Reverse
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reverse" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Reverse
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reverse/easyre/" class="md-nav__link">
+        EasyRe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reverse/z3/" class="md-nav__link">
+        z3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reverse/newsctf_re_signin/" class="md-nav__link">
+        NEWSCTF - re_signin
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Pwn
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Pwn" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Pwn
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pwn/when_did_you_born/" class="md-nav__link">
+        when did you born
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pwn/amnesia/" class="md-nav__link">
+        Amnesia
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Crypto
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crypto" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Crypto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/bank/" class="md-nav__link">
+        bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/shanghai/" class="md-nav__link">
+        shanghai
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/easy_rsa/" class="md-nav__link">
+        easy_RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/normal_rsa/" class="md-nav__link">
+        Normal_RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/easy_ecc/" class="md-nav__link">
+        easy_ECC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/fanfie/" class="md-nav__link">
+        fanfie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/jefferson_disk/" class="md-nav__link">
+        转轮机加密
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/code_modulate/" class="md-nav__link">
+        编码与调制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/ciscn_rsa/" class="md-nav__link">
+        CISCN - rsa
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/opisthocomus_hoazin/" class="md-nav__link">
+        opisthocomus-hoazin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/stars_and_shapes/" class="md-nav__link">
+        Stars and Shapes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/he_thrusts_his_fists_against_the_post/" class="md-nav__link">
+        He Thrusts His Fists Against the Post
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_13" type="checkbox" id="__nav_6_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_13">
+          PBCTF 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="PBCTF 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_13">
+          <span class="md-nav__icon md-icon"></span>
+          PBCTF 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/alkaloid_stream/" class="md-nav__link">
+        Alkaloid Stream
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/steroid_stream/" class="md-nav__link">
+        Steroid Stream
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/easyxor/" class="md-nav__link">
+        easyxor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/ustc_easy_rsa/" class="md-nav__link">
+        HackerGame - Easy RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/baby_mac/" class="md-nav__link">
+        Baby MAC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/noteasy03/" class="md-nav__link">
+        noteasy03
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/dealymaffs/" class="md-nav__link">
+        Dealymaffs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/weird_programmer/" class="md-nav__link">
+        Weird Programmer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/x_factor/" class="md-nav__link">
+        X Factor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/paiaiai/" class="md-nav__link">
+        P(ai)^3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/casino/" class="md-nav__link">
+        Casino
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/black_hole/" class="md-nav__link">
+        Black Hole
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/diophantine/" class="md-nav__link">
+        Diophantine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_25" type="checkbox" id="__nav_6_25" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_25">
+          Google CTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Google CTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_25">
+          <span class="md-nav__icon md-icon"></span>
+          Google CTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/cycling/" class="md-nav__link">
+        Cycling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/maybe_someday/" class="md-nav__link">
+        Maybe Someday
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/dynamic_rsa/" class="md-nav__link">
+        Dynamic RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_27" type="checkbox" id="__nav_6_27" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_27">
+          corCTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="corCTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_27">
+          <span class="md-nav__icon md-icon"></span>
+          corCTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/exchanged/" class="md-nav__link">
+        exchanged
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/leapfrog/" class="md-nav__link">
+        leapfrog
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Blockchain
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Blockchain" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Blockchain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/code_is_law/" class="md-nav__link">
+        Code is Law
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/totally_secure_dapp/" class="md-nav__link">
+        Totally Secure Dapp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/cairo_reverse/" class="md-nav__link">
+        Cairo Reverse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tctf_nft_market/" class="md-nav__link">
+        TCTF NFT Market
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_5">
+          DownUnderCTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DownUnderCTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          DownUnderCTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/secret_and_ephemeral/" class="md-nav__link">
+        Secret and Ephemeral
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/private_log/" class="md-nav__link">
+        Private Log
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Wargames
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Wargames" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Wargames
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../natas/" class="md-nav__link">
+        Natas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../leviathan/" class="md-nav__link">
+        Leviathan
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Krypton
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Krypton
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-0" class="md-nav__link">
+    Level 0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-1" class="md-nav__link">
+    Level 1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    Level 2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3" class="md-nav__link">
+    Level 3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4" class="md-nav__link">
+    Level 4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-5" class="md-nav__link">
+    Level 5
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-6" class="md-nav__link">
+    Level 6
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../narnia/" class="md-nav__link">
+        Narnia
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ethernaut/" class="md-nav__link">
+        Ethernaut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_6" type="checkbox" id="__nav_8_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_6">
+          Protostar
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Protostar" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_6">
+          <span class="md-nav__icon md-icon"></span>
+          Protostar
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/stack/" class="md-nav__link">
+        Stack
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/format/" class="md-nav__link">
+        Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/heap/" class="md-nav__link">
+        Heap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/net/" class="md-nav__link">
+        Net
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/final/" class="md-nav__link">
+        Final
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          彩蛋
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="彩蛋" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          彩蛋
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_index/" class="md-nav__link">
+        CTFHub - 首页
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_wechat/" class="md-nav__link">
+        CTFHub - 公众号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_tools/" class="md-nav__link">
+        CTFHub - 工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_match/" class="md-nav__link">
+        CTFHub - 赛事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_exams/" class="md-nav__link">
+        CTFHub - 真题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-0" class="md-nav__link">
+    Level 0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-1" class="md-nav__link">
+    Level 1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    Level 2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3" class="md-nav__link">
+    Level 3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4" class="md-nav__link">
+    Level 4
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-5" class="md-nav__link">
+    Level 5
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-6" class="md-nav__link">
+    Level 6
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+
+  
+                
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/wargames/krypton.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>Krypton</h1>
+
+<h2 id="level-0">Level 0<a class="headerlink" href="#level-0" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>$ <span class="nb">echo</span> <span class="nv">S1JZUFRPTklTR1JFQVQ</span><span class="o">=</span> <span class="p">|</span> base64 --decode
+KRYPTONISGREAT
+</code></pre></div>
+<h2 id="level-1">Level 1<a class="headerlink" href="#level-1" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>krypton1</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>KRYPTONISGREAT</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code>$ ssh krypton1@krypton.labs.overthewire.org -p <span class="m">2231</span>
+
+$ ls /krypton
+krypton1  krypton2  krypton3  krypton4  krypton5  krypton6
+$ ls /krypton/krypton1
+krypton2  README
+$ cat /krypton/krypton1/README 
+Welcome to Krypton!
+
+This game is intended to give hands on experience with cryptography
+and cryptanalysis.  The levels progress from classic ciphers, to modern,
+easy to harder.
+
+Although there are excellent public tools, like cryptool,to perform
+the simple analysis, we strongly encourage you to try and <span class="k">do</span> these
+without them <span class="k">for</span> now.  We will use them <span class="k">in</span> later excercises.
+
+** Please try these levels without cryptool first **
+
+
+The first level is easy.  The password <span class="k">for</span> level <span class="m">2</span> is <span class="k">in</span> the file 
+<span class="s1">&#39;krypton2&#39;</span>.  It is <span class="s1">&#39;encrypted&#39;</span> using a simple rotation called ROT13.  
+It is also <span class="k">in</span> non-standard ciphertext format.  When using alpha characters <span class="k">for</span>
+cipher text it is normal to group the letters into <span class="m">5</span> letter clusters, 
+regardless of word boundaries.  This helps obfuscate any patterns.
+
+This file has kept the plain text word boundaries and carried them to
+the cipher text.
+
+Enjoy!
+
+$ <span class="nb">cd</span> /krypton/krypton1
+$ cat krypton2 <span class="p">|</span> tr <span class="s1">&#39;a-zA-Z&#39;</span> <span class="s1">&#39;n-za-mN-ZA-M&#39;</span>
+LEVEL TWO PASSWORD ROTTEN
+</code></pre></div>
+<h2 id="level-2">Level 2<a class="headerlink" href="#level-2" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>krypton2</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>ROTTEN</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code>$ ssh krypton2@krypton.labs.overthewire.org -p <span class="m">2231</span>
+
+$ <span class="nb">cd</span> /krypton/krypton2
+$ ls
+encrypt  keyfile.dat  krypton3  README
+$ cat README 
+Krypton <span class="m">2</span>
+
+ROT13 is a simple substitution cipher.
+
+Substitution ciphers are a simple replacement algorithm.  In this example
+of a substitution cipher, we will explore a <span class="s1">&#39;monoalphebetic&#39;</span> cipher.
+Monoalphebetic means, literally, <span class="s2">&quot;one alphabet&quot;</span> and you will see why.
+
+This level contains an old form of cipher called a <span class="s1">&#39;Caesar Cipher&#39;</span>.
+A Caesar cipher shifts the alphabet by a <span class="nb">set</span> number.  For example:
+
+plain:  a b c d e f g h i j k ...
+cipher: G H I J K L M N O P Q ...
+
+In this example, the letter <span class="s1">&#39;a&#39;</span> <span class="k">in</span> plaintext is replaced by a <span class="s1">&#39;G&#39;</span> <span class="k">in</span> the
+ciphertext so, <span class="k">for</span> example, the plaintext <span class="s1">&#39;bad&#39;</span> becomes <span class="s1">&#39;HGJ&#39;</span> <span class="k">in</span> ciphertext.
+
+The password <span class="k">for</span> level <span class="m">3</span> is <span class="k">in</span> the file krypton3.  It is <span class="k">in</span> <span class="m">5</span> letter
+group ciphertext.  It is encrypted with a Caesar Cipher.  Without any 
+further information, this cipher text may be difficult to break.  You <span class="k">do</span> 
+not have direct access to the key, however you <span class="k">do</span> have access to a program 
+that will encrypt anything you wish to give it using the key.  
+If you think logically, this is completely easy.
+
+One shot can solve it!
+
+Have fun.
+
+Additional Information:
+
+The <span class="sb">`</span>encrypt<span class="sb">`</span> binary will look <span class="k">for</span> the keyfile <span class="k">in</span> your current working
+directory. Therefore, it might be best to create a working direcory <span class="k">in</span> /tmp
+and <span class="k">in</span> there a link to the keyfile. As the <span class="sb">`</span>encrypt<span class="sb">`</span> binary runs setuid
+<span class="sb">`</span>krypton3<span class="sb">`</span>, you also need to give <span class="sb">`</span>krypton3<span class="sb">`</span> access to your working directory.
+
+Here is an example:
+
+krypton2@melinda:~$ mktemp -d
+/tmp/tmp.Wf2OnCpCDQ
+krypton2@melinda:~$ <span class="nb">cd</span> /tmp/tmp.Wf2OnCpCDQ
+krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ ln -s /krypton/krypton2/keyfile.dat
+krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ ls
+keyfile.dat
+krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ chmod <span class="m">777</span> .
+krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ /krypton/krypton2/encrypt /etc/issue
+krypton2@melinda:/tmp/tmp.Wf2OnCpCDQ$ ls
+ciphertext  keyfile.dat
+
+$ cat krypton3 
+OMQEMDUEQMEK
+$ ./encrypt
+
+ usage: encrypt foo  - where foo is the file containing the plaintext
+$ mktemp -d
+/tmp/tmp.aHZs9AbfRo
+$ <span class="nb">cd</span> /tmp/tmp.aHZs9AbfRo
+$ ln -s /krypton/krypton2/keyfile.dat
+$ chmod <span class="m">777</span> .
+$ <span class="nb">echo</span> abcABC &gt; <span class="nb">test</span>
+$ /krypton/krypton2/encrypt <span class="nb">test</span>
+$ cat ciphertext 
+MNOMNO
+$ <span class="nb">cd</span> /krypton/krypton2
+$ cat krypton3 <span class="p">|</span> tr <span class="s1">&#39;A-Z&#39;</span> <span class="s1">&#39;O-ZA-N&#39;</span>
+CAESARISEASY
+</code></pre></div>
+<h2 id="level-3">Level 3<a class="headerlink" href="#level-3" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>krypton3</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>CAESARISEASY</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code>$ ssh krypton3@krypton.labs.overthewire.org -p <span class="m">2231</span>
+
+$ <span class="nb">cd</span> /krypton/krypton3
+$ ls
+found1  found2  found3  HINT1  HINT2  krypton4  README
+$ cat README 
+Well <span class="k">done</span>.  You‘ve moved past an easy substitution cipher.
+
+Hopefully you just encrypted the alphabet a plaintext 
+to fully expose the key <span class="k">in</span> one swoop.
+
+The main weakness of a simple substitution cipher is 
+repeated use of a simple key.  In the previous exercise
+you were able to introduce arbitrary plaintext to expose
+the key.  In this example, the cipher mechanism is not 
+available to you, the attacker.
+
+However, you have been lucky.  You have intercepted more
+than one message.  The password to the next level is found
+<span class="k">in</span> the file <span class="s1">&#39;krypton4&#39;</span>.  You have also found <span class="m">3</span> other files.
+<span class="o">(</span>found1, found2, found3<span class="o">)</span>
+
+You know the following important details:
+
+- The message plaintexts are <span class="k">in</span> English <span class="o">(</span>*** very important<span class="o">)</span>
+- They were produced from the same key <span class="o">(</span>*** even better!<span class="o">)</span>
+
+
+Enjoy.
+
+$ cat HINT1
+Some letters are more prevalent <span class="k">in</span> English than others.
+$ cat HINT2
+<span class="s2">&quot;Frequency Analysis&quot;</span> is your friend.
+$ cat found1
+CGZNL YJBEN QYDLQ ZQSUQ NZCYD SNQVU BFGBK GQUQZ QSUQN UZCYD SNJDS UDCXJ ZCYDS NZQSU QNUZB WSBNZ QSUQN UDCXJ CUBGS BXJDS UCTYV SUJQG WTBUJ KCWSV LFGBK GSGZN LYJCB GJSZD GCHMS UCJCU QJLYS BXUMA UJCJM JCBGZ CYDSN CGKDC ZDSQZ DVSJJ SNCGJ DSYVQ CGJSO JCUNS YVQZS WALQV SJJSN UBTSX COSWG MTASN BXYBU CJCBG UWBKG JDSQV YDQAS JXBNS OQTYV SKCJD QUDCX JBXQK BMVWA SNSYV QZSWA LWAKB MVWAS ZBTSS QGWUB BGJDS TSJDB WCUGQ TSWQX JSNRM VCMUZ QSUQN KDBMU SWCJJ BZBTT MGCZQ JSKCJ DDCUE SGSNQ VUJDS SGZNL YJCBG UJSYY SNXBN TSWAL QZQSU QNZCY DSNCU BXJSG CGZBN YBNQJ SWQUY QNJBX TBNSZ BTYVS OUZDS TSUUM ZDQUJ DSICE SGNSZ CYDSN QGWUJ CVVDQ UTBWS NGQYY VCZQJ CBGCG JDSNB JULUJ STQUK CJDQV VUCGE VSQVY DQASJ UMAUJ CJMJC BGZCY DSNUJ DSZQS UQNZC YDSNC USQUC VLANB FSGQG WCGYN QZJCZ SBXXS NUSUU SGJCQ VVLGB ZBTTM GCZQJ CBGUS ZMNCJ LUDQF SUYSQ NSYNB WMZSW TBUJB XDCUF GBKGK BNFAS JKSSG QGWDC USQNV LYVQL UKSNS TQCGV LZBTS WCSUQ GWDCU JBNCS UESGN SUDSN QCUSW JBJDS YSQFB XUBYD CUJCZ QJCBG QGWQN JCUJN LALJD SSGWB XJDSU COJSS GJDZS GJMNL GSOJD SKNBJ STQCG VLJNQ ESWCS UMGJC VQABM JCGZV MWCGE DQTVS JFCGE VSQNQ GWTQZ ASJDZ BGUCW SNSWU BTSBX JDSXC GSUJS OQTYV SUCGJ DSSGE VCUDV QGEMQ ESCGD CUVQU JYDQU SDSKN BJSJN QECZB TSWCS UQVUB FGBKG QUNBT QGZSU QGWZB VVQAB NQJSW KCJDB JDSNY VQLKN CEDJU TQGLB XDCUY VQLUK SNSYM AVCUD SWCGS WCJCB GUBXI QNLCG EHMQV CJLQG WQZZM NQZLW MNCGE DCUVC XSJCT SQGWC GJKBB XDCUX BNTSN JDSQJ NCZQV ZBVVS QEMSU YMAVC UDSWJ DSXCN UJXBV CBQZB VVSZJ SWSWC JCBGB XDCUW NQTQJ CZKBN FUJDQ JCGZV MWSWQ VVAMJ JKBBX JDSYV QLUGB KNSZB EGCUS WQUUD QFSUY SQNSU
+</code></pre></div>
+<ul>
+<li>虽然密文分组了，但仍然是单表代换。词频分析就交给 <a href="https://quipqiup.com/">quipqiup</a> 好啦</li>
+<li>选择任意一个 <code>found</code> 文件内容加上 <code>krypton4</code> 的文件内容就可以获得明文：<code>WELL DONE THE LEVEL FOUR PASSWORD IS BRUTE</code></li>
+</ul>
+<h2 id="level-4">Level 4<a class="headerlink" href="#level-4" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>krypton4</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>BRUTE</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code>$ ssh krypton4@krypton.labs.overthewire.org -p <span class="m">2231</span>
+
+$ <span class="nb">cd</span> /krypton/krypton4
+$ ls
+found1  found2  HINT  krypton5  README
+$ cat README <span class="p">|</span> iconv -f ISO8859-1 -t UTF-8
+Good job!
+
+You more than likely used frequency analysis and some common sense
+to solve that one.
+
+So far we have worked with simple substitution ciphers.  They have
+also been <span class="s1">&#39;monoalphabetic&#39;</span>, meaning using a fixed key, and 
+giving a one to one mapping of plaintext <span class="o">(</span>P<span class="o">)</span> to ciphertext <span class="o">(</span>C<span class="o">)</span>.
+Another <span class="nb">type</span> of substitution cipher is referred to as <span class="s1">&#39;polyalphabetic&#39;</span>,
+where one character of P may map to many, or all, possible ciphertext 
+characters.
+
+An example of a polyalphabetic cipher is called a Vigenère Cipher.  It works
+like this:
+
+If we use the key<span class="o">(</span>K<span class="o">)</span>  <span class="s1">&#39;GOLD&#39;</span>, and <span class="nv">P</span> <span class="o">=</span> PROCEED MEETING AS AGREED, <span class="k">then</span> <span class="s2">&quot;add&quot;</span>
+P to K, we get C.  When adding, <span class="k">if</span> we exceed <span class="m">25</span>, <span class="k">then</span> we roll to <span class="m">0</span> <span class="o">(</span>modulo <span class="m">26</span><span class="o">)</span>.
+
+
+P     P R O C E   E D M E E   T I N G A   S A G R E   E D
+K     G O L D G   O L D G O   L D G O L   D G O L D   G O
+
+becomes:
+
+P     <span class="m">15</span> <span class="m">17</span> <span class="m">14</span> <span class="m">2</span>  <span class="m">4</span>  <span class="m">4</span>  <span class="m">3</span> <span class="m">12</span>  <span class="m">4</span> <span class="m">4</span>  <span class="m">19</span>  <span class="m">8</span> <span class="m">13</span> <span class="m">6</span>  <span class="m">0</span>  <span class="m">18</span> <span class="m">0</span>  <span class="m">6</span> <span class="m">17</span> <span class="m">4</span> <span class="m">4</span>   <span class="m">3</span>
+K     <span class="m">6</span>  <span class="m">14</span> <span class="m">11</span> <span class="m">3</span>  <span class="m">6</span> <span class="m">14</span> <span class="m">11</span>  <span class="m">3</span>  <span class="m">6</span> <span class="m">14</span> <span class="m">11</span>  <span class="m">3</span>  <span class="m">6</span> <span class="m">14</span> <span class="m">11</span>  <span class="m">3</span> <span class="m">6</span> <span class="m">14</span> <span class="m">11</span> <span class="m">3</span> <span class="m">6</span>  <span class="m">14</span>
+C     <span class="m">21</span> <span class="m">5</span>  <span class="m">25</span> <span class="m">5</span> <span class="m">10</span> <span class="m">18</span> <span class="m">14</span> <span class="m">15</span> <span class="m">10</span> <span class="m">18</span>  <span class="m">4</span> <span class="m">11</span> <span class="m">19</span> <span class="m">20</span> <span class="m">11</span> <span class="m">21</span> <span class="m">6</span> <span class="m">20</span>  <span class="m">2</span> <span class="m">8</span> <span class="m">10</span> <span class="m">17</span>
+
+So, we get a ciphertext of:
+
+VFZFK SOPKS ELTUL VGUCH KR
+
+This level is a Vigenère Cipher.  You have intercepted two longer, english 
+language messages.  You also have a key piece of information.  You know the 
+key length!
+
+For this exercise, the key length is <span class="m">6</span>.  The password to level five is <span class="k">in</span> the usual
+place, encrypted with the <span class="m">6</span> letter key.
+
+Have fun!
+$ cat HINT 
+Frequency analysis will still work, but you need to analyse it
+by <span class="s2">&quot;keylength&quot;</span>.  Analysis of cipher text at position <span class="m">1</span>, <span class="m">6</span>, <span class="m">12</span>, etc
+should reveal the 1st letter of the key, <span class="k">in</span> this <span class="k">case</span>.  Treat this as
+<span class="m">6</span> different mono-alphabetic ciphers...
+
+Persistence and some good guesses are the key!
+
+$ cat found1
+YYICS JIZIB AGYYX RIEWV IXAFN JOOVQ QVHDL CRKLB SSLYX RIQYI IOXQT WXRIC RVVKP BHZXI YLYZP DLCDI IKGFJ UXRIP TFQGL CWVXR IEZRV NMYSF JDLCL RXOWJ NMINX FNJSP JGHVV ERJTT OOHRM VMBWN JTXKG JJJXY TSYKL OQZFT OSRFN JKBIY YSSHE LIKLO RFJGS VMRJC CYTCS VHDLC LRXOJ MWFYB JPNVR NWUMZ GRVMF UPOEB XKSDL CBZGU IBBZX MLMKK LOACX KECOC IUSBS RMPXR IPJZW XSPTR HKRQB VVOHR MVKEE PIZEX SDYYI QERJJ RYSLJ VZOVU NJLOW RTXSD LYYNE ILMBK LORYW VAOXM KZRNL CWZRA YGWVH DLCLZ VVXFF KASPJ GVIKW WWVTV MCIKL OQYSW SBAFJ EWRII SFACC MZRVO MLYYI MSSSK VISDY YIGML PZICW FJNMV PDNEH ISSFE HWEIJ PSEEJ QYIBW JFMIC TCWYE ZWLTK WKMBY YICGY WVGBS UKFVG IKJRR DSBJJ XBSWM VVYLR MRXSW BNWJO VCSKW KMBYY IQYYW UMKRM KKLOK YYVWX SMSVL KWCAV VNIQY ISIIB MVVLI DTIIC SGSRX EVYQC CDLMZ XLDWF JNSEP BRROO WJFMI CSDDF YKWQM VLKWM KKLOV CXKFE XRFBI MEPJW SBWFJ ZWGMA PVHKR BKZIB GCFEH WEWSF XKPJT NCYYR TUICX PTPLO VIJVT DSRMV AOWRB YIBIR MVWER QJKWK RBDFY MELSF XPEGQ KSPML IYIBX FJPXR ELPVH RMKFE HLEBJ YMWKM TUFII YSUXE VLJUX YAYWU XRIUJ JXGEJ PZRQS TJIJS IJIJS PWMKK KBEQX USDXC IYIBI YSUXR IPJNM DLBFZ WSIQF EHLYR YVVMY NXUSB SRMPW DMJQN SBIRM VTBIR YPWSP IIIIC WQMVL KHNZK SXMLY YIZEJ FTILY RSFAD SFJIW EVNWZ WOWFJ WSERB NKAKW LTCSX KCWXV OILGL XZYPJ NLSXC YYIBM ZGFRK VMZEH DSRTJ ROGIM RHKPQ TCSCX GYJKB ICSTS VSPFE HGEQF JARMR JRWNS PTKLI WBWVW CXFJV QOVYQ UGSXW BRWCS MSCIP XDFIF OLGSU ECXFJ PENZY STINX FJXVY YLISI MEKJI SEKFJ IEXHF NCPSI PKFVD LCWVA OVCSF JKVKX ESBLM ZJICM LYYMC GMZEX BCMKK LOACX KEXHR MVKBS SSUAK WSSKM VPCIZ RDLCF WXOVL TFRDL CXLRC LMSVL YXGSK LOMPK RGOWD TIXRI PJNIB ILTKV OIQYF SPJCW KLOQQ MRHOW MYYED FCKFV ORGLY XNSPT KLIEL
+$ cat found2
+YYIIA CWVSL PGLVH DSAFD TYYRY YEDRG LYXER BJIEV EPLVX BICNE XRIDT IICXD TIXRI PJNIB ILTYS EWCXE IKVRM VXBIC RRHOE ETFHD LGHBG YZCWZ RQXMU ISDIA YKLOQ DWFQD LCIVA KRBYY IDMLB FSNQY STLYT NJUEQ VCFKT SPCTW AYSBB ZXRLG XRBOE LIUSB SRMPF EMJYR WZPCS UMNJG WVXRE RBRVW IBMVV KRBRR HOLCW WIOPJ JJWVS LJCCC LCFEH DSRTR XOXFJ CECXM KKLOM PGIIK HYSUR YAQMV HSHLT KOXSU BYEDX FJPAY YJIUS PSPGI IKODF JXSJW TLASW FXRMN XFJCM YRGBZ PVKMN EXYXF JWSBI QYRRN OGQCE NICWW SBCMZ PSEGY SISKW RNKFI XFJWM BIQNE GOCMZ IXKWR JJEBI QTGIM YJNRV DLYYP SETPJ WIBGM TBINJ MTUEX HRMVR ISSBZ PVLYA VEFIP DXSYH ZWVEU JYXKH YRRUC IKWCI FRDFC LXINX FJKMX AMTUQ KRGXY SEPBH VVDEG SCCGI CUZJI SSPZP VIBFG SYVBJ VVKRB YYIXQ WORAC AMZCH BYQYR KKMLG LXDLC QZSXA CSKEG EWNEX YXFJW SBIQY RRNJM ZEHRM QTNRC YNUVV KRBSF SXICA VVURC BNLKX GYNEC JMWYI NMBSK QORRN FRSXY SUXRI QHRVO GPTNJ YYLIR XBICK LPVSD SLXCE LIWMV PCIUS BSRMP WLEQP VXGMR MKLOQ QTKLK XQMVA YYJIE SDFCM LRQVW KFVKP MSXXS QCXYI DLMZX LDXFN JAKWT JICUM LIRRN XFTLK RXDZC SPXFJ JGKVC HISGF SYJLO PYZXL OHFJR VDMJD RXDLC FNOGE PINEI MLBYM MLRMV TYSPH IIKXS WVTSG IJUYZ XFJEY DWFNJ TKHBJ ULKRB XNIBI QTTPE QQDRR NXFJE YDWUJ IICSQ RRPVX FFKLO HPTGT OHYQD SCXYX DEXCY XYIZY RNEXR IZFJO OXZZK XRIQH RVOGP TNHSH LTKQS RBMFA VSLLZ XDSMP YMWXM KZPVX FJSEC OCYWS BMRJE ELPCI YMWXM PVIZE UFPJB SKYYI PMPJR WRIDJ RVOHY XGEBO KNXLD KCYZR DSFNJ WDVYB RRNFS WELSQ SUJSR IIJGX KKMTU HSWRF EGOEU FPJBS KYYIP PYRVW KRBTE PIGYR VROEP YFGYZ CWUSB SRMPA SXFII CVIYA VWGLC SJLOP YDUSG RRTJP OINYY ICIIJ GXRIP AVVIW LZXEX HUFIQ KRBXY ICPCU KWYYL ICCER RNCQY VLNEK GLCSZ XGEQI RCVME MKXRI ENIPL ERMVH RIPKR GOMLF CMDXJ JIMZT JNEKL VMTBE XHQTF RKJRJ IXRIW FCPCX YWKIN XMBRV NXFJV QOVYQ UGSXW YYMCA YXKSL IYSVZ ORRKL PNEWK FVDLC YIEFI JJIWD LCDYE NLYWU PIFCJ EAKPI NEKKR FTLVG LCSKL OCQFN FOJMW VXRIK FXVOE RIZXM LRMRX MVMXJ INXFJ ISKHY SUHSZ GIVHD LCKFV OWRFJ JKVYX KLOCA TLPNW CJFRO MRMVV CMBJZ XGEQF MIBCU NUINM RHYEX HUMVR DLCDT VOTRZ GXYXF JVHQI YSUPY SIJUM XXMNK XRIWH FYVHQ JVMDA YXRPC STJIC NICUR RNXFJ IIGIP JDEXC ZNXNK KEJUV YGIXR XDLCG FXDSK YYICM BJJAO VCXFW DICUK LKXLT EIYJR MVQMS SQUGV MKGUS GRYSU JYVYR FQORR NKWOI KJUXR ERYYI SVHTL VXIWR LWDIL INLKX QMRPV ACIFE COCIU SBSRM PHOWN FZVSR EQPMR ETJEX DLCKR MXXCX KMNIY XRMNX FJKMX AMTUQ KRYSU XRIJN FRCLM TBLSW QMRKQ CKFEI KRBQF SUIBY YSEKF YWYVF SYKLO WAFII MVMBJ ESHUJ TEXRM YWPIX FFKMC GCWKE SRLJZ XRIPH RRGIA QZQLH MBEMX XMYYM CKPJR XNMRH YXRIP JWSBI GKNIM ELSFX TYKUF ZOVGY NIWYQ YJXYT UMVVO ACFII SXFNE OSGMZ CHTYK UFZOV GYJES HRMVG YAYWU PIPGT EEPXC WDIKW SWZRQ XFJUM CXYST IMEPJ WYVPW NELSW KNEHD LCSNI KVCFC PBMEM KEXWU JIINX FJJGK VCHIS GJMWP SEGYS TEBVW ZJEVP MAVVY RWTLV LEAPF ROERF KMWIU JCPSP JYICS XQFZH DLCQZ SXAFT NMVPE TWMBW RNNMV PBJTP KVCIK LOWAF IIMVM BWSBM DDFYP SSSUX RERDF YMSSQ URYXH ZDTYZ CWKLO KSQWH YVMYY CGSSQ UFOOG QCINS PYYID MLBFS NQYSS ENPWI VRDIB TEXRI PTTOC FCQFA LYRNW MKQMS PSEVZ FTOSX UNCPX SRRRX DIPXF QEGFK FVDLC KRPVA MZCHX SRMLV DQCFK EVP
+
+$ mktemp -d
+/tmp/tmp.uG3ytoUtVo
+$ <span class="nb">cd</span> /tmp/tmp.uG3ytoUtVo
+$ cp /krypton/krypton4/found* .
+
+$ vi count.py
+</code></pre></div>
+<ul>
+<li>按密钥长度分别统计各个位上的字母频率，一般最高频率字母对应明文 <code>E</code>，由此可推出密钥</li>
+<li>需要注意 <code>found1</code> 的长度不是 6 的倍数，不能直接与 <code>found2</code> 拼接后计算</li>
+</ul>
+<details class="note">
+<summary>count.py</summary>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+  <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;found&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+  <span class="n">cnt</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+    <span class="n">cnt</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">6</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">6</span><span class="p">][</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">6</span><span class="p">][</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">/=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:(</span><span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">key</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">((</span><span class="mi">26</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">))</span> <span class="o">%</span> <span class="mi">26</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code>$ python3 count.py 
+FRTKEY
+</code></pre></div>
+<ul>
+<li>在文本长度不够的情况下，实际字母频率会有一定的偏差，此时需根据解密情况并结合常用词对密钥进行调整</li>
+<li><code>found1</code> 与 <code>found2</code> 均以 <code>YYI</code> 开头，推测 <code>YYI</code> 对应明文 <code>THE</code>，调整密钥为 <code>FREKEY</code></li>
+<li><code>HCIKV RJOX</code> 解密为 <code>CLEAR TEXT</code></li>
+</ul>
+<h2 id="level-5">Level 5<a class="headerlink" href="#level-5" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>krypton5</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>CLEARTEXT</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code>$ ssh krypton5@krypton.labs.overthewire.org -p <span class="m">2231</span>
+
+$ <span class="nb">cd</span> /krypton/krypton5
+$ ls
+found1  found2  found3  krypton6  README
+$ cat README 
+Frequency analysis can <span class="nb">break</span> a known key length as well.  Lets try one
+last polyalphabetic cipher, but this <span class="nb">time</span> the key length is unknown.
+
+
+Enjoy.
+$ cat krypton6 
+BELOS Z
+</code></pre></div>
+<ul>
+<li>由于密钥长度未知，首先要推测密钥长度，通过 <a href="https://planetcalc.com/8550/">Kasiski 测试</a> 来判断<ul>
+<li>在维吉尼亚加密中，当明文中一对相同字母组间隔字母数为密钥的倍数时，其对应的密文字母组相同</li>
+</ul>
+</li>
+<li>
+<p>分别分析 <code>found1</code>、<code>found2</code> 和 <code>found3</code>，推测密钥长度为 <span class="arithmatex">\(3\)</span></p>
+<ul>
+<li>需要注意 <code>Key Length</code> 是工具处理后的结果，实际字母组间隔均大于 <span class="arithmatex">\(3\)</span></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Key Length</th>
+<th>Distances Matched</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>found1</td>
+<td>3</td>
+<td>84.18 %</td>
+</tr>
+<tr>
+<td>found2</td>
+<td>3</td>
+<td>83.19 %</td>
+</tr>
+<tr>
+<td>found3</td>
+<td>3</td>
+<td>78.40 %</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>再使用 <a href="#level-4">Level 4</a> 的脚本分析，打印输出各个位的字母频率，发现与字母频率表中的值差距较大</p>
+</li>
+</ul>
+<details class="note">
+<summary>count.py</summary>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="n">kl</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+  <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;found&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">kl</span><span class="p">))</span>
+  <span class="n">cnt</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">kl</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+    <span class="n">cnt</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">kl</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">kl</span><span class="p">][</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">kl</span><span class="p">][</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">kl</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">/=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:(</span><span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code>$ python3 count.py 
+<span class="o">[(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.08347529812606473<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.07836456558773425<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.07155025553662692<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.06132879045996593<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.05792163543441227<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.05792163543441227<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.05110732538330494<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.049403747870528106<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.04599659284497445<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.04599659284497445<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.04599659284497445<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.044293015332197615<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.039182282793867124<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.039182282793867124<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.030664395229982964<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.030664395229982964<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.02555366269165247<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.020442930153321975<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.020442930153321975<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.017035775127768313<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.017035775127768313<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.017035775127768313<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.017035775127768313<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.013628620102214651<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.013628620102214651<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.005110732538330494<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.09215017064846416<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.08191126279863481<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.07679180887372014<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.06825938566552901<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.06484641638225255<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.06143344709897611<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.059726962457337884<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.05460750853242321<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.04778156996587031<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.04778156996587031<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.04436860068259386<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.03924914675767918<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.03754266211604096<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.034129692832764506<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.030716723549488054<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.027303754266211604<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.023890784982935155<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.023890784982935155<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.017064846416382253<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.017064846416382253<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.015358361774744027<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.015358361774744027<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.006825938566552901<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.005119453924914676<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.0034129692832764505<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.0034129692832764505<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.07337883959044368<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.07167235494880546<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.059726962457337884<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.05802047781569966<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.05631399317406143<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.051194539249146756<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.04948805460750853<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.04607508532423208<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.04607508532423208<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.04607508532423208<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.042662116040955635<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.03924914675767918<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.03924914675767918<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.03924914675767918<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.03583617747440273<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.034129692832764506<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.034129692832764506<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.034129692832764506<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.02901023890784983<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.027303754266211604<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.025597269624573378<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.017064846416382253<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.015358361774744027<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.011945392491467578<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.011945392491467578<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.005119453924914676<span class="o">)]</span>
+</code></pre></div>
+<ul>
+<li>调整密钥长度为 <span class="arithmatex">\(3\)</span> 的倍数，当密钥长度为 <span class="arithmatex">\(9\)</span> 时，可以获得较为合理的字母频率，明文字母 <code>E</code> 一般对应频率靠前的密文字母，密钥为 <code>KEYLENGTH</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code>$ python3 count.py 
+<span class="o">[(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.12244897959183673<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.11224489795918367<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.09693877551020408<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.09183673469387756<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.08163265306122448<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.07142857142857142<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.0663265306122449<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.061224489795918366<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.04591836734693878<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.03571428571428571<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.030612244897959183<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.030612244897959183<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.02040816326530612<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.11734693877551021<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.10204081632653061<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.08163265306122448<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.08163265306122448<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.08163265306122448<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.07653061224489796<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.07142857142857142<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.0663265306122449<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.061224489795918366<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.03571428571428571<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.030612244897959183<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.02040816326530612<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.10204081632653061<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.10204081632653061<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.09693877551020408<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.09183673469387756<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.08673469387755102<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.08163265306122448<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.061224489795918366<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.061224489795918366<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.05102040816326531<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.04591836734693878<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.03571428571428571<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.03571428571428571<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.02040816326530612<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.02040816326530612<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.01020408163265306<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.14285714285714285<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.09183673469387756<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.08673469387755102<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.0663265306122449<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.0663265306122449<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.061224489795918366<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.061224489795918366<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.05102040816326531<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.05102040816326531<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.04591836734693878<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.04591836734693878<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.03571428571428571<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.030612244897959183<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.025510204081632654<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.02040816326530612<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.02040816326530612<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.02040816326530612<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.015306122448979591<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.00510204081632653<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.1282051282051282<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.09230769230769231<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.08205128205128205<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.07692307692307693<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.05641025641025641<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.05128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.046153846153846156<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.046153846153846156<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.041025641025641026<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.035897435897435895<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.03076923076923077<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.03076923076923077<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.015384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.09743589743589744<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.08205128205128205<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.08205128205128205<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.07692307692307693<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.06666666666666667<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.06666666666666667<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.05641025641025641<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.05128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.05128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.041025641025641026<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.035897435897435895<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.035897435897435895<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.03076923076923077<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Q&#39;</span>, <span class="m">0</span>.03076923076923077<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.015384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.015384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.015384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.15384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.10256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.08205128205128205<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.08205128205128205<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.07692307692307693<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.06666666666666667<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.05641025641025641<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.05641025641025641<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.05128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.046153846153846156<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.035897435897435895<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.015384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;X&#39;</span>, <span class="m">0</span>.10256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.10256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.09743589743589744<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.08205128205128205<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.07692307692307693<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;G&#39;</span>, <span class="m">0</span>.07179487179487179<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.06666666666666667<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.041025641025641026<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.041025641025641026<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.035897435897435895<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.035897435897435895<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.03076923076923077<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.03076923076923077<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.015384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.015384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)]</span>
+<span class="o">[(</span><span class="s1">&#39;L&#39;</span>, <span class="m">0</span>.09743589743589744<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;P&#39;</span>, <span class="m">0</span>.07692307692307693<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;S&#39;</span>, <span class="m">0</span>.07179487179487179<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;H&#39;</span>, <span class="m">0</span>.07179487179487179<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;V&#39;</span>, <span class="m">0</span>.06666666666666667<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;U&#39;</span>, <span class="m">0</span>.06666666666666667<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;K&#39;</span>, <span class="m">0</span>.06666666666666667<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Z&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;Y&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;O&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;A&#39;</span>, <span class="m">0</span>.06153846153846154<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;W&#39;</span>, <span class="m">0</span>.041025641025641026<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;M&#39;</span>, <span class="m">0</span>.035897435897435895<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;N&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;F&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;D&#39;</span>, <span class="m">0</span>.02564102564102564<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;T&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;J&#39;</span>, <span class="m">0</span>.020512820512820513<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;C&#39;</span>, <span class="m">0</span>.015384615384615385<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;B&#39;</span>, <span class="m">0</span>.010256410256410256<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;R&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;E&#39;</span>, <span class="m">0</span>.005128205128205128<span class="o">)]</span>
+</code></pre></div>
+<ul>
+<li>解 <code>BELOS Z</code> 得 <code>RANDO M</code></li>
+</ul>
+<h2 id="level-6">Level 6<a class="headerlink" href="#level-6" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>krypton6</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>RANDOM</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code>$ ssh krypton6@krypton.labs.overthewire.org -p <span class="m">2231</span>
+
+$ <span class="nb">cd</span> /krypton/krypton6
+$ ls
+encrypt6  HINT1  HINT2  keyfile.dat  krypton7  onetime  README
+$ cat README 
+Hopefully by now its obvious that encryption using repeating keys
+is a bad idea.  Frequency analysis can destroy repeating/fixed key
+substitution crypto.
+
+A feature of good crypto is random ciphertext.  A good cipher must
+not reveal any clues about the plaintext.  Since natural language 
+plaintext <span class="o">(</span><span class="k">in</span> this <span class="k">case</span>, English<span class="o">)</span> contains patterns, it is left up
+to the encryption key or the encryption algorithm to add the 
+<span class="s1">&#39;randomness&#39;</span>.
+
+Modern ciphers are similar to older plain substitution 
+ciphers, but improve the <span class="s1">&#39;random&#39;</span> nature of the key.
+
+An example of an older cipher using a complex, random, large key
+is a vigniere using a key of the same size of the plaintext.  For
+example, imagine you and your confident have agreed on a key using
+the book <span class="s1">&#39;A Tale of Two Cities&#39;</span> as your key, <span class="k">in</span> <span class="m">256</span> byte blocks.
+
+The cipher works as such:
+
+Each plaintext message is broken into <span class="m">256</span> byte blocks.  For each 
+block of plaintext, a corresponding <span class="m">256</span> byte block from the book
+is used as the key, starting from the first chapter, and progressing.
+No part of the book is ever re-used as key.  The use of a key of the 
+same length as the plaintext, and only using it once is called a <span class="s2">&quot;One Time Pad&quot;</span>.
+
+Look <span class="k">in</span> the krypton6/onetime  directory.  You will find a file called <span class="s1">&#39;plain1&#39;</span>, a <span class="m">256</span> 
+byte block.  You will also see a file <span class="s1">&#39;key1&#39;</span>, the first <span class="m">256</span> bytes of
+<span class="s1">&#39;A Tale of Two Cities&#39;</span>.  The file <span class="s1">&#39;cipher1&#39;</span> is the cipher text of 
+plain1.  As you can see <span class="o">(</span>and try<span class="o">)</span> it is very difficult to <span class="nb">break</span>
+the cipher without the key knowledge.
+
+<span class="o">(</span>NOTE - it is possible though.  Using plain language as a one <span class="nb">time</span> pad
+key has a weakness.  As a secondary challenge, open README <span class="k">in</span> that directory<span class="o">)</span>
+
+If the encryption is truly random letters, and only used once, <span class="k">then</span> it
+is impossible to break.  A truly random <span class="s2">&quot;One Time Pad&quot;</span> key cannot be
+broken.  Consider intercepting a ciphertext message of <span class="m">1000</span> bytes.  One
+could brute force <span class="k">for</span> the key, but due to the random key nature, you would
+produce every single valid <span class="m">1000</span> letter plaintext as well.  Who is to know
+which is the real plaintext?!?
+
+Choosing keys that are the same size as the plaintext is impractical.
+Therefore, other methods must be used to obscure ciphertext against 
+frequency analysis <span class="k">in</span> a simple substitution cipher.  The
+impracticality of an <span class="s1">&#39;infinite&#39;</span> key means that the randomness, or
+entropy, of the encryption is introduced via the method.
+
+We have seen the method of <span class="s1">&#39;substitution&#39;</span>.  Even <span class="k">in</span> modern crypto,
+substitution is a valid technique.  Another technique is <span class="s1">&#39;transposition&#39;</span>,
+or swapping of bytes.
+
+Modern ciphers <span class="nb">break</span> into two types<span class="p">;</span> symmetric and asymmetric.
+
+Symmetric ciphers come <span class="k">in</span> two flavours: block and stream.
+
+Until now, we have been playing with classical ciphers, approximating
+<span class="s1">&#39;block&#39;</span> ciphers.  A block cipher is <span class="k">done</span> <span class="k">in</span> fixed size blocks <span class="o">(</span>suprise!<span class="o">)</span>.
+For example, <span class="k">in</span> the previous paragraphs we discussed breaking text and keys
+into <span class="m">256</span> byte blocks, and working on those blocks.  Block ciphers use a
+fixed key to perform substituion and transposition ciphers on each
+block discretely.
+
+Its <span class="nb">time</span> to employ a stream cipher.  A stream cipher attempts to create
+an on-the-fly <span class="s1">&#39;random&#39;</span> keystream to encrypt the incoming plaintext one
+byte at a time.  Typically, the <span class="s1">&#39;random&#39;</span> key byte is xor<span class="s1">&#39;d with the </span>
+<span class="s1">plaintext to produce the ciphertext.  If the random keystream can be</span>
+<span class="s1">replicated at the recieving end, then a further xor will produce the</span>
+<span class="s1">plaintext once again.</span>
+
+<span class="s1">From this example forward, we will be working with bytes, not ASCII </span>
+<span class="s1">text, so a hex editor/dumper like hexdump is a necessity.  Now is the</span>
+<span class="s1">right time to start to learn to use tools like cryptool.</span>
+
+<span class="s1">In this example, the keyfile is in your directory, however it is </span>
+<span class="s1">not readable by you.  The binary &#39;</span>encrypt6<span class="s1">&#39; is also available.</span>
+<span class="s1">It will read the keyfile and encrypt any message you desire, using</span>
+<span class="s1">the key AND a &#39;</span>random<span class="s1">&#39; number.  You get to perform a &#39;</span>known ciphertext<span class="s1">&#39;</span>
+<span class="s1">attack by introducing plaintext of your choice.  The challenge here is </span>
+<span class="s1">not simple, but the &#39;</span>random<span class="s1">&#39; number generator is weak.</span>
+
+<span class="s1">As stated, it is now that we suggest you begin to use public tools, like cryptool,</span>
+<span class="s1">to help in your analysis.  You will most likely need a hint to get going.</span>
+<span class="s1">See &#39;</span>HINT1<span class="s1">&#39; if you need a kickstart.</span>
+
+<span class="s1">If you have further difficulty, there is a hint in &#39;</span>HINT2<span class="s1">&#39;.</span>
+
+<span class="s1">The password for level 7 (krypton7) is encrypted with &#39;</span>encrypt6<span class="err">&#39;</span>.
+
+Good Luck!
+</code></pre></div>
+<p>流密码，可以采用选择明文攻击，弱随机数生成器，建议使用开源工具（如 <code>cryptool</code>）辅助分析。</p>
+<div class="highlight"><pre><span></span><code>$ mktemp -d
+/tmp/tmp.dUnxjQOLqJ
+$ <span class="nb">cd</span> /tmp/tmp.dUnxjQOLqJ
+$ ln -s /krypton/krypton6/encrypt6
+$ ln -s /krypton/krypton6/keyfile.dat
+$ chmod <span class="m">777</span> .
+$ ./encrypt6 
+usage: encrypt6 foo bar 
+Where: foo is the file containing the plaintext and bar is the destination ciphertext file.
+$ cat /krypton/krypton6/krypton7 
+PNUKLYLWRQKGKBE
+</code></pre></div>
+<p><code>encrypt6</code> 不处理英文字母以外的字符</p>
+<div class="highlight"><pre><span></span><code>$ <span class="nb">echo</span> -n <span class="s1">&#39;!#$%^&amp;*()Aa&#39;</span> &gt; plain
+$ ./encrypt6 plain cipher
+$ cat cipher 
+EI
+</code></pre></div>
+<p>首先获取伪随机序列的周期</p>
+<div class="highlight"><pre><span></span><code>$ <span class="k">for</span> i <span class="k">in</span> <span class="k">$(</span>seq <span class="m">1</span> <span class="m">64</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> -n A<span class="p">;</span> <span class="k">done</span> &gt; plain
+$ ./encrypt6 plain cipher
+$ cat cipher 
+EICTDGYIYZKTHNSIRFXYCPFUEOCKRNEICTDGYIYZKTHNSIRFXYCPFUEOCKRNEICT
+</code></pre></div>
+<p>由此可知，伪随机序列的周期为 30 字节</p>
+<div class="highlight"><pre><span></span><code>$ <span class="k">for</span> i <span class="k">in</span> <span class="k">$(</span>seq <span class="m">1</span> <span class="m">30</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> -n B<span class="p">;</span> <span class="k">done</span> &gt; plain
+$ ./encrypt6 plain cipher
+$ cat cipher 
+FJDUEHZJZALUIOTJSGYZDQGVFPDLSO
+</code></pre></div>
+<p>对比 A 和 B 一个周期的加密结果，注意到 B 的加密结果只是在 A 的基础上字母表位置后移了一位（注意不是<strong>异或</strong>，不要被惯性思维带偏了），即 30 个 A 加密的结果就是一个周期的密钥！</p>
+<div class="highlight"><pre><span></span><code>A: EICTDGYIYZKTHNSIRFXYCPFUEOCKRN
+B: FJDUEHZJZALUIOTJSGYZDQGVFPDLSO
+</code></pre></div>
+<p>那么直接密文减去密钥就好了！</p>
+<div class="highlight"><pre><span></span><code><span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;PNUKLYLWRQKGKBE&#39;</span><span class="p">,</span> <span class="s1">&#39;EICTDGYIYZKTHNSIRFXYCPFUEOCKRN&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+    <span class="n">m</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">((</span><span class="mi">26</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">%</span> <span class="mi">26</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="c1"># LFSRISNOTRANDOM</span>
+</code></pre></div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">December 8, 2022 11:02:00</span>
+      
+    
+  </small>
+</div>
+
+              
+
+  
+    <div class="md-source-date">
+      <small>
+          <span class="twemoji">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.5 3.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.507 5.507 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4.001 4.001 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.49 3.49 0 0 1 2 5.5zM11 4a.75.75 0 1 0 0 1.5 1.5 1.5 0 0 1 .666 2.844.75.75 0 0 0-.416.672v.352a.75.75 0 0 0 .574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 1 0 1.434-.44 5.01 5.01 0 0 0-2.56-3.012A3 3 0 0 0 11 4z"/></svg> 
+          </span>
+          Contributors: <span class='git-page-authors git-authors'><a href='mailto:137126578@qq.com'>YanhuiJessica</a></span>
+      </small>
+      <br>
+      <small>
+          <span id="busuanzi_container_page_pv">
+            <span class="twemoji">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+            </span>
+            Pageviews: <span id="busuanzi_value_page_pv"></span>
+          </span>
+      </small>
+    </div>
+  
+  
+  <!-- Giscus -->
+  <h2 id="__comments">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="YanhuiJessica/Chictf-Writeups"
+      data-repo-id="MDEwOlJlcG9zaXRvcnkyNDg1MTU1OTc="
+      data-category="General"
+      data-category-id="DIC_kwDODtAMDc4CP_N3"
+      data-mapping="title"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme)
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../leviathan/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Leviathan" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              Leviathan
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../narnia/" class="md-footer__link md-footer__link--next" aria-label="下一页: Narnia" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              Narnia
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 - 2022 YanhuiJessica
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/YanhuiJessica" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

