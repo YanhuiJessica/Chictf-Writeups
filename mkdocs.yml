@@ -114,6 +114,7 @@ nav:
       - DownUnderCTF 2022:
         - Secret and Ephemeral: blockchain/secret_and_ephemeral.md
         - Private Log: blockchain/private_log.md
+      - 链上记忆大师: blockchain/memory_master_on_the_chain.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
