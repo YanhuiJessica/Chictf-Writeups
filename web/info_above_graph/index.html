@@ -2229,6 +2229,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2650,11 +2664,11 @@
 <li>
 <p>要使用 GraphQL 必须知道可查询的字段，首先了解一下接口可用的 <code>schema</code></p>
 <div class="highlight"><pre><span></span><code><span class="o">{</span>
-    __schema <span class="o">{</span>
-        types <span class="o">{</span>
-            name
-        <span class="o">}</span>
-    <span class="o">}</span>
+<span class="w">    </span>__schema<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>types<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span>name
+<span class="w">        </span><span class="o">}</span>
+<span class="w">    </span><span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1"># {&quot;query&quot;: &quot;{__schema {types {name}}}&quot;}</span>
@@ -2667,16 +2681,16 @@
 <li>
 <p>要获得 admin 的邮箱，邮箱字段应该与用户相关，查看类型 <code>GUser</code> 的详细信息 </p>
 <div class="highlight"><pre><span></span><code><span class="o">{</span>
-    __type<span class="o">(</span>name: <span class="s2">&quot;GUser&quot;</span><span class="o">)</span> <span class="o">{</span>
-        name
-        fields <span class="o">{</span>
-            name
-            <span class="nb">type</span> <span class="o">{</span>
-                name
-                kind
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+<span class="w">    </span>__type<span class="o">(</span>name:<span class="w"> </span><span class="s2">&quot;GUser&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>name
+<span class="w">        </span>fields<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span>name
+<span class="w">            </span><span class="nb">type</span><span class="w"> </span><span class="o">{</span>
+<span class="w">                </span>name
+<span class="w">                </span>kind
+<span class="w">            </span><span class="o">}</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">    </span><span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1"># {&quot;query&quot;: &quot;{__type(name: \&quot;GUser\&quot;){name\nfields{name\ntype{name\nkind}}}}&quot;}</span>
@@ -2686,17 +2700,17 @@
 <li>
 <p>类型字段获取完毕！接下来看看可用查询</p>
 <div class="highlight"><pre><span></span><code><span class="o">{</span>
-    __schema <span class="o">{</span>
-        queryType <span class="o">{</span>
-            fields <span class="o">{</span>
-                name
-                description
-                args <span class="o">{</span>
-                    name
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+<span class="w">    </span>__schema<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>queryType<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span>fields<span class="w"> </span><span class="o">{</span>
+<span class="w">                </span>name
+<span class="w">                </span>description
+<span class="w">                </span>args<span class="w"> </span><span class="o">{</span>
+<span class="w">                    </span>name
+<span class="w">                </span><span class="o">}</span>
+<span class="w">            </span><span class="o">}</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">    </span><span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1"># {&quot;query&quot;: &quot;{__schema{queryType{fields{name\ndescription\nargs{name}}}}}&quot;}</span>
@@ -2706,9 +2720,9 @@
 <li>
 <p><code>guest</code> 用户 <code>id</code> 为 2，推断 <code>admin</code> 用户的 <code>id</code> 为 1</p>
 <div class="highlight"><pre><span></span><code><span class="o">{</span>
-    user<span class="o">(</span>id: <span class="m">1</span><span class="o">)</span> <span class="o">{</span>
-        privateEmail
-    <span class="o">}</span>
+<span class="w">    </span>user<span class="o">(</span>id:<span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>privateEmail
+<span class="w">    </span><span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1"># {&quot;query&quot;: &quot;{user(id: 1){privateEmail}}&quot;}</span>

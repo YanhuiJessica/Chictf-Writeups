@@ -2227,6 +2227,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2634,7 +2648,7 @@
 <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$row</span><span class="p">);</span>
 <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">free</span><span class="p">();</span>
 <span class="nv">$mysqli</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
-<span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">?&gt;</span>
 </code></pre></div></li>
 <li>在使用<code>==</code>或<code>!=</code>进行比较时，如果以<code>0e</code>开头的字符串，<code>0e</code>后跟的所有字符都是数字，那么整个字符串会按科学计数法计算，即是 <span class="arithmatex">\(0\)</span>，暴力查找，通过 level 1
     <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
@@ -2649,9 +2663,9 @@
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-<span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">?&gt;</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code>$ php .<span class="se">\g</span>ethash1.php
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>php<span class="w"> </span>.<span class="se">\g</span>ethash1.php
 0e251288019
 </code></pre></div></li>
 <li>level 2 出现<code>===</code>和<code>!==</code>，既判断参数的值也判断参数的类型，计算哈希的结果是字符串类型，但<code>md5</code>无法处理数组，可以使用任意两个不相等的数组绕过</li>

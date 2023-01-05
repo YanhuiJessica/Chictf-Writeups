@@ -2220,6 +2220,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2600,12 +2614,12 @@
 <h2 id="_1">解题思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>file</code>查看附件，是 64 位的 ELF
-    <div class="highlight"><pre><span></span><code>$ file 24ac28ef281b4b6caab44d6d52b17491
-24ac28ef281b4b6caab44d6d52b17491: ELF <span class="m">64</span>-bit LSB executable, x86-64, version <span class="m">1</span> <span class="o">(</span>SYSV<span class="o">)</span>, dynamically linked, interpreter /lib64/l, <span class="k">for</span> GNU/Linux <span class="m">2</span>.6.32, BuildID<span class="o">[</span>sha1<span class="o">]=</span>718185b5ec9c26eb9aeccfa0ab53678e34fee00a, stripped
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>file<span class="w"> </span>24ac28ef281b4b6caab44d6d52b17491
+24ac28ef281b4b6caab44d6d52b17491:<span class="w"> </span>ELF<span class="w"> </span><span class="m">64</span>-bit<span class="w"> </span>LSB<span class="w"> </span>executable,<span class="w"> </span>x86-64,<span class="w"> </span>version<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">(</span>SYSV<span class="o">)</span>,<span class="w"> </span>dynamically<span class="w"> </span>linked,<span class="w"> </span>interpreter<span class="w"> </span>/lib64/l,<span class="w"> </span><span class="k">for</span><span class="w"> </span>GNU/Linux<span class="w"> </span><span class="m">2</span>.6.32,<span class="w"> </span>BuildID<span class="o">[</span>sha1<span class="o">]=</span>718185b5ec9c26eb9aeccfa0ab53678e34fee00a,<span class="w"> </span>stripped
 </code></pre></div></li>
 <li>使用 64 位的 IDA Pro 打开，找到<code>main</code>转到伪代码
-    <div class="highlight"><pre><span></span><code><span class="kr">__int64</span><span class="w"> </span><span class="kr">__fastcall</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kr">__int64</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">a3</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
+    <div class="highlight"><pre><span></span><code><span class="kr">__int64</span><span class="w"> </span><span class="kr">__fastcall</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kr">__int64</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">a3</span><span class="p">)</span>
+<span class="p">{</span>
 <span class="kr">__int64</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"> </span><span class="c1">// rax</span>
 <span class="c1">// 当发生缓冲区溢出时，赋给变量 v4 的值将覆盖变量 v5</span>
 <span class="kt">char</span><span class="w"> </span><span class="n">v4</span><span class="p">;</span><span class="w"> </span><span class="c1">// [rsp+0h] [rbp-20h]</span>
@@ -2614,39 +2628,39 @@
 <span class="c1">// 变量 v4 与变量 v5 的栈空间相差 8 个字节</span>
 <span class="kt">unsigned</span><span class="w"> </span><span class="kr">__int64</span><span class="w"> </span><span class="n">v6</span><span class="p">;</span><span class="w"> </span><span class="c1">// [rsp+18h] [rbp-8h]</span>
 
-<span class="n">v6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span><span class="w"></span>
-<span class="n">setbuf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span><span class="w"></span>
-<span class="n">setbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span><span class="w"></span>
-<span class="n">setbuf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span><span class="w"></span>
-<span class="n">puts</span><span class="p">(</span><span class="s">&quot;What&#39;s Your Birth?&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="n">__isoc99_scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v5</span><span class="p">);</span><span class="w"></span>
-<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">getchar</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">;</span><span class="w"></span>
+<span class="n">v6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+<span class="n">setbuf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span>
+<span class="n">setbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span>
+<span class="n">setbuf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span>
+<span class="n">puts</span><span class="p">(</span><span class="s">&quot;What&#39;s Your Birth?&quot;</span><span class="p">);</span>
+<span class="n">__isoc99_scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v5</span><span class="p">);</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">getchar</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">;</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1926</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="c1">// 无法直接通过输入使 v5 的值为 1926</span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Cannot Born In 1926!&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">else</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;What&#39;s Your Name?&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Cannot Born In 1926!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;What&#39;s Your Name?&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="n">gets</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v4</span><span class="p">);</span><span class="w">  </span><span class="c1">// gets 不检查输入长度</span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;You Are Born In %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v5</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;You Are Born In %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v5</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// 目标：通过缓冲区溢出使 v5 的值为 1926</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1926</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Shall Have Flag.&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;cat flag&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Are Naive.&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Speed One Second Here.&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1926</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Shall Have Flag.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;cat flag&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Are Naive.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Speed One Second Here.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></li>
 <li>变量 v4 与变量 v5 的栈空间相差 8 个字节，当<code>What's Your Name?</code>提示输入的字符串超过 8 位时，将发生缓冲区溢出。<span class="arithmatex">\(1926\)</span> 转换为十六进制是<code>0x0786</code>（均为不可打印字符），注意使用小端序
     <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">time</span>
@@ -2667,10 +2681,10 @@
 <li>运行 Python 代码，成功获得 Flag
     <div class="highlight"><pre><span></span><code>What<span class="s1">&#39;s Your Birth?</span>
 
-<span class="s1">What&#39;</span>s Your Name?
+<span class="s1">What&#39;</span>s<span class="w"> </span>Your<span class="w"> </span>Name?
 
-You Are Born In <span class="m">1926</span>
-You Shall Have Flag.
+You<span class="w"> </span>Are<span class="w"> </span>Born<span class="w"> </span>In<span class="w"> </span><span class="m">1926</span>
+You<span class="w"> </span>Shall<span class="w"> </span>Have<span class="w"> </span>Flag.
 cyberpeace<span class="o">{</span>82017cc00438da682e8bd4f335c26bee<span class="o">}</span>
 </code></pre></div></li>
 </ul>

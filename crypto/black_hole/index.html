@@ -2253,6 +2253,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2668,39 +2682,39 @@
 <p>We've got an open connection to the satellite.</p>
 <p>It sent us this encoded message. Decode it and send it back to get the flag.</p>
 <h3 id="connecting">Connecting<a class="headerlink" href="#connecting" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>nc black_hole.satellitesabove.me <span class="m">5300</span>
+<div class="highlight"><pre><span></span><code>nc<span class="w"> </span>black_hole.satellitesabove.me<span class="w"> </span><span class="m">5300</span>
 </code></pre></div>
 <h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>没有给源码，直接连服务器分析 <del>密文</del> 编码结果 ΣΣΣ(Φ ωΦ||¡)</li>
 <li>
 <p>既然是编码，应该有一定规律可循。就先试试最小的两个吧...等等！它们有什么区别么？！-ω- 十六进制字符串差了一个字符</p>
-<div class="highlight"><pre><span></span><code>Generating black hole...
+<div class="highlight"><pre><span></span><code>Generating<span class="w"> </span>black<span class="w"> </span>hole...
 
-Encoded msg is: e7a1977d3bce40b06475a6f44ca13535a345397224a927fc2f59633f66d7272bd45c1c8c9030755cf4e05fbd20ed995480e198b52498b0dcdfde8f027dd58c0c836f50045463ee0846df632a4c4b8bc7a7978290820441649b13760ee645d2f36af7571206d66b45b5eea1e0b13de2b84505a1b85c09d032f206f12b1179ca347eaecc6344af06e8c34bfe93072a5c0c6587a7e1c6c6bd1cd37a8868da78ecd103ce8d4f8e48d38369f669feb2ebf8ec9a74f70dbf22e84028b9290665ff2822fc4311047e68f02b24a5661cea07b42ec2dbfed36c964785cee1d70818aa2bdeece7680ef144c6e1797f695d2681a1210be06cd9e9d65487bbda4c5bba402030
-We can stream <span class="m">18909</span> bytes of data before the sat kills the connection. Please help. <span class="o">(</span>Send your message <span class="k">in</span> hex.<span class="o">)</span>
-<span class="o">(</span><span class="m">18909</span><span class="o">)</span> Msg: <span class="m">00</span>
+Encoded<span class="w"> </span>msg<span class="w"> </span>is:<span class="w"> </span>e7a1977d3bce40b06475a6f44ca13535a345397224a927fc2f59633f66d7272bd45c1c8c9030755cf4e05fbd20ed995480e198b52498b0dcdfde8f027dd58c0c836f50045463ee0846df632a4c4b8bc7a7978290820441649b13760ee645d2f36af7571206d66b45b5eea1e0b13de2b84505a1b85c09d032f206f12b1179ca347eaecc6344af06e8c34bfe93072a5c0c6587a7e1c6c6bd1cd37a8868da78ecd103ce8d4f8e48d38369f669feb2ebf8ec9a74f70dbf22e84028b9290665ff2822fc4311047e68f02b24a5661cea07b42ec2dbfed36c964785cee1d70818aa2bdeece7680ef144c6e1797f695d2681a1210be06cd9e9d65487bbda4c5bba402030
+We<span class="w"> </span>can<span class="w"> </span>stream<span class="w"> </span><span class="m">18909</span><span class="w"> </span>bytes<span class="w"> </span>of<span class="w"> </span>data<span class="w"> </span>before<span class="w"> </span>the<span class="w"> </span>sat<span class="w"> </span>kills<span class="w"> </span>the<span class="w"> </span>connection.<span class="w"> </span>Please<span class="w"> </span>help.<span class="w"> </span><span class="o">(</span>Send<span class="w"> </span>your<span class="w"> </span>message<span class="w"> </span><span class="k">in</span><span class="w"> </span>hex.<span class="o">)</span>
+<span class="o">(</span><span class="m">18909</span><span class="o">)</span><span class="w"> </span>Msg:<span class="w"> </span><span class="m">00</span>
 9844ce7e63ee946ac1b2572627e46fa2309f6bc2a10dd9f0062f23d826884f20ab56eeaec99490ff8694fc8b8e5097177a0deb5345212e9eb52ac7e90edfecafedc8e1ef9b3c7c9018581ca238ea246705b9185af5d748df08563e45d0e64b642743d826bcd7257c8e126193f0bc15682027a2c7d7611d9327c0779808e2c82f3f0cea10192127ff0ce72091f9d42b576180e18a0e3b5d159df3e4c30c07a59d98756abc68a009cdf125282757a1e7a9d1792cb0d8664007af41ba1fc625562ebbf2601018899aa22a1c27e30fd43e368d40d39f4e8b962c42e24c9d0ecedf0681bdab587f5c7a2950658e141175b5c1e358fdc765b6d6ff187f7fc8a3757eb9
 <span class="c1"># 9844ce7e63ee946ac1b2572627e46fa2309f6bc2a10dd9f0062f23d826884f20ab56eeaec99490ff8694fc8b8e5097177a0deb5345212e9eb52ac7e90edfecafedc8e1ef9b3c7c9018581ca238ea246705b9185af5d748df08563e45d0e64b642743d826bcd7257c8e126193f0bc15682027a2c7d7611d9327c0779808e2c82f3f0cea10192127ff0ce72091f9d42b576180e18a0e3b5d159df3e4c30c0_7_a59d98756abc68a009cdf125282757a1e7a9d1792cb0d8664007af41ba1fc625562ebbf2601018899aa22a1c27e30fd43e368d40d39f4e8b962c42e24c9d0ecedf0681bdab587f5c7a2950658e141175b5c1e358fdc765b6d6ff187f7fc8a3757eb9</span>
-<span class="o">(</span><span class="m">18908</span><span class="o">)</span> Msg: <span class="m">01</span>
+<span class="o">(</span><span class="m">18908</span><span class="o">)</span><span class="w"> </span>Msg:<span class="w"> </span><span class="m">01</span>
 9844ce7e63ee946ac1b2572627e46fa2309f6bc2a10dd9f0062f23d826884f20ab56eeaec99490ff8694fc8b8e5097177a0deb5345212e9eb52ac7e90edfecafedc8e1ef9b3c7c9018581ca238ea246705b9185af5d748df08563e45d0e64b642743d826bcd7257c8e126193f0bc15682027a2c7d7611d9327c0779808e2c82f3f0cea10192127ff0ce72091f9d42b576180e18a0e3b5d159df3e4c30c06a59d98756abc68a009cdf125282757a1e7a9d1792cb0d8664007af41ba1fc625562ebbf2601018899aa22a1c27e30fd43e368d40d39f4e8b962c42e24c9d0ecedf0681bdab587f5c7a2950658e141175b5c1e358fdc765b6d6ff187f7fc8a3757eb9
 <span class="c1"># 9844ce7e63ee946ac1b2572627e46fa2309f6bc2a10dd9f0062f23d826884f20ab56eeaec99490ff8694fc8b8e5097177a0deb5345212e9eb52ac7e90edfecafedc8e1ef9b3c7c9018581ca238ea246705b9185af5d748df08563e45d0e64b642743d826bcd7257c8e126193f0bc15682027a2c7d7611d9327c0779808e2c82f3f0cea10192127ff0ce72091f9d42b576180e18a0e3b5d159df3e4c30c0_6_a59d98756abc68a009cdf125282757a1e7a9d1792cb0d8664007af41ba1fc625562ebbf2601018899aa22a1c27e30fd43e368d40d39f4e8b962c42e24c9d0ecedf0681bdab587f5c7a2950658e141175b5c1e358fdc765b6d6ff187f7fc8a3757eb9</span>
 </code></pre></div>
 </li>
 <li>
 <p>随后试了一些 <code>00</code>，发现长度大于等于 <span class="arithmatex">\(2\)</span> 的消息不能包含 <code>00</code>（看上去 <code>0100</code> 是个例外）</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="m">18909</span><span class="o">)</span> Msg: <span class="m">0000</span>
-Must provide message with no NULL bytes <span class="o">(</span><span class="m">00</span><span class="o">)</span>
-<span class="o">(</span><span class="m">18907</span><span class="o">)</span> Msg: <span class="m">0001</span>
-Must provide message with no NULL bytes <span class="o">(</span><span class="m">00</span><span class="o">)</span>
-<span class="o">(</span><span class="m">18905</span><span class="o">)</span> Msg: <span class="m">0100</span>
+<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="m">18909</span><span class="o">)</span><span class="w"> </span>Msg:<span class="w"> </span><span class="m">0000</span>
+Must<span class="w"> </span>provide<span class="w"> </span>message<span class="w"> </span>with<span class="w"> </span>no<span class="w"> </span>NULL<span class="w"> </span>bytes<span class="w"> </span><span class="o">(</span><span class="m">00</span><span class="o">)</span>
+<span class="o">(</span><span class="m">18907</span><span class="o">)</span><span class="w"> </span>Msg:<span class="w"> </span><span class="m">0001</span>
+Must<span class="w"> </span>provide<span class="w"> </span>message<span class="w"> </span>with<span class="w"> </span>no<span class="w"> </span>NULL<span class="w"> </span>bytes<span class="w"> </span><span class="o">(</span><span class="m">00</span><span class="o">)</span>
+<span class="o">(</span><span class="m">18905</span><span class="o">)</span><span class="w"> </span>Msg:<span class="w"> </span><span class="m">0100</span>
 78c407e05c297ed2de6ebb9f4741be52a234e5519a0e4bd9be2e835dfd41ffbef0db1c87ea62db03f2711b96bb843afa3eadf6730996abbad539dba2cb433a02a877febfe8799e75e9170382c3c13238a4db876a691593e95a28267b3cedfa694f1a211fefa834a4bd41d670b3ad2f1dc8175c9716f136287c1c0c175914762d68069003215bc32fbc9dda8c01fc072eb379ecec40d2138e5f70b0b6e3af62bd1dbc1980227d5cf3475b979e5a19bf8069ad2f407f4e9edd109214bb70a2fcd343a5be3c8e408831a2482d0bf926b5322a521eb6158163419fb79a08802e052026e9bf9a20e2b7a8b5c50b1b36f0a6ea89f037a96a1f80784d2a2af4c7954aa2
-<span class="o">(</span><span class="m">18903</span><span class="o">)</span> Msg: <span class="m">010000</span>
-Must provide message with no NULL bytes <span class="o">(</span><span class="m">00</span><span class="o">)</span>
-<span class="o">(</span><span class="m">18900</span><span class="o">)</span> Msg: <span class="m">000001</span>
-Must provide message with no NULL bytes <span class="o">(</span><span class="m">00</span><span class="o">)</span>
-<span class="o">(</span><span class="m">18897</span><span class="o">)</span> Msg: <span class="m">010001</span>
-Must provide message with no NULL bytes <span class="o">(</span><span class="m">00</span><span class="o">)</span>
+<span class="o">(</span><span class="m">18903</span><span class="o">)</span><span class="w"> </span>Msg:<span class="w"> </span><span class="m">010000</span>
+Must<span class="w"> </span>provide<span class="w"> </span>message<span class="w"> </span>with<span class="w"> </span>no<span class="w"> </span>NULL<span class="w"> </span>bytes<span class="w"> </span><span class="o">(</span><span class="m">00</span><span class="o">)</span>
+<span class="o">(</span><span class="m">18900</span><span class="o">)</span><span class="w"> </span>Msg:<span class="w"> </span><span class="m">000001</span>
+Must<span class="w"> </span>provide<span class="w"> </span>message<span class="w"> </span>with<span class="w"> </span>no<span class="w"> </span>NULL<span class="w"> </span>bytes<span class="w"> </span><span class="o">(</span><span class="m">00</span><span class="o">)</span>
+<span class="o">(</span><span class="m">18897</span><span class="o">)</span><span class="w"> </span>Msg:<span class="w"> </span><span class="m">010001</span>
+Must<span class="w"> </span>provide<span class="w"> </span>message<span class="w"> </span>with<span class="w"> </span>no<span class="w"> </span>NULL<span class="w"> </span>bytes<span class="w"> </span><span class="o">(</span><span class="m">00</span><span class="o">)</span>
 </code></pre></div>
 </li>
 <li>
@@ -2743,7 +2757,7 @@ Must provide message with no NULL bytes <span class="o">(</span><span class="m">
 <span class="c1"># 获取编码消息的长度</span>
 <span class="n">enc_len</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">140</span><span class="p">,</span> <span class="mh">0x100</span><span class="p">):</span> <span class="c1"># 经过测试，待求消息的长度基本在 140 及以上</span>
-    <span class="n">conn</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s1">&#39;Msg:&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;01&quot;</span> <span class="o">*</span> <span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s1">&#39;Msg:&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;01&quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">compare</span><span class="p">(</span><span class="n">enc</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">:</span>
         <span class="n">enc_len</span> <span class="o">=</span> <span class="n">i</span>

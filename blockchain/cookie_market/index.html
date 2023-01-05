@@ -2260,6 +2260,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2711,204 +2725,204 @@
 </blockquote>
 <details class="note">
 <summary>cookie.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span><span class="w"></span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./ERC721.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./ERC721.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Cookie</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC721</span><span class="p">(</span><span class="s2">&quot;cookie&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;E&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Cookie</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC721</span><span class="p">(</span><span class="s2">&quot;cookie&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;E&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">cookieIDX</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">owner</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">cookieIDX</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">owner</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(){</span><span class="w"></span>
-<span class="w">        </span><span class="nx">cookieIDX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(){</span>
+<span class="w">        </span><span class="nx">cookieIDX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// @dev mints an cookie. Note that there are only 10 cookies in the basket.</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">mintcookie</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">cookieIDX</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">cookieIDX</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="nx">cookieIDX</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// @dev mints an cookie. Note that there are only 10 cookies in the basket.</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">mintcookie</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">cookieIDX</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">cookieIDX</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">cookieIDX</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 </code></pre></div>
 </details>
 <details class="note">
 <summary>CookieMarket.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span><span class="w"></span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./IERC721.sol&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./IERC721Receiver.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./IERC721.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./IERC721Receiver.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">CookieMarket</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IERC721Receiver</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">CookieMarket</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IERC721Receiver</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="c1">// mapping that handles ownership of the cookies within the CookieMarket.</span><span class="w"></span>
-<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">canRedeemcookie</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// mapping that handles ownership of the cookies within the CookieMarket.</span>
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">canRedeemcookie</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// struct that handles the orders in the market</span><span class="w"></span>
-<span class="w">    </span><span class="nx">struct</span><span class="w"> </span><span class="nx">sell_Order</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">cookie_idx_offered</span><span class="p">;</span><span class="w">    </span><span class="c1">// the ERC721 idx of the &quot;cookie&quot; token.</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount_eth_wanted</span><span class="p">;</span><span class="w">  </span><span class="c1">// the amount of ETH the seller wants to receive for the cookie.</span><span class="w"></span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">cookie_provider</span><span class="p">;</span><span class="w">       </span><span class="c1">// the address of the seller.</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// struct that handles the orders in the market</span>
+<span class="w">    </span><span class="nx">struct</span><span class="w"> </span><span class="nx">sell_Order</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">cookie_idx_offered</span><span class="p">;</span><span class="w">    </span><span class="c1">// the ERC721 idx of the &quot;cookie&quot; token.</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount_eth_wanted</span><span class="p">;</span><span class="w">  </span><span class="c1">// the amount of ETH the seller wants to receive for the cookie.</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">cookie_provider</span><span class="p">;</span><span class="w">       </span><span class="c1">// the address of the seller.</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// storing all the sell orders in the market.</span><span class="w"></span>
-<span class="w">    </span><span class="nx">sell_Order</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// storing all the sell orders in the market.</span>
+<span class="w">    </span><span class="nx">sell_Order</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// cookie</span><span class="w"></span>
-<span class="w">    </span><span class="nx">IERC721</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">cookie</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// cookie</span>
+<span class="w">    </span><span class="nx">IERC721</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">cookie</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">        @dev cookieMarket constructor.</span>
 
 <span class="cm">        @param _cookie ERC721 contract instance.</span>
-<span class="cm">    */</span><span class="w"></span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_cookie</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">cookie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IERC721</span><span class="p">(</span><span class="nx">_cookie</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_cookie</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">cookie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IERC721</span><span class="p">(</span><span class="nx">_cookie</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">        @dev Allows a buyer to buy an cookie from the cookieMarket via exhausting its subsequent sell order.</span>
 
 <span class="cm">        @param _idx The ERC721 idx of the cookie.</span>
 <span class="cm">        @param _owner The `current` owner of the cookie.</span>
-<span class="cm">    */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">executeOrder</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_idx</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_owner</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">executeOrder</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_idx</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_owner</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span>
 <span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">_owner</span><span class="p">,</span><span class="w"> </span>
-<span class="w">            </span><span class="s2">&quot;err: no self-exchanges allowed&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;err: no self-exchanges allowed&quot;</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// find the sellOrder whose cookie_idx_offered == _idx</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cookie_idx_offered</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_idx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// find the sellOrder whose cookie_idx_offered == _idx</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cookie_idx_offered</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_idx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">                </span><span class="c1">// check if the _owner is the seller</span><span class="w"></span>
-<span class="w">                </span><span class="nx">require</span><span class="p">(</span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cookie_provider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;err: _owner != seller&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// check if the _owner is the seller</span>
+<span class="w">                </span><span class="nx">require</span><span class="p">(</span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cookie_provider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;err: _owner != seller&quot;</span><span class="p">);</span>
 
-<span class="w">                </span><span class="c1">// the cookie is for sale.</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// the cookie is for sale.</span>
 
-<span class="w">                </span><span class="c1">// check if the msg.sender has provided enough ETH to pay for the cookie</span><span class="w"></span>
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">amount_eth_wanted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// check if the msg.sender has provided enough ETH to pay for the cookie</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">amount_eth_wanted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">                    </span><span class="c1">// the _owner has enough ETH to pay for the cookie</span><span class="w"></span>
-<span class="w">                    </span><span class="c1">// paying the seller(current owner) of the cookie</span><span class="w"></span>
-<span class="w">                    </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">sent</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_owner</span><span class="p">.</span><span class="nx">call</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">}(</span><span class="s2">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">                    </span><span class="nx">require</span><span class="p">(</span><span class="nx">sent</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;err: transfer failed&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="c1">// the _owner has enough ETH to pay for the cookie</span>
+<span class="w">                    </span><span class="c1">// paying the seller(current owner) of the cookie</span>
+<span class="w">                    </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">sent</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_owner</span><span class="p">.</span><span class="nx">call</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">}(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">                    </span><span class="nx">require</span><span class="p">(</span><span class="nx">sent</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;err: transfer failed&quot;</span><span class="p">);</span>
 
-<span class="w">                    </span><span class="c1">// transfer the ownership of the cookie from the seller to the buyer</span><span class="w"></span>
-<span class="w">                    </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_idx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="c1">// transfer the ownership of the cookie from the seller to the buyer</span>
+<span class="w">                    </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_idx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
 
-<span class="w">                    </span><span class="c1">// remove the sellOrder from the sellOrders array</span><span class="w"></span>
-<span class="w">                    </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
-<span class="w">                    </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span><span class="w"></span>
+<span class="w">                    </span><span class="c1">// remove the sellOrder from the sellOrders array</span>
+<span class="w">                    </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<span class="w">                    </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
 
-<span class="w">                    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">        @dev Function to retrieve an cookie from the market.</span>
 
 <span class="cm">        @param _idx The index of the cookie in the market.</span>
-<span class="cm">    */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">redeemcookies</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_idx</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">redeemcookies</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_idx</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// check if sender can redeem the cookie</span><span class="w"></span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_idx</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="s2">&quot;err: msg.sender != owner(cookie)&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// check if sender can redeem the cookie</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_idx</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;err: msg.sender != owner(cookie)&quot;</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// approve the cookie transfer.</span><span class="w"></span>
-<span class="w">        </span><span class="nx">cookie</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// approve the cookie transfer.</span>
+<span class="w">        </span><span class="nx">cookie</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span>
 <span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span>
-<span class="w">            </span><span class="nx">_idx</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="nx">_idx</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// transfer the ownership of the cookie.</span><span class="w"></span>
-<span class="w">        </span><span class="nx">cookie</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// transfer the ownership of the cookie.</span>
+<span class="w">        </span><span class="nx">cookie</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span>
 <span class="w">            </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span>
 <span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span>
-<span class="w">            </span><span class="nx">_idx</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="nx">_idx</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// remove the cookie _idx from the canRedeemcookie mapping</span><span class="w"></span>
-<span class="w">        </span><span class="ow">delete</span><span class="w"> </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_idx</span><span class="p">];</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// remove the cookie _idx from the canRedeemcookie mapping</span>
+<span class="w">        </span><span class="ow">delete</span><span class="w"> </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_idx</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">        @dev Function to effectively add a sellOrder for your cookie on the cookieMarket.</span>
 
 <span class="cm">        @param _cookieIDX The index of the ERC721 cookie.</span>
 <span class="cm">        @param _ethWanted The amount of ETH the seller wants to receive for the cookie.</span>
-<span class="cm">    */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">addSellOrder</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_cookieIDX</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_ethWanted</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">addSellOrder</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_cookieIDX</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_ethWanted</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// check whether the msg.sender can sell the _cookieIDX</span><span class="w"></span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_cookieIDX</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="s2">&quot;err: msg.sender != owner(cookie[_cookieIDX])&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// check whether the msg.sender can sell the _cookieIDX</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_cookieIDX</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;err: msg.sender != owner(cookie[_cookieIDX])&quot;</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// create the new sellOrder</span><span class="w"></span>
-<span class="w">        </span><span class="nx">sell_Order</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">newOrder</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="nx">newOrder</span><span class="p">.</span><span class="nx">cookie_idx_offered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_cookieIDX</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="nx">newOrder</span><span class="p">.</span><span class="nx">amount_eth_wanted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_ethWanted</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="nx">newOrder</span><span class="p">.</span><span class="nx">cookie_provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// create the new sellOrder</span>
+<span class="w">        </span><span class="nx">sell_Order</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">newOrder</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">newOrder</span><span class="p">.</span><span class="nx">cookie_idx_offered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_cookieIDX</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">newOrder</span><span class="p">.</span><span class="nx">amount_eth_wanted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_ethWanted</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">newOrder</span><span class="p">.</span><span class="nx">cookie_provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newOrder</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newOrder</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">        @dev Function to effectively remove a sellOrder from the cookieMarket.</span>
 
 <span class="cm">        @param _cookieIDX The index of the ERC721 cookie.</span>
-<span class="cm">    */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">removeSellOrder</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_cookieIDX</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">removeSellOrder</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_cookieIDX</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// iterate through all sellOrders</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// iterate through all sellOrders</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">            </span><span class="c1">// check if the sellOrder is for the _cookieIDX</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cookie_idx_offered</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_cookieIDX</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// check if the sellOrder is for the _cookieIDX</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cookie_idx_offered</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_cookieIDX</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">                </span><span class="c1">// check if the msg.sender is the owner of the cookie</span><span class="w"></span>
-<span class="w">                </span><span class="nx">require</span><span class="p">(</span><span class="w"></span>
-<span class="w">                    </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cookie_provider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;err: msg.sender != cookie_provider&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// check if the msg.sender is the owner of the cookie</span>
+<span class="w">                </span><span class="nx">require</span><span class="p">(</span>
+<span class="w">                    </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cookie_provider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;err: msg.sender != cookie_provider&quot;</span>
+<span class="w">                </span><span class="p">);</span>
 
-<span class="w">                </span><span class="c1">// delete the sellOrder</span><span class="w"></span>
-<span class="w">                </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
-<span class="w">                </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span><span class="w"></span>
-<span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// delete the sellOrder</span>
+<span class="w">                </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sellOrders</span><span class="p">[</span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<span class="w">                </span><span class="nx">sellOrders</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">        @dev Inherited from IERC721Receiver.</span>
-<span class="cm">    */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">onERC721Received</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="nx">address</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_from</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_tokenId</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">onERC721Received</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">address</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_from</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_tokenId</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// we have received an cookie from its owner; mark that in the redeem mapping</span><span class="w"></span>
-<span class="w">        </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_tokenId</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_from</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// we have received an cookie from its owner; mark that in the redeem mapping</span>
+<span class="w">        </span><span class="nx">canRedeemcookie</span><span class="p">[</span><span class="nx">_tokenId</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_from</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">onERC721Received</span><span class="p">.</span><span class="nx">selector</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </details>
 <h3 id="hint">Hint<a class="headerlink" href="#hint" title="Permanent link">&para;</a></h3>
@@ -3081,13 +3095,13 @@
       
       
         
-        <a href="../../wargames/natas/" class="md-footer__link md-footer__link--next" aria-label="下一页: Natas" rel="next">
+        <a href="../tetctftoken/" class="md-footer__link md-footer__link--next" aria-label="下一页: TetCTFToken" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              Natas
+              TetCTFToken
             </div>
           </div>
           <div class="md-footer__button md-icon">

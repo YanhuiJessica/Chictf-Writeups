@@ -2236,6 +2236,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2651,17 +2665,17 @@
 <li>本题与 PHP 的特性相关（做题的时候并没看源码或 HTTP 头之类的x），当数或运算结果超出 int 范围会被解释为 float，进一步使用函数 <code>intval()</code> 将 float 转为 int 时，结果是未定义的</li>
 <li>
 <p>奇数转偶数 :) 由于 <code>intval()</code> 函数只作用于乘法，小心不要让加法运算结果超出 int 范围
-    <div class="highlight"><pre><span></span><code>+ <span class="m">9</span> * <span class="m">1024819115206086201</span> -&gt; -9223372036854775808
-+ <span class="m">6</span> * <span class="m">1537228672809129301</span> -&gt; -2
-+ <span class="m">6</span> * <span class="m">4</span> -&gt; <span class="m">22</span>
-+ <span class="m">9</span> * <span class="m">1024819115206086201</span> -&gt; -9223372036854775786
-+ <span class="m">6</span> * <span class="m">1537228672809129301</span> -&gt; <span class="m">20</span>
+    <div class="highlight"><pre><span></span><code>+<span class="w"> </span><span class="m">9</span><span class="w"> </span>*<span class="w"> </span><span class="m">1024819115206086201</span><span class="w"> </span>-&gt;<span class="w"> </span>-9223372036854775808
++<span class="w"> </span><span class="m">6</span><span class="w"> </span>*<span class="w"> </span><span class="m">1537228672809129301</span><span class="w"> </span>-&gt;<span class="w"> </span>-2
++<span class="w"> </span><span class="m">6</span><span class="w"> </span>*<span class="w"> </span><span class="m">4</span><span class="w"> </span>-&gt;<span class="w"> </span><span class="m">22</span>
++<span class="w"> </span><span class="m">9</span><span class="w"> </span>*<span class="w"> </span><span class="m">1024819115206086201</span><span class="w"> </span>-&gt;<span class="w"> </span>-9223372036854775786
++<span class="w"> </span><span class="m">6</span><span class="w"> </span>*<span class="w"> </span><span class="m">1537228672809129301</span><span class="w"> </span>-&gt;<span class="w"> </span><span class="m">20</span>
 </code></pre></div></p>
 </li>
 <li>
 <p>还可以两步到位</p>
-<div class="highlight"><pre><span></span><code>+ <span class="m">9</span> * <span class="m">1500000000000000000</span> -&gt; -4946744073709551616
-+ <span class="m">9</span> * <span class="m">549638230412172404</span> -&gt; <span class="m">20</span>
+<div class="highlight"><pre><span></span><code>+<span class="w"> </span><span class="m">9</span><span class="w"> </span>*<span class="w"> </span><span class="m">1500000000000000000</span><span class="w"> </span>-&gt;<span class="w"> </span>-4946744073709551616
++<span class="w"> </span><span class="m">9</span><span class="w"> </span>*<span class="w"> </span><span class="m">549638230412172404</span><span class="w"> </span>-&gt;<span class="w"> </span><span class="m">20</span>
 </code></pre></div>
 </li>
 </ul>

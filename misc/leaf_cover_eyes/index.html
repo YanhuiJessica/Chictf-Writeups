@@ -2227,6 +2227,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2616,10 +2630,10 @@
 <li>打开图片看一眼，并无任何异常</li>
 <li>先用<code>file</code>确定了这是一个 PNG 图片</li>
 <li>然后用<code>binwalk</code>看了看
-    <div class="highlight"><pre><span></span><code>DECIMAL       HEXADECIMAL     DESCRIPTION
+    <div class="highlight"><pre><span></span><code>DECIMAL<span class="w">       </span>HEXADECIMAL<span class="w">     </span>DESCRIPTION
 --------------------------------------------------------------------------------
-<span class="m">0</span>             0x0             PNG image, <span class="m">321</span> x <span class="m">332</span>, <span class="m">8</span>-bit/color RGBA, non-interlaced
-<span class="m">91</span>            0x5B            Zlib compressed data, compressed
+<span class="m">0</span><span class="w">             </span>0x0<span class="w">             </span>PNG<span class="w"> </span>image,<span class="w"> </span><span class="m">321</span><span class="w"> </span>x<span class="w"> </span><span class="m">332</span>,<span class="w"> </span><span class="m">8</span>-bit/color<span class="w"> </span>RGBA,<span class="w"> </span>non-interlaced
+<span class="m">91</span><span class="w">            </span>0x5B<span class="w">            </span>Zlib<span class="w"> </span>compressed<span class="w"> </span>data,<span class="w"> </span>compressed
 </code></pre></div></li>
 <li>咕？zlib？之前没做过的格式……之后各种疯狂找资料看 zlib 【完全走错方向了咕！】</li>
 <li>实际上这题改一下图像的高度就可以了 QWQ <br>
@@ -2632,7 +2646,7 @@
 </ul>
 </li>
 <li>Windows 下使用<code>pngcheck</code>来弥补 QWQ
-    <div class="highlight"><pre><span></span><code>pngcheck -v <span class="m">1</span>.png
+    <div class="highlight"><pre><span></span><code>pngcheck<span class="w"> </span>-v<span class="w"> </span><span class="m">1</span>.png
 <span class="c1"># File: 1.png (418602 bytes)</span>
 <span class="c1">#  chunk IHDR at offset 0x0000c, length 13</span>
 <span class="c1">#    321 x 332 image, 32-bit RGB+alpha, non-interlaced</span>

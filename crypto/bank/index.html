@@ -2220,6 +2220,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2600,9 +2614,9 @@
 <h2 id="_1">解题思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>nc</code>连过去，要求输入三个字符， 其与剩下的随机字符串进行 SHA256 加密的结果等于等号后的随机字符串
-    <div class="highlight"><pre><span></span><code>$ nc <span class="m">39</span>.101.134.52 <span class="m">8005</span>
-sha256<span class="o">(</span>XXX+f2DXa00fbrrtXrZAV<span class="o">)</span> <span class="o">==</span> fad0b6f4dc03f907b999f15db8b467b17139189d2cc61f9fc37e213d91d0a2aa
-Give me XXX:
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>nc<span class="w"> </span><span class="m">39</span>.101.134.52<span class="w"> </span><span class="m">8005</span>
+sha256<span class="o">(</span>XXX+f2DXa00fbrrtXrZAV<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>fad0b6f4dc03f907b999f15db8b467b17139189d2cc61f9fc37e213d91d0a2aa
+Give<span class="w"> </span>me<span class="w"> </span>XXX:
 </code></pre></div></li>
 <li>使用 Python 破解
     <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha256</span>
@@ -2617,54 +2631,54 @@ Give me XXX:
         <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 </code></pre></div></li>
 <li>进入系统后，要求输入名字，随便输一个就可以
-    <div class="highlight"><pre><span></span><code>Welcome to the challenge!
+    <div class="highlight"><pre><span></span><code>Welcome<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>challenge!
 
 
-give me your name:yanhui
+give<span class="w"> </span>me<span class="w"> </span>your<span class="w"> </span>name:yanhui
 
-your cash:10
-you can choose: transact, view records, provide a record, get flag, hint
+your<span class="w"> </span>cash:10
+you<span class="w"> </span>can<span class="w"> </span>choose:<span class="w"> </span>transact,<span class="w"> </span>view<span class="w"> </span>records,<span class="w"> </span>provide<span class="w"> </span>a<span class="w"> </span>record,<span class="w"> </span>get<span class="w"> </span>flag,<span class="w"> </span>hint
 </code></pre></div></li>
 <li>首先选择<code>get flag</code>查看，提示现金不足
-  <div class="highlight"><pre><span></span><code>&gt; get flag
-you need pay <span class="m">1000</span> <span class="k">for</span> the flag!
-don<span class="err">&#39;</span>t have enough money!
+  <div class="highlight"><pre><span></span><code>&gt;<span class="w"> </span>get<span class="w"> </span>flag
+you<span class="w"> </span>need<span class="w"> </span>pay<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>flag!
+don<span class="err">&#39;</span>t<span class="w"> </span>have<span class="w"> </span>enough<span class="w"> </span>money!
 </code></pre></div></li>
 <li>查看<code>hint</code>，给出了<code>transact</code>的加密方式
-    <div class="highlight"><pre><span></span><code>def transact_ecb<span class="o">(</span>key, sender, receiver, amount<span class="o">)</span>:
-    <span class="nv">aes</span> <span class="o">=</span> AES.new<span class="o">(</span>key, AES.MODE_ECB<span class="o">)</span>
-    <span class="nv">ct</span> <span class="o">=</span> b<span class="s2">&quot;&quot;</span>
-    <span class="nv">ct</span> <span class="o">+=</span> aes.encrypt<span class="o">(</span>sender<span class="o">)</span>
-    <span class="nv">ct</span> <span class="o">+=</span> aes.encrypt<span class="o">(</span>receiver<span class="o">)</span>
-    <span class="nv">ct</span> <span class="o">+=</span> aes.encrypt<span class="o">(</span>amount<span class="o">)</span>
-    <span class="k">return</span> ct
+    <div class="highlight"><pre><span></span><code>def<span class="w"> </span>transact_ecb<span class="o">(</span>key,<span class="w"> </span>sender,<span class="w"> </span>receiver,<span class="w"> </span>amount<span class="o">)</span>:
+<span class="w">    </span><span class="nv">aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>AES.new<span class="o">(</span>key,<span class="w"> </span>AES.MODE_ECB<span class="o">)</span>
+<span class="w">    </span><span class="nv">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>b<span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nv">ct</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>aes.encrypt<span class="o">(</span>sender<span class="o">)</span>
+<span class="w">    </span><span class="nv">ct</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>aes.encrypt<span class="o">(</span>receiver<span class="o">)</span>
+<span class="w">    </span><span class="nv">ct</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>aes.encrypt<span class="o">(</span>amount<span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>ct
 </code></pre></div></li>
 <li><code>view records</code>给出的是经过加密的交易记录，<code>provide a record</code>则给出<code>My system is secure if you can give me other records, the receiver can also get the money.</code></li>
 <li>首要目标是要获得足够的现金，看看交易
-    <div class="highlight"><pre><span></span><code>&gt; transact
+    <div class="highlight"><pre><span></span><code>&gt;<span class="w"> </span>transact
 
-please give me the trader and the amount<span class="o">(</span><span class="k">for</span> example:Alice <span class="m">1</span><span class="o">)</span>
-&gt; Alice <span class="m">1</span>
+please<span class="w"> </span>give<span class="w"> </span>me<span class="w"> </span>the<span class="w"> </span>trader<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>amount<span class="o">(</span><span class="k">for</span><span class="w"> </span>example:Alice<span class="w"> </span><span class="m">1</span><span class="o">)</span>
+&gt;<span class="w"> </span>Alice<span class="w"> </span><span class="m">1</span>
 16afee8cc0a88bf0478fefe229e68418a9a0627e2da31f1d055e01d7000a3b3a1794bbe06d2ed80b02b1c90ba2c4606f
 
-your cash:9
-you can choose: transact, view records, provide a record, get flag, hint
-&gt; transact
+your<span class="w"> </span>cash:9
+you<span class="w"> </span>can<span class="w"> </span>choose:<span class="w"> </span>transact,<span class="w"> </span>view<span class="w"> </span>records,<span class="w"> </span>provide<span class="w"> </span>a<span class="w"> </span>record,<span class="w"> </span>get<span class="w"> </span>flag,<span class="w"> </span>hint
+&gt;<span class="w"> </span>transact
 
-please give me the trader and the amount<span class="o">(</span><span class="k">for</span> example:Alice <span class="m">1</span><span class="o">)</span>
-&gt; Alice <span class="m">0</span>
+please<span class="w"> </span>give<span class="w"> </span>me<span class="w"> </span>the<span class="w"> </span>trader<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>amount<span class="o">(</span><span class="k">for</span><span class="w"> </span>example:Alice<span class="w"> </span><span class="m">1</span><span class="o">)</span>
+&gt;<span class="w"> </span>Alice<span class="w"> </span><span class="m">0</span>
 16afee8cc0a88bf0478fefe229e68418a9a0627e2da31f1d055e01d7000a3b3ab55eefd708d39ed2b4ce4d561c34e5ec
 
-your cash:9
+your<span class="w"> </span>cash:9
 </code></pre></div></li>
 <li>输入金额为 <span class="arithmatex">\(0\)</span> 的话，交易也可以成功进行！尝试一下负数，看能不能获得现金
-    <div class="highlight"><pre><span></span><code>&gt; transact
+    <div class="highlight"><pre><span></span><code>&gt;<span class="w"> </span>transact
 
-please give me the trader and the amount<span class="o">(</span><span class="k">for</span> example:Alice <span class="m">1</span><span class="o">)</span>
-&gt; Alice -1
+please<span class="w"> </span>give<span class="w"> </span>me<span class="w"> </span>the<span class="w"> </span>trader<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>amount<span class="o">(</span><span class="k">for</span><span class="w"> </span>example:Alice<span class="w"> </span><span class="m">1</span><span class="o">)</span>
+&gt;<span class="w"> </span>Alice<span class="w"> </span>-1
 dd664379452c6af73b382cc5cd076754c70214708e2c0071ed74906852ecc510f2f0bd5754e02a2b03c635178e0200c5
 
-your cash:11
+your<span class="w"> </span>cash:11
 </code></pre></div></li>
 <li>发现可以成功增加持有现金，并没有被过滤之类的，获得足够现金之后就可以『购买』Flag 了！【之前还以为要考虑 ECB 加密……】
 <img alt="获得 Flag" src="../img/bank01.jpg" /></li>

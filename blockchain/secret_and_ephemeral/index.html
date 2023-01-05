@@ -2242,6 +2242,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2668,45 +2682,45 @@
 <p>Goal: Steal all the funds from the contract.</p>
 <details class="note">
 <summary>SecretAndEphemeral.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
 
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span><span class="w"></span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * @title Secret And Ephemeral</span>
 <span class="cm"> * @author Blue Alder (https://duc.tf)</span>
-<span class="cm"> **/</span><span class="w"></span>
+<span class="cm"> **/</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">SecretAndEphemeral</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">owner</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">int256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">seconds_in_a_year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">24</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">365</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">word_describing_ductf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;epic&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">not_yours</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">cool_wallet_addresses</span><span class="p">;</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">SecretAndEphemeral</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">owner</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">int256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">seconds_in_a_year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">24</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">365</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">word_describing_ductf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;epic&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">not_yours</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">cool_wallet_addresses</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">spooky_hash</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">spooky_hash</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">_not_yours</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_secret_number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">not_yours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_not_yours</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="nx">spooky_hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">not_yours</span><span class="p">,</span><span class="w"> </span><span class="nx">_secret_number</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">_not_yours</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_secret_number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">not_yours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_not_yours</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">spooky_hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">not_yours</span><span class="p">,</span><span class="w"> </span><span class="nx">_secret_number</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">giveTheFunds</span><span class="p">()</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// Thank you for your donation</span><span class="w"></span>
-<span class="w">        </span><span class="nx">cool_wallet_addresses</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">giveTheFunds</span><span class="p">()</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Thank you for your donation</span>
+<span class="w">        </span><span class="nx">cool_wallet_addresses</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">retrieveTheFunds</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">secret</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">secret_number</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_owner_address</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">userHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">secret</span><span class="p">,</span><span class="w"> </span><span class="nx">secret_number</span><span class="p">,</span><span class="w"> </span><span class="nx">_owner_address</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">retrieveTheFunds</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">secret</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">secret_number</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_owner_address</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">userHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">secret</span><span class="p">,</span><span class="w"> </span><span class="nx">secret_number</span><span class="p">,</span><span class="w"> </span><span class="nx">_owner_address</span><span class="p">));</span>
 
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">userHash</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">spooky_hash</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Somethings wrong :(&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">userHash</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">spooky_hash</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Somethings wrong :(&quot;</span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// User authenticated, sending funds</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">balance</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// User authenticated, sending funds</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">balance</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </details>
 <h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>

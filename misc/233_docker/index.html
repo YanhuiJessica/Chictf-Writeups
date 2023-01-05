@@ -2243,6 +2243,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2656,35 +2670,35 @@
 <ul>
 <li>题目中提到<code>于是写了一行命令删掉这个文件</code>，使用的应该是形如<code>RUN rm flag.txt</code>的命令，<code>RUN</code>指令会创建新的层，而非使用临时中间镜像，那么找到这一层，就可以找到<code>flag.txt</code></li>
 <li>获取各层的目录信息，镜像层为<code>lowerdir</code>，<code>diff</code>目录下包含该层的内容
-    <div class="highlight"><pre><span></span><code>$ docker inspect 8b8d3c8324c7/stringtool
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>docker<span class="w"> </span>inspect<span class="w"> </span>8b8d3c8324c7/stringtool
 <span class="o">[</span>
-    <span class="o">{</span>
-        <span class="s2">&quot;Id&quot;</span>: <span class="s2">&quot;sha256:be6d023618d199e0ec7448f70e5e47a00c6c2b79777ad5e2d312a6f74d6ad56b&quot;</span>,
-        <span class="s2">&quot;RepoTags&quot;</span>: <span class="o">[</span>
-            <span class="s2">&quot;8b8d3c8324c7/stringtool:latest&quot;</span>
-        <span class="o">]</span>,
-        <span class="s2">&quot;RepoDigests&quot;</span>: <span class="o">[</span>
-            <span class="s2">&quot;8b8d3c8324c7/stringtool@sha256:aef87a00ad7a4e240e4b475ea265d3818c694034c26ec227d8d4f445f3d93152&quot;</span>
-        <span class="o">]</span>,
-        <span class="s2">&quot;Parent&quot;</span>: <span class="s2">&quot;&quot;</span>,
-        <span class="s2">&quot;Comment&quot;</span>: <span class="s2">&quot;&quot;</span>,
-        <span class="s2">&quot;Created&quot;</span>: <span class="s2">&quot;2020-10-16T12:51:09.221320098Z&quot;</span>,
-        <span class="s2">&quot;Container&quot;</span>: <span class="s2">&quot;d2f452fddd5c71c8c57a29d67f29c69ffac419440d57664dad6e4ba1f0eff8a1&quot;</span>,
-        <span class="s2">&quot;ContainerConfig&quot;</span>: <span class="o">{</span>
-            ...
-        <span class="o">}</span>,
-        <span class="s2">&quot;DockerVersion&quot;</span>: <span class="s2">&quot;19.03.5&quot;</span>,
-        <span class="s2">&quot;Author&quot;</span>: <span class="s2">&quot;Software_Engineering_Project&quot;</span>,
-        <span class="s2">&quot;Config&quot;</span>: <span class="o">{</span>
-            ...
-        <span class="o">}</span>,
-        <span class="s2">&quot;Architecture&quot;</span>: <span class="s2">&quot;amd64&quot;</span>,
-        <span class="s2">&quot;Os&quot;</span>: <span class="s2">&quot;linux&quot;</span>,
-        <span class="s2">&quot;Size&quot;</span>: <span class="m">1430524643</span>,
-        <span class="s2">&quot;VirtualSize&quot;</span>: <span class="m">1430524643</span>,
-        <span class="s2">&quot;GraphDriver&quot;</span>: <span class="o">{</span>
-            <span class="s2">&quot;Data&quot;</span>: <span class="o">{</span>
-                <span class="s2">&quot;LowerDir&quot;</span>: <span class="s2">&quot;/var/lib/docker/overlay2/6edccc4d6d8f057b4b42b8f448b9bbbd4809be182e9fa263ac4a486a08f0bedd/diff:</span>
+<span class="w">    </span><span class="o">{</span>
+<span class="w">        </span><span class="s2">&quot;Id&quot;</span>:<span class="w"> </span><span class="s2">&quot;sha256:be6d023618d199e0ec7448f70e5e47a00c6c2b79777ad5e2d312a6f74d6ad56b&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;RepoTags&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;8b8d3c8324c7/stringtool:latest&quot;</span>
+<span class="w">        </span><span class="o">]</span>,
+<span class="w">        </span><span class="s2">&quot;RepoDigests&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;8b8d3c8324c7/stringtool@sha256:aef87a00ad7a4e240e4b475ea265d3818c694034c26ec227d8d4f445f3d93152&quot;</span>
+<span class="w">        </span><span class="o">]</span>,
+<span class="w">        </span><span class="s2">&quot;Parent&quot;</span>:<span class="w"> </span><span class="s2">&quot;&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;Comment&quot;</span>:<span class="w"> </span><span class="s2">&quot;&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;Created&quot;</span>:<span class="w"> </span><span class="s2">&quot;2020-10-16T12:51:09.221320098Z&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;Container&quot;</span>:<span class="w"> </span><span class="s2">&quot;d2f452fddd5c71c8c57a29d67f29c69ffac419440d57664dad6e4ba1f0eff8a1&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;ContainerConfig&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span>...
+<span class="w">        </span><span class="o">}</span>,
+<span class="w">        </span><span class="s2">&quot;DockerVersion&quot;</span>:<span class="w"> </span><span class="s2">&quot;19.03.5&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;Author&quot;</span>:<span class="w"> </span><span class="s2">&quot;Software_Engineering_Project&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;Config&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span>...
+<span class="w">        </span><span class="o">}</span>,
+<span class="w">        </span><span class="s2">&quot;Architecture&quot;</span>:<span class="w"> </span><span class="s2">&quot;amd64&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;Os&quot;</span>:<span class="w"> </span><span class="s2">&quot;linux&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;Size&quot;</span>:<span class="w"> </span><span class="m">1430524643</span>,
+<span class="w">        </span><span class="s2">&quot;VirtualSize&quot;</span>:<span class="w"> </span><span class="m">1430524643</span>,
+<span class="w">        </span><span class="s2">&quot;GraphDriver&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;Data&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">                </span><span class="s2">&quot;LowerDir&quot;</span>:<span class="w"> </span><span class="s2">&quot;/var/lib/docker/overlay2/6edccc4d6d8f057b4b42b8f448b9bbbd4809be182e9fa263ac4a486a08f0bedd/diff:</span>
 <span class="s2">                /var/lib/docker/overlay2/72c760a6faaf0c00299a0416d4a7d7892dbbe84c0d723e3cd026cf9bc23f2225/diff:</span>
 <span class="s2">                /var/lib/docker/overlay2/9c29b0ec3156e99f41991b01534021a575347898c6836c8077f5516ffee138af/diff:</span>
 <span class="s2">                /var/lib/docker/overlay2/a8721c9f92017818f0bfb114966aa0b84b543cfbefe359cfb5fd733df7e25431/diff:</span>
@@ -2706,69 +2720,69 @@
 <span class="s2">                /var/lib/docker/overlay2/4db84c7954a7906e803b5e2bae2d0e8c3dcb7ad39f3d27822bd6bee6d42954a1/diff:</span>
 <span class="s2">                /var/lib/docker/overlay2/e99c01108bb370642151fbdc8209bc70c8871604a5efd2a6b9005c29160b03fe/diff:</span>
 <span class="s2">                /var/lib/docker/overlay2/bbe523d8bff045d3c6db194ded9773912a2a527564724c9c27393cdb47d94754/diff&quot;</span>,
-                <span class="s2">&quot;MergedDir&quot;</span>: <span class="s2">&quot;/var/lib/docker/overlay2/66b4f69b33d469a3d81a2fa03e1e621b8de2b9ed4ba8a756279c2d3a0a39fa7e/merged&quot;</span>,
-                <span class="s2">&quot;UpperDir&quot;</span>: <span class="s2">&quot;/var/lib/docker/overlay2/66b4f69b33d469a3d81a2fa03e1e621b8de2b9ed4ba8a756279c2d3a0a39fa7e/diff&quot;</span>,
-                <span class="s2">&quot;WorkDir&quot;</span>: <span class="s2">&quot;/var/lib/docker/overlay2/66b4f69b33d469a3d81a2fa03e1e621b8de2b9ed4ba8a756279c2d3a0a39fa7e/work&quot;</span>
-            <span class="o">}</span>,
-            <span class="s2">&quot;Name&quot;</span>: <span class="s2">&quot;overlay2&quot;</span>
-        <span class="o">}</span>,
-        <span class="s2">&quot;RootFS&quot;</span>: <span class="o">{</span>
-            <span class="s2">&quot;Type&quot;</span>: <span class="s2">&quot;layers&quot;</span>,
-            <span class="s2">&quot;Layers&quot;</span>: <span class="o">[</span>
-                <span class="s2">&quot;sha256:613be09ab3c0860a5216936f412f09927947012f86bfa89b263dfa087a725f81&quot;</span>,
-                ...
-                <span class="s2">&quot;sha256:ce2f773d43eee87d53a828fbcd2daa8e6ae3f0490fbaf616a8aba752839072ff&quot;</span>
-            <span class="o">]</span>
-        <span class="o">}</span>,
-        <span class="s2">&quot;Metadata&quot;</span>: <span class="o">{</span>
-            <span class="s2">&quot;LastTagTime&quot;</span>: <span class="s2">&quot;0001-01-01T00:00:00Z&quot;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+<span class="w">                </span><span class="s2">&quot;MergedDir&quot;</span>:<span class="w"> </span><span class="s2">&quot;/var/lib/docker/overlay2/66b4f69b33d469a3d81a2fa03e1e621b8de2b9ed4ba8a756279c2d3a0a39fa7e/merged&quot;</span>,
+<span class="w">                </span><span class="s2">&quot;UpperDir&quot;</span>:<span class="w"> </span><span class="s2">&quot;/var/lib/docker/overlay2/66b4f69b33d469a3d81a2fa03e1e621b8de2b9ed4ba8a756279c2d3a0a39fa7e/diff&quot;</span>,
+<span class="w">                </span><span class="s2">&quot;WorkDir&quot;</span>:<span class="w"> </span><span class="s2">&quot;/var/lib/docker/overlay2/66b4f69b33d469a3d81a2fa03e1e621b8de2b9ed4ba8a756279c2d3a0a39fa7e/work&quot;</span>
+<span class="w">            </span><span class="o">}</span>,
+<span class="w">            </span><span class="s2">&quot;Name&quot;</span>:<span class="w"> </span><span class="s2">&quot;overlay2&quot;</span>
+<span class="w">        </span><span class="o">}</span>,
+<span class="w">        </span><span class="s2">&quot;RootFS&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;Type&quot;</span>:<span class="w"> </span><span class="s2">&quot;layers&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;Layers&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">                </span><span class="s2">&quot;sha256:613be09ab3c0860a5216936f412f09927947012f86bfa89b263dfa087a725f81&quot;</span>,
+<span class="w">                </span>...
+<span class="w">                </span><span class="s2">&quot;sha256:ce2f773d43eee87d53a828fbcd2daa8e6ae3f0490fbaf616a8aba752839072ff&quot;</span>
+<span class="w">            </span><span class="o">]</span>
+<span class="w">        </span><span class="o">}</span>,
+<span class="w">        </span><span class="s2">&quot;Metadata&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;LastTagTime&quot;</span>:<span class="w"> </span><span class="s2">&quot;0001-01-01T00:00:00Z&quot;</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">    </span><span class="o">}</span>
 <span class="o">]</span>
 </code></pre></div></li>
 <li>通过<code>history</code>查看各层的指令，删除<code>flag.txt</code>的操作在最后一层，是相比于倒数第二层的差异，查看倒数第一层的<code>diff</code>目录
-    <div class="highlight"><pre><span></span><code>$ docker <span class="nb">history</span> 8b8d3c8324c7/stringtool
-IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-be6d023618d1        <span class="m">3</span> weeks ago         /bin/sh -c <span class="c1">#(nop)  ENTRYPOINT [&quot;/bin/sh&quot; &quot;-c…   0B                  # ENTRYPOINT 不创建新层</span>
-&lt;missing&gt;           <span class="m">3</span> weeks ago         /bin/sh -c rm /code/flag.txt                    0B
-&lt;missing&gt;           <span class="m">3</span> weeks ago         /bin/sh -c <span class="c1">#(nop) COPY dir:c36852c2989cd5e8b…   1.19kB</span>
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c <span class="c1">#(nop) WORKDIR /code                 0B</span>
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c mkdir /code                          0B
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c <span class="c1">#(nop)  ENV PYTHONUNBUFFERED=1       0B</span>
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c pip3 install pipenv                  <span class="m">37</span>.5MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c pip3 install bpython                 <span class="m">5</span>.08MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c pip3 install ipython                 <span class="m">23</span>.8MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c yum clean all                        <span class="m">27</span>.9MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c rm -rf /tmp/Python-3.7.3*            0B
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c sed -i <span class="s1">&#39;s/python/python2/&#39;</span> /usr/b…   802B
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c pip install --upgrade pip            <span class="m">9</span>.55MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c ln -s /usr/local/bin/pip3 /usr/bi…   19B
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c ln -s /usr/local/bin/python3 /usr…   22B
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c rm -f /usr/bin/python                0B
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c make <span class="o">&amp;&amp;</span> make install                 300MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c /tmp/Python-3.7.3/configure          860kB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c tar -zxvf /tmp/Python-3.7.3.tgz -…   <span class="m">79</span>.3MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c wget -O /tmp/Python-3.7.3.tgz htt…   23MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c yum -y install mariadb-devel         103MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c yum -y install vim                   115MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c yum -y install gcc                   <span class="m">94</span>.8MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c yum-builddep python -y               316MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c yum -y install wget make yum-utils   <span class="m">92</span>.4MB
-&lt;missing&gt;           <span class="m">7</span> weeks ago         /bin/sh -c <span class="c1">#(nop)  MAINTAINER Software_Engin…   0B</span>
-&lt;missing&gt;           <span class="m">3</span> months ago        /bin/sh -c <span class="c1">#(nop)  CMD [&quot;/bin/bash&quot;]            0B</span>
-&lt;missing&gt;           <span class="m">3</span> months ago        /bin/sh -c <span class="c1">#(nop)  LABEL org.label-schema.sc…   0B</span>
-&lt;missing&gt;           <span class="m">3</span> months ago        /bin/sh -c <span class="c1">#(nop) ADD file:61908381d3142ffba…   203MB</span>
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>docker<span class="w"> </span><span class="nb">history</span><span class="w"> </span>8b8d3c8324c7/stringtool
+IMAGE<span class="w">               </span>CREATED<span class="w">             </span>CREATED<span class="w"> </span>BY<span class="w">                                      </span>SIZE<span class="w">                </span>COMMENT
+be6d023618d1<span class="w">        </span><span class="m">3</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="c1">#(nop)  ENTRYPOINT [&quot;/bin/sh&quot; &quot;-c…   0B                  # ENTRYPOINT 不创建新层</span>
+&lt;missing&gt;<span class="w">           </span><span class="m">3</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>rm<span class="w"> </span>/code/flag.txt<span class="w">                    </span>0B
+&lt;missing&gt;<span class="w">           </span><span class="m">3</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="c1">#(nop) COPY dir:c36852c2989cd5e8b…   1.19kB</span>
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="c1">#(nop) WORKDIR /code                 0B</span>
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>mkdir<span class="w"> </span>/code<span class="w">                          </span>0B
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="c1">#(nop)  ENV PYTHONUNBUFFERED=1       0B</span>
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>pipenv<span class="w">                  </span><span class="m">37</span>.5MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>bpython<span class="w">                 </span><span class="m">5</span>.08MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>ipython<span class="w">                 </span><span class="m">23</span>.8MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>yum<span class="w"> </span>clean<span class="w"> </span>all<span class="w">                        </span><span class="m">27</span>.9MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/tmp/Python-3.7.3*<span class="w">            </span>0B
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/python/python2/&#39;</span><span class="w"> </span>/usr/b…<span class="w">   </span>802B
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip<span class="w">            </span><span class="m">9</span>.55MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/usr/local/bin/pip3<span class="w"> </span>/usr/bi…<span class="w">   </span>19B
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/usr/local/bin/python3<span class="w"> </span>/usr…<span class="w">   </span>22B
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/usr/bin/python<span class="w">                </span>0B
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w">                 </span>300MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>/tmp/Python-3.7.3/configure<span class="w">          </span>860kB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>tar<span class="w"> </span>-zxvf<span class="w"> </span>/tmp/Python-3.7.3.tgz<span class="w"> </span>-…<span class="w">   </span><span class="m">79</span>.3MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>/tmp/Python-3.7.3.tgz<span class="w"> </span>htt…<span class="w">   </span>23MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>mariadb-devel<span class="w">         </span>103MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>vim<span class="w">                   </span>115MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>gcc<span class="w">                   </span><span class="m">94</span>.8MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>yum-builddep<span class="w"> </span>python<span class="w"> </span>-y<span class="w">               </span>316MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>wget<span class="w"> </span>make<span class="w"> </span>yum-utils<span class="w">   </span><span class="m">92</span>.4MB
+&lt;missing&gt;<span class="w">           </span><span class="m">7</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">         </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="c1">#(nop)  MAINTAINER Software_Engin…   0B</span>
+&lt;missing&gt;<span class="w">           </span><span class="m">3</span><span class="w"> </span>months<span class="w"> </span>ago<span class="w">        </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="c1">#(nop)  CMD [&quot;/bin/bash&quot;]            0B</span>
+&lt;missing&gt;<span class="w">           </span><span class="m">3</span><span class="w"> </span>months<span class="w"> </span>ago<span class="w">        </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="c1">#(nop)  LABEL org.label-schema.sc…   0B</span>
+&lt;missing&gt;<span class="w">           </span><span class="m">3</span><span class="w"> </span>months<span class="w"> </span>ago<span class="w">        </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span><span class="c1">#(nop) ADD file:61908381d3142ffba…   203MB</span>
 </code></pre></div></li>
 <li><code>LowerDir</code>中列出的层目录顺序与<code>history</code>展示的相同，查看目录即可获得 Flag
-    <div class="highlight"><pre><span></span><code>$ tree /var/lib/docker/overlay2/6edccc4d6d8f057b4b42b8f448b9bbbd4809be182e9fa263ac4a486a08f0bedd/diff
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>tree<span class="w"> </span>/var/lib/docker/overlay2/6edccc4d6d8f057b4b42b8f448b9bbbd4809be182e9fa263ac4a486a08f0bedd/diff
 /var/lib/docker/overlay2/6edccc4d6d8f057b4b42b8f448b9bbbd4809be182e9fa263ac4a486a08f0bedd/diff
-└── code
-    ├── app.py
-    ├── Dockerfile
-    └── flag.txt
+└──<span class="w"> </span>code
+<span class="w">    </span>├──<span class="w"> </span>app.py
+<span class="w">    </span>├──<span class="w"> </span>Dockerfile
+<span class="w">    </span>└──<span class="w"> </span>flag.txt
 
-<span class="m">1</span> directory, <span class="m">3</span> files
-$ cat /var/lib/docker/overlay2/6edccc4d6d8f057b4b42b8f448b9bbbd4809be182e9fa263ac4a486a08f0bedd/diff/code/flag.txt
+<span class="m">1</span><span class="w"> </span>directory,<span class="w"> </span><span class="m">3</span><span class="w"> </span>files
+$<span class="w"> </span>cat<span class="w"> </span>/var/lib/docker/overlay2/6edccc4d6d8f057b4b42b8f448b9bbbd4809be182e9fa263ac4a486a08f0bedd/diff/code/flag.txt
 flag<span class="o">{</span>Docker_Layers!<span class="o">=</span>PS_Layers_hhh<span class="o">}</span>
 </code></pre></div></li>
 </ul>

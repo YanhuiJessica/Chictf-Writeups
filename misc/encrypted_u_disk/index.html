@@ -2256,6 +2256,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2692,45 +2706,45 @@
 <li>由题意可知，从 <code>day1.img</code> 到 <code>day2.img</code> 只有用户密码发生了变更，加密数据使用的主密钥并没有变化</li>
 <li>Ubuntu 双击后输入密码，直接挂载 <code>day1.img</code>，这里并没有 Flag (ŏωŏ)，快进到下一步<ul>
 <li>或者通过命令行的方式挂载
-    <div class="highlight"><pre><span></span><code>sudo losetup -P /dev/loop23 day1.img
+    <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>losetup<span class="w"> </span>-P<span class="w"> </span>/dev/loop23<span class="w"> </span>day1.img
 <span class="c1"># -P：强制内核扫描新建回环设备上的分区表，否则 cryptsetup 无法识别为有效的 LUKS 设备</span>
-sudo cryptsetup luksOpen /dev/loop23p1 day1
+sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksOpen<span class="w"> </span>/dev/loop23p1<span class="w"> </span>day1
 </code></pre></div></li>
 </ul>
 </li>
 <li>获取 LUKS 加密镜像挂载的位置
-    <div class="highlight"><pre><span></span><code>$ lsblk <span class="p">|</span> grep luks -B <span class="m">2</span>
-loop23                                          <span class="m">7</span>:23   <span class="m">0</span>    20M  <span class="m">1</span> loop  
-└─loop23p1                                    <span class="m">259</span>:10   <span class="m">0</span>    19M  <span class="m">1</span> part  
-  └─luks-e9a660d5-4a91-4dca-bda5-3f6a49eea998   <span class="m">253</span>:0    <span class="m">0</span>     3M  <span class="m">1</span> crypt /media/yanhui/My Disk
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>lsblk<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>luks<span class="w"> </span>-B<span class="w"> </span><span class="m">2</span>
+loop23<span class="w">                                          </span><span class="m">7</span>:23<span class="w">   </span><span class="m">0</span><span class="w">    </span>20M<span class="w">  </span><span class="m">1</span><span class="w"> </span>loop<span class="w">  </span>
+└─loop23p1<span class="w">                                    </span><span class="m">259</span>:10<span class="w">   </span><span class="m">0</span><span class="w">    </span>19M<span class="w">  </span><span class="m">1</span><span class="w"> </span>part<span class="w">  </span>
+<span class="w">  </span>└─luks-e9a660d5-4a91-4dca-bda5-3f6a49eea998<span class="w">   </span><span class="m">253</span>:0<span class="w">    </span><span class="m">0</span><span class="w">     </span>3M<span class="w">  </span><span class="m">1</span><span class="w"> </span>crypt<span class="w"> </span>/media/yanhui/My<span class="w"> </span>Disk
 </code></pre></div></li>
 <li>获取主密钥并保存为二进制文件
-    <div class="highlight"><pre><span></span><code>$ sudo cryptsetup luksDump --dump-master-key /dev/loop23p1
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksDump<span class="w"> </span>--dump-master-key<span class="w"> </span>/dev/loop23p1
 
 WARNING!
 <span class="o">========</span>
-Header dump with volume key is sensitive information
-which allows access to an encrypted partition without a passphrase.
-This dump should be always stored encrypted <span class="k">in</span> a safe place.
+Header<span class="w"> </span>dump<span class="w"> </span>with<span class="w"> </span>volume<span class="w"> </span>key<span class="w"> </span>is<span class="w"> </span>sensitive<span class="w"> </span>information
+which<span class="w"> </span>allows<span class="w"> </span>access<span class="w"> </span>to<span class="w"> </span>an<span class="w"> </span>encrypted<span class="w"> </span>partition<span class="w"> </span>without<span class="w"> </span>a<span class="w"> </span>passphrase.
+This<span class="w"> </span>dump<span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span>always<span class="w"> </span>stored<span class="w"> </span>encrypted<span class="w"> </span><span class="k">in</span><span class="w"> </span>a<span class="w"> </span>safe<span class="w"> </span>place.
 
-Are you sure? <span class="o">(</span>Type uppercase yes<span class="o">)</span>: YES
-Enter passphrase <span class="k">for</span> /dev/loop23p1: 
-LUKS header information <span class="k">for</span> /dev/loop23p1
-Cipher name:    aes
-Cipher mode:    xts-plain64
-Payload offset: <span class="m">32768</span>
-UUID:           e9a660d5-4a91-4dca-bda5-3f6a49eea998
-MK bits:        <span class="m">512</span>
-MK dump:    be <span class="m">97</span> db <span class="m">91</span> 5c <span class="m">30</span> <span class="m">47</span> ce 1c <span class="m">59</span> c5 c0 8c <span class="m">75</span> 3c <span class="m">40</span> 
-            <span class="m">72</span> <span class="m">35</span> <span class="m">85</span> 9d fe <span class="m">49</span> c0 <span class="m">52</span> c4 f5 <span class="m">26</span> <span class="m">60</span> af 3e d4 2c 
-            ec a3 <span class="m">60</span> <span class="m">53</span> aa <span class="m">96</span> <span class="m">70</span> 4d f3 f2 ff <span class="m">56</span> 8f <span class="m">49</span> a1 <span class="m">82</span> 
-            <span class="m">60</span> <span class="m">18</span> 7c <span class="m">58</span> d7 6a ec e8 <span class="m">00</span> c1 <span class="m">90</span> c1 <span class="m">88</span> <span class="m">43</span> f8 9a
+Are<span class="w"> </span>you<span class="w"> </span>sure?<span class="w"> </span><span class="o">(</span>Type<span class="w"> </span>uppercase<span class="w"> </span>yes<span class="o">)</span>:<span class="w"> </span>YES
+Enter<span class="w"> </span>passphrase<span class="w"> </span><span class="k">for</span><span class="w"> </span>/dev/loop23p1:<span class="w"> </span>
+LUKS<span class="w"> </span>header<span class="w"> </span>information<span class="w"> </span><span class="k">for</span><span class="w"> </span>/dev/loop23p1
+Cipher<span class="w"> </span>name:<span class="w">    </span>aes
+Cipher<span class="w"> </span>mode:<span class="w">    </span>xts-plain64
+Payload<span class="w"> </span>offset:<span class="w"> </span><span class="m">32768</span>
+UUID:<span class="w">           </span>e9a660d5-4a91-4dca-bda5-3f6a49eea998
+MK<span class="w"> </span>bits:<span class="w">        </span><span class="m">512</span>
+MK<span class="w"> </span>dump:<span class="w">    </span>be<span class="w"> </span><span class="m">97</span><span class="w"> </span>db<span class="w"> </span><span class="m">91</span><span class="w"> </span>5c<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="m">47</span><span class="w"> </span>ce<span class="w"> </span>1c<span class="w"> </span><span class="m">59</span><span class="w"> </span>c5<span class="w"> </span>c0<span class="w"> </span>8c<span class="w"> </span><span class="m">75</span><span class="w"> </span>3c<span class="w"> </span><span class="m">40</span><span class="w"> </span>
+<span class="w">            </span><span class="m">72</span><span class="w"> </span><span class="m">35</span><span class="w"> </span><span class="m">85</span><span class="w"> </span>9d<span class="w"> </span>fe<span class="w"> </span><span class="m">49</span><span class="w"> </span>c0<span class="w"> </span><span class="m">52</span><span class="w"> </span>c4<span class="w"> </span>f5<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">60</span><span class="w"> </span>af<span class="w"> </span>3e<span class="w"> </span>d4<span class="w"> </span>2c<span class="w"> </span>
+<span class="w">            </span>ec<span class="w"> </span>a3<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="m">53</span><span class="w"> </span>aa<span class="w"> </span><span class="m">96</span><span class="w"> </span><span class="m">70</span><span class="w"> </span>4d<span class="w"> </span>f3<span class="w"> </span>f2<span class="w"> </span>ff<span class="w"> </span><span class="m">56</span><span class="w"> </span>8f<span class="w"> </span><span class="m">49</span><span class="w"> </span>a1<span class="w"> </span><span class="m">82</span><span class="w"> </span>
+<span class="w">            </span><span class="m">60</span><span class="w"> </span><span class="m">18</span><span class="w"> </span>7c<span class="w"> </span><span class="m">58</span><span class="w"> </span>d7<span class="w"> </span>6a<span class="w"> </span>ec<span class="w"> </span>e8<span class="w"> </span><span class="m">00</span><span class="w"> </span>c1<span class="w"> </span><span class="m">90</span><span class="w"> </span>c1<span class="w"> </span><span class="m">88</span><span class="w"> </span><span class="m">43</span><span class="w"> </span>f8<span class="w"> </span>9a
 
-$ <span class="nb">echo</span> <span class="s2">&quot;be 97 db 91 5c 30 47 ce 1c 59 c5 c0 8c 75 3c 40 72 35 85 9d fe 49 c0 52 c4 f5 26 60 af 3e d4 2c ec a3 60 53 aa 96 70 4d f3 f2 ff 56 8f 49 a1 82 60 18 7c 58 d7 6a ec e8 00 c1 90 c1 88 43 f8 9a&quot;</span> <span class="p">|</span> tr -d <span class="s2">&quot; &quot;</span> <span class="p">|</span> xxd -r -p &gt; masterkey
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;be 97 db 91 5c 30 47 ce 1c 59 c5 c0 8c 75 3c 40 72 35 85 9d fe 49 c0 52 c4 f5 26 60 af 3e d4 2c ec a3 60 53 aa 96 70 4d f3 f2 ff 56 8f 49 a1 82 60 18 7c 58 d7 6a ec e8 00 c1 90 c1 88 43 f8 9a&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xxd<span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span>&gt;<span class="w"> </span>masterkey
 </code></pre></div></li>
 <li>使用主密钥解密 <code>day2.img</code>
-    <div class="highlight"><pre><span></span><code>sudo losetup -P /dev/loop24 day2.img
-sudo cryptsetup luksOpen /dev/loop24p1 day2 --master-key-file masterkey
+    <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>losetup<span class="w"> </span>-P<span class="w"> </span>/dev/loop24<span class="w"> </span>day2.img
+sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksOpen<span class="w"> </span>/dev/loop24p1<span class="w"> </span>day2<span class="w"> </span>--master-key-file<span class="w"> </span>masterkey
 </code></pre></div></li>
 <li>进入磁盘，就能看到 <code>flag.txt</code> 了</li>
 </ul>

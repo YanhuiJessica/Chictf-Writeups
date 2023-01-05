@@ -2334,6 +2334,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2885,7 +2899,7 @@
 <span class="n">tx_receipt</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">wait_for_transaction_receipt</span><span class="p">(</span><span class="n">tx_hash</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Player contract address:&#39;</span><span class="p">,</span> <span class="n">tx_receipt</span><span class="o">.</span><span class="n">contractAddress</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Testing </span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">/10...&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Testing </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">/10...&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">challenge_id</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -2914,126 +2928,126 @@
 </details>
 <details class="note">
 <summary>genesis.json</summary>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;chainId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;homesteadBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;eip150Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;eip155Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;eip158Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;byzantiumBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;constantinopleBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;petersburgBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;istanbulBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;muirGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;berlinBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;londonBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;arrowGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;grayGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;clique&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;period&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;epoch&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;alloc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;0x2022af4DCbb9dA7F41cBD3dD8CdB4134D4e6DDe6&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;balance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x56bc75e2d63100000&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;coinbase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x1&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;gasLimit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x1c9c380&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;extraData&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00000000000000000000000000000000000000000000000000000000000000002022af4dcbb9da7f41cbd3dd8cdb4134d4e6dde60000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000042&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;mixhash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;parentHash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00&quot;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;chainId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;homesteadBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eip150Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eip155Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eip158Block&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;byzantiumBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;constantinopleBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;petersburgBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;istanbulBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;muirGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;berlinBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;londonBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;arrowGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;grayGlacierBlock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;clique&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;period&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;epoch&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;alloc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;0x2022af4DCbb9dA7F41cBD3dD8CdB4134D4e6DDe6&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;balance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x56bc75e2d63100000&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;coinbase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;gasLimit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x1c9c380&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;extraData&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00000000000000000000000000000000000000000000000000000000000000002022af4dcbb9da7f41cbd3dd8cdb4134d4e6dde60000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000042&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mixhash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;parentHash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00&quot;</span>
+<span class="p">}</span>
 </code></pre></div>
 </details>
 <details class="note">
 <summary>Dockerfile</summary>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:22.04</span>
-<span class="k">RUN</span><span class="w"> </span>apt update <span class="o">&amp;&amp;</span> apt install -y software-properties-common <span class="o">&amp;&amp;</span> add-apt-repository -y ppa:ethereum/ethereum <span class="o">&amp;&amp;</span> apt update <span class="o">&amp;&amp;</span> apt install -y ethereum python3-pip
-<span class="k">RUN</span><span class="w"> </span>python3 -m pip install web3 py-solc-x
-<span class="k">RUN</span><span class="w"> </span>python3 -c <span class="s2">&quot;from solcx import install_solc; install_solc(version=&#39;latest&#39;)&quot;</span>
-<span class="k">COPY</span><span class="w"> </span>genesis.json privatekey.txt password.txt main.py challenge1.sol challenge2.sol challenge3.sol compile.py /
-<span class="k">RUN</span><span class="w"> </span>geth init --datadir data genesis.json
-<span class="k">RUN</span><span class="w"> </span>geth --datadir data account import --password password.txt privatekey.txt
-<span class="k">RUN</span><span class="w"> </span>python3 compile.py
+<span class="k">RUN</span><span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>software-properties-common<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>add-apt-repository<span class="w"> </span>-y<span class="w"> </span>ppa:ethereum/ethereum<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>ethereum<span class="w"> </span>python3-pip
+<span class="k">RUN</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>web3<span class="w"> </span>py-solc-x
+<span class="k">RUN</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from solcx import install_solc; install_solc(version=&#39;latest&#39;)&quot;</span>
+<span class="k">COPY</span><span class="w"> </span>genesis.json<span class="w"> </span>privatekey.txt<span class="w"> </span>password.txt<span class="w"> </span>main.py<span class="w"> </span>challenge1.sol<span class="w"> </span>challenge2.sol<span class="w"> </span>challenge3.sol<span class="w"> </span>compile.py<span class="w"> </span>/
+<span class="k">RUN</span><span class="w"> </span>geth<span class="w"> </span>init<span class="w"> </span>--datadir<span class="w"> </span>data<span class="w"> </span>genesis.json
+<span class="k">RUN</span><span class="w"> </span>geth<span class="w"> </span>--datadir<span class="w"> </span>data<span class="w"> </span>account<span class="w"> </span>import<span class="w"> </span>--password<span class="w"> </span>password.txt<span class="w"> </span>privatekey.txt
+<span class="k">RUN</span><span class="w"> </span>python3<span class="w"> </span>compile.py
 <span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/usr/bin/python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-u&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/main.py&quot;</span><span class="p">]</span>
 </code></pre></div>
 </details>
 <h3 id="_2">记忆练习<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="_3">牛刀小试<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">memorize_revert</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">memorize_revert</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize_revert</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="nx">revert</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize_revert</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">revert</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="_4">终极挑战<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">=</span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kr">interface</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">memorize</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">recall</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">recalled</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h2 id="_5">解题思路<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>需要编写包含函数 <code>memorize</code> 和函数 <code>recall</code> 的合约 <code>MemoryMaster</code>，合约 <code>Challenge</code> 将首先调用函数 <code>memorize</code> 并传入参数 <code>n</code>，随后调用函数 <code>recall</code> 并期望返回 <code>n</code>。</p>
 <h3 id="_6">记忆练习<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>本题没有对函数 <code>memorize</code> 和函数 <code>recall</code> 进行任何限制，因而可以直接借助状态变量。</p>
-<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_n</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_n</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h4 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h4>
 <blockquote>
@@ -3054,46 +3068,46 @@
 </li>
 <li>
 <p>首先可利用 <code>revert</code> 获得执行到函数 <code>recall</code> 的剩余汽油量，并计算出 <code>k</code></p>
-<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/utils/Strings.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/utils/Strings.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">720</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">720</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="nx">revert</span><span class="p">(</span><span class="nx">Strings</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">n</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">uint16</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">revert</span><span class="p">(</span><span class="nx">Strings</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">n</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">uint16</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
 <p>提交字节码到服务器，由此可大致算出 <code>k = 30040</code> (<code>(50000000 - k - 27688 * 720) * 63 / 64 = 29565309</code>)</p>
-<div class="highlight"><pre><span></span><code>Testing <span class="m">1</span>/10...
-<span class="nv">n</span> <span class="o">=</span> <span class="m">27688</span>
+<div class="highlight"><pre><span></span><code>Testing<span class="w"> </span><span class="m">1</span>/10...
+<span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">27688</span>
 ...
-web3.exceptions.ContractLogicError: execution reverted: <span class="m">29565309</span>
+web3.exceptions.ContractLogicError:<span class="w"> </span>execution<span class="w"> </span>reverted:<span class="w"> </span><span class="m">29565309</span>
 </code></pre></div>
 </li>
 </ul>
 <h4 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">720</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">720</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">uint16</span><span class="p">((</span><span class="mf">50000000</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">30040</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">64</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">63</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">720</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">uint16</span><span class="p">((</span><span class="mf">50000000</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">30040</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">64</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">63</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">720</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h4 id="flag_1">Flag<a class="headerlink" href="#flag_1" title="Permanent link">&para;</a></h4>
 <blockquote>
@@ -3105,29 +3119,29 @@ web3.exceptions.ContractLogicError: execution reverted: <span class="m">29565309
 <li>一部分操作码，如 <code>SSTORE</code>、<code>SLOAD</code>，消耗的汽油量与访问的位置是否是初次访问有关，冷访问要消耗更多的汽油</li>
 <li>
 <p>可以通过故意访问一些特定的位置来向 <code>recall</code> 传递 <code>n</code> 的值，可以使用 <code>SLOAD</code>，访问冷/热存储位置的开销分别为 <code>2100</code>/<code>100</code>，或借助于其它 <code>ADDRESS_TOUCHING_OPCODES</code>、<code>STORAGE_TOUCHING_OPCODES</code></p>
-<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">MemoryMaster</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="nx">access</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="nx">access</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">256</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nx">n</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="nx">access</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">memorize</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">256</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nx">n</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="nx">access</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">256</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// i 减到 -1 会导致 revert</span><span class="w"></span>
-<span class="w">            </span><span class="nx">n</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="nx">access</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1000</span><span class="p">)</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recall</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint16</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">256</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// i 减到 -1 会导致 revert</span>
+<span class="w">            </span><span class="nx">n</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">();</span>
+<span class="w">            </span><span class="nx">access</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">g</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">gasleft</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1000</span><span class="p">)</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>

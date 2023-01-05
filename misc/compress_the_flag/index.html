@@ -2234,6 +2234,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2730,14 +2744,14 @@
 <ul>
 <li>
 <p>提供一个随机数种子和字符串，服务器使用随机数种子打乱 Flag 字符的顺序，再拼接上提供的字符串，返回最后生成字符串的原长度以及不同压缩算法压缩后的长度</p>
-<div class="highlight"><pre><span></span><code>Please send: seed:string<span class="se">\n</span>
-I<span class="err">&#39;</span>ll <span class="k">then</span> show you the compression benchmark results!
-Note: Flag has format DrgnS<span class="o">{[</span>A-Z<span class="o">]</span>+<span class="o">}</span>
+<div class="highlight"><pre><span></span><code>Please<span class="w"> </span>send:<span class="w"> </span>seed:string<span class="se">\n</span>
+I<span class="err">&#39;</span>ll<span class="w"> </span><span class="k">then</span><span class="w"> </span>show<span class="w"> </span>you<span class="w"> </span>the<span class="w"> </span>compression<span class="w"> </span>benchmark<span class="w"> </span>results!
+Note:<span class="w"> </span>Flag<span class="w"> </span>has<span class="w"> </span>format<span class="w"> </span>DrgnS<span class="o">{[</span>A-Z<span class="o">]</span>+<span class="o">}</span>
 <span class="m">1</span>:A
-    none   <span class="m">26</span>
-    zlib   <span class="m">34</span>
-   bzip2   <span class="m">63</span>
-    lzma   <span class="m">84</span>
+<span class="w">    </span>none<span class="w">   </span><span class="m">26</span>
+<span class="w">    </span>zlib<span class="w">   </span><span class="m">34</span>
+<span class="w">   </span>bzip2<span class="w">   </span><span class="m">63</span>
+<span class="w">    </span>lzma<span class="w">   </span><span class="m">84</span>
 </code></pre></div>
 </li>
 <li>
@@ -2751,20 +2765,20 @@ Note: Flag has format DrgnS<span class="o">{[</span>A-Z<span class="o">]</span>+
 <li>
 <p>观察发现，当输入字符串为 4 个相同字符时，<code>EEEE</code> 和打乱的 Flag 字符串使用 zlib 和 bzip2 （均含 RLE 和 Huffman 编码）压缩的长度会小于其他字符</p>
 <div class="highlight"><pre><span></span><code><span class="m">1</span>:EEEE
-    none   <span class="m">29</span>
-    zlib   <span class="m">35</span>
-   bzip2   <span class="m">69</span>
-    lzma   <span class="m">88</span>
+<span class="w">    </span>none<span class="w">   </span><span class="m">29</span>
+<span class="w">    </span>zlib<span class="w">   </span><span class="m">35</span>
+<span class="w">   </span>bzip2<span class="w">   </span><span class="m">69</span>
+<span class="w">    </span>lzma<span class="w">   </span><span class="m">88</span>
 <span class="m">1</span>:AAAA
-    none   <span class="m">29</span>
-    zlib   <span class="m">37</span>
-   bzip2   <span class="m">70</span>
-    lzma   <span class="m">88</span>
+<span class="w">    </span>none<span class="w">   </span><span class="m">29</span>
+<span class="w">    </span>zlib<span class="w">   </span><span class="m">37</span>
+<span class="w">   </span>bzip2<span class="w">   </span><span class="m">70</span>
+<span class="w">    </span>lzma<span class="w">   </span><span class="m">88</span>
 <span class="m">1</span>:SSSS
-    none   <span class="m">29</span>
-    zlib   <span class="m">37</span>
-   bzip2   <span class="m">70</span>
-    lzma   <span class="m">88</span>
+<span class="w">    </span>none<span class="w">   </span><span class="m">29</span>
+<span class="w">    </span>zlib<span class="w">   </span><span class="m">37</span>
+<span class="w">   </span>bzip2<span class="w">   </span><span class="m">70</span>
+<span class="w">    </span>lzma<span class="w">   </span><span class="m">88</span>
 </code></pre></div>
 </li>
 </ul>
@@ -2797,7 +2811,7 @@ Note: Flag has format DrgnS<span class="o">{[</span>A-Z<span class="o">]</span>+
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
     <span class="nb">min</span><span class="p">,</span> <span class="n">mic</span> <span class="o">=</span> <span class="mh">0xffff</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span>
     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">l</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="s1">&#39;zlib&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="nb">min</span><span class="p">:</span>
             <span class="nb">min</span><span class="p">,</span> <span class="n">mic</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>

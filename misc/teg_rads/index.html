@@ -2229,6 +2229,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2619,10 +2633,10 @@
 <ul>
 <li>打开 <code>fdp.pdf</code>，全选复制粘贴
     <div class="highlight"><pre><span></span><code>dsc<span class="o">{</span>f0r3n51x_15_fun<span class="o">}</span>
-dsc<span class="o">{</span>n0t_h3r3_31th3r<span class="o">}</span> <span class="m">1</span>  <span class="c1"># not here</span>
+dsc<span class="o">{</span>n0t_h3r3_31th3r<span class="o">}</span><span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="c1"># not here</span>
 dsc<span class="o">{</span>n1c3_try<span class="o">}</span>
 <span class="m">1</span>
-dsc<span class="o">{</span>f00t_n0t3<span class="o">}</span> would just be too obvious <span class="c1"># foot note</span>
+dsc<span class="o">{</span>f00t_n0t3<span class="o">}</span><span class="w"> </span>would<span class="w"> </span>just<span class="w"> </span>be<span class="w"> </span>too<span class="w"> </span>obvious<span class="w"> </span><span class="c1"># foot note</span>
 </code></pre></div></li>
 <li>看上去 <code>dsc{f0r3n51x_15_fun}</code> 是 FLag 呢，提交 -&gt; <code>Incorrect</code> (╥ω╥)</li>
 <li>好叭，根据题目 <code>writer</code>、<code>actor</code>、<code>producer</code> 之类的看看文件属性，找到应该是 Flag 的第三部分，Base64 解码得：<code>b4nn3d}</code><br>
@@ -2639,25 +2653,25 @@ dsc<span class="o">{</span>f00t_n0t3<span class="o">}</span> would just be too o
 </code></pre></div></li>
 <li>直接 开发者工具-&gt;控制台 跑一下就行：<code>d15pl4y_</code></li>
 <li>接下来就还差两个部分啦！在 Flag 第二部分的提示下面紧跟了 <code>PK</code> 压缩包头，赶紧 <code>binwalk</code> 看看
-    <div class="highlight"><pre><span></span><code>$ binwalk fdp.pdf 
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>binwalk<span class="w"> </span>fdp.pdf<span class="w"> </span>
 
-DECIMAL       HEXADECIMAL     DESCRIPTION
+DECIMAL<span class="w">       </span>HEXADECIMAL<span class="w">     </span>DESCRIPTION
 --------------------------------------------------------------------------------
-<span class="m">0</span>             0x0             PDF document, version: <span class="s2">&quot;1.4&quot;</span>
-<span class="m">48629</span>         0xBDF5          Zip archive data, at least v1.0 to extract, name: sk1/
-<span class="m">48691</span>         0xBE33          Zip archive data, at least v2.0 to extract, compressed size: <span class="m">95</span>, uncompressed size: <span class="m">108</span>, name: sk1/p4.txt
-<span class="m">49008</span>         0xBF70          End of Zip archive, footer length: <span class="m">22</span>
+<span class="m">0</span><span class="w">             </span>0x0<span class="w">             </span>PDF<span class="w"> </span>document,<span class="w"> </span>version:<span class="w"> </span><span class="s2">&quot;1.4&quot;</span>
+<span class="m">48629</span><span class="w">         </span>0xBDF5<span class="w">          </span>Zip<span class="w"> </span>archive<span class="w"> </span>data,<span class="w"> </span>at<span class="w"> </span>least<span class="w"> </span>v1.0<span class="w"> </span>to<span class="w"> </span>extract,<span class="w"> </span>name:<span class="w"> </span>sk1/
+<span class="m">48691</span><span class="w">         </span>0xBE33<span class="w">          </span>Zip<span class="w"> </span>archive<span class="w"> </span>data,<span class="w"> </span>at<span class="w"> </span>least<span class="w"> </span>v2.0<span class="w"> </span>to<span class="w"> </span>extract,<span class="w"> </span>compressed<span class="w"> </span>size:<span class="w"> </span><span class="m">95</span>,<span class="w"> </span>uncompressed<span class="w"> </span>size:<span class="w"> </span><span class="m">108</span>,<span class="w"> </span>name:<span class="w"> </span>sk1/p4.txt
+<span class="m">49008</span><span class="w">         </span>0xBF70<span class="w">          </span>End<span class="w"> </span>of<span class="w"> </span>Zip<span class="w"> </span>archive,<span class="w"> </span>footer<span class="w"> </span>length:<span class="w"> </span><span class="m">22</span>
 </code></pre></div></li>
 <li>分离压缩包解压得到 <code>p4.txt</code>，那应该是 Flag 第四部分了
     <div class="highlight"><pre><span></span><code><span class="c1">// p4.txt</span>
-<span class="n">Caesar</span><span class="w"> </span><span class="n">wasn</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">smart</span><span class="w"> </span><span class="n">enough</span><span class="p">.</span><span class="w"> </span><span class="n">He</span><span class="w"> </span><span class="n">got</span><span class="w"> </span><span class="n">outsmarted</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">Brutus</span><span class="w"> </span><span class="n">lmao</span><span class="p">.</span><span class="w"></span>
-<span class="n">The</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">our</span><span class="w"> </span><span class="n">creator</span><span class="w"></span>
-<span class="n">The</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">fq3gq10n_</span><span class="w"></span>
+<span class="n">Caesar</span><span class="w"> </span><span class="n">wasn</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">smart</span><span class="w"> </span><span class="n">enough</span><span class="p">.</span><span class="w"> </span><span class="n">He</span><span class="w"> </span><span class="n">got</span><span class="w"> </span><span class="n">outsmarted</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">Brutus</span><span class="w"> </span><span class="n">lmao</span><span class="p">.</span>
+<span class="n">The</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">our</span><span class="w"> </span><span class="n">creator</span>
+<span class="n">The</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">fq3gq10n_</span>
 
 <span class="c1">// 维吉尼亚密码</span>
 <span class="c1">// creator： alexa</span>
 <span class="c1">// 解密得</span>
-<span class="n">ff3ct10n_</span><span class="w"></span>
+<span class="n">ff3ct10n_</span>
 </code></pre></div></li>
 <li>最后再次检查 PDF 文件，发现一串二进制字符串。开头补 <code>0</code> 凑足 8 位后再转字符得到：<code>0f_</code>
     <div class="highlight"><pre><span></span><code>&lt;rdf:Description rdf:about=&#39;&#39;

@@ -2240,6 +2240,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2687,20 +2701,20 @@
 <summary>Dockerfile</summary>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.10.7</span>
 
-<span class="k">RUN</span><span class="w"> </span>/usr/sbin/useradd --no-create-home -u <span class="m">1000</span> ctf
+<span class="k">RUN</span><span class="w"> </span>/usr/sbin/useradd<span class="w"> </span>--no-create-home<span class="w"> </span>-u<span class="w"> </span><span class="m">1000</span><span class="w"> </span>ctf
 
-<span class="k">COPY</span><span class="w"> </span>flag.txt /
-<span class="k">COPY</span><span class="w"> </span>last-digit.py /home/ctf/
+<span class="k">COPY</span><span class="w"> </span>flag.txt<span class="w"> </span>/
+<span class="k">COPY</span><span class="w"> </span>last-digit.py<span class="w"> </span>/home/ctf/
 
-<span class="k">RUN</span><span class="w"> </span>chmod a+x /home/ctf/last-digit.py
+<span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>a+x<span class="w"> </span>/home/ctf/last-digit.py
 
-<span class="k">RUN</span><span class="w"> </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install -y socat <span class="o">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>socat<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
 
 <span class="k">USER</span><span class="w"> </span><span class="s">ctf</span>
 
-<span class="k">CMD</span><span class="w"> </span>socat <span class="se">\</span>
-        TCP-LISTEN:1337,reuseaddr,fork <span class="se">\</span>
-        EXEC:<span class="s2">&quot;python -u /home/ctf/last-digit.py&quot;</span>
+<span class="k">CMD</span><span class="w"> </span>socat<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>TCP-LISTEN:1337,reuseaddr,fork<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>EXEC:<span class="s2">&quot;python -u /home/ctf/last-digit.py&quot;</span>
 </code></pre></div>
 </details>
 <h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -2723,7 +2737,7 @@
 <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">4300</span>
 <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
     <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-    <span class="n">conn</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">10</span> <span class="o">**</span> <span class="n">mid</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">10</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">mid</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
     <span class="k">if</span> <span class="s1">&#39;&gt;:(&#39;</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">:</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>

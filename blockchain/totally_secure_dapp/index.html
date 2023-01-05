@@ -2240,6 +2240,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2672,52 +2686,52 @@
 <li><a href="https://totally-secure-dapp.vercel.app/">https://totally-secure-dapp.vercel.app/</a> 主要提供了 <code>New Post</code> 和展示 Post 的功能，Post 记录上链</li>
 <li>
 <p>提供了两份合约代码，Post 相关操作函数位于 <code>TotallySecureDapp.sol</code>，当调用者为 <code>owner</code> 且合约账户的余额大于 <code>0.005</code> 以太时可以触发 <code>FlagCaptured</code> 事件</p>
-<div class="highlight"><pre><span></span><code><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_owner</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Caller is not the owner&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_owner</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Caller is not the owner&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">captureFlag</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.005</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Balance too low&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_flagCaptured</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">FlagCaptured</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">captureFlag</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.005</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Balance too low&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">_flagCaptured</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">FlagCaptured</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
 <p>除此之外，能够调用的函数有 <code>addPost</code>、<code>editPost</code>、<code>removePost</code> 和 <code>nPost</code>。注意到 <code>removePost</code> 中 <code>length</code> 的减法没有使用 <code>SafeMath</code> 或在使用前进行判断</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">addPost</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">Post</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">post</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Post</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_authors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostPublished</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">addPost</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Post</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">post</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Post</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">_authors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostPublished</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">editPost</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span><span class="w"></span>
-<span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Post</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostEdited</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">editPost</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span>
+<span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Post</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostEdited</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">removePost</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">int256</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">int256</span><span class="p">(</span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">index</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
-<span class="w">            </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">_authors</span><span class="p">.</span><span class="nx">length</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostRemoved</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">removePost</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">int256</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">int256</span><span class="p">(</span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">index</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_posts</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<span class="w">            </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_authors</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="o">--</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">_authors</span><span class="p">.</span><span class="nx">length</span><span class="o">--</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">PostRemoved</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">nPosts</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">nPosts</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">_posts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
@@ -2726,28 +2740,28 @@
 <li><code>string</code> 类型的变量存储方式与 <code>address</code> 类型的不同，当长度小于 <span class="arithmatex">\(32\)</span> 字节时，元素存储在高位，低位存储字符串字节长度，当长度大于 <span class="arithmatex">\(31\)</span> 字节时，存储方式与数组类似</li>
 <li>建议通过 <code>_authors</code> 数组完成覆盖操作</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1">// contract Initializable</span><span class="w"></span>
-<span class="nx">bool</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_initialized</span><span class="p">;</span><span class="w">  </span><span class="c1">// slot 0</span><span class="w"></span>
-<span class="nx">bool</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_initializing</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 0</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// contract Initializable</span>
+<span class="nx">bool</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_initialized</span><span class="p">;</span><span class="w">  </span><span class="c1">// slot 0</span>
+<span class="nx">bool</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_initializing</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 0</span>
 
-<span class="c1">// contract TotallySecureDapp is Initializable</span><span class="w"></span>
-<span class="nx">struct</span><span class="w"> </span><span class="nx">Post</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"> </span><span class="c1">// 2 slots</span><span class="w"></span>
+<span class="c1">// contract TotallySecureDapp is Initializable</span>
+<span class="nx">struct</span><span class="w"> </span><span class="nx">Post</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">title</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">content</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// 2 slots</span>
 
-<span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_contractId</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 1</span><span class="w"></span>
-<span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_owner</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 2</span><span class="w"></span>
-<span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_authors</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 3</span><span class="w"></span>
-<span class="nx">Post</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_posts</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 4</span><span class="w"></span>
-<span class="nx">bool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_flagCaptured</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 5</span><span class="w"></span>
+<span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_contractId</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 1</span>
+<span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_owner</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 2</span>
+<span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_authors</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 3</span>
+<span class="nx">Post</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_posts</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 4</span>
+<span class="nx">bool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">_flagCaptured</span><span class="p">;</span><span class="w"> </span><span class="c1">// slot 5</span>
 </code></pre></div>
 </li>
 <li>
 <p>另外，合约 <code>TotallySecureDapp</code> 不接受直接转账，所以需要一些特殊手段 &gt;v&lt; 比如 <code>selfdestruct</code></p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">revert</span><span class="p">(</span><span class="s1">&#39;Contract does not accept payments&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">revert</span><span class="p">(</span><span class="s1">&#39;Contract does not accept payments&#39;</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
@@ -2791,26 +2805,26 @@
 </li>
 <li>
 <p>起初以为是事件的返回值，但查日志也最多只能获得传参。想到是 Web 题，跑去翻了翻源码，发现 <code>pages/api/secret.ts</code> 中提供了获取 Flag 的接口，请求参数包括 <code>userAddress</code>、<code>contractAddress</code> 以及 <code>userId</code></p>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">userId</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">ReqData</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">userId</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">ReqData</span><span class="p">;</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">_owner</span><span class="p">();</span><span class="w"></span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">flagCaptured</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">_flagCaptured</span><span class="p">();</span><span class="w"></span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">);</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">owner</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">userAddress</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">flagCaptured</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">balance</span><span class="p">.</span><span class="nx">gt</span><span class="p">(</span><span class="nx">parseEther</span><span class="p">(</span><span class="s1">&#39;0.005&#39;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="s1">&#39;ids&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Failed to load ids&#39;</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ids</span><span class="p">.</span><span class="nx">get</span><span class="p">()).</span><span class="nx">get</span><span class="p">(</span><span class="nx">userAddress</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">userId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Unauthorised&#39;</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">FLAG</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">flag</span><span class="o">:</span><span class="w"> </span><span class="kt">flag</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">_owner</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">flagCaptured</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">_flagCaptured</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">owner</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">userAddress</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">flagCaptured</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">balance</span><span class="p">.</span><span class="nx">gt</span><span class="p">(</span><span class="nx">parseEther</span><span class="p">(</span><span class="s1">&#39;0.005&#39;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="s1">&#39;ids&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Failed to load ids&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ids</span><span class="p">.</span><span class="nx">get</span><span class="p">()).</span><span class="nx">get</span><span class="p">(</span><span class="nx">userAddress</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">());</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">userId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Unauthorised&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">FLAG</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span><span class="w"> </span><span class="nx">flag</span><span class="o">:</span><span class="w"> </span><span class="kt">flag</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
@@ -2823,7 +2837,7 @@
 </li>
 <li>
 <p>调用 API 接口</p>
-<div class="highlight"><pre><span></span><code>$ curl -d <span class="s1">&#39;{&quot;userAddress&quot;:&quot;0xe09f6d20E2522F6B971b4516744946CF17BE8432&quot;, &quot;contractAddress&quot;:&quot;0x014A2a17AA06C26C660FB4A269aC87849d38Fd0A&quot;, &quot;userId&quot;: &quot;RIHIaESfxzilmF10mmBpH&quot;}&#39;</span> -H <span class="s2">&quot;Content-Type: application/json&quot;</span> -X POST https://totally-secure-dapp.vercel.app/api/secret
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;userAddress&quot;:&quot;0xe09f6d20E2522F6B971b4516744946CF17BE8432&quot;, &quot;contractAddress&quot;:&quot;0x014A2a17AA06C26C660FB4A269aC87849d38Fd0A&quot;, &quot;userId&quot;: &quot;RIHIaESfxzilmF10mmBpH&quot;}&#39;</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://totally-secure-dapp.vercel.app/api/secret
 <span class="o">{</span><span class="s2">&quot;flag&quot;</span>:<span class="s2">&quot;UACTF{23411y_m394_5u5_f149}&quot;</span><span class="o">}</span>
 </code></pre></div>
 </li>

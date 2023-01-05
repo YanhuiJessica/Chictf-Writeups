@@ -2234,6 +2234,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2631,8 +2645,8 @@
 <h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>file</code>查看，是 ZIP 文件，所以<code>tar zxvf</code>不好使(ŏωŏ)
-    <div class="highlight"><pre><span></span><code>$ file hW1ES89jF.tar.gz
-hW1ES89jF.tar.gz: Zip archive data, at least v2.0 to extract
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>file<span class="w"> </span>hW1ES89jF.tar.gz
+hW1ES89jF.tar.gz:<span class="w"> </span>Zip<span class="w"> </span>archive<span class="w"> </span>data,<span class="w"> </span>at<span class="w"> </span>least<span class="w"> </span>v2.0<span class="w"> </span>to<span class="w"> </span>extract
 </code></pre></div></li>
 <li>解压文件需要输入密码，但<code>解压密码不需要爆破</code>【?】……难道是伪加密？查看全局方式位标记，值为 <em>0x0009</em>，是真加密<br>
 <img alt="010Editor - frFlags" src="../img/targz_y1ng01.jpg" /></li>
@@ -2641,19 +2655,19 @@ hW1ES89jF.tar.gz: Zip archive data, at least v2.0 to extract
 
 <span class="nv">zfile</span><span class="o">=</span><span class="s2">&quot;hW1ES89jF.tar.gz&quot;</span>
 <span class="nv">pass</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">zfile</span><span class="p">%%.*</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">ftype</span><span class="o">=</span><span class="k">$(</span>file --mime-type <span class="s2">&quot;</span><span class="nv">$zfile</span><span class="s2">&quot;</span> <span class="p">|</span> grep -P <span class="s1">&#39;(?=[^/]*$).*&#39;</span> -o<span class="k">)</span>
-<span class="k">while</span> <span class="o">[</span> <span class="s1">&#39;zip&#39;</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="nv">$ftype</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
-    <span class="nv">old</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$zfile</span><span class="s2">&quot;</span>
-    <span class="nv">zfile</span><span class="o">=</span><span class="k">$(</span>unzip -P <span class="s2">&quot;</span><span class="nv">$pass</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$zfile</span><span class="s2">&quot;</span> <span class="p">|</span> grep -P <span class="s1">&#39;((?&lt;=(inflating: ))|(?&lt;=(extracting: )))(.*)\b&#39;</span> -o<span class="k">)</span>
-    <span class="nv">pass</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">zfile</span><span class="p">%%.*</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="nv">ftype</span><span class="o">=</span><span class="k">$(</span>file --mime-type <span class="s2">&quot;</span><span class="nv">$zfile</span><span class="s2">&quot;</span> <span class="p">|</span> grep -P <span class="s1">&#39;(?=[^/]*$).*&#39;</span> -o<span class="k">)</span>
-    rm <span class="s2">&quot;</span><span class="nv">$old</span><span class="s2">&quot;</span>
+<span class="nv">ftype</span><span class="o">=</span><span class="k">$(</span>file<span class="w"> </span>--mime-type<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$zfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-P<span class="w"> </span><span class="s1">&#39;(?=[^/]*$).*&#39;</span><span class="w"> </span>-o<span class="k">)</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s1">&#39;zip&#39;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ftype</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">old</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$zfile</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">zfile</span><span class="o">=</span><span class="k">$(</span>unzip<span class="w"> </span>-P<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$pass</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$zfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-P<span class="w"> </span><span class="s1">&#39;((?&lt;=(inflating: ))|(?&lt;=(extracting: )))(.*)\b&#39;</span><span class="w"> </span>-o<span class="k">)</span>
+<span class="w">    </span><span class="nv">pass</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">zfile</span><span class="p">%%.*</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">ftype</span><span class="o">=</span><span class="k">$(</span>file<span class="w"> </span>--mime-type<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$zfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-P<span class="w"> </span><span class="s1">&#39;(?=[^/]*$).*&#39;</span><span class="w"> </span>-o<span class="k">)</span>
+<span class="w">    </span>rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$old</span><span class="s2">&quot;</span>
 <span class="k">done</span>
 </code></pre></div></li>
 <li>最后得到一个<code>flag</code>文件
-    <div class="highlight"><pre><span></span><code>$ file flag
-flag: ASCII text, with no line terminators
-$ cat flag
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>file<span class="w"> </span>flag
+flag:<span class="w"> </span>ASCII<span class="w"> </span>text,<span class="w"> </span>with<span class="w"> </span>no<span class="w"> </span>line<span class="w"> </span>terminators
+$<span class="w"> </span>cat<span class="w"> </span>flag
 BJD<span class="o">{</span>wow_you_can_rea11y_dance<span class="o">}</span>
 </code></pre></div></li>
 </ul>

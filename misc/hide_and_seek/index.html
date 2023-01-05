@@ -2220,6 +2220,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2600,15 +2614,15 @@
 <h2 id="_1">解题思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>常规流程走一遍
-    <div class="highlight"><pre><span></span><code>$ file 藏藏藏.jpg
-藏藏藏.jpg: JPEG image data, JFIF standard <span class="m">1</span>.01, resolution <span class="o">(</span>DPI<span class="o">)</span>, density 72x72, segment length <span class="m">16</span>, baseline, precision <span class="m">8</span>, 800x566, frames <span class="m">3</span>
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>file<span class="w"> </span>藏藏藏.jpg
+藏藏藏.jpg:<span class="w"> </span>JPEG<span class="w"> </span>image<span class="w"> </span>data,<span class="w"> </span>JFIF<span class="w"> </span>standard<span class="w"> </span><span class="m">1</span>.01,<span class="w"> </span>resolution<span class="w"> </span><span class="o">(</span>DPI<span class="o">)</span>,<span class="w"> </span>density<span class="w"> </span>72x72,<span class="w"> </span>segment<span class="w"> </span>length<span class="w"> </span><span class="m">16</span>,<span class="w"> </span>baseline,<span class="w"> </span>precision<span class="w"> </span><span class="m">8</span>,<span class="w"> </span>800x566,<span class="w"> </span>frames<span class="w"> </span><span class="m">3</span>
 
-$ binwalk 藏藏藏.jpg
+$<span class="w"> </span>binwalk<span class="w"> </span>藏藏藏.jpg
 
-DECIMAL       HEXADECIMAL     DESCRIPTION
+DECIMAL<span class="w">       </span>HEXADECIMAL<span class="w">     </span>DESCRIPTION
 --------------------------------------------------------------------------------
-<span class="m">0</span>             0x0             JPEG image data, JFIF standard <span class="m">1</span>.01
-<span class="m">63967</span>         0xF9DF          End of Zip archive
+<span class="m">0</span><span class="w">             </span>0x0<span class="w">             </span>JPEG<span class="w"> </span>image<span class="w"> </span>data,<span class="w"> </span>JFIF<span class="w"> </span>standard<span class="w"> </span><span class="m">1</span>.01
+<span class="m">63967</span><span class="w">         </span>0xF9DF<span class="w">          </span>End<span class="w"> </span>of<span class="w"> </span>Zip<span class="w"> </span>archive
 </code></pre></div></li>
 <li>
 <p>藏有一个 ZIP 文件！但是为什么只有结尾的位置 (ŏωŏ) ？使用 <em>010Editor</em> 查看，文件还是很完整的，开头标识和结尾标识都可以找到<br>

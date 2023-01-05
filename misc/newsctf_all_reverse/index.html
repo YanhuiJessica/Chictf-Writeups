@@ -2233,6 +2233,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2650,11 +2664,11 @@
 <li>将文本各行按字符逆序再 Base64 解码，可获得《傲慢与偏见》一大段节选，没有直接的 Flag 信息，只有一些与原文有差异的字符以及看着像解码失败的字符 (ŏωŏ) 有点奇怪，难道 Flag 是由与原文有差异的字符组成的么？【可能性不大…
     <div class="highlight"><pre><span></span><code><span class="c1"># 解码文本节选</span>
 ...
-âMy dear Mr. Zennet,â said his lady to him one day, âhave you
-hearg that Netherfield <span class="se">\a</span>rk is <span class="nb">let</span> at last?â
-Mr. Bennet replied that he had not.
-âBut it is,â returned she<span class="p">;</span> âfor Mrs. Long has just been here, and she
-told me all about it.â
+âMy<span class="w"> </span>dear<span class="w"> </span>Mr.<span class="w"> </span>Zennet,â<span class="w"> </span>said<span class="w"> </span>his<span class="w"> </span>lady<span class="w"> </span>to<span class="w"> </span>him<span class="w"> </span>one<span class="w"> </span>day,<span class="w"> </span>âhave<span class="w"> </span>you
+hearg<span class="w"> </span>that<span class="w"> </span>Netherfield<span class="w"> </span><span class="se">\a</span>rk<span class="w"> </span>is<span class="w"> </span><span class="nb">let</span><span class="w"> </span>at<span class="w"> </span>last?â
+Mr.<span class="w"> </span>Bennet<span class="w"> </span>replied<span class="w"> </span>that<span class="w"> </span>he<span class="w"> </span>had<span class="w"> </span>not.
+âBut<span class="w"> </span>it<span class="w"> </span>is,â<span class="w"> </span>returned<span class="w"> </span>she<span class="p">;</span><span class="w"> </span>âfor<span class="w"> </span>Mrs.<span class="w"> </span>Long<span class="w"> </span>has<span class="w"> </span>just<span class="w"> </span>been<span class="w"> </span>here,<span class="w"> </span>and<span class="w"> </span>she
+told<span class="w"> </span>me<span class="w"> </span>all<span class="w"> </span>about<span class="w"> </span>it.â
 ...
 </code></pre></div></li>
 <li>其实是 Base64 隐写 XD 提取的内容为：<code>flag{md5(0)}</code></li>

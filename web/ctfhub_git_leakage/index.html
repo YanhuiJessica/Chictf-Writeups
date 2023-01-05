@@ -2241,6 +2241,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2644,65 +2658,65 @@
 <h2 id="log">Log<a class="headerlink" href="#log" title="Permanent link">&para;</a></h2>
 <ul>
 <li>使用工具 <a href="https://github.com/WangYihang/GitHacker">WangYihang/GitHacker</a> 检出 Git 仓库
-    <div class="highlight"><pre><span></span><code>$ githacker --url http://challenge-6c68a91f29757be4.sandbox.ctfhub.com:10080/.git/ --folder result
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>githacker<span class="w"> </span>--url<span class="w"> </span>http://challenge-6c68a91f29757be4.sandbox.ctfhub.com:10080/.git/<span class="w"> </span>--folder<span class="w"> </span>result
 </code></pre></div></li>
 <li>进入检出目录，查看日志信息，当前位于<code>flag</code>已经删除的版本
-    <div class="highlight"><pre><span></span><code>$ git log
-commit 331d0cdbf0d55ada0ee114851b846705bf19fd99 <span class="o">(</span>HEAD -&gt; master<span class="o">)</span>
-Author: CTFHub &lt;sandbox@ctfhub.com&gt;
-Date:   Thu May <span class="m">27</span> <span class="m">06</span>:27:19 <span class="m">2021</span> +0000
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>log
+commit<span class="w"> </span>331d0cdbf0d55ada0ee114851b846705bf19fd99<span class="w"> </span><span class="o">(</span>HEAD<span class="w"> </span>-&gt;<span class="w"> </span>master<span class="o">)</span>
+Author:<span class="w"> </span>CTFHub<span class="w"> </span>&lt;sandbox@ctfhub.com&gt;
+Date:<span class="w">   </span>Thu<span class="w"> </span>May<span class="w"> </span><span class="m">27</span><span class="w"> </span><span class="m">06</span>:27:19<span class="w"> </span><span class="m">2021</span><span class="w"> </span>+0000
 
-    remove flag
+<span class="w">    </span>remove<span class="w"> </span>flag
 
-commit 3db6be0b17e9d3141cfee4d7593d0d1a56bc1e82
-Author: CTFHub &lt;sandbox@ctfhub.com&gt;
-Date:   Thu May <span class="m">27</span> <span class="m">06</span>:27:19 <span class="m">2021</span> +0000
+commit<span class="w"> </span>3db6be0b17e9d3141cfee4d7593d0d1a56bc1e82
+Author:<span class="w"> </span>CTFHub<span class="w"> </span>&lt;sandbox@ctfhub.com&gt;
+Date:<span class="w">   </span>Thu<span class="w"> </span>May<span class="w"> </span><span class="m">27</span><span class="w"> </span><span class="m">06</span>:27:19<span class="w"> </span><span class="m">2021</span><span class="w"> </span>+0000
 
-    add flag
+<span class="w">    </span>add<span class="w"> </span>flag
 
-commit 3891bbce49688c80cd02d6bc91953055d249c697
-Author: CTFHub &lt;sandbox@ctfhub.com&gt;
-Date:   Thu May <span class="m">27</span> <span class="m">06</span>:27:19 <span class="m">2021</span> +0000
+commit<span class="w"> </span>3891bbce49688c80cd02d6bc91953055d249c697
+Author:<span class="w"> </span>CTFHub<span class="w"> </span>&lt;sandbox@ctfhub.com&gt;
+Date:<span class="w">   </span>Thu<span class="w"> </span>May<span class="w"> </span><span class="m">27</span><span class="w"> </span><span class="m">06</span>:27:19<span class="w"> </span><span class="m">2021</span><span class="w"> </span>+0000
 
-    init
+<span class="w">    </span>init
 </code></pre></div></li>
 <li>与<code>add flag</code>版本进行比较，差异信息即为 Flag
-    <div class="highlight"><pre><span></span><code>$ git diff 3db6be0b17e9d3141cfee4d7593d0d1a56bc1e82
-diff --git a/1380320821329.txt b/1380320821329.txt
-deleted file mode <span class="m">100644</span>
-index 7bbea29..0000000
---- a/1380320821329.txt
-+++ /dev/null
-@@ -1 +0,0 @@
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>diff<span class="w"> </span>3db6be0b17e9d3141cfee4d7593d0d1a56bc1e82
+diff<span class="w"> </span>--git<span class="w"> </span>a/1380320821329.txt<span class="w"> </span>b/1380320821329.txt
+deleted<span class="w"> </span>file<span class="w"> </span>mode<span class="w"> </span><span class="m">100644</span>
+index<span class="w"> </span>7bbea29..0000000
+---<span class="w"> </span>a/1380320821329.txt
++++<span class="w"> </span>/dev/null
+@@<span class="w"> </span>-1<span class="w"> </span>+0,0<span class="w"> </span>@@
 -ctfhub<span class="o">{</span>9b8fffa8e969d3950e8e98ba<span class="o">}</span>
 </code></pre></div></li>
 </ul>
 <h2 id="stash">Stash<a class="headerlink" href="#stash" title="Permanent link">&para;</a></h2>
 <ul>
 <li>同样地，检出仓库并进入仓库目录
-    <div class="highlight"><pre><span></span><code>$ githacker --url http://challenge-942122132ef0c89f.sandbox.ctfhub.com:10080/.git --folder result
-$ <span class="nb">cd</span> result/
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>githacker<span class="w"> </span>--url<span class="w"> </span>http://challenge-942122132ef0c89f.sandbox.ctfhub.com:10080/.git<span class="w"> </span>--folder<span class="w"> </span>result
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>result/
 </code></pre></div></li>
 <li><code>git stash</code> 保存本地未提交的修改，并将工作目录恢复到当前 <code>HEAD</code> commit 的版本，便于在当前分支修改未提交的情况下切换分支</li>
 <li>使用 <code>git stash apply</code> 恢复，即可获得 Flag 文件
-    <div class="highlight"><pre><span></span><code>$ ls
-50x.html  index.html
-$ git stash apply
-冲突（修改/删除）：291731707232651.txt 在 Updated upstream 中被删除，在 Stashed changes 中被 修改。291731707232651.txt 的 Stashed changes 版本被保留。
-$ ls
-<span class="m">291731707232651</span>.txt  50x.html  index.html
-$ cat <span class="m">291731707232651</span>.txt 
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls
+50x.html<span class="w">  </span>index.html
+$<span class="w"> </span>git<span class="w"> </span>stash<span class="w"> </span>apply
+冲突（修改/删除）：291731707232651.txt<span class="w"> </span>在<span class="w"> </span>Updated<span class="w"> </span>upstream<span class="w"> </span>中被删除，在<span class="w"> </span>Stashed<span class="w"> </span>changes<span class="w"> </span>中被<span class="w"> </span>修改。291731707232651.txt<span class="w"> </span>的<span class="w"> </span>Stashed<span class="w"> </span>changes<span class="w"> </span>版本被保留。
+$<span class="w"> </span>ls
+<span class="m">291731707232651</span>.txt<span class="w">  </span>50x.html<span class="w">  </span>index.html
+$<span class="w"> </span>cat<span class="w"> </span><span class="m">291731707232651</span>.txt<span class="w"> </span>
 ctfhub<span class="o">{</span>bb407b064154f284de35ad5c<span class="o">}</span>
 </code></pre></div></li>
 </ul>
 <h2 id="index">Index<a class="headerlink" href="#index" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>GitHacker</code>检出目录后就看到 Flag 文件了（咦 :0）
-    <div class="highlight"><pre><span></span><code>$ githacker --url http://challenge-4c0f5006f79ca499.sandbox.ctfhub.com:10080/.git --folder result
-$ <span class="nb">cd</span> result/
-$ ls
-<span class="m">2084027691726</span>.txt  50x.html  index.html
-$ cat <span class="m">2084027691726</span>.txt 
+    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>githacker<span class="w"> </span>--url<span class="w"> </span>http://challenge-4c0f5006f79ca499.sandbox.ctfhub.com:10080/.git<span class="w"> </span>--folder<span class="w"> </span>result
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>result/
+$<span class="w"> </span>ls
+<span class="m">2084027691726</span>.txt<span class="w">  </span>50x.html<span class="w">  </span>index.html
+$<span class="w"> </span>cat<span class="w"> </span><span class="m">2084027691726</span>.txt<span class="w"> </span>
 ctfhub<span class="o">{</span>c4bdf1723804493c9d8d61b3<span class="o">}</span>
 </code></pre></div></li>
 <li>Git index 作为工作目录和仓库之间的暂存区域，可存储一组修改一并提交</li>

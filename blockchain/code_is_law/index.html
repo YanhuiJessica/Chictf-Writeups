@@ -2301,6 +2301,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2791,161 +2805,161 @@
 <a href="../static/code-is-law-2.zip"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>code-is-law-2.zip</code></a></p>
 <details class="note">
 <summary>OnlyICanHazToken.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: Unlicense</span><span class="w"></span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: Unlicense</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">OnlyICanHazToken</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">bye</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">selfdestruct</span><span class="p">(</span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">OnlyICanHazToken</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">bye</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">selfdestruct</span><span class="p">(</span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </details>
 <details class="note">
 <summary>index.ts</summary>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">expect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;chai&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ethers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;hardhat&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ChallengeToken</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../typechain&quot;</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">expect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;chai&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ethers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;hardhat&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ChallengeToken</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../typechain&quot;</span><span class="p">;</span>
 
-<span class="c1">// This &quot;Challenge Setup&quot; block must be left as-is</span><span class="w"></span>
-<span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;Challenge Setup&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should deploy ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">ChallengeTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getSigners</span><span class="p">()).</span><span class="nx">pop</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ChallengeTokenFactory</span><span class="p">.</span><span class="nx">deploy</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">deployed</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">});</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="c1">// This &quot;Challenge Setup&quot; block must be left as-is</span>
+<span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;Challenge Setup&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should deploy ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">ChallengeTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getSigners</span><span class="p">()).</span><span class="nx">pop</span><span class="p">());</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ChallengeTokenFactory</span><span class="p">.</span><span class="nx">deploy</span><span class="p">();</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">deployed</span><span class="p">();</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span>
 
-<span class="c1">// Try to solve the challenge below this line</span><span class="w"></span>
-<span class="c1">// Run `npx hardhat ctf-try` to test your solution locally</span><span class="w"></span>
-<span class="c1">// Run `npx hardhat ctf-try --submit` to submit your solution to the remote CTF node and get the real flag</span><span class="w"></span>
-<span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;Solve Challenge&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">challengeToken</span><span class="o">:</span><span class="w"> </span><span class="nx">ChallengeToken</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// Try to solve the challenge below this line</span>
+<span class="c1">// Run `npx hardhat ctf-try` to test your solution locally</span>
+<span class="c1">// Run `npx hardhat ctf-try --submit` to submit your solution to the remote CTF node and get the real flag</span>
+<span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;Solve Challenge&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">challengeToken</span><span class="o">:</span><span class="w"> </span><span class="nx">ChallengeToken</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should return the winning flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should return the winning flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f&quot;</span><span class="p">);</span>
 
-<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">returnedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">did_i_win</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">returnedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">did_i_win</span><span class="p">()</span>
 
-<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`\tThe returned flag is: &quot;</span><span class="si">${</span><span class="nx">returnedFlag</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">});</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`\tThe returned flag is: &quot;</span><span class="si">${</span><span class="nx">returnedFlag</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">)</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div>
 </details>
 <h3 id="code-is-law-1">Code is Law 1<a class="headerlink" href="#code-is-law-1" title="Permanent link">&para;</a></h3>
 <details class="note">
 <summary>ChallengeToken.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: Unlicense</span><span class="w"></span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: Unlicense</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/ERC20.sol&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;hardhat/console.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/ERC20.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;hardhat/console.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">ChallengeToken</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC20</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">onlyICanHazTokenContractCodeHash</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">        </span><span class="mh">0x1431A52467B8E0B496D710A30B897A6EB093CD9137FBF9B34B47441FD5E868F3</span><span class="p">;</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">ChallengeToken</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC20</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">onlyICanHazTokenContractCodeHash</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="mh">0x1431A52467B8E0B496D710A30B897A6EB093CD9137FBF9B34B47441FD5E868F3</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BSIDES2022&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BSIDES2022&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">did_i_win</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">revert</span><span class="p">(</span><span class="s2">&quot;you shall not pass&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">did_i_win</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">revert</span><span class="p">(</span><span class="s2">&quot;you shall not pass&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;BSidesTLV2022{PLACEHOLDER}&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;BSidesTLV2022{PLACEHOLDER}&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">can_i_haz_token</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="nx">receiver</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">calculateAddressOfTheFirstContractDeployedBy</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="p">),</span><span class="w"></span>
-<span class="w">            </span><span class="s2">&quot;receiver is ineligible for a token because they are not the first contract deployed by the EOA who initiated this transaction&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="nx">getContractCodeHash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">onlyICanHazTokenContractCodeHash</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="s2">&quot;receiver is ineligible for a token because their codehash does not match the specific contract codehash required&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">can_i_haz_token</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">receiver</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">calculateAddressOfTheFirstContractDeployedBy</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="p">),</span>
+<span class="w">            </span><span class="s2">&quot;receiver is ineligible for a token because they are not the first contract deployed by the EOA who initiated this transaction&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">getContractCodeHash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">onlyICanHazTokenContractCodeHash</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;receiver is ineligible for a token because their codehash does not match the specific contract codehash required&quot;</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getContractCodeHash</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="kr">private</span><span class="w"></span>
-<span class="w">        </span><span class="nx">view</span><span class="w"></span>
-<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">callerContractCodeHash</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">callerContractCodeHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">extcodehash</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getContractCodeHash</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">)</span>
+<span class="w">        </span><span class="kr">private</span>
+<span class="w">        </span><span class="nx">view</span>
+<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">callerContractCodeHash</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">callerContractCodeHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">extcodehash</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Copied from https://ethereum.stackexchange.com/a/87840</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">calculateAddressOfTheFirstContractDeployedBy</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">deployer</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="kr">private</span><span class="w"></span>
-<span class="w">        </span><span class="nx">pure</span><span class="w"></span>
-<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_address</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">bytes1</span><span class="p">(</span><span class="mh">0xd6</span><span class="p">),</span><span class="w"> </span><span class="nx">bytes1</span><span class="p">(</span><span class="mh">0x94</span><span class="p">),</span><span class="w"> </span><span class="nx">deployer</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes1</span><span class="p">(</span><span class="mh">0x80</span><span class="p">))</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Copied from https://ethereum.stackexchange.com/a/87840</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">calculateAddressOfTheFirstContractDeployedBy</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">deployer</span><span class="p">)</span>
+<span class="w">        </span><span class="kr">private</span>
+<span class="w">        </span><span class="nx">pure</span>
+<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_address</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">bytes1</span><span class="p">(</span><span class="mh">0xd6</span><span class="p">),</span><span class="w"> </span><span class="nx">bytes1</span><span class="p">(</span><span class="mh">0x94</span><span class="p">),</span><span class="w"> </span><span class="nx">deployer</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes1</span><span class="p">(</span><span class="mh">0x80</span><span class="p">))</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">mstore</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="nx">_address</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">mstore</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">_address</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </details>
 <h3 id="code-is-law-2">Code is Law 2<a class="headerlink" href="#code-is-law-2" title="Permanent link">&para;</a></h3>
 <details class="note">
 <summary>ChallengeToken.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">//SPDX-License-Identifier: Unlicense</span><span class="w"></span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">//SPDX-License-Identifier: Unlicense</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/ERC20.sol&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;hardhat/console.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/ERC20.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;hardhat/console.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">ChallengeToken</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC20</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">onlyICanHazTokenContractCodeHash</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">        </span><span class="mh">0x1431A52467B8E0B496D710A30B897A6EB093CD9137FBF9B34B47441FD5E868F3</span><span class="p">;</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">ChallengeToken</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC20</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">onlyICanHazTokenContractCodeHash</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="mh">0x1431A52467B8E0B496D710A30B897A6EB093CD9137FBF9B34B47441FD5E868F3</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BSIDES2022&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BSIDES2022&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">did_i_win</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">revert</span><span class="p">(</span><span class="s2">&quot;you shall not pass&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">did_i_win</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">revert</span><span class="p">(</span><span class="s2">&quot;you shall not pass&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;BSidesTLV2022{PLACEHOLDER}&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;BSidesTLV2022{PLACEHOLDER}&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">can_i_haz_token</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="nx">getContractCodeHash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">onlyICanHazTokenContractCodeHash</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="s2">&quot;receiver is ineligible for a token because their codehash does not match the specific contract codehash required&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">can_i_haz_token</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">getContractCodeHash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">onlyICanHazTokenContractCodeHash</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;receiver is ineligible for a token because their codehash does not match the specific contract codehash required&quot;</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getContractCodeHash</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="kr">private</span><span class="w"></span>
-<span class="w">        </span><span class="nx">view</span><span class="w"></span>
-<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">callerContractCodeHash</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">callerContractCodeHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">extcodehash</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getContractCodeHash</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">)</span>
+<span class="w">        </span><span class="kr">private</span>
+<span class="w">        </span><span class="nx">view</span>
+<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">callerContractCodeHash</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">callerContractCodeHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">extcodehash</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">spender</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">spender</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </details>
 <h2 id="english-ver">解题思路 <a href="https://sekai.team/blog/bsidestlv-2022/code_is_law/">English ver.</a><a class="headerlink" href="#english-ver" title="Permanent link">&para;</a></h2>
@@ -2959,16 +2973,16 @@
 <li>再回头看看 <code>ChallengeToken</code> 的 <code>getContractCodeHash</code> 和 <code>calculateAddressOfTheFirstContractDeployedBy</code> 似乎也没有什么问题，<code>ERC20</code> 就更不可能了 uwu</li>
 <li>
 <p>最后把注意力转移到了 <code>hardhat</code> 上，发现了能修改合约存储的 <code>hardhat_setStorageAt</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>（是神 (╥ω╥)），结合合约变量的存储位置、方式直接修改余额就好了！</p>
-<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should return the winning flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f&quot;</span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should return the winning flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f&quot;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">player</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getSigners</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">playerHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">solidityKeccak256</span><span class="p">([</span><span class="s2">&quot;uint256&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;uint&quot;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="nx">player</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">]);</span><span class="w"></span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">provider</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;hardhat_setStorageAt&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">playerHash</span><span class="p">,</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">hexZeroPad</span><span class="p">(</span><span class="nx">ethers</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">hexlify</span><span class="p">(</span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="mf">32</span><span class="p">)]);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">player</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getSigners</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">playerHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">solidityKeccak256</span><span class="p">([</span><span class="s2">&quot;uint256&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;uint&quot;</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="nx">player</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">provider</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;hardhat_setStorageAt&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">playerHash</span><span class="p">,</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">hexZeroPad</span><span class="p">(</span><span class="nx">ethers</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">hexlify</span><span class="p">(</span><span class="mf">1</span><span class="p">),</span><span class="w"> </span><span class="mf">32</span><span class="p">)]);</span>
 
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">returnedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">did_i_win</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`\tThe returned flag is: &quot;</span><span class="si">${</span><span class="nx">returnedFlag</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">)</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">returnedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">did_i_win</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`\tThe returned flag is: &quot;</span><span class="si">${</span><span class="nx">returnedFlag</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">)</span>
+<span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>ChallengeToken</code> 继承自 <code>ERC20</code>，变量 <code>_balances</code> 用于存储各个账户地址对应的余额</li>
@@ -2985,20 +2999,20 @@
 <li>关键点在于构造函数不是合约代码的一部分，因此可以在 <code>OnlyICanHazToken</code> 的构造函数中 <code>approve</code></li>
 <li>
 <p>扩展合约 <code>OnlyICanHazToken</code></p>
-<div class="highlight"><pre><span></span><code><span class="c1">//SPDX-License-Identifier: Unlicense</span><span class="w"></span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">//SPDX-License-Identifier: Unlicense</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./ChallengeToken.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./ChallengeToken.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">ExtOnlyICanHazToken</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">ChallengeToken</span><span class="p">(</span><span class="mh">0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">ExtOnlyICanHazToken</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ChallengeToken</span><span class="p">(</span><span class="mh">0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">bye</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">selfdestruct</span><span class="p">(</span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">bye</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">selfdestruct</span><span class="p">(</span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
@@ -3006,10 +3020,10 @@
 </li>
 <li>
 <p>打印合约 <code>OnlyICanHazToken</code> 和 <code>ExtOnlyICanHazToken</code> 的字节码进行对比</p>
-<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;OnlyICanHazToken&quot;</span><span class="p">)).</span><span class="nx">bytecode</span><span class="p">);</span><span class="w"></span>
-<span class="c1">// 0x6080604052348015600f57600080fd5b5060848061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063e71b8b9314602d575b600080fd5b60336035565b005b3373ffffffffffffffffffffffffffffffffffffffff16fffea26469706673582212208288fb767ec1f00b6068ee0de53f59961ced5ec5d3e1770e0a0a46ede725d1ff64736f6c63430008040033</span><span class="w"></span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;ExtOnlyICanHazToken&quot;</span><span class="p">)).</span><span class="nx">bytecode</span><span class="p">);</span><span class="w"></span>
-<span class="c1">// 0x608060405234801561001057600080fd5b507373511669fd4de447fed18bb79bafeac93ab7f31f73ffffffffffffffffffffffffffffffffffffffff1663095ea7b33360016040518363ffffffff1660e01b8152600401610061929190610115565b602060405180830381600087803b15801561007b57600080fd5b505af115801561008f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906100b391906100ce565b506101af565b6000815190506100c881610198565b92915050565b6000602082840312156100e057600080fd5b60006100ee848285016100b9565b91505092915050565b6101008161013e565b82525050565b61010f81610186565b82525050565b600060408201905061012a60008301856100f7565b6101376020830184610106565b9392505050565b60006101498261015c565b9050919050565b60008115159050919050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000819050919050565b60006101918261017c565b9050919050565b6101a181610150565b81146101ac57600080fd5b50565b6084806101bd6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063e71b8b9314602d575b600080fd5b60336035565b005b3373ffffffffffffffffffffffffffffffffffffffff16fffea2646970667358221220497d6dee22cd21fcfafd049f00aefcfe7425aa5efdc817d1afe4473a9e7ceb2964736f6c63430008040033</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;OnlyICanHazToken&quot;</span><span class="p">)).</span><span class="nx">bytecode</span><span class="p">);</span>
+<span class="c1">// 0x6080604052348015600f57600080fd5b5060848061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063e71b8b9314602d575b600080fd5b60336035565b005b3373ffffffffffffffffffffffffffffffffffffffff16fffea26469706673582212208288fb767ec1f00b6068ee0de53f59961ced5ec5d3e1770e0a0a46ede725d1ff64736f6c63430008040033</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;ExtOnlyICanHazToken&quot;</span><span class="p">)).</span><span class="nx">bytecode</span><span class="p">);</span>
+<span class="c1">// 0x608060405234801561001057600080fd5b507373511669fd4de447fed18bb79bafeac93ab7f31f73ffffffffffffffffffffffffffffffffffffffff1663095ea7b33360016040518363ffffffff1660e01b8152600401610061929190610115565b602060405180830381600087803b15801561007b57600080fd5b505af115801561008f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906100b391906100ce565b506101af565b6000815190506100c881610198565b92915050565b6000602082840312156100e057600080fd5b60006100ee848285016100b9565b91505092915050565b6101008161013e565b82525050565b61010f81610186565b82525050565b600060408201905061012a60008301856100f7565b6101376020830184610106565b9392505050565b60006101498261015c565b9050919050565b60008115159050919050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000819050919050565b60006101918261017c565b9050919050565b6101a181610150565b81146101ac57600080fd5b50565b6084806101bd6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063e71b8b9314602d575b600080fd5b60336035565b005b3373ffffffffffffffffffffffffffffffffffffffff16fffea2646970667358221220497d6dee22cd21fcfafd049f00aefcfe7425aa5efdc817d1afe4473a9e7ceb2964736f6c63430008040033</span>
 </code></pre></div>
 </li>
 <li>
@@ -3028,24 +3042,24 @@
 </li>
 <li>
 <p>为了通过 <code>extcodehash</code> 的检查，可以使用 <code>OnlyICanHazToken</code> 覆盖 <code>ExtOnlyICanHazToken</code> IPFS 哈希部分的字节码</p>
-<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should return the winning flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">onlyICanHazTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;OnlyICanHazToken&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">extOnlyICanHazTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;ExtOnlyICanHazToken&#39;</span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should return the winning flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">onlyICanHazTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;OnlyICanHazToken&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">extOnlyICanHazTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;ExtOnlyICanHazToken&#39;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">player</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getSigners</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ExtOnlyICanHazTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">ContractFactory</span><span class="p">(</span><span class="nx">onlyICanHazTokenFactory</span><span class="p">.</span><span class="kr">interface</span><span class="p">,</span><span class="w"> </span><span class="nx">extOnlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">extOnlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">onlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">onlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">100</span><span class="p">),</span><span class="w"> </span><span class="nx">player</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">extOnlyICanHazToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ExtOnlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">deploy</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">extOnlyICanHazToken</span><span class="p">.</span><span class="nx">deployed</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">player</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getSigners</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ExtOnlyICanHazTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">ContractFactory</span><span class="p">(</span><span class="nx">onlyICanHazTokenFactory</span><span class="p">.</span><span class="kr">interface</span><span class="p">,</span><span class="w"> </span><span class="nx">extOnlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">extOnlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">onlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">onlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">100</span><span class="p">),</span><span class="w"> </span><span class="nx">player</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">extOnlyICanHazToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ExtOnlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">deploy</span><span class="p">();</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">extOnlyICanHazToken</span><span class="p">.</span><span class="nx">deployed</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f&quot;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">can_i_haz_token</span><span class="p">(</span><span class="nx">extOnlyICanHazToken</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">extOnlyICanHazToken</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">player</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">can_i_haz_token</span><span class="p">(</span><span class="nx">extOnlyICanHazToken</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">extOnlyICanHazToken</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">player</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">returnedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">did_i_win</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">returnedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">did_i_win</span><span class="p">()</span>
 
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`\tThe returned flag is: &quot;</span><span class="si">${</span><span class="nx">returnedFlag</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">)</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`\tThe returned flag is: &quot;</span><span class="si">${</span><span class="nx">returnedFlag</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">)</span>
+<span class="p">});</span>
 </code></pre></div>
 </li>
 </ul>
@@ -3056,102 +3070,102 @@
 <li>接下来思路就很清晰啦，先利用 <code>CREATE2</code> 部署 <code>OnlyICanHazToken</code> 并在取得 <code>token</code> 后 <code>selfdestruct</code>，再在相同地址上部署新的合约来转移 <code>token</code></li>
 <li>
 <p>合约 <code>Deployer</code> 负责部署指定合约</p>
-<div class="highlight"><pre><span></span><code><span class="c1">//SPDX-License-Identifier: Unlicense</span><span class="w"></span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">//SPDX-License-Identifier: Unlicense</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Deployer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">mapping</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="nx">_implementations</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">deployAddr</span><span class="p">;</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Deployer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">mapping</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="nx">_implementations</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">deployAddr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// will be called by the metamorphic Contract</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getImplementation</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">implementation</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">_implementations</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">];</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// will be called by the metamorphic Contract</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getImplementation</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">implementation</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">_implementations</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_getMetamorphicContractAddress</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">salt</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">metamorphicCode</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// determine the address of the metamorphic contract.</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">uint160</span><span class="p">(</span><span class="nx">uint256</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">hex</span><span class="s2">&quot;ff&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">salt</span><span class="p">,</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">metamorphicCode</span><span class="p">)))))));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_getMetamorphicContractAddress</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">salt</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">metamorphicCode</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// determine the address of the metamorphic contract.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">uint160</span><span class="p">(</span><span class="nx">uint256</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">hex</span><span class="s2">&quot;ff&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">salt</span><span class="p">,</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">metamorphicCode</span><span class="p">)))))));</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deploy</span><span class="p">(</span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">bytecode</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">salt</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">implInitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bytecode</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deploy</span><span class="p">(</span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">bytecode</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">salt</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">implInitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bytecode</span><span class="p">;</span>
 
-<span class="w">        </span><span class="c1">// assign the initialization code for the metamorphic contract.</span><span class="w"></span>
-<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">metamorphicCode</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="nx">hex</span><span class="s2">&quot;5860208158601c335a63aaf10f428752fa158151803b80938091923cf3&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="c1">// here 3c (extcodecopy) is used, not 39 (codecopy)</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// assign the initialization code for the metamorphic contract.</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">metamorphicCode</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="nx">hex</span><span class="s2">&quot;5860208158601c335a63aaf10f428752fa158151803b80938091923cf3&quot;</span>
+<span class="w">            </span><span class="c1">// here 3c (extcodecopy) is used, not 39 (codecopy)</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// declare a variable for the address of the implementation contract.</span><span class="w"></span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">implementationContract</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// declare a variable for the address of the implementation contract.</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">implementationContract</span><span class="p">;</span>
 
-<span class="w">        </span><span class="c1">// load implementation init code and length, then deploy via CREATE.</span><span class="w"></span>
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nx">implementationContract</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">create</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="mh">0x20</span><span class="p">,</span><span class="w"> </span><span class="nx">implInitCode</span><span class="p">),</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="nx">implInitCode</span><span class="p">))</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// load implementation init code and length, then deploy via CREATE.</span>
+<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">implementationContract</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">create</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="mh">0x20</span><span class="p">,</span><span class="w"> </span><span class="nx">implInitCode</span><span class="p">),</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="nx">implInitCode</span><span class="p">))</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">metamorphicContractAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_getMetamorphicContractAddress</span><span class="p">(</span><span class="nx">salt</span><span class="p">,</span><span class="w"> </span><span class="nx">metamorphicCode</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// first we deploy the code we want to deploy on a separate address</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// store the implementation to be retrieved by the metamorphic contract.</span><span class="w"></span>
-<span class="w">        </span><span class="nx">_implementations</span><span class="p">[</span><span class="nx">metamorphicContractAddress</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">implementationContract</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">metamorphicContractAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_getMetamorphicContractAddress</span><span class="p">(</span><span class="nx">salt</span><span class="p">,</span><span class="w"> </span><span class="nx">metamorphicCode</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// first we deploy the code we want to deploy on a separate address</span>
+<span class="w">        </span><span class="c1">// store the implementation to be retrieved by the metamorphic contract.</span>
+<span class="w">        </span><span class="nx">_implementations</span><span class="p">[</span><span class="nx">metamorphicContractAddress</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">implementationContract</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">addr</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">addr</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
-<span class="w">            </span><span class="nx">addr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">create2</span><span class="p">(</span><span class="w"></span>
-<span class="w">                </span><span class="mf">0</span><span class="p">,</span><span class="w">  </span><span class="c1">// send 0 wei</span><span class="w"></span>
-<span class="w">                </span><span class="nx">add</span><span class="p">(</span><span class="mh">0x20</span><span class="p">,</span><span class="w"> </span><span class="nx">metamorphicCode</span><span class="p">),</span><span class="w"> </span><span class="c1">// load initialization code.</span><span class="w"></span>
-<span class="w">                </span><span class="nx">mload</span><span class="p">(</span><span class="nx">metamorphicCode</span><span class="p">),</span><span class="w"> </span><span class="c1">// load init code&#39;s length.</span><span class="w"></span>
-<span class="w">                </span><span class="nx">salt</span><span class="w"></span>
-<span class="w">            </span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="nx">addr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">create2</span><span class="p">(</span>
+<span class="w">                </span><span class="mf">0</span><span class="p">,</span><span class="w">  </span><span class="c1">// send 0 wei</span>
+<span class="w">                </span><span class="nx">add</span><span class="p">(</span><span class="mh">0x20</span><span class="p">,</span><span class="w"> </span><span class="nx">metamorphicCode</span><span class="p">),</span><span class="w"> </span><span class="c1">// load initialization code.</span>
+<span class="w">                </span><span class="nx">mload</span><span class="p">(</span><span class="nx">metamorphicCode</span><span class="p">),</span><span class="w"> </span><span class="c1">// load init code&#39;s length.</span>
+<span class="w">                </span><span class="nx">salt</span>
+<span class="w">            </span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="nx">deployAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">addr</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="nx">deployAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">addr</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
 <p>合约 <code>Withdrawer</code> 用于转移 <code>token</code>，在 <code>OnlyICanHazToken</code> 实例自毁后由 <code>Deployer</code> 部署到原 <code>OnlyICanHazToken</code> 实例所在的地址</p>
-<div class="highlight"><pre><span></span><code><span class="c1">//SPDX-License-Identifier: Unlicense</span><span class="w"></span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">//SPDX-License-Identifier: Unlicense</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./ChallengeToken.sol&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./ChallengeToken.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Withdrawer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nx">ChallengeToken</span><span class="p">(</span><span class="mh">0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Withdrawer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ChallengeToken</span><span class="p">(</span><span class="mh">0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
 <p>合约交互过程</p>
-<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should return the winning flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f&quot;</span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should return the winning flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">challengeToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;ChallengeToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f&quot;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">salt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">salt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">deployerFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;Deployer&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">deployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">deployerFactory</span><span class="p">.</span><span class="nx">deploy</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deployed</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">deployerFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;Deployer&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">deployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">deployerFactory</span><span class="p">.</span><span class="nx">deploy</span><span class="p">();</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deployed</span><span class="p">();</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">onlyICanHazTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;OnlyICanHazToken&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="nx">onlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">,</span><span class="w"> </span><span class="nx">salt</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">deployAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deployAddr</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">can_i_haz_token</span><span class="p">(</span><span class="nx">deployAddr</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">onlyICanHazTokenFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;OnlyICanHazToken&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="nx">onlyICanHazTokenFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">,</span><span class="w"> </span><span class="nx">salt</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">deployAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deployAddr</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">can_i_haz_token</span><span class="p">(</span><span class="nx">deployAddr</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">onlyICanHazToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;OnlyICanHazToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">deployAddr</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">onlyICanHazToken</span><span class="p">.</span><span class="nx">bye</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">onlyICanHazToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;OnlyICanHazToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">deployAddr</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">onlyICanHazToken</span><span class="p">.</span><span class="nx">bye</span><span class="p">();</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">withdrawerFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;Withdrawer&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="nx">withdrawerFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">,</span><span class="w"> </span><span class="nx">salt</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">withdrawer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;Withdrawer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">deployAddr</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">withdrawer</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">withdrawerFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;Withdrawer&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="nx">withdrawerFactory</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">,</span><span class="w"> </span><span class="nx">salt</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">withdrawer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractAt</span><span class="p">(</span><span class="s2">&quot;Withdrawer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">deployAddr</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">withdrawer</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">();</span>
 
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">returnedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">did_i_win</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">returnedFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">challengeToken</span><span class="p">.</span><span class="nx">did_i_win</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`\tThe returned flag is: &quot;</span><span class="si">${</span><span class="nx">returnedFlag</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">)</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`\tThe returned flag is: &quot;</span><span class="si">${</span><span class="nx">returnedFlag</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">)</span>
+<span class="p">});</span>
 </code></pre></div>
 </li>
 </ul>

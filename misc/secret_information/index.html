@@ -2220,6 +2220,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2600,11 +2614,11 @@
 <h2 id="_1">解题思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>使用<code>binwalk</code>查看，发现包含压缩文件
-    <div class="highlight"><pre><span></span><code>DECIMAL       HEXADECIMAL     DESCRIPTION
+    <div class="highlight"><pre><span></span><code>DECIMAL<span class="w">       </span>HEXADECIMAL<span class="w">     </span>DESCRIPTION
 --------------------------------------------------------------------------------
-<span class="m">0</span>             0x0             JPEG image data, JFIF standard <span class="m">1</span>.01
-<span class="m">24976</span>         0x6190          Zip archive data, encrypted at least v2.0 to extract, compressed size: <span class="m">453</span>, uncompressed size: <span class="m">5038</span>, name: flag.txt
-<span class="m">25557</span>         0x63D5          End of Zip archive
+<span class="m">0</span><span class="w">             </span>0x0<span class="w">             </span>JPEG<span class="w"> </span>image<span class="w"> </span>data,<span class="w"> </span>JFIF<span class="w"> </span>standard<span class="w"> </span><span class="m">1</span>.01
+<span class="m">24976</span><span class="w">         </span>0x6190<span class="w">          </span>Zip<span class="w"> </span>archive<span class="w"> </span>data,<span class="w"> </span>encrypted<span class="w"> </span>at<span class="w"> </span>least<span class="w"> </span>v2.0<span class="w"> </span>to<span class="w"> </span>extract,<span class="w"> </span>compressed<span class="w"> </span>size:<span class="w"> </span><span class="m">453</span>,<span class="w"> </span>uncompressed<span class="w"> </span>size:<span class="w"> </span><span class="m">5038</span>,<span class="w"> </span>name:<span class="w"> </span>flag.txt
+<span class="m">25557</span><span class="w">         </span>0x63D5<span class="w">          </span>End<span class="w"> </span>of<span class="w"> </span>Zip<span class="w"> </span>archive
 </code></pre></div></li>
 <li>使用<code>dd if=misc03.jpg of=flag.zip skip=24976 bs=1</code>提取压缩包（直接使用<code>binwalk -e</code>提取会导致压缩包损坏）</li>
 <li>解压时，发现需要输入密码，使用工具爆破得到密码为<code>7878</code><br>

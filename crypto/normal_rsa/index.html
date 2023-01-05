@@ -2220,6 +2220,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2602,19 +2616,19 @@
 <li>附件为一个公钥文件 <em>pubkey.pem</em> 和一个经过加密的文件 <em>flag.enc</em></li>
 <li>直接使用工具 <a href="https://github.com/Ganapati/RsaCtfTool">Ganapati/RsaCtfTool</a> 解密
     <div class="highlight"><pre><span></span><code><span class="c1"># factordb 在线分解 N</span>
-$ ./RsaCtfTool.py --publickey pubkey.pem --uncipherfile flag.enc --attack factordb
-private argument is not set, the private key will not be displayed, even <span class="k">if</span> recovered.
+$<span class="w"> </span>./RsaCtfTool.py<span class="w"> </span>--publickey<span class="w"> </span>pubkey.pem<span class="w"> </span>--uncipherfile<span class="w"> </span>flag.enc<span class="w"> </span>--attack<span class="w"> </span>factordb
+private<span class="w"> </span>argument<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>set,<span class="w"> </span>the<span class="w"> </span>private<span class="w"> </span>key<span class="w"> </span>will<span class="w"> </span>not<span class="w"> </span>be<span class="w"> </span>displayed,<span class="w"> </span>even<span class="w"> </span><span class="k">if</span><span class="w"> </span>recovered.
 
-<span class="o">[</span>*<span class="o">]</span> Testing key pubkey.pem.
-<span class="o">[</span>*<span class="o">]</span> Performing factordb attack on pubkey.pem.
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Testing<span class="w"> </span>key<span class="w"> </span>pubkey.pem.
+<span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Performing<span class="w"> </span>factordb<span class="w"> </span>attack<span class="w"> </span>on<span class="w"> </span>pubkey.pem.
 
-Results <span class="k">for</span> pubkey.pem:
+Results<span class="w"> </span><span class="k">for</span><span class="w"> </span>pubkey.pem:
 
-Unciphered data :
-HEX : 0x0002c0fe04e3260e5b8700504354467b323536625f69355f6d336469756d7d0a
-INT <span class="o">(</span>big endian<span class="o">)</span> : <span class="m">4865677769286717240419296208145914517832094464845949055035370987525602570</span>
-INT <span class="o">(</span>little endian<span class="o">)</span> : <span class="m">4744739824694533032519230312074638919149793854447671791679980959756701401600</span>
-STR : b<span class="s1">&#39;\x00\x02\xc0\xfe\x04\xe3&amp;\x0e[\x87\x00PCTF{256b_i5_m3dium}\n&#39;</span>
+Unciphered<span class="w"> </span>data<span class="w"> </span>:
+HEX<span class="w"> </span>:<span class="w"> </span>0x0002c0fe04e3260e5b8700504354467b323536625f69355f6d336469756d7d0a
+INT<span class="w"> </span><span class="o">(</span>big<span class="w"> </span>endian<span class="o">)</span><span class="w"> </span>:<span class="w"> </span><span class="m">4865677769286717240419296208145914517832094464845949055035370987525602570</span>
+INT<span class="w"> </span><span class="o">(</span>little<span class="w"> </span>endian<span class="o">)</span><span class="w"> </span>:<span class="w"> </span><span class="m">4744739824694533032519230312074638919149793854447671791679980959756701401600</span>
+STR<span class="w"> </span>:<span class="w"> </span>b<span class="s1">&#39;\x00\x02\xc0\xfe\x04\xe3&amp;\x0e[\x87\x00PCTF{256b_i5_m3dium}\n&#39;</span>
 </code></pre></div></li>
 <li>Flag 为<code>PCTF{256b_i5_m3dium}</code></li>
 </ul>

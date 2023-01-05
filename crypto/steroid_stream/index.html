@@ -2249,6 +2249,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2672,7 +2686,7 @@
 <li>异或等同于 <span class="arithmatex">\(GF(2)\)</span> 中的加法，可以把 <code>fake</code> 数组中的值看作是已知 <code>keys</code> 的线性组合，而 <code>keys</code> 数组中的值相互间线性无关，从而可以区分 <code>fake</code> 和 <code>keys</code></li>
 <li>使用已知 <code>keys</code> 构建一个以 <code>keys</code> 为行的 <span class="arithmatex">\(GF(2)\)</span> 矩阵，假设 <code>keys</code> 的数量为 <span class="arithmatex">\(k\)</span>，那么有 <span class="arithmatex">\(k\)</span> 行相互独立，矩阵的秩（rank）为 <span class="arithmatex">\(k\)</span>。添加值 <span class="arithmatex">\(v\)</span> 到 <span class="arithmatex">\(k + 1\)</span> 行，如果 <span class="arithmatex">\(v\)</span> 是 <code>keys</code> 的线性组合，那么矩阵的秩仍为 <span class="arithmatex">\(k\)</span>，否则是 <span class="arithmatex">\(k + 1\)</span>
     <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">gf2_rank</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find rank of a matrix over GF2.</span>
 
 <span class="sd">    The rows of the matrix are given as nonnegative integers, thought</span>
