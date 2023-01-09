@@ -106,6 +106,7 @@ nav:
       - corCTF 2022:
         - exchanged: crypto/exchanged.md
         - leapfrog: crypto/leapfrog.md
+      - shuffle128: crypto/shuffle128.md
     - Blockchain:
       - Code is Law: blockchain/code_is_law.md
       - Totally Secure Dapp: blockchain/totally_secure_dapp.md
