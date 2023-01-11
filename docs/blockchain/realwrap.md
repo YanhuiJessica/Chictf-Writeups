@@ -3,6 +3,8 @@ title: Blockchain - realwrap
 description: 2023 | Real World CTF | Blockchain
 tags:
     - smart contract
+    - precompiled contract
+    - evm
 ---
 
 ## 题目
