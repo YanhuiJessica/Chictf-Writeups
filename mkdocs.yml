@@ -118,6 +118,7 @@ nav:
       - 链上记忆大师: blockchain/memory_master_on_the_chain.md
       - Cookie Market: blockchain/cookie_market.md
       - TetCTFToken: blockchain/tetctftoken.md
+      - realwrap: blockchain/realwrap.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
