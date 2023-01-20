@@ -116,7 +116,7 @@ export default async function fund(
 
 ## Get the balance
 
-> Implement `publicKey` & `balance`.
+> Implement `publicKey` & `balance`
 
 ```ts
 // pages/api/solana/balance.ts
