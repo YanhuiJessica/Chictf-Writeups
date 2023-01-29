@@ -3186,6 +3186,7 @@
 <span class="w">    </span><span class="c1">// try_from_slice will mutably reference and deserialize the account.data</span>
 <span class="w">    </span><span class="n">greeting_account</span><span class="p">.</span><span class="n">counter</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">    </span><span class="n">greeting_account</span><span class="p">.</span><span class="n">serialize</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">account</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">borrow_mut</span><span class="p">()[</span><span class="o">..</span><span class="p">])</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// with the serialize(), the new counter value is sent back to Solana</span>
 
 <span class="w">    </span><span class="n">msg</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Greeted {} time(s)!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">greeting_account</span><span class="p">.</span><span class="n">counter</span><span class="p">);</span>
 
@@ -3485,7 +3486,7 @@ $<span class="w"> </span>solana<span class="w"> </span>deploy<span class="w"> </
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">January 20, 2023 23:38:04</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">January 29, 2023 23:56:10</span>
       
     
   </small>
