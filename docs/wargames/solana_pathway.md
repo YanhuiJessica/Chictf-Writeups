@@ -282,6 +282,7 @@ export default async function transfer(
         // try_from_slice will mutably reference and deserialize the account.data
         greeting_account.counter += 1;
         greeting_account.serialize(&mut &mut account.data.borrow_mut()[..])?;
+        // with the serialize(), the new counter value is sent back to Solana
 
         msg!("Greeted {} time(s)!", greeting_account.counter);
 
