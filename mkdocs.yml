@@ -132,6 +132,7 @@ nav:
         - Final: wargames/protostar/final.md
       - Ethernaut: wargames/ethernaut.md
       - Solana Pathway: wargames/solana_pathway.md
+      - Solana Security Workshop: wargames/solana_security_workshop.md
     - 彩蛋:
       - CTFHub - 首页: eggs/ctfhub_index.md
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
