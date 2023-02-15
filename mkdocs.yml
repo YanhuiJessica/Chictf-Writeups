@@ -119,6 +119,7 @@ nav:
       - Cookie Market: blockchain/cookie_market.md
       - TetCTFToken: blockchain/tetctftoken.md
       - realwrap: blockchain/realwrap.md
+      - evmvm: blockchain/evmvm.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
