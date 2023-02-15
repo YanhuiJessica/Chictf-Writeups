@@ -3090,11 +3090,15 @@
 <li><code>g</code>，可以简单地借用 <code>GASLIMIT</code> 来设置</li>
 <li>
 <p><code>a</code>，通过 <code>arg</code> 传入 <code>Setup</code> 的地址，由 <code>calldataload(p)</code> 获取。可借助 <code>CHAINID</code>（值为 1）来构造任意值</p>
-<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>sig(4 bytes) | opcode(32 bytes) | arg(32 bytes)
--|-|-
-</code></pre></div></td></tr></table></div>
-
+<p><table>
+    <tbody>
+        <tr>
+            <td> sig(4 bytes) </td>
+            <td> opcode(32 bytes) </td>
+            <td> arg(32 bytes) </td>
+        </tr>
+    </tbody>
+</table></p>
 </li>
 <li>
 <p><code>in</code> &amp; <code>insize</code> &amp; <code>out</code> &amp; <code>outsize</code>，无需传参且没有输出，可设置为 0</p>
@@ -3204,7 +3208,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 15, 2023 15:43:32</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 15, 2023 15:53:54</span>
       
     
   </small>
