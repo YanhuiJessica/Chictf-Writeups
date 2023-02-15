@@ -317,8 +317,15 @@ All these zoomers with their "metaverse" or something are thinking far too primi
     - `g`，可以简单地借用 `GASLIMIT` 来设置
     - `a`，通过 `arg` 传入 `Setup` 的地址，由 `calldataload(p)` 获取。可借助 `CHAINID`（值为 1）来构造任意值
 
-            sig(4 bytes) | opcode(32 bytes) | arg(32 bytes)
-            -|-|-
+        <table>
+            <tbody>
+                <tr>
+                    <td> sig(4 bytes) </td>
+                    <td> opcode(32 bytes) </td>
+                    <td> arg(32 bytes) </td>
+                </tr>
+            </tbody>
+        </table>
 
     - `in` & `insize` & `out` & `outsize`，无需传参且没有输出，可设置为 0
 
