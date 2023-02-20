@@ -5,6 +5,7 @@ tags:
     - smart contract
     - solidity
     - flashloan
+    - UUPS
 ---
 
 ## 题目
@@ -26,6 +27,7 @@ Good luck.
 - 目标是将 100 Diamonds 转移到 `Setup` 实例
 
     ```js
+    // contract Setup
     function isSolved() external view returns (bool) {
         return diamond.balanceOf(address(this)) == DIAMONDS;
     }
@@ -34,6 +36,7 @@ Good luck.
 - `Setup` 部署后，`Vault` 的代理合约持有 100 Diamonds，显然需要通过更新合约来进行 Diamond 的转移操作。不过，`Vault` 采用 UUPS 代理模式，虽然没有初始化其逻辑合约，但由于存在 `onlyProxy` 修饰符，无法通过逻辑合约升级
 
     ```js
+    // contract Setup
     constructor () {
         vaultFactory = new VaultFactory();
         vault = vaultFactory.createVault(keccak256("The tea in Nepal is very hot."));
@@ -47,6 +50,7 @@ Good luck.
 - 当 `Vault` 代理合约的调用者为 `owner` 或代理合约自身且代理合约持有 Diamond 的数量为 $0$ 时，允许更新合约逻辑
 
     ```js
+    // contract Vault
     function _authorizeUpgrade(address) internal override view {
         require(msg.sender == owner() || msg.sender == address(this));
         require(IERC20(diamond).balanceOf(address(this)) == 0);
@@ -56,6 +60,7 @@ Good luck.
 - `Vault` 代理合约的所有者为 `Setup`，而 `Setup` 中没有 `transferOwnership` 相关的逻辑，无法以 `owner` 身份更新。注意到当调用者的票数不小于 `AUTHORITY_THRESHOLD` 时，可以以 `Vault` 代理合约的身份调用 `Vault` 中的任意函数
 
     ```js
+    // contract Vault
     uint constant public AUTHORITY_THRESHOLD = 10_000 ether;
     function governanceCall(bytes calldata data) external {
         require(msg.sender == owner() || saltyPretzel.getCurrentVotes(msg.sender) >= AUTHORITY_THRESHOLD);
@@ -67,6 +72,7 @@ Good luck.
 - 至于使 `IERC20(diamond).balanceOf(address(this)) == 0` 可以通过 `flashloan` 解决
 
     ```js
+    // contract Vault
     function flashloan(address token, uint amount, address receiver) external {
         uint balanceBefore = IERC20(token).balanceOf(address(this)); // 只能借用代理合约持有的 token
         IERC20(token).transfer(receiver, amount);
@@ -79,6 +85,7 @@ Good luck.
 - 那么，接下来考虑如何获取足够的票数。初始可通过 `Setup.claim()` 获得 `SALTY_PRETZELS(100 ether)`，`mint` 将首先增加 `_to` 持有的代币数量，随后增加 `_delegates[_to]` 的票数。由于 `srcRep` 为 `address(0)`，不对其执行减少票数的操作，因而总票数是增加的
 
     ```js
+    // contract SaltyPretzel
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
@@ -106,6 +113,7 @@ Good luck.
 - 代币 `SP` 的数量自 `Setup.claim()` 后不再变化，`_moveDelegates` 从 `address(0)` 到任意不为 0 的地址似乎是增加总票数的唯一方法。当 `delegator` 初次声明 `delegatee` 时，`currentDelegate` 为 `address(0)`，将为 `delegatee` 增加 `balanceOf(delegator)` 票。那么，可以将持有的代币转移给新的 `delegator` 再由其调用 `delegate()` 来增加 `delegatee` 的票数
 
     ```js
+    // contract SaltyPretzel
     function delegate(address delegatee) external {
         return _delegate(msg.sender, delegatee);
     }
