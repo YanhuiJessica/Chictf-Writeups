@@ -121,6 +121,7 @@ nav:
       - realwrap: blockchain/realwrap.md
       - evmvm: blockchain/evmvm.md
       - HackTM CTF 2023:
+        - Dragon Slayer: blockchain/dragon_slayer.md
         - Diamond Heist: blockchain/diamond_heist.md
     - Wargames:
       - Natas: wargames/natas.md
