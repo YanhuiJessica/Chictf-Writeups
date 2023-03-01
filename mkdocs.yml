@@ -179,6 +179,7 @@ plugins:
           tags:
             insert: top
         locale: zh_CN
+        time_format: "%Y/%m/%d %H:%M"
         size: 5
         paging: false
         show_total: false
