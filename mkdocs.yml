@@ -178,7 +178,7 @@ plugins:
         features:
           tags:
             insert: top
-        locale: en
+        locale: zh-CN
         size: 5
         paging: false
         show_total: false
