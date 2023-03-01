@@ -178,6 +178,7 @@ plugins:
         features:
           tags:
             insert: top
+        locale: en
         size: 5
         paging: false
         show_total: false
