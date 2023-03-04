@@ -951,7 +951,7 @@ contract GatekeeperOne {
 
     - 由此可计算出通过 `gateTwo` 实际需要的最少汽油量：$90000-89577+8191\times 3=24996$
         - `entrant = tx.origin` 包含 `SSTORE` 操作码，因为 `entrant` 未被写入过，至少需要消耗 20000 汽油
-    - 在 Goerli 测试网络中运行时会抛出异常，再次调试，观察栈中出现 `0x1fff(8191)` 的下一个数字，为 `0x60a4(24740)`，得出最终需要的汽油量为：$24996-24740+8191\times 3=24829$
+    - 在 Goerli 测试网络中运行时会抛出异常，再次调试，观察栈中出现 `0x1fff(8191)` 的下一个数字，为 `0x60a4(24740)`，得出最终需要的汽油量为：$24996-24740+8191\times 3=24829$<br>
 ![0x60a4](img/ethernaut05.jpg)
 
 - 对于 `gateThree`，用 $A_0A_1...A_7$ 来表示 `_gateKey` 的各个字节
@@ -2092,7 +2092,7 @@ contract Engine is Initializable {
 - 与透明代理模式不同，UUPS 代理模式由逻辑合约负责升级逻辑，因而代理合约部署的代价较小
 - `upgrader` 可以使用 `upgradeToAndCall()` 更新逻辑合约并调用
 - `Motorbike` 在部署时通过 `delegatecall` 调用 `Engine` 的 `initialize()`，`initialize()` 使用 `initializer` 函数修饰符，避免再次初始化
-    - `initializer` 修饰符使用状态变量 `initialized` 和 `initializing` 记录初始化状态
+    - `initializer` 修饰符使用状态变量 `initialized` 和 `initializing` 记录或判断初始化状态
 - `initialized` 存储在 `Motorbike` 实例中，而不是 `Engine`，因而可以直接调用 `Engine` 实例的 `initialize()` 再更新其逻辑合约的地址并调用
 - *不要让逻辑合约处于未初始化状态*
 
@@ -2120,3 +2120,170 @@ contract Bomb {
 - [Proxies - OpenZeppelin Docs](https://docs.openzeppelin.com/contracts/4.x/api/proxy#transparent-vs-uups)
 - [Constant and Immutable State Variables](https://docs.soliditylang.org/en/latest/contracts.html#constants)
 - [Writing Upgradeable Contracts - OpenZeppelin Docs](https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable)
+
+## 26. DoubleEntryPoint
+
+- 防止合约 `CryptoVault` 被清空代币
+- 实现能够正确告警以防止潜在攻击或漏洞利用的 `detection bot` 合约并在 `Forta` 注册
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "openzeppelin-contracts-08/access/Ownable.sol";
+import "openzeppelin-contracts-08/token/ERC20/ERC20.sol";
+
+interface DelegateERC20 {
+  function delegateTransfer(address to, uint256 value, address origSender) external returns (bool);
+}
+
+interface IDetectionBot {
+    function handleTransaction(address user, bytes calldata msgData) external;
+}
+
+interface IForta {
+    function setDetectionBot(address detectionBotAddress) external;
+    function notify(address user, bytes calldata msgData) external;
+    function raiseAlert(address user) external;
+}
+
+contract Forta is IForta {
+  mapping(address => IDetectionBot) public usersDetectionBots;
+  mapping(address => uint256) public botRaisedAlerts;
+
+  function setDetectionBot(address detectionBotAddress) external override {
+      usersDetectionBots[msg.sender] = IDetectionBot(detectionBotAddress);
+  }
+
+  function notify(address user, bytes calldata msgData) external override {
+    if(address(usersDetectionBots[user]) == address(0)) return;
+    try usersDetectionBots[user].handleTransaction(user, msgData) {
+        return;
+    } catch {}
+  }
+
+  function raiseAlert(address user) external override {
+      if(address(usersDetectionBots[user]) != msg.sender) return;
+      botRaisedAlerts[msg.sender] += 1;
+  } 
+}
+
+contract CryptoVault {
+    address public sweptTokensRecipient;  // player
+    IERC20 public underlying; // DoubleEntryPoint
+
+    constructor(address recipient) {
+        sweptTokensRecipient = recipient;
+    }
+
+    function setUnderlying(address latestToken) public {
+        require(address(underlying) == address(0), "Already set");
+        underlying = IERC20(latestToken);
+    }
+
+    /*
+    ...
+    */
+
+    function sweepToken(IERC20 token) public {
+        require(token != underlying, "Can't transfer underlying token");
+        token.transfer(sweptTokensRecipient, token.balanceOf(address(this)));
+    }
+}
+
+contract LegacyToken is ERC20("LegacyToken", "LGT"), Ownable {
+    DelegateERC20 public delegate;
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+
+    function delegateToNewContract(DelegateERC20 newContract) public onlyOwner {
+        delegate = newContract;
+    }
+
+    function transfer(address to, uint256 value) public override returns (bool) {
+        if (address(delegate) == address(0)) {
+            return super.transfer(to, value);
+        } else {
+            return delegate.delegateTransfer(to, value, msg.sender);
+        }
+    }
+}
+
+contract DoubleEntryPoint is ERC20("DoubleEntryPointToken", "DET"), DelegateERC20, Ownable {
+    address public cryptoVault;
+    address public player;
+    address public delegatedFrom;
+    Forta public forta;
+
+    constructor(address legacyToken, address vaultAddress, address fortaAddress, address playerAddress) {
+        delegatedFrom = legacyToken;
+        forta = Forta(fortaAddress);
+        player = playerAddress;
+        cryptoVault = vaultAddress;
+        _mint(cryptoVault, 100 ether);
+    }
+
+    modifier onlyDelegateFrom() {
+        require(msg.sender == delegatedFrom, "Not legacy contract");
+        _;
+    }
+
+    modifier fortaNotify() {
+        address detectionBot = address(forta.usersDetectionBots(player));
+
+        // Cache old number of bot alerts
+        uint256 previousValue = forta.botRaisedAlerts(detectionBot);
+
+        // Notify Forta
+        forta.notify(player, msg.data);
+
+        // Continue execution
+        _;
+
+        // Check if alarms have been raised
+        if(forta.botRaisedAlerts(detectionBot) > previousValue) revert("Alert has been triggered, reverting");
+    }
+
+    function delegateTransfer(
+        address to,
+        uint256 value,
+        address origSender
+    ) public override onlyDelegateFrom fortaNotify returns (bool) {
+        _transfer(origSender, to, value);
+        return true;
+    }
+}
+```
+
+- 传入 `CryptoVault.sweepToken()` 代币的地址不能等于 `underlying`，而若传入 `LegacyToken` 的地址，将调用 `delegateTransfer`，实际转移的是 `CryptoVault` 持有的 `DET` 代币，对应 `underlying`
+- 若 `origSender` 为 `CryptoVault` 的实例则 `raiseAlert`
+
+    ```js
+    contract DetectionBot is IDetectionBot {
+      address vault;
+
+      constructor(address instance) {
+        DoubleEntryPoint dep = DoubleEntryPoint(instance);
+        vault = dep.cryptoVault();
+      }
+
+      function handleTransaction(address user, bytes calldata msgData) external {
+        // skip the 4-byte function signature
+        ( , , address sender) = abi.decode(msgData[4:], (address, uint256, address));
+        if (sender == vault) {
+          IForta(msg.sender).raiseAlert(user);
+        }
+      }
+    }
+    ```
+
+- 部署 `DetectionBot` 后，使用 `player` 账户调用 `Forta.setDetectionBot()`
+- 可以在 `sweepToken()` 的最后检查合约 `underlying` 的余额是否和调用前相同
+
+### 参考资料
+
+- [ABI Decode | Solidity by Example](https://solidity-by-example.org/abi-decode/)
+- [abi.decode cannot decode `msg.data` · Issue #6012 · ethereum/solidity](https://github.com/ethereum/solidity/issues/6012)
+- [TrueUSD ↔ Compound Vulnerability | by ChainSecurity | ChainSecurity | Medium](https://medium.com/chainsecurity/trueusd-compound-vulnerability-bc5b696d29e2)
