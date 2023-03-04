@@ -2923,6 +2923,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#26-doubleentrypoint" class="md-nav__link">
+    26. DoubleEntryPoint
+  </a>
+  
+    <nav class="md-nav" aria-label="26. DoubleEntryPoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3481,6 +3501,26 @@
         
           <li class="md-nav__item">
   <a href="#_16" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-doubleentrypoint" class="md-nav__link">
+    26. DoubleEntryPoint
+  </a>
+  
+    <nav class="md-nav" aria-label="26. DoubleEntryPoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
     参考资料
   </a>
   
@@ -4440,7 +4480,7 @@
 <li><code>entrant = tx.origin</code> 包含 <code>SSTORE</code> 操作码，因为 <code>entrant</code> 未被写入过，至少需要消耗 20000 汽油</li>
 </ul>
 </li>
-<li>在 Goerli 测试网络中运行时会抛出异常，再次调试，观察栈中出现 <code>0x1fff(8191)</code> 的下一个数字，为 <code>0x60a4(24740)</code>，得出最终需要的汽油量为：<span class="arithmatex">\(24996-24740+8191\times 3=24829\)</span>
+<li>在 Goerli 测试网络中运行时会抛出异常，再次调试，观察栈中出现 <code>0x1fff(8191)</code> 的下一个数字，为 <code>0x60a4(24740)</code>，得出最终需要的汽油量为：<span class="arithmatex">\(24996-24740+8191\times 3=24829\)</span><br>
 <img alt="0x60a4" src="../img/ethernaut05.jpg" /></li>
 </ul>
 </li>
@@ -5555,7 +5595,7 @@ f3  // return
 <li>与透明代理模式不同，UUPS 代理模式由逻辑合约负责升级逻辑，因而代理合约部署的代价较小</li>
 <li><code>upgrader</code> 可以使用 <code>upgradeToAndCall()</code> 更新逻辑合约并调用</li>
 <li><code>Motorbike</code> 在部署时通过 <code>delegatecall</code> 调用 <code>Engine</code> 的 <code>initialize()</code>，<code>initialize()</code> 使用 <code>initializer</code> 函数修饰符，避免再次初始化<ul>
-<li><code>initializer</code> 修饰符使用状态变量 <code>initialized</code> 和 <code>initializing</code> 记录初始化状态</li>
+<li><code>initializer</code> 修饰符使用状态变量 <code>initialized</code> 和 <code>initializing</code> 记录或判断初始化状态</li>
 </ul>
 </li>
 <li><code>initialized</code> 存储在 <code>Motorbike</code> 实例中，而不是 <code>Engine</code>，因而可以直接调用 <code>Engine</code> 实例的 <code>initialize()</code> 再更新其逻辑合约的地址并调用</li>
@@ -5581,13 +5621,180 @@ f3  // return
 <li><a href="https://docs.soliditylang.org/en/latest/contracts.html#constants">Constant and Immutable State Variables</a></li>
 <li><a href="https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable">Writing Upgradeable Contracts - OpenZeppelin Docs</a></li>
 </ul>
+<h2 id="26-doubleentrypoint">26. DoubleEntryPoint<a class="headerlink" href="#26-doubleentrypoint" title="Permanent link">&para;</a></h2>
+<ul>
+<li>防止合约 <code>CryptoVault</code> 被清空代币</li>
+<li>实现能够正确告警以防止潜在攻击或漏洞利用的 <code>detection bot</code> 合约并在 <code>Forta</code> 注册</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;openzeppelin-contracts-08/access/Ownable.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;openzeppelin-contracts-08/token/ERC20/ERC20.sol&quot;</span><span class="p">;</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">DelegateERC20</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">delegateTransfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">origSender</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">IDetectionBot</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">handleTransaction</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">msgData</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">IForta</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setDetectionBot</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">detectionBotAddress</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">notify</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">msgData</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">raiseAlert</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Forta</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IForta</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">IDetectionBot</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">usersDetectionBots</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">botRaisedAlerts</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">setDetectionBot</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">detectionBotAddress</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">usersDetectionBots</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IDetectionBot</span><span class="p">(</span><span class="nx">detectionBotAddress</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">notify</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">msgData</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">usersDetectionBots</span><span class="p">[</span><span class="nx">user</span><span class="p">])</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="nx">usersDetectionBots</span><span class="p">[</span><span class="nx">user</span><span class="p">].</span><span class="nx">handleTransaction</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">msgData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">raiseAlert</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">usersDetectionBots</span><span class="p">[</span><span class="nx">user</span><span class="p">])</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">botRaisedAlerts</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">CryptoVault</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">sweptTokensRecipient</span><span class="p">;</span><span class="w">  </span><span class="c1">// player</span>
+<span class="w">    </span><span class="nx">IERC20</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">underlying</span><span class="p">;</span><span class="w"> </span><span class="c1">// DoubleEntryPoint</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">recipient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">sweptTokensRecipient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">recipient</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUnderlying</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">latestToken</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">underlying</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Already set&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">underlying</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">latestToken</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    ...</span>
+<span class="cm">    */</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">sweepToken</span><span class="p">(</span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">token</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">underlying</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Can&#39;t transfer underlying token&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">sweptTokensRecipient</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">LegacyToken</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;LegacyToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LGT&quot;</span><span class="p">),</span><span class="w"> </span><span class="nx">Ownable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">DelegateERC20</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">delegate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">mint</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">delegateToNewContract</span><span class="p">(</span><span class="nx">DelegateERC20</span><span class="w"> </span><span class="nx">newContract</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">delegate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newContract</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">delegate</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">super</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">delegate</span><span class="p">.</span><span class="nx">delegateTransfer</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">DoubleEntryPoint</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;DoubleEntryPointToken&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DET&quot;</span><span class="p">),</span><span class="w"> </span><span class="nx">DelegateERC20</span><span class="p">,</span><span class="w"> </span><span class="nx">Ownable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">cryptoVault</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">player</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">delegatedFrom</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">Forta</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">forta</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">legacyToken</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">vaultAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">fortaAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">playerAddress</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">delegatedFrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">legacyToken</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">forta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Forta</span><span class="p">(</span><span class="nx">fortaAddress</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">playerAddress</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cryptoVault</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vaultAddress</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">cryptoVault</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyDelegateFrom</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">delegatedFrom</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Not legacy contract&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">fortaNotify</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">detectionBot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">forta</span><span class="p">.</span><span class="nx">usersDetectionBots</span><span class="p">(</span><span class="nx">player</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// Cache old number of bot alerts</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">previousValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">forta</span><span class="p">.</span><span class="nx">botRaisedAlerts</span><span class="p">(</span><span class="nx">detectionBot</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Notify Forta</span>
+<span class="w">        </span><span class="nx">forta</span><span class="p">.</span><span class="nx">notify</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Continue execution</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Check if alarms have been raised</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="nx">forta</span><span class="p">.</span><span class="nx">botRaisedAlerts</span><span class="p">(</span><span class="nx">detectionBot</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">previousValue</span><span class="p">)</span><span class="w"> </span><span class="nx">revert</span><span class="p">(</span><span class="s2">&quot;Alert has been triggered, reverting&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">delegateTransfer</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">origSender</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="nx">onlyDelegateFrom</span><span class="w"> </span><span class="nx">fortaNotify</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_transfer</span><span class="p">(</span><span class="nx">origSender</span><span class="p">,</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>传入 <code>CryptoVault.sweepToken()</code> 代币的地址不能等于 <code>underlying</code>，而若传入 <code>LegacyToken</code> 的地址，将调用 <code>delegateTransfer</code>，实际转移的是 <code>CryptoVault</code> 持有的 <code>DET</code> 代币，对应 <code>underlying</code></li>
+<li>
+<p>若 <code>origSender</code> 为 <code>CryptoVault</code> 的实例则 <code>raiseAlert</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">DetectionBot</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IDetectionBot</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">address</span><span class="w"> </span><span class="nx">vault</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">instance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">DoubleEntryPoint</span><span class="w"> </span><span class="nx">dep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">DoubleEntryPoint</span><span class="p">(</span><span class="nx">instance</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">vault</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dep</span><span class="p">.</span><span class="nx">cryptoVault</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">handleTransaction</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">msgData</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// skip the 4-byte function signature</span>
+<span class="w">    </span><span class="p">(</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">msgData</span><span class="p">[</span><span class="mf">4</span><span class="o">:</span><span class="p">],</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">vault</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">IForta</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">raiseAlert</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>部署 <code>DetectionBot</code> 后，使用 <code>player</code> 账户调用 <code>Forta.setDetectionBot()</code></p>
+</li>
+<li>可以在 <code>sweepToken()</code> 的最后检查合约 <code>underlying</code> 的余额是否和调用前相同</li>
+</ul>
+<h3 id="_17">参考资料<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://solidity-by-example.org/abi-decode/">ABI Decode | Solidity by Example</a></li>
+<li><a href="https://github.com/ethereum/solidity/issues/6012">abi.decode cannot decode <code>msg.data</code> · Issue #6012 · ethereum/solidity</a></li>
+<li><a href="https://medium.com/chainsecurity/trueusd-compound-vulnerability-bc5b696d29e2">TrueUSD ↔ Compound Vulnerability | by ChainSecurity | ChainSecurity | Medium</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年2月17日 16:24:42</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月4日 21:27:06</span>
       
     
   </small>
