@@ -135,6 +135,7 @@ nav:
         - Net: wargames/protostar/net.md
         - Final: wargames/protostar/final.md
       - Ethernaut: wargames/ethernaut.md
+      - Damn Vulnerable DeFi V3: wargames/damn_vulnerable_defi.md
       - Solana Pathway: wargames/solana_pathway.md
       - Solana Security Workshop: wargames/solana_security_workshop.md
     - 彩蛋:
