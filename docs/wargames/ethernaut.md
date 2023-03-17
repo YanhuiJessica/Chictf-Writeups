@@ -2090,6 +2090,7 @@ contract Engine is Initializable {
 ```
 
 - 与透明代理模式不同，UUPS 代理模式由逻辑合约负责升级逻辑，因而代理合约部署的代价较小
+    - 同时 UUPS 代理模式节省了每次检查用户是否为 `owner` 的开销
 - `upgrader` 可以使用 `upgradeToAndCall()` 更新逻辑合约并调用
 - `Motorbike` 在部署时通过 `delegatecall` 调用 `Engine` 的 `initialize()`，`initialize()` 使用 `initializer` 函数修饰符，避免再次初始化
     - `initializer` 修饰符使用状态变量 `initialized` 和 `initializing` 记录或判断初始化状态
