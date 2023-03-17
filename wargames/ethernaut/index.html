@@ -5660,7 +5660,10 @@ f3  // return
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>与透明代理模式不同，UUPS 代理模式由逻辑合约负责升级逻辑，因而代理合约部署的代价较小</li>
+<li>与透明代理模式不同，UUPS 代理模式由逻辑合约负责升级逻辑，因而代理合约部署的代价较小<ul>
+<li>同时 UUPS 代理模式节省了每次检查用户是否为 <code>owner</code> 的开销</li>
+</ul>
+</li>
 <li><code>upgrader</code> 可以使用 <code>upgradeToAndCall()</code> 更新逻辑合约并调用</li>
 <li><code>Motorbike</code> 在部署时通过 <code>delegatecall</code> 调用 <code>Engine</code> 的 <code>initialize()</code>，<code>initialize()</code> 使用 <code>initializer</code> 函数修饰符，避免再次初始化<ul>
 <li><code>initializer</code> 修饰符使用状态变量 <code>initialized</code> 和 <code>initializing</code> 记录或判断初始化状态</li>
@@ -6106,7 +6109,7 @@ f3  // return
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月5日 19:43:59</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月17日 23:54:28</span>
       
     
   </small>
