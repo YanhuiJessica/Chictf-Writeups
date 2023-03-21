@@ -123,6 +123,7 @@ nav:
       - HackTM CTF 2023:
         - Dragon Slayer: blockchain/dragon_slayer.md
         - Diamond Heist: blockchain/diamond_heist.md
+      - TealyMan: blockchain/tealyman.md
     - Wargames:
       - Natas: wargames/natas.md
       - Leviathan: wargames/leviathan.md
