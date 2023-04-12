@@ -125,20 +125,23 @@ nav:
         - Diamond Heist: blockchain/diamond_heist.md
       - TealyMan: blockchain/tealyman.md
     - Wargames:
-      - Natas: wargames/natas.md
-      - Leviathan: wargames/leviathan.md
-      - Krypton: wargames/krypton.md
-      - Narnia: wargames/narnia.md
+      - OverTheWire:
+        - Natas: wargames/natas.md
+        - Leviathan: wargames/leviathan.md
+        - Krypton: wargames/krypton.md
+        - Narnia: wargames/narnia.md
       - Protostar:
         - Stack: wargames/protostar/stack.md
         - Format: wargames/protostar/format.md
         - Heap: wargames/protostar/heap.md
         - Net: wargames/protostar/net.md
         - Final: wargames/protostar/final.md
-      - Ethernaut: wargames/ethernaut.md
-      - Damn Vulnerable DeFi V3: wargames/damn_vulnerable_defi.md
-      - Solana Pathway: wargames/solana_pathway.md
-      - Solana Security Workshop: wargames/solana_security_workshop.md
+      - Ethereum:
+        - Ethernaut: wargames/ethernaut.md
+        - Damn Vulnerable DeFi V3: wargames/damn_vulnerable_defi.md
+      - Solana:
+        - Solana Pathway: wargames/solana_pathway.md
+        - Solana Security Workshop: wargames/solana_security_workshop.md
     - 彩蛋:
       - CTFHub - 首页: eggs/ctfhub_index.md
       - CTFHub - 公众号: eggs/ctfhub_wechat.md
