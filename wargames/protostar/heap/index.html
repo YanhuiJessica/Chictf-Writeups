@@ -308,11 +308,18 @@
   
   
   
+    
+
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../../natas/" class="md-tabs__link md-tabs__link--active">
         Wargames
       </a>
     </li>
+  
+
   
 
       
@@ -2351,6 +2358,32 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_1">
+          OverTheWire
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OverTheWire" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_1">
+          <span class="md-nav__icon md-icon"></span>
+          OverTheWire
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../natas/" class="md-nav__link">
         Natas
@@ -2402,6 +2435,13 @@
 
             
           
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
             
               
   
@@ -2413,18 +2453,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_5" type="checkbox" id="__nav_8_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_8_5">
+        <label class="md-nav__link" for="__nav_8_2">
           Protostar
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Protostar" data-md-level="2">
-        <label class="md-nav__title" for="__nav_8_5">
+        <label class="md-nav__title" for="__nav_8_2">
           <span class="md-nav__icon md-icon"></span>
           Protostar
         </label>
@@ -2629,6 +2669,32 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_3">
+          Ethereum
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ethereum" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Ethereum
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../ethernaut/" class="md-nav__link">
         Ethernaut
@@ -2651,6 +2717,39 @@
   
 
             
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_4">
+          Solana
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Solana" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          Solana
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
             
               
@@ -2675,6 +2774,13 @@
       <a href="../../solana_security_workshop/" class="md-nav__link">
         Solana Security Workshop
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -3134,9 +3240,9 @@ and<span class="w"> </span>we<span class="w"> </span>have<span class="w"> </span
 <h3 id="additional">Additional<a class="headerlink" href="#additional" title="Permanent link">&para;</a></h3>
 <p>关于在 <code>gdb</code> 中使用 <code>echo</code> 不能成功的问题</p>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>gdb<span class="w"> </span>./heap1
-<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x080484ce
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span>*0x080484ce
 Breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span>0x80484ce:<span class="w"> </span>file<span class="w"> </span>heap1/heap1.c,<span class="w"> </span>line<span class="w"> </span><span class="m">23</span>.
-<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x0804853d
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span>*0x0804853d
 Breakpoint<span class="w"> </span><span class="m">2</span><span class="w"> </span>at<span class="w"> </span>0x804853d:<span class="w"> </span>file<span class="w"> </span>heap1/heap1.c,<span class="w"> </span>line<span class="w"> </span><span class="m">32</span>.
 <span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>r<span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span><span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
 Starting<span class="w"> </span>program:<span class="w"> </span>/opt/protostar/bin/heap1<span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span>AAAABBBBCCCCDDDDEEEE<span class="se">\x</span><span class="m">74</span><span class="se">\x</span><span class="m">97</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span><span class="w"> </span><span class="s2">&quot;`echo -ne &quot;</span><span class="se">\x</span><span class="m">94</span><span class="se">\x</span><span class="m">84</span><span class="se">\x</span><span class="m">04</span><span class="se">\x</span><span class="m">08</span><span class="s2">&quot;`&quot;</span>
@@ -3374,7 +3480,7 @@ Mapped<span class="w"> </span>address<span class="w"> </span>spaces:
 <span class="w">  </span>0xb7ffe000<span class="w"> </span>0xb7fff000<span class="w">     </span>0x1000<span class="w">    </span>0x1a000<span class="w">         </span>/lib/ld-2.11.2.so
 <span class="w">  </span>0xb7fff000<span class="w"> </span>0xb8000000<span class="w">     </span>0x1000<span class="w">    </span>0x1b000<span class="w">         </span>/lib/ld-2.11.2.so
 <span class="w">  </span>0xbffeb000<span class="w"> </span>0xc0000000<span class="w">    </span>0x15000<span class="w">          </span><span class="m">0</span><span class="w">           </span><span class="o">[</span>stack<span class="o">]</span>
-<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x0804895f<span class="w"> </span><span class="c1"># call   0x804881c &lt;printf@plt&gt;</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span>*0x0804895f<span class="w"> </span><span class="c1"># call   0x804881c &lt;printf@plt&gt;</span>
 Breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span>0x804895f:<span class="w"> </span>file<span class="w"> </span>heap2/heap2.c,<span class="w"> </span>line<span class="w"> </span><span class="m">20</span>.
 <span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">command</span><span class="w">  </span><span class="c1"># define what gdb commands shall be executed when the breakpoint is hit</span>
 Type<span class="w"> </span>commands<span class="w"> </span><span class="k">for</span><span class="w"> </span>when<span class="w"> </span>breakpoint<span class="w"> </span><span class="m">1</span><span class="w"> </span>is<span class="w"> </span>hit,<span class="w"> </span>one<span class="w"> </span>per<span class="w"> </span>line.

@@ -308,11 +308,18 @@
   
   
   
+    
+
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../natas/" class="md-tabs__link md-tabs__link--active">
         Wargames
       </a>
     </li>
+  
+
   
 
       
@@ -2350,6 +2357,34 @@
               
   
   
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_1">
+          OverTheWire
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OverTheWire" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_1">
+          <span class="md-nav__icon md-icon"></span>
+          OverTheWire
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
   
     <li class="md-nav__item">
       <a href="../natas/" class="md-nav__link">
@@ -2466,6 +2501,13 @@
 
             
           
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
             
               
   
@@ -2475,18 +2517,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_5" type="checkbox" id="__nav_8_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_8_5">
+        <label class="md-nav__link" for="__nav_8_2">
           Protostar
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Protostar" data-md-level="2">
-        <label class="md-nav__title" for="__nav_8_5">
+        <label class="md-nav__title" for="__nav_8_2">
           <span class="md-nav__icon md-icon"></span>
           Protostar
         </label>
@@ -2574,6 +2616,32 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_3">
+          Ethereum
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ethereum" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Ethereum
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../ethernaut/" class="md-nav__link">
         Ethernaut
@@ -2596,6 +2664,39 @@
   
 
             
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_4">
+          Solana
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Solana" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          Solana
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
             
               
@@ -2620,6 +2721,13 @@
       <a href="../solana_security_workshop/" class="md-nav__link">
         Solana Security Workshop
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -2956,7 +3064,7 @@ int<span class="w"> </span>main<span class="o">(</span>int<span class="w"> </spa
 <span class="o">}</span>
 <span class="c1"># 确定可以控制 EIP 的溢出点</span>
 $<span class="w"> </span>gdb<span class="w"> </span>./narnia2
-<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">break</span><span class="w"> </span>*0x080491e8<span class="w"> </span><span class="c1"># main ret</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span>*0x080491e8<span class="w"> </span><span class="c1"># main ret</span>
 Breakpoint<span class="w"> </span><span class="m">2</span><span class="w"> </span>at<span class="w"> </span>0x80491e8
 <span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>define<span class="w"> </span>hook-stop
 Type<span class="w"> </span>commands<span class="w"> </span><span class="k">for</span><span class="w"> </span>definition<span class="w"> </span>of<span class="w"> </span><span class="s2">&quot;hook-stop&quot;</span>.
