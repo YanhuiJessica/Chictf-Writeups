@@ -224,6 +224,71 @@ it('Execution', async function () {
 });
 ```
 
+### Using Echidna
+
+!!! note "contracts/naive-receiver/NaiveReceiverTest.sol"
+
+    ```js
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.0;
+
+    import "./FlashLoanReceiver.sol";
+
+    contract NaiveReceiverTest {
+
+        NaiveReceiverLenderPool pool;
+        FlashLoanReceiver receiver;
+
+        constructor() payable {
+            pool = new NaiveReceiverLenderPool();
+            receiver = new FlashLoanReceiver(address(pool));
+
+            payable(address(pool)).transfer(1000 ether);
+            payable(address(receiver)).transfer(10 ether);
+        }
+
+        // Invariant: the balance of the receiver contract can not decrease
+        function echidna_test_balance() public view returns (bool) {
+            return address(receiver).balance >= 10 ether;
+        }
+    }
+    ```
+
+!!! note "naive-receiver.yml"
+
+    ```yml
+    balanceContract: 10000000000000000000000 # 10000 ether
+    # Multi ABI: performing direct calls to every contract
+    allContracts: true  # multi-abi was renamed in echidna >= 2.1
+    ```
+
+```bash
+$ echidna . --contract NaiveReceiverTest --config naive-receiver.yml
+...
+echidna_test_balance: failed!💥  
+  Call sequence:
+    flashLoan(0x62d69f6867a0a084c6d313943dc22023bc263691,0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee,30,"ERC20: insufficient allowance")
+
+
+Unique instructions: 1553
+Unique codehashes: 4
+Corpus size: 8
+Seed: 8140429313308935610
+```
+
+??? Tip "ERROR:CryticCompile:Unknown file: contracts/hardhat-dependency-compiler/@gnosis.pm/safe-contracts/contracts/GnosisSafe.sol"
+
+    Comment out `dependencyCompiler` in `hardhat.config.js`.
+
+??? Tip "echidna: Error running slither:"
+
+    Update Slither to the latest version.
+
+### 参考资料
+
+- [How to use Echidna with multiple contracts · crytic/echidna Wiki](https://github.com/crytic/echidna/wiki/How-to-use-Echidna-with-multiple-contracts)
+- [External testing](https://secure-contracts.com/program-analysis/echidna/basic/common-testing-approaches.html#external-testing)
+
 ## 3. Truster
 
 > The pool holds 1 million DVT tokens. You have nothing.
@@ -702,7 +767,7 @@ server: cloudflare
     }
     ```
 
-- 先降低价格购买 NFT，再提高价格卖出
+- 先降低价格购买 DVNFT，再提高价格卖出
 
 ### Exploit
 
