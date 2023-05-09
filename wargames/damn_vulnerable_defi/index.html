@@ -2672,6 +2672,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#using-echidna" class="md-nav__link">
+    Using Echidna
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     参考资料
   </a>
@@ -2699,7 +2706,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#using-echidna" class="md-nav__link">
+  <a href="#using-echidna_1" class="md-nav__link">
     Using Echidna
   </a>
   
@@ -2748,6 +2755,13 @@
           <li class="md-nav__item">
   <a href="#exploit_1" class="md-nav__link">
     Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-echidna_2" class="md-nav__link">
+    Using Echidna
   </a>
   
 </li>
@@ -3158,6 +3172,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#using-echidna" class="md-nav__link">
+    Using Echidna
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     参考资料
   </a>
@@ -3185,7 +3206,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#using-echidna" class="md-nav__link">
+  <a href="#using-echidna_1" class="md-nav__link">
     Using Echidna
   </a>
   
@@ -3234,6 +3255,13 @@
           <li class="md-nav__item">
   <a href="#exploit_1" class="md-nav__link">
     Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-echidna_2" class="md-nav__link">
+    Using Echidna
   </a>
   
 </li>
@@ -3534,6 +3562,75 @@ $<span class="w"> </span>forge<span class="w"> </span>remappings
 </code></pre></div>
 </li>
 </ul>
+<h3 id="using-echidna">Using Echidna<a class="headerlink" href="#using-echidna" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">contracts/unstoppable/UnstoppableTest.sol</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./ReceiverUnstoppable.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../DamnValuableToken.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">UnstoppableTest</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IERC3156FlashBorrower</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">DamnValuableToken</span><span class="w"> </span><span class="nx">token</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">UnstoppableVault</span><span class="w"> </span><span class="nx">vault</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">TOKENS_IN_VAULT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1000000e18</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">INITIAL_PLAYER_TOKEN_BALANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10e18</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">DamnValuableToken</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">vault</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">UnstoppableVault</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="nx">TOKENS_IN_VAULT</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">TOKENS_IN_VAULT</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// sending the attacker some tokens</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="mh">0x10000</span><span class="p">),</span><span class="w"> </span><span class="nx">INITIAL_PLAYER_TOKEN_BALANCE</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">onFlashLoan</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">initiator</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_token</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">fee</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="w"> </span><span class="p">(</span><span class="nx">initiator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">_token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">.</span><span class="nx">asset</span><span class="p">())</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">fee</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">ERC20</span><span class="p">(</span><span class="nx">_token</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="s2">&quot;IERC3156FlashBorrower.onFlashLoan&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// check whether UnstoppableLender can always provide flash loans</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">echidna_test_flashloan</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">flashLoan</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">),</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>echidna<span class="w"> </span>.<span class="w"> </span>--contract<span class="w"> </span>UnstoppableTest<span class="w"> </span>--all-contracts<span class="w"> </span>--sender<span class="w"> </span>0x10000
+...
+echidna_test_flashloan:<span class="w"> </span>failed!💥<span class="w">  </span>
+<span class="w">  </span>Call<span class="w"> </span>sequence:
+<span class="w">    </span>*wait*<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">392942</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">1545</span>
+<span class="w">    </span>*wait*<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">389927</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">9966</span>
+<span class="w">    </span>*wait*<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">414579</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">12172</span>
+<span class="w">    </span>*wait*<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">322246</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">65</span>
+<span class="w">    </span>*wait*<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">271329</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">883</span>
+<span class="w">    </span>*fallback*<span class="o">()</span><span class="w"> </span>from:<span class="w"> </span>0x0000000000000000000000000000000000010000<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">138756</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">3281</span>
+<span class="w">    </span>*wait*<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">289607</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">38344</span>
+<span class="w">    </span>*wait*<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">372714</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">55396</span>
+
+Event<span class="w"> </span>sequence:<span class="w"> </span>Transfer<span class="o">()</span><span class="w"> </span>from:<span class="w"> </span>0xb4c79dab8f259c7aee6e5b2aa729821864227e84,<span class="w"> </span>error<span class="w"> </span>Revert<span class="w"> </span>0x,<span class="w"> </span>error<span class="w"> </span>Revert<span class="w"> </span>0x
+Unique<span class="w"> </span>instructions:<span class="w"> </span><span class="m">3719</span>
+Unique<span class="w"> </span>codehashes:<span class="w"> </span><span class="m">4</span>
+Corpus<span class="w"> </span>size:<span class="w"> </span><span class="m">1</span>
+Seed:<span class="w"> </span><span class="m">2655974979073607364</span>
+</code></pre></div>
 <h3 id="_1">参考资料<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626">ERC4626</a></li>
@@ -3602,7 +3699,7 @@ $<span class="w"> </span>forge<span class="w"> </span>remappings
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">hacker</span><span class="p">.</span><span class="nx">exploit</span><span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">receiver</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
-<h3 id="using-echidna">Using Echidna<a class="headerlink" href="#using-echidna" title="Permanent link">&para;</a></h3>
+<h3 id="using-echidna_1">Using Echidna<a class="headerlink" href="#using-echidna_1" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">contracts/naive-receiver/NaiveReceiverTest.sol</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
@@ -3778,6 +3875,103 @@ Seed:<span class="w"> </span><span class="m">8140429313308935610</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">hacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s1">&#39;SideEntranceHacker&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">player</span><span class="p">)).</span><span class="nx">deploy</span><span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">hacker</span><span class="p">.</span><span class="nx">exploit</span><span class="p">();</span>
 <span class="p">});</span>
+</code></pre></div>
+<h3 id="using-echidna_2">Using Echidna<a class="headerlink" href="#using-echidna_2" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">contracts/side-entrance/SideEntranceTest.sol</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./SideEntranceLenderPool.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">PoolDeployer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// SideEntranceTest contract should not be the owner of the initial funds,</span>
+<span class="w">    </span><span class="c1">// or it can remove the funds by calling withdraw()</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deploy</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SideEntranceLenderPool</span><span class="w"> </span><span class="nx">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SideEntranceLenderPool</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">pool</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">SideEntranceTest</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IFlashLoanEtherReceiver</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">SideEntranceLenderPool</span><span class="w"> </span><span class="nx">pool</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="nx">canWithdraw</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="nx">canDeposit</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">depositAmount</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">PoolDeployer</span><span class="w"> </span><span class="nx">deployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PoolDeployer</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SideEntranceLenderPool</span><span class="p">(</span><span class="nx">deployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">}());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setWithdraw</span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">canWithdraw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setDeposit</span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">canDeposit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">depositAmount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_amount</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// IFlashLoanEtherReceiver.execute()</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">execute</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">canWithdraw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">pool</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">canDeposit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">pool</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">depositAmount</span><span class="p">}();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">flashLoan</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">pool</span><span class="p">.</span><span class="nx">flashLoan</span><span class="p">(</span><span class="nx">_amount</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testBalance</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">assert</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">side-entrance.yml</p>
+<div class="highlight"><pre><span></span><code>testMode: assertion # to check sth as well as changing the state
+balanceContract: 1000000000000000000000 # 1000 ether
+
+deployer: &quot;0x10000&quot;
+psender: &quot;0x10000&quot;
+contractAddr: &quot;0x10000&quot; # only SideEntranceTest is the sender
+sender: [&quot;0x10000&quot;]
+</code></pre></div>
+</div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>echidna<span class="w"> </span>.<span class="w"> </span>--contract<span class="w"> </span>SideEntranceTest<span class="w"> </span>--config<span class="w"> </span>side-entrance.yml<span class="w"> </span>
+...
+execute<span class="o">()</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+flashLoan<span class="o">(</span>uint256<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+setDeposit<span class="o">(</span>bool,uint256<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+setWithdraw<span class="o">(</span>bool<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+testBalance<span class="o">()</span>:<span class="w"> </span>failed!💥<span class="w">  </span>
+<span class="w">  </span>Call<span class="w"> </span>sequence:
+<span class="w">    </span>execute<span class="o">()</span><span class="w"> </span>Value:<span class="w"> </span>0x8081
+<span class="w">    </span>setDeposit<span class="o">(</span>true,32768<span class="o">)</span>
+<span class="w">    </span>flashLoan<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">    </span>setDeposit<span class="o">(</span>false,0<span class="o">)</span>
+<span class="w">    </span>setWithdraw<span class="o">(</span><span class="nb">true</span><span class="o">)</span>
+<span class="w">    </span>execute<span class="o">()</span>
+<span class="w">    </span>testBalance<span class="o">()</span>
+
+Event<span class="w"> </span>sequence:<span class="w"> </span>Panic<span class="o">(</span><span class="m">1</span><span class="o">)</span>:<span class="w"> </span>Using<span class="w"> </span>assert.
+AssertionFailed<span class="o">(</span>..<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+Unique<span class="w"> </span>instructions:<span class="w"> </span><span class="m">1079</span>
+Unique<span class="w"> </span>codehashes:<span class="w"> </span><span class="m">2</span>
+Corpus<span class="w"> </span>size:<span class="w"> </span><span class="m">9</span>
+Seed:<span class="w"> </span><span class="m">4893652944378861842</span>
 </code></pre></div>
 <h2 id="5-the-rewarder">5. The Rewarder<a class="headerlink" href="#5-the-rewarder" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -4171,7 +4365,7 @@ server: cloudflare
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年5月6日 17:46:06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年5月9日 23:01:10</span>
       
     
   </small>
