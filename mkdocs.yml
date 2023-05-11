@@ -142,6 +142,7 @@ nav:
         - Damn Vulnerable DeFi V3: wargames/damn_vulnerable_defi.md
         - QuillCTF:
           - Slot Puzzle: wargames/quillctf/slot_puzzle.md
+          - Invest Pool: wargames/quillctf/invest_pool.md
       - Solana:
         - Solana Pathway: wargames/solana_pathway.md
         - Solana Security Workshop: wargames/solana_security_workshop.md
