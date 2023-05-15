@@ -48,6 +48,9 @@ nav:
       - Bishop Duel: misc/bishop_duel.md
       - Lighthouse: misc/lighthouse.md
       - last digit: misc/last_digit.md
+      - HeroCTF 2023:
+        - Chm0d: misc/chm0d.md
+        - SUDOkLu: misc/sudoklu.md
     - Web:
       - 文件上传 JS 绕过: web/t_star_upload_bypass.md
       - 小猫咪踩灯泡: web/t_star_tomcat.md
