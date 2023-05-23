@@ -3928,6 +3928,12 @@
 
         <a href="#solidity" class="blogging-tag"><code>#solidity</code></a>
 
+        <a href="#metamask" class="blogging-tag"><code>#metamask</code></a>
+
+        <a href="#remix" class="blogging-tag"><code>#remix</code></a>
+
+        <a href="#web3" class="blogging-tag"><code>#web3</code></a>
+
     </div>
 
 <style>
@@ -6495,11 +6501,14 @@ f3  // return
 <li>
 <p>那么调用 <code>flipSwitch()</code> 传入的 <code>_data</code> 编码如下</p>
 <div class="highlight"><pre><span></span><code><span class="m">0000000000000000000000000000000000000000000000000000000000000060</span><span class="w"> </span><span class="c1"># _data offset</span>
-<span class="m">0000000000000000000000000000000000000000000000000000000000000004</span>
+<span class="m">0000000000000000000000000000000000000000000000000000000000000000</span><span class="w"> </span><span class="c1"># padding</span>
 20606e1500000000000000000000000000000000000000000000000000000000<span class="w"> </span><span class="c1"># offSelector</span>
 <span class="m">0000000000000000000000000000000000000000000000000000000000000004</span>
 76227e1200000000000000000000000000000000000000000000000000000000
 </code></pre></div>
+</li>
+<li>
+<p>对于动态类型的数据，假设其在 CALLDATA 中的位置可能是错误的</p>
 </li>
 </ul>
 <h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
@@ -6511,7 +6520,7 @@ f3  // return
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年5月3日 20:49:08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年5月23日 14:29:46</span>
       
     
   </small>
