@@ -18,8 +18,8 @@ tags:
 ## Vulnerability Description
 
 - Most arithmetic opcodes are banned
-  - We can not simply push `0x04` onto the stack in order to load the first parameter
-  - We can not use opcode EQ to compare the two numbers
+    - We can not simply push `0x04` onto the stack in order to load the first parameter
+    - We can not use opcode EQ to compare the two numbers
 - As an alternative, ISZERO can be used to compare
 - 4 wei is send for each call
 - Since v0.8.7 does not support PUSH0, we can use RETURNDATASIZE as an alternative
