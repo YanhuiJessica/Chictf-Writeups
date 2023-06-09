@@ -3098,10 +3098,12 @@
 <li>Only the instance of SlotPuzzle deployed from SlotPuzzleFactory can call the <code>payout()</code> function to transfer ether and we need to pass the check in <code>ascertainSlot()</code> to let SlotPuzzle call <code>payout()</code></li>
 <li>Calculate the slot iteratively according to <code>keccak256(key, slot + (is ghostStore ? 1 : 0))</code> pattern</li>
 <li>We need three recipients, all pointing to hacker, to recover 3 ether since each <code>payout()</code> can only transfer 1 ether</li>
-<li>The difficult part is to decide <code>offset</code> &gt; &lt;</li>
-<li><code>params.slotKey</code> is copy from calldata to memory. <code>bytes memory slotKey</code> stores the slotKey offset in memory, here is 0x80</li>
 <li>
-<p>The offset of slot is calculated using <code>add(slotKey, calldataload(offset))</code>. So, the value of <code>offset</code> should be the offset of target value (i.e. slot.offset - slotKey) in the calldata. We can make use of <code>Parameters.slotKey</code> to pass that value</p>
+<p>The difficult part is to decide <code>offset</code> &gt; &lt;</p>
+<ul>
+<li><code>params.slotKey</code> is copy from calldata to memory. <code>bytes memory slotKey</code> stores the slotKey offset in memory, here is 0x80</li>
+<li>The offset of slot is calculated using <code>add(slotKey, calldataload(offset))</code>. So, the value of <code>offset</code> should be the offset of target value (i.e. slot.offset - slotKey) in the calldata. We can make use of <code>Parameters.slotKey</code> to pass that value</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -3234,7 +3236,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年4月13日 10:03:05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月9日 11:11:10</span>
       
     
   </small>
