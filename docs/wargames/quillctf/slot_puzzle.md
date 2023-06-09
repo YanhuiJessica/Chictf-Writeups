@@ -18,8 +18,8 @@ tags:
 - Calculate the slot iteratively according to `keccak256(key, slot + (is ghostStore ? 1 : 0))` pattern
 - We need three recipients, all pointing to hacker, to recover 3 ether since each `payout()` can only transfer 1 ether
 - The difficult part is to decide `offset` > <
-  - `params.slotKey` is copy from calldata to memory. `bytes memory slotKey` stores the slotKey offset in memory, here is 0x80
-  - The offset of slot is calculated using `add(slotKey, calldataload(offset))`. So, the value of `offset` should be the offset of target value (i.e. slot.offset - slotKey) in the calldata. We can make use of `Parameters.slotKey` to pass that value
+    - `params.slotKey` is copy from calldata to memory. `bytes memory slotKey` stores the slotKey offset in memory, here is 0x80
+    - The offset of slot is calculated using `add(slotKey, calldataload(offset))`. So, the value of `offset` should be the offset of target value (i.e. slot.offset - slotKey) in the calldata. We can make use of `Parameters.slotKey` to pass that value
 
     Offset(Hex)|Calldata Layout
     -|-
