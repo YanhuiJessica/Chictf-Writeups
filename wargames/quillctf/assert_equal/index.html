@@ -3115,9 +3115,11 @@
 <p><a href="https://quillctf.super.site/challenges/assertequal">QuillCTF Challenges - assertEqual</a></p>
 <h2 id="vulnerability-description">Vulnerability Description<a class="headerlink" href="#vulnerability-description" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Most arithmetic opcodes are banned</li>
+<li>Most arithmetic opcodes are banned<ul>
 <li>We can not simply push <code>0x04</code> onto the stack in order to load the first parameter</li>
 <li>We can not use opcode EQ to compare the two numbers</li>
+</ul>
+</li>
 <li>As an alternative, ISZERO can be used to compare</li>
 <li>4 wei is send for each call</li>
 <li>Since v0.8.7 does not support PUSH0, we can use RETURNDATASIZE as an alternative</li>
@@ -3242,7 +3244,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月9日 10:40:28</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月9日 11:05:44</span>
       
     
   </small>
