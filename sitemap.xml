@@ -46,6 +46,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://yanhuijessica.github.io/Chictf-Writeups/blockchain/murky_seepass/</loc>
+         <lastmod>2023-06-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://yanhuijessica.github.io/Chictf-Writeups/blockchain/operation_feathered_fortune_fiasco/</loc>
+         <lastmod>2023-06-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://yanhuijessica.github.io/Chictf-Writeups/blockchain/private_log/</loc>
          <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
