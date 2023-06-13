@@ -129,6 +129,9 @@ nav:
         - Diamond Heist: blockchain/diamond_heist.md
       - TealyMan: blockchain/tealyman.md
       - Sailor's Revenge: blockchain/sailors_revenge.md
+      - SEETF 2023:
+        - 🎓 Murky SEEPass: blockchain/murky_seepass.md
+        - Operation Feathered Fortune Fiasco: blockchain/operation_feathered_fortune_fiasco.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
