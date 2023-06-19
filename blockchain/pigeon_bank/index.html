@@ -3436,8 +3436,10 @@
 </code></pre></div>
 <ul>
 <li>不过，<code>PETH.flashLoan()</code> 使用了 <code>Address.functionCallWithValue()</code>，即可以让 <code>PETH</code> 的实例调用任何函数 :D</li>
-<li>值得注意的是，在 <code>withdrawAll()</code> 中，首先向 <code>_userAddress</code> 发送其当前余额对应数量的 ETH，随后根据 <code>_userAddress</code> 的当前余额销毁代币，那么可以在回调函数中将代币 <code>transfer</code> 到受控地址（可以是 <code>PETH</code> 实例，使用 <code>flashLoan()</code> 调用 <code>approve</code>），从而逐步转移 <code>PETH</code> 持有的 ETH &gt; &lt;</li>
 </ul>
+</li>
+<li>
+<p>值得注意的是，在 <code>withdrawAll()</code> 中，首先向 <code>_userAddress</code> 发送其当前余额对应数量的 ETH，随后根据 <code>_userAddress</code> 的当前余额销毁代币，那么可以在回调函数中将代币 <code>transfer</code> 到受控地址（可以是 <code>PETH</code> 实例，使用 <code>flashLoan()</code> 调用 <code>approve</code>），从而逐步转移 <code>PETH</code> 持有的 ETH &gt; &lt;</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">withdrawAll</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_userAddress</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">payable</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">).</span><span class="nx">sendValue</span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">_userAddress</span><span class="p">]);</span>
 <span class="w">    </span><span class="nx">_burnAll</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">);</span>
@@ -3523,7 +3525,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月19日 23:07:01</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月19日 23:10:59</span>
       
     
   </small>
