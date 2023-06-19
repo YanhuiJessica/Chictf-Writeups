@@ -132,6 +132,7 @@ nav:
       - SEETF 2023:
         - 🎓 Murky SEEPass: blockchain/murky_seepass.md
         - Operation Feathered Fortune Fiasco: blockchain/operation_feathered_fortune_fiasco.md
+        - Pigeon Bank: blockchain/pigeon_bank.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
