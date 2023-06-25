@@ -133,6 +133,7 @@ nav:
         - 🎓 Murky SEEPass: blockchain/murky_seepass.md
         - Operation Feathered Fortune Fiasco: blockchain/operation_feathered_fortune_fiasco.md
         - Pigeon Bank: blockchain/pigeon_bank.md
+        - Pigeon Vault: blockchain/pigeon_vault.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
