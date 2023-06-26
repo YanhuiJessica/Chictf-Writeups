@@ -155,6 +155,7 @@ nav:
           - assertEqual: wargames/quillctf/assert_equal.md
           - Collect: wargames/quillctf/collect.md
           - NFTBANK: wargames/quillctf/nftbank.md
+          - LicenseManager: wargames/quillctf/license_manager.md
       - Solana:
         - Solana Pathway: wargames/solana_pathway.md
         - Solana Security Workshop: wargames/solana_security_workshop.md
