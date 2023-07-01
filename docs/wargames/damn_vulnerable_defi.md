@@ -293,6 +293,7 @@ contract NaiveReceiverHacker {
 ```js
 it('Execution', async function () {
     let hacker = await (await ethers.getContractFactory("NaiveReceiverHacker")).deploy();
+    // or use ethers.deployContract("NaiveReceiverHacker"). However, hardhat-ethers(hardhat-toolbox) is not included in the package.json
     await hacker.exploit(pool.address, receiver.address);
 });
 ```
