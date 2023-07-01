@@ -3948,6 +3948,7 @@ Seed:<span class="w"> </span><span class="m">2655974979073607364</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Execution&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">hacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">getContractFactory</span><span class="p">(</span><span class="s2">&quot;NaiveReceiverHacker&quot;</span><span class="p">)).</span><span class="nx">deploy</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// or use ethers.deployContract(&quot;NaiveReceiverHacker&quot;). However, hardhat-ethers(hardhat-toolbox) is not included in the package.json</span>
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">hacker</span><span class="p">.</span><span class="nx">exploit</span><span class="p">(</span><span class="nx">pool</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">receiver</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -4778,7 +4779,7 @@ server: cloudflare
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月24日 14:57:30</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年7月1日 16:39:52</span>
       
     
   </small>
