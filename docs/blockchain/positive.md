@@ -83,7 +83,7 @@ Stay positive.
 > If you have `int x = type(int).min;`, then `-x` does not fit the positive range. This means that `unchecked { assert(-x == x); }` works [^1]
 
 - As int64 type values range from -9223372036854775808 to 9223372036854775807, the answer will be -9223372036854775808
-- During the competition, I simply used fuzzing to get the answer uwu
+- During the competition, I used fuzzing to get the answer uwu
 
     ```js
     contract PositiveTest is Test {

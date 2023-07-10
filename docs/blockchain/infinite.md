@@ -35,7 +35,7 @@ Infinite respect.
     }
     ```
 
-- Next, we can exchange 10 candy tokens with 1 crew token
+- Next, we can exchange 1 crew token for 10 candies
 
     ```js
     function verification() public payable{
@@ -48,8 +48,8 @@ Infinite respect.
     }
     ```
 
-- The respect tokens can be exchanged with candy tokens through `fancyStore.sellCandies()` or `localGang.gainRespect()`. But these two functions have a slight difference. The `sellCandies()` function burns candy tokens and transfers the respect tokens stored in the contract to msg.sender, while the `gainRespect()` function transfers the candy tokens from msg.sender and **mint** respect tokens to msg.sender. Thus, the total supply of respect tokens can be increased through `gainRespect()`. Similarly, we can increase the total supply of candy tokens through `fancyStore.buyCandies()`
-- Start with 10 candy tokens, we can first exchange 10 respect tokens and increase `candyCount` through `localGang.gainRespect()`. Then, buy 10 candies and increase `respectCount` through `fancyStore.buyCandies()`. Now, we have obtained another 10 candies and transferred 10 respect tokens to the `fancyStore` contract XD Repeat these steps until `STORE.respectCount(CREW.receiver())` reaches the desired threshold
+- The candy tokens can be exchanged for respect tokens through `fancyStore.sellCandies()` or `localGang.gainRespect()`. But these two functions have a slight difference. The `sellCandies()` function burns candy tokens and transfers the respect tokens stored in the contract to the msg.sender, while the `gainRespect()` function transfers the candy tokens from the msg.sender and **mint** respect tokens to msg.sender. Thus, the total supply of respect tokens can be increased through `gainRespect()`. Similarly, we can increase the total supply of candy tokens through `fancyStore.buyCandies()`
+- Starting with 10 candy tokens, we can first exchange them for 10 respect tokens and increase `candyCount` through `localGang.gainRespect()`. Then, buy 10 candies and increase `respectCount` through `fancyStore.buyCandies()`. At this point, we have obtained an additional 10 candies and transferred 10 respect tokens to the `fancyStore` contract XD Repeat these steps until `STORE.respectCount(CREW.receiver())` reaches the desired threshold
 
 ### Script
 
