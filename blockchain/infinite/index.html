@@ -3359,7 +3359,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>Next, we can exchange 10 candy tokens with 1 crew token</p>
+<p>Next, we can exchange 1 crew token for 10 candies</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">verification</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">payable</span><span class="p">{</span>
 <span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">crew</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span><span class="o">==</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;You don&#39;t have crew tokens to verify&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">crew</span><span class="p">.</span><span class="nx">allowance</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span><span class="o">==</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;You need to approve the contract to transfer crew tokens&quot;</span><span class="p">);</span>
@@ -3371,9 +3371,9 @@
 </code></pre></div>
 </li>
 <li>
-<p>The respect tokens can be exchanged with candy tokens through <code>fancyStore.sellCandies()</code> or <code>localGang.gainRespect()</code>. But these two functions have a slight difference. The <code>sellCandies()</code> function burns candy tokens and transfers the respect tokens stored in the contract to msg.sender, while the <code>gainRespect()</code> function transfers the candy tokens from msg.sender and <strong>mint</strong> respect tokens to msg.sender. Thus, the total supply of respect tokens can be increased through <code>gainRespect()</code>. Similarly, we can increase the total supply of candy tokens through <code>fancyStore.buyCandies()</code></p>
+<p>The candy tokens can be exchanged for respect tokens through <code>fancyStore.sellCandies()</code> or <code>localGang.gainRespect()</code>. But these two functions have a slight difference. The <code>sellCandies()</code> function burns candy tokens and transfers the respect tokens stored in the contract to the msg.sender, while the <code>gainRespect()</code> function transfers the candy tokens from the msg.sender and <strong>mint</strong> respect tokens to msg.sender. Thus, the total supply of respect tokens can be increased through <code>gainRespect()</code>. Similarly, we can increase the total supply of candy tokens through <code>fancyStore.buyCandies()</code></p>
 </li>
-<li>Start with 10 candy tokens, we can first exchange 10 respect tokens and increase <code>candyCount</code> through <code>localGang.gainRespect()</code>. Then, buy 10 candies and increase <code>respectCount</code> through <code>fancyStore.buyCandies()</code>. Now, we have obtained another 10 candies and transferred 10 respect tokens to the <code>fancyStore</code> contract XD Repeat these steps until <code>STORE.respectCount(CREW.receiver())</code> reaches the desired threshold</li>
+<li>Starting with 10 candy tokens, we can first exchange them for 10 respect tokens and increase <code>candyCount</code> through <code>localGang.gainRespect()</code>. Then, buy 10 candies and increase <code>respectCount</code> through <code>fancyStore.buyCandies()</code>. At this point, we have obtained an additional 10 candies and transferred 10 respect tokens to the <code>fancyStore</code> contract XD Repeat these steps until <code>STORE.respectCount(CREW.receiver())</code> reaches the desired threshold</li>
 </ul>
 <h3 id="script">Script<a class="headerlink" href="#script" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">/// forge script script/Infinite.s.sol --private-key $PRIVATE_KEY --rpc-url $RPC_URL --sig &quot;run(address)&quot; $INSTANCE_ADDR --broadcast</span>
@@ -3413,7 +3413,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年7月10日 10:13:53</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年7月10日 10:55:12</span>
       
     
   </small>
