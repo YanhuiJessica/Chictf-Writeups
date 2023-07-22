@@ -668,7 +668,7 @@ contract Challenge7Test is Test {
     }
     ```
 
-- 由于使用的是实时价格，通过 `swap()` 降低 token0 的价格，以降低健康系数并清算健康账户
+- 由于使用的是实时价格，通过 `swap()` 降低 token0 的价格，以降低健康系数并清算原先健康的账户
 
     ```js
     function getPriceToken0() public view returns (uint256) {
