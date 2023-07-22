@@ -4253,7 +4253,7 @@ function burnFrom(address account, uint256 amount) public {
 </code></pre></div>
 </li>
 <li>
-<p>由于使用的是实时价格，通过 <code>swap()</code> 降低 token0 的价格，以降低健康系数并清算健康账户</p>
+<p>由于使用的是实时价格，通过 <code>swap()</code> 降低 token0 的价格，以降低健康系数并清算原先健康的账户</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">getPriceToken0</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nx">reserve1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e18</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">reserve0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -4364,7 +4364,7 @@ function burnFrom(address account, uint256 amount) public {
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年7月22日 18:00:19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年7月22日 18:45:13</span>
       
     
   </small>
