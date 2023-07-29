@@ -91,7 +91,7 @@ $ cargo-build-bpf
     [package]
     name = "solve"
     version = "0.1.0"
-    edition = "2023"
+    edition = "2021"
 
     [dependencies]
     borsh = "0.10.3"
