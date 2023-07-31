@@ -138,6 +138,7 @@ nav:
         - positive: blockchain/positive.md
         - infinite: blockchain/infinite.md
         - deception: blockchain/deception.md
+      - tribunal: blockchain/tribunal.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
