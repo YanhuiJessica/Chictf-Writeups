@@ -313,6 +313,7 @@ $ solana account $(solana-keygen pubkey solana-wallet/keypair.json) # check bala
 $ yarn run solana:build:program
 # Deploy the program
 $ solana deploy -v --keypair solana-wallet/keypair.json dist/solana/program/helloworld.so
+# Default Signer Path: solana-wallet/keypair.json
 ```
 
 当部署一直处在等待状态时，注意检查集群的版本是否与 CLI 的版本匹配[^version]
