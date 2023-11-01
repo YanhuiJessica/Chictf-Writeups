@@ -139,6 +139,7 @@ nav:
         - infinite: blockchain/infinite.md
         - deception: blockchain/deception.md
       - tribunal: blockchain/tribunal.md
+      - Tokyo Payload: blockchain/tokyo_payload.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
