@@ -3475,7 +3475,7 @@
 <h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
 <ol>
 <li>调用 <code>tokyoPayload()</code>，覆盖内存，<code>funcs[z]()</code> 为 <code>0x17f</code></li>
-<li><code>0x17f</code> <code>MEM[0x20 * 0x18f + 0x20 + y] = 0xd0</code>，执行完后从栈顶到栈底 <code>[0xd0, 0x60, y, ...]</code>，由此 <code>y</code> 为 <code>0x153</code></li>
+<li><code>0x17f</code> <code>MEM[0x20 * 0x18f + 0x20 + y] = 0xd0</code>，执行到 <code>0x18e JUMP</code> 时，栈中元素从栈顶到栈底依次为 <code>[0xd0, 0x60, y, ...]</code>，由此 <code>y</code> 为 <code>0x153</code></li>
 <li><code>0xd0</code> 构造栈，<code>b</code> 对应新的 <code>x</code>，<code>c</code> 对应新的 <code>y</code></li>
 <li><code>0x153</code> 重设 <code>gasLimit</code>，下一跳转地址 <code>0x1a3</code> 对应 <code>y</code>，<code>funcs[z]()</code> 为 <code>0xd0</code></li>
 <li><code>0xd0</code> 构造调用栈</li>
@@ -3543,7 +3543,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年11月1日 17:43:06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年11月17日 21:30:29</span>
       
     
   </small>
