@@ -140,6 +140,8 @@ nav:
         - deception: blockchain/deception.md
       - tribunal: blockchain/tribunal.md
       - Tokyo Payload: blockchain/tokyo_payload.md
+      - Paradigm CTF 2023:
+        - 100%: blockchain/paradigm/one_hundred_percent.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
