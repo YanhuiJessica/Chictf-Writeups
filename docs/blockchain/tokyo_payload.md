@@ -83,8 +83,6 @@ What is Solidity?
 
 ## 解题思路
 
-> TokyoPayload: [Graph - Bytegraph - Smart-Contract Analysis](https://bytegraph.xyz/bytecode/6442127989179d00d4a0eb3a93dd092e/graph)
-
 - 目标是让 `solved` 为 `true`，而 `TokyoPayload` 没有直接设置 `solved` 的语句，显然需要借助 `delegatecall`
 - 地址检查限制了 `TokyoPayload.delegatecall()` 的调用，则只能通过 `tokyoPayload()` 跳转
 - 分配给 `delegatecall` 的 gas 取决于通过 `arr.length` 设置的 `gasLimit`，而 `arr` 是尚未初始化的内存数组，那么即读取 `MEM[0x60]` 中的值。`calldatacopy` 可以覆盖 `MEM[0x60]` 中的值，使得 `arr.length > 0`，由此可确定 $x\in[40_{16}, 80_{16})$（且由于每次调用 `tokyoPayload()` 都会重设 `gasLimit`，需要通过一次调用来完成多次跳转）
@@ -92,12 +90,14 @@ What is Solidity?
     - 希望代理调用结束后直接结束本次交易，下一跳转地址可以选择 `0x93`
     ![DELEGATECALL block](img/tokyo_payload01.jpg)
 
-- 可通过 `calldataload` 将所需参数压入栈中，构造合适的调用栈。三个 `CALLDATALOAD` 所在块 `JUMPDEST` 的地址为 `0xd0`，从栈顶到栈底调用栈应满足 `[起始地址i, 下一跳转地址, ...]`。执行到 `0xdf` 时，栈中元素为 `[下一跳转地址, c, b, a, ...]`
+- 可通过 `calldataload` 将所需参数压入栈中，构造合适的调用栈。三个 `CALLDATALOAD` 所在块 `JUMPDEST` 的地址为 `0xd0`，从栈顶到栈底调用栈应满足 `[起始地址i, 下一跳转地址, ...]`。执行到 `0xdf` 时，栈中元素为 `[下一跳转地址, c, b, a, ...]`<br>
+![CALLDATALOAD block](img/tokyo_payload02.jpg)
+
 - 调用 `tokyoPayload()` 首次执行到函数跳转前，即 `0x18e JUMP`，对应源码 `funcs[z]()`，元素从栈顶到栈底依次为 `[0x18f, y, 0x60, y, x, ...]`
 - 在内存覆盖完成后，需要再次调用 `resetGasLimit()`，可以选择 `0x153 JUMPDEST`，此时 `y` 对应栈顶元素 `STACK[0]`，`x` 对应 `STACK[1]`
 - 由于需要使用 `SSTORE` 且对应 cold slot，至少需要 22100 gas，`tokyoPayload()` 的函数签名为 `0x40c3` (16579)，可以设 `x` 为 `0x7B` (0x80 - 5)，这样 `delegatecall` 的 `gasLimit` 为 `0xc300`
 - 另外，`0x17f` 对应的块可以对栈结构进行微调，可用于跳转 `0xd0` 前，改变栈顶参数 `i`<br>
-![0x17f JUMPDEST](img/tokyo_payload02.jpg)
+![0x17f JUMPDEST](img/tokyo_payload03.jpg)
 
 ### Exploit
 
