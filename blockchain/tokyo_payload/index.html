@@ -3496,9 +3496,6 @@
 </code></pre></div>
 </details>
 <h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>TokyoPayload: <a href="https://bytegraph.xyz/bytecode/6442127989179d00d4a0eb3a93dd092e/graph">Graph - Bytegraph - Smart-Contract Analysis</a></p>
-</blockquote>
 <ul>
 <li>目标是让 <code>solved</code> 为 <code>true</code>，而 <code>TokyoPayload</code> 没有直接设置 <code>solved</code> 的语句，显然需要借助 <code>delegatecall</code></li>
 <li>地址检查限制了 <code>TokyoPayload.delegatecall()</code> 的调用，则只能通过 <code>tokyoPayload()</code> 跳转</li>
@@ -3511,13 +3508,16 @@
 </ul>
 </li>
 <li>
-<p>可通过 <code>calldataload</code> 将所需参数压入栈中，构造合适的调用栈。三个 <code>CALLDATALOAD</code> 所在块 <code>JUMPDEST</code> 的地址为 <code>0xd0</code>，从栈顶到栈底调用栈应满足 <code>[起始地址i, 下一跳转地址, ...]</code>。执行到 <code>0xdf</code> 时，栈中元素为 <code>[下一跳转地址, c, b, a, ...]</code></p>
+<p>可通过 <code>calldataload</code> 将所需参数压入栈中，构造合适的调用栈。三个 <code>CALLDATALOAD</code> 所在块 <code>JUMPDEST</code> 的地址为 <code>0xd0</code>，从栈顶到栈底调用栈应满足 <code>[起始地址i, 下一跳转地址, ...]</code>。执行到 <code>0xdf</code> 时，栈中元素为 <code>[下一跳转地址, c, b, a, ...]</code><br>
+<img alt="CALLDATALOAD block" src="../img/tokyo_payload02.jpg" /></p>
 </li>
-<li>调用 <code>tokyoPayload()</code> 首次执行到函数跳转前，即 <code>0x18e JUMP</code>，对应源码 <code>funcs[z]()</code>，元素从栈顶到栈底依次为 <code>[0x18f, y, 0x60, y, x, ...]</code></li>
+<li>
+<p>调用 <code>tokyoPayload()</code> 首次执行到函数跳转前，即 <code>0x18e JUMP</code>，对应源码 <code>funcs[z]()</code>，元素从栈顶到栈底依次为 <code>[0x18f, y, 0x60, y, x, ...]</code></p>
+</li>
 <li>在内存覆盖完成后，需要再次调用 <code>resetGasLimit()</code>，可以选择 <code>0x153 JUMPDEST</code>，此时 <code>y</code> 对应栈顶元素 <code>STACK[0]</code>，<code>x</code> 对应 <code>STACK[1]</code></li>
 <li>由于需要使用 <code>SSTORE</code> 且对应 cold slot，至少需要 22100 gas，<code>tokyoPayload()</code> 的函数签名为 <code>0x40c3</code> (16579)，可以设 <code>x</code> 为 <code>0x7B</code> (0x80 - 5)，这样 <code>delegatecall</code> 的 <code>gasLimit</code> 为 <code>0xc300</code></li>
 <li>另外，<code>0x17f</code> 对应的块可以对栈结构进行微调，可用于跳转 <code>0xd0</code> 前，改变栈顶参数 <code>i</code><br>
-<img alt="0x17f JUMPDEST" src="../img/tokyo_payload02.jpg" /></li>
+<img alt="0x17f JUMPDEST" src="../img/tokyo_payload03.jpg" /></li>
 </ul>
 <h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
 <ol>
@@ -3590,7 +3590,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年11月17日 21:30:29</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年11月21日 17:31:19</span>
       
     
   </small>
