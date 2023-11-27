@@ -142,7 +142,7 @@ nav:
       - Tokyo Payload: blockchain/tokyo_payload.md
       - Paradigm CTF 2023:
         - 100%: blockchain/paradigm/one_hundred_percent.md
-      - The Council of Apes: the_council_of_apes.md
+      - The Council of Apes: blockchain/the_council_of_apes.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
