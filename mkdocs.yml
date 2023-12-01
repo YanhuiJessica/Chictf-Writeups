@@ -143,6 +143,7 @@ nav:
       - Paradigm CTF 2023:
         - 100%: blockchain/paradigm/one_hundred_percent.md
         - Dai++: blockchain/paradigm/dai_plus_plus.md
+        - Grains of Sand: blockchain/paradigm/grains_of_sand.md
       - The Council of Apes: blockchain/the_council_of_apes.md
     - Wargames:
       - OverTheWire:
