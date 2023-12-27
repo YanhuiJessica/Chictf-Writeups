@@ -181,6 +181,12 @@ Smart Contract Solutions is proud to introduce the only Enterprise Blockchain th
         ...
     }
 
+    pub enum ConfigKind {
+        ...
+        DumpState = 4,
+        Unknown,
+    }
+
     pub enum AdminCallKind {
         EmergencyStop = 1,
         ReloadRuntimeConfig = 2,
