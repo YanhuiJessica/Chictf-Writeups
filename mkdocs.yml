@@ -146,6 +146,8 @@ nav:
         - Grains of Sand: blockchain/paradigm/grains_of_sand.md
         - Enterprise Blockchain: blockchain/paradigm/enterprise_blockchain.md
       - The Council of Apes: blockchain/the_council_of_apes.md
+      - MoveCTF 2024:
+        - Checkin: blockchain/movectf/checkin.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
