@@ -148,6 +148,7 @@ nav:
       - The Council of Apes: blockchain/the_council_of_apes.md
       - MoveCTF 2024:
         - Checkin: blockchain/movectf/checkin.md
+      - UnnamedWeb3: blockchain/unnamedweb3.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
