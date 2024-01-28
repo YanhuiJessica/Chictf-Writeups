@@ -409,7 +409,7 @@ MakerDAO is such a complex codebase, and we all know that larger codebases are m
     }
     ```
 
-### Exploit
+### Exploitation
 
 ```js
 contract Solve is CTFSolver {

@@ -127,7 +127,7 @@ At what point does it stop being a heap?
     0x1483f5c6158dfb9a899b137ccfa988fb2b1f6927854dcd83e0a29caadd0e38ba | 4200000000000000 | 84000000000000000
     0x6d727f761c7744bebf4a8773f5a06cd7af280dcda0b55c0995aea47d5570f1a1 | 4246800000000000 | 42468000000000000
 
-### Exploit
+### Exploitation
 
 ```js
 interface ITokenStore {

@@ -196,7 +196,7 @@ Smart Contract Solutions is proud to introduce the only Enterprise Blockchain th
     }
     ```
 
-### Solution
+### Exploitation
 
 ```py
 import pwn

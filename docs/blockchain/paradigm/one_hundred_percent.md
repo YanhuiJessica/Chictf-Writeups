@@ -349,7 +349,7 @@ Your funds are safe when you use our innovative new payment splitter that ensure
 
 - Similarly, we can utilize the hash collision caused by `abi.encodePacked` to withdraw more ETH than deposited to drain `Split`
 
-### Exploit
+### Exploitation
 
 ```js
 function solve(address challenge, address player) internal override {
