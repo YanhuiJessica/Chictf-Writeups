@@ -149,6 +149,7 @@ nav:
       - MoveCTF 2024:
         - Checkin: blockchain/movectf/checkin.md
       - UnnamedWeb3: blockchain/unnamedweb3.md
+      - SafeBridge: blockchain/safebridge.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
