@@ -151,6 +151,8 @@ nav:
         - EasyGame: blockchain/movectf/easy_game.md
       - UnnamedWeb3: blockchain/unnamedweb3.md
       - SafeBridge: blockchain/safebridge.md
+      - Ethernaut CTF 2024:
+        - Dutch 2: blockchain/ethernaut/dutch2.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
