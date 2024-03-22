@@ -152,6 +152,7 @@ nav:
       - UnnamedWeb3: blockchain/unnamedweb3.md
       - SafeBridge: blockchain/safebridge.md
       - Ethernaut CTF 2024:
+        - Wombo Combo: blockchain/ethernaut/wombo_combo.md
         - Dutch 2: blockchain/ethernaut/dutch2.md
     - Wargames:
       - OverTheWire:
