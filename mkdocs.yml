@@ -154,6 +154,8 @@ nav:
       - Ethernaut CTF 2024:
         - Wombo Combo: blockchain/ethernaut/wombo_combo.md
         - Dutch 2: blockchain/ethernaut/dutch2.md
+      - Grey Cat The Flag 2024:
+        - Voting Vault: blockchain/voting_vault.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
