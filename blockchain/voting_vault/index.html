@@ -3730,15 +3730,19 @@
 <p>Each person can only vote once for each proposal, but the voting power is reusable. The intuitive idea is to transfer the voting power to other accounts and double spend the votes</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">vote</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">proposalId</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="o">!</span><span class="nx">voted</span><span class="p">[</span><span class="nx">proposalId</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">],</span><span class="w"> </span><span class="s2">&quot;already voted&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">blockNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">proposals</span><span class="p">[</span><span class="nx">proposalId</span><span class="p">].</span><span class="nx">blockNumber</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">blockNumber</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">number</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;same block&quot;</span><span class="p">);</span>
+
 <span class="w">    </span><span class="nx">voted</span><span class="p">[</span><span class="nx">proposalId</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">votingPower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">VAULT</span><span class="p">.</span><span class="nx">votingPower</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">number</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">votingPower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">VAULT</span><span class="p">.</span><span class="nx">votingPower</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">blockNumber</span><span class="p">);</span>
 <span class="w">    </span><span class="nx">proposals</span><span class="p">[</span><span class="nx">proposalId</span><span class="p">].</span><span class="nx">votes</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">votingPower</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
-<p>The minimum number of votes required to execute a withdrawal proposal is 1,000,000, while the maximum number of votes we can obtain by locking GREY is 1,300. Due to the limitation of <code>vote()</code> function, which only obtains the historical voting power of the previous block, we can only vote once in each block. It is not feasible to reach the threshold and execute the proposal within the validity period of the instance</p>
+<p>The minimum number of votes required to execute a withdrawal proposal is 1,000,000, while the maximum number of votes we can obtain by locking GREY is 1,300. Due to the limitation of <code>vote()</code> function, which only obtains the historical voting power of the previous block, we can only vote once in each block. It is infeasible to reach the threshold and execute the proposal within the validity period of the instance</p>
 </li>
 <li>
 <p>When changing the delegatee, the voting power of the previous delegatee will be subtracted. However, the calculation is done within an unchecked block. If <code>votes</code> is larger than <code>oldVotes</code>, an integer underflow could occur leading to a significant increase in the voting power of the old delegatee</p>
@@ -3819,7 +3823,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年4月22日 20:23:18</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年4月25日 09:51:36</span>
       
     
   </small>
