@@ -48,14 +48,18 @@ In the spirit of decentralization, GreyHats is now a DAO! Vote with your GREY to
     ```js
     function vote(uint256 proposalId) external {
         require(!voted[proposalId][msg.sender], "already voted");
+
+        uint256 blockNumber = proposals[proposalId].blockNumber;
+        require(blockNumber < block.number, "same block");
+        
         voted[proposalId][msg.sender] = true;
 
-        uint256 votingPower = VAULT.votingPower(msg.sender, block.number - 1);
+        uint256 votingPower = VAULT.votingPower(msg.sender, blockNumber);
         proposals[proposalId].votes += votingPower;
     }
     ```
 
-- The minimum number of votes required to execute a withdrawal proposal is 1,000,000, while the maximum number of votes we can obtain by locking GREY is 1,300. Due to the limitation of `vote()` function, which only obtains the historical voting power of the previous block, we can only vote once in each block. It is not feasible to reach the threshold and execute the proposal within the validity period of the instance
+- The minimum number of votes required to execute a withdrawal proposal is 1,000,000, while the maximum number of votes we can obtain by locking GREY is 1,300. Due to the limitation of `vote()` function, which only obtains the historical voting power of the previous block, we can only vote once in each block. It is infeasible to reach the threshold and execute the proposal within the validity period of the instance
 - When changing the delegatee, the voting power of the previous delegatee will be subtracted. However, the calculation is done within an unchecked block. If `votes` is larger than `oldVotes`, an integer underflow could occur leading to a significant increase in the voting power of the old delegatee
 
     ```js
