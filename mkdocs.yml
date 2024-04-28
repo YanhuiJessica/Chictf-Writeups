@@ -156,6 +156,7 @@ nav:
         - Dutch 2: blockchain/ethernaut/dutch2.md
       - Grey Cat The Flag 2024:
         - Greyhats Dollar: blockchain/greyhats_dollar.md
+        - Escrow: blockchain/escrow.md
         - Voting Vault: blockchain/voting_vault.md
     - Wargames:
       - OverTheWire:
