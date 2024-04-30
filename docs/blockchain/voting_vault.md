@@ -71,7 +71,7 @@ In the spirit of decentralization, GreyHats is now a DAO! Vote with your GREY to
     }
     ```
 
-- The number of votes a user receives when locking GREY is calculated based on the amount of GREY being locked. However, when updating the delegatee, the number of transferred votes is calculated based on the **total number** of locked GREY
+- The number of votes a user receives when locking GREY is calculated based on the amount of GREY to be locked. However, when updating the delegatee, the number of transferred votes is calculated based on the **total number** of locked GREY
 
     ```js
     function lock(uint256 amount) external returns (uint256) {
@@ -94,7 +94,7 @@ In the spirit of decentralization, GreyHats is now a DAO! Vote with your GREY to
     }
     ```
 
-- There is a potential loss of precision when calculating votes. Specifically, the number of votes calculated based on the total number of locked GREY could be greater than the number of votes obtained by locking the same amount of GREY several times
+- There is a potential loss of precision when calculating votes. Specifically, the number of votes calculated based on the total number of locked GREY could be greater than the number of votes accumulated by diving the same total amount of GREY into multiple locks
 
     ```js
     function _calculateVotes(uint256 amount) internal pure returns (uint256) {
