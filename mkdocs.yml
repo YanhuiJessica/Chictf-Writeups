@@ -157,6 +157,7 @@ nav:
       - Grey Cat The Flag 2024:
         - Greyhats Dollar: blockchain/greyhats_dollar.md
         - Escrow: blockchain/escrow.md
+        - Simple Amm Vault: blockchain/simple_amm_vault.md
         - Voting Vault: blockchain/voting_vault.md
     - Wargames:
       - OverTheWire:
