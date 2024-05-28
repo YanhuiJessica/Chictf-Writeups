@@ -111,6 +111,7 @@ nav:
         - leapfrog: crypto/leapfrog.md
       - shuffle128: crypto/shuffle128.md
       - badkey1: crypto/badkey1.md
+      - random rabin: crypto/random_rabin.md
     - Blockchain:
       - Code is Law: blockchain/code_is_law.md
       - Totally Secure Dapp: blockchain/totally_secure_dapp.md
