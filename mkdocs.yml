@@ -161,6 +161,7 @@ nav:
         - Escrow: blockchain/escrow.md
         - Simple Amm Vault: blockchain/simple_amm_vault.md
         - Voting Vault: blockchain/voting_vault.md
+      - 404Paymaster: blockchain/404paymaster.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
