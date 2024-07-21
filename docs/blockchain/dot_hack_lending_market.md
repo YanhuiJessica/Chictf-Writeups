@@ -115,7 +115,7 @@ Please save our money in Lending protocol.
 
 ### Exploitation
 
-The exploit steps are as follows:
+The exploitation steps are as follows:
 
 1. Register for the challenge and receive tokens
 2. Deposit USD as collateral and borrow some RebasingWETH
