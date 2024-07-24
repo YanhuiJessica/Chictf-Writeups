@@ -2,7 +2,7 @@
 site_name: Chictf-Writeups
 site_author: YanhuiJessica
 site_url: https://yanhuijessica.github.io/Chictf-Writeups/
-copyright: Copyright &copy; 2020 - 2022 YanhuiJessica
+copyright: Copyright &copy; 2020 - 2024 YanhuiJessica
 
 # Repository
 repo_name: 'YanhuiJessica/Chictf-Writeups'
@@ -164,6 +164,7 @@ nav:
       - Dreamhack Invitational 2024:
         - 404Paymaster: blockchain/404paymaster.md
         - .Hack Lending Market: blockchain/dot_hack_lending_market.md
+      - Lustrous: blockchain/lustrous.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
