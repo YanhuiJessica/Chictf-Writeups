@@ -514,4 +514,30 @@ if land.caller.is_solved():
 
 > hitcon{f1y_m3_t0_th3_m00n_3a080ea144010d74}
 
+## Appendix
+
+- By checking [the author's writeup](https://github.com/minaminao/lustrous/blob/main/solver/README.md), there is another vulnerability[^abi_decode] that is also expected to be utilized
+- Argument(s) is (are) encoded as a tuple. The ABI encoding of a tuple consists of two areas: the statically encoded `head` and the dynamically encoded `tail`. For dynamic types, the head contains the offset of the location within the tail where the data is stored
+- Prior to Vyper 0.4.0, the ABI decoder does not have a buffer overflow check for dynamic offsets. To decode data containing dynamic types, the decoder will retrieve the actual data with the offset information and the raw data location in the memory
+
+    > Vyper stores all variables in memory, including primitives
+
+- Take `_abi_decode(x, Bytes[32])` as an example. Assume that the variable `x` is stored in memory starting from 0x140. According to the specified type, the decoder will get the actual data position by calculating `offset+0x160`. In this example, the bytes string data is stored in memory starting from 0x180 (0x20+0x160)
+
+    ```
+    0x140   0x0000000000000000000000000000000000000000000000000000000000000060  [length]
+    0x160   0x0000000000000000000000000000000000000000000000000000000000000020  [encoded bytes - offset]
+    0x180   0x0000000000000000000000000000000000000000000000000000000000000003  [encoded bytes - length]
+    0x1a0   0x666f6f0000000000000000000000000000000000000000000000000000000000  [encoded bytes - data]
+    ```
+
+- By setting the offset to a value that causes the position calculation to overflow, it is possible to decode arbitrary data in the memory. In the above example, we can set the offset to `0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffa0` to decode data located at `0x100`
+- In this challenge, we can let `master.get_actions()` return a byte string containing a specific offset to achieve the purpose of copying the lunarian's actions without front-running
+
+## References
+
+- [The Vyper Compiler - by jtriley.eth](https://jtriley.substack.com/p/the-vyper-compiler)
+
 [^concat]: [concat built-in can corrupt memory · Advisory · vyperlang/vyper](https://github.com/vyperlang/vyper/security/advisories/GHSA-2q8v-3gqq-4f8p)
+
+[^abi_decode]: [_abi_decode Memory Overflow · Advisory · vyperlang/vyper](https://github.com/vyperlang/vyper/security/advisories/GHSA-9p8r-4xp4-gw5w)
