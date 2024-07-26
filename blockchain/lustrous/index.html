@@ -3102,6 +3102,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#appendix" class="md-nav__link">
+    Appendix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3758,6 +3772,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#appendix" class="md-nav__link">
+    Appendix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4319,11 +4347,41 @@
 <blockquote>
 <p>hitcon{f1y_m3_t0_th3_m00n_3a080ea144010d74}</p>
 </blockquote>
+<h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
+<ul>
+<li>By checking <a href="https://github.com/minaminao/lustrous/blob/main/solver/README.md">the author's writeup</a>, there is another vulnerability<sup id="fnref:abi_decode"><a class="footnote-ref" href="#fn:abi_decode">2</a></sup> that is also expected to be utilized</li>
+<li>Argument(s) is (are) encoded as a tuple. The ABI encoding of a tuple consists of two areas: the statically encoded <code>head</code> and the dynamically encoded <code>tail</code>. For dynamic types, the head contains the offset of the location within the tail where the data is stored</li>
+<li>
+<p>Prior to Vyper 0.4.0, the ABI decoder does not have a buffer overflow check for dynamic offsets. To decode data containing dynamic types, the decoder will retrieve the actual data with the offset information and the raw data location in the memory</p>
+<blockquote>
+<p>Vyper stores all variables in memory, including primitives</p>
+</blockquote>
+</li>
+<li>
+<p>Take <code>_abi_decode(x, Bytes[32])</code> as an example. Assume that the variable <code>x</code> is stored in memory starting from 0x140. According to the specified type, the decoder will get the actual data position by calculating <code>offset+0x160</code>. In this example, the bytes string data is stored in memory starting from 0x180 (0x20+0x160)</p>
+<div class="highlight"><pre><span></span><code>0x140   0x0000000000000000000000000000000000000000000000000000000000000060  [length]
+0x160   0x0000000000000000000000000000000000000000000000000000000000000020  [encoded bytes - offset]
+0x180   0x0000000000000000000000000000000000000000000000000000000000000003  [encoded bytes - length]
+0x1a0   0x666f6f0000000000000000000000000000000000000000000000000000000000  [encoded bytes - data]
+</code></pre></div>
+</li>
+<li>
+<p>By setting the offset to a value that causes the position calculation to overflow, it is possible to decode arbitrary data in the memory. In the above example, we can set the offset to <code>0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffa0</code> to decode data located at <code>0x100</code></p>
+</li>
+<li>In this challenge, we can let <code>master.get_actions()</code> return a byte string containing a specific offset to achieve the purpose of copying the lunarian's actions without front-running</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://jtriley.substack.com/p/the-vyper-compiler">The Vyper Compiler - by jtriley.eth</a></li>
+</ul>
 <div class="footnote">
 <hr />
 <ol>
 <li id="fn:concat">
 <p><a href="https://github.com/vyperlang/vyper/security/advisories/GHSA-2q8v-3gqq-4f8p">concat built-in can corrupt memory · Advisory · vyperlang/vyper</a>&#160;<a class="footnote-backref" href="#fnref:concat" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:abi_decode">
+<p><a href="https://github.com/vyperlang/vyper/security/advisories/GHSA-9p8r-4xp4-gw5w">_abi_decode Memory Overflow · Advisory · vyperlang/vyper</a>&#160;<a class="footnote-backref" href="#fnref:abi_decode" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -4333,7 +4391,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年7月24日 13:45:14</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年7月26日 22:22:15</span>
       
     
   </small>
