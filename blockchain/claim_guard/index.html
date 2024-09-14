@@ -3975,8 +3975,9 @@
 </code></pre></div>
 </li>
 <li>
-<p>根据 <code>nonce</code> 和题目约束，<code>proveWork()</code> 只能在 <code>registerBlock()</code> 之后执行，因此只需要 <code>player</code> 以更高的 <code>gas_price</code> 抢跑 bot 的 <code>registerBlock()</code> 交易并完成 <code>proveWork()</code> 即可</p>
+<p>根据 <code>nonce</code> 和题目约束，<code>proveWork()</code> 只能在 <code>registerBlock()</code> 之后执行，因此只需要 <code>player</code> 以更高的 gas price 抢跑 bot 的 <code>registerBlock()</code> 交易并完成 <code>proveWork()</code> 即可</p>
 </li>
+<li>另外，由于区块的使用率几乎总是不到 50%，因此 base fee 会逐区块减少，可以以此来区分模拟执行和实际执行，设置小于当前 base fee 而大于下一区块 base fee 的 gas price，从而阻止 bot 发送 <code>proveWork()</code> 交易</li>
 </ul>
 <h3 id="_3">解题脚本<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">web3</span> <span class="kn">import</span> <span class="n">Web3</span>
@@ -4050,7 +4051,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年9月14日 23:29:11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年9月15日 00:36:35</span>
       
     
   </small>
