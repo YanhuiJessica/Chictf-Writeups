@@ -137,7 +137,8 @@ We got a cheater.
     }
     ```
 
-- 根据 `nonce` 和题目约束，`proveWork()` 只能在 `registerBlock()` 之后执行，因此只需要 `player` 以更高的 `gas_price` 抢跑 bot 的 `registerBlock()` 交易并完成 `proveWork()` 即可
+- 根据 `nonce` 和题目约束，`proveWork()` 只能在 `registerBlock()` 之后执行，因此只需要 `player` 以更高的 gas price 抢跑 bot 的 `registerBlock()` 交易并完成 `proveWork()` 即可
+- 另外，由于区块的使用率几乎总是不到 50%，因此 base fee 会逐区块减少，可以以此来区分模拟执行和实际执行，设置小于当前 base fee 而大于下一区块 base fee 的 gas price，从而阻止 bot 发送 `proveWork()` 交易
 
 ### 解题脚本
 
