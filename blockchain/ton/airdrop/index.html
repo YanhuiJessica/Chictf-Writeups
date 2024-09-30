@@ -6,28 +6,28 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="攻防世界 | 新手练习区 | Crypto">
+        <meta name="description" content="2024 | TON CTF | DEFI">
       
       
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/crypto/normal_rsa/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/ton/airdrop/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-8.3.3">
     
     
       
-        <title>Crypto - Normal_RSA - Chictf-Writeups</title>
+        <title>Blockchain - Airdrop - Chictf-Writeups</title>
       
     
     
   
-      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4a0965b7.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
         
           
           
@@ -56,7 +56,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#description" class="md-skip">
           跳转至
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+    <a href="../../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Crypto - Normal_RSA
+              Blockchain - Airdrop
             
           </span>
         </div>
@@ -197,7 +197,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         简介
       </a>
     </li>
@@ -213,7 +213,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../misc/unpleasant_music/" class="md-tabs__link">
+      <a href="../../../misc/unpleasant_music/" class="md-tabs__link">
         Misc
       </a>
     </li>
@@ -229,7 +229,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../web/t_star_upload_bypass/" class="md-tabs__link">
+      <a href="../../../web/t_star_upload_bypass/" class="md-tabs__link">
         Web
       </a>
     </li>
@@ -245,8 +245,24 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../reverse/easyre/" class="md-tabs__link">
+      <a href="../../../reverse/easyre/" class="md-tabs__link">
         Reverse / Pwn
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../crypto/bank/" class="md-tabs__link">
+        Crypto
       </a>
     </li>
   
@@ -263,23 +279,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../bank/" class="md-tabs__link md-tabs__link--active">
-        Crypto
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../blockchain/code_is_law/" class="md-tabs__link">
+      <a href="../../code_is_law/" class="md-tabs__link md-tabs__link--active">
         Blockchain
       </a>
     </li>
@@ -300,7 +300,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../wargames/natas/" class="md-tabs__link">
+      <a href="../../../wargames/natas/" class="md-tabs__link">
         Wargames
       </a>
     </li>
@@ -318,7 +318,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../eggs/ctfhub_index/" class="md-tabs__link">
+      <a href="../../../eggs/ctfhub_index/" class="md-tabs__link">
         彩蛋
       </a>
     </li>
@@ -346,7 +346,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
+    <a href="../../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
@@ -403,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         首页
       </a>
     </li>
@@ -417,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../how_to_participate/" class="md-nav__link">
+      <a href="../../../how_to_participate/" class="md-nav__link">
         如何参与
       </a>
     </li>
@@ -465,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/unpleasant_music/" class="md-nav__link">
+      <a href="../../../misc/unpleasant_music/" class="md-nav__link">
         Unpleasant music
       </a>
     </li>
@@ -479,7 +479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/leaf_cover_eyes/" class="md-nav__link">
+      <a href="../../../misc/leaf_cover_eyes/" class="md-nav__link">
         一叶障目
       </a>
     </li>
@@ -493,7 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/difficult_programming_language/" class="md-nav__link">
+      <a href="../../../misc/difficult_programming_language/" class="md-nav__link">
         Difficult Programming Language
       </a>
     </li>
@@ -507,7 +507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/secret_information/" class="md-nav__link">
+      <a href="../../../misc/secret_information/" class="md-nav__link">
         机密信息
       </a>
     </li>
@@ -521,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/hide_and_seek/" class="md-nav__link">
+      <a href="../../../misc/hide_and_seek/" class="md-nav__link">
         藏藏藏
       </a>
     </li>
@@ -535,7 +535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/targz_y1ng/" class="md-nav__link">
+      <a href="../../../misc/targz_y1ng/" class="md-nav__link">
         TARGZ-y1ng
       </a>
     </li>
@@ -549,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/gakki/" class="md-nav__link">
+      <a href="../../../misc/gakki/" class="md-nav__link">
         gakki
       </a>
     </li>
@@ -589,7 +589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/account_bot/" class="md-nav__link">
+      <a href="../../../misc/account_bot/" class="md-nav__link">
         从零开始的记账工具人
       </a>
     </li>
@@ -603,7 +603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/gibberish_message/" class="md-nav__link">
+      <a href="../../../misc/gibberish_message/" class="md-nav__link">
         从零开始的火星文生活
       </a>
     </li>
@@ -617,7 +617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/self_repeating_repeater/" class="md-nav__link">
+      <a href="../../../misc/self_repeating_repeater/" class="md-nav__link">
         自复读的复读机
       </a>
     </li>
@@ -631,7 +631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/233_string_tool/" class="md-nav__link">
+      <a href="../../../misc/233_string_tool/" class="md-nav__link">
         233 同学的字符串工具
       </a>
     </li>
@@ -645,7 +645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/233_docker/" class="md-nav__link">
+      <a href="../../../misc/233_docker/" class="md-nav__link">
         233 同学的 Docker
       </a>
     </li>
@@ -659,7 +659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/4f_system_middle/" class="md-nav__link">
+      <a href="../../../misc/4f_system_middle/" class="md-nav__link">
         来自一教的图片
       </a>
     </li>
@@ -673,7 +673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/basic_math_simulator/" class="md-nav__link">
+      <a href="../../../misc/basic_math_simulator/" class="md-nav__link">
         超基础的数理模拟器
       </a>
     </li>
@@ -694,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/stegano50/" class="md-nav__link">
+      <a href="../../../misc/stegano50/" class="md-nav__link">
         Stegano50
       </a>
     </li>
@@ -708,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/newsctf_all_reverse/" class="md-nav__link">
+      <a href="../../../misc/newsctf_all_reverse/" class="md-nav__link">
         NEWSCTF - ！了反都，了反
       </a>
     </li>
@@ -722,7 +722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/audio_frequency_stego/" class="md-nav__link">
+      <a href="../../../misc/audio_frequency_stego/" class="md-nav__link">
         audio-frequency-stego
       </a>
     </li>
@@ -762,7 +762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/pirates/" class="md-nav__link">
+      <a href="../../../misc/pirates/" class="md-nav__link">
         Pirates
       </a>
     </li>
@@ -776,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/teg_rads/" class="md-nav__link">
+      <a href="../../../misc/teg_rads/" class="md-nav__link">
         Teg Rads
       </a>
     </li>
@@ -797,7 +797,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/hearing_not_believing/" class="md-nav__link">
+      <a href="../../../misc/hearing_not_believing/" class="md-nav__link">
         HearingNotBelieving
       </a>
     </li>
@@ -837,7 +837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/transparent_file/" class="md-nav__link">
+      <a href="../../../misc/transparent_file/" class="md-nav__link">
         透明的文件
       </a>
     </li>
@@ -851,7 +851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/encrypted_u_disk/" class="md-nav__link">
+      <a href="../../../misc/encrypted_u_disk/" class="md-nav__link">
         加密的 U 盘
       </a>
     </li>
@@ -865,7 +865,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/p_q/" class="md-nav__link">
+      <a href="../../../misc/p_q/" class="md-nav__link">
         p😭q
       </a>
     </li>
@@ -912,7 +912,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/yusa_little_secret/" class="md-nav__link">
+      <a href="../../../misc/yusa_little_secret/" class="md-nav__link">
         YUSA的小秘密
       </a>
     </li>
@@ -926,7 +926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/yusa_secret/" class="md-nav__link">
+      <a href="../../../misc/yusa_secret/" class="md-nav__link">
         Yusa的秘密
       </a>
     </li>
@@ -947,7 +947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/compress_the_flag/" class="md-nav__link">
+      <a href="../../../misc/compress_the_flag/" class="md-nav__link">
         Compress The Flag
       </a>
     </li>
@@ -961,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/s_script_gi/" class="md-nav__link">
+      <a href="../../../misc/s_script_gi/" class="md-nav__link">
         s/&lt;script&gt;//gi
       </a>
     </li>
@@ -975,7 +975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/log4_sanity_check/" class="md-nav__link">
+      <a href="../../../misc/log4_sanity_check/" class="md-nav__link">
         Log 4 sanity check
       </a>
     </li>
@@ -989,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/bishop_duel/" class="md-nav__link">
+      <a href="../../../misc/bishop_duel/" class="md-nav__link">
         Bishop Duel
       </a>
     </li>
@@ -1003,7 +1003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/lighthouse/" class="md-nav__link">
+      <a href="../../../misc/lighthouse/" class="md-nav__link">
         Lighthouse
       </a>
     </li>
@@ -1017,7 +1017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/last_digit/" class="md-nav__link">
+      <a href="../../../misc/last_digit/" class="md-nav__link">
         last digit
       </a>
     </li>
@@ -1057,7 +1057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/chm0d/" class="md-nav__link">
+      <a href="../../../misc/chm0d/" class="md-nav__link">
         Chm0d
       </a>
     </li>
@@ -1071,7 +1071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/sudoklu/" class="md-nav__link">
+      <a href="../../../misc/sudoklu/" class="md-nav__link">
         SUDOkLu
       </a>
     </li>
@@ -1126,7 +1126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/t_star_upload_bypass/" class="md-nav__link">
+      <a href="../../../web/t_star_upload_bypass/" class="md-nav__link">
         文件上传 JS 绕过
       </a>
     </li>
@@ -1140,7 +1140,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/t_star_tomcat/" class="md-nav__link">
+      <a href="../../../web/t_star_tomcat/" class="md-nav__link">
         小猫咪踩灯泡
       </a>
     </li>
@@ -1154,7 +1154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/ctfhub_reflected_xss/" class="md-nav__link">
+      <a href="../../../web/ctfhub_reflected_xss/" class="md-nav__link">
         CTFHub - 反射型 XSS
       </a>
     </li>
@@ -1168,7 +1168,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/initiative/" class="md-nav__link">
+      <a href="../../../web/initiative/" class="md-nav__link">
         主动
       </a>
     </li>
@@ -1182,7 +1182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/funhash/" class="md-nav__link">
+      <a href="../../../web/funhash/" class="md-nav__link">
         Funhash
       </a>
     </li>
@@ -1196,7 +1196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/xss_game/" class="md-nav__link">
+      <a href="../../../web/xss_game/" class="md-nav__link">
         XSS Game
       </a>
     </li>
@@ -1210,7 +1210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/web_php_include/" class="md-nav__link">
+      <a href="../../../web/web_php_include/" class="md-nav__link">
         Web php include
       </a>
     </li>
@@ -1224,7 +1224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/ctfhub_git_leakage/" class="md-nav__link">
+      <a href="../../../web/ctfhub_git_leakage/" class="md-nav__link">
         CTFHub - Git 泄露
       </a>
     </li>
@@ -1238,7 +1238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/newsctf_easy_web/" class="md-nav__link">
+      <a href="../../../web/newsctf_easy_web/" class="md-nav__link">
         NEWSCTF - easy_web
       </a>
     </li>
@@ -1252,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/heres_a_flag/" class="md-nav__link">
+      <a href="../../../web/heres_a_flag/" class="md-nav__link">
         Here's a Flag
       </a>
     </li>
@@ -1292,7 +1292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/sale_melon/" class="md-nav__link">
+      <a href="../../../web/sale_melon/" class="md-nav__link">
         卖瓜
       </a>
     </li>
@@ -1306,7 +1306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/flag_red_packet/" class="md-nav__link">
+      <a href="../../../web/flag_red_packet/" class="md-nav__link">
         FLAG 助力大红包
       </a>
     </li>
@@ -1320,7 +1320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/info_above_graph/" class="md-nav__link">
+      <a href="../../../web/info_above_graph/" class="md-nav__link">
         图之上的信息
       </a>
     </li>
@@ -1341,7 +1341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/most_secure_crypto_algo/" class="md-nav__link">
+      <a href="../../../web/most_secure_crypto_algo/" class="md-nav__link">
         Most Secure Crypto Algo
       </a>
     </li>
@@ -1355,7 +1355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web/calculus_calc_exercise/" class="md-nav__link">
+      <a href="../../../web/calculus_calc_exercise/" class="md-nav__link">
         微积分计算小练习
       </a>
     </li>
@@ -1403,7 +1403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/easyre/" class="md-nav__link">
+      <a href="../../../reverse/easyre/" class="md-nav__link">
         EasyRe
       </a>
     </li>
@@ -1417,7 +1417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/z3/" class="md-nav__link">
+      <a href="../../../reverse/z3/" class="md-nav__link">
         z3
       </a>
     </li>
@@ -1431,7 +1431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/newsctf_re_signin/" class="md-nav__link">
+      <a href="../../../reverse/newsctf_re_signin/" class="md-nav__link">
         NEWSCTF - re_signin
       </a>
     </li>
@@ -1445,7 +1445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../pwn/when_did_you_born/" class="md-nav__link">
+      <a href="../../../pwn/when_did_you_born/" class="md-nav__link">
         when did you born
       </a>
     </li>
@@ -1459,7 +1459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../pwn/amnesia/" class="md-nav__link">
+      <a href="../../../pwn/amnesia/" class="md-nav__link">
         Amnesia
       </a>
     </li>
@@ -1479,14 +1479,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
       
       
       
@@ -1509,7 +1507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bank/" class="md-nav__link">
+      <a href="../../../crypto/bank/" class="md-nav__link">
         bank
       </a>
     </li>
@@ -1523,7 +1521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../shanghai/" class="md-nav__link">
+      <a href="../../../crypto/shanghai/" class="md-nav__link">
         shanghai
       </a>
     </li>
@@ -1537,7 +1535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../easy_rsa/" class="md-nav__link">
+      <a href="../../../crypto/easy_rsa/" class="md-nav__link">
         easy_RSA
       </a>
     </li>
@@ -1549,48 +1547,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Normal_RSA
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../crypto/normal_rsa/" class="md-nav__link">
         Normal_RSA
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    解题思路
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1602,7 +1563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../easy_ecc/" class="md-nav__link">
+      <a href="../../../crypto/easy_ecc/" class="md-nav__link">
         easy_ECC
       </a>
     </li>
@@ -1616,7 +1577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fanfie/" class="md-nav__link">
+      <a href="../../../crypto/fanfie/" class="md-nav__link">
         fanfie
       </a>
     </li>
@@ -1630,7 +1591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../jefferson_disk/" class="md-nav__link">
+      <a href="../../../crypto/jefferson_disk/" class="md-nav__link">
         转轮机加密
       </a>
     </li>
@@ -1644,7 +1605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../code_modulate/" class="md-nav__link">
+      <a href="../../../crypto/code_modulate/" class="md-nav__link">
         编码与调制
       </a>
     </li>
@@ -1658,7 +1619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ciscn_rsa/" class="md-nav__link">
+      <a href="../../../crypto/ciscn_rsa/" class="md-nav__link">
         CISCN - rsa
       </a>
     </li>
@@ -1672,7 +1633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../opisthocomus_hoazin/" class="md-nav__link">
+      <a href="../../../crypto/opisthocomus_hoazin/" class="md-nav__link">
         opisthocomus-hoazin
       </a>
     </li>
@@ -1686,7 +1647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../stars_and_shapes/" class="md-nav__link">
+      <a href="../../../crypto/stars_and_shapes/" class="md-nav__link">
         Stars and Shapes
       </a>
     </li>
@@ -1700,7 +1661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../he_thrusts_his_fists_against_the_post/" class="md-nav__link">
+      <a href="../../../crypto/he_thrusts_his_fists_against_the_post/" class="md-nav__link">
         He Thrusts His Fists Against the Post
       </a>
     </li>
@@ -1740,7 +1701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../alkaloid_stream/" class="md-nav__link">
+      <a href="../../../crypto/alkaloid_stream/" class="md-nav__link">
         Alkaloid Stream
       </a>
     </li>
@@ -1754,7 +1715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../steroid_stream/" class="md-nav__link">
+      <a href="../../../crypto/steroid_stream/" class="md-nav__link">
         Steroid Stream
       </a>
     </li>
@@ -1775,7 +1736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../easyxor/" class="md-nav__link">
+      <a href="../../../crypto/easyxor/" class="md-nav__link">
         easyxor
       </a>
     </li>
@@ -1789,7 +1750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ustc_easy_rsa/" class="md-nav__link">
+      <a href="../../../crypto/ustc_easy_rsa/" class="md-nav__link">
         HackerGame - Easy RSA
       </a>
     </li>
@@ -1803,7 +1764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../baby_mac/" class="md-nav__link">
+      <a href="../../../crypto/baby_mac/" class="md-nav__link">
         Baby MAC
       </a>
     </li>
@@ -1817,7 +1778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../noteasy03/" class="md-nav__link">
+      <a href="../../../crypto/noteasy03/" class="md-nav__link">
         noteasy03
       </a>
     </li>
@@ -1831,7 +1792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dealymaffs/" class="md-nav__link">
+      <a href="../../../crypto/dealymaffs/" class="md-nav__link">
         Dealymaffs
       </a>
     </li>
@@ -1845,7 +1806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../weird_programmer/" class="md-nav__link">
+      <a href="../../../crypto/weird_programmer/" class="md-nav__link">
         Weird Programmer
       </a>
     </li>
@@ -1859,7 +1820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../x_factor/" class="md-nav__link">
+      <a href="../../../crypto/x_factor/" class="md-nav__link">
         X Factor
       </a>
     </li>
@@ -1873,7 +1834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../paiaiai/" class="md-nav__link">
+      <a href="../../../crypto/paiaiai/" class="md-nav__link">
         P(ai)^3
       </a>
     </li>
@@ -1887,7 +1848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../casino/" class="md-nav__link">
+      <a href="../../../crypto/casino/" class="md-nav__link">
         Casino
       </a>
     </li>
@@ -1901,7 +1862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../black_hole/" class="md-nav__link">
+      <a href="../../../crypto/black_hole/" class="md-nav__link">
         Black Hole
       </a>
     </li>
@@ -1915,7 +1876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../diophantine/" class="md-nav__link">
+      <a href="../../../crypto/diophantine/" class="md-nav__link">
         Diophantine
       </a>
     </li>
@@ -1955,7 +1916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cycling/" class="md-nav__link">
+      <a href="../../../crypto/cycling/" class="md-nav__link">
         Cycling
       </a>
     </li>
@@ -1969,7 +1930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../maybe_someday/" class="md-nav__link">
+      <a href="../../../crypto/maybe_someday/" class="md-nav__link">
         Maybe Someday
       </a>
     </li>
@@ -1990,7 +1951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dynamic_rsa/" class="md-nav__link">
+      <a href="../../../crypto/dynamic_rsa/" class="md-nav__link">
         Dynamic RSA
       </a>
     </li>
@@ -2030,7 +1991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exchanged/" class="md-nav__link">
+      <a href="../../../crypto/exchanged/" class="md-nav__link">
         exchanged
       </a>
     </li>
@@ -2044,7 +2005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../leapfrog/" class="md-nav__link">
+      <a href="../../../crypto/leapfrog/" class="md-nav__link">
         leapfrog
       </a>
     </li>
@@ -2065,7 +2026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../shuffle128/" class="md-nav__link">
+      <a href="../../../crypto/shuffle128/" class="md-nav__link">
         shuffle128
       </a>
     </li>
@@ -2079,7 +2040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../badkey1/" class="md-nav__link">
+      <a href="../../../crypto/badkey1/" class="md-nav__link">
         badkey1
       </a>
     </li>
@@ -2093,7 +2054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../random_rabin/" class="md-nav__link">
+      <a href="../../../crypto/random_rabin/" class="md-nav__link">
         random rabin
       </a>
     </li>
@@ -2113,12 +2074,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
       
       
       
@@ -2141,7 +2104,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/code_is_law/" class="md-nav__link">
+      <a href="../../code_is_law/" class="md-nav__link">
         Code is Law
       </a>
     </li>
@@ -2155,7 +2118,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/totally_secure_dapp/" class="md-nav__link">
+      <a href="../../totally_secure_dapp/" class="md-nav__link">
         Totally Secure Dapp
       </a>
     </li>
@@ -2169,7 +2132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/cairo_reverse/" class="md-nav__link">
+      <a href="../../cairo_reverse/" class="md-nav__link">
         Cairo Reverse
       </a>
     </li>
@@ -2183,7 +2146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/tctf_nft_market/" class="md-nav__link">
+      <a href="../../tctf_nft_market/" class="md-nav__link">
         TCTF NFT Market
       </a>
     </li>
@@ -2223,7 +2186,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/secret_and_ephemeral/" class="md-nav__link">
+      <a href="../../secret_and_ephemeral/" class="md-nav__link">
         Secret and Ephemeral
       </a>
     </li>
@@ -2237,7 +2200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/private_log/" class="md-nav__link">
+      <a href="../../private_log/" class="md-nav__link">
         Private Log
       </a>
     </li>
@@ -2258,7 +2221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/memory_master_on_the_chain/" class="md-nav__link">
+      <a href="../../memory_master_on_the_chain/" class="md-nav__link">
         链上记忆大师
       </a>
     </li>
@@ -2272,7 +2235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/cookie_market/" class="md-nav__link">
+      <a href="../../cookie_market/" class="md-nav__link">
         Cookie Market
       </a>
     </li>
@@ -2286,7 +2249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/tetctftoken/" class="md-nav__link">
+      <a href="../../tetctftoken/" class="md-nav__link">
         TetCTFToken
       </a>
     </li>
@@ -2300,7 +2263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/realwrap/" class="md-nav__link">
+      <a href="../../realwrap/" class="md-nav__link">
         realwrap
       </a>
     </li>
@@ -2314,7 +2277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/evmvm/" class="md-nav__link">
+      <a href="../../evmvm/" class="md-nav__link">
         evmvm
       </a>
     </li>
@@ -2354,7 +2317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/dragon_slayer/" class="md-nav__link">
+      <a href="../../dragon_slayer/" class="md-nav__link">
         Dragon Slayer
       </a>
     </li>
@@ -2368,7 +2331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/diamond_heist/" class="md-nav__link">
+      <a href="../../diamond_heist/" class="md-nav__link">
         Diamond Heist
       </a>
     </li>
@@ -2389,7 +2352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/tealyman/" class="md-nav__link">
+      <a href="../../tealyman/" class="md-nav__link">
         TealyMan
       </a>
     </li>
@@ -2403,7 +2366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/sailors_revenge/" class="md-nav__link">
+      <a href="../../sailors_revenge/" class="md-nav__link">
         Sailor's Revenge
       </a>
     </li>
@@ -2443,7 +2406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/murky_seepass/" class="md-nav__link">
+      <a href="../../murky_seepass/" class="md-nav__link">
         🎓 Murky SEEPass
       </a>
     </li>
@@ -2457,7 +2420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/operation_feathered_fortune_fiasco/" class="md-nav__link">
+      <a href="../../operation_feathered_fortune_fiasco/" class="md-nav__link">
         Operation Feathered Fortune Fiasco
       </a>
     </li>
@@ -2471,7 +2434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/pigeon_bank/" class="md-nav__link">
+      <a href="../../pigeon_bank/" class="md-nav__link">
         Pigeon Bank
       </a>
     </li>
@@ -2485,7 +2448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/pigeon_vault/" class="md-nav__link">
+      <a href="../../pigeon_vault/" class="md-nav__link">
         Pigeon Vault
       </a>
     </li>
@@ -2532,7 +2495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/positive/" class="md-nav__link">
+      <a href="../../positive/" class="md-nav__link">
         positive
       </a>
     </li>
@@ -2546,7 +2509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/infinite/" class="md-nav__link">
+      <a href="../../infinite/" class="md-nav__link">
         infinite
       </a>
     </li>
@@ -2560,7 +2523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/deception/" class="md-nav__link">
+      <a href="../../deception/" class="md-nav__link">
         deception
       </a>
     </li>
@@ -2581,7 +2544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/tribunal/" class="md-nav__link">
+      <a href="../../tribunal/" class="md-nav__link">
         tribunal
       </a>
     </li>
@@ -2595,7 +2558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/tokyo_payload/" class="md-nav__link">
+      <a href="../../tokyo_payload/" class="md-nav__link">
         Tokyo Payload
       </a>
     </li>
@@ -2609,7 +2572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/chain_hunter/" class="md-nav__link">
+      <a href="../../chain_hunter/" class="md-nav__link">
         链上猎手
       </a>
     </li>
@@ -2649,7 +2612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/paradigm/one_hundred_percent/" class="md-nav__link">
+      <a href="../../paradigm/one_hundred_percent/" class="md-nav__link">
         100%
       </a>
     </li>
@@ -2663,7 +2626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/paradigm/dai_plus_plus/" class="md-nav__link">
+      <a href="../../paradigm/dai_plus_plus/" class="md-nav__link">
         Dai++
       </a>
     </li>
@@ -2677,7 +2640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/paradigm/grains_of_sand/" class="md-nav__link">
+      <a href="../../paradigm/grains_of_sand/" class="md-nav__link">
         Grains of Sand
       </a>
     </li>
@@ -2691,7 +2654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/paradigm/enterprise_blockchain/" class="md-nav__link">
+      <a href="../../paradigm/enterprise_blockchain/" class="md-nav__link">
         Enterprise Blockchain
       </a>
     </li>
@@ -2712,7 +2675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/the_council_of_apes/" class="md-nav__link">
+      <a href="../../the_council_of_apes/" class="md-nav__link">
         The Council of Apes
       </a>
     </li>
@@ -2752,7 +2715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/movectf/checkin/" class="md-nav__link">
+      <a href="../../movectf/checkin/" class="md-nav__link">
         Checkin
       </a>
     </li>
@@ -2766,7 +2729,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/movectf/dynamic_matrix_traversal/" class="md-nav__link">
+      <a href="../../movectf/dynamic_matrix_traversal/" class="md-nav__link">
         DynamicMatrixTraversal
       </a>
     </li>
@@ -2780,7 +2743,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/movectf/easy_game/" class="md-nav__link">
+      <a href="../../movectf/easy_game/" class="md-nav__link">
         EasyGame
       </a>
     </li>
@@ -2801,7 +2764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/unnamedweb3/" class="md-nav__link">
+      <a href="../../unnamedweb3/" class="md-nav__link">
         UnnamedWeb3
       </a>
     </li>
@@ -2815,7 +2778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/safebridge/" class="md-nav__link">
+      <a href="../../safebridge/" class="md-nav__link">
         SafeBridge
       </a>
     </li>
@@ -2855,7 +2818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/ethernaut/wombo_combo/" class="md-nav__link">
+      <a href="../../ethernaut/wombo_combo/" class="md-nav__link">
         Wombo Combo
       </a>
     </li>
@@ -2869,7 +2832,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/ethernaut/dutch2/" class="md-nav__link">
+      <a href="../../ethernaut/dutch2/" class="md-nav__link">
         Dutch 2
       </a>
     </li>
@@ -2916,7 +2879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/greyhats_dollar/" class="md-nav__link">
+      <a href="../../greyhats_dollar/" class="md-nav__link">
         Greyhats Dollar
       </a>
     </li>
@@ -2930,7 +2893,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/escrow/" class="md-nav__link">
+      <a href="../../escrow/" class="md-nav__link">
         Escrow
       </a>
     </li>
@@ -2944,7 +2907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/simple_amm_vault/" class="md-nav__link">
+      <a href="../../simple_amm_vault/" class="md-nav__link">
         Simple Amm Vault
       </a>
     </li>
@@ -2958,7 +2921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/voting_vault/" class="md-nav__link">
+      <a href="../../voting_vault/" class="md-nav__link">
         Voting Vault
       </a>
     </li>
@@ -3005,7 +2968,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/404paymaster/" class="md-nav__link">
+      <a href="../../404paymaster/" class="md-nav__link">
         404Paymaster
       </a>
     </li>
@@ -3019,7 +2982,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/dot_hack_lending_market/" class="md-nav__link">
+      <a href="../../dot_hack_lending_market/" class="md-nav__link">
         .Hack Lending Market
       </a>
     </li>
@@ -3040,7 +3003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/lustrous/" class="md-nav__link">
+      <a href="../../lustrous/" class="md-nav__link">
         Lustrous
       </a>
     </li>
@@ -3054,7 +3017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../blockchain/claim_guard/" class="md-nav__link">
+      <a href="../../claim_guard/" class="md-nav__link">
         claim-guard
       </a>
     </li>
@@ -3066,12 +3029,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_29" type="checkbox" id="__nav_6_29" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_29" type="checkbox" id="__nav_6_29" checked>
       
       
       
@@ -3092,11 +3057,82 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../blockchain/ton/airdrop/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Airdrop
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Airdrop
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    Solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3175,7 +3211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/natas/" class="md-nav__link">
+      <a href="../../../wargames/natas/" class="md-nav__link">
         Natas
       </a>
     </li>
@@ -3189,7 +3225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/leviathan/" class="md-nav__link">
+      <a href="../../../wargames/leviathan/" class="md-nav__link">
         Leviathan
       </a>
     </li>
@@ -3203,7 +3239,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/krypton/" class="md-nav__link">
+      <a href="../../../wargames/krypton/" class="md-nav__link">
         Krypton
       </a>
     </li>
@@ -3217,7 +3253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/narnia/" class="md-nav__link">
+      <a href="../../../wargames/narnia/" class="md-nav__link">
         Narnia
       </a>
     </li>
@@ -3264,7 +3300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/stack/" class="md-nav__link">
+      <a href="../../../wargames/protostar/stack/" class="md-nav__link">
         Stack
       </a>
     </li>
@@ -3278,7 +3314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/format/" class="md-nav__link">
+      <a href="../../../wargames/protostar/format/" class="md-nav__link">
         Format
       </a>
     </li>
@@ -3292,7 +3328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/heap/" class="md-nav__link">
+      <a href="../../../wargames/protostar/heap/" class="md-nav__link">
         Heap
       </a>
     </li>
@@ -3306,7 +3342,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/net/" class="md-nav__link">
+      <a href="../../../wargames/protostar/net/" class="md-nav__link">
         Net
       </a>
     </li>
@@ -3320,7 +3356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/protostar/final/" class="md-nav__link">
+      <a href="../../../wargames/protostar/final/" class="md-nav__link">
         Final
       </a>
     </li>
@@ -3367,7 +3403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/ethernaut/" class="md-nav__link">
+      <a href="../../../wargames/ethernaut/" class="md-nav__link">
         Ethernaut
       </a>
     </li>
@@ -3381,7 +3417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/damn_vulnerable_defi/" class="md-nav__link">
+      <a href="../../../wargames/damn_vulnerable_defi/" class="md-nav__link">
         Damn Vulnerable DeFi V3
       </a>
     </li>
@@ -3421,7 +3457,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/quillctf/slot_puzzle/" class="md-nav__link">
+      <a href="../../../wargames/quillctf/slot_puzzle/" class="md-nav__link">
         Slot Puzzle
       </a>
     </li>
@@ -3435,7 +3471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/quillctf/invest_pool/" class="md-nav__link">
+      <a href="../../../wargames/quillctf/invest_pool/" class="md-nav__link">
         Invest Pool
       </a>
     </li>
@@ -3449,7 +3485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/quillctf/assert_equal/" class="md-nav__link">
+      <a href="../../../wargames/quillctf/assert_equal/" class="md-nav__link">
         assertEqual
       </a>
     </li>
@@ -3463,7 +3499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/quillctf/collect/" class="md-nav__link">
+      <a href="../../../wargames/quillctf/collect/" class="md-nav__link">
         Collect
       </a>
     </li>
@@ -3477,7 +3513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/quillctf/nftbank/" class="md-nav__link">
+      <a href="../../../wargames/quillctf/nftbank/" class="md-nav__link">
         NFTBANK
       </a>
     </li>
@@ -3491,7 +3527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/quillctf/license_manager/" class="md-nav__link">
+      <a href="../../../wargames/quillctf/license_manager/" class="md-nav__link">
         LicenseManager
       </a>
     </li>
@@ -3512,7 +3548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/defi_security_summit/" class="md-nav__link">
+      <a href="../../../wargames/defi_security_summit/" class="md-nav__link">
         A-MAZE-X CTF 2023
       </a>
     </li>
@@ -3559,7 +3595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/solana_pathway/" class="md-nav__link">
+      <a href="../../../wargames/solana_pathway/" class="md-nav__link">
         Solana Pathway
       </a>
     </li>
@@ -3573,7 +3609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../wargames/solana_security_workshop/" class="md-nav__link">
+      <a href="../../../wargames/solana_security_workshop/" class="md-nav__link">
         Solana Security Workshop
       </a>
     </li>
@@ -3628,7 +3664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_index/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_index/" class="md-nav__link">
         CTFHub - 首页
       </a>
     </li>
@@ -3642,7 +3678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_wechat/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_wechat/" class="md-nav__link">
         CTFHub - 公众号
       </a>
     </li>
@@ -3656,7 +3692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_tools/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_tools/" class="md-nav__link">
         CTFHub - 工具
       </a>
     </li>
@@ -3670,7 +3706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_match/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_match/" class="md-nav__link">
         CTFHub - 赛事
       </a>
     </li>
@@ -3684,7 +3720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eggs/ctfhub_exams/" class="md-nav__link">
+      <a href="../../../eggs/ctfhub_exams/" class="md-nav__link">
         CTFHub - 真题
       </a>
     </li>
@@ -3723,8 +3759,42 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    解题思路
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    Solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    Exploitation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
   </a>
   
 </li>
@@ -3743,26 +3813,60 @@
   
   <div style="color: gray;">
     <small>
-      攻防世界 | 新手练习区 | Crypto
+      2024 | TON CTF | DEFI
     </small>
   </div>
   
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/crypto/normal_rsa.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/blockchain/ton/airdrop.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Normal_RSA</h1>
+  <h1>Airdrop</h1>
 
-<h2 id="_1">解题思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<ul>
-<li>附件为一个公钥文件 <em>pubkey.pem</em> 和一个经过加密的文件 <em>flag.enc</em></li>
-<li>直接使用工具 <a href="https://github.com/Ganapati/RsaCtfTool">Ganapati/RsaCtfTool</a> 解密
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<div class="md-typeset">
+    <div class="blogging-tags-grid">
+
+        <a href="#ton" class="blogging-tag"><code>#ton</code></a>
+
+        <a href="#tact" class="blogging-tag"><code>#tact</code></a>
+
+    </div>
+
+
+</div>
+
+<style>
+    .md-typeset .blogging-tags-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+    }
+
+    .md-typeset .blogging-tag {
+        color: var(--md-typeset-color);
+        background-color: var(--md-typeset-code-color);
+        white-space: nowrap;
+        display: block;
+    }
+
+    .md-typeset .blogging-tag code {
+        border-radius: 5px;
+    }
+</style>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><a href="https://github.com/TonBitSec/TonCTF-Challenges/tree/6dc2518086f88006a4dd4dd0bfef963b1f13c33b/airdrop">Challenge Files</a></p>
+</blockquote>
+<details class="note">
+<summary>Airdrop.tact</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
@@ -3775,22 +3879,244 @@
 <span class="normal"><a href="#__codelineno-0-11">11</a></span>
 <span class="normal"><a href="#__codelineno-0-12">12</a></span>
 <span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># factordb 在线分解 N</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a>$<span class="w"> </span>./RsaCtfTool.py<span class="w"> </span>--publickey<span class="w"> </span>pubkey.pem<span class="w"> </span>--uncipherfile<span class="w"> </span>flag.enc<span class="w"> </span>--attack<span class="w"> </span>factordb
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>private<span class="w"> </span>argument<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>set,<span class="w"> </span>the<span class="w"> </span>private<span class="w"> </span>key<span class="w"> </span>will<span class="w"> </span>not<span class="w"> </span>be<span class="w"> </span>displayed,<span class="w"> </span>even<span class="w"> </span><span class="k">if</span><span class="w"> </span>recovered.
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Testing<span class="w"> </span>key<span class="w"> </span>pubkey.pem.
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Performing<span class="w"> </span>factordb<span class="w"> </span>attack<span class="w"> </span>on<span class="w"> </span>pubkey.pem.
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#__codelineno-0-64">64</a></span>
+<span class="normal"><a href="#__codelineno-0-65">65</a></span>
+<span class="normal"><a href="#__codelineno-0-66">66</a></span>
+<span class="normal"><a href="#__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#__codelineno-0-69">69</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">const</span><span class="w"> </span><span class="n">CLAIM_AMOUNT</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="k">const</span><span class="w"> </span><span class="n">INIT_SUPPLY</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30000</span><span class="p">;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">message</span><span class="w"> </span><span class="n">UserStake</span><span class="p">{</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="p">}</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a>Results<span class="w"> </span><span class="k">for</span><span class="w"> </span>pubkey.pem:
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a>Unciphered<span class="w"> </span>data<span class="w"> </span>:
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>HEX<span class="w"> </span>:<span class="w"> </span>0x0002c0fe04e3260e5b8700504354467b323536625f69355f6d336469756d7d0a
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a>INT<span class="w"> </span><span class="o">(</span>big<span class="w"> </span>endian<span class="o">)</span><span class="w"> </span>:<span class="w"> </span><span class="m">4865677769286717240419296208145914517832094464845949055035370987525602570</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a>INT<span class="w"> </span><span class="o">(</span>little<span class="w"> </span>endian<span class="o">)</span><span class="w"> </span>:<span class="w"> </span><span class="m">4744739824694533032519230312074638919149793854447671791679980959756701401600</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>STR<span class="w"> </span>:<span class="w"> </span>b<span class="s1">&#39;\x00\x02\xc0\xfe\x04\xe3&amp;\x0e[\x87\x00PCTF{256b_i5_m3dium}\n&#39;</span>
-</span></code></pre></div></td></tr></table></div></li>
-<li>Flag 为<code>PCTF{256b_i5_m3dium}</code></li>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">message</span><span class="w"> </span><span class="n">UserWithdraw</span><span class="p">{</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="p">}</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="n">message</span><span class="w"> </span><span class="n">StakeEvent</span><span class="p">{</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="n">sender</span><span class="p">:</span><span class="w"> </span><span class="nc">Address</span><span class="p">;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="n">amount</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">;</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="p">}</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="n">contract</span><span class="w"> </span><span class="n">AirDrop</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="w">    </span><span class="n">total_balance</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">uint256</span><span class="p">;</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="w">    </span><span class="n">user_info</span><span class="p">:</span><span class="w"> </span><span class="nc">map</span><span class="o">&lt;</span><span class="n">Address</span><span class="p">,</span><span class="w"> </span><span class="n">Int</span><span class="o">&gt;</span><span class="p">;</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="w">    </span><span class="n">user_claim_info</span><span class="p">:</span><span class="w"> </span><span class="nc">map</span><span class="o">&lt;</span><span class="n">Address</span><span class="p">,</span><span class="w"> </span><span class="n">Bool</span><span class="o">&gt;</span><span class="p">;</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="n">init</span><span class="p">(</span><span class="n">version</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">emptyMap</span><span class="p">();</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INIT_SUPPLY</span><span class="p">;</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="w">    </span><span class="n">receive</span><span class="p">(</span><span class="s">&quot;AirDrop&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="w">        </span><span class="n">require</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">user_claim_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Have claimed&quot;</span><span class="p">);</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">user_staked</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="w">            </span><span class="n">user_staked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="o">!!</span><span class="p">;</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CLAIM_AMOUNT</span><span class="p">;</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">sender</span><span class="p">(),</span><span class="w"> </span><span class="n">user_staked</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">CLAIM_AMOUNT</span><span class="p">);</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">user_claim_info</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">sender</span><span class="p">(),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="w">    </span><span class="n">receive</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="nc">UserStake</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="w">        </span><span class="n">require</span><span class="p">(</span><span class="n">context</span><span class="p">().</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Incorrect TON value&quot;</span><span class="p">);</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">user_staked</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="w">            </span><span class="n">user_staked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="o">!!</span><span class="p">;</span>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="p">;</span>
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">sender</span><span class="p">(),</span><span class="w"> </span><span class="n">user_staked</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="p">);</span>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48"></a>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="w">    </span><span class="n">receive</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="nc">UserWithdraw</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="w">        </span><span class="n">require</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="o">!!</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nothing to withdraw&quot;</span><span class="p">);</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">user_staked</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="w">        </span><span class="n">user_staked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="o">!!</span><span class="p">;</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="w">        </span><span class="n">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">user_staked</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Insufficient balance&quot;</span><span class="p">);</span>
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="p">;</span>
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">user_staked</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">del</span><span class="p">(</span><span class="n">sender</span><span class="p">());</span>
+</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">sender</span><span class="p">(),</span><span class="w"> </span><span class="n">user_staked</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="p">);</span>
+</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>
+</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a><span class="w">    </span><span class="n">get</span><span class="w"> </span><span class="n">fun</span><span class="w"> </span><span class="n">balance</span><span class="p">():</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="p">;</span>
+</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65"></a>
+</span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66"></a><span class="w">    </span><span class="n">get</span><span class="w"> </span><span class="n">fun</span><span class="w"> </span><span class="n">is_solved</span><span class="p">():</span><span class="w"> </span><span class="nc">Bool</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
+<ul>
+<li>There is a state variable <code>total_balance</code> with value <code>30000</code> initially. The goal of this challenge is to make <code>total_balance</code> equal to zero</li>
+<li>There are three operations:</li>
+<li><strong>AirDrop</strong> Each user can execute once and <code>total_balance</code> will be subtracted by 1.</li>
+<li><strong>UserStake</strong> Increase <code>total_balance</code> and <code>user_staked</code> with user-provided <code>msg.amount</code>.</li>
+<li><strong>UserWithdraw</strong> Decrease <code>total_balance</code> and <code>user_staked</code> with user-provided <code>msg.amount</code>. The <code>msg.amount</code> should not be greater than <code>user_staked</code>.</li>
+<li>
+<p>Since <code>UserStake</code> does not check <code>msg.amount</code> which is of type <code>Int</code>, we can provide a negative value to reduce <code>total_balance</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#__codelineno-1-8">8</a></span>
+<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">receive</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span><span class="w"> </span><span class="nc">UserStake</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="n">require</span><span class="p">(</span><span class="n">context</span><span class="p">().</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Incorrect TON value&quot;</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">user_staked</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="n">user_staked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">sender</span><span class="p">())</span><span class="o">!!</span><span class="p">;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">total_balance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="p">;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="bp">self</span><span class="p">.</span><span class="n">user_info</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">sender</span><span class="p">(),</span><span class="w"> </span><span class="n">user_staked</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">amount</span><span class="p">);</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h3 id="exploitation">Exploitation<a class="headerlink" href="#exploitation" title="Permanent link">&para;</a></h3>
+<p>Create a <code>solve.ts</code> under the <code>sources/</code> and run <code>yarn solve</code>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span>
+<span class="normal"><a href="#__codelineno-2-29">29</a></span>
+<span class="normal"><a href="#__codelineno-2-30">30</a></span>
+<span class="normal"><a href="#__codelineno-2-31">31</a></span>
+<span class="normal"><a href="#__codelineno-2-32">32</a></span>
+<span class="normal"><a href="#__codelineno-2-33">33</a></span>
+<span class="normal"><a href="#__codelineno-2-34">34</a></span>
+<span class="normal"><a href="#__codelineno-2-35">35</a></span>
+<span class="normal"><a href="#__codelineno-2-36">36</a></span>
+<span class="normal"><a href="#__codelineno-2-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Address</span><span class="p">,</span><span class="w"> </span><span class="nx">toNano</span><span class="p">,</span><span class="w"> </span><span class="nx">TonClient</span><span class="p">,</span><span class="w"> </span><span class="nx">WalletContractV4</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@ton/ton&quot;</span><span class="p">;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">mnemonicToPrivateKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;ton-crypto&quot;</span><span class="p">;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AirDrop</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./output/Airdrop_AirDrop&quot;</span><span class="p">;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">dotenv</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;dotenv&quot;</span><span class="p">;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="nx">dotenv</span><span class="p">.</span><span class="nx">config</span><span class="p">();</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TonClient</span><span class="p">({</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">        </span><span class="nx">endpoint</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;http://65.21.223.95:8081/jsonRPC&quot;</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="p">});</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">mnemonics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">mnemonics_2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">mnemonics</span><span class="p">);</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">keyPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">mnemonicToPrivateKey</span><span class="p">(</span><span class="nx">mnemonics</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">));</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">secretKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keyPair</span><span class="p">.</span><span class="nx">secretKey</span><span class="p">;</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">workchain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// we are working in basechain.</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">deployer_wallet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">WalletContractV4</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="w"> </span><span class="nx">workchain</span><span class="p">,</span><span class="w"> </span><span class="nx">publicKey</span><span class="o">:</span><span class="w"> </span><span class="nx">keyPair</span><span class="p">.</span><span class="nx">publicKey</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">deployer_wallet</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">deployer_wallet_contract</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">deployer_wallet</span><span class="p">);</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22"></a>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Address</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">CONTRACT</span><span class="p">);</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24"></a>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">contract_open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">AirDrop</span><span class="p">.</span><span class="nx">fromAddress</span><span class="p">(</span><span class="nx">target</span><span class="p">));</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26"></a><span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">contract_open</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="w">        </span><span class="nx">deployer_wallet_contract</span><span class="p">.</span><span class="nx">sender</span><span class="p">(</span><span class="nx">secretKey</span><span class="p">),</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29"></a><span class="w">            </span><span class="c1">// deducting fees from it</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s2">&quot;0.1&quot;</span><span class="p">),</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33"></a><span class="w">            </span><span class="s2">&quot;$$type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;UserStake&quot;</span><span class="p">,</span>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34"></a><span class="w">            </span><span class="s2">&quot;amount&quot;</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mi">30000n</span><span class="p">,</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36"></a><span class="w">    </span><span class="p">);</span>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37"></a><span class="p">})();</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>flag{9uhaXCAoWxGi}_Airdrop</p>
+</blockquote>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/TonBitSec/ton-sample/tree/054915e9f0655d39e60d0b6740692615da37e023/sources">TonBitSec / ton-sample</a></li>
 </ul>
 
   <hr>
@@ -3798,7 +4124,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2020年10月26日 10:36:26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年9月30日 22:47:56</span>
       
     
   </small>
@@ -3892,7 +4218,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../easy_rsa/" class="md-footer__link md-footer__link--prev" aria-label="上一页: easy_RSA" rel="prev">
+        <a href="../../claim_guard/" class="md-footer__link md-footer__link--prev" aria-label="上一页: claim-guard" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -3901,20 +4227,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              easy_RSA
+              claim-guard
             </div>
           </div>
         </a>
       
       
         
-        <a href="../easy_ecc/" class="md-footer__link md-footer__link--next" aria-label="下一页: easy_ECC" rel="next">
+        <a href="../../../wargames/natas/" class="md-footer__link md-footer__link--next" aria-label="下一页: Natas" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              easy_ECC
+              Natas
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -3956,10 +4282,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f758a944.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f758a944.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
