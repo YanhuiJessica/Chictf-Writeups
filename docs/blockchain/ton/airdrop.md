@@ -1,6 +1,6 @@
 ---
 title: Blockchain - Airdrop
-description: 2024 | TON CTF | DEFI
+description: 2024 | TON CTF
 tags:
     - ton
     - tact
@@ -109,7 +109,7 @@ tags:
 
 Create a `solve.ts` under the `sources/` and run `yarn solve`.
 
-```js
+```ts
 import { Address, toNano, TonClient, WalletContractV4 } from "@ton/ton";
 import { mnemonicToPrivateKey } from "ton-crypto";
 import { AirDrop } from "./output/Airdrop_AirDrop";
