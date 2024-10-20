@@ -141,6 +141,7 @@ nav:
       - tribunal: blockchain/tribunal.md
       - Tokyo Payload: blockchain/tokyo_payload.md
       - 链上猎手: blockchain/chain_hunter.md
+      - Magic of solidity: blockchain/magic_of_solidity.md
       - Paradigm CTF 2023:
         - 100%: blockchain/paradigm/one_hundred_percent.md
         - Dai++: blockchain/paradigm/dai_plus_plus.md
