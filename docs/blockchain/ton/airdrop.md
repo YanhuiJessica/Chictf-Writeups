@@ -10,7 +10,7 @@ tags:
 
 > [Challenge Files](https://github.com/TonBitSec/TonCTF-Challenges/tree/6dc2518086f88006a4dd4dd0bfef963b1f13c33b/airdrop)
 
-??? note "Airdrop.tact"
+??? note "Airdrop.tact[^dup]"
 
     ```rs
     const CLAIM_AMOUNT: Int = 1;
@@ -88,9 +88,9 @@ tags:
 
 - There is a state variable `total_balance` with value `30000` initially. The goal of this challenge is to make `total_balance` equal to zero
 - There are three operations:
-  - **AirDrop** Each user can execute once and `total_balance` will be subtracted by 1.
-  - **UserStake** Increase `total_balance` and `user_staked` with user-provided `msg.amount`.
-  - **UserWithdraw** Decrease `total_balance` and `user_staked` with user-provided `msg.amount`. The `msg.amount` should not be greater than `user_staked`.
+    - **AirDrop** Each user can execute once and `total_balance` will be subtracted by 1.
+    - **UserStake** Increase `total_balance` and `user_staked` with user-provided `msg.amount`.
+    - **UserWithdraw** Decrease `total_balance` and `user_staked` with user-provided `msg.amount`. The `msg.amount` should not be greater than `user_staked`.
 - Since `UserStake` does not check `msg.amount` which is of type `Int`, we can provide a negative value to reduce `total_balance`
 
     ```rs
@@ -156,3 +156,5 @@ dotenv.config();
 ## References
 
 - [TonBitSec / ton-sample](https://github.com/TonBitSec/ton-sample/tree/054915e9f0655d39e60d0b6740692615da37e023/sources)
+
+[^dup]: The `init` function adds a `version` parameter to avoid instance contracts having the same address.
