@@ -3907,7 +3907,7 @@
 <p><a href="https://github.com/TonBitSec/TonCTF-Challenges/tree/6dc2518086f88006a4dd4dd0bfef963b1f13c33b/airdrop">Challenge Files</a></p>
 </blockquote>
 <details class="note">
-<summary>Airdrop.tact</summary>
+<summary>Airdrop.tact<sup id="fnref:dup"><a class="footnote-ref" href="#fn:dup">1</a></sup></summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -4050,10 +4050,12 @@
 <h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
 <ul>
 <li>There is a state variable <code>total_balance</code> with value <code>30000</code> initially. The goal of this challenge is to make <code>total_balance</code> equal to zero</li>
-<li>There are three operations:</li>
+<li>There are three operations:<ul>
 <li><strong>AirDrop</strong> Each user can execute once and <code>total_balance</code> will be subtracted by 1.</li>
 <li><strong>UserStake</strong> Increase <code>total_balance</code> and <code>user_staked</code> with user-provided <code>msg.amount</code>.</li>
 <li><strong>UserWithdraw</strong> Decrease <code>total_balance</code> and <code>user_staked</code> with user-provided <code>msg.amount</code>. The <code>msg.amount</code> should not be greater than <code>user_staked</code>.</li>
+</ul>
+</li>
 <li>
 <p>Since <code>UserStake</code> does not check <code>msg.amount</code> which is of type <code>Int</code>, we can provide a negative value to reduce <code>total_balance</code></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
@@ -4160,13 +4162,21 @@
 <ul>
 <li><a href="https://github.com/TonBitSec/ton-sample/tree/054915e9f0655d39e60d0b6740692615da37e023/sources">TonBitSec / ton-sample</a></li>
 </ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:dup">
+<p>The <code>init</code> function adds a <code>version</code> parameter to avoid instance contracts having the same address.&#160;<a class="footnote-backref" href="#fnref:dup" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年10月2日 20:10:49</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年10月25日 19:51:53</span>
       
     
   </small>
