@@ -171,6 +171,7 @@ nav:
       - TON CTF 2024:
         - Airdrop: blockchain/ton/airdrop.md
         - Dex: blockchain/ton/dex.md
+      - 链上转账助手: blockchain/chain_transfer_helper.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
