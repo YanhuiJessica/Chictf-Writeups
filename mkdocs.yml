@@ -172,6 +172,7 @@ nav:
         - Airdrop: blockchain/ton/airdrop.md
         - Dex: blockchain/ton/dex.md
       - 链上转账助手: blockchain/chain_transfer_helper.md
+      - respectable_nft: blockchain/respectable_nft.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
