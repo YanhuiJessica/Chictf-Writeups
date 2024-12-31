@@ -162,7 +162,7 @@ My favorite TikTok influencer told me about a great NFT project that is guarante
     }
     ```
 
-- If the target slot is at `keccak(abi.encode(id, 6))`, we can not modify it because `bytes(FlagNames[id]).length` is not zero, and it is impossible to find such a collision. But it is possible that the target slot is close to `keccak(uint256(keccak(abi.encode(id, 6))))`. Luckily, CryptoFlags limits the maximum value of `id`, we can traverse within this range.
+- If the target slot is at `keccak(abi.encode(id, 6))`, we can not modify it because `bytes(FlagNames[id]).length` is not zero. But it is possible that the target slot is close to `keccak(uint256(keccak(abi.encode(id, 6))))`. Luckily, the value of `IMPLEMENTATION_STORAGE` is not the keccak256 hash of "implementation_storage" and CryptoFlags limits the maximum value of `id`, we can traverse within this range.
 
     ```py
     from web3 import Web3
