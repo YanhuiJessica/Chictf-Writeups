@@ -4175,7 +4175,7 @@
 </span></code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>If the target slot is at <code>keccak(abi.encode(id, 6))</code>, we can not modify it because <code>bytes(FlagNames[id]).length</code> is not zero, and it is impossible to find such a collision. But it is possible that the target slot is close to <code>keccak(uint256(keccak(abi.encode(id, 6))))</code>. Luckily, CryptoFlags limits the maximum value of <code>id</code>, we can traverse within this range.</p>
+<p>If the target slot is at <code>keccak(abi.encode(id, 6))</code>, we can not modify it because <code>bytes(FlagNames[id]).length</code> is not zero. But it is possible that the target slot is close to <code>keccak(uint256(keccak(abi.encode(id, 6))))</code>. Luckily, the value of <code>IMPLEMENTATION_STORAGE</code> is not the keccak256 hash of "implementation_storage" and CryptoFlags limits the maximum value of <code>id</code>, we can traverse within this range.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -4288,7 +4288,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年12月30日 11:56:17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年12月31日 11:44:45</span>
       
     
   </small>
