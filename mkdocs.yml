@@ -2,7 +2,7 @@
 site_name: Chictf-Writeups
 site_author: YanhuiJessica
 site_url: https://yanhuijessica.github.io/Chictf-Writeups/
-copyright: Copyright &copy; 2020 - 2024 YanhuiJessica
+copyright: Copyright &copy; 2020 - 2025 YanhuiJessica
 
 # Repository
 repo_name: 'YanhuiJessica/Chictf-Writeups'
@@ -212,8 +212,8 @@ theme:
     custom_dir: docs/overrides
     language: 'zh'
     palette:
-      primary: 'white'
-      accent: 'red'
+      primary: 'custom'
+      accent: 'orange'
     icon:
       logo: material/school
     features:
@@ -254,9 +254,12 @@ plugins:
           - eggs
 
 extra_javascript:
-    - https://polyfill.io/v3/polyfill.min.js?features=es6
-    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-    - https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+
+extra_css:
+  - stylesheets/extra.css
 
 extra:
   generator: false
