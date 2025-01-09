@@ -214,8 +214,8 @@ theme:
     palette:
       primary: 'custom'
       accent: 'orange'
-    icon:
-      logo: material/school
+    logo: assets/chicken-brown.svg
+    favicon: assets/favicon.svg
     features:
       - navigation.tabs
       - navigation.top
