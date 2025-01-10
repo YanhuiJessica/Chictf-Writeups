@@ -14,7 +14,7 @@
       
         <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/blockchain/unnamedweb3/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-8.3.3">
     
     
@@ -98,8 +98,7 @@
   <nav class="md-header__inner md-grid" aria-label="页眉">
     <a href="../.." title="Chictf-Writeups" class="md-header__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+  <img src="../../assets/chicken-brown.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -350,8 +349,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Chictf-Writeups" class="md-nav__button md-logo" aria-label="Chictf-Writeups" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+  <img src="../../assets/chicken-brown.svg" alt="logo">
 
     </a>
     Chictf-Writeups
@@ -4378,12 +4376,12 @@
 <span class="normal"><a href="#__codelineno-1-166">166</a></span>
 <span class="normal"><a href="#__codelineno-1-167">167</a></span>
 <span class="normal"><a href="#__codelineno-1-168">168</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="ch">#!/usr/bin/env python3</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">send_from_directory</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">request</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="kn">from</span> <span class="nn">flask_limiter</span> <span class="kn">import</span> <span class="n">Limiter</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">token_hex</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kn">import</span> <span class="nn">os</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="kn">import</span> <span class="nn">requests</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="kn">import</span> <span class="nn">helpers</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">send_from_directory</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">request</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask_limiter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Limiter</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">secrets</span><span class="w"> </span><span class="kn">import</span> <span class="n">token_hex</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">helpers</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a>
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="n">FLAG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;FLAG&quot;</span><span class="p">,</span> <span class="s2">&quot;INS</span><span class="si">{fake_flag}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="n">CHALLENGE_DOMAIN</span> <span class="o">=</span> <span class="s2">&quot;insomnihack.flag&quot;</span>
@@ -4394,7 +4392,7 @@
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SESSION_PERMANENT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SESSION_TYPE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;filesystem&quot;</span>
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="k">def</span> <span class="nf">get_remote_address</span><span class="p">():</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_remote_address</span><span class="p">():</span>
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a>    <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">access_route</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a>
 </span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="n">limiter</span> <span class="o">=</span> <span class="n">Limiter</span><span class="p">(</span><span class="n">get_remote_address</span><span class="p">,</span>
@@ -4403,7 +4401,7 @@
 </span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24"></a>                <span class="n">storage_uri</span><span class="o">=</span><span class="s2">&quot;memory://&quot;</span><span class="p">)</span>
 </span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25"></a>
 </span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
 </span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28"></a>    <span class="k">if</span> <span class="s2">&quot;subdomain&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
 </span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29"></a>        <span class="n">session</span><span class="p">[</span><span class="s2">&quot;subdomain&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token_hex</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 </span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30"></a>    <span class="n">challenge_host</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;subdomain&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">CHALLENGE_DOMAIN</span>
@@ -4435,12 +4433,12 @@
 </span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56"></a>
 </span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57"></a>
 </span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/static/&lt;path:path&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59"></a><span class="k">def</span> <span class="nf">static_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59"></a><span class="k">def</span><span class="w"> </span><span class="nf">static_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
 </span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60"></a>    <span class="k">return</span> <span class="n">send_from_directory</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 </span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61"></a>
 </span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62"></a>
 </span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/domain-query&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64"></a><span class="k">def</span> <span class="nf">dns_query_get</span><span class="p">():</span>
+</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64"></a><span class="k">def</span><span class="w"> </span><span class="nf">dns_query_get</span><span class="p">():</span>
 </span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65"></a>    <span class="n">domain</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;domain&quot;</span><span class="p">)</span>
 </span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66"></a>    <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67"></a>        <span class="k">return</span> <span class="s2">&quot;Invalid request&quot;</span><span class="p">,</span> <span class="mi">400</span>
@@ -4452,7 +4450,7 @@
 </span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73"></a>
 </span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74"></a>
 </span><span id="__span-1-75"><a id="__codelineno-1-75" name="__codelineno-1-75"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/transfer-codes&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
-</span><span id="__span-1-76"><a id="__codelineno-1-76" name="__codelineno-1-76"></a><span class="k">def</span> <span class="nf">transfer_codes</span><span class="p">():</span>
+</span><span id="__span-1-76"><a id="__codelineno-1-76" name="__codelineno-1-76"></a><span class="k">def</span><span class="w"> </span><span class="nf">transfer_codes</span><span class="p">():</span>
 </span><span id="__span-1-77"><a id="__codelineno-1-77" name="__codelineno-1-77"></a>    <span class="k">if</span> <span class="s2">&quot;instance_id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
 </span><span id="__span-1-78"><a id="__codelineno-1-78" name="__codelineno-1-78"></a>        <span class="k">return</span> <span class="s2">&quot;Invalid session&quot;</span><span class="p">,</span> <span class="mi">400</span>
 </span><span id="__span-1-79"><a id="__codelineno-1-79" name="__codelineno-1-79"></a>
@@ -4468,7 +4466,7 @@
 </span><span id="__span-1-89"><a id="__codelineno-1-89" name="__codelineno-1-89"></a>    <span class="k">return</span> <span class="n">transfer_codes</span>
 </span><span id="__span-1-90"><a id="__codelineno-1-90" name="__codelineno-1-90"></a>
 </span><span id="__span-1-91"><a id="__codelineno-1-91" name="__codelineno-1-91"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/transfer-code/&lt;req_domain&gt;/&lt;req_recipient&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
-</span><span id="__span-1-92"><a id="__codelineno-1-92" name="__codelineno-1-92"></a><span class="k">def</span> <span class="nf">transfer_code</span><span class="p">(</span><span class="n">req_domain</span><span class="p">,</span> <span class="n">req_recipient</span><span class="p">):</span>
+</span><span id="__span-1-92"><a id="__codelineno-1-92" name="__codelineno-1-92"></a><span class="k">def</span><span class="w"> </span><span class="nf">transfer_code</span><span class="p">(</span><span class="n">req_domain</span><span class="p">,</span> <span class="n">req_recipient</span><span class="p">):</span>
 </span><span id="__span-1-93"><a id="__codelineno-1-93" name="__codelineno-1-93"></a>    <span class="k">if</span> <span class="s2">&quot;instance_id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
 </span><span id="__span-1-94"><a id="__codelineno-1-94" name="__codelineno-1-94"></a>        <span class="k">return</span> <span class="s2">&quot;Invalid session&quot;</span><span class="p">,</span> <span class="mi">400</span>
 </span><span id="__span-1-95"><a id="__codelineno-1-95" name="__codelineno-1-95"></a>
@@ -4484,7 +4482,7 @@
 </span><span id="__span-1-105"><a id="__codelineno-1-105" name="__codelineno-1-105"></a>
 </span><span id="__span-1-106"><a id="__codelineno-1-106" name="__codelineno-1-106"></a>
 </span><span id="__span-1-107"><a id="__codelineno-1-107" name="__codelineno-1-107"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/send-flag&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
-</span><span id="__span-1-108"><a id="__codelineno-1-108" name="__codelineno-1-108"></a><span class="k">def</span> <span class="nf">send_flag</span><span class="p">():</span>
+</span><span id="__span-1-108"><a id="__codelineno-1-108" name="__codelineno-1-108"></a><span class="k">def</span><span class="w"> </span><span class="nf">send_flag</span><span class="p">():</span>
 </span><span id="__span-1-109"><a id="__codelineno-1-109" name="__codelineno-1-109"></a>    <span class="k">if</span> <span class="s2">&quot;subdomain&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
 </span><span id="__span-1-110"><a id="__codelineno-1-110" name="__codelineno-1-110"></a>        <span class="k">return</span> <span class="s2">&quot;Invalid session&quot;</span><span class="p">,</span> <span class="mi">400</span>
 </span><span id="__span-1-111"><a id="__codelineno-1-111" name="__codelineno-1-111"></a>
@@ -4517,7 +4515,7 @@
 </span><span id="__span-1-138"><a id="__codelineno-1-138" name="__codelineno-1-138"></a>
 </span><span id="__span-1-139"><a id="__codelineno-1-139" name="__codelineno-1-139"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/create-instance&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 </span><span id="__span-1-140"><a id="__codelineno-1-140" name="__codelineno-1-140"></a><span class="nd">@limiter</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="s2">&quot;2 per minute; 3 per 10 minutes; 4 per 20 minutes&quot;</span><span class="p">)</span>
-</span><span id="__span-1-141"><a id="__codelineno-1-141" name="__codelineno-1-141"></a><span class="k">def</span> <span class="nf">create</span><span class="p">():</span>
+</span><span id="__span-1-141"><a id="__codelineno-1-141" name="__codelineno-1-141"></a><span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">():</span>
 </span><span id="__span-1-142"><a id="__codelineno-1-142" name="__codelineno-1-142"></a>    <span class="c1"># Remark: The instance is destroyed after 20 minutes</span>
 </span><span id="__span-1-143"><a id="__codelineno-1-143" name="__codelineno-1-143"></a>    <span class="n">instance</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">create_instance</span><span class="p">()</span>
 </span><span id="__span-1-144"><a id="__codelineno-1-144" name="__codelineno-1-144"></a>
@@ -4531,7 +4529,7 @@
 </span><span id="__span-1-152"><a id="__codelineno-1-152" name="__codelineno-1-152"></a>
 </span><span id="__span-1-153"><a id="__codelineno-1-153" name="__codelineno-1-153"></a>
 </span><span id="__span-1-154"><a id="__codelineno-1-154" name="__codelineno-1-154"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/stop-instance&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
-</span><span id="__span-1-155"><a id="__codelineno-1-155" name="__codelineno-1-155"></a><span class="k">def</span> <span class="nf">stop</span><span class="p">():</span>
+</span><span id="__span-1-155"><a id="__codelineno-1-155" name="__codelineno-1-155"></a><span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">():</span>
 </span><span id="__span-1-156"><a id="__codelineno-1-156" name="__codelineno-1-156"></a>    <span class="k">if</span> <span class="s2">&quot;instance_id&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
 </span><span id="__span-1-157"><a id="__codelineno-1-157" name="__codelineno-1-157"></a>        <span class="n">helpers</span><span class="o">.</span><span class="n">stop_instance</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;instance_id&quot;</span><span class="p">])</span>
 </span><span id="__span-1-158"><a id="__codelineno-1-158" name="__codelineno-1-158"></a>        <span class="k">del</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;instance_id&quot;</span><span class="p">]</span>
