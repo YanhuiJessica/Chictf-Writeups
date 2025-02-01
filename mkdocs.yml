@@ -119,7 +119,7 @@ nav:
       - DownUnderCTF 2022:
         - Secret and Ephemeral: blockchain/secret_and_ephemeral.md
         - Private Log: blockchain/private_log.md
-      - 链上记忆大师: blockchain/memory_master_on_the_chain.md
+      - 链上记忆大师: blockchain/hackergame/memory_master_on_the_chain.md
       - Cookie Market: blockchain/cookie_market.md
       - TetCTFToken: blockchain/tetctftoken.md
       - realwrap: blockchain/realwrap.md
@@ -140,7 +140,7 @@ nav:
         - deception: blockchain/deception.md
       - tribunal: blockchain/tribunal.md
       - Tokyo Payload: blockchain/tokyo_payload.md
-      - 链上猎手: blockchain/chain_hunter.md
+      - 链上猎手: blockchain/hackergame/chain_hunter.md
       - Magic of solidity: blockchain/magic_of_solidity.md
       - Paradigm CTF 2023:
         - 100%: blockchain/paradigm/one_hundred_percent.md
@@ -171,7 +171,7 @@ nav:
       - TON CTF 2024:
         - Airdrop: blockchain/ton/airdrop.md
         - Dex: blockchain/ton/dex.md
-      - 链上转账助手: blockchain/chain_transfer_helper.md
+      - 链上转账助手: blockchain/hackergame/chain_transfer_helper.md
       - respectable_nft: blockchain/respectable_nft.md
     - Wargames:
       - OverTheWire:
