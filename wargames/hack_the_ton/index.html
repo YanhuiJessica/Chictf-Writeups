@@ -3707,11 +3707,24 @@
     3. BOUNCE
   </a>
   
+    <nav class="md-nav" aria-label="3. BOUNCE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references_1" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#references_1" class="md-nav__link">
-    References
+  <a href="#4-intruder" class="md-nav__link">
+    4. INTRUDER
   </a>
   
 </li>
@@ -3898,11 +3911,24 @@
     3. BOUNCE
   </a>
   
+    <nav class="md-nav" aria-label="3. BOUNCE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references_1" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#references_1" class="md-nav__link">
-    References
+  <a href="#4-intruder" class="md-nav__link">
+    4. INTRUDER
   </a>
   
 </li>
@@ -4051,9 +4077,15 @@
 </ul>
 <h2 id="1-deposit">1. DEPOSIT<a class="headerlink" href="#1-deposit" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p>You will beat this level if:
-- Claim ownership of the contract
-- Reduce its balance to 0</p>
+<p>You will beat this level if:</p>
+<ul>
+<li>
+<p>Claim ownership of the contract</p>
+</li>
+<li>
+<p>Reduce its balance to 0</p>
+</li>
+</ul>
 </blockquote>
 <details class="note">
 <summary>DepositLevel</summary>
@@ -4156,7 +4188,7 @@
 </details>
 <ul>
 <li>
-<p>向合约发送 TON 以成为所有者</p>
+<p>只有所有者才能取出合约持有的 TON，首先向合约发送 TON 以成为所有者</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
 <span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">player</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">address</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s2">&quot;0.05&quot;</span><span class="p">)});</span>
@@ -4165,7 +4197,7 @@
 </span></code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>使用 <code>withdraw</code> 取出合约所有资金</p>
+<p>使用 <code>withdraw</code> 取出合约中所有的资金</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)},</span><span class="w"> </span><span class="s2">&quot;withdraw&quot;</span><span class="p">);</span><span class="w"> </span>
 </span></code></pre></div></td></tr></table></div>
 </li>
@@ -4519,7 +4551,7 @@
 <li>
 <p>只需要在发送完 <code>start</code> 的三分钟后向 <code>BounceLevel</code> 发送 <code>finish</code>，让合约 <code>Timer</code> 抛出错误弹回消息即可</p>
 <ul>
-<li>或直接向 <code>Timer</code> 发送 <code>start</code> 设置开始时间</li>
+<li>或直接向 <code>Timer</code> 发送 <code>start</code> 设置自定义开始时间</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
@@ -4535,9 +4567,220 @@
 </span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
-<h2 id="references_1">References<a class="headerlink" href="#references_1" title="Permanent link">&para;</a></h2>
+<h3 id="references_1">References<a class="headerlink" href="#references_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/tact-lang/tact/blob/ecae8d73c2cafef31c3c2ffebf1c69a5a89cb506/src/types/resolveSignatures.ts#L283-L291">tact-lang / tact</a></li>
+</ul>
+<h2 id="4-intruder">4. INTRUDER<a class="headerlink" href="#4-intruder" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Claim ownership of the contract below to complete this level.</p>
+</blockquote>
+<details class="note">
+<summary>IntruderLevel</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span>
+<span class="normal"><a href="#__codelineno-8-36">36</a></span>
+<span class="normal"><a href="#__codelineno-8-37">37</a></span>
+<span class="normal"><a href="#__codelineno-8-38">38</a></span>
+<span class="normal"><a href="#__codelineno-8-39">39</a></span>
+<span class="normal"><a href="#__codelineno-8-40">40</a></span>
+<span class="normal"><a href="#__codelineno-8-41">41</a></span>
+<span class="normal"><a href="#__codelineno-8-42">42</a></span>
+<span class="normal"><a href="#__codelineno-8-43">43</a></span>
+<span class="normal"><a href="#__codelineno-8-44">44</a></span>
+<span class="normal"><a href="#__codelineno-8-45">45</a></span>
+<span class="normal"><a href="#__codelineno-8-46">46</a></span>
+<span class="normal"><a href="#__codelineno-8-47">47</a></span>
+<span class="normal"><a href="#__codelineno-8-48">48</a></span>
+<span class="normal"><a href="#__codelineno-8-49">49</a></span>
+<span class="normal"><a href="#__codelineno-8-50">50</a></span>
+<span class="normal"><a href="#__codelineno-8-51">51</a></span>
+<span class="normal"><a href="#__codelineno-8-52">52</a></span>
+<span class="normal"><a href="#__codelineno-8-53">53</a></span>
+<span class="normal"><a href="#__codelineno-8-54">54</a></span>
+<span class="normal"><a href="#__codelineno-8-55">55</a></span>
+<span class="normal"><a href="#__codelineno-8-56">56</a></span>
+<span class="normal"><a href="#__codelineno-8-57">57</a></span>
+<span class="normal"><a href="#__codelineno-8-58">58</a></span>
+<span class="normal"><a href="#__codelineno-8-59">59</a></span>
+<span class="normal"><a href="#__codelineno-8-60">60</a></span>
+<span class="normal"><a href="#__codelineno-8-61">61</a></span>
+<span class="normal"><a href="#__codelineno-8-62">62</a></span>
+<span class="normal"><a href="#__codelineno-8-63">63</a></span>
+<span class="normal"><a href="#__codelineno-8-64">64</a></span>
+<span class="normal"><a href="#__codelineno-8-65">65</a></span>
+<span class="normal"><a href="#__codelineno-8-66">66</a></span>
+<span class="normal"><a href="#__codelineno-8-67">67</a></span>
+<span class="normal"><a href="#__codelineno-8-68">68</a></span>
+<span class="normal"><a href="#__codelineno-8-69">69</a></span>
+<span class="normal"><a href="#__codelineno-8-70">70</a></span>
+<span class="normal"><a href="#__codelineno-8-71">71</a></span>
+<span class="normal"><a href="#__codelineno-8-72">72</a></span>
+<span class="normal"><a href="#__codelineno-8-73">73</a></span>
+<span class="normal"><a href="#__codelineno-8-74">74</a></span>
+<span class="normal"><a href="#__codelineno-8-75">75</a></span>
+<span class="normal"><a href="#__codelineno-8-76">76</a></span>
+<span class="normal"><a href="#__codelineno-8-77">77</a></span>
+<span class="normal"><a href="#__codelineno-8-78">78</a></span>
+<span class="normal"><a href="#__codelineno-8-79">79</a></span>
+<span class="normal"><a href="#__codelineno-8-80">80</a></span>
+<span class="normal"><a href="#__codelineno-8-81">81</a></span>
+<span class="normal"><a href="#__codelineno-8-82">82</a></span>
+<span class="normal"><a href="#__codelineno-8-83">83</a></span>
+<span class="normal"><a href="#__codelineno-8-84">84</a></span>
+<span class="normal"><a href="#__codelineno-8-85">85</a></span>
+<span class="normal"><a href="#__codelineno-8-86">86</a></span>
+<span class="normal"><a href="#__codelineno-8-87">87</a></span>
+<span class="normal"><a href="#__codelineno-8-88">88</a></span>
+<span class="normal"><a href="#__codelineno-8-89">89</a></span>
+<span class="normal"><a href="#__codelineno-8-90">90</a></span>
+<span class="normal"><a href="#__codelineno-8-91">91</a></span>
+<span class="normal"><a href="#__codelineno-8-92">92</a></span>
+<span class="normal"><a href="#__codelineno-8-93">93</a></span>
+<span class="normal"><a href="#__codelineno-8-94">94</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@stdlib/deploy&quot;</span><span class="p">;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;./messages&quot;</span><span class="p">;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="nx">message</span><span class="p">(</span><span class="mh">0x6e38a063</span><span class="p">)</span><span class="w"> </span><span class="nx">ChangeLevelOwner</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="nx">newOwner</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="p">}</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="nx">message</span><span class="p">(</span><span class="mh">0x6f13c225</span><span class="p">)</span><span class="w"> </span><span class="nx">ChangeClientOwner</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">    </span><span class="nx">newOwner</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="p">}</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="nx">message</span><span class="p">(</span><span class="mh">0xa4e501ef</span><span class="p">)</span><span class="w"> </span><span class="nx">ChangeOwnerInternal</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">    </span><span class="nx">newOwner</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="p">}</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15"></a>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">Manager</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">Deployable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">    </span><span class="nx">client</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">    </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19"></a>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">client</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">client</span><span class="p">;</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nonce</span><span class="p">;</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24"></a>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">ChangeClientOwner</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="w">        </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="w">            </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">client</span><span class="p">,</span>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29"></a><span class="w">            </span><span class="nx">bounce</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30"></a><span class="w">            </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendRemainingValue</span><span class="p">,</span>
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="w">            </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">ChangeOwnerInternal</span><span class="p">{</span>
+</span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32"></a><span class="w">                </span><span class="nx">newOwner</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">newOwner</span>
+</span><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="w">            </span><span class="p">}.</span><span class="nx">toCell</span><span class="p">()</span>
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34"></a><span class="w">        </span><span class="p">});</span>
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-36"><a id="__codelineno-8-36" name="__codelineno-8-36"></a><span class="p">}</span>
+</span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37"></a>
+</span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">IntruderLevel</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">Deployable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-39"><a id="__codelineno-8-39" name="__codelineno-8-39"></a><span class="w">    </span><span class="nx">owner</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-8-40"><a id="__codelineno-8-40" name="__codelineno-8-40"></a><span class="w">    </span><span class="nx">player</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-8-41"><a id="__codelineno-8-41" name="__codelineno-8-41"></a><span class="w">    </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-8-42"><a id="__codelineno-8-42" name="__codelineno-8-42"></a><span class="w">    </span><span class="nx">manager</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-8-43"><a id="__codelineno-8-43" name="__codelineno-8-43"></a>
+</span><span id="__span-8-44"><a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">player</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-45"><a id="__codelineno-8-45" name="__codelineno-8-45"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sender</span><span class="p">();</span>
+</span><span id="__span-8-46"><a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">player</span><span class="p">;</span>
+</span><span id="__span-8-47"><a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nonce</span><span class="p">;</span>
+</span><span id="__span-8-48"><a id="__codelineno-8-48" name="__codelineno-8-48"></a>
+</span><span id="__span-8-49"><a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">level_init</span><span class="o">:</span><span class="w"> </span><span class="nx">StateInit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">initOf</span><span class="w"> </span><span class="nx">Manager</span><span class="p">(</span><span class="nx">myAddress</span><span class="p">(),</span><span class="w"> </span><span class="nx">nonce</span><span class="p">);</span>
+</span><span id="__span-8-50"><a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">(</span><span class="nx">level_init</span><span class="p">);</span>
+</span><span id="__span-8-51"><a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="w">        </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-8-52"><a id="__codelineno-8-52" name="__codelineno-8-52"></a><span class="w">            </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">manager</span><span class="p">,</span>
+</span><span id="__span-8-53"><a id="__codelineno-8-53" name="__codelineno-8-53"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">ton</span><span class="p">(</span><span class="s2">&quot;0.01&quot;</span><span class="p">),</span>
+</span><span id="__span-8-54"><a id="__codelineno-8-54" name="__codelineno-8-54"></a><span class="w">            </span><span class="nx">bounce</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-8-55"><a id="__codelineno-8-55" name="__codelineno-8-55"></a><span class="w">            </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">level_init</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span>
+</span><span id="__span-8-56"><a id="__codelineno-8-56" name="__codelineno-8-56"></a><span class="w">            </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="nx">level_init</span><span class="p">.</span><span class="nx">code</span>
+</span><span id="__span-8-57"><a id="__codelineno-8-57" name="__codelineno-8-57"></a><span class="w">        </span><span class="p">});</span>
+</span><span id="__span-8-58"><a id="__codelineno-8-58" name="__codelineno-8-58"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-59"><a id="__codelineno-8-59" name="__codelineno-8-59"></a>
+</span><span id="__span-8-60"><a id="__codelineno-8-60" name="__codelineno-8-60"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">ChangeLevelOwner</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-61"><a id="__codelineno-8-61" name="__codelineno-8-61"></a><span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">sender</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">owner</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Wrong sender.&quot;</span><span class="p">);</span>
+</span><span id="__span-8-62"><a id="__codelineno-8-62" name="__codelineno-8-62"></a><span class="w">        </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-8-63"><a id="__codelineno-8-63" name="__codelineno-8-63"></a><span class="w">            </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">manager</span><span class="p">,</span>
+</span><span id="__span-8-64"><a id="__codelineno-8-64" name="__codelineno-8-64"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-8-65"><a id="__codelineno-8-65" name="__codelineno-8-65"></a><span class="w">            </span><span class="nx">bounce</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-8-66"><a id="__codelineno-8-66" name="__codelineno-8-66"></a><span class="w">            </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendRemainingValue</span><span class="p">,</span>
+</span><span id="__span-8-67"><a id="__codelineno-8-67" name="__codelineno-8-67"></a><span class="w">            </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">ChangeClientOwner</span><span class="p">{</span>
+</span><span id="__span-8-68"><a id="__codelineno-8-68" name="__codelineno-8-68"></a><span class="w">                </span><span class="nx">newOwner</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">newOwner</span>
+</span><span id="__span-8-69"><a id="__codelineno-8-69" name="__codelineno-8-69"></a><span class="w">            </span><span class="p">}.</span><span class="nx">toCell</span><span class="p">()</span>
+</span><span id="__span-8-70"><a id="__codelineno-8-70" name="__codelineno-8-70"></a><span class="w">        </span><span class="p">});</span>
+</span><span id="__span-8-71"><a id="__codelineno-8-71" name="__codelineno-8-71"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-72"><a id="__codelineno-8-72" name="__codelineno-8-72"></a>
+</span><span id="__span-8-73"><a id="__codelineno-8-73" name="__codelineno-8-73"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">ChangeOwnerInternal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-74"><a id="__codelineno-8-74" name="__codelineno-8-74"></a><span class="w">        </span><span class="nx">require</span><span class="p">(</span><span class="nx">sender</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Wrong sender.&quot;</span><span class="p">);</span>
+</span><span id="__span-8-75"><a id="__codelineno-8-75" name="__codelineno-8-75"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">newOwner</span><span class="p">;</span>
+</span><span id="__span-8-76"><a id="__codelineno-8-76" name="__codelineno-8-76"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-77"><a id="__codelineno-8-77" name="__codelineno-8-77"></a>
+</span><span id="__span-8-78"><a id="__codelineno-8-78" name="__codelineno-8-78"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="s2">&quot;check&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-79"><a id="__codelineno-8-79" name="__codelineno-8-79"></a><span class="w">        </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-8-80"><a id="__codelineno-8-80" name="__codelineno-8-80"></a><span class="w">            </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">sender</span><span class="p">(),</span>
+</span><span id="__span-8-81"><a id="__codelineno-8-81" name="__codelineno-8-81"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-8-82"><a id="__codelineno-8-82" name="__codelineno-8-82"></a><span class="w">            </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendRemainingValue</span><span class="p">,</span>
+</span><span id="__span-8-83"><a id="__codelineno-8-83" name="__codelineno-8-83"></a><span class="w">            </span><span class="nx">bounce</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-8-84"><a id="__codelineno-8-84" name="__codelineno-8-84"></a><span class="w">            </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">CheckLevelResult</span><span class="p">{</span>
+</span><span id="__span-8-85"><a id="__codelineno-8-85" name="__codelineno-8-85"></a><span class="w">                </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;intruder&quot;</span><span class="p">,</span>
+</span><span id="__span-8-86"><a id="__codelineno-8-86" name="__codelineno-8-86"></a><span class="w">                </span><span class="nx">completed</span><span class="o">:</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">owner</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">player</span>
+</span><span id="__span-8-87"><a id="__codelineno-8-87" name="__codelineno-8-87"></a><span class="w">            </span><span class="p">}.</span><span class="nx">toCell</span><span class="p">()</span>
+</span><span id="__span-8-88"><a id="__codelineno-8-88" name="__codelineno-8-88"></a><span class="w">        </span><span class="p">});</span>
+</span><span id="__span-8-89"><a id="__codelineno-8-89" name="__codelineno-8-89"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-90"><a id="__codelineno-8-90" name="__codelineno-8-90"></a>
+</span><span id="__span-8-91"><a id="__codelineno-8-91" name="__codelineno-8-91"></a><span class="w">    </span><span class="nx">get</span><span class="w"> </span><span class="nx">fun</span><span class="w"> </span><span class="nx">owner</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-92"><a id="__codelineno-8-92" name="__codelineno-8-92"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">owner</span><span class="p">;</span>
+</span><span id="__span-8-93"><a id="__codelineno-8-93" name="__codelineno-8-93"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-94"><a id="__codelineno-8-94" name="__codelineno-8-94"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<ul>
+<li>
+<p>只有 <code>manager</code> 能设置合约的所有者，而初始 <code>manager</code> 为 <code>Manager</code> 合约</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nx">message</span><span class="p">(</span><span class="mh">0x6f13c225</span><span class="p">)</span><span class="w"> </span><span class="nx">ChangeClientOwner</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">    </span><span class="nx">newOwner</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>可以向 <code>Manager</code> 合约发送 <code>ChangeClientOwner</code> 消息来设置 <code>IntruderLevel</code> 合约的所有者</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">player</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s2">&quot;kQCi5Sne638i1fdoGMK7cnKPVuQWgyGO4N4LxneLonWwvgZ_&quot;</span><span class="p">),</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s2">&quot;0.01&quot;</span><span class="p">),</span><span class="w"> </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeUint</span><span class="p">(</span><span class="mh">0x6f13c225</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">).</span><span class="nx">storeAddress</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">address</span><span class="p">).</span><span class="nx">endCell</span><span class="p">()});</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
 </ul>
 
   <hr>
@@ -4545,7 +4788,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2025年2月8日 23:39:12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2025年2月19日 23:56:00</span>
       
     
   </small>
