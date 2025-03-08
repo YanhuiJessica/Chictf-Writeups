@@ -617,3 +617,291 @@ tags:
 ### References
 
 - [Internal message](https://docs.ton.org/v3/documentation/smart-contracts/transaction-fees/accept-message-effects#internal-message)
+
+## 6. PEEK
+
+> Unlock the contract below to complete this level.
+
+??? note "PeekLevel"
+
+    ```js
+    import "@stdlib/deploy";
+    import "../messages";
+    message Unlock {
+        password: Int as uint32;
+    }
+
+    contract PeekLevel with Deployable {
+        player: Address;
+        nonce: Int;
+        password: Int as uint32;
+        locked: Bool = true;
+        init(player: Address, nonce: Int, password: Int){
+            self.player = player;
+            self.nonce = nonce;
+            self.password = password;
+        }
+
+        receive(msg: Unlock){
+            require(msg.password == self.password, "Wrong password.");
+            self.locked = false;
+        }
+
+        receive("check"){
+            send(SendParameters{
+                to: sender(),
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: CheckLevelResult{name: "peek", completed: !self.locked}.toCell()
+            }
+            );
+        }
+
+        get fun locked(): Bool {
+            return self.locked;
+        }
+    }
+    ```
+
+- 提供正确的密码即可解锁，需要解析[初始化消息](https://testnet.tonviewer.com/transaction/fbeffd0aceed689c0da7bf2ed2c5544b541f2b8c00e57c49a06616d123ede22f)
+- 部署 Tact 编写的合约，函数 `init()` 的参数包含在 init data 中，并将在部署附带的第一次合约调用中根据 init data 更新存储
+- 使用 `pytoniq-core` 解析初始数据
+    - 尽管可以使用较小的 `Int` 表示形式来减少存储开销，但 TVM 仅对 257 位整型进行操作。因此，init data 中的整型参数均为 257 位
+
+    ```py
+    from pytoniq_core import Cell, Slice
+
+    init = Cell.one_from_boc('b5ee9c720102120100034600020134040101c340007a7155b50ef485eb69331e4e6a963457a71a0d34a960e74e38724741ddb27b00000000000000000000000000000000000000000000000000000000000000005800000000000000000000000000000000000000000000000000000000abad86ee020101c0030105a1a75f040114ff00f4a413f4bcf2c80b05020162060702ead001d0d3030171b0a301fa400120d74981010bbaf2e08820d70b0a208104ffbaf2d0898309baf2e088545053036f04f86102f862db3c5513db3cf2e082c8f84301cc7f01ca005530504320d74981010bbaf2e08820d70b0a208104ffbaf2d0898309baf2e088cf16810101cf0012cb1fca00c9ed540f080201200d0e02eeeda2edfb0192307fe07021d749c21f953020d70b1fde2082102194da8eba8e1c30d31f0182102194da8ebaf2e081d31f0131816dde3222baf2f4707fe0208210946a98b6ba8ea830d31f018210946a98b6baf2e081d33f0131c8018210aff90f5758cb1fcb3fc9f84201706ddb3c7fe0c0009130e30d70090a013a6d6d226eb3995b206ef2d0806f22019132e2102470030480425023db3c0b01aef90182f0b92ab1b3504a092e6e10b90beb85a7ceb990452ba73c09375bf2dd2a56cbcf7fba8eaff842708040708b47065656b825c000c85982106df37b4d5003cb1fc858cf16c901ccca00c91443306d6ddb3c7fdb31e00b01cac87101ca01500701ca007001ca02500520d74981010bbaf2e08820d70b0a208104ffbaf2d0898309baf2e088cf165003fa027001ca68236eb3917f93246eb3e2973333017001ca00e30d216eb39c7f01ca0001206ef2d08001cc95317001ca00e2c901fb000c00987f01ca00c87001ca007001ca00246eb39d7f01ca0004206ef2d0805004cc9634037001ca00e2246eb39d7f01ca0004206ef2d0805004cc9634037001ca00e27001ca00027f01ca0002c958cc0211becdbed9e6d9e3620c0f100011be15f76a268690000c01eced44d0d401f863d200018e2dfa400120d74981010bbaf2e08820d70b0a208104ffbaf2d0898309baf2e08801810101d700d31fd20055306c14e0f828d70b0a8309baf2e089fa400120d74981010bbaf2e08820d70b0a208104ffbaf2d0898309baf2e08801810101d700810101d700552003d158db3c1100022000027f')
+    init_slice = init.begin_parse()
+    init_slice.load_ref()   # skip init code
+    init_data = init_slice.load_ref()
+    data_slice = init_data.begin_parse()
+    data_slice.load_ref()   # skip tact context system
+    data_slice.load_int(1)  # skip init status
+    data_slice.load_address()   # player
+    data_slice.load_int(257)    # nonce
+    print(data_slice.load_int(257)) # password
+    ```
+
+- 发送解锁消息
+
+    ```js
+    > await contract.send(player, {value: toNano("0.005")}, {$$type: "Unlock", password: 720069051}); 
+    ```
+
+### References
+
+- [yungwine / pytoniq-core](https://github.com/yungwine/pytoniq-core/blob/22c0359b79408b9048f930f59b10ddfdd904edab/examples/boc/boc.py)
+- [Serialization](https://docs.tact-lang.org/book/integers/#serialization)
+
+## 7. SWAP
+
+> You will beat the level if you manage to acquire tokens amount equivalent to 1000 TON or more.
+
+??? note "SwapLevel"
+
+    ```js
+    import "@stdlib/ownable";
+    import "@stdlib/deploy";
+    import "../messages";
+    message SwapTonToTokens {
+        amount: Int as coins;
+    }
+    message RequestBalance {
+        sender: Address;
+    }
+    message ResponseBalance {
+        sender: Address;
+        balance: Int as coins;
+    }
+
+    contract Token with Ownable, Deployable {
+        owner: Address;
+        nonce: Int;
+        balance: Int as coins = 0;
+        init(owner: Address, nonce: Int){
+            self.owner = owner;
+            self.nonce = nonce;
+        }
+
+        receive(msg: SwapTonToTokens){
+            self.requireOwner();
+            self.balance += msg.amount;
+            send(SendParameters{
+                to: sender(),
+                value: 0,
+                bounce: false,
+                mode: SendRemainingValue,
+                body: "send ton".asComment()
+            }
+            );
+        }
+
+        receive("swap tokens to ton"){
+            self.requireOwner();
+            self.balance = 0;
+            send(SendParameters{
+                to: sender(),
+                bounce: true,
+                value: 0,
+                mode: SendRemainingBalance + SendIgnoreErrors
+            }
+            );
+        }
+
+        receive(msg: RequestBalance){
+            send(SendParameters{
+                to: sender(),
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: ResponseBalance{
+                sender: msg.sender,
+                balance: self.balance
+                }.toCell()
+            }
+            );
+        }
+
+        get fun balance(): Int {
+            return self.balance;
+        }
+    }
+
+    contract SwapLevel with Deployable {
+        player: Address;
+        nonce: Int;
+        token: Address;
+        init(player: Address, nonce: Int){
+            self.player = player;
+            self.nonce = nonce;
+            let token_init: StateInit = initOf Token(myAddress(), nonce);
+            self.token = contractAddress(token_init);
+            send(SendParameters{
+                to: self.token,
+                value: ton("0.01"),
+                bounce: false,
+                data: token_init.data,
+                code: token_init.code
+            }
+            );
+        }
+
+        receive(){}
+
+        receive("swap ton to tokens"){
+            send(SendParameters{
+                to: self.token,
+                value: 0,
+                bounce: false,
+                mode: SendRemainingValue,
+                body: SwapTonToTokens{amount: myBalance() - context().value}.toCell()
+            });
+        }
+
+        receive("swap tokens to ton"){
+            send(SendParameters{
+                to: self.token,
+                value: 0,
+                bounce: false,
+                mode: SendRemainingValue,
+                body: "swap tokens to ton".asComment()
+            }
+            );
+        }
+
+        receive("send ton"){
+            require(sender() == self.token, "Wrong sender.");
+            send(SendParameters{
+                to: self.token,
+                bounce: true,
+                value: 0,
+                mode: SendRemainingBalance + SendIgnoreErrors
+            }
+            );
+        }
+
+        receive("withdraw"){
+            send(SendParameters{
+                to: self.player,
+                bounce: true,
+                value: 0,
+                mode: SendRemainingBalance + SendIgnoreErrors
+            }
+            );
+        }
+
+        receive("check"){
+            send(SendParameters{
+                to: self.token,
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: RequestBalance{sender: sender()}.toCell()
+            }
+            );
+        }
+
+        receive(msg: ResponseBalance){
+            require(sender() == self.token, "Wrong sender.");
+            send(SendParameters{
+                to: msg.sender,
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: CheckLevelResult{
+                    name: "swap",
+                    completed: msg.balance >= ton("1000")
+                }.toCell()
+            }
+            );
+        }
+    }
+    ```
+
+- 操作 `swap ton to tokens` 每次能使 `Token` 的 `balance` 增加 `myBalance() - context().value`，即合约 `SwapLevel` 持有的 TON 越多，每次的增加量越大。向合约 `SwapLevel` 发送 TON 增加其余额以减少操作的次数
+
+    ```js
+    await contract.send(player, {value: toNano("4")}, null);
+    ```
+
+- 合约 `Token` 执行操作 `SwapTonToTokens` 时，会向合约 `SwapLevel` 发送 `send ton` 消息，使其将所持有的全部 TON 发送给合约 `Token`。需要控制 `swap ton to tokens` 消息附带的 TON，使合约 `SwapLevel` 无法将余额发送给合约 `Token`。经测试，可以使用 0.008 TON
+
+    ```js
+    > await contract.send(player, {value: toNano("0.008")}, "swap ton to tokens");
+    ```
+
+- 使用 [TON Web IDE](https://ide.ton.org/) 部署[辅助合约](https://testnet.tonviewer.com/kQD_0bgEFD_LSF-_g5jrmlSyOsz-j2iLKY49OSMKOMYH-Zk-)，批量发送消息
+    - 全局设置中可以修改消息附带的 TON 数量
+
+    ```js
+    import "@stdlib/deploy";
+
+    message Swap {
+        cnt: Int as uint32;
+        target: Address;
+    }
+
+    contract MultiMessageSender with Deployable {
+        // example args: {cnt: 1000, value: 1 TON}
+        receive(msg: Swap) {
+            repeat(msg.cnt) {
+                send(SendParameters{
+                    to: msg.target,
+                    value: ton("0.008"),
+                    mode: SendDefaultMode + SendPayGasSeparately,
+                    body: "swap ton to tokens".asComment()
+                });
+            }
+        }
+    }
+    ```
+
+- 检查完后取回合约中的 TON
+
+    ```js
+    > await contract.send(player, {value: toNano("0.008")}, "swap tokens to ton");
+    > await contract.send(player, {value: toNano("0.005")}, "withdraw");
+    ```
+
