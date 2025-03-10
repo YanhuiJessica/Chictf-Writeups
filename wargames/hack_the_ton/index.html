@@ -3776,6 +3776,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#8-coin" class="md-nav__link">
+    8. COIN
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-gatekeeper" class="md-nav__link">
+    9. GATEKEEPER
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-brute-force" class="md-nav__link">
+    10. BRUTE-FORCE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-tolk" class="md-nav__link">
+    11. TOLK
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4023,6 +4051,34 @@
         <li class="md-nav__item">
   <a href="#7-swap" class="md-nav__link">
     7. SWAP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-coin" class="md-nav__link">
+    8. COIN
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-gatekeeper" class="md-nav__link">
+    9. GATEKEEPER
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-brute-force" class="md-nav__link">
+    10. BRUTE-FORCE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-tolk" class="md-nav__link">
+    11. TOLK
   </a>
   
 </li>
@@ -5286,7 +5342,7 @@
 <li>
 <p>使用 <code>pytoniq-core</code> 解析初始数据</p>
 <ul>
-<li>尽管可以使用较小的 <code>Int</code> 表示形式来减少存储开销，但 TVM 仅对 257 位整型进行操作。因此，init data 中的整型参数均为 257 位</li>
+<li>尽管可以使用较小的 <code>Int</code> 表示形式来减少存储开销，但 TVM 仅对 257 位整型进行操作。因此，init data 中的整型参数均为 257 位有符号整数</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
@@ -5701,20 +5757,667 @@
 </span></code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>检查完后取回合约中的 TON</p>
+<p>检查结束后取回合约中的 TON</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s2">&quot;0.008&quot;</span><span class="p">)},</span><span class="w"> </span><span class="s2">&quot;swap tokens to ton&quot;</span><span class="p">);</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s2">&quot;0.005&quot;</span><span class="p">)},</span><span class="w"> </span><span class="s2">&quot;withdraw&quot;</span><span class="p">);</span>
 </span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
+<h2 id="8-coin">8. COIN<a class="headerlink" href="#8-coin" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>To complete the level, guess 10 times in a row which side the coin will land on.</p>
+</blockquote>
+<details class="note">
+<summary>CoinLevel</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span>
+<span class="normal"><a href="#__codelineno-22-18">18</a></span>
+<span class="normal"><a href="#__codelineno-22-19">19</a></span>
+<span class="normal"><a href="#__codelineno-22-20">20</a></span>
+<span class="normal"><a href="#__codelineno-22-21">21</a></span>
+<span class="normal"><a href="#__codelineno-22-22">22</a></span>
+<span class="normal"><a href="#__codelineno-22-23">23</a></span>
+<span class="normal"><a href="#__codelineno-22-24">24</a></span>
+<span class="normal"><a href="#__codelineno-22-25">25</a></span>
+<span class="normal"><a href="#__codelineno-22-26">26</a></span>
+<span class="normal"><a href="#__codelineno-22-27">27</a></span>
+<span class="normal"><a href="#__codelineno-22-28">28</a></span>
+<span class="normal"><a href="#__codelineno-22-29">29</a></span>
+<span class="normal"><a href="#__codelineno-22-30">30</a></span>
+<span class="normal"><a href="#__codelineno-22-31">31</a></span>
+<span class="normal"><a href="#__codelineno-22-32">32</a></span>
+<span class="normal"><a href="#__codelineno-22-33">33</a></span>
+<span class="normal"><a href="#__codelineno-22-34">34</a></span>
+<span class="normal"><a href="#__codelineno-22-35">35</a></span>
+<span class="normal"><a href="#__codelineno-22-36">36</a></span>
+<span class="normal"><a href="#__codelineno-22-37">37</a></span>
+<span class="normal"><a href="#__codelineno-22-38">38</a></span>
+<span class="normal"><a href="#__codelineno-22-39">39</a></span>
+<span class="normal"><a href="#__codelineno-22-40">40</a></span>
+<span class="normal"><a href="#__codelineno-22-41">41</a></span>
+<span class="normal"><a href="#__codelineno-22-42">42</a></span>
+<span class="normal"><a href="#__codelineno-22-43">43</a></span>
+<span class="normal"><a href="#__codelineno-22-44">44</a></span>
+<span class="normal"><a href="#__codelineno-22-45">45</a></span>
+<span class="normal"><a href="#__codelineno-22-46">46</a></span>
+<span class="normal"><a href="#__codelineno-22-47">47</a></span>
+<span class="normal"><a href="#__codelineno-22-48">48</a></span>
+<span class="normal"><a href="#__codelineno-22-49">49</a></span>
+<span class="normal"><a href="#__codelineno-22-50">50</a></span>
+<span class="normal"><a href="#__codelineno-22-51">51</a></span>
+<span class="normal"><a href="#__codelineno-22-52">52</a></span>
+<span class="normal"><a href="#__codelineno-22-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@stdlib/deploy&quot;</span><span class="p">;</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;../messages&quot;</span><span class="p">;</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="nx">message</span><span class="w"> </span><span class="nx">Flip</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="nx">side</span><span class="o">:</span><span class="w"> </span><span class="nx">Bool</span><span class="p">;</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="p">}</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6"></a>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">Contract</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">){</span>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nonce</span><span class="p">;</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="p">}</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13"></a>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">CoinLevel</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">Deployable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="w">    </span><span class="nx">player</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16"></a><span class="w">    </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="w">    </span><span class="nx">consecutiveWins</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="w">    </span><span class="nx">flipsCount</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">player</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">){</span>
+</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">player</span><span class="p">;</span>
+</span><span id="__span-22-21"><a id="__codelineno-22-21" name="__codelineno-22-21"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nonce</span><span class="p">;</span>
+</span><span id="__span-22-22"><a id="__codelineno-22-22" name="__codelineno-22-22"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-23"><a id="__codelineno-22-23" name="__codelineno-22-23"></a>
+</span><span id="__span-22-24"><a id="__codelineno-22-24" name="__codelineno-22-24"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">Flip</span><span class="p">){</span>
+</span><span id="__span-22-25"><a id="__codelineno-22-25" name="__codelineno-22-25"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">init</span><span class="o">:</span><span class="w"> </span><span class="nx">StateInit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">initOf</span><span class="w"> </span><span class="nx">Contract</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">flipsCount</span><span class="p">);</span>
+</span><span id="__span-22-26"><a id="__codelineno-22-26" name="__codelineno-22-26"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">contractAddress</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">(</span><span class="nx">init</span><span class="p">);</span>
+</span><span id="__span-22-27"><a id="__codelineno-22-27" name="__codelineno-22-27"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">.</span><span class="nx">asSlice</span><span class="p">().</span><span class="nx">asCell</span><span class="p">().</span><span class="nx">hash</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-22-28"><a id="__codelineno-22-28" name="__codelineno-22-28"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">consecutiveWins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">side</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">side</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">consecutiveWins</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-22-29"><a id="__codelineno-22-29" name="__codelineno-22-29"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">flipsCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+</span><span id="__span-22-30"><a id="__codelineno-22-30" name="__codelineno-22-30"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-31"><a id="__codelineno-22-31" name="__codelineno-22-31"></a>
+</span><span id="__span-22-32"><a id="__codelineno-22-32" name="__codelineno-22-32"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="s2">&quot;check&quot;</span><span class="p">){</span>
+</span><span id="__span-22-33"><a id="__codelineno-22-33" name="__codelineno-22-33"></a><span class="w">        </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-22-34"><a id="__codelineno-22-34" name="__codelineno-22-34"></a><span class="w">            </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">sender</span><span class="p">(),</span>
+</span><span id="__span-22-35"><a id="__codelineno-22-35" name="__codelineno-22-35"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-22-36"><a id="__codelineno-22-36" name="__codelineno-22-36"></a><span class="w">            </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendRemainingValue</span><span class="p">,</span>
+</span><span id="__span-22-37"><a id="__codelineno-22-37" name="__codelineno-22-37"></a><span class="w">            </span><span class="nx">bounce</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-22-38"><a id="__codelineno-22-38" name="__codelineno-22-38"></a><span class="w">            </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">CheckLevelResult</span><span class="p">{</span>
+</span><span id="__span-22-39"><a id="__codelineno-22-39" name="__codelineno-22-39"></a><span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;coin&quot;</span><span class="p">,</span>
+</span><span id="__span-22-40"><a id="__codelineno-22-40" name="__codelineno-22-40"></a><span class="w">            </span><span class="nx">completed</span><span class="o">:</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">consecutiveWins</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">10</span>
+</span><span id="__span-22-41"><a id="__codelineno-22-41" name="__codelineno-22-41"></a><span class="w">            </span><span class="p">}.</span><span class="nx">toCell</span><span class="p">()</span>
+</span><span id="__span-22-42"><a id="__codelineno-22-42" name="__codelineno-22-42"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-22-43"><a id="__codelineno-22-43" name="__codelineno-22-43"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-22-44"><a id="__codelineno-22-44" name="__codelineno-22-44"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-45"><a id="__codelineno-22-45" name="__codelineno-22-45"></a>
+</span><span id="__span-22-46"><a id="__codelineno-22-46" name="__codelineno-22-46"></a><span class="w">    </span><span class="nx">get</span><span class="w"> </span><span class="nx">fun</span><span class="w"> </span><span class="nx">consecutiveWins</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-47"><a id="__codelineno-22-47" name="__codelineno-22-47"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">consecutiveWins</span><span class="p">;</span>
+</span><span id="__span-22-48"><a id="__codelineno-22-48" name="__codelineno-22-48"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-49"><a id="__codelineno-22-49" name="__codelineno-22-49"></a>
+</span><span id="__span-22-50"><a id="__codelineno-22-50" name="__codelineno-22-50"></a><span class="w">    </span><span class="nx">get</span><span class="w"> </span><span class="nx">fun</span><span class="w"> </span><span class="nx">flipsCount</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-51"><a id="__codelineno-22-51" name="__codelineno-22-51"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">flipsCount</span><span class="p">;</span>
+</span><span id="__span-22-52"><a id="__codelineno-22-52" name="__codelineno-22-52"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-53"><a id="__codelineno-22-53" name="__codelineno-22-53"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<ul>
+<li>
+<p>需要连续猜对 10 次，借助辅助合约预测结果并发送消息</p>
+<ul>
+<li>题目合约使用的 Tact 编译器版本为 1.4.4。不同编译器版本可能产生不同的编译结果，最好<strong>使用相同版本的编译器</strong>，保证 <code>initOf</code> 在辅助合约中的计算结果与实例合约相同</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span>
+<span class="normal"><a href="#__codelineno-23-23">23</a></span>
+<span class="normal"><a href="#__codelineno-23-24">24</a></span>
+<span class="normal"><a href="#__codelineno-23-25">25</a></span>
+<span class="normal"><a href="#__codelineno-23-26">26</a></span>
+<span class="normal"><a href="#__codelineno-23-27">27</a></span>
+<span class="normal"><a href="#__codelineno-23-28">28</a></span>
+<span class="normal"><a href="#__codelineno-23-29">29</a></span>
+<span class="normal"><a href="#__codelineno-23-30">30</a></span>
+<span class="normal"><a href="#__codelineno-23-31">31</a></span>
+<span class="normal"><a href="#__codelineno-23-32">32</a></span>
+<span class="normal"><a href="#__codelineno-23-33">33</a></span>
+<span class="normal"><a href="#__codelineno-23-34">34</a></span>
+<span class="normal"><a href="#__codelineno-23-35">35</a></span>
+<span class="normal"><a href="#__codelineno-23-36">36</a></span>
+<span class="normal"><a href="#__codelineno-23-37">37</a></span>
+<span class="normal"><a href="#__codelineno-23-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@stdlib/deploy&quot;</span><span class="p">;</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="nx">message</span><span class="w"> </span><span class="nx">Flip</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">    </span><span class="nx">side</span><span class="o">:</span><span class="w"> </span><span class="nx">Bool</span><span class="p">;</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="p">}</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="nx">message</span><span class="w"> </span><span class="nx">Guess</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">    </span><span class="nx">cnt</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">uint32</span><span class="p">;</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">    </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">uint32</span><span class="p">;</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="p">}</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11"></a>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">Contract</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">){</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nonce</span><span class="p">;</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="p">}</span>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18"></a>
+</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">Guesser</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">Deployable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20"></a>
+</span><span id="__span-23-21"><a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">Guess</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-22"><a id="__codelineno-23-22" name="__codelineno-23-22"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">p</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">start</span><span class="p">;</span>
+</span><span id="__span-23-23"><a id="__codelineno-23-23" name="__codelineno-23-23"></a><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">cnt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-24"><a id="__codelineno-23-24" name="__codelineno-23-24"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">init</span><span class="o">:</span><span class="w"> </span><span class="nx">StateInit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">initOf</span><span class="w"> </span><span class="nx">Contract</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+</span><span id="__span-23-25"><a id="__codelineno-23-25" name="__codelineno-23-25"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">contractAddress</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">(</span><span class="nx">init</span><span class="p">);</span>
+</span><span id="__span-23-26"><a id="__codelineno-23-26" name="__codelineno-23-26"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">side</span><span class="o">:</span><span class="w"> </span><span class="nx">Bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">contractAddress</span><span class="p">.</span><span class="nx">asSlice</span><span class="p">().</span><span class="nx">asCell</span><span class="p">().</span><span class="nx">hash</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-23-27"><a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="w">            </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-23-28"><a id="__codelineno-23-28" name="__codelineno-23-28"></a><span class="w">                </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span>
+</span><span id="__span-23-29"><a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="w">                </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">ton</span><span class="p">(</span><span class="s2">&quot;0.01&quot;</span><span class="p">),</span>
+</span><span id="__span-23-30"><a id="__codelineno-23-30" name="__codelineno-23-30"></a><span class="w">                </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendDefaultMode</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">SendPayGasSeparately</span><span class="p">,</span>
+</span><span id="__span-23-31"><a id="__codelineno-23-31" name="__codelineno-23-31"></a><span class="w">                </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">Flip</span><span class="p">{</span>
+</span><span id="__span-23-32"><a id="__codelineno-23-32" name="__codelineno-23-32"></a><span class="w">                    </span><span class="nx">side</span><span class="o">:</span><span class="w"> </span><span class="nx">side</span>
+</span><span id="__span-23-33"><a id="__codelineno-23-33" name="__codelineno-23-33"></a><span class="w">                </span><span class="p">}.</span><span class="nx">toCell</span><span class="p">()</span>
+</span><span id="__span-23-34"><a id="__codelineno-23-34" name="__codelineno-23-34"></a><span class="w">            </span><span class="p">});</span>
+</span><span id="__span-23-35"><a id="__codelineno-23-35" name="__codelineno-23-35"></a><span class="w">            </span><span class="nx">p</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+</span><span id="__span-23-36"><a id="__codelineno-23-36" name="__codelineno-23-36"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-23-37"><a id="__codelineno-23-37" name="__codelineno-23-37"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-23-38"><a id="__codelineno-23-38" name="__codelineno-23-38"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h2 id="9-gatekeeper">9. GATEKEEPER<a class="headerlink" href="#9-gatekeeper" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Unlock the contract below to complete this level.</p>
+</blockquote>
+<details class="note">
+<summary>GatekeeperLevel</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span>
+<span class="normal"><a href="#__codelineno-24-14">14</a></span>
+<span class="normal"><a href="#__codelineno-24-15">15</a></span>
+<span class="normal"><a href="#__codelineno-24-16">16</a></span>
+<span class="normal"><a href="#__codelineno-24-17">17</a></span>
+<span class="normal"><a href="#__codelineno-24-18">18</a></span>
+<span class="normal"><a href="#__codelineno-24-19">19</a></span>
+<span class="normal"><a href="#__codelineno-24-20">20</a></span>
+<span class="normal"><a href="#__codelineno-24-21">21</a></span>
+<span class="normal"><a href="#__codelineno-24-22">22</a></span>
+<span class="normal"><a href="#__codelineno-24-23">23</a></span>
+<span class="normal"><a href="#__codelineno-24-24">24</a></span>
+<span class="normal"><a href="#__codelineno-24-25">25</a></span>
+<span class="normal"><a href="#__codelineno-24-26">26</a></span>
+<span class="normal"><a href="#__codelineno-24-27">27</a></span>
+<span class="normal"><a href="#__codelineno-24-28">28</a></span>
+<span class="normal"><a href="#__codelineno-24-29">29</a></span>
+<span class="normal"><a href="#__codelineno-24-30">30</a></span>
+<span class="normal"><a href="#__codelineno-24-31">31</a></span>
+<span class="normal"><a href="#__codelineno-24-32">32</a></span>
+<span class="normal"><a href="#__codelineno-24-33">33</a></span>
+<span class="normal"><a href="#__codelineno-24-34">34</a></span>
+<span class="normal"><a href="#__codelineno-24-35">35</a></span>
+<span class="normal"><a href="#__codelineno-24-36">36</a></span>
+<span class="normal"><a href="#__codelineno-24-37">37</a></span>
+<span class="normal"><a href="#__codelineno-24-38">38</a></span>
+<span class="normal"><a href="#__codelineno-24-39">39</a></span>
+<span class="normal"><a href="#__codelineno-24-40">40</a></span>
+<span class="normal"><a href="#__codelineno-24-41">41</a></span>
+<span class="normal"><a href="#__codelineno-24-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@stdlib/deploy&quot;</span><span class="p">;</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;../messages&quot;</span><span class="p">;</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="nx">message</span><span class="w"> </span><span class="nx">Unlock</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="w">    </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="w">    </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="p">}</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7"></a>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">GatekeeperLevel</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">Deployable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">    </span><span class="nx">player</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="w">    </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">    </span><span class="nx">locked</span><span class="o">:</span><span class="w"> </span><span class="nx">Bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">player</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">){</span>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">player</span><span class="p">;</span>
+</span><span id="__span-24-14"><a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nonce</span><span class="p">;</span>
+</span><span id="__span-24-15"><a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-24-16"><a id="__codelineno-24-16" name="__codelineno-24-16"></a>
+</span><span id="__span-24-17"><a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">Unlock</span><span class="p">){</span>
+</span><span id="__span-24-18"><a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="w">        </span><span class="nx">require</span><span class="p">((</span><span class="nx">sender</span><span class="p">().</span><span class="nx">asSlice</span><span class="p">().</span><span class="nx">asCell</span><span class="p">().</span><span class="nx">hash</span><span class="p">()</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">((</span><span class="nx">msg</span><span class="p">.</span><span class="nx">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">b</span><span class="p">))</span><span class="w"> </span><span class="o">==</span>
+</span><span id="__span-24-19"><a id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="w">            </span><span class="nx">myAddress</span><span class="p">().</span><span class="nx">asSlice</span><span class="p">().</span><span class="nx">asCell</span><span class="p">().</span><span class="nx">hash</span><span class="p">(),</span>
+</span><span id="__span-24-20"><a id="__codelineno-24-20" name="__codelineno-24-20"></a><span class="w">        </span><span class="s2">&quot;Check failed.&quot;</span>
+</span><span id="__span-24-21"><a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-24-22"><a id="__codelineno-24-22" name="__codelineno-24-22"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span><span id="__span-24-23"><a id="__codelineno-24-23" name="__codelineno-24-23"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-24-24"><a id="__codelineno-24-24" name="__codelineno-24-24"></a>
+</span><span id="__span-24-25"><a id="__codelineno-24-25" name="__codelineno-24-25"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="s2">&quot;check&quot;</span><span class="p">){</span>
+</span><span id="__span-24-26"><a id="__codelineno-24-26" name="__codelineno-24-26"></a><span class="w">        </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-24-27"><a id="__codelineno-24-27" name="__codelineno-24-27"></a><span class="w">            </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">sender</span><span class="p">(),</span>
+</span><span id="__span-24-28"><a id="__codelineno-24-28" name="__codelineno-24-28"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-24-29"><a id="__codelineno-24-29" name="__codelineno-24-29"></a><span class="w">            </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendRemainingValue</span><span class="p">,</span>
+</span><span id="__span-24-30"><a id="__codelineno-24-30" name="__codelineno-24-30"></a><span class="w">            </span><span class="nx">bounce</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-24-31"><a id="__codelineno-24-31" name="__codelineno-24-31"></a><span class="w">            </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">CheckLevelResult</span><span class="p">{</span>
+</span><span id="__span-24-32"><a id="__codelineno-24-32" name="__codelineno-24-32"></a><span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;gatekeeper&quot;</span><span class="p">,</span>
+</span><span id="__span-24-33"><a id="__codelineno-24-33" name="__codelineno-24-33"></a><span class="w">            </span><span class="nx">completed</span><span class="o">:</span><span class="w"> </span><span class="o">!</span><span class="nx">self</span><span class="p">.</span><span class="nx">locked</span>
+</span><span id="__span-24-34"><a id="__codelineno-24-34" name="__codelineno-24-34"></a><span class="w">            </span><span class="p">}.</span><span class="nx">toCell</span><span class="p">()</span>
+</span><span id="__span-24-35"><a id="__codelineno-24-35" name="__codelineno-24-35"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-24-36"><a id="__codelineno-24-36" name="__codelineno-24-36"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-24-37"><a id="__codelineno-24-37" name="__codelineno-24-37"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-24-38"><a id="__codelineno-24-38" name="__codelineno-24-38"></a>
+</span><span id="__span-24-39"><a id="__codelineno-24-39" name="__codelineno-24-39"></a><span class="w">    </span><span class="nx">get</span><span class="w"> </span><span class="nx">fun</span><span class="w"> </span><span class="nx">locked</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">Bool</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-40"><a id="__codelineno-24-40" name="__codelineno-24-40"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">locked</span><span class="p">;</span>
+</span><span id="__span-24-41"><a id="__codelineno-24-41" name="__codelineno-24-41"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-24-42"><a id="__codelineno-24-42" name="__codelineno-24-42"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<ul>
+<li>解锁需要 <code>sender().asSlice().asCell().hash() ^ ((msg.a &lt;&lt; 2) + msg.b)</code> 的值与 <code>myAddress().asSlice().asCell().hash()</code> 相等</li>
+<li>
+<p>获取实例地址的哈希值</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeAddress</span><span class="p">(</span><span class="nx">contract</span><span class="p">.</span><span class="nx">address</span><span class="p">).</span><span class="nx">endCell</span><span class="p">().</span><span class="nx">hash</span><span class="p">().</span><span class="nx">toHex</span><span class="p">()</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="mf">3036979211</span><span class="nx">fd86c13a1113af157f701ea19eafb8e1d1c36d761c5ff41c99bc80</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>由于 <code>a</code> 和 <code>b</code> 没有限制范围，可以直接将 <code>a</code> 设置为 0，<code>b</code> 为发送者地址哈希值与实例地址哈希值异或的结果</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s1">&#39;0.01&#39;</span><span class="p">)},</span><span class="w"> </span><span class="p">{</span><span class="nx">$$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Unlock&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="mi">86130810477776835231294161513457632144148633294017539526014373747458502429745n</span><span class="p">});</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h2 id="10-brute-force">10. BRUTE-FORCE<a class="headerlink" href="#10-brute-force" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Unlock the contract below to complete this level.</p>
+</blockquote>
+<details class="note">
+<summary>BruteforceLevel</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-27-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-27-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-27-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-27-10">10</a></span>
+<span class="normal"><a href="#__codelineno-27-11">11</a></span>
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span>
+<span class="normal"><a href="#__codelineno-27-14">14</a></span>
+<span class="normal"><a href="#__codelineno-27-15">15</a></span>
+<span class="normal"><a href="#__codelineno-27-16">16</a></span>
+<span class="normal"><a href="#__codelineno-27-17">17</a></span>
+<span class="normal"><a href="#__codelineno-27-18">18</a></span>
+<span class="normal"><a href="#__codelineno-27-19">19</a></span>
+<span class="normal"><a href="#__codelineno-27-20">20</a></span>
+<span class="normal"><a href="#__codelineno-27-21">21</a></span>
+<span class="normal"><a href="#__codelineno-27-22">22</a></span>
+<span class="normal"><a href="#__codelineno-27-23">23</a></span>
+<span class="normal"><a href="#__codelineno-27-24">24</a></span>
+<span class="normal"><a href="#__codelineno-27-25">25</a></span>
+<span class="normal"><a href="#__codelineno-27-26">26</a></span>
+<span class="normal"><a href="#__codelineno-27-27">27</a></span>
+<span class="normal"><a href="#__codelineno-27-28">28</a></span>
+<span class="normal"><a href="#__codelineno-27-29">29</a></span>
+<span class="normal"><a href="#__codelineno-27-30">30</a></span>
+<span class="normal"><a href="#__codelineno-27-31">31</a></span>
+<span class="normal"><a href="#__codelineno-27-32">32</a></span>
+<span class="normal"><a href="#__codelineno-27-33">33</a></span>
+<span class="normal"><a href="#__codelineno-27-34">34</a></span>
+<span class="normal"><a href="#__codelineno-27-35">35</a></span>
+<span class="normal"><a href="#__codelineno-27-36">36</a></span>
+<span class="normal"><a href="#__codelineno-27-37">37</a></span>
+<span class="normal"><a href="#__codelineno-27-38">38</a></span>
+<span class="normal"><a href="#__codelineno-27-39">39</a></span>
+<span class="normal"><a href="#__codelineno-27-40">40</a></span>
+<span class="normal"><a href="#__codelineno-27-41">41</a></span>
+<span class="normal"><a href="#__codelineno-27-42">42</a></span>
+<span class="normal"><a href="#__codelineno-27-43">43</a></span>
+<span class="normal"><a href="#__codelineno-27-44">44</a></span>
+<span class="normal"><a href="#__codelineno-27-45">45</a></span>
+<span class="normal"><a href="#__codelineno-27-46">46</a></span>
+<span class="normal"><a href="#__codelineno-27-47">47</a></span>
+<span class="normal"><a href="#__codelineno-27-48">48</a></span>
+<span class="normal"><a href="#__codelineno-27-49">49</a></span>
+<span class="normal"><a href="#__codelineno-27-50">50</a></span>
+<span class="normal"><a href="#__codelineno-27-51">51</a></span>
+<span class="normal"><a href="#__codelineno-27-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@stdlib/deploy&quot;</span><span class="p">;</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;../messages&quot;</span><span class="p">;</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="nx">message</span><span class="w"> </span><span class="nx">Unlock</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="w">    </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="w">    </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="w">    </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="w">    </span><span class="nx">d</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="p">}</span>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9"></a>
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">BruteforceLevel</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">Deployable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="w">    </span><span class="nx">player</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="w">    </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">;</span>
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="w">    </span><span class="nx">locked</span><span class="o">:</span><span class="w"> </span><span class="nx">Bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="w">    </span><span class="nx">x</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">uint8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="w">    </span><span class="nx">y</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">uint8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">player</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="p">){</span>
+</span><span id="__span-27-17"><a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">player</span><span class="p">;</span>
+</span><span id="__span-27-18"><a id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nonce</span><span class="p">;</span>
+</span><span id="__span-27-19"><a id="__codelineno-27-19" name="__codelineno-27-19"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-27-20"><a id="__codelineno-27-20" name="__codelineno-27-20"></a>
+</span><span id="__span-27-21"><a id="__codelineno-27-21" name="__codelineno-27-21"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">Unlock</span><span class="p">){</span>
+</span><span id="__span-27-22"><a id="__codelineno-27-22" name="__codelineno-27-22"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">c</span><span class="p">;</span>
+</span><span id="__span-27-23"><a id="__codelineno-27-23" name="__codelineno-27-23"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">d</span><span class="p">;</span>
+</span><span id="__span-27-24"><a id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="w">        </span><span class="nx">require</span><span class="p">((</span><span class="nx">self</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;First check failed.&quot;</span><span class="p">);</span>
+</span><span id="__span-27-25"><a id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="w">        </span><span class="nx">require</span><span class="p">((((</span><span class="nx">pow</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="mf">25</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-27-26"><a id="__codelineno-27-26" name="__codelineno-27-26"></a><span class="w">            </span><span class="nx">pow</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="mf">25</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-27-27"><a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="w">            </span><span class="nx">pow</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="mf">25</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-27-28"><a id="__codelineno-27-28" name="__codelineno-27-28"></a><span class="w">            </span><span class="nx">pow</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="mf">25</span><span class="p">))</span><span class="w"> </span><span class="o">==</span>
+</span><span id="__span-27-29"><a id="__codelineno-27-29" name="__codelineno-27-29"></a><span class="w">            </span><span class="mf">1968172103452999492963878188028555943794336458502883276710491621054698698752</span><span class="p">,</span>
+</span><span id="__span-27-30"><a id="__codelineno-27-30" name="__codelineno-27-30"></a><span class="w">        </span><span class="s2">&quot;Second check failed.&quot;</span>
+</span><span id="__span-27-31"><a id="__codelineno-27-31" name="__codelineno-27-31"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-27-32"><a id="__codelineno-27-32" name="__codelineno-27-32"></a><span class="w">        </span><span class="nx">self</span><span class="p">.</span><span class="nx">locked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span><span id="__span-27-33"><a id="__codelineno-27-33" name="__codelineno-27-33"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-27-34"><a id="__codelineno-27-34" name="__codelineno-27-34"></a>
+</span><span id="__span-27-35"><a id="__codelineno-27-35" name="__codelineno-27-35"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="s2">&quot;check&quot;</span><span class="p">){</span>
+</span><span id="__span-27-36"><a id="__codelineno-27-36" name="__codelineno-27-36"></a><span class="w">        </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-27-37"><a id="__codelineno-27-37" name="__codelineno-27-37"></a><span class="w">            </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">sender</span><span class="p">(),</span>
+</span><span id="__span-27-38"><a id="__codelineno-27-38" name="__codelineno-27-38"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-27-39"><a id="__codelineno-27-39" name="__codelineno-27-39"></a><span class="w">            </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendRemainingValue</span><span class="p">,</span>
+</span><span id="__span-27-40"><a id="__codelineno-27-40" name="__codelineno-27-40"></a><span class="w">            </span><span class="nx">bounce</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-27-41"><a id="__codelineno-27-41" name="__codelineno-27-41"></a><span class="w">            </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">CheckLevelResult</span><span class="p">{</span>
+</span><span id="__span-27-42"><a id="__codelineno-27-42" name="__codelineno-27-42"></a><span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;bruteforce&quot;</span><span class="p">,</span>
+</span><span id="__span-27-43"><a id="__codelineno-27-43" name="__codelineno-27-43"></a><span class="w">            </span><span class="nx">completed</span><span class="o">:</span><span class="w"> </span><span class="o">!</span><span class="nx">self</span><span class="p">.</span><span class="nx">locked</span>
+</span><span id="__span-27-44"><a id="__codelineno-27-44" name="__codelineno-27-44"></a><span class="w">            </span><span class="p">}.</span><span class="nx">toCell</span><span class="p">()</span>
+</span><span id="__span-27-45"><a id="__codelineno-27-45" name="__codelineno-27-45"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-27-46"><a id="__codelineno-27-46" name="__codelineno-27-46"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-27-47"><a id="__codelineno-27-47" name="__codelineno-27-47"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-27-48"><a id="__codelineno-27-48" name="__codelineno-27-48"></a>
+</span><span id="__span-27-49"><a id="__codelineno-27-49" name="__codelineno-27-49"></a><span class="w">    </span><span class="nx">get</span><span class="w"> </span><span class="nx">fun</span><span class="w"> </span><span class="nx">locked</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">Bool</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-50"><a id="__codelineno-27-50" name="__codelineno-27-50"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">self</span><span class="p">.</span><span class="nx">locked</span><span class="p">;</span>
+</span><span id="__span-27-51"><a id="__codelineno-27-51" name="__codelineno-27-51"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-27-52"><a id="__codelineno-27-52" name="__codelineno-27-52"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<ul>
+<li>解锁需要提供满足特定条件的四个整数<ul>
+<li><code>(self.x + self.y) == 2</code> 即 <code>msg.a + msg.b + msg.c + msg.d == 2</code>，说明正负整数的绝对值之差为 2，且 <code>msg.a + msg.c</code> 和 <code>msg.b + msg.d</code> 的结果在 8 位无符号整型的范围内</li>
+<li><code>(((pow(msg.a, 25) + pow(msg.b, 25)) + pow(msg.c, 25)) + pow(msg.d, 25))</code> 的结果是一个正整数 <code>1968172103452999492963878188028555943794336458502883276710491621054698698752</code></li>
+</ul>
+</li>
+<li>
+<p>由此推测出两种可能的情况</p>
+<ul>
+<li><code>self.x</code> 为 2，<code>self.y</code> 为 0（反之亦同）</li>
+<li><code>self.x</code> 和 <code>self.y</code> 同为 1</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span>
+<span class="normal"><a href="#__codelineno-28-13">13</a></span>
+<span class="normal"><a href="#__codelineno-28-14">14</a></span>
+<span class="normal"><a href="#__codelineno-28-15">15</a></span>
+<span class="normal"><a href="#__codelineno-28-16">16</a></span>
+<span class="normal"><a href="#__codelineno-28-17">17</a></span>
+<span class="normal"><a href="#__codelineno-28-18">18</a></span>
+<span class="normal"><a href="#__codelineno-28-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">t</span> <span class="o">=</span> <span class="mi">1968172103452999492963878188028555943794336458502883276710491621054698698752</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3000</span><span class="p">):</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3"></a>    <span class="n">c</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4"></a>    <span class="n">r</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5"></a>    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7"></a>        <span class="k">break</span>
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8"></a>    <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">:</span>
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9"></a>        <span class="k">break</span>
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3000</span><span class="p">):</span>
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11"></a>    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3000</span><span class="p">):</span>
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12"></a>        <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="o">-</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13"></a>        <span class="n">r</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+</span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14"></a>        <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span>
+</span><span id="__span-28-15"><a id="__codelineno-28-15" name="__codelineno-28-15"></a>            <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+</span><span id="__span-28-16"><a id="__codelineno-28-16" name="__codelineno-28-16"></a>            <span class="k">break</span>
+</span><span id="__span-28-17"><a id="__codelineno-28-17" name="__codelineno-28-17"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-28-18"><a id="__codelineno-28-18" name="__codelineno-28-18"></a>        <span class="k">continue</span>
+</span><span id="__span-28-19"><a id="__codelineno-28-19" name="__codelineno-28-19"></a>    <span class="k">break</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>发送结果到实例合约</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s1">&#39;0.01&#39;</span><span class="p">)},</span><span class="w"> </span><span class="p">{</span><span class="nx">$$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Unlock&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mf">850</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="mf">1200</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">849</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">1199</span><span class="p">});</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h2 id="11-tolk">11. TOLK<a class="headerlink" href="#11-tolk" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Unlock the contract below to complete this level.</p>
+</blockquote>
+<details class="note">
+<summary>Tolk</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span>
+<span class="normal"><a href="#__codelineno-30-12">12</a></span>
+<span class="normal"><a href="#__codelineno-30-13">13</a></span>
+<span class="normal"><a href="#__codelineno-30-14">14</a></span>
+<span class="normal"><a href="#__codelineno-30-15">15</a></span>
+<span class="normal"><a href="#__codelineno-30-16">16</a></span>
+<span class="normal"><a href="#__codelineno-30-17">17</a></span>
+<span class="normal"><a href="#__codelineno-30-18">18</a></span>
+<span class="normal"><a href="#__codelineno-30-19">19</a></span>
+<span class="normal"><a href="#__codelineno-30-20">20</a></span>
+<span class="normal"><a href="#__codelineno-30-21">21</a></span>
+<span class="normal"><a href="#__codelineno-30-22">22</a></span>
+<span class="normal"><a href="#__codelineno-30-23">23</a></span>
+<span class="normal"><a href="#__codelineno-30-24">24</a></span>
+<span class="normal"><a href="#__codelineno-30-25">25</a></span>
+<span class="normal"><a href="#__codelineno-30-26">26</a></span>
+<span class="normal"><a href="#__codelineno-30-27">27</a></span>
+<span class="normal"><a href="#__codelineno-30-28">28</a></span>
+<span class="normal"><a href="#__codelineno-30-29">29</a></span>
+<span class="normal"><a href="#__codelineno-30-30">30</a></span>
+<span class="normal"><a href="#__codelineno-30-31">31</a></span>
+<span class="normal"><a href="#__codelineno-30-32">32</a></span>
+<span class="normal"><a href="#__codelineno-30-33">33</a></span>
+<span class="normal"><a href="#__codelineno-30-34">34</a></span>
+<span class="normal"><a href="#__codelineno-30-35">35</a></span>
+<span class="normal"><a href="#__codelineno-30-36">36</a></span>
+<span class="normal"><a href="#__codelineno-30-37">37</a></span>
+<span class="normal"><a href="#__codelineno-30-38">38</a></span>
+<span class="normal"><a href="#__codelineno-30-39">39</a></span>
+<span class="normal"><a href="#__codelineno-30-40">40</a></span>
+<span class="normal"><a href="#__codelineno-30-41">41</a></span>
+<span class="normal"><a href="#__codelineno-30-42">42</a></span>
+<span class="normal"><a href="#__codelineno-30-43">43</a></span>
+<span class="normal"><a href="#__codelineno-30-44">44</a></span>
+<span class="normal"><a href="#__codelineno-30-45">45</a></span>
+<span class="normal"><a href="#__codelineno-30-46">46</a></span>
+<span class="normal"><a href="#__codelineno-30-47">47</a></span>
+<span class="normal"><a href="#__codelineno-30-48">48</a></span>
+<span class="normal"><a href="#__codelineno-30-49">49</a></span>
+<span class="normal"><a href="#__codelineno-30-50">50</a></span>
+<span class="normal"><a href="#__codelineno-30-51">51</a></span>
+<span class="normal"><a href="#__codelineno-30-52">52</a></span>
+<span class="normal"><a href="#__codelineno-30-53">53</a></span>
+<span class="normal"><a href="#__codelineno-30-54">54</a></span>
+<span class="normal"><a href="#__codelineno-30-55">55</a></span>
+<span class="normal"><a href="#__codelineno-30-56">56</a></span>
+<span class="normal"><a href="#__codelineno-30-57">57</a></span>
+<span class="normal"><a href="#__codelineno-30-58">58</a></span>
+<span class="normal"><a href="#__codelineno-30-59">59</a></span>
+<span class="normal"><a href="#__codelineno-30-60">60</a></span>
+<span class="normal"><a href="#__codelineno-30-61">61</a></span>
+<span class="normal"><a href="#__codelineno-30-62">62</a></span>
+<span class="normal"><a href="#__codelineno-30-63">63</a></span>
+<span class="normal"><a href="#__codelineno-30-64">64</a></span>
+<span class="normal"><a href="#__codelineno-30-65">65</a></span>
+<span class="normal"><a href="#__codelineno-30-66">66</a></span>
+<span class="normal"><a href="#__codelineno-30-67">67</a></span>
+<span class="normal"><a href="#__codelineno-30-68">68</a></span>
+<span class="normal"><a href="#__codelineno-30-69">69</a></span>
+<span class="normal"><a href="#__codelineno-30-70">70</a></span>
+<span class="normal"><a href="#__codelineno-30-71">71</a></span>
+<span class="normal"><a href="#__codelineno-30-72">72</a></span>
+<span class="normal"><a href="#__codelineno-30-73">73</a></span>
+<span class="normal"><a href="#__codelineno-30-74">74</a></span>
+<span class="normal"><a href="#__codelineno-30-75">75</a></span>
+<span class="normal"><a href="#__codelineno-30-76">76</a></span>
+<span class="normal"><a href="#__codelineno-30-77">77</a></span>
+<span class="normal"><a href="#__codelineno-30-78">78</a></span>
+<span class="normal"><a href="#__codelineno-30-79">79</a></span>
+<span class="normal"><a href="#__codelineno-30-80">80</a></span>
+<span class="normal"><a href="#__codelineno-30-81">81</a></span>
+<span class="normal"><a href="#__codelineno-30-82">82</a></span>
+<span class="normal"><a href="#__codelineno-30-83">83</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1"></a>const OP_UNLOCK = &quot;op::unlock&quot;c; // create an opcode from string using the &quot;c&quot; prefix, this results in 0xf0fd50bb opcode in this case
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2"></a>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3"></a>// storage variables
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4"></a>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5"></a>global ctxPlayer: slice;
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6"></a>global ctxNonce: int;
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7"></a>global ctxLocked: bool;
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8"></a>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9"></a>// loadData populates storage variables using stored data
+</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10"></a>fun loadData() {
+</span><span id="__span-30-11"><a id="__codelineno-30-11" name="__codelineno-30-11"></a>    var ds = getContractData().beginParse();
+</span><span id="__span-30-12"><a id="__codelineno-30-12" name="__codelineno-30-12"></a>
+</span><span id="__span-30-13"><a id="__codelineno-30-13" name="__codelineno-30-13"></a>    ctxPlayer = ds.loadAddress();
+</span><span id="__span-30-14"><a id="__codelineno-30-14" name="__codelineno-30-14"></a>    ctxNonce = ds.loadUint(32);
+</span><span id="__span-30-15"><a id="__codelineno-30-15" name="__codelineno-30-15"></a>    ctxLocked = ds.loadBool();
+</span><span id="__span-30-16"><a id="__codelineno-30-16" name="__codelineno-30-16"></a>
+</span><span id="__span-30-17"><a id="__codelineno-30-17" name="__codelineno-30-17"></a>    ds.assertEndOfSlice();
+</span><span id="__span-30-18"><a id="__codelineno-30-18" name="__codelineno-30-18"></a>}
+</span><span id="__span-30-19"><a id="__codelineno-30-19" name="__codelineno-30-19"></a>
+</span><span id="__span-30-20"><a id="__codelineno-30-20" name="__codelineno-30-20"></a>// saveData stores storage variables as a cell into persistent storage
+</span><span id="__span-30-21"><a id="__codelineno-30-21" name="__codelineno-30-21"></a>fun saveData() {
+</span><span id="__span-30-22"><a id="__codelineno-30-22" name="__codelineno-30-22"></a>    setContractData(
+</span><span id="__span-30-23"><a id="__codelineno-30-23" name="__codelineno-30-23"></a>        beginCell()
+</span><span id="__span-30-24"><a id="__codelineno-30-24" name="__codelineno-30-24"></a>            .storeSlice(ctxPlayer)
+</span><span id="__span-30-25"><a id="__codelineno-30-25" name="__codelineno-30-25"></a>            .storeUint(ctxNonce, 32)
+</span><span id="__span-30-26"><a id="__codelineno-30-26" name="__codelineno-30-26"></a>            .storeBool(ctxLocked)
+</span><span id="__span-30-27"><a id="__codelineno-30-27" name="__codelineno-30-27"></a>        .endCell()
+</span><span id="__span-30-28"><a id="__codelineno-30-28" name="__codelineno-30-28"></a>    );
+</span><span id="__span-30-29"><a id="__codelineno-30-29" name="__codelineno-30-29"></a>}
+</span><span id="__span-30-30"><a id="__codelineno-30-30" name="__codelineno-30-30"></a>
+</span><span id="__span-30-31"><a id="__codelineno-30-31" name="__codelineno-30-31"></a>// onInternalMessage is the main function of the contract and is called when it receives a message from other contracts
+</span><span id="__span-30-32"><a id="__codelineno-30-32" name="__codelineno-30-32"></a>fun onInternalMessage(myBalance: int, msgValue: int, inMsgFull: cell, inMsgBody: slice) {
+</span><span id="__span-30-33"><a id="__codelineno-30-33" name="__codelineno-30-33"></a>    if (inMsgBody.isEndOfSlice()) { // ignore all empty messages
+</span><span id="__span-30-34"><a id="__codelineno-30-34" name="__codelineno-30-34"></a>        return;
+</span><span id="__span-30-35"><a id="__codelineno-30-35" name="__codelineno-30-35"></a>    }
+</span><span id="__span-30-36"><a id="__codelineno-30-36" name="__codelineno-30-36"></a>
+</span><span id="__span-30-37"><a id="__codelineno-30-37" name="__codelineno-30-37"></a>    var cs: slice = inMsgFull.beginParse();
+</span><span id="__span-30-38"><a id="__codelineno-30-38" name="__codelineno-30-38"></a>    val flags: int = cs.loadUint(4);
+</span><span id="__span-30-39"><a id="__codelineno-30-39" name="__codelineno-30-39"></a>    if (flags &amp; 1) { // ignore all bounced messages
+</span><span id="__span-30-40"><a id="__codelineno-30-40" name="__codelineno-30-40"></a>        return;
+</span><span id="__span-30-41"><a id="__codelineno-30-41" name="__codelineno-30-41"></a>    }
+</span><span id="__span-30-42"><a id="__codelineno-30-42" name="__codelineno-30-42"></a>    val senderAddress: slice = cs.loadAddress();
+</span><span id="__span-30-43"><a id="__codelineno-30-43" name="__codelineno-30-43"></a>
+</span><span id="__span-30-44"><a id="__codelineno-30-44" name="__codelineno-30-44"></a>    loadData(); // here we populate the storage variables
+</span><span id="__span-30-45"><a id="__codelineno-30-45" name="__codelineno-30-45"></a>
+</span><span id="__span-30-46"><a id="__codelineno-30-46" name="__codelineno-30-46"></a>    val op: int = inMsgBody.loadUint(32); // by convention, the first 32 bits of incoming message is the op
+</span><span id="__span-30-47"><a id="__codelineno-30-47" name="__codelineno-30-47"></a>
+</span><span id="__span-30-48"><a id="__codelineno-30-48" name="__codelineno-30-48"></a>    // receive &quot;check&quot; message
+</span><span id="__span-30-49"><a id="__codelineno-30-49" name="__codelineno-30-49"></a>    if (isSliceBitsEqual(inMsgBody, &quot;check&quot;)) {
+</span><span id="__span-30-50"><a id="__codelineno-30-50" name="__codelineno-30-50"></a>        // send CheckLevelResult msg
+</span><span id="__span-30-51"><a id="__codelineno-30-51" name="__codelineno-30-51"></a>        val msgBody: cell = beginCell()
+</span><span id="__span-30-52"><a id="__codelineno-30-52" name="__codelineno-30-52"></a>            .storeUint(0x6df37b4d, 32)
+</span><span id="__span-30-53"><a id="__codelineno-30-53" name="__codelineno-30-53"></a>            .storeRef(beginCell().storeSlice(&quot;tolk&quot;).endCell())
+</span><span id="__span-30-54"><a id="__codelineno-30-54" name="__codelineno-30-54"></a>            .storeBool(!ctxLocked)
+</span><span id="__span-30-55"><a id="__codelineno-30-55" name="__codelineno-30-55"></a>        .endCell();
+</span><span id="__span-30-56"><a id="__codelineno-30-56" name="__codelineno-30-56"></a>        val msg: builder = beginCell()
+</span><span id="__span-30-57"><a id="__codelineno-30-57" name="__codelineno-30-57"></a>            .storeUint(0x18, 6)
+</span><span id="__span-30-58"><a id="__codelineno-30-58" name="__codelineno-30-58"></a>            .storeSlice(senderAddress)
+</span><span id="__span-30-59"><a id="__codelineno-30-59" name="__codelineno-30-59"></a>            .storeCoins(0)
+</span><span id="__span-30-60"><a id="__codelineno-30-60" name="__codelineno-30-60"></a>            .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+</span><span id="__span-30-61"><a id="__codelineno-30-61" name="__codelineno-30-61"></a>            .storeRef(msgBody);
+</span><span id="__span-30-62"><a id="__codelineno-30-62" name="__codelineno-30-62"></a>
+</span><span id="__span-30-63"><a id="__codelineno-30-63" name="__codelineno-30-63"></a>        // send all the remaining value
+</span><span id="__span-30-64"><a id="__codelineno-30-64" name="__codelineno-30-64"></a>        sendRawMessage(msg.endCell(), 64);
+</span><span id="__span-30-65"><a id="__codelineno-30-65" name="__codelineno-30-65"></a>        return;
+</span><span id="__span-30-66"><a id="__codelineno-30-66" name="__codelineno-30-66"></a>    }
+</span><span id="__span-30-67"><a id="__codelineno-30-67" name="__codelineno-30-67"></a>
+</span><span id="__span-30-68"><a id="__codelineno-30-68" name="__codelineno-30-68"></a>    if (op == OP_UNLOCK) {
+</span><span id="__span-30-69"><a id="__codelineno-30-69" name="__codelineno-30-69"></a>        ctxLocked = false;
+</span><span id="__span-30-70"><a id="__codelineno-30-70" name="__codelineno-30-70"></a>        saveData();
+</span><span id="__span-30-71"><a id="__codelineno-30-71" name="__codelineno-30-71"></a>        return;
+</span><span id="__span-30-72"><a id="__codelineno-30-72" name="__codelineno-30-72"></a>    }
+</span><span id="__span-30-73"><a id="__codelineno-30-73" name="__codelineno-30-73"></a>
+</span><span id="__span-30-74"><a id="__codelineno-30-74" name="__codelineno-30-74"></a>    throw 0xffff; // if the message contains an op that is not known to this contract, we throw
+</span><span id="__span-30-75"><a id="__codelineno-30-75" name="__codelineno-30-75"></a>}
+</span><span id="__span-30-76"><a id="__codelineno-30-76" name="__codelineno-30-76"></a>
+</span><span id="__span-30-77"><a id="__codelineno-30-77" name="__codelineno-30-77"></a>// get methods are a means to conveniently read contract data using, for example, HTTP APIs
+</span><span id="__span-30-78"><a id="__codelineno-30-78" name="__codelineno-30-78"></a>// note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+</span><span id="__span-30-79"><a id="__codelineno-30-79" name="__codelineno-30-79"></a>
+</span><span id="__span-30-80"><a id="__codelineno-30-80" name="__codelineno-30-80"></a>get locked(): bool {
+</span><span id="__span-30-81"><a id="__codelineno-30-81" name="__codelineno-30-81"></a>    loadData();
+</span><span id="__span-30-82"><a id="__codelineno-30-82" name="__codelineno-30-82"></a>    return ctxLocked;
+</span><span id="__span-30-83"><a id="__codelineno-30-83" name="__codelineno-30-83"></a>}
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p>发送 <code>OP_UNLOCK</code> 对应的操作码即可解锁。</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeUint</span><span class="p">(</span><span class="mh">0xf0fd50bb</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">).</span><span class="nx">endCell</span><span class="p">(),</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s1">&#39;0.005&#39;</span><span class="p">));</span>
+</span></code></pre></div></td></tr></table></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月8日 21:24:41">2025年3月8日 21:24:41</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月10日 23:02:13">2025年3月10日 23:02:13</span>
       
     
   </small>
