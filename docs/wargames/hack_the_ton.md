@@ -667,7 +667,7 @@ tags:
 - 提供正确的密码即可解锁，需要解析[初始化消息](https://testnet.tonviewer.com/transaction/fbeffd0aceed689c0da7bf2ed2c5544b541f2b8c00e57c49a06616d123ede22f)
 - 部署 Tact 编写的合约，函数 `init()` 的参数包含在 init data 中，并将在部署附带的第一次合约调用中根据 init data 更新存储
 - 使用 `pytoniq-core` 解析初始数据
-    - 尽管可以使用较小的 `Int` 表示形式来减少存储开销，但 TVM 仅对 257 位整型进行操作。因此，init data 中的整型参数均为 257 位
+    - 尽管可以使用较小的 `Int` 表示形式来减少存储开销，但 TVM 仅对 257 位整型进行操作。因此，init data 中的整型参数均为 257 位有符号整数
 
     ```py
     from pytoniq_core import Cell, Slice
@@ -898,10 +898,375 @@ tags:
     }
     ```
 
-- 检查完后取回合约中的 TON
+- 检查结束后取回合约中的 TON
 
     ```js
     > await contract.send(player, {value: toNano("0.008")}, "swap tokens to ton");
     > await contract.send(player, {value: toNano("0.005")}, "withdraw");
     ```
+
+## 8. COIN
+
+> To complete the level, guess 10 times in a row which side the coin will land on.
+
+??? note "CoinLevel"
+
+    ```js
+    import "@stdlib/deploy";
+    import "../messages";
+    message Flip {
+        side: Bool;
+    }
+
+    contract Contract {
+        nonce: Int;
+        init(nonce: Int){
+            self.nonce = nonce;
+        }
+    }
+
+    contract CoinLevel with Deployable {
+        player: Address;
+        nonce: Int;
+        consecutiveWins: Int = 0;
+        flipsCount: Int = 0;
+        init(player: Address, nonce: Int){
+            self.player = player;
+            self.nonce = nonce;
+        }
+
+        receive(msg: Flip){
+            let init: StateInit = initOf Contract(self.flipsCount);
+            let contractAddress: Address = contractAddress(init);
+            let side = contractAddress.asSlice().asCell().hash() % 2 == 0;
+            self.consecutiveWins = msg.side == side ? self.consecutiveWins + 1 : 0;
+            self.flipsCount += 1;
+        }
+
+        receive("check"){
+            send(SendParameters{
+                to: sender(),
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: CheckLevelResult{
+                name: "coin",
+                completed: self.consecutiveWins >= 10
+                }.toCell()
+            }
+            );
+        }
+
+        get fun consecutiveWins(): Int {
+            return self.consecutiveWins;
+        }
+
+        get fun flipsCount(): Int {
+            return self.flipsCount;
+        }
+    }
+    ```
+
+- 需要连续猜对 10 次，借助辅助合约预测结果并发送消息
+    - 题目合约使用的 Tact 编译器版本为 1.4.4。不同编译器版本可能产生不同的编译结果，最好**使用相同版本的编译器**，保证 `initOf` 在辅助合约中的计算结果与实例合约相同
+
+    ```js
+    import "@stdlib/deploy";
+
+    message Flip {
+        side: Bool;
+    }
+    message Guess {
+        cnt: Int as uint32;
+        start: Int as uint32;
+        target: Address;
+    }
+
+    contract Contract {
+        nonce: Int;
+        init(nonce: Int){
+            self.nonce = nonce;
+        }
+    }
+
+    contract Guesser with Deployable {
+
+        receive(msg: Guess) {
+            let p: Int = msg.start;
+            while(p < msg.start + msg.cnt) {
+                let init: StateInit = initOf Contract(p);
+                let contractAddress: Address = contractAddress(init);
+                let side: Bool = contractAddress.asSlice().asCell().hash() % 2 == 0;
+                send(SendParameters{
+                    to: msg.target,
+                    value: ton("0.01"),
+                    mode: SendDefaultMode + SendPayGasSeparately,
+                    body: Flip{
+                        side: side
+                    }.toCell()
+                });
+                p += 1;
+            }
+        }
+    }
+    ```
+
+## 9. GATEKEEPER
+
+> Unlock the contract below to complete this level.
+
+??? note "GatekeeperLevel"
+
+    ```js
+    import "@stdlib/deploy";
+    import "../messages";
+    message Unlock {
+        a: Int;
+        b: Int;
+    }
+
+    contract GatekeeperLevel with Deployable {
+        player: Address;
+        nonce: Int;
+        locked: Bool = true;
+        init(player: Address, nonce: Int){
+            self.player = player;
+            self.nonce = nonce;
+        }
+
+        receive(msg: Unlock){
+            require((sender().asSlice().asCell().hash() ^ ((msg.a << 2) + msg.b)) ==
+                myAddress().asSlice().asCell().hash(),
+            "Check failed."
+            );
+            self.locked = false;
+        }
+
+        receive("check"){
+            send(SendParameters{
+                to: sender(),
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: CheckLevelResult{
+                name: "gatekeeper",
+                completed: !self.locked
+                }.toCell()
+            }
+            );
+        }
+
+        get fun locked(): Bool {
+            return self.locked;
+        }
+    }
+    ```
+
+- 解锁需要 `sender().asSlice().asCell().hash() ^ ((msg.a << 2) + msg.b)` 的值与 `myAddress().asSlice().asCell().hash()` 相等
+- 获取实例地址的哈希值
+
+    ```js
+    > beginCell().storeAddress(contract.address).endCell().hash().toHex()
+    3036979211fd86c13a1113af157f701ea19eafb8e1d1c36d761c5ff41c99bc80
+    ```
+
+- 由于 `a` 和 `b` 没有限制范围，可以直接将 `a` 设置为 0，`b` 为发送者地址哈希值与实例地址哈希值异或的结果
+
+    ```js
+    > await contract.send(player, {value: toNano('0.01')}, {$$type: 'Unlock', a: 0n, b: 86130810477776835231294161513457632144148633294017539526014373747458502429745n});
+    ```
+
+## 10. BRUTE-FORCE
+
+> Unlock the contract below to complete this level.
+
+??? note "BruteforceLevel"
+
+    ```js
+    import "@stdlib/deploy";
+    import "../messages";
+    message Unlock {
+        a: Int;
+        b: Int;
+        c: Int;
+        d: Int;
+    }
+
+    contract BruteforceLevel with Deployable {
+        player: Address;
+        nonce: Int;
+        locked: Bool = true;
+        x: Int as uint8 = 0;
+        y: Int as uint8 = 0;
+        init(player: Address, nonce: Int){
+            self.player = player;
+            self.nonce = nonce;
+        }
+
+        receive(msg: Unlock){
+            self.x = msg.a + msg.c;
+            self.y = msg.b + msg.d;
+            require((self.x + self.y) == 2, "First check failed.");
+            require((((pow(msg.a, 25) +
+                pow(msg.b, 25)) +
+                pow(msg.c, 25)) +
+                pow(msg.d, 25)) ==
+                1968172103452999492963878188028555943794336458502883276710491621054698698752,
+            "Second check failed."
+            );
+            self.locked = false;
+        }
+
+        receive("check"){
+            send(SendParameters{
+                to: sender(),
+                value: 0,
+                mode: SendRemainingValue,
+                bounce: false,
+                body: CheckLevelResult{
+                name: "bruteforce",
+                completed: !self.locked
+                }.toCell()
+            }
+            );
+        }
+
+        get fun locked(): Bool {
+            return self.locked;
+        }
+    }
+    ```
+
+- 解锁需要提供满足特定条件的四个整数
+    - `(self.x + self.y) == 2` 即 `msg.a + msg.b + msg.c + msg.d == 2`，说明正负整数的绝对值之差为 2，且 `msg.a + msg.c` 和 `msg.b + msg.d` 的结果在 8 位无符号整型的范围内
+    - `(((pow(msg.a, 25) + pow(msg.b, 25)) + pow(msg.c, 25)) + pow(msg.d, 25))` 的结果是一个正整数 `1968172103452999492963878188028555943794336458502883276710491621054698698752`
+- 由此推测出两种可能的情况
+    - `self.x` 为 2，`self.y` 为 0（反之亦同）
+    - `self.x` 和 `self.y` 同为 1
+
+    ```py
+    t = 1968172103452999492963878188028555943794336458502883276710491621054698698752
+    for a in range(2, 3000):
+        c = - (a - 2)
+        r = pow(a, 25) + pow(c, 25)
+        if r == t:
+            print(a, c)
+            break
+        if r > t:
+            break
+    for a in range(1, 3000):
+        for b in range(1, 3000):
+            c, d = - (a - 1), - (b - 1)
+            r = pow(a, 25) + pow(b, 25) + pow(c, 25) + pow(d, 25)
+            if r == t:
+                print(a, b, c, d)
+                break
+        else:
+            continue
+        break
+    ```
+
+- 发送结果到实例合约
+
+    ```js
+    > await contract.send(player, {value: toNano('0.01')}, {$$type: 'Unlock', a: 850, b: 1200, c: -849, d: -1199});
+    ```
+
+## 11. TOLK
+
+> Unlock the contract below to complete this level.
+
+??? note "Tolk"
+
+    ```
+    const OP_UNLOCK = "op::unlock"c; // create an opcode from string using the "c" prefix, this results in 0xf0fd50bb opcode in this case
+
+    // storage variables
+
+    global ctxPlayer: slice;
+    global ctxNonce: int;
+    global ctxLocked: bool;
+
+    // loadData populates storage variables using stored data
+    fun loadData() {
+        var ds = getContractData().beginParse();
+
+        ctxPlayer = ds.loadAddress();
+        ctxNonce = ds.loadUint(32);
+        ctxLocked = ds.loadBool();
+
+        ds.assertEndOfSlice();
+    }
+
+    // saveData stores storage variables as a cell into persistent storage
+    fun saveData() {
+        setContractData(
+            beginCell()
+                .storeSlice(ctxPlayer)
+                .storeUint(ctxNonce, 32)
+                .storeBool(ctxLocked)
+            .endCell()
+        );
+    }
+
+    // onInternalMessage is the main function of the contract and is called when it receives a message from other contracts
+    fun onInternalMessage(myBalance: int, msgValue: int, inMsgFull: cell, inMsgBody: slice) {
+        if (inMsgBody.isEndOfSlice()) { // ignore all empty messages
+            return;
+        }
+
+        var cs: slice = inMsgFull.beginParse();
+        val flags: int = cs.loadUint(4);
+        if (flags & 1) { // ignore all bounced messages
+            return;
+        }
+        val senderAddress: slice = cs.loadAddress();
+
+        loadData(); // here we populate the storage variables
+
+        val op: int = inMsgBody.loadUint(32); // by convention, the first 32 bits of incoming message is the op
+
+        // receive "check" message
+        if (isSliceBitsEqual(inMsgBody, "check")) {
+            // send CheckLevelResult msg
+            val msgBody: cell = beginCell()
+                .storeUint(0x6df37b4d, 32)
+                .storeRef(beginCell().storeSlice("tolk").endCell())
+                .storeBool(!ctxLocked)
+            .endCell();
+            val msg: builder = beginCell()
+                .storeUint(0x18, 6)
+                .storeSlice(senderAddress)
+                .storeCoins(0)
+                .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .storeRef(msgBody);
+                
+            // send all the remaining value
+            sendRawMessage(msg.endCell(), 64);
+            return;
+        }
+
+        if (op == OP_UNLOCK) {
+            ctxLocked = false;
+            saveData();
+            return;
+        }
+
+        throw 0xffff; // if the message contains an op that is not known to this contract, we throw
+    }
+
+    // get methods are a means to conveniently read contract data using, for example, HTTP APIs
+    // note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+
+    get locked(): bool {
+        loadData();
+        return ctxLocked;
+    }
+    ```
+
+发送 `OP_UNLOCK` 对应的操作码即可解锁。
+
+```js
+> await contract.send(player, beginCell().storeUint(0xf0fd50bb, 32).endCell(), toNano('0.005'));
+```
 
