@@ -3804,6 +3804,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#12-upgrade" class="md-nav__link">
+    12. UPGRADE
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4083,6 +4090,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#12-upgrade" class="md-nav__link">
+    12. UPGRADE
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4116,6 +4130,8 @@
         <a href="#ton" class="blogging-tag"><code>#ton</code></a>
 
         <a href="#tact" class="blogging-tag"><code>#tact</code></a>
+
+        <a href="#tolk" class="blogging-tag"><code>#tolk</code></a>
 
     </div>
 
@@ -6411,13 +6427,239 @@
 <p>发送 <code>OP_UNLOCK</code> 对应的操作码即可解锁。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeUint</span><span class="p">(</span><span class="mh">0xf0fd50bb</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">).</span><span class="nx">endCell</span><span class="p">(),</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s1">&#39;0.005&#39;</span><span class="p">));</span>
 </span></code></pre></div></td></tr></table></div>
+<h2 id="12-upgrade">12. UPGRADE<a class="headerlink" href="#12-upgrade" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Unlock the contract below to complete this level.</p>
+</blockquote>
+<details class="note">
+<summary>Upgrade</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-32-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-32-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-32-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-32-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-32-10">10</a></span>
+<span class="normal"><a href="#__codelineno-32-11">11</a></span>
+<span class="normal"><a href="#__codelineno-32-12">12</a></span>
+<span class="normal"><a href="#__codelineno-32-13">13</a></span>
+<span class="normal"><a href="#__codelineno-32-14">14</a></span>
+<span class="normal"><a href="#__codelineno-32-15">15</a></span>
+<span class="normal"><a href="#__codelineno-32-16">16</a></span>
+<span class="normal"><a href="#__codelineno-32-17">17</a></span>
+<span class="normal"><a href="#__codelineno-32-18">18</a></span>
+<span class="normal"><a href="#__codelineno-32-19">19</a></span>
+<span class="normal"><a href="#__codelineno-32-20">20</a></span>
+<span class="normal"><a href="#__codelineno-32-21">21</a></span>
+<span class="normal"><a href="#__codelineno-32-22">22</a></span>
+<span class="normal"><a href="#__codelineno-32-23">23</a></span>
+<span class="normal"><a href="#__codelineno-32-24">24</a></span>
+<span class="normal"><a href="#__codelineno-32-25">25</a></span>
+<span class="normal"><a href="#__codelineno-32-26">26</a></span>
+<span class="normal"><a href="#__codelineno-32-27">27</a></span>
+<span class="normal"><a href="#__codelineno-32-28">28</a></span>
+<span class="normal"><a href="#__codelineno-32-29">29</a></span>
+<span class="normal"><a href="#__codelineno-32-30">30</a></span>
+<span class="normal"><a href="#__codelineno-32-31">31</a></span>
+<span class="normal"><a href="#__codelineno-32-32">32</a></span>
+<span class="normal"><a href="#__codelineno-32-33">33</a></span>
+<span class="normal"><a href="#__codelineno-32-34">34</a></span>
+<span class="normal"><a href="#__codelineno-32-35">35</a></span>
+<span class="normal"><a href="#__codelineno-32-36">36</a></span>
+<span class="normal"><a href="#__codelineno-32-37">37</a></span>
+<span class="normal"><a href="#__codelineno-32-38">38</a></span>
+<span class="normal"><a href="#__codelineno-32-39">39</a></span>
+<span class="normal"><a href="#__codelineno-32-40">40</a></span>
+<span class="normal"><a href="#__codelineno-32-41">41</a></span>
+<span class="normal"><a href="#__codelineno-32-42">42</a></span>
+<span class="normal"><a href="#__codelineno-32-43">43</a></span>
+<span class="normal"><a href="#__codelineno-32-44">44</a></span>
+<span class="normal"><a href="#__codelineno-32-45">45</a></span>
+<span class="normal"><a href="#__codelineno-32-46">46</a></span>
+<span class="normal"><a href="#__codelineno-32-47">47</a></span>
+<span class="normal"><a href="#__codelineno-32-48">48</a></span>
+<span class="normal"><a href="#__codelineno-32-49">49</a></span>
+<span class="normal"><a href="#__codelineno-32-50">50</a></span>
+<span class="normal"><a href="#__codelineno-32-51">51</a></span>
+<span class="normal"><a href="#__codelineno-32-52">52</a></span>
+<span class="normal"><a href="#__codelineno-32-53">53</a></span>
+<span class="normal"><a href="#__codelineno-32-54">54</a></span>
+<span class="normal"><a href="#__codelineno-32-55">55</a></span>
+<span class="normal"><a href="#__codelineno-32-56">56</a></span>
+<span class="normal"><a href="#__codelineno-32-57">57</a></span>
+<span class="normal"><a href="#__codelineno-32-58">58</a></span>
+<span class="normal"><a href="#__codelineno-32-59">59</a></span>
+<span class="normal"><a href="#__codelineno-32-60">60</a></span>
+<span class="normal"><a href="#__codelineno-32-61">61</a></span>
+<span class="normal"><a href="#__codelineno-32-62">62</a></span>
+<span class="normal"><a href="#__codelineno-32-63">63</a></span>
+<span class="normal"><a href="#__codelineno-32-64">64</a></span>
+<span class="normal"><a href="#__codelineno-32-65">65</a></span>
+<span class="normal"><a href="#__codelineno-32-66">66</a></span>
+<span class="normal"><a href="#__codelineno-32-67">67</a></span>
+<span class="normal"><a href="#__codelineno-32-68">68</a></span>
+<span class="normal"><a href="#__codelineno-32-69">69</a></span>
+<span class="normal"><a href="#__codelineno-32-70">70</a></span>
+<span class="normal"><a href="#__codelineno-32-71">71</a></span>
+<span class="normal"><a href="#__codelineno-32-72">72</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1"></a>const OP_UPGRADE = &quot;op::upgrade&quot;c; // create an opcode from string using the &quot;c&quot; prefix, this results in 0xdbfaf817 opcode in this case
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2"></a>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3"></a>// storage variables
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4"></a>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5"></a>global ctxPlayer: slice;
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6"></a>global ctxNonce: int;
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7"></a>global ctxLocked: bool;
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8"></a>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9"></a>// loadData populates storage variables using stored data
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10"></a>fun loadData() {
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11"></a>    var ds = getContractData().beginParse();
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12"></a>
+</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13"></a>    ctxPlayer = ds.loadAddress();
+</span><span id="__span-32-14"><a id="__codelineno-32-14" name="__codelineno-32-14"></a>    ctxNonce = ds.loadUint(32);
+</span><span id="__span-32-15"><a id="__codelineno-32-15" name="__codelineno-32-15"></a>    ctxLocked = ds.loadBool();
+</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16"></a>
+</span><span id="__span-32-17"><a id="__codelineno-32-17" name="__codelineno-32-17"></a>    ds.assertEndOfSlice();
+</span><span id="__span-32-18"><a id="__codelineno-32-18" name="__codelineno-32-18"></a>}
+</span><span id="__span-32-19"><a id="__codelineno-32-19" name="__codelineno-32-19"></a>
+</span><span id="__span-32-20"><a id="__codelineno-32-20" name="__codelineno-32-20"></a>// onInternalMessage is the main function of the contract and is called when it receives a message from other contracts
+</span><span id="__span-32-21"><a id="__codelineno-32-21" name="__codelineno-32-21"></a>fun onInternalMessage(myBalance: int, msgValue: int, inMsgFull: cell, inMsgBody: slice) {
+</span><span id="__span-32-22"><a id="__codelineno-32-22" name="__codelineno-32-22"></a>    if (inMsgBody.isEndOfSlice()) { // ignore all empty messages
+</span><span id="__span-32-23"><a id="__codelineno-32-23" name="__codelineno-32-23"></a>        return;
+</span><span id="__span-32-24"><a id="__codelineno-32-24" name="__codelineno-32-24"></a>    }
+</span><span id="__span-32-25"><a id="__codelineno-32-25" name="__codelineno-32-25"></a>
+</span><span id="__span-32-26"><a id="__codelineno-32-26" name="__codelineno-32-26"></a>    var cs: slice = inMsgFull.beginParse();
+</span><span id="__span-32-27"><a id="__codelineno-32-27" name="__codelineno-32-27"></a>    val flags: int = cs.loadUint(4);
+</span><span id="__span-32-28"><a id="__codelineno-32-28" name="__codelineno-32-28"></a>    if (flags &amp; 1) { // ignore all bounced messages
+</span><span id="__span-32-29"><a id="__codelineno-32-29" name="__codelineno-32-29"></a>        return;
+</span><span id="__span-32-30"><a id="__codelineno-32-30" name="__codelineno-32-30"></a>    }
+</span><span id="__span-32-31"><a id="__codelineno-32-31" name="__codelineno-32-31"></a>    val senderAddress: slice = cs.loadAddress();
+</span><span id="__span-32-32"><a id="__codelineno-32-32" name="__codelineno-32-32"></a>
+</span><span id="__span-32-33"><a id="__codelineno-32-33" name="__codelineno-32-33"></a>    loadData(); // here we populate the storage variables
+</span><span id="__span-32-34"><a id="__codelineno-32-34" name="__codelineno-32-34"></a>
+</span><span id="__span-32-35"><a id="__codelineno-32-35" name="__codelineno-32-35"></a>    val op: int = inMsgBody.loadUint(32); // by convention, the first 32 bits of incoming message is the op
+</span><span id="__span-32-36"><a id="__codelineno-32-36" name="__codelineno-32-36"></a>
+</span><span id="__span-32-37"><a id="__codelineno-32-37" name="__codelineno-32-37"></a>    // receive &quot;check&quot; message
+</span><span id="__span-32-38"><a id="__codelineno-32-38" name="__codelineno-32-38"></a>    if (isSliceBitsEqual(inMsgBody, &quot;check&quot;)) {
+</span><span id="__span-32-39"><a id="__codelineno-32-39" name="__codelineno-32-39"></a>        // send CheckLevelResult msg
+</span><span id="__span-32-40"><a id="__codelineno-32-40" name="__codelineno-32-40"></a>        val msgBody: cell = beginCell()
+</span><span id="__span-32-41"><a id="__codelineno-32-41" name="__codelineno-32-41"></a>            .storeUint(0x6df37b4d, 32)
+</span><span id="__span-32-42"><a id="__codelineno-32-42" name="__codelineno-32-42"></a>            .storeRef(beginCell().storeSlice(&quot;upgrade&quot;).endCell())
+</span><span id="__span-32-43"><a id="__codelineno-32-43" name="__codelineno-32-43"></a>            .storeBool(!ctxLocked)
+</span><span id="__span-32-44"><a id="__codelineno-32-44" name="__codelineno-32-44"></a>        .endCell();
+</span><span id="__span-32-45"><a id="__codelineno-32-45" name="__codelineno-32-45"></a>        val msg: builder = beginCell()
+</span><span id="__span-32-46"><a id="__codelineno-32-46" name="__codelineno-32-46"></a>            .storeUint(0x18, 6)
+</span><span id="__span-32-47"><a id="__codelineno-32-47" name="__codelineno-32-47"></a>            .storeSlice(senderAddress)
+</span><span id="__span-32-48"><a id="__codelineno-32-48" name="__codelineno-32-48"></a>            .storeCoins(0)
+</span><span id="__span-32-49"><a id="__codelineno-32-49" name="__codelineno-32-49"></a>            .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+</span><span id="__span-32-50"><a id="__codelineno-32-50" name="__codelineno-32-50"></a>            .storeRef(msgBody);
+</span><span id="__span-32-51"><a id="__codelineno-32-51" name="__codelineno-32-51"></a>
+</span><span id="__span-32-52"><a id="__codelineno-32-52" name="__codelineno-32-52"></a>        // send all the remaining value
+</span><span id="__span-32-53"><a id="__codelineno-32-53" name="__codelineno-32-53"></a>        sendRawMessage(msg.endCell(), 64);
+</span><span id="__span-32-54"><a id="__codelineno-32-54" name="__codelineno-32-54"></a>        return;
+</span><span id="__span-32-55"><a id="__codelineno-32-55" name="__codelineno-32-55"></a>    }
+</span><span id="__span-32-56"><a id="__codelineno-32-56" name="__codelineno-32-56"></a>
+</span><span id="__span-32-57"><a id="__codelineno-32-57" name="__codelineno-32-57"></a>    if (op == OP_UPGRADE) {
+</span><span id="__span-32-58"><a id="__codelineno-32-58" name="__codelineno-32-58"></a>        val code: cell = inMsgBody.loadRef();
+</span><span id="__span-32-59"><a id="__codelineno-32-59" name="__codelineno-32-59"></a>        setContractCodePostponed(code);
+</span><span id="__span-32-60"><a id="__codelineno-32-60" name="__codelineno-32-60"></a>        return;
+</span><span id="__span-32-61"><a id="__codelineno-32-61" name="__codelineno-32-61"></a>    }
+</span><span id="__span-32-62"><a id="__codelineno-32-62" name="__codelineno-32-62"></a>
+</span><span id="__span-32-63"><a id="__codelineno-32-63" name="__codelineno-32-63"></a>    throw 0xffff; // if the message contains an op that is not known to this contract, we throw
+</span><span id="__span-32-64"><a id="__codelineno-32-64" name="__codelineno-32-64"></a>}
+</span><span id="__span-32-65"><a id="__codelineno-32-65" name="__codelineno-32-65"></a>
+</span><span id="__span-32-66"><a id="__codelineno-32-66" name="__codelineno-32-66"></a>// get methods are a means to conveniently read contract data using, for example, HTTP APIs
+</span><span id="__span-32-67"><a id="__codelineno-32-67" name="__codelineno-32-67"></a>// note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+</span><span id="__span-32-68"><a id="__codelineno-32-68" name="__codelineno-32-68"></a>
+</span><span id="__span-32-69"><a id="__codelineno-32-69" name="__codelineno-32-69"></a>get locked(): bool {
+</span><span id="__span-32-70"><a id="__codelineno-32-70" name="__codelineno-32-70"></a>    loadData();
+</span><span id="__span-32-71"><a id="__codelineno-32-71" name="__codelineno-32-71"></a>    return ctxLocked;
+</span><span id="__span-32-72"><a id="__codelineno-32-72" name="__codelineno-32-72"></a>}
+</span></code></pre></div></td></tr></table></div>
+</details>
+<ul>
+<li>
+<p>向合约发送 <code>OP_UPGRADE</code> 消息可以更新合约的代码</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
+<span class="normal"><a href="#__codelineno-33-2">2</a></span>
+<span class="normal"><a href="#__codelineno-33-3">3</a></span>
+<span class="normal"><a href="#__codelineno-33-4">4</a></span>
+<span class="normal"><a href="#__codelineno-33-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1"></a>if (op == OP_UPGRADE) {
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2"></a>    val code: cell = inMsgBody.loadRef();
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3"></a>    setContractCodePostponed(code);
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4"></a>    return;
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5"></a>}
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>可以在新代码中增加更新存储的逻辑</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
+<span class="normal"><a href="#__codelineno-34-2">2</a></span>
+<span class="normal"><a href="#__codelineno-34-3">3</a></span>
+<span class="normal"><a href="#__codelineno-34-4">4</a></span>
+<span class="normal"><a href="#__codelineno-34-5">5</a></span>
+<span class="normal"><a href="#__codelineno-34-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1"></a>if (op == 0x12345678) {
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2"></a>    setContractData(
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3"></a>        beginCell().storeSlice(ctxPlayer).storeUint(ctxNonce, 32).storeBool(false).endCell()
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4"></a>    );
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5"></a>    return;
+</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6"></a>}
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>更新代码并解锁</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-35-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-35-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-35-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-35-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-35-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-35-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-35-10">10</a></span>
+<span class="normal"><a href="#__codelineno-35-11">11</a></span>
+<span class="normal"><a href="#__codelineno-35-12">12</a></span>
+<span class="normal"><a href="#__codelineno-35-13">13</a></span>
+<span class="normal"><a href="#__codelineno-35-14">14</a></span>
+<span class="normal"><a href="#__codelineno-35-15">15</a></span>
+<span class="normal"><a href="#__codelineno-35-16">16</a></span>
+<span class="normal"><a href="#__codelineno-35-17">17</a></span>
+<span class="normal"><a href="#__codelineno-35-18">18</a></span>
+<span class="normal"><a href="#__codelineno-35-19">19</a></span>
+<span class="normal"><a href="#__codelineno-35-20">20</a></span>
+<span class="normal"><a href="#__codelineno-35-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">run</span><span class="p">(</span><span class="nx">provider</span><span class="o">:</span><span class="w"> </span><span class="nx">NetworkProvider</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ui</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">ui</span><span class="p">();</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3"></a>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Address</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">args</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">&#39;old address&#39;</span><span class="p">));</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5"></a>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">oldContract</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">provider</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">Upgrade</span><span class="p">.</span><span class="nx">createFromAddress</span><span class="p">(</span><span class="nx">address</span><span class="p">));</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7"></a>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">oldContract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="w">        </span><span class="nx">provider</span><span class="p">.</span><span class="nx">sender</span><span class="p">(),</span>
+</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10"></a><span class="w">        </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeUint</span><span class="p">(</span><span class="mh">0xdbfaf817</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">).</span><span class="nx">storeRef</span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">compile</span><span class="p">(</span><span class="s2">&quot;Upgrade&quot;</span><span class="p">)).</span><span class="nx">endCell</span><span class="p">(),</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11"></a><span class="w">        </span><span class="nx">toNano</span><span class="p">(</span><span class="s1">&#39;0.05&#39;</span><span class="p">)</span>
+</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12"></a><span class="w">    </span><span class="p">);</span>
+</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13"></a>
+</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14"></a><span class="w">    </span><span class="nx">sleep</span><span class="p">(</span><span class="mf">10000</span><span class="p">);</span>
+</span><span id="__span-35-15"><a id="__codelineno-35-15" name="__codelineno-35-15"></a>
+</span><span id="__span-35-16"><a id="__codelineno-35-16" name="__codelineno-35-16"></a><span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">oldContract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span>
+</span><span id="__span-35-17"><a id="__codelineno-35-17" name="__codelineno-35-17"></a><span class="w">        </span><span class="nx">provider</span><span class="p">.</span><span class="nx">sender</span><span class="p">(),</span>
+</span><span id="__span-35-18"><a id="__codelineno-35-18" name="__codelineno-35-18"></a><span class="w">        </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeUint</span><span class="p">(</span><span class="mh">0x12345678</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">).</span><span class="nx">endCell</span><span class="p">(),</span>
+</span><span id="__span-35-19"><a id="__codelineno-35-19" name="__codelineno-35-19"></a><span class="w">        </span><span class="nx">toNano</span><span class="p">(</span><span class="s1">&#39;0.01&#39;</span><span class="p">)</span>
+</span><span id="__span-35-20"><a id="__codelineno-35-20" name="__codelineno-35-20"></a><span class="w">    </span><span class="p">);</span>
+</span><span id="__span-35-21"><a id="__codelineno-35-21" name="__codelineno-35-21"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月10日 23:02:13">2025年3月10日 23:02:13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月20日 16:50:56">2025年3月20日 16:50:56</span>
       
     
   </small>
