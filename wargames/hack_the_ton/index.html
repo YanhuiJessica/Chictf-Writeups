@@ -3838,6 +3838,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#15-logical" class="md-nav__link">
+    15. LOGICAL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-seed" class="md-nav__link">
+    16. SEED
+  </a>
+  
+    <nav class="md-nav" aria-label="16. SEED">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references_5" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4141,6 +4168,33 @@
         
           <li class="md-nav__item">
   <a href="#references_4" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-logical" class="md-nav__link">
+    15. LOGICAL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-seed" class="md-nav__link">
+    16. SEED
+  </a>
+  
+    <nav class="md-nav" aria-label="16. SEED">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references_5" class="md-nav__link">
     References
   </a>
   
@@ -7340,13 +7394,560 @@
 <ul>
 <li><a href="https://docs.ton.org/v3/documentation/smart-contracts/func/docs/statements#variable-declaration">Variable declaration</a></li>
 </ul>
+<h2 id="15-logical">15. LOGICAL<a class="headerlink" href="#15-logical" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Unlock the contract below to complete this level.</p>
+</blockquote>
+<details class="note">
+<summary>Logical</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-43-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-43-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-43-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-43-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-43-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-43-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-43-10">10</a></span>
+<span class="normal"><a href="#__codelineno-43-11">11</a></span>
+<span class="normal"><a href="#__codelineno-43-12">12</a></span>
+<span class="normal"><a href="#__codelineno-43-13">13</a></span>
+<span class="normal"><a href="#__codelineno-43-14">14</a></span>
+<span class="normal"><a href="#__codelineno-43-15">15</a></span>
+<span class="normal"><a href="#__codelineno-43-16">16</a></span>
+<span class="normal"><a href="#__codelineno-43-17">17</a></span>
+<span class="normal"><a href="#__codelineno-43-18">18</a></span>
+<span class="normal"><a href="#__codelineno-43-19">19</a></span>
+<span class="normal"><a href="#__codelineno-43-20">20</a></span>
+<span class="normal"><a href="#__codelineno-43-21">21</a></span>
+<span class="normal"><a href="#__codelineno-43-22">22</a></span>
+<span class="normal"><a href="#__codelineno-43-23">23</a></span>
+<span class="normal"><a href="#__codelineno-43-24">24</a></span>
+<span class="normal"><a href="#__codelineno-43-25">25</a></span>
+<span class="normal"><a href="#__codelineno-43-26">26</a></span>
+<span class="normal"><a href="#__codelineno-43-27">27</a></span>
+<span class="normal"><a href="#__codelineno-43-28">28</a></span>
+<span class="normal"><a href="#__codelineno-43-29">29</a></span>
+<span class="normal"><a href="#__codelineno-43-30">30</a></span>
+<span class="normal"><a href="#__codelineno-43-31">31</a></span>
+<span class="normal"><a href="#__codelineno-43-32">32</a></span>
+<span class="normal"><a href="#__codelineno-43-33">33</a></span>
+<span class="normal"><a href="#__codelineno-43-34">34</a></span>
+<span class="normal"><a href="#__codelineno-43-35">35</a></span>
+<span class="normal"><a href="#__codelineno-43-36">36</a></span>
+<span class="normal"><a href="#__codelineno-43-37">37</a></span>
+<span class="normal"><a href="#__codelineno-43-38">38</a></span>
+<span class="normal"><a href="#__codelineno-43-39">39</a></span>
+<span class="normal"><a href="#__codelineno-43-40">40</a></span>
+<span class="normal"><a href="#__codelineno-43-41">41</a></span>
+<span class="normal"><a href="#__codelineno-43-42">42</a></span>
+<span class="normal"><a href="#__codelineno-43-43">43</a></span>
+<span class="normal"><a href="#__codelineno-43-44">44</a></span>
+<span class="normal"><a href="#__codelineno-43-45">45</a></span>
+<span class="normal"><a href="#__codelineno-43-46">46</a></span>
+<span class="normal"><a href="#__codelineno-43-47">47</a></span>
+<span class="normal"><a href="#__codelineno-43-48">48</a></span>
+<span class="normal"><a href="#__codelineno-43-49">49</a></span>
+<span class="normal"><a href="#__codelineno-43-50">50</a></span>
+<span class="normal"><a href="#__codelineno-43-51">51</a></span>
+<span class="normal"><a href="#__codelineno-43-52">52</a></span>
+<span class="normal"><a href="#__codelineno-43-53">53</a></span>
+<span class="normal"><a href="#__codelineno-43-54">54</a></span>
+<span class="normal"><a href="#__codelineno-43-55">55</a></span>
+<span class="normal"><a href="#__codelineno-43-56">56</a></span>
+<span class="normal"><a href="#__codelineno-43-57">57</a></span>
+<span class="normal"><a href="#__codelineno-43-58">58</a></span>
+<span class="normal"><a href="#__codelineno-43-59">59</a></span>
+<span class="normal"><a href="#__codelineno-43-60">60</a></span>
+<span class="normal"><a href="#__codelineno-43-61">61</a></span>
+<span class="normal"><a href="#__codelineno-43-62">62</a></span>
+<span class="normal"><a href="#__codelineno-43-63">63</a></span>
+<span class="normal"><a href="#__codelineno-43-64">64</a></span>
+<span class="normal"><a href="#__codelineno-43-65">65</a></span>
+<span class="normal"><a href="#__codelineno-43-66">66</a></span>
+<span class="normal"><a href="#__codelineno-43-67">67</a></span>
+<span class="normal"><a href="#__codelineno-43-68">68</a></span>
+<span class="normal"><a href="#__codelineno-43-69">69</a></span>
+<span class="normal"><a href="#__codelineno-43-70">70</a></span>
+<span class="normal"><a href="#__codelineno-43-71">71</a></span>
+<span class="normal"><a href="#__codelineno-43-72">72</a></span>
+<span class="normal"><a href="#__codelineno-43-73">73</a></span>
+<span class="normal"><a href="#__codelineno-43-74">74</a></span>
+<span class="normal"><a href="#__codelineno-43-75">75</a></span>
+<span class="normal"><a href="#__codelineno-43-76">76</a></span>
+<span class="normal"><a href="#__codelineno-43-77">77</a></span>
+<span class="normal"><a href="#__codelineno-43-78">78</a></span>
+<span class="normal"><a href="#__codelineno-43-79">79</a></span>
+<span class="normal"><a href="#__codelineno-43-80">80</a></span>
+<span class="normal"><a href="#__codelineno-43-81">81</a></span>
+<span class="normal"><a href="#__codelineno-43-82">82</a></span>
+<span class="normal"><a href="#__codelineno-43-83">83</a></span>
+<span class="normal"><a href="#__codelineno-43-84">84</a></span>
+<span class="normal"><a href="#__codelineno-43-85">85</a></span>
+<span class="normal"><a href="#__codelineno-43-86">86</a></span>
+<span class="normal"><a href="#__codelineno-43-87">87</a></span>
+<span class="normal"><a href="#__codelineno-43-88">88</a></span>
+<span class="normal"><a href="#__codelineno-43-89">89</a></span>
+<span class="normal"><a href="#__codelineno-43-90">90</a></span>
+<span class="normal"><a href="#__codelineno-43-91">91</a></span>
+<span class="normal"><a href="#__codelineno-43-92">92</a></span>
+<span class="normal"><a href="#__codelineno-43-93">93</a></span>
+<span class="normal"><a href="#__codelineno-43-94">94</a></span>
+<span class="normal"><a href="#__codelineno-43-95">95</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1"></a>// storage variables
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2"></a>
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3"></a>global ctxPlayer: slice;
+</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4"></a>global ctxNonce: int;
+</span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5"></a>global ctxLocked: bool;
+</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6"></a>global ctxPrevLogicalTime: int;
+</span><span id="__span-43-7"><a id="__codelineno-43-7" name="__codelineno-43-7"></a>global ctxLogicalTimeDiff: int;
+</span><span id="__span-43-8"><a id="__codelineno-43-8" name="__codelineno-43-8"></a>
+</span><span id="__span-43-9"><a id="__codelineno-43-9" name="__codelineno-43-9"></a>// loadData populates storage variables using stored data
+</span><span id="__span-43-10"><a id="__codelineno-43-10" name="__codelineno-43-10"></a>fun loadData() {
+</span><span id="__span-43-11"><a id="__codelineno-43-11" name="__codelineno-43-11"></a>    var ds = getContractData().beginParse();
+</span><span id="__span-43-12"><a id="__codelineno-43-12" name="__codelineno-43-12"></a>
+</span><span id="__span-43-13"><a id="__codelineno-43-13" name="__codelineno-43-13"></a>    ctxPlayer = ds.loadAddress();
+</span><span id="__span-43-14"><a id="__codelineno-43-14" name="__codelineno-43-14"></a>    ctxNonce = ds.loadUint(32);
+</span><span id="__span-43-15"><a id="__codelineno-43-15" name="__codelineno-43-15"></a>    ctxLocked = ds.loadBool();
+</span><span id="__span-43-16"><a id="__codelineno-43-16" name="__codelineno-43-16"></a>    ctxPrevLogicalTime = ds.loadUint(64);
+</span><span id="__span-43-17"><a id="__codelineno-43-17" name="__codelineno-43-17"></a>    ctxLogicalTimeDiff = ds.loadUint(32);
+</span><span id="__span-43-18"><a id="__codelineno-43-18" name="__codelineno-43-18"></a>
+</span><span id="__span-43-19"><a id="__codelineno-43-19" name="__codelineno-43-19"></a>    ds.assertEndOfSlice();
+</span><span id="__span-43-20"><a id="__codelineno-43-20" name="__codelineno-43-20"></a>}
+</span><span id="__span-43-21"><a id="__codelineno-43-21" name="__codelineno-43-21"></a>
+</span><span id="__span-43-22"><a id="__codelineno-43-22" name="__codelineno-43-22"></a>// saveData stores storage variables as a cell into persistent storage
+</span><span id="__span-43-23"><a id="__codelineno-43-23" name="__codelineno-43-23"></a>fun saveData() {
+</span><span id="__span-43-24"><a id="__codelineno-43-24" name="__codelineno-43-24"></a>    setContractData(
+</span><span id="__span-43-25"><a id="__codelineno-43-25" name="__codelineno-43-25"></a>        beginCell()
+</span><span id="__span-43-26"><a id="__codelineno-43-26" name="__codelineno-43-26"></a>            .storeSlice(ctxPlayer)
+</span><span id="__span-43-27"><a id="__codelineno-43-27" name="__codelineno-43-27"></a>            .storeUint(ctxNonce, 32)
+</span><span id="__span-43-28"><a id="__codelineno-43-28" name="__codelineno-43-28"></a>            .storeBool(ctxLocked)
+</span><span id="__span-43-29"><a id="__codelineno-43-29" name="__codelineno-43-29"></a>            .storeUint(ctxPrevLogicalTime, 64)
+</span><span id="__span-43-30"><a id="__codelineno-43-30" name="__codelineno-43-30"></a>            .storeUint(ctxLogicalTimeDiff, 32)
+</span><span id="__span-43-31"><a id="__codelineno-43-31" name="__codelineno-43-31"></a>        .endCell()
+</span><span id="__span-43-32"><a id="__codelineno-43-32" name="__codelineno-43-32"></a>    );
+</span><span id="__span-43-33"><a id="__codelineno-43-33" name="__codelineno-43-33"></a>}
+</span><span id="__span-43-34"><a id="__codelineno-43-34" name="__codelineno-43-34"></a>
+</span><span id="__span-43-35"><a id="__codelineno-43-35" name="__codelineno-43-35"></a>// onInternalMessage is the main function of the contract and is called when it receives a message from other contracts
+</span><span id="__span-43-36"><a id="__codelineno-43-36" name="__codelineno-43-36"></a>fun onInternalMessage(myBalance: int, msgValue: int, inMsgFull: cell, inMsgBody: slice) {
+</span><span id="__span-43-37"><a id="__codelineno-43-37" name="__codelineno-43-37"></a>    if (inMsgBody.isEndOfSlice()) { // ignore all empty messages
+</span><span id="__span-43-38"><a id="__codelineno-43-38" name="__codelineno-43-38"></a>        return;
+</span><span id="__span-43-39"><a id="__codelineno-43-39" name="__codelineno-43-39"></a>    }
+</span><span id="__span-43-40"><a id="__codelineno-43-40" name="__codelineno-43-40"></a>
+</span><span id="__span-43-41"><a id="__codelineno-43-41" name="__codelineno-43-41"></a>    var cs: slice = inMsgFull.beginParse();
+</span><span id="__span-43-42"><a id="__codelineno-43-42" name="__codelineno-43-42"></a>    val flags: int = cs.loadUint(4);
+</span><span id="__span-43-43"><a id="__codelineno-43-43" name="__codelineno-43-43"></a>    if (flags &amp; 1) { // ignore all bounced messages
+</span><span id="__span-43-44"><a id="__codelineno-43-44" name="__codelineno-43-44"></a>        return;
+</span><span id="__span-43-45"><a id="__codelineno-43-45" name="__codelineno-43-45"></a>    }
+</span><span id="__span-43-46"><a id="__codelineno-43-46" name="__codelineno-43-46"></a>    val senderAddress: slice = cs.loadAddress();
+</span><span id="__span-43-47"><a id="__codelineno-43-47" name="__codelineno-43-47"></a>
+</span><span id="__span-43-48"><a id="__codelineno-43-48" name="__codelineno-43-48"></a>    loadData(); // here we populate the storage variables
+</span><span id="__span-43-49"><a id="__codelineno-43-49" name="__codelineno-43-49"></a>
+</span><span id="__span-43-50"><a id="__codelineno-43-50" name="__codelineno-43-50"></a>    inMsgBody.skipBits(32); // by convention, the first 32 bits of incoming message is the op
+</span><span id="__span-43-51"><a id="__codelineno-43-51" name="__codelineno-43-51"></a>
+</span><span id="__span-43-52"><a id="__codelineno-43-52" name="__codelineno-43-52"></a>    // receive &quot;check&quot; message
+</span><span id="__span-43-53"><a id="__codelineno-43-53" name="__codelineno-43-53"></a>    if (isSliceBitsEqual(inMsgBody, &quot;check&quot;)) {
+</span><span id="__span-43-54"><a id="__codelineno-43-54" name="__codelineno-43-54"></a>        // send CheckLevelResult msg
+</span><span id="__span-43-55"><a id="__codelineno-43-55" name="__codelineno-43-55"></a>        val msgBody: cell = beginCell()
+</span><span id="__span-43-56"><a id="__codelineno-43-56" name="__codelineno-43-56"></a>            .storeUint(0x6df37b4d, 32)
+</span><span id="__span-43-57"><a id="__codelineno-43-57" name="__codelineno-43-57"></a>            .storeRef(beginCell().storeSlice(&quot;logical&quot;).endCell())
+</span><span id="__span-43-58"><a id="__codelineno-43-58" name="__codelineno-43-58"></a>            .storeBool(!ctxLocked)
+</span><span id="__span-43-59"><a id="__codelineno-43-59" name="__codelineno-43-59"></a>        .endCell();
+</span><span id="__span-43-60"><a id="__codelineno-43-60" name="__codelineno-43-60"></a>        val msg: builder = beginCell()
+</span><span id="__span-43-61"><a id="__codelineno-43-61" name="__codelineno-43-61"></a>            .storeUint(0x18, 6)
+</span><span id="__span-43-62"><a id="__codelineno-43-62" name="__codelineno-43-62"></a>            .storeSlice(senderAddress)
+</span><span id="__span-43-63"><a id="__codelineno-43-63" name="__codelineno-43-63"></a>            .storeCoins(0)
+</span><span id="__span-43-64"><a id="__codelineno-43-64" name="__codelineno-43-64"></a>            .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+</span><span id="__span-43-65"><a id="__codelineno-43-65" name="__codelineno-43-65"></a>            .storeRef(msgBody);
+</span><span id="__span-43-66"><a id="__codelineno-43-66" name="__codelineno-43-66"></a>
+</span><span id="__span-43-67"><a id="__codelineno-43-67" name="__codelineno-43-67"></a>        // send all the remaining value
+</span><span id="__span-43-68"><a id="__codelineno-43-68" name="__codelineno-43-68"></a>        sendRawMessage(msg.endCell(), 64);
+</span><span id="__span-43-69"><a id="__codelineno-43-69" name="__codelineno-43-69"></a>        return;
+</span><span id="__span-43-70"><a id="__codelineno-43-70" name="__codelineno-43-70"></a>    }
+</span><span id="__span-43-71"><a id="__codelineno-43-71" name="__codelineno-43-71"></a>
+</span><span id="__span-43-72"><a id="__codelineno-43-72" name="__codelineno-43-72"></a>    if (getLogicalTime() - ctxPrevLogicalTime == ctxLogicalTimeDiff) {
+</span><span id="__span-43-73"><a id="__codelineno-43-73" name="__codelineno-43-73"></a>        ctxLocked = false;
+</span><span id="__span-43-74"><a id="__codelineno-43-74" name="__codelineno-43-74"></a>    }
+</span><span id="__span-43-75"><a id="__codelineno-43-75" name="__codelineno-43-75"></a>    ctxPrevLogicalTime = getLogicalTime();
+</span><span id="__span-43-76"><a id="__codelineno-43-76" name="__codelineno-43-76"></a>    saveData();
+</span><span id="__span-43-77"><a id="__codelineno-43-77" name="__codelineno-43-77"></a>}
+</span><span id="__span-43-78"><a id="__codelineno-43-78" name="__codelineno-43-78"></a>
+</span><span id="__span-43-79"><a id="__codelineno-43-79" name="__codelineno-43-79"></a>// get methods are a means to conveniently read contract data using, for example, HTTP APIs
+</span><span id="__span-43-80"><a id="__codelineno-43-80" name="__codelineno-43-80"></a>// note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+</span><span id="__span-43-81"><a id="__codelineno-43-81" name="__codelineno-43-81"></a>
+</span><span id="__span-43-82"><a id="__codelineno-43-82" name="__codelineno-43-82"></a>get locked(): bool {
+</span><span id="__span-43-83"><a id="__codelineno-43-83" name="__codelineno-43-83"></a>    loadData();
+</span><span id="__span-43-84"><a id="__codelineno-43-84" name="__codelineno-43-84"></a>    return ctxLocked;
+</span><span id="__span-43-85"><a id="__codelineno-43-85" name="__codelineno-43-85"></a>}
+</span><span id="__span-43-86"><a id="__codelineno-43-86" name="__codelineno-43-86"></a>
+</span><span id="__span-43-87"><a id="__codelineno-43-87" name="__codelineno-43-87"></a>get prevLogicalTime(): int {
+</span><span id="__span-43-88"><a id="__codelineno-43-88" name="__codelineno-43-88"></a>    loadData();
+</span><span id="__span-43-89"><a id="__codelineno-43-89" name="__codelineno-43-89"></a>    return ctxPrevLogicalTime;
+</span><span id="__span-43-90"><a id="__codelineno-43-90" name="__codelineno-43-90"></a>}
+</span><span id="__span-43-91"><a id="__codelineno-43-91" name="__codelineno-43-91"></a>
+</span><span id="__span-43-92"><a id="__codelineno-43-92" name="__codelineno-43-92"></a>get logicalTimeDiff(): int {
+</span><span id="__span-43-93"><a id="__codelineno-43-93" name="__codelineno-43-93"></a>    loadData();
+</span><span id="__span-43-94"><a id="__codelineno-43-94" name="__codelineno-43-94"></a>    return ctxLogicalTimeDiff;
+</span><span id="__span-43-95"><a id="__codelineno-43-95" name="__codelineno-43-95"></a>}
+</span></code></pre></div></td></tr></table></div>
+</details>
+<ul>
+<li>
+<p>当当前交易的逻辑时间和上一交易的逻辑时间之差为 <code>ctxLogicalTimeDiff</code> 时，可以解锁</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1">1</a></span>
+<span class="normal"><a href="#__codelineno-44-2">2</a></span>
+<span class="normal"><a href="#__codelineno-44-3">3</a></span>
+<span class="normal"><a href="#__codelineno-44-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1"></a>if (getLogicalTime() - ctxPrevLogicalTime == ctxLogicalTimeDiff) {
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2"></a>    ctxLocked = false;
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3"></a>}
+</span><span id="__span-44-4"><a id="__codelineno-44-4" name="__codelineno-44-4"></a>ctxPrevLogicalTime = getLogicalTime();
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>获取 <code>ctxLogicalTimeDiff</code> 的值</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
+<span class="normal"><a href="#__codelineno-45-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">getLogicalTimeDiff</span><span class="p">();</span>
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="mi">1n</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>由于要求逻辑时间差仅为 1，可以从同一个合约中发出两条消息</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-46-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-46-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-46-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-46-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-46-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-46-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-46-10">10</a></span>
+<span class="normal"><a href="#__codelineno-46-11">11</a></span>
+<span class="normal"><a href="#__codelineno-46-12">12</a></span>
+<span class="normal"><a href="#__codelineno-46-13">13</a></span>
+<span class="normal"><a href="#__codelineno-46-14">14</a></span>
+<span class="normal"><a href="#__codelineno-46-15">15</a></span>
+<span class="normal"><a href="#__codelineno-46-16">16</a></span>
+<span class="normal"><a href="#__codelineno-46-17">17</a></span>
+<span class="normal"><a href="#__codelineno-46-18">18</a></span>
+<span class="normal"><a href="#__codelineno-46-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@stdlib/deploy&quot;</span><span class="p">;</span>
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2"></a>
+</span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3"></a><span class="nx">message</span><span class="w"> </span><span class="nx">Send</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-46-4"><a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="w">    </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-46-5"><a id="__codelineno-46-5" name="__codelineno-46-5"></a><span class="p">}</span>
+</span><span id="__span-46-6"><a id="__codelineno-46-6" name="__codelineno-46-6"></a>
+</span><span id="__span-46-7"><a id="__codelineno-46-7" name="__codelineno-46-7"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">MultiMessageSender</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">Deployable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-46-8"><a id="__codelineno-46-8" name="__codelineno-46-8"></a>
+</span><span id="__span-46-9"><a id="__codelineno-46-9" name="__codelineno-46-9"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">Send</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-46-10"><a id="__codelineno-46-10" name="__codelineno-46-10"></a><span class="w">        </span><span class="nx">repeat</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-46-11"><a id="__codelineno-46-11" name="__codelineno-46-11"></a><span class="w">            </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-46-12"><a id="__codelineno-46-12" name="__codelineno-46-12"></a><span class="w">                </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span>
+</span><span id="__span-46-13"><a id="__codelineno-46-13" name="__codelineno-46-13"></a><span class="w">                </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">ton</span><span class="p">(</span><span class="s2">&quot;0.008&quot;</span><span class="p">),</span>
+</span><span id="__span-46-14"><a id="__codelineno-46-14" name="__codelineno-46-14"></a><span class="w">                </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendDefaultMode</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">SendPayGasSeparately</span><span class="p">,</span>
+</span><span id="__span-46-15"><a id="__codelineno-46-15" name="__codelineno-46-15"></a><span class="w">                </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeUint</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">).</span><span class="nx">endCell</span><span class="p">()</span>
+</span><span id="__span-46-16"><a id="__codelineno-46-16" name="__codelineno-46-16"></a><span class="w">            </span><span class="p">});</span>
+</span><span id="__span-46-17"><a id="__codelineno-46-17" name="__codelineno-46-17"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-46-18"><a id="__codelineno-46-18" name="__codelineno-46-18"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-46-19"><a id="__codelineno-46-19" name="__codelineno-46-19"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h2 id="16-seed">16. SEED<a class="headerlink" href="#16-seed" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Unlock the contract below to complete this level.</p>
+</blockquote>
+<details class="note">
+<summary>Seed</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-47-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-47-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-47-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-47-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-47-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-47-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-47-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-47-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-47-10">10</a></span>
+<span class="normal"><a href="#__codelineno-47-11">11</a></span>
+<span class="normal"><a href="#__codelineno-47-12">12</a></span>
+<span class="normal"><a href="#__codelineno-47-13">13</a></span>
+<span class="normal"><a href="#__codelineno-47-14">14</a></span>
+<span class="normal"><a href="#__codelineno-47-15">15</a></span>
+<span class="normal"><a href="#__codelineno-47-16">16</a></span>
+<span class="normal"><a href="#__codelineno-47-17">17</a></span>
+<span class="normal"><a href="#__codelineno-47-18">18</a></span>
+<span class="normal"><a href="#__codelineno-47-19">19</a></span>
+<span class="normal"><a href="#__codelineno-47-20">20</a></span>
+<span class="normal"><a href="#__codelineno-47-21">21</a></span>
+<span class="normal"><a href="#__codelineno-47-22">22</a></span>
+<span class="normal"><a href="#__codelineno-47-23">23</a></span>
+<span class="normal"><a href="#__codelineno-47-24">24</a></span>
+<span class="normal"><a href="#__codelineno-47-25">25</a></span>
+<span class="normal"><a href="#__codelineno-47-26">26</a></span>
+<span class="normal"><a href="#__codelineno-47-27">27</a></span>
+<span class="normal"><a href="#__codelineno-47-28">28</a></span>
+<span class="normal"><a href="#__codelineno-47-29">29</a></span>
+<span class="normal"><a href="#__codelineno-47-30">30</a></span>
+<span class="normal"><a href="#__codelineno-47-31">31</a></span>
+<span class="normal"><a href="#__codelineno-47-32">32</a></span>
+<span class="normal"><a href="#__codelineno-47-33">33</a></span>
+<span class="normal"><a href="#__codelineno-47-34">34</a></span>
+<span class="normal"><a href="#__codelineno-47-35">35</a></span>
+<span class="normal"><a href="#__codelineno-47-36">36</a></span>
+<span class="normal"><a href="#__codelineno-47-37">37</a></span>
+<span class="normal"><a href="#__codelineno-47-38">38</a></span>
+<span class="normal"><a href="#__codelineno-47-39">39</a></span>
+<span class="normal"><a href="#__codelineno-47-40">40</a></span>
+<span class="normal"><a href="#__codelineno-47-41">41</a></span>
+<span class="normal"><a href="#__codelineno-47-42">42</a></span>
+<span class="normal"><a href="#__codelineno-47-43">43</a></span>
+<span class="normal"><a href="#__codelineno-47-44">44</a></span>
+<span class="normal"><a href="#__codelineno-47-45">45</a></span>
+<span class="normal"><a href="#__codelineno-47-46">46</a></span>
+<span class="normal"><a href="#__codelineno-47-47">47</a></span>
+<span class="normal"><a href="#__codelineno-47-48">48</a></span>
+<span class="normal"><a href="#__codelineno-47-49">49</a></span>
+<span class="normal"><a href="#__codelineno-47-50">50</a></span>
+<span class="normal"><a href="#__codelineno-47-51">51</a></span>
+<span class="normal"><a href="#__codelineno-47-52">52</a></span>
+<span class="normal"><a href="#__codelineno-47-53">53</a></span>
+<span class="normal"><a href="#__codelineno-47-54">54</a></span>
+<span class="normal"><a href="#__codelineno-47-55">55</a></span>
+<span class="normal"><a href="#__codelineno-47-56">56</a></span>
+<span class="normal"><a href="#__codelineno-47-57">57</a></span>
+<span class="normal"><a href="#__codelineno-47-58">58</a></span>
+<span class="normal"><a href="#__codelineno-47-59">59</a></span>
+<span class="normal"><a href="#__codelineno-47-60">60</a></span>
+<span class="normal"><a href="#__codelineno-47-61">61</a></span>
+<span class="normal"><a href="#__codelineno-47-62">62</a></span>
+<span class="normal"><a href="#__codelineno-47-63">63</a></span>
+<span class="normal"><a href="#__codelineno-47-64">64</a></span>
+<span class="normal"><a href="#__codelineno-47-65">65</a></span>
+<span class="normal"><a href="#__codelineno-47-66">66</a></span>
+<span class="normal"><a href="#__codelineno-47-67">67</a></span>
+<span class="normal"><a href="#__codelineno-47-68">68</a></span>
+<span class="normal"><a href="#__codelineno-47-69">69</a></span>
+<span class="normal"><a href="#__codelineno-47-70">70</a></span>
+<span class="normal"><a href="#__codelineno-47-71">71</a></span>
+<span class="normal"><a href="#__codelineno-47-72">72</a></span>
+<span class="normal"><a href="#__codelineno-47-73">73</a></span>
+<span class="normal"><a href="#__codelineno-47-74">74</a></span>
+<span class="normal"><a href="#__codelineno-47-75">75</a></span>
+<span class="normal"><a href="#__codelineno-47-76">76</a></span>
+<span class="normal"><a href="#__codelineno-47-77">77</a></span>
+<span class="normal"><a href="#__codelineno-47-78">78</a></span>
+<span class="normal"><a href="#__codelineno-47-79">79</a></span>
+<span class="normal"><a href="#__codelineno-47-80">80</a></span>
+<span class="normal"><a href="#__codelineno-47-81">81</a></span>
+<span class="normal"><a href="#__codelineno-47-82">82</a></span>
+<span class="normal"><a href="#__codelineno-47-83">83</a></span>
+<span class="normal"><a href="#__codelineno-47-84">84</a></span>
+<span class="normal"><a href="#__codelineno-47-85">85</a></span>
+<span class="normal"><a href="#__codelineno-47-86">86</a></span>
+<span class="normal"><a href="#__codelineno-47-87">87</a></span>
+<span class="normal"><a href="#__codelineno-47-88">88</a></span>
+<span class="normal"><a href="#__codelineno-47-89">89</a></span>
+<span class="normal"><a href="#__codelineno-47-90">90</a></span>
+<span class="normal"><a href="#__codelineno-47-91">91</a></span>
+<span class="normal"><a href="#__codelineno-47-92">92</a></span>
+<span class="normal"><a href="#__codelineno-47-93">93</a></span>
+<span class="normal"><a href="#__codelineno-47-94">94</a></span>
+<span class="normal"><a href="#__codelineno-47-95">95</a></span>
+<span class="normal"><a href="#__codelineno-47-96">96</a></span>
+<span class="normal"><a href="#__codelineno-47-97">97</a></span>
+<span class="normal"><a href="#__codelineno-47-98">98</a></span>
+<span class="normal"><a href="#__codelineno-47-99">99</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1"></a>const OP_UNLOCK = &quot;op::unlock&quot;c; // create an opcode from string using the &quot;c&quot; prefix, this results in 0xf0fd50bb opcode in this case
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2"></a>
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3"></a>// storage variables
+</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4"></a>
+</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5"></a>global ctxPlayer: slice;
+</span><span id="__span-47-6"><a id="__codelineno-47-6" name="__codelineno-47-6"></a>global ctxNonce: int;
+</span><span id="__span-47-7"><a id="__codelineno-47-7" name="__codelineno-47-7"></a>global ctxLocked: bool;
+</span><span id="__span-47-8"><a id="__codelineno-47-8" name="__codelineno-47-8"></a>global ctxSeed: int;
+</span><span id="__span-47-9"><a id="__codelineno-47-9" name="__codelineno-47-9"></a>
+</span><span id="__span-47-10"><a id="__codelineno-47-10" name="__codelineno-47-10"></a>// loadData populates storage variables using stored data
+</span><span id="__span-47-11"><a id="__codelineno-47-11" name="__codelineno-47-11"></a>fun loadData() {
+</span><span id="__span-47-12"><a id="__codelineno-47-12" name="__codelineno-47-12"></a>    var ds = getContractData().beginParse();
+</span><span id="__span-47-13"><a id="__codelineno-47-13" name="__codelineno-47-13"></a>
+</span><span id="__span-47-14"><a id="__codelineno-47-14" name="__codelineno-47-14"></a>    ctxPlayer = ds.loadAddress();
+</span><span id="__span-47-15"><a id="__codelineno-47-15" name="__codelineno-47-15"></a>    ctxNonce = ds.loadUint(32);
+</span><span id="__span-47-16"><a id="__codelineno-47-16" name="__codelineno-47-16"></a>    ctxLocked = ds.loadBool();
+</span><span id="__span-47-17"><a id="__codelineno-47-17" name="__codelineno-47-17"></a>    ctxSeed = ds.loadUint(256);
+</span><span id="__span-47-18"><a id="__codelineno-47-18" name="__codelineno-47-18"></a>
+</span><span id="__span-47-19"><a id="__codelineno-47-19" name="__codelineno-47-19"></a>    ds.assertEndOfSlice();
+</span><span id="__span-47-20"><a id="__codelineno-47-20" name="__codelineno-47-20"></a>}
+</span><span id="__span-47-21"><a id="__codelineno-47-21" name="__codelineno-47-21"></a>
+</span><span id="__span-47-22"><a id="__codelineno-47-22" name="__codelineno-47-22"></a>// saveData stores storage variables as a cell into persistent storage
+</span><span id="__span-47-23"><a id="__codelineno-47-23" name="__codelineno-47-23"></a>fun saveData() {
+</span><span id="__span-47-24"><a id="__codelineno-47-24" name="__codelineno-47-24"></a>    setContractData(
+</span><span id="__span-47-25"><a id="__codelineno-47-25" name="__codelineno-47-25"></a>        beginCell()
+</span><span id="__span-47-26"><a id="__codelineno-47-26" name="__codelineno-47-26"></a>            .storeSlice(ctxPlayer)
+</span><span id="__span-47-27"><a id="__codelineno-47-27" name="__codelineno-47-27"></a>            .storeUint(ctxNonce, 32)
+</span><span id="__span-47-28"><a id="__codelineno-47-28" name="__codelineno-47-28"></a>            .storeBool(ctxLocked)
+</span><span id="__span-47-29"><a id="__codelineno-47-29" name="__codelineno-47-29"></a>            .storeUint(ctxSeed, 256)
+</span><span id="__span-47-30"><a id="__codelineno-47-30" name="__codelineno-47-30"></a>        .endCell()
+</span><span id="__span-47-31"><a id="__codelineno-47-31" name="__codelineno-47-31"></a>    );
+</span><span id="__span-47-32"><a id="__codelineno-47-32" name="__codelineno-47-32"></a>}
+</span><span id="__span-47-33"><a id="__codelineno-47-33" name="__codelineno-47-33"></a>
+</span><span id="__span-47-34"><a id="__codelineno-47-34" name="__codelineno-47-34"></a>// onInternalMessage is the main function of the contract and is called when it receives a message from other contracts
+</span><span id="__span-47-35"><a id="__codelineno-47-35" name="__codelineno-47-35"></a>fun onInternalMessage(myBalance: int, msgValue: int, inMsgFull: cell, inMsgBody: slice) {
+</span><span id="__span-47-36"><a id="__codelineno-47-36" name="__codelineno-47-36"></a>    if (inMsgBody.isEndOfSlice()) { // ignore all empty messages
+</span><span id="__span-47-37"><a id="__codelineno-47-37" name="__codelineno-47-37"></a>        return;
+</span><span id="__span-47-38"><a id="__codelineno-47-38" name="__codelineno-47-38"></a>    }
+</span><span id="__span-47-39"><a id="__codelineno-47-39" name="__codelineno-47-39"></a>
+</span><span id="__span-47-40"><a id="__codelineno-47-40" name="__codelineno-47-40"></a>    var cs: slice = inMsgFull.beginParse();
+</span><span id="__span-47-41"><a id="__codelineno-47-41" name="__codelineno-47-41"></a>    val flags: int = cs.loadUint(4);
+</span><span id="__span-47-42"><a id="__codelineno-47-42" name="__codelineno-47-42"></a>    if (flags &amp; 1) { // ignore all bounced messages
+</span><span id="__span-47-43"><a id="__codelineno-47-43" name="__codelineno-47-43"></a>        return;
+</span><span id="__span-47-44"><a id="__codelineno-47-44" name="__codelineno-47-44"></a>    }
+</span><span id="__span-47-45"><a id="__codelineno-47-45" name="__codelineno-47-45"></a>    val senderAddress: slice = cs.loadAddress();
+</span><span id="__span-47-46"><a id="__codelineno-47-46" name="__codelineno-47-46"></a>
+</span><span id="__span-47-47"><a id="__codelineno-47-47" name="__codelineno-47-47"></a>    loadData(); // here we populate the storage variables
+</span><span id="__span-47-48"><a id="__codelineno-47-48" name="__codelineno-47-48"></a>
+</span><span id="__span-47-49"><a id="__codelineno-47-49" name="__codelineno-47-49"></a>    val op: int = inMsgBody.loadUint(32); // by convention, the first 32 bits of incoming message is the op
+</span><span id="__span-47-50"><a id="__codelineno-47-50" name="__codelineno-47-50"></a>
+</span><span id="__span-47-51"><a id="__codelineno-47-51" name="__codelineno-47-51"></a>    // receive &quot;check&quot; message
+</span><span id="__span-47-52"><a id="__codelineno-47-52" name="__codelineno-47-52"></a>    if (isSliceBitsEqual(inMsgBody, &quot;check&quot;)) {
+</span><span id="__span-47-53"><a id="__codelineno-47-53" name="__codelineno-47-53"></a>        // send CheckLevelResult msg
+</span><span id="__span-47-54"><a id="__codelineno-47-54" name="__codelineno-47-54"></a>        val msgBody: cell = beginCell()
+</span><span id="__span-47-55"><a id="__codelineno-47-55" name="__codelineno-47-55"></a>            .storeUint(0x6df37b4d, 32)
+</span><span id="__span-47-56"><a id="__codelineno-47-56" name="__codelineno-47-56"></a>            .storeRef(beginCell().storeSlice(&quot;seed&quot;).endCell())
+</span><span id="__span-47-57"><a id="__codelineno-47-57" name="__codelineno-47-57"></a>            .storeBool(!ctxLocked)
+</span><span id="__span-47-58"><a id="__codelineno-47-58" name="__codelineno-47-58"></a>        .endCell();
+</span><span id="__span-47-59"><a id="__codelineno-47-59" name="__codelineno-47-59"></a>        val msg: builder = beginCell()
+</span><span id="__span-47-60"><a id="__codelineno-47-60" name="__codelineno-47-60"></a>            .storeUint(0x18, 6)
+</span><span id="__span-47-61"><a id="__codelineno-47-61" name="__codelineno-47-61"></a>            .storeSlice(senderAddress)
+</span><span id="__span-47-62"><a id="__codelineno-47-62" name="__codelineno-47-62"></a>            .storeCoins(0)
+</span><span id="__span-47-63"><a id="__codelineno-47-63" name="__codelineno-47-63"></a>            .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+</span><span id="__span-47-64"><a id="__codelineno-47-64" name="__codelineno-47-64"></a>            .storeRef(msgBody);
+</span><span id="__span-47-65"><a id="__codelineno-47-65" name="__codelineno-47-65"></a>
+</span><span id="__span-47-66"><a id="__codelineno-47-66" name="__codelineno-47-66"></a>        // send all the remaining value
+</span><span id="__span-47-67"><a id="__codelineno-47-67" name="__codelineno-47-67"></a>        sendRawMessage(msg.endCell(), 64);
+</span><span id="__span-47-68"><a id="__codelineno-47-68" name="__codelineno-47-68"></a>        return;
+</span><span id="__span-47-69"><a id="__codelineno-47-69" name="__codelineno-47-69"></a>    }
+</span><span id="__span-47-70"><a id="__codelineno-47-70" name="__codelineno-47-70"></a>
+</span><span id="__span-47-71"><a id="__codelineno-47-71" name="__codelineno-47-71"></a>    if (op == OP_UNLOCK) {
+</span><span id="__span-47-72"><a id="__codelineno-47-72" name="__codelineno-47-72"></a>        val guess: int = inMsgBody.loadUint(256);
+</span><span id="__span-47-73"><a id="__codelineno-47-73" name="__codelineno-47-73"></a>        if (ctxSeed == 0) {
+</span><span id="__span-47-74"><a id="__codelineno-47-74" name="__codelineno-47-74"></a>            ctxSeed = random();
+</span><span id="__span-47-75"><a id="__codelineno-47-75" name="__codelineno-47-75"></a>        }
+</span><span id="__span-47-76"><a id="__codelineno-47-76" name="__codelineno-47-76"></a>        randomSetSeed(ctxSeed);
+</span><span id="__span-47-77"><a id="__codelineno-47-77" name="__codelineno-47-77"></a>        ctxSeed = random();
+</span><span id="__span-47-78"><a id="__codelineno-47-78" name="__codelineno-47-78"></a>        if (guess == ctxSeed) {
+</span><span id="__span-47-79"><a id="__codelineno-47-79" name="__codelineno-47-79"></a>            ctxLocked = false;
+</span><span id="__span-47-80"><a id="__codelineno-47-80" name="__codelineno-47-80"></a>        }
+</span><span id="__span-47-81"><a id="__codelineno-47-81" name="__codelineno-47-81"></a>        saveData();
+</span><span id="__span-47-82"><a id="__codelineno-47-82" name="__codelineno-47-82"></a>        return;
+</span><span id="__span-47-83"><a id="__codelineno-47-83" name="__codelineno-47-83"></a>    }
+</span><span id="__span-47-84"><a id="__codelineno-47-84" name="__codelineno-47-84"></a>
+</span><span id="__span-47-85"><a id="__codelineno-47-85" name="__codelineno-47-85"></a>    throw 0xffff; // if the message contains an op that is not known to this contract, we throw
+</span><span id="__span-47-86"><a id="__codelineno-47-86" name="__codelineno-47-86"></a>}
+</span><span id="__span-47-87"><a id="__codelineno-47-87" name="__codelineno-47-87"></a>
+</span><span id="__span-47-88"><a id="__codelineno-47-88" name="__codelineno-47-88"></a>// get methods are a means to conveniently read contract data using, for example, HTTP APIs
+</span><span id="__span-47-89"><a id="__codelineno-47-89" name="__codelineno-47-89"></a>// note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+</span><span id="__span-47-90"><a id="__codelineno-47-90" name="__codelineno-47-90"></a>
+</span><span id="__span-47-91"><a id="__codelineno-47-91" name="__codelineno-47-91"></a>get locked(): bool {
+</span><span id="__span-47-92"><a id="__codelineno-47-92" name="__codelineno-47-92"></a>    loadData();
+</span><span id="__span-47-93"><a id="__codelineno-47-93" name="__codelineno-47-93"></a>    return ctxLocked;
+</span><span id="__span-47-94"><a id="__codelineno-47-94" name="__codelineno-47-94"></a>}
+</span><span id="__span-47-95"><a id="__codelineno-47-95" name="__codelineno-47-95"></a>
+</span><span id="__span-47-96"><a id="__codelineno-47-96" name="__codelineno-47-96"></a>get seed(): int {
+</span><span id="__span-47-97"><a id="__codelineno-47-97" name="__codelineno-47-97"></a>    loadData();
+</span><span id="__span-47-98"><a id="__codelineno-47-98" name="__codelineno-47-98"></a>    return ctxSeed;
+</span><span id="__span-47-99"><a id="__codelineno-47-99" name="__codelineno-47-99"></a>}
+</span></code></pre></div></td></tr></table></div>
+</details>
+<ul>
+<li>
+<p>当 <code>ctxSeed</code> 不为 0 时，将直接设置 seed 并获取随机数作为下一个 seed</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-48-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-48-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-48-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-48-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-48-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-48-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-48-10">10</a></span>
+<span class="normal"><a href="#__codelineno-48-11">11</a></span>
+<span class="normal"><a href="#__codelineno-48-12">12</a></span>
+<span class="normal"><a href="#__codelineno-48-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1"></a>if (op == OP_UNLOCK) {
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2"></a>    val guess: int = inMsgBody.loadUint(256);
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3"></a>    if (ctxSeed == 0) {
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4"></a>        ctxSeed = random();
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5"></a>    }
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6"></a>    randomSetSeed(ctxSeed);
+</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7"></a>    ctxSeed = random();
+</span><span id="__span-48-8"><a id="__codelineno-48-8" name="__codelineno-48-8"></a>    if (guess == ctxSeed) {
+</span><span id="__span-48-9"><a id="__codelineno-48-9" name="__codelineno-48-9"></a>        ctxLocked = false;
+</span><span id="__span-48-10"><a id="__codelineno-48-10" name="__codelineno-48-10"></a>    }
+</span><span id="__span-48-11"><a id="__codelineno-48-11" name="__codelineno-48-11"></a>    saveData();
+</span><span id="__span-48-12"><a id="__codelineno-48-12" name="__codelineno-48-12"></a>    return;
+</span><span id="__span-48-13"><a id="__codelineno-48-13" name="__codelineno-48-13"></a>}
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>发送一条消息初始化 seed</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="o">&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">contract</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span><span class="w"> </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeUint</span><span class="p">(</span><span class="mh">0xf0fd50bb</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">).</span><span class="nx">storeUint</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">256</span><span class="p">).</span><span class="nx">endCell</span><span class="p">(),</span><span class="w"> </span><span class="nx">toNano</span><span class="p">(</span><span class="s2">&quot;0.01&quot;</span><span class="p">));</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>在已知 seed 的情况下，可以通过辅助合约获取随机的结果</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-50-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-50-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-50-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-50-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-50-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-50-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-50-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-50-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-50-10">10</a></span>
+<span class="normal"><a href="#__codelineno-50-11">11</a></span>
+<span class="normal"><a href="#__codelineno-50-12">12</a></span>
+<span class="normal"><a href="#__codelineno-50-13">13</a></span>
+<span class="normal"><a href="#__codelineno-50-14">14</a></span>
+<span class="normal"><a href="#__codelineno-50-15">15</a></span>
+<span class="normal"><a href="#__codelineno-50-16">16</a></span>
+<span class="normal"><a href="#__codelineno-50-17">17</a></span>
+<span class="normal"><a href="#__codelineno-50-18">18</a></span>
+<span class="normal"><a href="#__codelineno-50-19">19</a></span>
+<span class="normal"><a href="#__codelineno-50-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1"></a><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@stdlib/deploy&quot;</span><span class="p">;</span>
+</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2"></a>
+</span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3"></a><span class="nx">message</span><span class="w"> </span><span class="nx">Random</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-50-4"><a id="__codelineno-50-4" name="__codelineno-50-4"></a><span class="w">    </span><span class="nx">prevSeed</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">uint256</span><span class="p">;</span>
+</span><span id="__span-50-5"><a id="__codelineno-50-5" name="__codelineno-50-5"></a><span class="w">    </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">;</span>
+</span><span id="__span-50-6"><a id="__codelineno-50-6" name="__codelineno-50-6"></a><span class="p">}</span>
+</span><span id="__span-50-7"><a id="__codelineno-50-7" name="__codelineno-50-7"></a>
+</span><span id="__span-50-8"><a id="__codelineno-50-8" name="__codelineno-50-8"></a><span class="nx">contract</span><span class="w"> </span><span class="nx">Guesser</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">Deployable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-50-9"><a id="__codelineno-50-9" name="__codelineno-50-9"></a>
+</span><span id="__span-50-10"><a id="__codelineno-50-10" name="__codelineno-50-10"></a><span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">msg</span><span class="o">:</span><span class="w"> </span><span class="nx">Random</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-50-11"><a id="__codelineno-50-11" name="__codelineno-50-11"></a><span class="w">        </span><span class="nx">setSeed</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">prevSeed</span><span class="p">);</span>
+</span><span id="__span-50-12"><a id="__codelineno-50-12" name="__codelineno-50-12"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">guess</span><span class="o">:</span><span class="w"> </span><span class="nx">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nativeRandom</span><span class="p">();</span>
+</span><span id="__span-50-13"><a id="__codelineno-50-13" name="__codelineno-50-13"></a><span class="w">        </span><span class="nx">send</span><span class="p">(</span><span class="nx">SendParameters</span><span class="p">{</span>
+</span><span id="__span-50-14"><a id="__codelineno-50-14" name="__codelineno-50-14"></a><span class="w">            </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span>
+</span><span id="__span-50-15"><a id="__codelineno-50-15" name="__codelineno-50-15"></a><span class="w">            </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">ton</span><span class="p">(</span><span class="s2">&quot;0.008&quot;</span><span class="p">),</span>
+</span><span id="__span-50-16"><a id="__codelineno-50-16" name="__codelineno-50-16"></a><span class="w">            </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">SendDefaultMode</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">SendPayGasSeparately</span><span class="p">,</span>
+</span><span id="__span-50-17"><a id="__codelineno-50-17" name="__codelineno-50-17"></a><span class="w">            </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">beginCell</span><span class="p">().</span><span class="nx">storeUint</span><span class="p">(</span><span class="mh">0xf0fd50bb</span><span class="p">,</span><span class="w"> </span><span class="mf">32</span><span class="p">).</span><span class="nx">storeUint</span><span class="p">(</span><span class="nx">guess</span><span class="p">,</span><span class="w"> </span><span class="mf">256</span><span class="p">).</span><span class="nx">endCell</span><span class="p">()</span>
+</span><span id="__span-50-18"><a id="__codelineno-50-18" name="__codelineno-50-18"></a><span class="w">        </span><span class="p">});</span>
+</span><span id="__span-50-19"><a id="__codelineno-50-19" name="__codelineno-50-19"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-50-20"><a id="__codelineno-50-20" name="__codelineno-50-20"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<h3 id="references_5">References<a class="headerlink" href="#references_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://docs.ton.org/v3/guidelines/smart-contracts/security/random-number-generation/">Random number generation</a></li>
+<li><a href="https://docs.tact-lang.org/ref/core-random/#nativerandom">nativeRandom</a></li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月25日 11:46:10">2025年3月25日 11:46:10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月30日 22:21:02">2025年3月30日 22:21:02</span>
       
     
   </small>
