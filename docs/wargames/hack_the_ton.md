@@ -7,6 +7,7 @@ tags:
     - tact
     - tolk
     - func
+    - fift
 ---
 
 ## 0. INTRODUCTION
@@ -2050,3 +2051,510 @@ tags:
 
 - [Random number generation](https://docs.ton.org/v3/guidelines/smart-contracts/security/random-number-generation/)
 - [nativeRandom](https://docs.tact-lang.org/ref/core-random/#nativerandom)
+
+## 17. TOKEN
+
+> You will beat this level if you manage to acquire tokens amount equivalent to total token supply.
+
+??? note "Token"
+
+    ```
+    import "@stdlib/tvm-dicts"
+
+    const OP_MINT = "op::mint"c; // create an opcode from string using the "c" prefix, this results in 0xecad15c4 opcode in this case
+    const OP_TRANSFER = "op::transfer"c; // create an opcode from string using the "c" prefix, this results in 0x3ee943f1 opcode in this case
+
+    // storage variables
+
+    global ctxPlayer: slice;
+    global ctxNonce: int;
+    global ctxOwner: slice;
+    global ctxBalances: cell;
+    global ctxTotalSupply: int;
+
+    // loadData populates storage variables using stored data
+    fun loadData() {
+        var ds = getContractData().beginParse();
+
+        ctxPlayer = ds.loadAddress();
+        ctxNonce = ds.loadUint(32);
+        ctxOwner = ds.loadAddress();
+        ctxBalances = ds.loadDict();
+        ctxTotalSupply = ds.loadUint(256);
+
+        ds.assertEndOfSlice();
+    }
+
+    // saveData stores storage variables as a cell into persistent storage
+    fun saveData() {
+        setContractData(
+            beginCell()
+                .storeSlice(ctxPlayer)
+                .storeUint(ctxNonce, 32)
+                .storeSlice(ctxOwner)
+                .storeDict(ctxBalances)
+                .storeUint(ctxTotalSupply, 256)
+            .endCell()
+        );
+    }
+
+    fun getBalance(balances: cell, account: slice): int {
+        var (_, value: slice, _, isFound: bool) = balances.prefixDictGet(account.getRemainingBitsCount(), account);
+        if (!isFound) {
+            return 0;
+        }
+        return value.loadUint(256);
+    }
+
+    fun setBalance(mutate self: cell, account: slice, amount: int): void {
+        // will throw if amount is negative
+        val isSuccess: bool = self.prefixDictSet(account.getRemainingBitsCount(), account, beginCell().storeUint(amount, 256).endCell().beginParse());
+        assert(isSuccess, 501);
+    }
+
+    fun mint(balances: cell, to: slice, amount: int): cell {
+        var toBalance: int = getBalance(balances, to);
+
+        toBalance += amount;
+    
+        balances.setBalance(to, toBalance);
+        return balances;
+    }
+
+    fun transfer(balances: cell, from: slice, to: slice, amount: int): cell {
+        var fromBalance: int = getBalance(balances, from);
+        var toBalance: int = getBalance(balances, to);
+    
+        fromBalance -= amount;
+        toBalance += amount;
+
+        assert(fromBalance > 0, 502);
+    
+        balances.setBalance(from, fromBalance);
+        balances.setBalance(to, toBalance);
+        return balances;
+    }
+
+    // onInternalMessage is the main function of the contract and is called when it receives a message from other contracts
+    fun onInternalMessage(myBalance: int, msgValue: int, inMsgFull: cell, inMsgBody: slice) {
+        if (inMsgBody.isEndOfSlice()) { // ignore all empty messages
+            return;
+        }
+
+        var cs: slice = inMsgFull.beginParse();
+        val flags: int = cs.loadUint(4);
+        if (flags & 1) { // ignore all bounced messages
+            return;
+        }
+        val senderAddress: slice = cs.loadAddress();
+
+        loadData(); // here we populate the storage variables
+
+        val op: int = inMsgBody.loadUint(32); // by convention, the first 32 bits of incoming message is the op
+
+        // receive "check" message
+        if (isSliceBitsEqual(inMsgBody, "check")) {
+            // send CheckLevelResult msg
+            val msgBody: cell = beginCell()
+                .storeUint(0x6df37b4d, 32)
+                .storeRef(beginCell().storeSlice("token").endCell())
+                .storeBool(getBalance(ctxBalances, ctxPlayer) == ctxTotalSupply)
+            .endCell();
+            val msg: builder = beginCell()
+                .storeUint(0x18, 6)
+                .storeSlice(senderAddress)
+                .storeCoins(0)
+                .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .storeRef(msgBody);
+                
+            // send all the remaining value
+            sendRawMessage(msg.endCell(), 64);
+            return;
+        }
+
+        if (op == OP_MINT) {
+            assert(isSliceBitsEqual(senderAddress, ctxOwner), 503);
+            val to: slice = inMsgBody.loadAddress();
+            val amount: int = inMsgBody.loadInt(256);
+            ctxTotalSupply += amount;
+            ctxBalances = mint(ctxBalances, to, amount);
+            saveData();
+            return;
+        }
+
+        if (op == OP_TRANSFER) {
+            val to: slice = inMsgBody.loadAddress();
+            val amount: int = inMsgBody.loadInt(256);
+            ctxBalances = transfer(ctxBalances, senderAddress, to, amount);
+            saveData();
+            return;
+        }
+
+        throw 0xffff; // if the message contains an op that is not known to this contract, we throw
+    }
+
+    // get methods are a means to conveniently read contract data using, for example, HTTP APIs
+    // note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+
+    get owner(): slice {
+        loadData();
+        return ctxOwner;
+    }
+
+    get balanceOf(account: slice): int {
+        loadData();
+        return getBalance(ctxBalances, account);
+    }
+
+    get totalSupply(): int {
+        loadData();
+        return ctxTotalSupply;
+    }
+    ```
+
+- 需要让代币余额与总供应量相同
+
+    ```
+    // send CheckLevelResult msg
+    val msgBody: cell = beginCell()
+        .storeUint(0x6df37b4d, 32)
+        .storeRef(beginCell().storeSlice("token").endCell())
+        .storeBool(getBalance(ctxBalances, ctxPlayer) == ctxTotalSupply)
+    .endCell();
+    ```
+
+- 获取初始数据
+
+    ```js
+    > await contract.getTotalSupply();
+    1000000n
+    > await contract.getBalanceOf(player.address);
+    0n
+    ```
+
+- 初始代币余额为 0。操作 `OP_TRANSFER` 使用 `loadInt()` 解析要转移的代币数量，即 `amount` 可以为负数，能够增加发送者的代币余额
+
+    ```
+    if (op == OP_TRANSFER) {
+        val to: slice = inMsgBody.loadAddress();
+        val amount: int = inMsgBody.loadInt(256);
+        ctxBalances = transfer(ctxBalances, senderAddress, to, amount);
+        saveData();
+        return;
+    }
+
+    fun transfer(balances: cell, from: slice, to: slice, amount: int): cell {
+        // ...
+    
+        fromBalance -= amount;
+        toBalance += amount;
+
+        assert(fromBalance > 0, 502);
+    
+        // ...
+    }
+    ```
+
+- 进行代币转移
+
+    ```js
+    > await contract.send(player, beginCell().storeUint(0x3ee943f1, 32).storeAddress(contract.address).storeInt(-1000000n, 256).endCell(), toNano("0.02"));
+    ```
+
+## 18. JACKPOT
+
+> You will beat this level if you manage to reduce its balance to 0.
+
+??? note "Jackpot"
+
+    ```c
+    #include "../imports/stdlib.fc";
+
+    ;; storage variables
+
+    global slice ctx_player;
+    global int ctx_nonce;
+    global cell ctx_balances;
+
+    ;; load_data populates storage variables using stored data
+    () load_data() impure {
+        var ds = get_data().begin_parse();
+
+        ctx_player = ds~load_msg_addr();
+        ctx_nonce = ds~load_uint(32);
+        ctx_balances = ds~load_dict();
+
+        ds.end_parse();
+    }
+
+    ;; save_data stores storage variables as a cell into persistent storage
+    () save_data() impure {
+        set_data(
+            begin_cell()
+                .store_slice(ctx_player)
+                .store_uint(ctx_nonce, 32)
+                .store_dict(ctx_balances)
+            .end_cell()
+        );
+    }
+
+    ;; recv_internal is the main function of the contract and is called when it receives a message from other contracts
+    () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+        if (in_msg_body.slice_empty?()) { ;; ignore all empty messages
+            return ();
+        }
+
+        slice cs = in_msg_full.begin_parse();
+        int flags = cs~load_uint(4);
+        if (flags & 1) { ;; ignore all bounced messages
+            return ();
+        }
+        slice sender_address = cs~load_msg_addr();
+        (int wc, int sender) = parse_std_addr(sender_address);
+        throw_unless(501, wc == 0);
+
+        load_data(); ;; here we populate the storage variables
+
+        int op = in_msg_body~load_uint(32); ;; by convention, the first 32 bits of incoming message is the op
+
+        if (equal_slice_bits(in_msg_body, "check")) { ;; receive "check" message
+            ;; send CheckLevelResult msg
+            cell msg_body = begin_cell()
+                .store_uint(0x6df37b4d, 32)
+                .store_ref(begin_cell().store_slice("jackpot").end_cell())
+                .store_int(my_balance - msg_value == 0, 1)
+            .end_cell();
+            builder msg = begin_cell()
+                .store_uint(0x18, 6)
+                .store_slice(sender_address)
+                .store_coins(0)
+                .store_uint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .store_ref(msg_body);
+                
+            ;; send all the remaining value
+            send_raw_message(msg.end_cell(), 64);
+            return ();
+        }
+
+        if (op == 0) { ;; deposit
+            int fee = 10000000;
+            int balance = max(msg_value - fee, 0);
+            (_, slice old_balance_slice, int found?) = ctx_balances.udict_delete_get?(256, sender);
+            if (found?) {
+                balance += old_balance_slice~load_coins();
+            }
+            ctx_balances~udict_set_builder(256, sender, begin_cell().store_coins(balance));
+            save_data();
+            return ();
+        }
+
+        if (op == 1) { ;; withdraw
+            (_, slice old_balance_slice, int found?) = ctx_balances.udict_delete_get?(256, sender);
+            throw_unless(502, found?);
+            int balance = old_balance_slice~load_coins();
+            int withdraw_amount = in_msg_body~load_coins();
+            throw_unless(503, balance >= withdraw_amount);
+            balance -= withdraw_amount;
+            if (balance > 0) {
+                ctx_balances~udict_set_builder(256, sender, begin_cell().store_coins(balance));
+            }
+            var msg = begin_cell()
+                .store_uint(0x18, 6)
+                .store_slice(sender_address)
+                .store_coins(withdraw_amount)
+                .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+            .end_cell();
+            send_raw_message(msg, 64 + 2);
+            save_data();
+            return ();
+        }
+
+        throw(0xffff); ;; if the message contains an op that is not known to this contract, we throw
+    }
+
+    ;; get methods are a means to conveniently read contract data using, for example, HTTP APIs
+    ;; they are marked with method_id
+    ;; note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+
+    int balance_of(slice account_address) method_id {
+        load_data();
+        (_, int account) = parse_std_addr(account_address);
+        (slice value, int found?) = ctx_balances.udict_get?(256, account);
+        ifnot (found?) {
+            return 0;
+        }
+        return value~load_coins();
+    }
+
+    int balance() method_id {
+        [int value, _] = get_balance();
+        return value;
+    }
+    ```
+
+- 操作 `withdraw` 使用了非修改方法 `udict_delete_get?` 获取了旧的余额，但修改后的字典没有赋值给 `ctx_balances`。如果 `withdraw_amount` 恰好等于 `balance`，`ctx_balances` 将不会被更新
+
+    ```c
+    if (op == 1) { ;; withdraw
+        (_, slice old_balance_slice, int found?) = ctx_balances.udict_delete_get?(256, sender);
+        throw_unless(502, found?);
+        int balance = old_balance_slice~load_coins();
+        int withdraw_amount = in_msg_body~load_coins();
+        throw_unless(503, balance >= withdraw_amount);
+        balance -= withdraw_amount;
+        if (balance > 0) {
+            ctx_balances~udict_set_builder(256, sender, begin_cell().store_coins(balance));
+        }
+        ;; [...]
+        save_data();
+        return ();
+    }
+    ```
+
+- 可以在一次 deposit 之后，进行多次 withdraw
+
+    ```js
+    > await contract.send(player, beginCell().storeUint(0, 32).endCell(), toNano("0.05"));
+    > await contract.getBalanceOf(player.address);
+    40000000n
+    > await contract.send(player, beginCell().storeUint(1, 32).storeCoins(40000000n).endCell(), toNano("0.05"));
+    // 根据合约余额决定接下来的 withdraw_amount
+    > await contract.getBalance();
+    1423502n
+    > await contract.send(player, beginCell().storeUint(1, 32).storeCoins(1423482n).endCell(), toNano("0.05"));
+    // 需要留一部分交 storage fee，否则转出消息会失败
+    // https://testnet.tonviewer.com/transaction/f422227642e7cb91d4e730df9324b83905e724f19c6488d009480bbd0fde66b0
+    ```
+
+## 19. PROXY
+
+> You will beat this level if you manage to disable this proxy contract.
+
+??? note "Proxy"
+
+    ```
+    // storage variables
+
+    global ctxPlayer: slice;
+    global ctxNonce: int;
+    global ctxOwner: slice;
+    global ctxEnabled: bool;
+
+    // loadData populates storage variables using stored data
+    fun loadData() {
+        var ds = getContractData().beginParse();
+
+        ctxPlayer = ds.loadAddress();
+        ctxNonce = ds.loadUint(32);
+        ctxOwner = ds.loadAddress();
+        ctxEnabled = ds.loadBool();
+
+        ds.assertEndOfSlice();
+    }
+
+    // saveData stores storage variables as a cell into persistent storage
+    fun saveData() {
+        setContractData(
+            beginCell()
+                .storeSlice(ctxPlayer)
+                .storeUint(ctxNonce, 32)
+                .storeSlice(ctxOwner)
+                .storeBool(ctxEnabled)
+            .endCell()
+        );
+    }
+
+    // onInternalMessage is the main function of the contract and is called when it receives a message from other contracts
+    fun onInternalMessage(myBalance: int, msgValue: int, inMsgFull: cell, inMsgBody: slice) {
+        if (inMsgBody.isEndOfSlice()) { // ignore all empty messages
+            return;
+        }
+
+        var cs: slice = inMsgFull.beginParse();
+        cs.skipBits(4);
+        val senderAddress: slice = cs.loadAddress();
+
+        loadData(); // here we populate the storage variables
+
+        val op: int = inMsgBody.loadUint(32); // by convention, the first 32 bits of incoming message is the op
+
+        // receive "check" message
+        if (isSliceBitsEqual(inMsgBody, "check")) {
+            // send CheckLevelResult msg
+            val msgBody: cell = beginCell()
+                .storeUint(0x6df37b4d, 32)
+                .storeRef(beginCell().storeSlice("proxy").endCell())
+                .storeBool(!ctxEnabled)
+            .endCell();
+            val msg: builder = beginCell()
+                .storeUint(0x18, 6)
+                .storeSlice(senderAddress)
+                .storeCoins(0)
+                .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .storeRef(msgBody);
+                
+            // send all the remaining value
+            sendRawMessage(msg.endCell(), 64);
+            return;
+        }
+
+        if (op == 0) {
+            assert(ctxEnabled, 501);
+            val targetAddress: slice = inMsgBody.loadAddress();
+            val msgBody: cell = inMsgBody.loadRef();
+            val msg: builder = beginCell()
+                .storeUint(0x18, 6)
+                .storeSlice(targetAddress)
+                .storeCoins(0)
+                .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .storeRef(msgBody);
+                        
+            // send all the remaining value
+            sendRawMessage(msg.endCell(), 64);
+        } else {
+            assert(isSliceBitsEqual(senderAddress, ctxOwner), 502);
+            ctxEnabled = inMsgBody.loadBool();
+            saveData();
+        }
+    }
+
+    // get methods are a means to conveniently read contract data using, for example, HTTP APIs
+    // note that unlike in many other smart contract VMs, get methods cannot be called by other contracts
+
+    get owner(): slice {
+        loadData();
+        return ctxOwner;
+    }
+
+    get enabled(): bool {
+        loadData();
+        return ctxEnabled;
+    }
+    ```
+
+- 题目要求将 `ctxEnabled` 设置为 `false`，但只有合约所有者能够设置，而所有者为零地址
+
+    ```js
+    > (await contract.getOwner()).toString();
+    EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM9c
+    ```
+
+- 在 `ctxEnabled` 为 `true` 时，操作 `0` 可以向任意地址发送任意消息，可以用于直接发送 `check` 消息
+- 可以先执行一次 `CHECK SOLUTION`，以确定[目标地址](https://testnet.tonviewer.com/kQDL370ftqHMY7NcopQb2H9fs7AjkqepO9nPtJXdLSmx6Bvw)
+- 发送 `check` 消息
+
+    ```js
+    > await contract.send(player, beginCell().storeUint(0, 32).storeAddress(Address.parse("kQDL370ftqHMY7NcopQb2H9fs7AjkqepO9nPtJXdLSmx6Bvw")).storeRef(beginCell().storeUint(0x6df37b4d, 32).storeRef(beginCell().storeStringTail("proxy").endCell()).storeUint(1, 1).endCell()).endCell(), toNano("0.05"));
+    ```
+
+- 另外，由于 `onInternalMessage()` 没有检查收到的消息是否是弹回消息，也可以向零地址发送消息，并借助弹回消息设置 `ctxEnabled`
+
+    ```js
+    > await contract.send(player, beginCell().storeUint(0, 32).storeAddress(await contract.getOwner()).storeRef(beginCell().storeUint(1, 32).endCell()).endCell(), toNano("0.05"));
+    ```
+
+### References
+
+- [Transfer With a Comment](https://docs.ton.org/v3/guidelines/ton-connect/guidelines/preparing-messages#transfer-with-a-comment)
+
+
