@@ -2422,7 +2422,7 @@ tags:
     > await contract.getBalance();
     1423502n
     > await contract.send(player, beginCell().storeUint(1, 32).storeCoins(1423482n).endCell(), toNano("0.05"));
-    // 需要留一部分交 storage fee，否则转出消息会失败
+    // 需要留一部分合约余额用于交 storage fee，否则转出消息会发送失败
     // https://testnet.tonviewer.com/transaction/f422227642e7cb91d4e730df9324b83905e724f19c6488d009480bbd0fde66b0
     ```
 
@@ -2557,4 +2557,173 @@ tags:
 
 - [Transfer With a Comment](https://docs.ton.org/v3/guidelines/ton-connect/guidelines/preparing-messages#transfer-with-a-comment)
 
+## 20. EXECUTION
 
+> You will beat this level if you manage to reduce its balance to 0.
+
+??? note "Execution"
+
+    ```
+    import "@stdlib/tvm-lowlevel"
+
+    // storage variables
+
+    global ctxPlayer: slice;
+    global ctxNonce: int;
+
+    // loadData populates storage variables using stored data
+    fun loadData() {
+        var ds = getContractData().beginParse();
+
+        ctxPlayer = ds.loadAddress();
+        ctxNonce = ds.loadUint(32);
+
+        ds.assertEndOfSlice();
+    }
+
+    // saveData stores storage variables as a cell into persistent storage
+    fun saveData() {
+        setContractData(
+            beginCell()
+                .storeSlice(ctxPlayer)
+                .storeUint(ctxNonce, 32)
+            .endCell()
+        );
+    }
+
+    // this asm actually do nothing on TVM level, but force compiler to think that 
+    // typeless continuation is actually () to int function
+    @pure
+    fun castToFunction(c: continuation): (() -> int)
+        asm "NOP";
+
+    // put cell to c5 (we need it to clean register)
+    fun setC5(c: cell): void
+        asm "c5 POPCTR";
+
+    // this asm gets function as an argument
+    // then it passes it to "wrapper" and execute wrapper with "1 1 CALLXARGS"
+    // that means move to wrapper stack 1 element and then return 1 element.
+    // wrapper itself try to execute function but catches exceptions, also it checks that
+    // after execution there is at least 1 element on stack via `DEPTH 2 THROWIFNOT`.
+    // if function didn't throw, wrapper returns it's result, otherwise it returns NULL from CATCH statement
+    @pure
+    fun tryExecute(guesser: (() -> int)): int
+        asm "<{ TRY:<{ EXECUTE DEPTH 2 THROWIFNOT }>CATCH<{ 2DROP NULL }> }>CONT" "1 1 CALLXARGS";
+
+    // we do not trust function which we test: it may try to send messages or do other nasty things
+    // so we wrap it to the function which save register values prior to execution
+    // and restores them after
+    @inline
+    fun safeExecute(guesser: (() -> int)): int {
+        val c4: cell = getContractData();
+        val result: int = tryExecute(guesser);
+        // restore c4 if guesser spoiled it
+        setContractData(c4); 
+        // clean actions if guesser spoiled them
+        setC5(beginCell().endCell());
+        return result;
+    }
+
+    // onInternalMessage is the main function of the contract and is called when it receives a message from other contracts
+    fun onInternalMessage(myBalance: int, msgValue: int, inMsgFull: cell, inMsgBody: slice) {
+        if (inMsgBody.isEndOfSlice()) { // ignore all empty messages
+            return;
+        }
+
+        var cs: slice = inMsgFull.beginParse();
+        val flags: int = cs.loadUint(4);
+        if (flags & 1) { // ignore all bounced messages
+            return;
+        }
+        val senderAddress: slice = cs.loadAddress();
+
+        loadData(); // here we populate the storage variables
+
+        val op: int = inMsgBody.loadUint(32); // by convention, the first 32 bits of incoming message is the op
+
+        // receive "check" message
+        if (isSliceBitsEqual(inMsgBody, "check")) {
+            // send CheckLevelResult msg
+            val msgBody: cell = beginCell()
+                .storeUint(0x6df37b4d, 32)
+                .storeRef(beginCell().storeSlice("execution").endCell())
+                .storeBool(myBalance - msgValue == 0)
+            .endCell();
+            val msg: builder = beginCell()
+                .storeUint(0x18, 6)
+                .storeSlice(senderAddress)
+                .storeCoins(0)
+                .storeUint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .storeRef(msgBody);
+                
+            // send all the remaining value
+            sendRawMessage(msg.endCell(), 64);
+            return;
+        }
+
+        if (op == 0) {
+            val code: cell = inMsgBody.loadRef();
+            val guesser = castToFunction(code.beginParse().transformSliceToContinuation());
+            randomizeByLogicalTime();
+            val randomNumber: int = random();
+            val guess: int = safeExecute(guesser);
+            assert(randomNumber == guess, 501);
+
+            val msg = beginCell()
+                .storeUint(0x18, 6)
+                .storeSlice(senderAddress)
+                .storeCoins(0)
+                .storeUint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+            .endCell();
+
+            // send all the contract balance
+            sendRawMessage(msg, 128);
+            return;
+        }
+
+        throw 0xffff; // if the message contains an op that is not known to this contract, we throw
+    }
+
+    get balance(): int {
+        val [value, _] = getMyOriginalBalanceWithExtraCurrencies();
+        return value;
+    }
+    ```
+
+- 通过操作 `0` 中的检查即能清空合约所持有的 TON
+- 操作 `0` 能够将发送者提供的代码作为无输入返回值类型为 `int` 的函数执行，且要满足返回值与 `randomNumber` 相同
+- 但是操作 `0` 已经调用一次 `randomizeByLogicalTime()` 随机化了种子，因而无法通过执行相同的代码来获取相同的随机数。不过，尽管 `safeExecute()` 在调用完 `tryExecute()` 后会重置寄存器 `c4` 和 `c5`，但由于没有 `commit`，后续执行如果抛出错误，修改将会被回滚。因此，用户自定义的 `guesser()` 函数实际上可以直接发送模式为 128 的消息，并调用 `commit()` 提交当前 `c4`、`c5` 寄存器的状态即可
+
+    ```
+    "Asm.fif" include
+    "TonUtil.fif" include
+    <{
+        <b 0x18 6 u, "0QAHpxVbUO9IXraTMeTmqWNFenGg00qWDnTjhyR0HdsnsCrL" $>smca 2drop Addr, 0 Gram, 0 107 u, b>  // 构建消息体
+        PUSHREF
+        128 PUSHINT
+        SENDRAWMSG
+        COMMIT
+        1 PUSHINT   // 作为返回值
+    }>s s>c boc>B Bx.   // 输出结果
+    ```
+
+- 编译代码
+
+    ```bash
+    $ fift func.fif -I libs/
+    ```
+
+- 发送交易
+
+    ```js
+    > await contract.send(player, beginCell().storeUint(0, 32).storeRef(Cell.fromHex("B5EE9C7201010201003E00011288810080FB00F80F71010060620003D38AADA877A42F5B4998F27354B1A2BD38D069A54B073A71C3923A0EED93D80000000000000000000000000000")).endCell(), toNano("0.05"));
+    ```
+
+### References
+
+- [`bless`](https://docs.ton.org/v3/documentation/smart-contracts/func/docs/stdlib/#bless)
+- [Introduction To Fift](https://blog.ton.org/introduction-to-fift)
+- [Fift deep dive](https://docs.ton.org/v3/documentation/smart-contracts/fift/fift-deep-dive#defining-functions-fift-words)
+- [Fift: A Brief Introduction](https://ton.org/fiftbase.pdf)
+- [Telegram Open Network Virtual Machine](https://ton.org/tvm.pdf)
