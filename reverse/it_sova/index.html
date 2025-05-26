@@ -4030,7 +4030,7 @@
 <span class="normal"><a href="#__codelineno-2-14">14</a></span>
 <span class="normal"><a href="#__codelineno-2-15">15</a></span>
 <span class="normal"><a href="#__codelineno-2-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nb">input</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;ABCDEFGH&quot;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">16</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="nb">input</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">),</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="mi">4</span><span class="p">:],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">masks</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0xf00dbabe</span><span class="p">,</span> <span class="mh">0xdeadbeef</span><span class="p">,</span> <span class="mh">0xbadc0ffe</span><span class="p">,</span> <span class="mh">0xfeedface</span><span class="p">]</span>
@@ -4048,7 +4048,7 @@
 </span></code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>Next, we can infer the input based on the desired result. According to the above code, let <span class="arithmatex">\(X[i]\)</span> represent the result of each iteration. Given <span class="arithmatex">\(C[i]\)</span> and <span class="arithmatex">\(D[i]\)</span>, we can deduce that <span class="arithmatex">\(A[i-1]=B[i-1]=D[i]\)</span> and <span class="arithmatex">\(C[i-1]=B[i-1]\)</span>. Then, we can compute <span class="arithmatex">\(A[i]\)</span> with <span class="arithmatex">\(A[i-1]\)</span>, and by XORing it with <span class="arithmatex">\(C[i]\)</span>, we can obtain <span class="arithmatex">\(D[i-1]\)</span>. Repeat the above steps until the initial values of A (B / C) and D are obtained.</p>
+<p>Next, we can infer the input based on the desired result. According to the above code, let <span class="arithmatex">\(X[i]\)</span> represent the result of each iteration. Given <span class="arithmatex">\(C[i]\)</span> and <span class="arithmatex">\(D[i]\)</span>, we can deduce that <span class="arithmatex">\(A[i-1]=B[i-1]=D[i]\)</span> and <span class="arithmatex">\(C[i-1]=B[i-1]\)</span>. Then, we can compute <span class="arithmatex">\(A[i]\)</span> with <span class="arithmatex">\(A[i-1]\)</span>, and by XORing it with <span class="arithmatex">\(C[i]\)</span>, we can obtain <span class="arithmatex">\(D[i-1]\)</span>. Repeat the above steps until the initial values of <em>A</em> (<em>B</em> / <em>C</em>) and <em>D</em> are obtained.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -4058,8 +4058,7 @@
 <span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-3-10">10</a></span>
-<span class="normal"><a href="#__codelineno-3-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">D</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mh">0x16c11e3b</span><span class="p">,</span> <span class="mh">0x4fe39c85</span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">D</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mh">0x16c11e3b</span><span class="p">,</span> <span class="mh">0x4fe39c85</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span> <span class="n">D</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a>    <span class="n">A</span> <span class="o">^=</span> <span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -4069,8 +4068,10 @@
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a>    <span class="n">D</span> <span class="o">=</span> <span class="n">C</span> <span class="o">^</span> <span class="n">A</span>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="n">C</span> <span class="o">=</span> <span class="n">B</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input =&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">))</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="c1"># input = b&#39;Qy=*}OV(&#39;</span>
 </span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>With the two obtained values, we can retrieve the target input: <code>Qy=*}OV(</code> &lt;3</p>
 </li>
 </ul>
 <h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
@@ -4083,7 +4084,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年5月27日 00:00:49 CST">2025年5月27日 00:00:49</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年5月27日 00:14:57 CST">2025年5月27日 00:14:57</span>
       
     
   </small>
