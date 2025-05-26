@@ -59,7 +59,7 @@ I wonder who should pay for the gas on the first date.
 
     ```py
     input = b"ABCDEFGH"
-    x, y = int(input[::-1][4:].hex(), 16), int(input[::-1][:4].hex(), 16)
+    x, y = int.from_bytes(input[:4], 'little'), int.from_bytes(input[4:], 'little')
     A, B, C, D = x, x, x, y
 
     masks = [0xf00dbabe, 0xdeadbeef, 0xbadc0ffe, 0xfeedface]
@@ -76,7 +76,7 @@ I wonder who should pay for the gas on the first date.
     print("result =", hex((D << 32) | C))
     ```
 
-- Next, we can infer the input based on the desired result. According to the above code, let $X[i]$ represent the result of each iteration. Given $C[i]$ and $D[i]$, we can deduce that $A[i-1]=B[i-1]=D[i]$ and $C[i-1]=B[i-1]$. Then, we can compute $A[i]$ with $A[i-1]$, and by XORing it with $C[i]$, we can obtain $D[i-1]$. Repeat the above steps until the initial values of A (B / C) and D are obtained.
+- Next, we can infer the input based on the desired result. According to the above code, let $X[i]$ represent the result of each iteration. Given $C[i]$ and $D[i]$, we can deduce that $A[i-1]=B[i-1]=D[i]$ and $C[i-1]=B[i-1]$. Then, we can compute $A[i]$ with $A[i-1]$, and by XORing it with $C[i]$, we can obtain $D[i-1]$. Repeat the above steps until the initial values of *A* (*B* / *C*) and *D* are obtained.
 
     ```py
     D, C = 0x16c11e3b, 0x4fe39c85
@@ -89,8 +89,9 @@ I wonder who should pay for the gas on the first date.
         D = C ^ A
         C = B
     print("input =", int.to_bytes(B, 4, 'little') + int.to_bytes(D, 4, 'little'))
-    # input = b'Qy=*}OV('
     ```
+
+- With the two obtained values, we can retrieve the target input: `Qy=*}OV(` <3
 
 ### Flag
 
