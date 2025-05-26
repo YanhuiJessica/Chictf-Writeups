@@ -6,20 +6,20 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="攻防世界 | CGCTF | Pwn">
+        <meta name="description" content="2025 | SAS CTF | reverse / web3">
       
       
         <meta name="author" content="YanhuiJessica">
       
       
-        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/pwn/when_did_you_born/">
+        <link rel="canonical" href="https://yanhuijessica.github.io/Chictf-Writeups/reverse/it_sova/">
       
       <link rel="icon" href="../../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-8.3.3">
     
     
       
-        <title>Pwn - when did you born - Chictf-Writeups</title>
+        <title>Reverse - it Sova - Chictf-Writeups</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#description" class="md-skip">
           跳转至
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pwn - when did you born
+              Reverse - it Sova
             
           </span>
         </div>
@@ -248,7 +248,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../reverse/easyre/" class="md-tabs__link md-tabs__link--active">
+      <a href="../easyre/" class="md-tabs__link md-tabs__link--active">
         Reverse / Pwn
       </a>
     </li>
@@ -1405,7 +1405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/easyre/" class="md-nav__link">
+      <a href="../easyre/" class="md-nav__link">
         EasyRe
       </a>
     </li>
@@ -1419,7 +1419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/z3/" class="md-nav__link">
+      <a href="../z3/" class="md-nav__link">
         z3
       </a>
     </li>
@@ -1433,8 +1433,36 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reverse/newsctf_re_signin/" class="md-nav__link">
+      <a href="../newsctf_re_signin/" class="md-nav__link">
         NEWSCTF - re_signin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pwn/when_did_you_born/" class="md-nav__link">
+        when did you born
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pwn/amnesia/" class="md-nav__link">
+        Amnesia
       </a>
     </li>
   
@@ -1455,12 +1483,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          when did you born
+          it Sova
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        when did you born
+        it Sova
       </a>
       
         
@@ -1477,9 +1505,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    解题思路
+  <a href="#description" class="md-nav__link">
+    Description
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    Solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1487,34 +1535,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../amnesia/" class="md-nav__link">
-        Amnesia
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reverse/it_sova/" class="md-nav__link">
-        it Sova
-      </a>
     </li>
   
 
@@ -3835,9 +3855,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    解题思路
+  <a href="#description" class="md-nav__link">
+    Description
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    Solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    Flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3855,30 +3895,76 @@
   
   <div style="color: gray;">
     <small>
-      攻防世界 | CGCTF | Pwn
+      2025 | SAS CTF | reverse / web3
     </small>
   </div>
   
 
   
                 
-  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/pwn/when_did_you_born.md" title="编辑此页" class="md-content__button md-icon">
+  <a href="https://github.com/YanhuiJessica/Chictf-Writeups/edit/master/docs/reverse/it_sova.md" title="编辑此页" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>when did you born</h1>
+  <h1>it Sova</h1>
 
-<h2 id="_1">解题思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="md-typeset">
+    <div class="blogging-tags-grid">
+
+        <a href="#evm" class="blogging-tag"><code>#evm</code></a>
+
+        <a href="#bytecode" class="blogging-tag"><code>#bytecode</code></a>
+
+    </div>
+
+
+</div>
+
+<style>
+    .md-typeset .blogging-tags-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+    }
+
+    .md-typeset .blogging-tag {
+        color: var(--md-typeset-color);
+        background-color: var(--md-typeset-code-color);
+        white-space: nowrap;
+        display: block;
+    }
+
+    .md-typeset .blogging-tag code {
+        border-radius: 5px;
+    }
+</style>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>I wonder who should pay for the gas on the first date.</p>
+<blockquote>
+<p><a href="https://sova.task.sasc.tf/">https://sova.task.sasc.tf/</a></p>
+</blockquote>
+<h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>file</code>查看附件，是 64 位的 ELF
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>$<span class="w"> </span>file<span class="w"> </span>24ac28ef281b4b6caab44d6d52b17491
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a>24ac28ef281b4b6caab44d6d52b17491:<span class="w"> </span>ELF<span class="w"> </span><span class="m">64</span>-bit<span class="w"> </span>LSB<span class="w"> </span>executable,<span class="w"> </span>x86-64,<span class="w"> </span>version<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">(</span>SYSV<span class="o">)</span>,<span class="w"> </span>dynamically<span class="w"> </span>linked,<span class="w"> </span>interpreter<span class="w"> </span>/lib64/l,<span class="w"> </span><span class="k">for</span><span class="w"> </span>GNU/Linux<span class="w"> </span><span class="m">2</span>.6.32,<span class="w"> </span>BuildID<span class="o">[</span>sha1<span class="o">]=</span>718185b5ec9c26eb9aeccfa0ab53678e34fee00a,<span class="w"> </span>stripped
-</span></code></pre></div></td></tr></table></div></li>
-<li>使用 64 位的 IDA Pro 打开，找到<code>main</code>转到伪代码
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<li>
+<p>The given website provides a backend code snippet and an input box. Sending any input will return the contract address: <code>0x5FbDB2315678afecb367f032d93F642f64180aa3</code>.</p>
+<p><img alt="The website" src="../img/it_sova01.jpg" /></p>
+</li>
+<li>
+<p>To solve the challenge, we need to figure out the <code>user_input</code> that lets the function <code>validate()</code> execute successfully.</p>
+</li>
+<li>
+<p>We can use the RPC URL provided in the code snippet to get the EVM bytecode of the target contract, and then use Dedaub to decompile.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>$<span class="w"> </span>cast<span class="w"> </span>code<span class="w"> </span>--rpc-url<span class="w"> </span>https://sova-rpc.task.sasc.tf<span class="w"> </span>0x5FbDB2315678afecb367f032d93F642f64180aa3
+</span></code></pre></div></td></tr></table></div>
+<p><a href="../static/it_sova.code"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>it_sova.code</code></a></p>
+</li>
+<li>
+<p>By briefly reviewing the decompiled code, basically, the function <code>validate()</code> accepts a string parameter and verifies its validity. It then performs corresponding computations based on the values stored in the contract storage and updates memory accordingly. Finally, it checks whether the result in <code>MEM[0x1e0]</code> is equal to <code>0x16c11e3b4fe39c85</code> (note that there are some discrepancies between the actual behavior and the decompiled code).</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
@@ -3899,73 +3985,36 @@
 <span class="normal"><a href="#__codelineno-1-19">19</a></span>
 <span class="normal"><a href="#__codelineno-1-20">20</a></span>
 <span class="normal"><a href="#__codelineno-1-21">21</a></span>
-<span class="normal"><a href="#__codelineno-1-22">22</a></span>
-<span class="normal"><a href="#__codelineno-1-23">23</a></span>
-<span class="normal"><a href="#__codelineno-1-24">24</a></span>
-<span class="normal"><a href="#__codelineno-1-25">25</a></span>
-<span class="normal"><a href="#__codelineno-1-26">26</a></span>
-<span class="normal"><a href="#__codelineno-1-27">27</a></span>
-<span class="normal"><a href="#__codelineno-1-28">28</a></span>
-<span class="normal"><a href="#__codelineno-1-29">29</a></span>
-<span class="normal"><a href="#__codelineno-1-30">30</a></span>
-<span class="normal"><a href="#__codelineno-1-31">31</a></span>
-<span class="normal"><a href="#__codelineno-1-32">32</a></span>
-<span class="normal"><a href="#__codelineno-1-33">33</a></span>
-<span class="normal"><a href="#__codelineno-1-34">34</a></span>
-<span class="normal"><a href="#__codelineno-1-35">35</a></span>
-<span class="normal"><a href="#__codelineno-1-36">36</a></span>
-<span class="normal"><a href="#__codelineno-1-37">37</a></span>
-<span class="normal"><a href="#__codelineno-1-38">38</a></span>
-<span class="normal"><a href="#__codelineno-1-39">39</a></span>
-<span class="normal"><a href="#__codelineno-1-40">40</a></span>
-<span class="normal"><a href="#__codelineno-1-41">41</a></span>
-<span class="normal"><a href="#__codelineno-1-42">42</a></span>
-<span class="normal"><a href="#__codelineno-1-43">43</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kr">__int64</span><span class="w"> </span><span class="kr">__fastcall</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kr">__int64</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">a3</span><span class="p">)</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="p">{</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="kr">__int64</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"> </span><span class="c1">// rax</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1">// 当发生缓冲区溢出时，赋给变量 v4 的值将覆盖变量 v5</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kt">char</span><span class="w"> </span><span class="n">v4</span><span class="p">;</span><span class="w"> </span><span class="c1">// [rsp+0h] [rbp-20h]</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">v5</span><span class="p">;</span><span class="w"> </span><span class="c1">// [rsp+8h] [rbp-18h]</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="c1">// 20h - 18h = 8h</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="c1">// 变量 v4 与变量 v5 的栈空间相差 8 个字节</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="kt">unsigned</span><span class="w"> </span><span class="kr">__int64</span><span class="w"> </span><span class="n">v6</span><span class="p">;</span><span class="w"> </span><span class="c1">// [rsp+18h] [rbp-8h]</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="n">v6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="n">setbuf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="n">setbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="n">setbuf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="n">puts</span><span class="p">(</span><span class="s">&quot;What&#39;s Your Birth?&quot;</span><span class="p">);</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="n">__isoc99_scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v5</span><span class="p">);</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">getchar</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">)</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">    </span><span class="p">;</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1926</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="c1">// 无法直接通过输入使 v5 的值为 1926</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="p">{</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Cannot Born In 1926!&quot;</span><span class="p">);</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">;</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="p">}</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="k">else</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="p">{</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;What&#39;s Your Name?&quot;</span><span class="p">);</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="w">    </span><span class="n">gets</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v4</span><span class="p">);</span><span class="w">  </span><span class="c1">// gets 不检查输入长度</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;You Are Born In %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v5</span><span class="p">);</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="w">    </span><span class="c1">// 目标：通过缓冲区溢出使 v5 的值为 1926</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1926</span><span class="w"> </span><span class="p">)</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Shall Have Flag.&quot;</span><span class="p">);</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33"></a><span class="w">    </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;cat flag&quot;</span><span class="p">);</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35"></a><span class="w">    </span><span class="k">else</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37"></a><span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Are Naive.&quot;</span><span class="p">);</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38"></a><span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;You Speed One Second Here.&quot;</span><span class="p">);</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40"></a><span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">;</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41"></a><span class="p">}</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42"></a><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div></li>
-<li>变量 v4 与变量 v5 的栈空间相差 8 个字节，当<code>What's Your Name?</code>提示输入的字符串超过 8 位时，将发生缓冲区溢出。<span class="arithmatex">\(1926\)</span> 转换为十六进制是<code>0x0786</code>（均为不可打印字符），注意使用小端序
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">validate</span><span class="p">(</span><span class="nx">string</span><span class="w"> </span><span class="nx">name_</span><span class="p">)</span><span class="w"> </span><span class="kr">public</span><span class="w"> </span><span class="nx">payable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="mf">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">4</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">4</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">32</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">name_</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">uint64</span><span class="p">.</span><span class="nx">max</span><span class="p">);</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="mf">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">name_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">31</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">4</span><span class="p">));</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">name_</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">uint64</span><span class="p">.</span><span class="nx">max</span><span class="p">);</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="nx">name_</span><span class="p">.</span><span class="nx">data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">name_</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">4</span><span class="p">));</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="c1">// [...]</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="nx">v6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">v7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">        </span><span class="nx">v8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">uint8</span><span class="p">(</span><span class="nx">STORAGE</span><span class="p">[</span><span class="nx">v6</span><span class="p">]);</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="nx">v9</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">STORAGE</span><span class="p">[</span><span class="nx">v6</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mf">8</span><span class="p">;</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">v8</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">            </span><span class="nx">MEM</span><span class="p">[</span><span class="nx">v1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">uint8</span><span class="p">(</span><span class="nx">v9</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">5</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">v9</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mf">8</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mf">8</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">196</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mf">196</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">MEM</span><span class="p">[</span><span class="nx">v1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">uint8</span><span class="p">(</span><span class="nx">v9</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mf">8</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">5</span><span class="p">)];</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">            </span><span class="c1">// Unknown jump to Block 0x7abB0x42. Refer to 3-address code (TAC);</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">v8</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">        </span><span class="c1">// [...]</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">        </span><span class="nx">v6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">v6</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="mf">11</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">17</span><span class="p">,</span><span class="w"> </span><span class="nx">Panic</span><span class="p">(</span><span class="mf">50</span><span class="p">));</span><span class="w"> </span><span class="c1">// access an out-of-bounds or negative index of bytesN array or slice</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">    </span><span class="nx">require</span><span class="p">(</span><span class="mf">128</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">name_</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0x16c11e3b4fe39c85</span><span class="p">);</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">    </span><span class="c1">// [...]</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>There are a total of 104 slots with values in the contract storage. Additionally, the computations and the locations of memory updates depend on the values read from these slots, making it difficult to directly understand the intent from the decompiled code.</p>
+</li>
+<li>
+<p>Another approach is to use Forge's debugger to observe how the function processes the user input and the pattern of memory updates. In short, the program first reverses the first 8 bytes of the input and splits them into two groups of 4 bytes each, assumed to be <em>x</em> and <em>y</em>, respectively. These two groups are then stored in four memory locations, assumed to be <em>A</em>, <em>B</em>, <em>C</em>, and <em>D</em>. Among them, <em>A</em>, <em>B</em>, and <em>C</em> hold the value <em>x</em>, while <em>D</em> holds the value <em>y</em>. Next, the program performs calculations using the values in these four memory locations in combination with masks. The final returned value is based on values stored in <em>C</em> and <em>D</em>. For details, refer to the following code:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
@@ -3978,44 +4027,63 @@
 <span class="normal"><a href="#__codelineno-2-11">11</a></span>
 <span class="normal"><a href="#__codelineno-2-12">12</a></span>
 <span class="normal"><a href="#__codelineno-2-13">13</a></span>
-<span class="normal"><a href="#__codelineno-2-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">socket</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;&lt;server-ip&gt;&#39;</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="n">port</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">server</span><span class="o">-</span><span class="n">port</span><span class="o">&gt;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;1</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># 任意输入</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;11111111</span><span class="se">\x86\x07\n</span><span class="s1">&#39;</span><span class="p">)</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-</span></code></pre></div></td></tr></table></div></li>
-<li>运行 Python 代码，成功获得 Flag
-    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span>
-<span class="normal"><a href="#__codelineno-3-5">5</a></span>
-<span class="normal"><a href="#__codelineno-3-6">6</a></span>
-<span class="normal"><a href="#__codelineno-3-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a>What<span class="s1">&#39;s Your Birth?</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="s1">What&#39;</span>s<span class="w"> </span>Your<span class="w"> </span>Name?
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>You<span class="w"> </span>Are<span class="w"> </span>Born<span class="w"> </span>In<span class="w"> </span><span class="m">1926</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a>You<span class="w"> </span>Shall<span class="w"> </span>Have<span class="w"> </span>Flag.
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>cyberpeace<span class="o">{</span>82017cc00438da682e8bd4f335c26bee<span class="o">}</span>
-</span></code></pre></div></td></tr></table></div></li>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nb">input</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;ABCDEFGH&quot;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">16</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">masks</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0xf00dbabe</span><span class="p">,</span> <span class="mh">0xdeadbeef</span><span class="p">,</span> <span class="mh">0xbadc0ffe</span><span class="p">,</span> <span class="mh">0xfeedface</span><span class="p">]</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a>    <span class="n">A</span> <span class="o">^=</span> <span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a>    <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="mi">27</span><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a>    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mh">0x045d9f3b</span> <span class="o">*</span> <span class="n">tmp</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a>    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">^</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a>    <span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">^</span> <span class="n">D</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a>    <span class="n">D</span> <span class="o">=</span> <span class="n">B</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>        <span class="n">A</span> <span class="o">=</span> <span class="n">B</span> <span class="o">=</span> <span class="n">C</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;result =&quot;</span><span class="p">,</span> <span class="nb">hex</span><span class="p">((</span><span class="n">D</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">|</span> <span class="n">C</span><span class="p">))</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Next, we can infer the input based on the desired result. According to the above code, let <span class="arithmatex">\(X[i]\)</span> represent the result of each iteration. Given <span class="arithmatex">\(C[i]\)</span> and <span class="arithmatex">\(D[i]\)</span>, we can deduce that <span class="arithmatex">\(A[i-1]=B[i-1]=D[i]\)</span> and <span class="arithmatex">\(C[i-1]=B[i-1]\)</span>. Then, we can compute <span class="arithmatex">\(A[i]\)</span> with <span class="arithmatex">\(A[i-1]\)</span>, and by XORing it with <span class="arithmatex">\(C[i]\)</span>, we can obtain <span class="arithmatex">\(D[i-1]\)</span>. Repeat the above steps until the initial values of A (B / C) and D are obtained.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">D</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mh">0x16c11e3b</span><span class="p">,</span> <span class="mh">0x4fe39c85</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span> <span class="n">D</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a>    <span class="n">A</span> <span class="o">^=</span> <span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>    <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="mi">27</span><span class="p">)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a>    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mh">0x045d9f3b</span> <span class="o">*</span> <span class="n">tmp</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">^</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a>    <span class="n">D</span> <span class="o">=</span> <span class="n">C</span> <span class="o">^</span> <span class="n">A</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="n">C</span> <span class="o">=</span> <span class="n">B</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input =&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">))</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="c1"># input = b&#39;Qy=*}OV(&#39;</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
 </ul>
+<h3 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>SAS{h00t_h00t_7h1s_6uy_w1ll_c0v3r_th3_c0st5_9f03fd}</p>
+</blockquote>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2020年11月26日 15:58:40 CST">2020年11月26日 15:58:40</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年5月27日 00:00:49 CST">2025年5月27日 00:00:49</span>
       
     
   </small>
@@ -4109,7 +4177,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../../reverse/newsctf_re_signin/" class="md-footer__link md-footer__link--prev" aria-label="上一页: NEWSCTF - re_signin" rel="prev">
+        <a href="../../pwn/amnesia/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Amnesia" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -4118,20 +4186,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              NEWSCTF - re_signin
+              Amnesia
             </div>
           </div>
         </a>
       
       
         
-        <a href="../amnesia/" class="md-footer__link md-footer__link--next" aria-label="下一页: Amnesia" rel="next">
+        <a href="../../crypto/bank/" class="md-footer__link md-footer__link--next" aria-label="下一页: bank" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              Amnesia
+              bank
             </div>
           </div>
           <div class="md-footer__button md-icon">
