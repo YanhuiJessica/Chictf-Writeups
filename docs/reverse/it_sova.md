@@ -1,6 +1,6 @@
 ---
 title: Reverse - it Sova
-description: 2025 | SAS CTF | reverse / web3
+description: 2025 | SAS CTF | reverse | web3
 tags:
     - evm
     - bytecode
@@ -25,7 +25,7 @@ I wonder who should pay for the gas on the first date.
     $ cast code --rpc-url https://sova-rpc.task.sasc.tf 0x5FbDB2315678afecb367f032d93F642f64180aa3
     ```
 
-    [:material-download: `it_sova.code`](static/it_sova.code)
+    [:material-download: `it_sova.json`](static/it_sova.json)
 
 - By briefly reviewing the decompiled code, basically, the function `validate()` accepts a string parameter and verifies its validity. It then performs corresponding computations based on the values stored in the contract storage and updates memory accordingly. Finally, it checks whether the result in `MEM[0x1e0]` is equal to `0x16c11e3b4fe39c85` (note that there are some discrepancies between the actual behavior and the decompiled code).
 
@@ -80,6 +80,8 @@ I wonder who should pay for the gas on the first date.
 
     ```py
     D, C = 0x16c11e3b, 0x4fe39c85
+    masks = [0xf00dbabe, 0xdeadbeef, 0xbadc0ffe, 0xfeedface]
+    
     for i in range(3, -1, -1):
         A, B = D, D
         A ^= masks[i]
