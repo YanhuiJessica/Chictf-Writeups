@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="2025 | SAS CTF | reverse / web3">
+        <meta name="description" content="2025 | SAS CTF | reverse | web3">
       
       
         <meta name="author" content="YanhuiJessica">
@@ -3895,7 +3895,7 @@
   
   <div style="color: gray;">
     <small>
-      2025 | SAS CTF | reverse / web3
+      2025 | SAS CTF | reverse | web3
     </small>
   </div>
   
@@ -3960,7 +3960,7 @@
 <p>We can use the RPC URL provided in the code snippet to get the EVM bytecode of the target contract, and then use Dedaub to decompile.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>$<span class="w"> </span>cast<span class="w"> </span>code<span class="w"> </span>--rpc-url<span class="w"> </span>https://sova-rpc.task.sasc.tf<span class="w"> </span>0x5FbDB2315678afecb367f032d93F642f64180aa3
 </span></code></pre></div></td></tr></table></div>
-<p><a href="../static/it_sova.code"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>it_sova.code</code></a></p>
+<p><a href="../static/it_sova.json"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> <code>it_sova.json</code></a></p>
 </li>
 <li>
 <p>By briefly reviewing the decompiled code, basically, the function <code>validate()</code> accepts a string parameter and verifies its validity. It then performs corresponding computations based on the values stored in the contract storage and updates memory accordingly. Finally, it checks whether the result in <code>MEM[0x1e0]</code> is equal to <code>0x16c11e3b4fe39c85</code> (note that there are some discrepancies between the actual behavior and the decompiled code).</p>
@@ -4058,16 +4058,20 @@
 <span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-3-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">D</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mh">0x16c11e3b</span><span class="p">,</span> <span class="mh">0x4fe39c85</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span> <span class="n">D</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a>    <span class="n">A</span> <span class="o">^=</span> <span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>    <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="mi">27</span><span class="p">)</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a>    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mh">0x045d9f3b</span> <span class="o">*</span> <span class="n">tmp</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">^</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a>    <span class="n">D</span> <span class="o">=</span> <span class="n">C</span> <span class="o">^</span> <span class="n">A</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="n">C</span> <span class="o">=</span> <span class="n">B</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input =&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">))</span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">D</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mh">0x16c11e3b</span><span class="p">,</span> <span class="mh">0x4fe39c85</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">masks</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0xf00dbabe</span><span class="p">,</span> <span class="mh">0xdeadbeef</span><span class="p">,</span> <span class="mh">0xbadc0ffe</span><span class="p">,</span> <span class="mh">0xfeedface</span><span class="p">]</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span> <span class="n">D</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a>    <span class="n">A</span> <span class="o">^=</span> <span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="mi">27</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a>    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mh">0x045d9f3b</span> <span class="o">*</span> <span class="n">tmp</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">^</span> <span class="p">(</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a>    <span class="n">D</span> <span class="o">=</span> <span class="n">C</span> <span class="o">^</span> <span class="n">A</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a>    <span class="n">C</span> <span class="o">=</span> <span class="n">B</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input =&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">))</span>
 </span></code></pre></div></td></tr></table></div>
 </li>
 <li>
@@ -4084,7 +4088,7 @@
   <small>
     
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年5月27日 00:14:57 CST">2025年5月27日 00:14:57</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年5月28日 15:40:01 CST">2025年5月28日 15:40:01</span>
       
     
   </small>
