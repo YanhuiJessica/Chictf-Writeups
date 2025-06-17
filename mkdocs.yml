@@ -175,6 +175,7 @@ nav:
       - 链上转账助手: blockchain/hackergame/chain_transfer_helper.md
       - respectable_nft: blockchain/respectable_nft.md
       - Restricted Proxy: blockchain/restricted_proxy.md
+      - Transient Heist (Revenge): blockchain/transient_heist.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
