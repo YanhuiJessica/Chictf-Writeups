@@ -176,6 +176,7 @@ nav:
       - respectable_nft: blockchain/respectable_nft.md
       - Restricted Proxy: blockchain/restricted_proxy.md
       - Transient Heist (Revenge): blockchain/transient_heist.md
+      - mini agent: blockchain/mini_agent.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
