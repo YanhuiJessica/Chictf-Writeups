@@ -3276,6 +3276,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../breithorn/" class="md-nav__link">
+        breithorn
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -4513,7 +4527,7 @@
 </span></code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>A master can have multiple gems. The data of each gem is stored in the contract via <code>gem_id</code>. The <code>gem_id</code> is the hash of <code>master_addr</code> and a sequence number. The <code>get_gem_id()</code> internal function uses the <code>concat</code> built-in function, which is related to a memory buffer overflow vulnerability<sup id="fnref:concat"><a class="footnote-ref" href="#fn:concat">1</a></sup>. That is, if a function calls an internal function that uses <code>concat</code>, the leading bytes of its first declared variable may be overwritten with zeros. In <code>get_gem_id()</code>, <code>sequence_bytes</code> will be mloaded and mstored right after previous copied <code>master_addr_bytes</code>, causing a 20-byte memory buffer overflow</p>
+<p>A master can have multiple gems. The data of each gem is stored in the contract via <code>gem_id</code>. The <code>gem_id</code> is the hash of <code>master_addr</code> and a sequence number. The <code>get_gem_id()</code> internal function uses the <code>concat</code> built-in function, which is related to a memory buffer overflow vulnerability<sup id="fnref:concat"><a class="footnote-ref" href="#fn:concat">2</a></sup>. That is, if a function calls an internal function that uses <code>concat</code>, the leading bytes of its first declared variable may be overwritten with zeros. In <code>get_gem_id()</code>, <code>sequence_bytes</code> will be mloaded and mstored right after previous copied <code>master_addr_bytes</code>, causing a 20-byte memory buffer overflow</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
@@ -4952,7 +4966,7 @@
 </blockquote>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <ul>
-<li>By checking <a href="https://github.com/minaminao/lustrous/blob/main/solver/README.md">the author's writeup</a>, there is another vulnerability<sup id="fnref:abi_decode"><a class="footnote-ref" href="#fn:abi_decode">2</a></sup> that is also expected to be utilized</li>
+<li>By checking <a href="https://github.com/minaminao/lustrous/blob/main/solver/README.md">the author's writeup</a>, there is another vulnerability<sup id="fnref:abi_decode"><a class="footnote-ref" href="#fn:abi_decode">1</a></sup> that is also expected to be utilized</li>
 <li>Argument(s) is (are) encoded as a tuple. The ABI encoding of a tuple consists of two areas: the statically encoded <code>head</code> and the dynamically encoded <code>tail</code>. For dynamic types, the head contains the offset of the location within the tail where the data is stored</li>
 <li>
 <p>Prior to Vyper 0.4.0, the ABI decoder does not have a buffer overflow check for dynamic offsets. To decode data containing dynamic types, the decoder will retrieve the actual data with the offset information and the raw data location in the memory</p>
@@ -4983,11 +4997,11 @@
 <div class="footnote">
 <hr />
 <ol>
-<li id="fn:concat">
-<p><a href="https://github.com/vyperlang/vyper/security/advisories/GHSA-2q8v-3gqq-4f8p">concat built-in can corrupt memory · Advisory · vyperlang/vyper</a>&#160;<a class="footnote-backref" href="#fnref:concat" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
 <li id="fn:abi_decode">
-<p><a href="https://github.com/vyperlang/vyper/security/advisories/GHSA-9p8r-4xp4-gw5w">_abi_decode Memory Overflow · Advisory · vyperlang/vyper</a>&#160;<a class="footnote-backref" href="#fnref:abi_decode" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p><a href="https://github.com/vyperlang/vyper/security/advisories/GHSA-9p8r-4xp4-gw5w">_abi_decode Memory Overflow · Advisory · vyperlang/vyper</a>&#160;<a class="footnote-backref" href="#fnref:abi_decode" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:concat">
+<p><a href="https://github.com/vyperlang/vyper/security/advisories/GHSA-2q8v-3gqq-4f8p">concat built-in can corrupt memory · Advisory · vyperlang/vyper</a>&#160;<a class="footnote-backref" href="#fnref:concat" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

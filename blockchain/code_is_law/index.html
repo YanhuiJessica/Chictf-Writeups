@@ -3316,6 +3316,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../breithorn/" class="md-nav__link">
+        breithorn
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -4402,7 +4416,7 @@
 <li>那么，先让合约 <code>OnlyICanHazToken</code> 获得 <code>token</code> 再转移呢？但 <code>selfdestruct(payable(msg.sender))</code> 只能转移以太币，无法转移 <code>token</code></li>
 <li>再回头看看 <code>ChallengeToken</code> 的 <code>getContractCodeHash</code> 和 <code>calculateAddressOfTheFirstContractDeployedBy</code> 似乎也没有什么问题，<code>ERC20</code> 就更不可能了 uwu</li>
 <li>
-<p>最后把注意力转移到了 <code>hardhat</code> 上，发现了能修改合约存储的 <code>hardhat_setStorageAt</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>（是神 (╥ω╥)），结合合约变量的存储位置、方式直接修改余额就好了！</p>
+<p>最后把注意力转移到了 <code>hardhat</code> 上，发现了能修改合约存储的 <code>hardhat_setStorageAt</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">3</a></sup>（是神 (╥ω╥)），结合合约变量的存储位置、方式直接修改余额就好了！</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -4431,7 +4445,7 @@
 <li>
 <p><code>Code is Law 2</code> 与 <code>Code is Law 1</code> 相比，只修改了 <code>ChallengeToken</code> 发放 <code>token</code> 的规则并禁用了 <code>approve</code>，因而修改存储的方法仍然适用 =）</p>
 </li>
-<li>看了官方 WP<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> 再来补充一下 =ω=</li>
+<li>看了官方 WP<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">1</a></sup><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">2</a></sup> 再来补充一下 =ω=</li>
 </ul>
 <h3 id="code-is-law-1_1">Code is Law 1<a class="headerlink" href="#code-is-law-1_1" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4748,14 +4762,14 @@
 <div class="footnote">
 <hr />
 <ol>
-<li id="fn:1">
-<p><a href="https://kndrck.co/posts/local_erc20_bal_mani_w_hh/">Local ERC20 Balance Manipulation (with HardHat)</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
 <li id="fn:2">
-<p><a href="https://medium.com/@patternrecognizer/solidity-ctf-writeup-code-is-law-1-465428bf4bd5">Code is Law 1: Solidity CTF Challenge Writeup | by Oren Yomtov</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p><a href="https://medium.com/@patternrecognizer/solidity-ctf-writeup-code-is-law-1-465428bf4bd5">Code is Law 1: Solidity CTF Challenge Writeup | by Oren Yomtov</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:3">
-<p><a href="https://medium.com/@patternrecognizer/code-is-law-2-solidity-ctf-challenge-writeup-c55f072664a9">Code is Law 2: Solidity CTF Challenge Writeup | by Oren Yomtov</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<p><a href="https://medium.com/@patternrecognizer/code-is-law-2-solidity-ctf-challenge-writeup-c55f072664a9">Code is Law 2: Solidity CTF Challenge Writeup | by Oren Yomtov</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:1">
+<p><a href="https://kndrck.co/posts/local_erc20_bal_mani_w_hh/">Local ERC20 Balance Manipulation (with HardHat)</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 <li id="fn:4">
 <p><a href="https://docs.soliditylang.org/en/v0.8.15/metadata.html">Contract Metadata</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>

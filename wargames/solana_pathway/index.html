@@ -3194,6 +3194,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blockchain/breithorn/" class="md-nav__link">
+        breithorn
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -4652,7 +4666,7 @@
 <li><code>serialize</code> 需要类型为 <code>&amp;mut W</code> 的参数，<code>W</code> 实现了 <code>Write</code> 特征，而 <code>Write</code> 需要 <code>&amp;mut [u8]</code></li>
 <li><code>borrow_mut()</code> 返回 <code>RefMut&lt;&amp;mut [u8]&gt;</code>，接下来取可变切片</li>
 <li><code>account.data.borrow_mut()[..]</code> 是 <code>*(account.data.borrow_mut().index_mut(..))</code>（<code>*</code> 执行解引用）的语法糖，<code>..</code> 是 <code>RangeFull</code> 的简写，而 <code>fn index_mut(&amp;mut self, index: RangeFull) -&gt; &amp;mut Self::Output</code>，得到 <code>[u8]</code></li>
-<li>在查询方法调用时，接收者可能会自动解引用或借用变量来调用一个方法<sup id="fnref:deref"><a class="footnote-ref" href="#fn:deref">1</a></sup>，使用 <code>greeting_account.serialize(&amp;mut *account.data.borrow_mut())?</code> 是等价的</li>
+<li>在查询方法调用时，接收者可能会自动解引用或借用变量来调用一个方法<sup id="fnref:deref"><a class="footnote-ref" href="#fn:deref">2</a></sup>，使用 <code>greeting_account.serialize(&amp;mut *account.data.borrow_mut())?</code> 是等价的</li>
 </ul>
 </li>
 </ul>
@@ -4678,7 +4692,7 @@
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a>$<span class="w"> </span>solana<span class="w"> </span>deploy<span class="w"> </span>-v<span class="w"> </span>--keypair<span class="w"> </span>solana-wallet/keypair.json<span class="w"> </span>dist/solana/program/helloworld.so
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="c1"># Default Signer Path: solana-wallet/keypair.json</span>
 </span></code></pre></div></td></tr></table></div>
-<p>当部署一直处在等待状态时，注意检查集群的版本是否与 CLI 的版本匹配<sup id="fnref:version"><a class="footnote-ref" href="#fn:version">2</a></sup></p>
+<p>当部署一直处在等待状态时，注意检查集群的版本是否与 CLI 的版本匹配<sup id="fnref:version"><a class="footnote-ref" href="#fn:version">1</a></sup></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a>$<span class="w"> </span>solana<span class="w"> </span>cluster-version
 </span></code></pre></div></td></tr></table></div>
 <h3 id="challenge">Challenge<a class="headerlink" href="#challenge" title="Permanent link">&para;</a></h3>
@@ -5151,11 +5165,11 @@
 <div class="footnote">
 <hr />
 <ol>
-<li id="fn:deref">
-<p><a href="https://doc.rust-lang.org/reference/expressions/method-call-expr.html">Method call expressions - The Rust Reference</a>&#160;<a class="footnote-backref" href="#fnref:deref" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
 <li id="fn:version">
-<p><a href="https://docs.solana.com/cli/choose-a-cluster#ensure-versions-match">Ensure Versions Match</a>&#160;<a class="footnote-backref" href="#fnref:version" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p><a href="https://docs.solana.com/cli/choose-a-cluster#ensure-versions-match">Ensure Versions Match</a>&#160;<a class="footnote-backref" href="#fnref:version" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:deref">
+<p><a href="https://doc.rust-lang.org/reference/expressions/method-call-expr.html">Method call expressions - The Rust Reference</a>&#160;<a class="footnote-backref" href="#fnref:deref" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
