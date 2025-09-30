@@ -177,6 +177,7 @@ nav:
       - Restricted Proxy: blockchain/restricted_proxy.md
       - Transient Heist (Revenge): blockchain/transient_heist.md
       - mini agent: blockchain/mini_agent.md
+      - breithorn: blockchain/breithorn.md
     - Wargames:
       - OverTheWire:
         - Natas: wargames/natas.md
