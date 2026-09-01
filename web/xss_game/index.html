@@ -4022,7 +4022,7 @@
 <ul>
 <li>提交一个整数，会启动一个计时器并在整数（提交的整数）秒后弹框，提示『计时结束』</li>
 <li>查看源码，注意到
-  <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/static/loading.gif&quot;</span> <span class="na">onload</span><span class="o">=</span><span class="s">&quot;startTimer(&#39;{{ timer }}&#39;);&quot;</span> <span class="p">/&gt;</span>
+  <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"/static/loading.gif"</span> <span class="na">onload</span><span class="o">=</span><span class="s">"startTimer('{{ timer }}');"</span> <span class="p">/&gt;</span>
 </span></code></pre></div></td></tr></table></div></li>
 <li>提交一个单引号<code>'</code>，控制台会报错，意味着逃逸的可能性<br>
 <img alt="括号不匹配" src="../img/xss_game07.jpg" /></li>
@@ -4040,12 +4040,12 @@
 <span class="normal"><a href="#__codelineno-1-5">5</a></span>
 <span class="normal"><a href="#__codelineno-1-6">6</a></span>
 <span class="normal"><a href="#__codelineno-1-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># part of level.py</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">if</span> <span class="s2">&quot;signup&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a>      <span class="bp">self</span><span class="o">.</span><span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;signup.html&#39;</span><span class="p">,</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a>        <span class="p">{</span><span class="s1">&#39;next&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;next&#39;</span><span class="p">)})</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">if</span> <span class="s2">"signup"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a>      <span class="bp">self</span><span class="o">.</span><span class="n">render_template</span><span class="p">(</span><span class="s1">'signup.html'</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a>        <span class="p">{</span><span class="s1">'next'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'next'</span><span class="p">)})</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="c1"># part of signup.html</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{{ next }}&quot;</span><span class="o">&gt;</span><span class="n">Next</span> <span class="o">&gt;&gt;&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">"{{ next }}"</span><span class="o">&gt;</span><span class="n">Next</span> <span class="o">&gt;&gt;&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
 </span></code></pre></div></td></tr></table></div></li>
 <li><code>href</code>属性可以链接 JS。访问 <a href="https://xss-game.appspot.com/level5/frame/signup?next=javascript:alert(1">https://xss-game.appspot.com/level5/frame/signup?next=javascript:alert(1</a>)，并点击<code>Next &gt;&gt;</code>可弹框<br>
 <img alt="?next=javascript:alert(1)" src="../img/xss_game09.jpg" /></li>
@@ -4088,20 +4088,20 @@
 <span class="normal"><a href="#__codelineno-2-33">33</a></span>
 <span class="normal"><a href="#__codelineno-2-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>// Take the value after # and use it as the gadget filename.
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a>function getGadgetName() {
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a>  return window.location.hash.substr(1) || &quot;/static/gadget.js&quot;;
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a>  return window.location.hash.substr(1) || "/static/gadget.js";
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a>}
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a>includeGadget(getGadgetName());
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a>
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a>function includeGadget(url) {
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a>  // 创建一个 script 标签
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a>  var scriptEl = document.createElement(&#39;script&#39;);
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a>  var scriptEl = document.createElement('script');
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a>  // This will totally prevent us from loading evil URLs!
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a>  // 只匹配小写，大写即可绕过
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a>  if (url.match(/^https?:\/\//)) {
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>    setInnerText(document.getElementById(&quot;log&quot;),
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a>      &quot;Sorry, cannot load a URL containing \&quot;http\&quot;.&quot;);
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>    setInnerText(document.getElementById("log"),
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a>      "Sorry, cannot load a URL containing \"http\".");
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a>    return;
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a>  }
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a>
@@ -4110,12 +4110,12 @@
 </span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22"></a>
 </span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23"></a>  // Show log messages
 </span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24"></a>  scriptEl.onload = function() {
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25"></a>    setInnerText(document.getElementById(&quot;log&quot;),
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26"></a>      &quot;Loaded gadget from &quot; + url);
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25"></a>    setInnerText(document.getElementById("log"),
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26"></a>      "Loaded gadget from " + url);
 </span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27"></a>  }
 </span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28"></a>  scriptEl.onerror = function() {
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29"></a>    setInnerText(document.getElementById(&quot;log&quot;),
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30"></a>      &quot;Couldn&#39;t load gadget from &quot; + url);
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29"></a>    setInnerText(document.getElementById("log"),
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30"></a>      "Couldn't load gadget from " + url);
 </span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31"></a>  }
 </span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32"></a>  // 插入到 head 中
 </span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33"></a>  document.head.appendChild(scriptEl);

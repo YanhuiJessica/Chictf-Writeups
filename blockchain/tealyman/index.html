@@ -4360,12 +4360,12 @@
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>    bnz label2
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a>    txn OnCompletion
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    intc_0 // 1, OptIn, before executing the ApprovalProgram, allocate local state for this application into the sender&#39;s account data
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    intc_0 // 1, OptIn, before executing the ApprovalProgram, allocate local state for this application into the sender's account data
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>    ==
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    bnz label3
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>    txn OnCompletion
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>    pushint 2 // CloseOut, after executing the ApprovalProgram, clear any local state for this application out of the sender&#39;s account data.
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>    pushint 2 // CloseOut, after executing the ApprovalProgram, clear any local state for this application out of the sender's account data.
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>    ==
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>    bnz label4
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>
@@ -4389,7 +4389,7 @@
 </span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a>    ==
 </span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44"></a>    assert
 </span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45"></a>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46"></a>    bytec_2 // &quot;admin_key&quot;
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46"></a>    bytec_2 // "admin_key"
 </span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47"></a>    app_global_get
 </span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48"></a>    callsub label7
 </span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49"></a>
@@ -4403,12 +4403,12 @@
 </span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57"></a>    return
 </span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a>label2:
 </span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a>    txna ApplicationArgs 0 // 0-th value of the ApplicationArgs array of the current transaction
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60"></a>    pushbytes 0x7365747570 // &quot;setup&quot;
+</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60"></a>    pushbytes 0x7365747570 // "setup"
 </span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>    ==
 </span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a>    bnz label8
 </span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63"></a>
 </span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64"></a>    txna ApplicationArgs 0
-</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65"></a>    pushbytes 0x627579 // &quot;buy&quot;
+</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65"></a>    pushbytes 0x627579 // "buy"
 </span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66"></a>    ==
 </span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67"></a>    bnz label9
 </span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68"></a>
@@ -4426,7 +4426,7 @@
 </span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80"></a>    &amp;&amp;  // if is_opted_in and asset balance &gt; 0
 </span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81"></a>
 </span><span id="__span-0-82"><a id="__codelineno-0-82" name="__codelineno-0-82"></a>    txn Sender
-</span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83"></a>    bytec_0 // &quot;start&quot;
+</span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83"></a>    bytec_0 // "start"
 </span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84"></a>    app_local_get
 </span><span id="__span-0-85"><a id="__codelineno-0-85" name="__codelineno-0-85"></a>    global LatestTimestamp
 </span><span id="__span-0-86"><a id="__codelineno-0-86" name="__codelineno-0-86"></a>    callsub label10
@@ -4434,7 +4434,7 @@
 </span><span id="__span-0-88"><a id="__codelineno-0-88" name="__codelineno-0-88"></a>
 </span><span id="__span-0-89"><a id="__codelineno-0-89" name="__codelineno-0-89"></a>    global LatestTimestamp
 </span><span id="__span-0-90"><a id="__codelineno-0-90" name="__codelineno-0-90"></a>    txn Sender
-</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91"></a>    bytec_1 // &quot;end&quot;
+</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91"></a>    bytec_1 // "end"
 </span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92"></a>    app_local_get
 </span><span id="__span-0-93"><a id="__codelineno-0-93" name="__codelineno-0-93"></a>    callsub label10
 </span><span id="__span-0-94"><a id="__codelineno-0-94" name="__codelineno-0-94"></a>    &amp;&amp;
@@ -4483,7 +4483,7 @@
 </span><span id="__span-0-137"><a id="__codelineno-0-137" name="__codelineno-0-137"></a>    +
 </span><span id="__span-0-138"><a id="__codelineno-0-138" name="__codelineno-0-138"></a>
 </span><span id="__span-0-139"><a id="__codelineno-0-139" name="__codelineno-0-139"></a>    txn Sender
-</span><span id="__span-0-140"><a id="__codelineno-0-140" name="__codelineno-0-140"></a>    bytec_0 // &quot;start&quot;
+</span><span id="__span-0-140"><a id="__codelineno-0-140" name="__codelineno-0-140"></a>    bytec_0 // "start"
 </span><span id="__span-0-141"><a id="__codelineno-0-141" name="__codelineno-0-141"></a>    app_local_get
 </span><span id="__span-0-142"><a id="__codelineno-0-142" name="__codelineno-0-142"></a>    callsub label10
 </span><span id="__span-0-143"><a id="__codelineno-0-143" name="__codelineno-0-143"></a>    bnz label11
@@ -4492,7 +4492,7 @@
 </span><span id="__span-0-146"><a id="__codelineno-0-146" name="__codelineno-0-146"></a>    return
 </span><span id="__span-0-147"><a id="__codelineno-0-147" name="__codelineno-0-147"></a>label11:
 </span><span id="__span-0-148"><a id="__codelineno-0-148" name="__codelineno-0-148"></a>    txn Sender
-</span><span id="__span-0-149"><a id="__codelineno-0-149" name="__codelineno-0-149"></a>    bytec_3 // &quot;nft_id&quot;
+</span><span id="__span-0-149"><a id="__codelineno-0-149" name="__codelineno-0-149"></a>    bytec_3 // "nft_id"
 </span><span id="__span-0-150"><a id="__codelineno-0-150" name="__codelineno-0-150"></a>    app_local_get
 </span><span id="__span-0-151"><a id="__codelineno-0-151" name="__codelineno-0-151"></a>
 </span><span id="__span-0-152"><a id="__codelineno-0-152" name="__codelineno-0-152"></a>    txn Sender
@@ -4514,31 +4514,31 @@
 </span><span id="__span-0-168"><a id="__codelineno-0-168" name="__codelineno-0-168"></a>    itxn_submit // execute the current inner transaction group
 </span><span id="__span-0-169"><a id="__codelineno-0-169" name="__codelineno-0-169"></a>
 </span><span id="__span-0-170"><a id="__codelineno-0-170" name="__codelineno-0-170"></a>    txn Sender
-</span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a>    bytec_3 // &quot;nft_id&quot;
+</span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a>    bytec_3 // "nft_id"
 </span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>    txna Assets 0
-</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>    app_local_put // store the nft_id in the sender&#39;s local state
+</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>    app_local_put // store the nft_id in the sender's local state
 </span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>
 </span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>    txn Sender
-</span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>    pushbytes 0x73656c6c6572 // &quot;seller&quot;
+</span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>    pushbytes 0x73656c6c6572 // "seller"
 </span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>    txn Sender
-</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>    app_local_put // store the seller address in the sender&#39;s local state
+</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>    app_local_put // store the seller address in the sender's local state
 </span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>
 </span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>    txn Sender
-</span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>    bytec_0 // &quot;start&quot;
+</span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>    bytec_0 // "start"
 </span><span id="__span-0-182"><a id="__codelineno-0-182" name="__codelineno-0-182"></a>    global LatestTimestamp
 </span><span id="__span-0-183"><a id="__codelineno-0-183" name="__codelineno-0-183"></a>    app_local_put
 </span><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a>
 </span><span id="__span-0-185"><a id="__codelineno-0-185" name="__codelineno-0-185"></a>    txn Sender
-</span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>    bytec_1 // &quot;end&quot;
+</span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>    bytec_1 // "end"
 </span><span id="__span-0-187"><a id="__codelineno-0-187" name="__codelineno-0-187"></a>    txna ApplicationArgs 1
 </span><span id="__span-0-188"><a id="__codelineno-0-188" name="__codelineno-0-188"></a>    btoi
 </span><span id="__span-0-189"><a id="__codelineno-0-189" name="__codelineno-0-189"></a>    app_local_put
 </span><span id="__span-0-190"><a id="__codelineno-0-190" name="__codelineno-0-190"></a>
 </span><span id="__span-0-191"><a id="__codelineno-0-191" name="__codelineno-0-191"></a>    txn Sender
-</span><span id="__span-0-192"><a id="__codelineno-0-192" name="__codelineno-0-192"></a>    bytec_0 // &quot;start&quot;
+</span><span id="__span-0-192"><a id="__codelineno-0-192" name="__codelineno-0-192"></a>    bytec_0 // "start"
 </span><span id="__span-0-193"><a id="__codelineno-0-193" name="__codelineno-0-193"></a>    app_local_get
 </span><span id="__span-0-194"><a id="__codelineno-0-194" name="__codelineno-0-194"></a>    txn Sender
-</span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>    bytec_1 // &quot;end&quot;
+</span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>    bytec_1 // "end"
 </span><span id="__span-0-196"><a id="__codelineno-0-196" name="__codelineno-0-196"></a>    app_local_get
 </span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>    &lt;
 </span><span id="__span-0-198"><a id="__codelineno-0-198" name="__codelineno-0-198"></a>    assert  // require start &lt; end
@@ -4546,7 +4546,7 @@
 </span><span id="__span-0-200"><a id="__codelineno-0-200" name="__codelineno-0-200"></a>    intc_0 // 1, approval
 </span><span id="__span-0-201"><a id="__codelineno-0-201" name="__codelineno-0-201"></a>    return
 </span><span id="__span-0-202"><a id="__codelineno-0-202" name="__codelineno-0-202"></a>label1:
-</span><span id="__span-0-203"><a id="__codelineno-0-203" name="__codelineno-0-203"></a>    bytec_2 // &quot;admin_key&quot;
+</span><span id="__span-0-203"><a id="__codelineno-0-203" name="__codelineno-0-203"></a>    bytec_2 // "admin_key"
 </span><span id="__span-0-204"><a id="__codelineno-0-204" name="__codelineno-0-204"></a>    txn Sender
 </span><span id="__span-0-205"><a id="__codelineno-0-205" name="__codelineno-0-205"></a>    app_global_put
 </span><span id="__span-0-206"><a id="__codelineno-0-206" name="__codelineno-0-206"></a>
@@ -4749,19 +4749,19 @@
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a>        <span class="n">signed_txns</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">txn</span><span class="p">]</span>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a>        <span class="n">txid</span> <span class="o">=</span> <span class="n">algod_client</span><span class="o">.</span><span class="n">send_transactions</span><span class="p">(</span><span class="n">signed_txns</span><span class="p">)</span>
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a>    <span class="n">confirmed_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">wait_for_confirmation</span><span class="p">(</span><span class="n">algod_client</span><span class="p">,</span> <span class="n">txid</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Transaction information: </span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">confirmed_txn</span><span class="p">,</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Transaction information: </span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">confirmed_txn</span><span class="p">,</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a>    <span class="k">return</span> <span class="n">confirmed_txn</span>
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="n">private_key</span> <span class="o">=</span> <span class="s1">&#39;&lt;private&gt;&#39;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="n">private_key</span> <span class="o">=</span> <span class="s1">'&lt;private&gt;'</span>
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="n">sender</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">address_from_private_key</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a>
 </span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="n">app_id</span> <span class="o">=</span> <span class="mi">163726037</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="n">app_address</span> <span class="o">=</span> <span class="s2">&quot;5K7JP6324NOEPDB5THIZY3FWHUKF4FBPJFYKIUX2SBNG264NUY6E3AI3BM&quot;</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="n">app_address</span> <span class="o">=</span> <span class="s2">"5K7JP6324NOEPDB5THIZY3FWHUKF4FBPJFYKIUX2SBNG264NUY6E3AI3BM"</span>
 </span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23"></a>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="n">algod_address</span> <span class="o">=</span> <span class="s2">&quot;https://testnet-algorand.api.purestake.io/ps2&quot;</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="n">algod_token</span> <span class="o">=</span> <span class="s2">&quot;&lt;api-key&gt;&quot;</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="n">algod_address</span> <span class="o">=</span> <span class="s2">"https://testnet-algorand.api.purestake.io/ps2"</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="n">algod_token</span> <span class="o">=</span> <span class="s2">"&lt;api-key&gt;"</span>
 </span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27"></a>    <span class="s2">&quot;X-API-Key&quot;</span><span class="p">:</span> <span class="n">algod_token</span><span class="p">,</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27"></a>    <span class="s2">"X-API-Key"</span><span class="p">:</span> <span class="n">algod_token</span><span class="p">,</span>
 </span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="p">}</span>
 </span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="n">algod_client</span> <span class="o">=</span> <span class="n">algod</span><span class="o">.</span><span class="n">AlgodClient</span><span class="p">(</span><span class="n">algod_token</span><span class="p">,</span> <span class="n">algod_address</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 </span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30"></a>
@@ -4778,18 +4778,18 @@
 </span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41"></a>    <span class="mi">100</span><span class="p">,</span>
 </span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42"></a>    <span class="n">decimals</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
 </span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43"></a>    <span class="n">default_frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44"></a>    <span class="n">unit_name</span><span class="o">=</span><span class="s2">&quot;CC&quot;</span><span class="p">,</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45"></a>    <span class="n">asset_name</span><span class="o">=</span><span class="s2">&quot;Chicken Coin&quot;</span><span class="p">,</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44"></a>    <span class="n">unit_name</span><span class="o">=</span><span class="s2">"CC"</span><span class="p">,</span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45"></a>    <span class="n">asset_name</span><span class="o">=</span><span class="s2">"Chicken Coin"</span><span class="p">,</span>
 </span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46"></a>    <span class="n">manager</span><span class="o">=</span><span class="n">sender</span><span class="p">,</span>
 </span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47"></a><span class="p">)</span>
 </span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48"></a><span class="n">res</span> <span class="o">=</span> <span class="n">transact</span><span class="p">(</span><span class="n">create_txn</span><span class="p">)</span>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49"></a><span class="n">asset_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;asset-index&#39;</span><span class="p">]</span>
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49"></a><span class="n">asset_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">'asset-index'</span><span class="p">]</span>
 </span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50"></a>
 </span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51"></a><span class="n">setup_txn</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">ApplicationNoOpTxn</span><span class="p">(</span>
 </span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52"></a>    <span class="n">sender</span><span class="p">,</span>
 </span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53"></a>    <span class="n">params</span><span class="p">,</span>
 </span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54"></a>    <span class="n">app_id</span><span class="p">,</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55"></a>    <span class="p">[</span><span class="sa">b</span><span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mh">0x80000000</span><span class="p">)],</span>
+</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55"></a>    <span class="p">[</span><span class="sa">b</span><span class="s1">'setup'</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mh">0x80000000</span><span class="p">)],</span>
 </span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56"></a>    <span class="n">foreign_assets</span><span class="o">=</span><span class="p">[</span><span class="n">asset_id</span><span class="p">],</span>
 </span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57"></a>    <span class="n">foreign_apps</span><span class="o">=</span><span class="p">[</span><span class="n">asset_id</span><span class="p">],</span>
 </span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58"></a>    <span class="p">)</span>
@@ -4814,7 +4814,7 @@
 </span><span id="__span-1-77"><a id="__codelineno-1-77" name="__codelineno-1-77"></a>    <span class="n">sender</span><span class="p">,</span>
 </span><span id="__span-1-78"><a id="__codelineno-1-78" name="__codelineno-1-78"></a>    <span class="n">params</span><span class="p">,</span>
 </span><span id="__span-1-79"><a id="__codelineno-1-79" name="__codelineno-1-79"></a>    <span class="n">app_id</span><span class="p">,</span>
-</span><span id="__span-1-80"><a id="__codelineno-1-80" name="__codelineno-1-80"></a>    <span class="p">[</span><span class="sa">b</span><span class="s1">&#39;buy&#39;</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="mi">9223372036854775808</span><span class="p">)],</span>
+</span><span id="__span-1-80"><a id="__codelineno-1-80" name="__codelineno-1-80"></a>    <span class="p">[</span><span class="sa">b</span><span class="s1">'buy'</span><span class="p">,</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="mi">9223372036854775808</span><span class="p">)],</span>
 </span><span id="__span-1-81"><a id="__codelineno-1-81" name="__codelineno-1-81"></a>    <span class="n">foreign_assets</span><span class="o">=</span><span class="p">[</span><span class="n">asset_id</span><span class="p">],</span>
 </span><span id="__span-1-82"><a id="__codelineno-1-82" name="__codelineno-1-82"></a>    <span class="n">foreign_apps</span><span class="o">=</span><span class="p">[</span><span class="n">asset_id</span><span class="p">],</span>
 </span><span id="__span-1-83"><a id="__codelineno-1-83" name="__codelineno-1-83"></a><span class="p">)</span>
@@ -4857,26 +4857,26 @@
 <span class="normal"><a href="#__codelineno-2-25">25</a></span>
 <span class="normal"><a href="#__codelineno-2-26">26</a></span>
 <span class="normal"><a href="#__codelineno-2-27">27</a></span>
-<span class="normal"><a href="#__codelineno-2-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">algosdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;algosdk&#39;</span><span class="p">);</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">unsealMessageFromNote</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;algosms&#39;</span><span class="p">);</span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">algosdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'algosdk'</span><span class="p">);</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">unsealMessageFromNote</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'algosms'</span><span class="p">);</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">baseServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://testnet-algorand.api.purestake.io/idx2&#39;</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">baseServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'https://testnet-algorand.api.purestake.io/idx2'</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">;</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="s1">&#39;X-API-Key&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&lt;api-key&gt;&#39;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="s1">'X-API-Key'</span><span class="o">:</span><span class="w"> </span><span class="s1">'&lt;api-key&gt;'</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a>
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">indexerClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">algosdk</span><span class="p">.</span><span class="nx">Indexer</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">baseServer</span><span class="p">,</span><span class="w"> </span><span class="nx">port</span><span class="p">);</span>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">accRcpt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">algosdk</span><span class="p">.</span><span class="nx">mnemonicToSecretKey</span><span class="p">(</span><span class="s1">&#39;&lt;mnemonic&gt;&#39;</span><span class="p">);</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">accRcpt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">algosdk</span><span class="p">.</span><span class="nx">mnemonicToSecretKey</span><span class="p">(</span><span class="s1">'&lt;mnemonic&gt;'</span><span class="p">);</span>
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a>
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="cm">/* get the TXN with encrypted note from indexer */</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">SmsTXID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DPHCQMJZ7BKJZHZO674VWGUO3J7JJAIKFKGSAEDHBSQBVYGV4I7A&quot;</span><span class="p">;</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">SmsTXID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"DPHCQMJZ7BKJZHZO674VWGUO3J7JJAIKFKGSAEDHBSQBVYGV4I7A"</span><span class="p">;</span>
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">txn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">indexerClient</span><span class="p">.</span><span class="nx">lookupTransactionByID</span><span class="p">(</span><span class="nx">SmsTXID</span><span class="p">).</span><span class="k">do</span><span class="p">();</span>
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a>
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">    </span><span class="cm">/* convert base64 to bytes */</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">note</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Buffer</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">txn</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">note</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;base64&#39;</span><span class="p">);</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">note</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Buffer</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">txn</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">note</span><span class="p">,</span><span class="w"> </span><span class="s1">'base64'</span><span class="p">);</span>
 </span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">senderAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txn</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
 </span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22"></a>
 </span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="w">    </span><span class="cm">/* decrypt the note with recipient secret key */</span>
