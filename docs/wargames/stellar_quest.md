@@ -6,8 +6,14 @@ tags:
     - stellar
 ---
 
-|[Albedo Wallet](https://albedo.link)|[Stellar Lab](https://lab.stellar.org)
--|-
+<table>
+<tbody>
+  <tr>
+    <td><a href="https://albedo.link">Albedo Wallet</a></td>
+    <td><a href="https://lab.stellar.org">Stellar Lab</a></td>
+  </tr>
+</tbody>
+</table>
 
 ## Payment Operations
 
@@ -26,6 +32,12 @@ tags:
 
 - **Destination**: It can be the public key of any account that has been created.
 - **Amount**: The amount of XLM to send.
+
+If an account is the issuer of an asset, they can use the `payment` operation to mint tokens.
+
+#### References
+
+- [Making a `payment` operation from the issuer account](https://developers.stellar.org/docs/build/guides/tokens/custom-sac-admin#making-a-payment-operation-from-the-issuer-account)
 
 ### Change Trust
 
@@ -60,3 +72,13 @@ Note that the source account must trust the issuer of the asset it's trying to b
 #### References
 
 - [Liquidity on Stellar: SDEX & Liquidity Pools](https://developers.stellar.org/docs/learn/fundamentals/liquidity-on-stellar-sdex-liquidity-pools#sdex)
+
+### Path Payments
+
+In a path payment, the asset received differs from the asset sent. Path payments cross through the SDEX and/or liquidity pools before arriving at the destination account.
+
+For denoting a specific send amount, use the path payment strict send operation; otherwise, use the path payment strict receive operation to ensure that the destination account receives a specific amount of the destination asset.
+
+![Path Payment Strict Send](img/stellar_quest05.jpg)
+
+The path payment strict send operation can ensure the amount of tokens received by setting a minimum destination amount, while the path payment strict receive operation can limit the amount of tokens sent by setting a maximum send amount.
